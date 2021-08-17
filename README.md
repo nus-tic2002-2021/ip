@@ -10,6 +10,12 @@ bazel build //:Duke
 ./bazel-bin/Duke
 ```
 
+## Testing
+
+```bash
+bazel test --test_output=all //...
+```
+
 ## Setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
