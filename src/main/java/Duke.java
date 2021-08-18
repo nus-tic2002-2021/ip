@@ -15,14 +15,20 @@ public class Duke {
 
         String line = "";
         Scanner in = new Scanner(System.in).useDelimiter("\\n");
+        TaskList tl = new TaskList();
 
         while (true) {
             line = in.next();
+
             if(line.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (line.equals("list")) {
+                tl.printTaskList();
+                break;
             }
 
+            tl.addTask(line);
             System.out.println(line);
         }
 
