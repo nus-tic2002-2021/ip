@@ -12,16 +12,20 @@ public class AddListResponder implements QueryRespondable {
         list = new ArrayList<String>();
     }
 
+    private void printList(StringBuilder s) {
+        int i = 1;
+        for (i = 0; i < list.size(); i++) {
+            s.append(i+1);
+            s.append(". ");
+            s.append(list.get(i));
+            s.append("\n");
+        }
+    }
+
     public Response respondTo(String query) {
         if (query.equals("list")) {
             StringBuilder s = new StringBuilder();
-            int i = 1;
-            for (i = 0; i < list.size(); i++) {
-                s.append(i+1);
-                s.append(". ");
-                s.append(list.get(i));
-                s.append("\n");
-            }
+            printList(s);
             return new Response(s.toString(), false);
         }
         // by default, adds the given query.
