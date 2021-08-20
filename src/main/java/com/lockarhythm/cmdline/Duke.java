@@ -48,7 +48,7 @@ public class Duke {
         line = in.nextLine();
         Response res = getResponse(line);
         while(!res.shouldExit()) {
-            print(line);
+            print(res.getText());
             line = in.nextLine();
             res = getResponse(line);
         }
