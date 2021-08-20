@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import com.lockarhythm.responders.QueryRespondable;
 import com.lockarhythm.responders.Response;
-import com.lockarhythm.responders.echo.EchoResponder;
 import com.lockarhythm.responders.exit.ExitResponder;
+import com.lockarhythm.responders.addlist.AddListResponder;
 
 public class Duke {
     static String logo =   " \t____        _        \n"
@@ -17,13 +17,14 @@ public class Duke {
 
     static QueryRespondable[] responders = {
         new ExitResponder(),
-        new EchoResponder(),
+        new AddListResponder(),
     };
 
     private static void print(String ...strings) {
         System.out.println("\t____________________________________________________________");
         for (String s : strings) {
-            System.out.println("\t"+s);
+            s = Arrays.stream(s.split("\n")).map(x -> "\t" + x).reduce("", (x, y) -> x + y + "\n");
+            System.out.println(s);
         }
         System.out.println("\t____________________________________________________________\n");
     }
