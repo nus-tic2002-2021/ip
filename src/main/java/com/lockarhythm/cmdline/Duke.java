@@ -7,6 +7,8 @@ import com.lockarhythm.responders.QueryRespondable;
 import com.lockarhythm.responders.Response;
 import com.lockarhythm.responders.exit.ExitResponder;
 import com.lockarhythm.responders.addlist.AddListResponder;
+import com.lockarhythm.responders.markasdone.MarkAsDoneResponder;
+import com.lockarhythm.tasks.TaskList;
 
 public class Duke {
     static String logo =   " \t____        _        \n"
@@ -15,9 +17,12 @@ public class Duke {
                            + "\t| |_| | |_| |   <  __/\n"
                            + "\t|____/ \\__,_|_|\\_\\___|\n";
 
+    static TaskList list = new TaskList();
+
     static QueryRespondable[] responders = {
         new ExitResponder(),
-        new AddListResponder(),
+        new MarkAsDoneResponder(list),
+        new AddListResponder(list),
     };
 
     private static void print(String ...strings) {
