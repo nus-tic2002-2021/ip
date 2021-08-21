@@ -30,8 +30,8 @@ public class TestDuke {
 
         assertTrue("it adds the 1st item", output.contains("added: read book"));
         assertTrue("it adds the 2nd item", output.contains("added: return book"));
-        assertTrue("it lists the items", output.contains("1. read book"));
-        assertTrue("it lists the items", output.contains("2. return book"));
+        assertTrue("it lists the items", output.contains("1.[ ] read book"));
+        assertTrue("it lists the items", output.contains("2.[ ] return book"));
         assertTrue("it exits", output.contains("Bye. Hope to see you again soon!"));
 
         System.setOut(standardOut);

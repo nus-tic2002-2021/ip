@@ -44,3 +44,21 @@ java_test(
         "src/main/java/com/lockarhythm/**/*.java",
     ]),
 )
+
+java_test(
+    name = "TestTask",
+    size = "small",
+    srcs = glob([
+        "src/test/java/com/lockarhythm/**/*.java",
+        "src/main/java/com/lockarhythm/**/*.java",
+    ]),
+)
+
+java_test(
+    name = "TestTaskList",
+    size = "small",
+    srcs = glob([
+        "src/test/java/com/lockarhythm/**/*.java",
+        "src/main/java/com/lockarhythm/**/*.java",
+    ]),
+)
