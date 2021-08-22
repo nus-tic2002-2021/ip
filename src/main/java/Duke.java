@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Duke {
     private final static String DETECT_END = "bye";
+    private final static String DETECT_LIST = "list";
     private final static String STMT_END = "Bye. Hope to see you again soon!";
     private final static String STMT_START = "Hello! I'm Duke\nWhat can I do for you?";
-    private final static String DETECT_LIST = "list";
 
     public static void main(String[] args) {
 
