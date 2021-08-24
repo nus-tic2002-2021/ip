@@ -1,4 +1,6 @@
-# Duke project template
+<img src="https://user-images.githubusercontent.com/88638946/130622078-e049680c-7895-4725-ace0-49869574887c.png" width="50%" align="right">
+
+# Duke
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
