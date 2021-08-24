@@ -5,14 +5,16 @@ public class DukePrompt {
         START,
         END,
         ADD,
+        DONE,
         MANUAL
     }
 
-    private static final String PADDING = "    ";
-    private static final String HORIZONTAL_LINE = PADDING + "_________________________________________";
-    private static final String START = "Hello! I'm Duke\n    What can I do for you?";
-    private static final String END = "Bye. Hope to see you again soon!";
-    private static final String ADD = "added: ";
+    public static final String DEFAULT_PADDING = "    ";
+    private static final String HORIZONTAL_LINE = DEFAULT_PADDING + "_________________________________________";
+    private static final String START = DEFAULT_PADDING + "Hello! I'm Duke\n    What can I do for you?";
+    private static final String END = DEFAULT_PADDING + "Bye. Hope to see you again soon!";
+    private static final String TASK_ADD = DEFAULT_PADDING + "added: ";
+    private static final String TASK_DONE = DEFAULT_PADDING + "Nice! I've marked this task as done:\n" + DEFAULT_PADDING + "   ";
 
     public static String getPrompt(Prompts decision) {
         return getPrompt(decision, "");
@@ -21,38 +23,28 @@ public class DukePrompt {
     public static String getPrompt(Prompts decision, String man) {
         String output = "";
 
-        output += HORIZONTAL_LINE + System.lineSeparator() + PADDING;
+        output += HORIZONTAL_LINE + System.lineSeparator();
 
         switch (decision) {
-            case START:
-                output += START;
-                break;
-            case END:
-                output += END;
-                break;
-            case ADD:
-                output += ADD + man;
-                break;
-            default:
-                output += man;
-                break;
+        case START:
+            output += START;
+            break;
+        case END:
+            output += END;
+            break;
+        case ADD:
+            output += TASK_ADD + man;
+            break;
+        case DONE:
+            output += TASK_DONE + man;
+            break;
+        default:
+            output += man;
+            break;
         }
 
         output += System.lineSeparator() + HORIZONTAL_LINE;
 
         return output;
-    }
-
-    public static String getPrompt(Prompts decision, ArrayList<String> outputs) {
-        String formattedInput = "";
-
-        for (int i=0;i < outputs.size();i++) {
-            if (i > 0) {
-                formattedInput += System.lineSeparator() + PADDING;
-            }
-            formattedInput += (i + 1) + ". " + outputs.get(i);
-        }
-
-        return getPrompt(decision, formattedInput);
     }
 }

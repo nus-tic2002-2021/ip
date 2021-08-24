@@ -3,13 +3,17 @@ import java.util.Scanner;
 
 public class Duke {
     public static String printTasks(ArrayList<Task> tasks) {
-        ArrayList<String> outputs = new ArrayList();
+        String output = "";
 
-        for (Task t : tasks) {
-            outputs.add(t.getDescription());
+        for (int i=0;i < tasks.size();i++) {
+            output += DukePrompt.DEFAULT_PADDING + (i + 1) + ". ";
+            output += tasks.get(i).toString();
+            if (i < tasks.size() - 1) {
+                output += System.lineSeparator();
+            }
         }
 
-        return DukePrompt.getPrompt(DukePrompt.Prompts.MANUAL, outputs);
+        return DukePrompt.getPrompt(DukePrompt.Prompts.MANUAL, output);
     }
 
     public static void main(String[] args) {
@@ -25,6 +29,11 @@ public class Duke {
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 System.out.println(printTasks(tasks));
+            } else if (input.matches("^done \\d+")) {
+                String[] inputs = input.split(" ");
+                int taskNum = Integer.parseInt(inputs[1]) - 1;
+                tasks.get(taskNum).setDone(true);
+                System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.DONE, tasks.get(taskNum).toString()));
             } else {
                 System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.ADD, input));
                 tasks.add(new Task(input));
