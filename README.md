@@ -31,3 +31,9 @@ For terminal ui tests (`text-ui-test`):
 cd text-ui-test
 ./runtest.sh
 ```
+
+## Code Formatting & Style
+Use [google-java-format](https://github.com/google/google-java-format):
+```bash
+google-java-format --replace **/*.java # executes recursively
+```
