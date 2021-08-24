@@ -16,6 +16,7 @@ public class Duke {
         String line = "";
         Scanner in = new Scanner(System.in).useDelimiter("\\n");
         TaskList tl = new TaskList();
+        Boolean isAddTask = true;
 
         while (true) {
             line = in.next();
@@ -25,11 +26,19 @@ public class Duke {
                 break;
             } else if (line.equals("list")) {
                 tl.printTaskList();
-                break;
+                isAddTask = false;
+            } else if (line.contains("done")) {
+                System.out.println(line);
+                int index = Integer.parseInt(line.split(" ")[1]);
+                tl.setDone(index - 1);
+                isAddTask = false;
             }
 
-            tl.addTask(line);
-            System.out.println(line);
+            if(isAddTask) {
+                tl.addTask(line);
+                System.out.println(line);
+            }
+            isAddTask = true;
         }
 
     }

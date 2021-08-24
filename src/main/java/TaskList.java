@@ -1,21 +1,26 @@
-public class TaskList {
+public class TaskList extends Task{
 
-    public String[] taskList = new String[100];
+    public Task[] taskList = new Task[100];
     static int counter;
 
     public TaskList() {
         counter = 0;
     }
 
-    public void addTask(String task) {
-        this.taskList[counter] = task;
+    public void addTask(String description) {
+        this.taskList[counter] = new Task(description);
         this.counter++;
-        System.out.println("added: " + task);
+        System.out.println("added: " + description);
+    }
+
+    public void setDone(int index) {
+        this.taskList[index].setDone();
     }
 
     public void printTaskList() {
         for (int i = 0; i < this.counter; i++) {
-            System.out.println(i+1 + ". " + this.taskList[i]);
+            Task temp = this.taskList[i];
+            System.out.println(i+1 + ". [" + temp.getStatusIcon() + "] " + temp.getDescription());
         }
     }
 }
