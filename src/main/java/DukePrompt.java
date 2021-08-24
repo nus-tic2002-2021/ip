@@ -53,6 +53,6 @@ public class DukePrompt {
             formattedInput += (i + 1) + ". " + outputs.get(i);
         }
 
-        return getPrompt(Prompts.MANUAL, formattedInput);
+        return getPrompt(decision, formattedInput);
     }
 }

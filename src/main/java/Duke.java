@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static String printTasks(ArrayList<Task> tasks) {
-        ArrayList<String> outputs = new ArrayList<String>();
+        ArrayList<String> outputs = new ArrayList();
 
         for (Task t : tasks) {
             outputs.add(t.getDescription());
@@ -16,7 +16,7 @@ public class Duke {
         System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.START));
 
         Scanner in = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList();
 
         while (in.hasNext()) {
             String input = in.nextLine();
