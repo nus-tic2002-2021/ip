@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,17 +14,27 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
         String line = "";
-
+        String[] lists = new String[100];
+        int counter=0;
         while(true) {
 
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
             if(line.equalsIgnoreCase("bye"))
                 break;
-            System.out.println("____________________________________________________________");
-            System.out.println(line);
-            System.out.println("____________________________________________________________");
-
+            if(line.equalsIgnoreCase("list")){
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < counter; i++) {
+                    System.out.println(i+1 + ". " + lists[i]);
+                }
+                System.out.println("____________________________________________________________");
+            }else {
+                System.out.println("____________________________________________________________");
+                lists[counter]=line;
+                counter++;
+                System.out.println("added: " + line);
+                System.out.println("____________________________________________________________");
+            }
         }
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
