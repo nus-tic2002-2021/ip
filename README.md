@@ -39,3 +39,13 @@ Use [google-java-format](https://github.com/google/google-java-format):
 ```bash
 google-java-format --replace **/*.java # executes recursively
 ```
+
+## Pre-commit Git Hook (Tested on macOS)
+`pre-commit` is a python tool that helps to create git pre-commit hook handlers. For this project, it is used to enforce Google Java Style (via `google-java-format`) on new commits.
+
+To setup, ensure you have [`pre-commit`](https://pre-commit.com/#install) installed, then run:
+```bash
+pre-commit install
+```
+This only needs to be executed once, so that `pre-commit` can generate the script and write it to `.git/hooks/pre-commit`
+Thereafter, it should be executed right before every commit!
