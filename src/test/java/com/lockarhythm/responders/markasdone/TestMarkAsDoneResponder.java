@@ -46,4 +46,17 @@ public class TestMarkAsDoneResponder {
     res = alresponder.respondTo("list");
     assertTrue(res.getText().contains("1.[ ] read book\n2.[ ] return book\n"));
   }
+
+  @Test
+  public void testMarkAsDoneParseCommand() throws Exception {
+    TaskList list = new TaskList();
+    MarkAsDoneResponder mdresponder = new MarkAsDoneResponder(list);
+    AddListResponder alresponder = new AddListResponder(list);
+
+    Response res = alresponder.respondTo("read book");
+    assertEquals("added: read book", res.getText());
+
+    res = mdresponder.respondTo("all done 10000");
+    assertNull(res);
+  }
 }

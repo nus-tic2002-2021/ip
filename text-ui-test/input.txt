@@ -4,4 +4,7 @@ buy bread
 done 1
 list
 done 2
+done 2
+all done 1
+list
 bye

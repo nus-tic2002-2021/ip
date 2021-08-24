@@ -19,7 +19,7 @@ public class TaskList {
 
   public Task markAsDone(int index) {
     Task t = list.get(index);
-    t.toggleDone();
+    t.setDone(true);
     return t;
   }
 

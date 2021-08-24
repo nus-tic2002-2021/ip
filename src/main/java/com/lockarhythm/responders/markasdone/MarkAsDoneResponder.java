@@ -8,9 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MarkAsDoneResponder implements QueryRespondable {
-  private static String doneCommandPrefix = "done ";
   private TaskList list;
-  Pattern pattern = Pattern.compile(doneCommandPrefix + "(\\d+)");
+  Pattern pattern = Pattern.compile("^done (\\d+)");
 
   public MarkAsDoneResponder(TaskList list) {
     this.list = list;

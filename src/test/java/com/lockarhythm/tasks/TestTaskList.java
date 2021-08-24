@@ -15,5 +15,9 @@ public class TestTaskList {
 
     Task task = list.markAsDone(1);
     assertEquals("can mark tasks as done", "learn bazel", task.getDescription());
+    assertTrue("task is set to done", task.isDone());
+
+    task = list.markAsDone(1);
+    assertTrue("it's an idempotent operation", task.isDone());
   }
 }
