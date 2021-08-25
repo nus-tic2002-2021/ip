@@ -3,7 +3,8 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         boolean exit = false;
-        ArrayList<String> tasks = new ArrayList<String>();
+//        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -29,15 +30,24 @@ public class Duke {
                     System.out.println("There's no task now :D");
                 }
                 else {
-                    int count = 1;
-                    for (String task : tasks) {
-                        System.out.println(count + ". " + task);
-                        count += 1;
+                    for (Task task : tasks) {
+                        System.out.println(task.toString());
                     }
                 }
             }
+            else if (inputStr.startsWith("done")){
+                String[] words = inputStr.split(" ");
+                int doneItemId = Integer.parseInt(words[1]);
+
+                Task doneTask = tasks.get(doneItemId - 1);
+                doneTask.markAsDone();
+
+                System.out.println("Amazing! The task is marked as done now:");
+                System.out.println(doneTask.toString());
+            }
             else{
-                tasks.add(inputStr);
+                Task newTask = new Task(inputStr);
+                tasks.add(newTask);
                 System.out.println("added: " + inputStr);
             }
         }
