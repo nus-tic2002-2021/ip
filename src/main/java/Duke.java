@@ -1,8 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
         boolean exit = false;
+        ArrayList<String> tasks = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -23,8 +24,21 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 exit = true;
             }
+            else if (inputStr.equalsIgnoreCase("list")){
+                if(tasks.size() == 0){
+                    System.out.println("There's no task now :D");
+                }
+                else {
+                    int count = 1;
+                    for (String task : tasks) {
+                        System.out.println(count + ". " + task);
+                        count += 1;
+                    }
+                }
+            }
             else{
-                System.out.println(inputStr);
+                tasks.add(inputStr);
+                System.out.println("added: " + inputStr);
             }
         }
     }
