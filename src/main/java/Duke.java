@@ -12,21 +12,38 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello! I'm Duke By Justin\nWhat can I do for you?\n" + logo);
+        System.out.println("\nHello! I'm Duke By Justin\nWhat can I do for you?\n" + logo);
+
+        String[] listTasks = new String[100];
+        String newTask;
+        int count = 0;
 
         while (true) {
-            String line;
+
             Scanner in = new Scanner(System.in);
             System.out.print("You: ");
-            line = in.nextLine();
+            newTask = in.nextLine();
 
-            if (line.equals("bye")) {
-                line = "Bye. Hope to see you again soon!";
-                System.out.println("Duke: " + line);
+            if (newTask.equals("bye")) {
+                System.out.println("Duke: Bye. Hope to see you again soon!");
                 break;
             }
 
-            else System.out.println("Duke: " + line);
+            else if (newTask.equals("list")) {
+
+                for (int i = 0; i < count; i++) {
+                    System.out.println( i+1 + ". " + listTasks[i] );
+                }
+
+                System.out.print("\n");
+
+            }
+
+            else {
+                System.out.println("Added: " + newTask + "\n");
+                listTasks[count] = newTask;
+                count++;
+            }
 
         }
 
