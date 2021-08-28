@@ -3,19 +3,20 @@ public class Duke {
 
     private static String lineBreak = "\t________________________________________";
     private static List inputList;
+    static final int LIST_SIZE = 100;
 
     public static void initialize (){
         Scanner in = new Scanner(System.in);
         String inputLine = "";
-        inputList = new List();
+        inputList = new List(LIST_SIZE);
 
         printIntro();
-
         while (!inputLine.equals("bye")) {
             inputLine = in.nextLine();
             printResponse(inputLine);
         }
     }
+
     public static void printIntro(){
         System.out.println(lineBreak);
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
@@ -28,6 +29,9 @@ public class Duke {
         }
         else if(inputMsg.equals("list")){
             inputList.printList();
+        }
+        else if (inputMsg.startsWith("done")){
+            inputList.setDone(inputMsg.substring(5));
         }
         else{
             inputList.storeList(inputMsg);
