@@ -2,6 +2,36 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    private static String[] commandList = new String[100];
+    private static int commandCount = 0;
+
+    public static void addCommand(String command){
+        commandList[commandCount] = command;
+        commandCount++;
+    }
+    public static void reply(String command){
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     added: "+command);
+        System.out.println("    ____________________________________________________________");
+
+    }
+
+    public static void printAll(){
+        if(commandCount==0){
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Nothing in list yet...");
+            System.out.println("    ____________________________________________________________");
+            return;
+        }
+        int numbering = 1;
+        System.out.println("    ____________________________________________________________");
+        for(int i=0;i<commandCount;i++){
+            System.out.println("    "+numbering+". "+commandList[i]);
+            numbering++;
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,10 +51,13 @@ public class Duke {
             if(command.equals("bye")){
                 end = true;
             }
+            else if(command.equals("list")){
+                printAll();
+                command = in.nextLine();
+            }
             else{
-                System.out.println("    ____________________________________________________________");
-                System.out.println("    "+command);
-                System.out.println("    ____________________________________________________________");
+                reply(command);
+                addCommand(command);
                 command = in.nextLine();
             }
         }
