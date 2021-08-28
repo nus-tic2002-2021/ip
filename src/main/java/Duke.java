@@ -2,12 +2,12 @@ import java.util.Scanner;
 public class Duke {
 
     private static String lineBreak = "\t________________________________________";
-    private static int inputCounter = 0;
-    private static String[] inputList = new String[100];
+    private static List inputList;
 
     public static void initialize (){
         Scanner in = new Scanner(System.in);
         String inputLine = "";
+        inputList = new List();
 
         printIntro();
 
@@ -27,26 +27,15 @@ public class Duke {
             System.out.println("\tBye. Hope to see you again soon!");
         }
         else if(inputMsg.equals("list")){
-            printList();
+            inputList.printList();
         }
         else{
-            storeList(inputMsg);
+            inputList.storeList(inputMsg);
             System.out.println("\tadded: " + inputMsg);
         }
         System.out.println(lineBreak);
     }
 
-    public static void storeList(String inputMsg) {
-        inputList[inputCounter]= inputMsg;
-        inputCounter = inputCounter + 1;
-    }
-
-    public static void printList() {
-        for(int i = 0; i < inputCounter; i++){
-            System.out.println("\t" + (i+1) + "." + inputList[i]);
-
-        }
-    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -55,6 +44,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         initialize();
 
     }
