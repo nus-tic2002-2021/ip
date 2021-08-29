@@ -1,4 +1,4 @@
-package com.lockarhythm.cmdline;
+package com.lockarhythm.application;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import org.junit.Test;
 
-public class TestDuke {
+public class TestTerminalDuke {
   private final PrintStream standardOut = System.out;
   private final InputStream standardIn = System.in;
   private final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -20,7 +20,7 @@ public class TestDuke {
     System.setIn(in);
     System.setOut(new PrintStream(out));
 
-    Duke.main(null);
+    TerminalDuke.main(null);
     String output = out.toString().trim();
     assertFalse(output.isEmpty());
 

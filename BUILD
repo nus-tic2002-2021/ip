@@ -1,7 +1,7 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_test")
 
 java_binary(
-    name = "Duke",
+    name = "TerminalDuke",
     srcs = glob([
         "src/main/java/com/lockarhythm/**/*.java",
     ]),
@@ -18,7 +18,7 @@ java_binary(
       ]),
   )
   for class_name in [
-      "TestDuke",
+      "TestTerminalDuke",
       "TestEchoResponder",
       "TestExitResponder",
       "TestAddListResponder",

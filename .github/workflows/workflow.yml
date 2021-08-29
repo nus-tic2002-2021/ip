@@ -26,14 +26,14 @@ jobs:
 
     - name: Build JAR File
       run: |
-        "${GITHUB_WORKSPACE}/bin/bazel" build //:Duke_deploy.jar
+        "${GITHUB_WORKSPACE}/bin/bazel" build //:TerminalDuke_deploy.jar
 
     - name: "Move file to non-symlink directory (a workaround for some bug See: https://github.com/actions/upload-artifact/issues/92)"
       run: |
-       mv ${{ github.workspace }}/bazel-bin/Duke_deploy.jar ${{ github.workspace }}/Duke_deploy.jar
+       mv ${{ github.workspace }}/bazel-bin/TerminalDuke_deploy.jar ${{ github.workspace }}/TerminalDuke_deploy.jar
 
     - name: Upload JAR File
       uses: actions/upload-artifact@v2
       with:
-        name: Duke_deploy.jar
-        path: ${{ github.workspace }}/Duke_deploy.jar
+        name: TerminalDuke_deploy.jar
+        path: ${{ github.workspace }}/TerminalDuke_deploy.jar

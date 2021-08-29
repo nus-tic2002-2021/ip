@@ -1,12 +1,16 @@
-package com.lockarhythm.responders;
+package com.lockarhythm.query;
 
-public class Response {
+public class Result {
   private String text;
   private boolean shouldExit;
 
-  public Response(String text, boolean shouldExit) {
+  public Result(String text, boolean shouldExit) {
     this.text = text;
     this.shouldExit = shouldExit;
+  }
+
+  public Result(String text) {
+    this(text, false);
   }
 
   public String getText() {
