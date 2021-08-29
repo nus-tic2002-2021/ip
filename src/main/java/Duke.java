@@ -1,51 +1,91 @@
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
 
+        Scanner input = new Scanner(System.in);
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                   + "|  _ \\ _   _| | _____ \n"
+                   + "| | | | | | | |/ / _ \\\n"
+                   + "| |_| | |_| |   <  __/\n"
+                   + "|____/ \\__,_|_|\\_\\___|";
+        System.out.println("____________________________________________________");
+        System.out.println("Hello! I'm Duke By Justin\nWhat can I do for you?\n" + logo);
+        System.out.println("____________________________________________________");
 
-        System.out.println("\nHello! I'm Duke By Justin\nWhat can I do for you?\n" + logo);
+        ArrayList<Task> listOfTasks = new ArrayList<Task>();
+        boolean bye = false;
 
-        String[] listTasks = new String[100];
-        String newTask;
-        int count = 0;
+        while (!bye) {
 
-        while (true) {
+            System.out.print("\ncmd: ");
+            String cmd = input.nextLine();
 
-            Scanner in = new Scanner(System.in);
-            System.out.print("You: ");
-            newTask = in.nextLine();
-
-            if (newTask.equals("bye")) {
-                System.out.println("Duke: Bye. Hope to see you again soon!");
-                break;
+            if (cmd.equalsIgnoreCase("bye")) {
+                System.out.println("____________________________________________________");
+                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("____________________________________________________");
+                bye = true;
             }
 
-            else if (newTask.equals("list")) {
+            else if (cmd.equalsIgnoreCase("list")) {
 
-                for (int i = 0; i < count; i++) {
-                    System.out.println( i+1 + ". " + listTasks[i] );
+                if (listOfTasks.size() == 0) {
+                    System.out.println("____________________________________________________");
+                    System.out.println("You have no task! :)");
+                    System.out.println("____________________________________________________");
                 }
 
-                System.out.print("\n");
+                System.out.println("____________________________________________________");
+                for (Task task : listOfTasks) {
+                    System.out.println(task.listTask());
+                }
+                System.out.println("____________________________________________________");
 
+            }
+
+            else if (cmd.startsWith("done")) {
+                for (Task task : listOfTasks) {
+                    int id = Integer.parseInt(String.valueOf(cmd.charAt(5)));
+                    if (task.getID() == id) {
+                        task.setDone();
+                        System.out.println("____________________________________________________");
+                        System.out.println("Nice! I've marked this task as done.\n" + task.getTask());
+                        System.out.println("____________________________________________________");
+                    }
+                }
+            }
+
+            else if (cmd.startsWith("blah")) {
+                System.out.println("____________________________________________________");
+                System.out.println("Oops! Sorry, I don't know what you mean ☹");
+                System.out.println("____________________________________________________");
             }
 
             else {
-                System.out.println("Added: " + newTask + "\n");
-                listTasks[count] = newTask;
-                count++;
+
+                Task newTask = new Task(cmd);
+                listOfTasks.add(newTask);
+
+                if (cmd.startsWith("todo")) {
+                    newTask.setToDo();
+                }
+
+                else if (cmd.startsWith("deadline")) {
+                    newTask.setDeadline();
+                }
+
+                System.out.println("____________________________________________________");
+                System.out.println("Got it! I've added this task.\n" + newTask.getTask());
+                System.out.println("Now you have " + newTask.getTotalCount() + " in the list.");
+                System.out.println("____________________________________________________");
+
             }
 
         }
-
     }
 }
