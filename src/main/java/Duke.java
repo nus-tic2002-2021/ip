@@ -11,30 +11,23 @@ public class Duke {
         text = in.nextLine();
 
         while(text != null){
-            if (text.equals("bye")){
-                System.out.println("Bye, i will miss you.");
-                System.out.println("=========================END===========================");
-                return;
-            } else {
-                System.out.println(text);
-                System.out.println("=======================================================");
-                text = in.nextLine();
-            }
+            Echo(text);
+            text = in.nextLine();
         }
     }
 
-    /*  can i create a method called Echo rather than Echo inside main()?
-    public static void Echo(Scanner args){
-        while(text != null){
-            if (text.equals("bye")){
-                System.out.println("Bye, i will miss you.");
-                return;
-            } else {
-                System.out.println(text);
-                text = in.nextLine();
+    public static void Echo(String text){
+        if (text.equals("bye")){
+            System.out.println("Bye, i will miss you.");
+            System.out.println("=========================END===========================");
+            return;
+        } else {
+            System.out.println(text);
+            System.out.println("=======================================================");
             }
-        }
     }
-    */
+
+
+
 
 }
