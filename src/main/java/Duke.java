@@ -43,6 +43,8 @@ public class Duke {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 listCount = 0;
                 stop = true;
+            } else if (input.equals("list")){
+                PrintList();
             } else {
                 list[listCount] = input;
                 listCount++;
