@@ -4,6 +4,10 @@
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
+## Demo
+![output](https://user-images.githubusercontent.com/88638946/131530452-cbe5ab59-9e43-4c08-affe-f9fdf2c75427.gif)
+
+
 ## Build
 Prerequisites: Have `bazel` installed.
 
