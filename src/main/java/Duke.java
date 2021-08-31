@@ -48,15 +48,17 @@ public class Duke {
             } else {
                 list[listCount] = input;
                 listCount++;
-                System.out.println("added: " + input);
+                System.out.println(line + "added: " + input + "\n" + line);
             }
         }
     }
 
     public static void PrintList() {
+        System.out.println(line);
         for (int i = 0; i < listCount; i++) {
             System.out.println(i+1 + ". " + list[i]);
         }
+        System.out.println(line);
     }
 
     public static void Level1() {
