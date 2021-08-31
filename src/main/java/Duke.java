@@ -33,9 +33,13 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        StartDuke();
+    public static void Level1() {
         Greet();
         Echo();
+    }
+
+    public static void main(String[] args) {
+        StartDuke();
+        Level1();
     }
 }
