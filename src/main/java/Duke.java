@@ -51,6 +51,12 @@ public class Duke {
         }
     }
 
+    public static void PrintList() {
+        for (int i = 0; i < listCount; i++) {
+            System.out.println(i+1 + ". " + list[i]);
+        }
+    }
+
     public static void Level1() {
         Greet();
         Echo();
