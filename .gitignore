@@ -2,16 +2,26 @@
 /.idea/
 /out/
 /*.iml
+/lib
 
 # Gradle build files
 /.gradle/
 /build/
 src/main/resources/docs/
 
+# Maven build files
+/target
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
 
+# Generated files
+/src/main/resources/*
+!/src/main/resources/data/*
+
+# Test
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+/src/test/resources/generated/*
