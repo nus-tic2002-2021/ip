@@ -4,6 +4,8 @@ public class Duke {
 
     static Scanner in = new Scanner(System.in);
     static String line = "____________________________________________________________\n";
+    static String[] list = new String[100];
+    static int listCount = 0;
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -29,6 +31,22 @@ public class Duke {
                 stop = true;
             } else {
                 System.out.println(line + word + "\n" + line);
+            }
+        }
+    }
+
+    public static void Add() {
+        Boolean stop = false;
+        while (stop == false) {
+            String input = in.nextLine();
+            if (input.equals("bye")) {
+                System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
+                listCount = 0;
+                stop = true;
+            } else {
+                list[listCount] = input;
+                listCount++;
+                System.out.println("added: " + input);
             }
         }
     }
