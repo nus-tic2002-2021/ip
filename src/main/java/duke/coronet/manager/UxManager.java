@@ -4,6 +4,9 @@ package duke.coronet.manager;
 import java.io.PrintStream;
 
 
+/**
+ * Handles terminal display.
+ */
 public class UxManager {
 
     private PrintStream _out;

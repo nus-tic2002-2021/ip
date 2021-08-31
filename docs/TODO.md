@@ -8,9 +8,9 @@ for development: tracking of tasks and project design
 
 # [Feature Level 0](https://www.notion.so/Level-0-Greet-71a7be8614a440169e7041813d1f943e)
 
-- [ ] entry message
-- [ ] exit message
-- [ ] exits gently
+- [x] entry message
+- [x] exit message
+- [x] exits gently
 
 # [Feature Level 1](https://www.notion.so/Level-1-Greet-Echo-Exit-2b73e7e61b944e878b8150f937218f88)
 

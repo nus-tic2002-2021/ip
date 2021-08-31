@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Implement an initial skeletal version of the Duke that simply greets the user and exits.
  * <p>
- * Uses OrchestratorLevel01
+ * Uses OrchestratorLevel00
  *
  * @see <a href="https://nus-tic2002-2021.github.io/website/se-book-adapted/projectDuke/index.html#level-0-greet">Level-0</a>
  */
