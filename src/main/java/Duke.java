@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     static Scanner in = new Scanner(System.in);
+    static String line = "____________________________________________________________\n";
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -16,7 +17,7 @@ public class Duke {
     public static void Greet() {
         String start = "Hello, I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(start);
+        System.out.println(line + start + line);
     }
 
     public static void Echo() {
@@ -24,10 +25,10 @@ public class Duke {
         while (stop == false) {
             String word = in.next();
             if (word.equals("bye")) {
-                System.out.println("Bye. Hope to see you again!");
+                System.out.println(line + "Bye. Hope to see you again!\n" + line);
                 stop = true;
             } else {
-                System.out.println(word);
+                System.out.println(line + word + "\n" + line);
             }
         }
     }
