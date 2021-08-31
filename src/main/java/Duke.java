@@ -1,6 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,6 +11,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String line;
+        String[] store = new String[100];
+        int storeCount = 1;
         Scanner in = new Scanner(System.in);
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             line = in.nextLine();
@@ -17,8 +20,15 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
+            else if (line.toLowerCase(Locale.forLanguageTag(line)).equals("list")){
+                for (int count = 1; count<storeCount; count++) {
+                    System.out.println(count + ". " + store[count]);
+                }
+            }
             else {
-                System.out.println(line);
+                store[storeCount] = line;
+                storeCount++;
+                System.out.println("added: " + line);
             }
         }
     }
