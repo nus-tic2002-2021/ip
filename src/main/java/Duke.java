@@ -25,7 +25,7 @@ public class Duke {
     public static void Echo() {
         Boolean stop = false;
         while (stop == false) {
-            String word = in.next();
+            String word = in.nextLine();
             if (word.equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again!\n" + line);
                 stop = true;
