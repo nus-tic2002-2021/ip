@@ -35,7 +35,7 @@ public class Duke {
         }
     }
 
-    public static void Add() {
+    public static void AddDisplayList() {
         Boolean stop = false;
         while (stop == false) {
             String input = in.nextLine();
@@ -68,7 +68,7 @@ public class Duke {
 
     public static void Level2() {
         Greet();
-        Add();
+        AddDisplayList();
     }
 
     public static void main(String[] args) {
