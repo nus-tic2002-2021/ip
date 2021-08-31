@@ -13,7 +13,7 @@ public class TestTerminalDuke {
   private final InputStream standardIn = System.in;
   private final ByteArrayOutputStream out = new ByteArrayOutputStream();
   private final ByteArrayInputStream in =
-      new ByteArrayInputStream("read book\nreturn book\nlist\nbye".getBytes());
+      new ByteArrayInputStream("todo read book\ntodo return book\nlist\nbye".getBytes());
 
   @Test
   public void testMeetsLevel2() throws Exception {
@@ -24,10 +24,10 @@ public class TestTerminalDuke {
     String output = out.toString().trim();
     assertFalse(output.isEmpty());
 
-    assertTrue("it adds the 1st item", output.contains("added: read book"));
-    assertTrue("it adds the 2nd item", output.contains("added: return book"));
-    assertTrue("it lists the items", output.contains("1.[ ] read book"));
-    assertTrue("it lists the items", output.contains("2.[ ] return book"));
+    assertTrue("it adds the 1st item", output.contains("Now you have 1 tasks in the list"));
+    assertTrue("it adds the 2nd item", output.contains("Now you have 2 tasks in the list"));
+    assertTrue("it lists the items", output.contains("1.[T][ ] read book"));
+    assertTrue("it lists the items", output.contains("2.[T][ ] return book"));
     assertTrue("it exits", output.contains("Bye. Hope to see you again soon!"));
 
     System.setOut(standardOut);

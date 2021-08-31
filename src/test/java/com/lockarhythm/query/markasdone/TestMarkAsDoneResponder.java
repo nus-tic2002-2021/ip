@@ -3,7 +3,6 @@ package com.lockarhythm.query.markasdone;
 import static org.junit.Assert.*;
 
 import com.lockarhythm.query.Result;
-import com.lockarhythm.query.addlist.AddListResponder;
 import com.lockarhythm.tasks.TaskList;
 import org.junit.Test;
 
@@ -11,52 +10,40 @@ public class TestMarkAsDoneResponder {
   @Test
   public void testMarkAsDoneHappyPath() throws Exception {
     TaskList list = new TaskList();
-    MarkAsDoneResponder mdresponder = new MarkAsDoneResponder(list);
-    AddListResponder alresponder = new AddListResponder(list);
+    MarkAsDoneResponder responder = new MarkAsDoneResponder(list);
 
-    Result res = alresponder.interpret("read book");
-    assertEquals("added: read book", res.getText());
+    list.addTodoTask("read book");
+    list.addTodoTask("return book");
 
-    res = alresponder.interpret("return book");
-    assertEquals("added: return book", res.getText());
-
-    res = mdresponder.interpret("done 1");
+    Result res = responder.interpret("done 1");
     assertTrue(res.getText().contains("Nice! I've marked this task as done"));
     assertTrue(res.getText().contains("read book"));
 
-    res = alresponder.interpret("list");
-    assertTrue(res.getText().contains("1.[X] read book\n2.[ ] return book\n"));
+    assertTrue(list.toString().contains("1.[T][X] read book\n2.[T][ ] return book\n"));
   }
 
   @Test
   public void testMarkAsDoneOnNonExistentItem() throws Exception {
     TaskList list = new TaskList();
-    MarkAsDoneResponder mdresponder = new MarkAsDoneResponder(list);
-    AddListResponder alresponder = new AddListResponder(list);
+    MarkAsDoneResponder responder = new MarkAsDoneResponder(list);
 
-    Result res = alresponder.interpret("read book");
-    assertEquals("added: read book", res.getText());
+    list.addTodoTask("read book");
+    list.addTodoTask("return book");
 
-    res = alresponder.interpret("return book");
-    assertEquals("added: return book", res.getText());
-
-    res = mdresponder.interpret("done 10000");
+    Result res = responder.interpret("done 10000");
     assertTrue(res.getText().contains("Item 10000 is not on the list. I cannot mark it as done!"));
 
-    res = alresponder.interpret("list");
-    assertTrue(res.getText().contains("1.[ ] read book\n2.[ ] return book\n"));
+    assertTrue(list.toString().contains("1.[T][ ] read book\n2.[T][ ] return book\n"));
   }
 
   @Test
   public void testMarkAsDoneParseCommand() throws Exception {
     TaskList list = new TaskList();
-    MarkAsDoneResponder mdresponder = new MarkAsDoneResponder(list);
-    AddListResponder alresponder = new AddListResponder(list);
+    MarkAsDoneResponder responder = new MarkAsDoneResponder(list);
 
-    Result res = alresponder.interpret("read book");
-    assertEquals("added: read book", res.getText());
+    list.addTodoTask("read book");
 
-    res = mdresponder.interpret("all done 10000");
+    Result res = responder.interpret("all done 10000");
     assertNull(res);
   }
 }

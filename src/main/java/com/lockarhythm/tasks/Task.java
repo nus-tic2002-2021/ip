@@ -1,6 +1,6 @@
 package com.lockarhythm.tasks;
 
-public class Task {
+public abstract class Task {
   private String description;
   private boolean isDone;
 
@@ -29,8 +29,10 @@ public class Task {
     return isDone ? "X" : " ";
   }
 
+  protected abstract String getTaskTypeIcon();
+
   @Override
   public String toString() {
-    return String.format("[%s] %s", getDoneIcon(), description);
+    return String.format("[%s][%s] %s", getTaskTypeIcon(), getDoneIcon(), description);
   }
 }

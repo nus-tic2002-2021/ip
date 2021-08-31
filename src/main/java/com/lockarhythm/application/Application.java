@@ -18,10 +18,14 @@ abstract class Application {
     ui.print("Hello I'm\n" + logo, "What can I do for you?");
 
     while (ui.hasNext()) {
-      result = q.interpret(ui.nextLine());
-      ui.print(result);
-      if (result.shouldExit()) {
-        break;
+      try {
+        result = q.interpret(ui.nextLine());
+        ui.print(result);
+        if (result.shouldExit()) {
+          break;
+        }
+      } catch (NullPointerException e) {
+        ui.print("Sorry, I don't understand that yet!");
       }
     }
   }

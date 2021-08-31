@@ -21,9 +21,9 @@ java_binary(
       "TestTerminalDuke",
       "TestEchoResponder",
       "TestExitResponder",
-      "TestAddListResponder",
+      "TestListResponder",
       "TestMarkAsDoneResponder",
-      "TestTask",
+      "TestTodoTask",
       "TestTaskList",
   ]
 ]

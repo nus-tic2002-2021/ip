@@ -9,8 +9,8 @@ public class TestTaskList {
   public void testAddTask() throws Exception {
     TaskList list = new TaskList();
 
-    list.add("learn useful libraries in java");
-    list.add("learn bazel");
+    list.addTodoTask("learn useful libraries in java");
+    list.addTodoTask("learn bazel");
     assertEquals("has correct number of items", 2, list.size());
 
     Task task = list.markAsDone(1);

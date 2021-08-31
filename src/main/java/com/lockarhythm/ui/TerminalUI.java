@@ -4,7 +4,7 @@ import com.lockarhythm.query.Result;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TerminalUI implements UI {
+public final class TerminalUI implements UI {
   private static Scanner in = new Scanner(System.in);
 
   public String nextLine() {
