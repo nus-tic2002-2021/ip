@@ -66,8 +66,14 @@ public class Duke {
         Echo();
     }
 
+    public static void Level2() {
+        Greet();
+        Add();
+    }
+
     public static void main(String[] args) {
         StartDuke();
-        Level1();
+        // Level1();
+        Level2();
     }
 }
