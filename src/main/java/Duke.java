@@ -13,6 +13,12 @@ public class Duke {
         System.out.println("Welcome to\n" + logo + " chatbot! \n");
     }
 
+    public static void Greet() {
+        String start = "Hello, I'm Duke\n"
+                + "What can I do for you?\n";
+        System.out.println(start);
+    }
+
     public static void Echo() {
         Boolean stop = false;
         while (stop == false) {
@@ -28,6 +34,7 @@ public class Duke {
 
     public static void main(String[] args) {
         StartDuke();
+        Greet();
         Echo();
     }
 }
