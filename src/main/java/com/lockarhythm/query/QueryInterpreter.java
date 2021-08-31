@@ -1,5 +1,5 @@
 package com.lockarhythm.query;
 
 public interface QueryInterpreter {
-  public Result interpret(String query);
+  public Result interpret(String query) throws DukeException;
 }

@@ -24,14 +24,13 @@ public final class SimpleQueryInterpreter implements QueryInterpreter {
     interpreters = res;
   }
 
-  public Result interpret(String query) {
-    Result res = null;
+  public Result interpret(String query) throws DukeException {
     for (QueryInterpreter interpreter : interpreters) {
-      res = interpreter.interpret(query);
+      Result res = interpreter.interpret(query);
       if (res != null) {
         return res;
       }
     }
-    return res;
+    throw new DukeException();
   }
 }

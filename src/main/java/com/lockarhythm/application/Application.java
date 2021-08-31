@@ -1,5 +1,6 @@
 package com.lockarhythm.application;
 
+import com.lockarhythm.query.DukeException;
 import com.lockarhythm.query.QueryInterpreter;
 import com.lockarhythm.query.Result;
 import com.lockarhythm.ui.UI;
@@ -24,7 +25,7 @@ abstract class Application {
         if (result.shouldExit()) {
           break;
         }
-      } catch (NullPointerException e) {
+      } catch (DukeException e) {
         ui.print("Sorry, I don't understand that yet!");
       }
     }
