@@ -15,8 +15,9 @@ for development: tracking of tasks and project design
 # [Feature Level 1](https://www.notion.so/Level-1-Greet-Echo-Exit-2b73e7e61b944e878b8150f937218f88)
 
 ## Test
-- [ ] refine display
-  - [ ] each request-response cycle to be distinguishable.
+- user input loop
+  - [ ] user should input text and app will echo back full text
+  - [ ] exit loop on bye
 
 # [Feature Level 2](https://www.notion.so/Level-2-Add-List-ec463c120b9447a6be16443b3ecf3d5c)
 
