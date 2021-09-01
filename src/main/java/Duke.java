@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
     private static Task[] taskList = new Task[100];
-    private static int commandCount = 0;
+    private static int taskCount = 0;
 
     public static void addCommand(String command){
-        taskList[commandCount] = new Task(command);
-        commandCount++;
+        taskList[taskCount] = new Task(command);
+        taskCount++;
     }
     public static void reply(String command){
         if(command.contains("done")){
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     public static void printAll(){
-        if(commandCount==0){
+        if(taskCount==0){
             System.out.println("    ____________________________________________________________");
             System.out.println("    Nothing in list yet...");
             System.out.println("    ____________________________________________________________");
@@ -34,7 +34,7 @@ public class Duke {
         }
         int numbering = 1;
         System.out.println("    ____________________________________________________________");
-        for(int i=0;i<commandCount;i++){
+        for(int i=0;i<taskCount;i++){
             System.out.println("    "+numbering+". ["+taskList[i].getStatusIcon()+"] "+taskList[i].getTaskInfo());
             numbering++;
         }
