@@ -23,8 +23,14 @@ public abstract class AbstractOrchestrator {
     private void setTaskManager(TaskManager tm) {
         this._taskManager = tm;
     }
+    private TaskManager getTaskManager() {
+        return this._taskManager;
+    }
     private void setFileResourceManager(FileResourceManager frm) {
         this._frMgr = frm;
+    }
+    private FileResourceManager getFileResourceManager() {
+        return this._frMgr;
     }
     private void setUxManager(UxManager uxMgr) {
         this._uxMgr = uxMgr;
@@ -39,4 +45,7 @@ public abstract class AbstractOrchestrator {
         this.getUxManager().printTerminateMessage();
     }
     public abstract void run() throws Exception;
+    public void inputLoop() throws Exception {
+        this.getUxManager().userInputLoop(this.getTaskManager(), this.getFileResourceManager());
+    }
 }
