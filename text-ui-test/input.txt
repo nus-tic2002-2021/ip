@@ -1,0 +1,7 @@
+list
+read a book
+revise TIC2002
+be happy
+done 1
+list
+bye

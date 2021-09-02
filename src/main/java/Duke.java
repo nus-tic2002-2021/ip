@@ -21,6 +21,7 @@ public class Duke {
         while (!exit){
             String inputStr = sc.nextLine();
 
+            System.out.println("________________________________");
             if (inputStr.equalsIgnoreCase("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 exit = true;
@@ -50,6 +51,7 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println("added: " + inputStr);
             }
+            System.out.println("________________________________");
         }
     }
 }
