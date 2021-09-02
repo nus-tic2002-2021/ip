@@ -1,4 +1,6 @@
 
+import java.util.Locale;
+
 public class Task {
 
     protected int id = 0;
@@ -12,11 +14,11 @@ public class Task {
         id = totalCount + 1;
         totalCount++;
 
-        if (cmd.startsWith("todo")) {
+        if (cmd.toLowerCase(Locale.ROOT).startsWith("todo")) {
             name = cmd.substring(5);
         }
 
-        else if (cmd.startsWith("deadline")) {
+        else if (cmd.toLowerCase(Locale.ROOT).startsWith("deadline")) {
             name = cmd.substring(9);
         }
 
