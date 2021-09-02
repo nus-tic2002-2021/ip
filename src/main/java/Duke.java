@@ -14,10 +14,10 @@ public class Duke {
                    + "| |_| | |_| |   <  __/\n"
                    + "|____/ \\__,_|_|\\_\\___|";
         System.out.println("____________________________________________________");
-        System.out.println("Hello! I'm Duke By Justin\nWhat can I do for you?\n" + logo);
+        System.out.println("Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n" + logo);
         System.out.println("____________________________________________________");
 
-        ArrayList<Task> listOfTasks = new ArrayList<Task>();
+        ArrayList<Task> listOfTasks = new ArrayList<>();
         boolean bye = false;
 
         while (!bye) {
@@ -36,16 +36,18 @@ public class Duke {
 
                 if (listOfTasks.size() == 0) {
                     System.out.println("____________________________________________________");
-                    System.out.println("You have no task! :)");
+                    System.out.println("You have no task in your list!");
                     System.out.println("____________________________________________________");
                 }
 
-                System.out.println("____________________________________________________");
-                for (Task task : listOfTasks) {
-                    System.out.println(task.listTask());
+                else {
+                    System.out.println("____________________________________________________");
+                    System.out.println("Here are the tasks in your list:");
+                    for (Task task : listOfTasks) {
+                        System.out.println(task.listTask());
+                    }
+                    System.out.println("____________________________________________________");
                 }
-                System.out.println("____________________________________________________");
-
             }
 
             else if (cmd.startsWith("done")) {

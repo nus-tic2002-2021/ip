@@ -1,12 +1,12 @@
 
 public class Task {
 
-    private int id = 0;
-    private String name = "";
-    private boolean isToDo = false;
-    private boolean isDeadline = false;
-    private boolean isDone = false;
-    private static int totalCount = 0;
+    protected int id = 0;
+    protected String name = "";
+    protected boolean isToDo = false;
+    protected boolean isDeadline = false;
+    protected boolean isDone = false;
+    protected static int totalCount = 0;
 
     public Task(String cmd) {
         id = totalCount + 1;
