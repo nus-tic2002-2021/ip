@@ -16,8 +16,8 @@ for development: tracking of tasks and project design
 
 ## Test
 - user input loop
-  - [ ] user should input text and app will echo back full text
-  - [ ] exit loop on bye
+  - [x] user should input as textCommand and app will echo back full text
+  - [x] exit loop on textCommand "bye"
 
 # [Feature Level 2](https://www.notion.so/Level-2-Add-List-ec463c120b9447a6be16443b3ecf3d5c)
 

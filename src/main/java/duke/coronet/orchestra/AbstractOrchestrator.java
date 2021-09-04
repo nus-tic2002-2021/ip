@@ -46,6 +46,6 @@ public abstract class AbstractOrchestrator {
     }
     public abstract void run() throws Exception;
     public void inputLoop() throws Exception {
-        this.getUxManager().userInputLoop(this.getTaskManager(), this.getFileResourceManager());
+        this.getUxManager().textCommandLoop(this.getTaskManager(), this.getFileResourceManager());
     }
 }

@@ -7,7 +7,7 @@
 
 ### See
 [Changelog](/docs/CHANGELOG.md) \
-[Dev Milestones](/docs/TODO.md)
+[Dev Milestones / Development Guide](/docs/TODO.md)
 
 ## Run
 
@@ -19,7 +19,7 @@ Orchestrators are entry points of project stages.
   Test: ```duke.coronet.level.Increment_00_Test```
 
 - [Level 1. Greet, Echo, Exit](https://nus-tic2002-2021.github.io/website/se-book-adapted/projectDuke/index.html#level-1-greet-echo-exit) \
-  ```duke.coronet.orchestra.OrchestratorLevel01.main()``` \
+  Entry Point:  ```duke.coronet.orchestra.OrchestratorLevel01.main()``` \
   Test: ```duke.coronet.level.Increment_01_Test```
 
 # Production Build (Maven)

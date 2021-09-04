@@ -72,13 +72,13 @@ public class UxManager {
         this.getPrintStream().print("Echoed after you: " + text + System.lineSeparator());
     }
     /* request response cycle which takes in a line input and "renders" the command output */
-    public void userInputLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
+    public void textCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
-        String userInput;
+        String textCommand;
         Scanner in = new Scanner(System.in);
         do {
-            userInput = in.nextLine();
-            Command command = this.getUxCommandFactory().executeTextCommand(userInput, taskManager, frm);
+            textCommand = in.nextLine();
+            Command command = this.getUxCommandFactory().executeTextCommand(textCommand, taskManager, frm);
             this.displayCommandResponse(command);
             this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
         } while (this._loop);
