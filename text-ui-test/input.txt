@@ -1,7 +1,13 @@
 list
 read a book
-revise TIC2002
-be happy
+todo read a book
+deadlinee return the book
+deadline return the book /b 6th Sep
+deadline return the book /by 6th Sep
+event meeting
+event meeting /at 9th Sep 2pm-3pm
+list
 done 1
+done 3
 list
 bye

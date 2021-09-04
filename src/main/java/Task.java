@@ -14,6 +14,8 @@ public class Task {
         this.isDone = false;
     }
 
+    public int getTaskId() { return id; }
+
     public String getDescription() {
         return description;
     }
@@ -27,10 +29,9 @@ public class Task {
         isDone = true;
     }
 
-    //TODO: Add your code here
     @Override
     public String toString()
     {
-        return id + ". [" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
