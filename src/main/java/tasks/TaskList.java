@@ -1,4 +1,6 @@
-package task;
+package tasks;
+
+import exceptions.*;
 
 import java.util.ArrayList;
 
@@ -23,9 +25,9 @@ public class TaskList {
         }
     }
 
-    public void setDone(int taskId){
+    public void setDone(int taskId) throws DukeArgumentException {
         if (taskId > taskList.size()){
-            System.out.println("Task with id " + taskId + " is not found.");
+            throw new DukeArgumentException();
         }
         else {
             Task doneTask = taskList.get(taskId - 1);

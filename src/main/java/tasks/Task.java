@@ -1,4 +1,4 @@
-package task;
+package tasks;
 
 public class Task {
     private static int taskCount;
@@ -34,6 +34,6 @@ public class Task {
     @Override
     public String toString()
     {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }

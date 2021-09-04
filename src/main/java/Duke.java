@@ -1,4 +1,5 @@
-import task.*;
+import tasks.*;
+import exceptions.*;
 import java.util.*;
 
 public class Duke {
@@ -33,8 +34,17 @@ public class Duke {
                 }
                 case "done":
                 {
-                    int taskId = Integer.parseInt(words[1]);
-                    taskList.setDone(taskId);
+                    try {
+                        int taskId = Integer.parseInt(words[1]);
+
+                        try {
+                            taskList.setDone(taskId);
+                        } catch (DukeArgumentException e) {
+                            System.out.println("Task with id " + taskId + " is not found.");
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Task id is missing.");
+                    }
                     break;
                 }
                 case "todo":
@@ -45,8 +55,13 @@ public class Duke {
 
                     switch (keyword) {
                         case "todo": {
-                            task = new ToDo(words[1]);
-                            taskList.addTask(task);
+                            try {
+                                task = new ToDo(words[1]);
+                                taskList.addTask(task);
+                            }
+                            catch (IndexOutOfBoundsException e) {
+                                System.out.println("Task cannot be added: \nDescription is missing.");
+                            }
                             break;
                         }
                         case "deadline": {
@@ -55,9 +70,8 @@ public class Duke {
                                 task = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                                 taskList.addTask(task);
                             }
-                            catch(Exception e) {
-                                System.out.println("Task cannot be added: ");
-                                System.out.println("Deadline or description is missing.");
+                            catch(IndexOutOfBoundsException e) {
+                                System.out.println("Task cannot be added: \nDeadline or description is missing.");
                             }
                             break;
                         }
@@ -67,9 +81,8 @@ public class Duke {
                                 task = new Event(eventInfo[0], eventInfo[1]);
                                 taskList.addTask(task);
                             }
-                            catch(Exception e) {
-                                System.out.println("Task cannot be added: ");
-                                System.out.println("Event time or description is missing");
+                            catch(IndexOutOfBoundsException e) {
+                                System.out.println("Task cannot be added: \nEvent time or description is missing");
                             }
                             break;
                         }
