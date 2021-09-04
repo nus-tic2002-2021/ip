@@ -1,9 +1,10 @@
+import task.*;
 import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
         boolean exit = false;
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -26,28 +27,14 @@ public class Duke {
 
             switch(keyword)
             {
-                case "list":
-                {
-                    if(tasks.size() == 0){
-                        System.out.println("There's no task now :D");
-                    }
-                    else {
-                        System.out.println("Here are the task(s) in your list:");
-                        for (Task task : tasks) {
-                            System.out.println(task.getTaskId() + ". " + task.toString());
-                        }
-                    }
+                case "list": {
+                    taskList.printTasks();
                     break;
                 }
                 case "done":
                 {
-                    int doneItemId = Integer.parseInt(words[1]);
-
-                    Task doneTask = tasks.get(doneItemId - 1);
-                    doneTask.markAsDone();
-
-                    System.out.println("Amazing! The task is marked as done now:");
-                    System.out.println(doneTask.toString());
+                    int taskId = Integer.parseInt(words[1]);
+                    taskList.setDone(taskId);
                     break;
                 }
                 case "todo":
@@ -55,58 +42,46 @@ public class Duke {
                 case "event":
                 {
                     Task task = null;
-                    boolean isAdded = false;
 
                     switch (keyword) {
                         case "todo": {
                             task = new ToDo(words[1]);
-                            tasks.add(task);
-                            isAdded = true;
+                            taskList.addTask(task);
                             break;
                         }
                         case "deadline": {
-                            if (words[1].contains(" /by ")) {
+                            try {
                                 String deadlineInfo[] = words[1].split(" /by ");
                                 task = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                                tasks.add(task);
-                                isAdded = true;
+                                taskList.addTask(task);
                             }
-                            else {
+                            catch(Exception e) {
                                 System.out.println("Task cannot be added: ");
-                                System.out.println("Deadline is not specified.");
+                                System.out.println("Deadline or description is missing.");
                             }
                             break;
                         }
                         case "event": {
-                            if (words[1].contains(" /at ")) {
+                            try {
                                 String eventInfo[] = words[1].split(" /at ");
                                 task = new Event(eventInfo[0], eventInfo[1]);
-                                tasks.add(task);
-                                isAdded = true;
+                                taskList.addTask(task);
                             }
-                            else {
+                            catch(Exception e) {
                                 System.out.println("Task cannot be added: ");
-                                System.out.println("Event time is not specified.");
+                                System.out.println("Event time or description is missing");
                             }
                             break;
                         }
                     }
-
-                    if (isAdded) {
-                        System.out.println("Got it! I've added this task: ");
-                        System.out.println(task.toString());
-                        System.out.println("Now you have " + tasks.size() + " task(s) in the list");
-                    }
                     break;
                 }
-                case "bye":
-                {
+                case "bye": {
                     System.out.println("Bye. Hope to see you again soon!");
                     exit = true;
                     break;
                 }
-                default:
-                {
+                default: {
                     System.out.println("Sorry, no command <" + keyword + "> found :(");
                     break;
                 }

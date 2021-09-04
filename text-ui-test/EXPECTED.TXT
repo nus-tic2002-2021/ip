@@ -20,11 +20,12 @@ Got it! I've added this task:
 Now you have 1 task(s) in the list
 __________________________________________
 __________________________________________
-Sorry, no command <deadlinee> found :(
+Task cannot be added: 
+Deadline or description is missing.
 __________________________________________
 __________________________________________
 Task cannot be added: 
-Deadline is not specified.
+Deadline or description is missing.
 __________________________________________
 __________________________________________
 Got it! I've added this task: 
@@ -32,8 +33,11 @@ Got it! I've added this task:
 Now you have 2 task(s) in the list
 __________________________________________
 __________________________________________
+Sorry, no command <eventt> found :(
+__________________________________________
+__________________________________________
 Task cannot be added: 
-Event time is not specified.
+Event time or description is missing
 __________________________________________
 __________________________________________
 Got it! I've added this task: 
@@ -53,6 +57,9 @@ __________________________________________
 __________________________________________
 Amazing! The task is marked as done now:
 [E][X] meeting (at: 9th Sep 2pm-3pm)
+__________________________________________
+__________________________________________
+Task with id 5 is not found.
 __________________________________________
 __________________________________________
 Here are the task(s) in your list:
