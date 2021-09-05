@@ -17,6 +17,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        return id + ". [" + status + "] " + super.toString();
+        return id + ". [T][" + status + "] " + super.toString();
     }
 }
