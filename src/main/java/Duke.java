@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Duke {
 
-    private static String lineBreak = "\t________________________________________";
+    private static String lineBreak = "\t_______________________________________________________";
     private static List inputList;
     static final int LIST_SIZE = 100;
 
@@ -19,23 +19,30 @@ public class Duke {
 
     public static void printIntro(){
         System.out.println(lineBreak);
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("\tHello! This are the implemented actions.\n\t" +
+                            " /at & /by are currently case sensitive"); // cannot implement with what we learnt yet.
+        System.out.println("\t1.) Todo (text)--- to add todo task");    //
+        System.out.println("\t2.) Deadline (text /by text)--- to add deadline task");
+        System.out.println("\t3.) Event (text /at text)--- to add event task");
+        System.out.println("\tEnter 'list' without quotes show list. Maximum size set to 100");
+        System.out.println("\tEnter 'bye' without quotes to exit program\n");
+        System.out.println("\tWelcome. Please enter your instruction.");
         System.out.println(lineBreak);
     }
     public static void printResponse(String inputMsg) {
         System.out.println(lineBreak);
-        if (inputMsg.equals("bye")){
+        String inputLow = inputMsg.toLowerCase();
+        if (inputLow.equals("bye")){
             System.out.println("\tBye. Hope to see you again soon!");
         }
-        else if(inputMsg.equals("list")){
+        else if(inputLow.equals("list")){
             inputList.printList();
         }
-        else if (inputMsg.startsWith("done")){
-            inputList.setDone(inputMsg.substring(5));
+        else if (inputLow.startsWith("done ")){
+            inputList.taskDone(inputMsg.substring(5));
         }
         else{
-            inputList.storeList(inputMsg);
-            System.out.println("\tadded: " + inputMsg);
+            inputList.checkAction(inputMsg);
         }
         System.out.println(lineBreak);
     }

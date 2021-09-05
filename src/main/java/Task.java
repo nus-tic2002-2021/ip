@@ -1,18 +1,14 @@
-public class Task {
+abstract class Task {
     protected String description;
-    protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        setDescription(description);
     }
 
-    @Override  /*testing override*/
-    public String toString() {
-        String box = "[ ] ";
-        if (isDone){
-            box = "[X] ";
-        }
-        return (box + description);
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public abstract void setDone();
+    public abstract void print();
 }
