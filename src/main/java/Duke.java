@@ -4,6 +4,7 @@ public class Duke {
 
     public static Task[] tasks = new Task[100];
     private static int tasksCount = 0;
+    //Declare the breakline as a class-level variable
     public static String breakLine = "____________________________________________________________\n";
 
 
@@ -18,16 +19,25 @@ public class Duke {
     public static void collectUserInput(){
         Scanner in = new Scanner(System.in);
         String line = "";
+        String status = "";
         line = in.nextLine();
 
         while(!line.equalsIgnoreCase("bye")){
-            Task t = new Task(line);
+            //extract description from the string line
+            String[] taskSplit = line.split(" ");
+            if(taskSplit[0].equals("todo") || taskSplit[0].equals("deadline") || taskSplit[0].equals("event")){
+                taskSplit[0]="";
+            }
+            String text = String.join(" ", taskSplit);
+            Task t = new Task(text);
+            //TODO ask teacher how to connect child class to super class
 
-            if(t.description.contains("list")){
+            if(line.contains("list")){
                 printList();
             }
-            else if(t.description.contains("done")){
+            else if(line.contains("done")){
                 String[] userKeyIn = t.description.split(" ");
+                //TODO write a class or function for done
                 //check the str behind the done is a digit
                 try
                 {
@@ -50,14 +60,40 @@ public class Duke {
                 catch(NullPointerException e){
                     System.out.println("There are only "+tasksCount+" tasks, please enter the correct task number");
                 }
-
-
-
             }
-            else if (!line.equals("")){
-                //append the items to list
+
+            else if(line.contains("todo")){
+                tasks[tasksCount] = new Todo(text);
+                tasks[tasksCount].setTaskStatus("T");
+//                System.out.println(breakLine);
+                System.out.println(tasks[tasksCount].toString());
                 addTask(t);
+                System.out.println("Now you have "+tasksCount+" tasks in the list.");
             }
+
+            else if(line.contains("deadline")){
+                //get the index of /
+                String[] deadlineAndTime = text.split("/by");
+                tasks[tasksCount] = new Deadline(deadlineAndTime[0],deadlineAndTime[1]);
+                tasks[tasksCount].setTaskStatus("D");
+
+                System.out.println(tasks[tasksCount].toString());
+                addTask(t);
+                System.out.println("Now you have "+tasksCount+" tasks in the list.");
+
+
+            }
+            else if(line.contains("event")){
+                String[] eventAndTime = text.split("/at");
+                tasks[tasksCount] = new Event(eventAndTime[0],eventAndTime[1]);
+                tasks[tasksCount].setTaskStatus("E");
+
+                System.out.println(tasks[tasksCount].toString());
+                addTask(t);
+                System.out.println("Now you have "+tasksCount+" tasks in the list.");
+
+            }
+
             line = in.nextLine();
         }
 
@@ -66,7 +102,7 @@ public class Duke {
     }
 
     public static void addTask(Task t){
-        tasks[tasksCount] = t;
+//        tasks[tasksCount] = t;
         tasksCount++;
     }
 
@@ -76,7 +112,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         //print out all items in list
         for(int i = 0; i< tasksCount;i++){
-            System.out.println(i+1 + ". "+ " ["+tasks[i].getStatusIcon()+"] "+tasks[i].getDescription());
+            System.out.println(i+1 + "."+"["+tasks[i].getTaskStatus()+"]" +"["+tasks[i].getStatusIcon()+"]"+tasks[i].getDescription());
         }
         System.out.println(breakLine);
     }
@@ -88,6 +124,7 @@ public class Duke {
             }
         }
     }
+
 
     public static void printTaskDone(Task t){
         System.out.println(breakLine+"Nice! I've marked this task as done: \n" +

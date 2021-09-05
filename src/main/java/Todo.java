@@ -13,4 +13,9 @@ public class Todo extends Task {
     public boolean isDone() {
         return isDone;
     }
+
+    @Override
+    public String toString() {
+        return "Got it. I've added this task: \n  "+ super.toString();
+    }
 }
