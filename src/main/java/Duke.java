@@ -23,14 +23,38 @@ public class Duke {
         while(!line.equalsIgnoreCase("bye")){
             Task t = new Task(line);
 
-            if(line.equals("list")){
+            if(t.description.contains("list")){
                 printList();
             }
+            else if(t.description.contains("done")){
+                String[] userKeyIn = t.description.split(" ");
+                //check the str behind the done is a digit
+                try
+                {
+                    Integer.parseInt(userKeyIn[1]);
+                    int taskIndex = Integer.parseInt(userKeyIn[1])-1;
 
-            else{
-                //display the input
-//                System.out.println(
-//                        breakLine + "added: " + line +"\n" + breakLine);
+                    tasks[taskIndex].markAsDone();
+                    printTaskDone(tasks[taskIndex]);
+                }
+                //check the input is integer
+                catch (NumberFormatException e)
+                {
+                    System.out.println(line + " is not a valid integer");
+                }
+                //check the input is not 0, and it is a real task id
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("Enter a correct task number");
+                }
+                //check the input is not 0, is not exceed the total tasks index
+                catch(NullPointerException e){
+                    System.out.println("There are only "+tasksCount+" tasks, please enter the correct task number");
+                }
+
+
+
+            }
+            else if (!line.equals("")){
                 //append the items to list
                 addTask(t);
             }
@@ -73,10 +97,9 @@ public class Duke {
     public static void main(String[] args) {
         greeting();
         collectUserInput();
-        Task t = new Task("read book");
-        t.markAsDone();
-        updateList(t.getDescription());
-        printList();
-        printTaskDone(t);
+//        Task t = new Task("read book");
+//        t.markAsDone();
+//        updateList(t.getDescription());
+//        printList();
     }
 }

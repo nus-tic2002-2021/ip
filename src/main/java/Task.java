@@ -24,8 +24,6 @@ public class Task {
 
     public void markAsDone(){
         setIsDone(true);
-//        System.out.println(breakLine+"Nice! I've marked this task as done: \n" +
-//                " ["+getStatusIcon()+"] " + getDescription() + "\n"+breakLine);
     }
 
 }
