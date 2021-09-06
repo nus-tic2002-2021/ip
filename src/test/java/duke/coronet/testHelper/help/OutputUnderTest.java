@@ -33,4 +33,11 @@ public class OutputUnderTest {
     public static String getMsgUnderTestExitLoop() {
         return "ok bye" + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
+    public static String getMsgUnderTestResponseTaskAdded(String taskDesc) {
+        return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+    public static String getMsgUnderTestResponseListAll(String list) {
+        return list + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
 }
