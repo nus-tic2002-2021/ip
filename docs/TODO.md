@@ -22,12 +22,12 @@ for development: tracking of tasks and project design
 # [Feature Level 2](https://www.notion.so/Level-2-Add-List-ec463c120b9447a6be16443b3ecf3d5c)
 
 ## New Feature
-- [ ] Create abstract Class Task
-  - [ ] Create ToDo sub class of Task
-  - [ ] Aggregate class TaskManager of Task objects
+- [x] Create abstract Class Task
+  - [x] Create ToDo sub class of Task
+  - [x] Aggregate class TaskManager of Task objects
 - textCommand
-  - [ ] default textCommand: create task with textCommand as task description
-  - [ ] add textCommand `list` to list all tasks
+  - [x] default textCommand: create task with textCommand as task description
+  - [x] add textCommand `list` to list all tasks
 
 ## Feature Change
 - [ ] command `*` default response change from echo command to add task
