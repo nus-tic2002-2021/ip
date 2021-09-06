@@ -23,9 +23,11 @@ for development: tracking of tasks and project design
 
 ## New Feature
 - [ ] Create abstract Class Task
-  - [ ] Create Todo sub class of Task
-  - [ ] In-memory storage of Task objects (Need to create suitable collection)
-- [ ] command `list` list all
+  - [ ] Create ToDo sub class of Task
+  - [ ] Aggregate class TaskManager of Task objects
+- textCommand
+  - [ ] default textCommand: create task with textCommand as task description
+  - [ ] add textCommand `list` to list all tasks
 
 ## Feature Change
 - [ ] command `*` default response change from echo command to add task
