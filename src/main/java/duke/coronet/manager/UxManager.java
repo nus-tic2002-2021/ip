@@ -91,7 +91,11 @@ public class UxManager {
             this.printExitLoopMessage();
         } else if (rt == ResponseType.ECHO) {
             this.printEchoMessage(c.getArgs().get(1));
-        }   else {
+        }  else if (rt == ResponseType.TASK_CREATE_TODO) {
+            this.getPrintStream().print("Added To Do: " + c.getArgs().get(2) + System.lineSeparator());
+        } else if (rt == ResponseType.TASK_LIST_ALL) {
+            this.getPrintStream().print(c.getArgs().get(1));
+        } else {
             throw new Exception("Unhandled response type [" + rt +  "].");
         }
     }
