@@ -29,26 +29,15 @@ for development: tracking of tasks and project design
   - [x] default textCommand: create task with textCommand as task description
   - [x] add textCommand `list` to list all tasks
 
-## Feature Change
-- [ ] command `*` default response change from echo command to add task
-
 # [Feature Level 3](https://www.notion.so/Level-3-Mark-as-Done-b1fc5a70549d4f099631a786241d7ce5)
 
 ## New Feature
 
-- Task object attributes
-  - "done" status
-    - [ ] add "done" status
-  - [ ] add "active" status
-  - [ ] added a HashMap\<taskId:int,task:Task\> in TaskList for constant time object access.
-
-## Feature Change
-
 - Command
   - [ ] `list` - add display "done" status column
-  - [ ] `add [task_description]` - add a ToDo
-  - [ ] `done [task_id]` - flag task as done
-  - [ ] `*` - default command change from add task to unknown request.
+  - [ ] `add [taskDescription]` - add a ToDo
+  - [ ] `done [taskId]` - flag task as done
+  - [ ] `*` - default textCommand change from add task to unknown request.
 
 # [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
 
