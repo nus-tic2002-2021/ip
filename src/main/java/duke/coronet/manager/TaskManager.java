@@ -35,4 +35,16 @@ public class TaskManager {
     public Integer getSize() {
         return this.getActiveTasks().getSize();
     }
+    public Boolean containsTaskId(Integer taskId) {
+        return this.getActiveTasks().containsKey(taskId);
+    }
+    public Task getTaskByIdAndSetDone(Integer taskId, Boolean done) {
+        Task target = this.getTaskById(taskId);
+        target.setDoneStatus(done);
+        return target;
+    }
+    public Task getTaskById(Integer taskId) {
+        return this.getActiveTasks().getTaskById(taskId);
+    }
+
 }
