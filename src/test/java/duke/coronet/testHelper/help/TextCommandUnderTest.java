@@ -4,6 +4,7 @@ public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
     public static final String PROMPT_UNDER_TEST_MARK_AS_DONE = "done ";
+    public static final String PROMPT_UNDER_TEST_ADD_TO_DO = "todo ";
 
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
@@ -23,4 +24,10 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSetCompleted(String invoke, Integer taskId) {
         return invoke + taskId + System.lineSeparator();
     }
+
+    public static String generateTextCommandLineAddToDo(String invoke, String description) {
+        return invoke + description + System.lineSeparator();
+    }
+
+
 }
