@@ -1,9 +1,11 @@
 package duke.coronet.manager;
 
 import duke.coronet.task.aggregator.TaskList;
+import duke.coronet.task.model.Deadline;
 import duke.coronet.task.model.Task;
 import duke.coronet.task.model.ToDo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -28,6 +30,12 @@ public class TaskManager {
         ToDo todo = new ToDo(taskDescription, this.rollSerialNo(), false);
         this._activeTasks.addTask(todo);
         return todo;
+    }
+    public Deadline addNewDeadline(String taskDescription, LocalDateTime deadline) {
+        Deadline deadLine = new Deadline(taskDescription, deadline, this.rollSerialNo(), false);
+        this._activeTasks.addTask(deadLine);
+        this._serialNo++;
+        return deadLine;
     }
     public ArrayList<Task> getAllAsArray() {
         return this.getActiveTasks().getAllAsArray();
