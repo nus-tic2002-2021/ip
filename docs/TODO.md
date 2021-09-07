@@ -34,7 +34,7 @@ for development: tracking of tasks and project design
 ## New Feature
 
 - textCommands
-  - [ ] `done [taskId]` - flag task as done
+  - [x] `done [taskId]` - flag task as done
 
 # [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
 
