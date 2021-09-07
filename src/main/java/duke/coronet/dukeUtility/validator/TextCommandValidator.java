@@ -1,7 +1,6 @@
 package duke.coronet.dukeUtility.validator;
 
 import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.*;
-import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 
 /**
  * Text Command Validation methods
@@ -20,8 +19,12 @@ public class TextCommandValidator {
         return text.startsWith(PROMPT_ADD_TODO);
     }
 
-    public static Boolean isRequestDeadline(String text) {
+    public static Boolean isRequestAddDeadline(String text) {
         return text.startsWith(PROMPT_ADD_DEADLINE);
+    }
+
+    public static Boolean isRequestAddEvent(String text) {
+        return text.startsWith(PROMPT_ADD_EVENT);
     }
 
 }

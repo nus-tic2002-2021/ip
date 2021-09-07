@@ -2,6 +2,7 @@ package duke.coronet.manager;
 
 import duke.coronet.task.aggregator.TaskList;
 import duke.coronet.task.model.Deadline;
+import duke.coronet.task.model.Event;
 import duke.coronet.task.model.Task;
 import duke.coronet.task.model.ToDo;
 
@@ -34,9 +35,15 @@ public class TaskManager {
     public Deadline addNewDeadline(String taskDescription, LocalDateTime deadline) {
         Deadline deadLine = new Deadline(taskDescription, deadline, this.rollSerialNo(), false);
         this._activeTasks.addTask(deadLine);
-        this._serialNo++;
         return deadLine;
     }
+    public Event addNewEvent(String taskDescription, LocalDateTime from, LocalDateTime to) {
+        this.rollSerialNo();
+        Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
+        this.getActiveTasks().addTask(event);
+        return event;
+    }
+
     public ArrayList<Task> getAllAsArray() {
         return this.getActiveTasks().getAllAsArray();
     }

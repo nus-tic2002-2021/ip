@@ -7,6 +7,7 @@ import duke.coronet.command.errorCommand.CommandTaskNotFound;
 import duke.coronet.command.systemCommand.CommandEcho;
 import duke.coronet.command.systemCommand.CommandExit;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewDeadline;
+import duke.coronet.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewToDo;
 import duke.coronet.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.coronet.manager.FileResourceManager;
@@ -74,4 +75,31 @@ public abstract class UxCommandFactory extends CommandFactory {
         }
         return new CommandAddNewDeadline(taskManager, taskDescription, deadline);
     }
+
+    protected Command executeCommandAddEvent(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        String[] scheduleOptionList;
+        String taskDescription;
+        LocalDateTime from;
+        LocalDateTime to;
+        try {
+            argLine = text.replaceFirst(PROMPT_ADD_EVENT, "");
+            argList = argLine.split(ADD_EVENT_SCHEDULE_DELIMITER);
+            if (argList.length != 2) {
+                throw new Exception("Request line for adding event does not conform to syntax.");
+            }
+            taskDescription = argList[0];
+            scheduleOptionList = argList[1].split("-");
+            if (scheduleOptionList.length != 2) {
+                throw new Exception("Request line for adding event does not conform to syntax.");
+            }
+            from = parseStringAsLocalDateTime(scheduleOptionList[0]);
+            to = parseStringAsLocalDateTime(scheduleOptionList[1]);
+        } catch (Exception e) {
+            return new CommandInvalidRequest(e.toString());
+        }
+        return new CommandAddNewEvent(taskManager, taskDescription, from, to);
+    }
+
 }

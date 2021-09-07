@@ -21,7 +21,7 @@ public class DateParserUnderTest {
             return parseStringAsLocalDateUnderTest(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
         }
-            throw new Exception("Parse as LocalDateTime failed.");
+            throw new Exception("Parse [" + dateTimeString + "] as LocalDateTime failed.");
 
     }
     public static LocalDate parseStringAsLocalDateUnderTest(String dateString) {

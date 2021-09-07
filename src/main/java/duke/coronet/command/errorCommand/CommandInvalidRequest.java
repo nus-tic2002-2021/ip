@@ -7,6 +7,6 @@ import java.util.List;
 
 public class CommandInvalidRequest extends Command {
     public CommandInvalidRequest(String message) {
-        super(ResponseType.ERROR_REQUEST_INVALID, List.of("?", message));
+        super(ResponseType.ERROR_REQUEST_INVALID, List.of("Invalid request parameters", message));
     }
 }

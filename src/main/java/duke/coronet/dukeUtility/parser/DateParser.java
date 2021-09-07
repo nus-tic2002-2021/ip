@@ -20,7 +20,7 @@ public class DateParser {
             return parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
         }
-        throw new Exception("Parse as LocalDateTime failed.");
+        throw new Exception("Parse [" + dateTimeString + "] as LocalDateTime failed.");
     }
     public static LocalDate parseStringAsLocalDate(String dateString) {
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"));
