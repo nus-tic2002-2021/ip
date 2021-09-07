@@ -76,12 +76,17 @@ public class Duke {
                 PrintChecklist();
             } else if ((input.length() > 3) && (input.substring(0,4)).equals("done") ) {
                 if (input.length() < 5) {
-                    System.out.println("Input missing the index of the task that is done.");
+                    System.out.println(line + "\nInput missing the index of the task that is done.\n"
+                            + line);
                 } else {
                     int index = Integer.parseInt(input.substring(4).trim()) - 1;
-                    MarkTask(index);
-                    System.out.println("Nice! I've marked this task as done:\n  "
-                            + Checklist[index].getTaskInfo());
+                    if (index < TaskCount) {
+                        MarkTask(index);
+                        System.out.println(line + "Nice! I've marked this task as done:\n  "
+                                + Checklist[index].getTaskInfo() + "\n" + line);
+                    } else {
+                        System.out.println(line + "\nInvalid task index number\n" + line);
+                    }
                 }
             } else {
                 Task newTask = new Task(input);
@@ -97,10 +102,11 @@ public class Duke {
     }
 
     public static void PrintChecklist() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println(line + "\nHere are the tasks in your list:");
         for (int i = 0; i < TaskCount; i++) {
             System.out.println((i+1) + "." + Checklist[i].getTaskInfo());
         }
+        System.out.println(line);
     }
 
     public static void MarkTask(int index) {
