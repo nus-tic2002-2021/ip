@@ -32,11 +32,11 @@ public class Increment_01_Test extends TestStream {
 
         String echoCommand1 = generateTextCommandFullTextAsEcho(echoText1);
         String echoCommand2 = generateTextCommandFullTextAsEcho(echoText2);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(echoCommand1);
         commandBuilder.append(echoCommand2);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
 
         String expectedExitMessage = getMsgUnderTestTerminate();

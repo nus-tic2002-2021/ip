@@ -21,7 +21,7 @@ public class OrchestratorLevel00 extends AbstractOrchestrator {
     @Override
     public void run() {
         this.printEntryMessage();
-        this.printExitMessage();
+        this.printTerminateMessage();
     }
 
 

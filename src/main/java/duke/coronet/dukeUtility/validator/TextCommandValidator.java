@@ -7,7 +7,7 @@ import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.*;
  */
 public class TextCommandValidator {
     public static Boolean isRequestExitLoop(String text) {
-        return text.equals(PROMPT_EXIT);
+        return text.equals(PROMPT_EXIT_LOOP);
     }
     public static Boolean isRequestList(String text) {
         return text.equals("list");

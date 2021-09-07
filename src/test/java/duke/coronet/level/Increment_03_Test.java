@@ -48,14 +48,14 @@ public class Increment_03_Test extends TestStream {
         String storeCommand1 = generateTextCommandFullTextAsNewToDoDescription(storeText1);
         String markAsDoneCommand = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE, 0);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(storeCommand1);
         commandBuilder.append(listCommand);
         /* Mark Task As Done */
         commandBuilder.append(markAsDoneCommand);
         commandBuilder.append(listCommand);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
         /*
          * Should display:

@@ -5,7 +5,7 @@ import duke.coronet.command.Command;
 import duke.coronet.command.errorCommand.CommandInvalidRequest;
 import duke.coronet.command.errorCommand.CommandTaskNotFound;
 import duke.coronet.command.systemCommand.CommandEcho;
-import duke.coronet.command.systemCommand.CommandExit;
+import duke.coronet.command.systemCommand.CommandExitLoop;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewDeadline;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewToDo;
@@ -23,7 +23,7 @@ public abstract class UxCommandFactory extends CommandFactory {
         return new CommandEcho(text);
     }
     protected Command executeCommandExitLoop() {
-        return new CommandExit(PROMPT_EXIT);
+        return new CommandExitLoop(PROMPT_EXIT_LOOP);
     }
     public abstract Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm);
 

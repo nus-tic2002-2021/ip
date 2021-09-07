@@ -41,7 +41,7 @@ public abstract class AbstractOrchestrator {
     public void printEntryMessage() {
         this.getUxManager().printEntryMessage();
     }
-    public void printExitMessage() {
+    public void printTerminateMessage() {
         this.getUxManager().printTerminateMessage();
     }
     public abstract void run() throws Exception;

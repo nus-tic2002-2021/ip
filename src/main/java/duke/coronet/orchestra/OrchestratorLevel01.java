@@ -37,6 +37,6 @@ public class OrchestratorLevel01 extends AbstractOrchestrator {
     public void run() throws Exception {
         this.printEntryMessage();
         this.inputLoop();
-        this.printExitMessage();
+        this.printTerminateMessage();
     }
 }

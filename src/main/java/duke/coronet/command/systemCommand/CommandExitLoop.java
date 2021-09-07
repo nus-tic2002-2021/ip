@@ -5,8 +5,8 @@ import duke.coronet.dukeUtility.enums.ResponseType;
 
 import java.util.List;
 
-public class CommandExit extends Command {
-    public CommandExit(String invocation) {
+public class CommandExitLoop extends Command {
+    public CommandExitLoop(String invocation) {
         super(ResponseType.EXIT_LOOP, List.of(invocation));
     }
 }

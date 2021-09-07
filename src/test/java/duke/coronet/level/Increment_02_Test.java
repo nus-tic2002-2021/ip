@@ -51,12 +51,12 @@ public class Increment_02_Test extends TestStream {
         String storeCommand1 = generateTextCommandFullTextAsNewToDoDescription(storeText1);
         String storeCommand2 = generateTextCommandFullTextAsNewToDoDescription(storeText2);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(storeCommand1);
         commandBuilder.append(storeCommand2);
         commandBuilder.append(listCommand);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
 
 

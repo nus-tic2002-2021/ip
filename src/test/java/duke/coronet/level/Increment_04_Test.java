@@ -51,11 +51,11 @@ public class Increment_04_Test extends TestStream {
         String taskDescription = "first todo description";
         String storeToDoCommand = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO,taskDescription);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(storeToDoCommand);
         commandBuilder.append(listCommand);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
         /*
          * Should display:
@@ -113,11 +113,11 @@ public class Increment_04_Test extends TestStream {
 
         String storeDeadlineCommand = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, taskDescription, DELIMITER_DEADLINE_DEADLINE, deadlineString);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(storeDeadlineCommand);
         commandBuilder.append(listCommand);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
         /*
          * Should display:
@@ -175,11 +175,11 @@ public class Increment_04_Test extends TestStream {
 
         String storeEventCommand = generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, taskDescription, DELIMITER_EVENT_FROM, fromString,DELIMITER_EVENT_TO,toString);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         commandBuilder.append(storeEventCommand);
         commandBuilder.append(listCommand);
-        commandBuilder.append(exitCommand);
+        commandBuilder.append(exitLoopCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
         /*
          * Should display:
@@ -223,8 +223,8 @@ public class Increment_04_Test extends TestStream {
     public void TestLevel4_UnknownCommand() throws Exception {
 
         String randomtextCommand = generateTextCommandRandom("s0meUnknownPrompt");
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
-        String commandLines = randomtextCommand + exitCommand;
+        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String commandLines = randomtextCommand + exitLoopCommand;
         System.setIn(new ByteArrayInputStream(commandLines.getBytes()));
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
