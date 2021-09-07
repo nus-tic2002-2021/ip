@@ -6,8 +6,9 @@ public class Duke {
     static String line = "____________________________________________________________\n";
     static String[] list = new String[100];
     static int listCount = 0;
-    static int TaskCount = 0;
     static Task[] Checklist = new Task[100];
+    static int TaskCount = 0;
+
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -73,7 +74,16 @@ public class Duke {
                 stop = true;
             } else if (input.equals("list")){
                 PrintChecklist();
-            }  else {
+            } else if ((input.length() > 3) && (input.substring(0,4)).equals("done") ) {
+                if (input.length() < 5) {
+                    System.out.println("Input missing the index of the task that is done.");
+                } else {
+                    int index = Integer.parseInt(input.substring(4).trim()) - 1;
+                    MarkTask(index);
+                    System.out.println("Nice! I've marked this task as done:\n  "
+                            + Checklist[index].getTaskInfo());
+                }
+            } else {
                 Task newTask = new Task(input);
                 AddTask(newTask);
                 System.out.println(line + "added: " + input + "\n" + line);
@@ -89,9 +99,12 @@ public class Duke {
     public static void PrintChecklist() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < TaskCount; i++) {
-            System.out.println((i+1) + "." + Checklist[i].getCompletedSymbol()
-                    + " " + Checklist[i].getDescription());
+            System.out.println((i+1) + "." + Checklist[i].getTaskInfo());
         }
+    }
+
+    public static void MarkTask(int index) {
+        Checklist[index].markCompleted();
     }
 
     public static void Level1() {
