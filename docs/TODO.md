@@ -39,18 +39,17 @@ for development: tracking of tasks and project design
 # [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
 
 ## New Feature
- 
 
-- [ ] Show Task Type in list
-- [ ] Create Deadline sub class of Task
+
+- [ ] Create Deadline extends Task
   - With deadline
-- [ ] Create Event sub class of Task
+- [ ] Create Event extends Task
   - With start and end time
 - Command
   - [ ] `$ todo [task_description]` - add a ToDo \
   - [ ] `$ deadline [task_description] /by [dateString]` - add a Deadline \
   - [ ] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
-  - [ ] `$ add ` - subsumed by default
+  - [ ] `*` - default is unknownRequest
 
 # [Feature Level 6](https://www.notion.so/Level-6-Delete-01e01049c8ef41748ba3be9b035b0e5d)
 
