@@ -11,6 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static duke.coronet.testHelper.help.OutputUnderTest.*;
@@ -219,8 +220,27 @@ public class Increment_04_Test extends TestStream {
 
 
     @Test
-    public void TestLevel4_UnknownRequest() throws Exception {
-        fail();
+    public void TestLevel4_UnknownCommand() throws Exception {
+
+        String randomtextCommand = generateTextCommandRandom("s0meUnknownPrompt");
+        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String commandLines = randomtextCommand + exitCommand;
+        System.setIn(new ByteArrayInputStream(commandLines.getBytes()));
+        StringBuilder expectedResponseBuilder = new StringBuilder();
+
+        expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+
+        expectedResponseBuilder.append(getMsgUnderTestUnknownRequest());
+        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
+
+        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+
+        String expectedOutputResponse = expectedResponseBuilder.toString();
+
+        new OrchestratorLevel04(new TaskManager(), null, new UxManager(this.getPrintStream())).run();
+        assertEquals(expectedOutputResponse, this.getOutput());
+
     }
 
 }

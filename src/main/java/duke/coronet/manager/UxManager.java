@@ -103,6 +103,8 @@ public class UxManager {
             this.getPrintStream().print(String.join(" ", c.getArgs()) + System.lineSeparator());
         }  else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
             this.getPrintStream().print("Invalid command " + c.getArgs().get(1) + System.lineSeparator());
+        } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
+            this.getPrintStream().print("Unknown command. . ." + System.lineSeparator());
         } else {
             throw new Exception("Unhandled response type [" + rt +  "].");
         }

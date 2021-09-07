@@ -17,6 +17,10 @@ public class TextCommandUnderTest {
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
     }
+
+    public static String generateTextCommandRandom(String text){
+        return text + System.lineSeparator();
+    }
     public static String generateTextCommandExit(String invoke) {
         return singleArgumentCommand(invoke);
     }

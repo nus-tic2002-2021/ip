@@ -54,4 +54,8 @@ public class OutputUnderTest {
     public static String getMsgUnderTestResponseTaskSetCompleted(Integer taskId) {
         return "update done #" + taskId.toString() + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
+
+    public static String getMsgUnderTestUnknownRequest(){
+        return "Unknown command. . ." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
 }

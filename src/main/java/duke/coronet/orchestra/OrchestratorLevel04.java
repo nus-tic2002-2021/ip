@@ -3,6 +3,7 @@ package duke.coronet.orchestra;
 import duke.coronet.command.Command;
 import duke.coronet.command.commandFactory.UxCommandFactory;
 import duke.coronet.command.errorCommand.CommandExecutionError;
+import duke.coronet.command.errorCommand.CommandUnknownRequest;
 import duke.coronet.command.taskCommand.taskQuery.CommandListAll;
 import duke.coronet.manager.FileResourceManager;
 import duke.coronet.manager.TaskManager;
@@ -37,7 +38,7 @@ public class OrchestratorLevel04 extends AbstractOrchestrator {
                     }
                     else{
                         // default behavior
-                        return this.executeCommandAddToDo(text, taskManager);
+                        return new CommandUnknownRequest(text);
                     }
                 } catch (Exception e) {
                     return new CommandExecutionError(e, "command execution @ cli");
