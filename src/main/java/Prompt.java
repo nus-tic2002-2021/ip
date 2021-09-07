@@ -1,13 +1,15 @@
+import classes.Task;
 import interfaces.Printable;
 import interfaces.Promptable;
 
 import java.util.Iterator;
 
-public class Prompt<T extends Printable> implements Promptable {
+public class Prompt implements Promptable<Task> {
     private static final String PADDING = "    ";
     private static final String HORIZONTAL_LINE = "_________________________________________";
     private static final String START = "Hello! I'm Duke\n    What can I do for you?";
     private static final String END = "Bye. Hope to see you again soon!";
+    private static final String DONE = "Nice! I've marked this task as done:";
     private static final String ADD = "added: ";
 
     public enum Prompts {
@@ -23,29 +25,33 @@ public class Prompt<T extends Printable> implements Promptable {
     }
 
     @Override
-    public String add(Printable printable) {
+    public String add(Task printable) {
         return formatOutput(formatLine(ADD + printable.toString()));
     }
 
     @Override
-    public String list(Iterable inputs) {
-        String output = "";
-        int count = 1;
-        Iterator<T> iter = inputs.iterator();
-        while (iter.hasNext()) {
-            output += formatLine(count + ". " + iter.next().toStatusString());
-            count++;
-        }
-        return formatOutput(output);
+    public String done(Task printable) {
+        return formatOutput(formatLine(DONE) + formatLine("   " + printable.toStatusString()));
     }
 
     @Override
-    public String list(Printable[] inputs) {
-        String output = "";
-        for (int i=0;i < inputs.length;i++) {
-            output += formatLine((i+1) + ". " + inputs[i].toStatusString());
+    public String list(Iterable<Task> inputs) {
+        StringBuilder output = new StringBuilder();
+        int count = 1;
+        for (Task input : inputs) {
+            output.append(formatLine(count + ". " + input.toStatusString()));
+            count++;
         }
-        return output;
+        return formatOutput(output.toString());
+    }
+
+    @Override
+    public String list(Task[] inputs) {
+        StringBuilder output = new StringBuilder();
+        for (int i=0;i < inputs.length;i++) {
+            output.append(formatLine((i + 1) + ". " + inputs[i].toStatusString()));
+        }
+        return output.toString();
     }
 
     @Override
