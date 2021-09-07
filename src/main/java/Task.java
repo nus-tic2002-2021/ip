@@ -22,8 +22,8 @@ public class Task {
         this.description = description;
     }
 
-    public String print(){
-        String print = " [" + getStatusIcon()+"] "+getDescription();
+    public String toString(){
+        String print = "[" + getStatusIcon()+"] "+getDescription();
         return print;
     }
 }
