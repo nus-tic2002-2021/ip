@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+    public static void printTasks(String[] tasks, int numTask) {
+        for (int i=0; i< numTask; i++){
+            String task = tasks[i];
+            System.out.println(i+1+". "+task);
+        }
+    }
+
     public static void main(String[] args) {
         //print greeting messages
         String logo = " ____        _        \n"
@@ -16,9 +23,23 @@ public class Duke {
         //take user input
         Scanner in = new Scanner(System.in);
         String command = "";
-        while (!command.equals("bye")){
+        //initiate an Array to store tasks, assume numTask <= 100
+        String[] tasks = new String[100];
+        int numTask = 0;
+        while (true){
             command = in.nextLine();
-            System.out.println(command);
+            if (command.equals("bye")){
+                break;
+            }
+            //add task to the list
+            if (!command.equals("list")){
+                tasks[numTask] = command;
+                System.out.println("added "+ command);
+                numTask ++;
+            }
+            //print out the list
+            else{printTasks(tasks, numTask);}
         }
+        System.out.println("Bye. Have a nice day!");
     }
 }
