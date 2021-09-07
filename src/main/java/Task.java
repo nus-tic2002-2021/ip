@@ -19,4 +19,13 @@ public class Task {
             return "[]";
         }
     }
+
+    public String getTaskInfo() {
+        String TaskInfo = this.getCompletedSymbol() + " " + Description;
+        return TaskInfo;
+    }
+
+    public void markCompleted() {
+        Completed = true;
+    }
 }
