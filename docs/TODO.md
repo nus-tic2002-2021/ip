@@ -41,15 +41,15 @@ for development: tracking of tasks and project design
 ## New Feature
 
 
-- [ ] Create Deadline extends Task
+- [x] Create Deadline extends Task
   - With deadline
-- [ ] Create Event extends Task
+- [x] Create Event extends Task
   - With start and end time
 - Command
   - [x] `$ todo [task_description]` - add a ToDo \
-  - [ ] `$ deadline [task_description] /by [dateString]` - add a Deadline \
-  - [ ] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
-  - [ ] `*` - default is unknownRequest
+  - [x] `$ deadline [task_description] /by [dateString]` - add a Deadline \
+  - [x] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
+  - [x] `*` - unknown request
 
 # [Feature Level 6](https://www.notion.so/Level-6-Delete-01e01049c8ef41748ba3be9b035b0e5d)
 

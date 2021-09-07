@@ -20,3 +20,8 @@ Implement an initial skeletal version of the Duke that simply greets the user an
 ### OrchestratorLevel03
 
 ![level 3](/docs/screenshots/branch-level-3.gif)
+
+## Feature Level 4
+### OrchestratorLevel04
+
+![level 4](/docs/screenshots/branch-level-4.gif)
