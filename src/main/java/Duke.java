@@ -1,19 +1,18 @@
+import interfaces.Promptable;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static String printTasks(ArrayList<Task> tasks) {
-        ArrayList<String> outputs = new ArrayList();
+    private Promptable _prompt;
 
-        for (Task t : tasks) {
-            outputs.add(t.getDescription());
-        }
-
-        return DukePrompt.getPrompt(DukePrompt.Prompts.MANUAL, outputs);
+    public Duke(Promptable prompt) {
+        this._prompt = prompt;
     }
 
     public static void main(String[] args) {
-        System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.START));
+        Duke d = new Duke(new Prompt());
+        System.out.println(d._prompt.start());
 
         Scanner in = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList();
@@ -24,13 +23,14 @@ public class Duke {
             if (input.equalsIgnoreCase("bye")) {
                 break;
             } else if (input.equalsIgnoreCase("list")) {
-                System.out.println(printTasks(tasks));
+                System.out.println(d._prompt.list(tasks));
             } else {
-                System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.ADD, input));
-                tasks.add(new Task(input));
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+                System.out.println(d._prompt.add(newTask));
             }
         }
 
-        System.out.println(DukePrompt.getPrompt(DukePrompt.Prompts.END));
+        System.out.println(d._prompt.exit());
     }
 }
