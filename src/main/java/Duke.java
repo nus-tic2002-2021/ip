@@ -6,6 +6,8 @@ public class Duke {
     static String line = "____________________________________________________________\n";
     static String[] list = new String[100];
     static int listCount = 0;
+    static int TaskCount = 0;
+    static Task[] Checklist = new Task[100];
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -61,6 +63,37 @@ public class Duke {
         System.out.println(line);
     }
 
+    public static void TaskList() {
+        Boolean stop = false;
+        while (stop == false) {
+            String input = in.nextLine();
+            if (input.equals("bye")) {
+                System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
+                listCount = 0;
+                stop = true;
+            } else if (input.equals("list")){
+                PrintChecklist();
+            }  else {
+                Task newTask = new Task(input);
+                AddTask(newTask);
+                System.out.println(line + "added: " + input + "\n" + line);
+            }
+        }
+    }
+
+    public static void AddTask(Task newEntry) {
+        Checklist[TaskCount] = newEntry;
+        TaskCount++;
+    }
+
+    public static void PrintChecklist() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < TaskCount; i++) {
+            System.out.println((i+1) + "." + Checklist[i].getCompletedSymbol()
+                    + " " + Checklist[i].getDescription());
+        }
+    }
+
     public static void Level1() {
         Greet();
         Echo();
@@ -71,9 +104,15 @@ public class Duke {
         AddDisplayList();
     }
 
+    public static void Level3() {
+        Greet();
+        TaskList();
+    }
+
     public static void main(String[] args) {
         StartDuke();
         // Level1();
-        Level2();
+        // Level2();
+        Level3();
     }
 }
