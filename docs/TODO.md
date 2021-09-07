@@ -33,11 +33,8 @@ for development: tracking of tasks and project design
 
 ## New Feature
 
-- Command
-  - [ ] `list` - add display "done" status column
-  - [ ] `add [taskDescription]` - add a ToDo
+- textCommands
   - [ ] `done [taskId]` - flag task as done
-  - [ ] `*` - default textCommand change from add task to unknown request.
 
 # [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
 
