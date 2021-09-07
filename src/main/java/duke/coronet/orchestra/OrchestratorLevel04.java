@@ -30,7 +30,10 @@ public class OrchestratorLevel04 extends AbstractOrchestrator {
                         return this.executeCommandMarkTaskAsDone(text, taskManager);
                     } else if(isRequestAddToDo(text)){
                         return this.executeCommandAddToDo(text, taskManager);
-                    } else{
+                    } else if(isRequestDeadline(text)){
+                        return this.executeCommandAddDeadline(text, taskManager);
+                    }
+                    else{
                         // default behavior
                         return this.executeCommandAddToDo(text, taskManager);
                     }

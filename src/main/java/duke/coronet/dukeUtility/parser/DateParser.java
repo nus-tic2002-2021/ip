@@ -10,8 +10,6 @@ public class DateParser {
     private static final List<String> patterns = List.of("yyyyMMdd", "yyyyMMdd HH:mm", DateParser.transitiveJsonAndTextPattern);
 
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
-
-
         for (String pattern : DateParser.patterns) {
             try {
                 return LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
@@ -23,8 +21,6 @@ public class DateParser {
         } catch (Exception e) {
         }
         throw new Exception("Parse as LocalDateTime failed.");
-
-
     }
     public static LocalDate parseStringAsLocalDate(String dateString) {
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"));
