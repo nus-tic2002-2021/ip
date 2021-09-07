@@ -20,4 +20,8 @@ public class TextCommandValidator {
         return text.startsWith(PROMPT_ADD_TODO);
     }
 
+    public static Boolean isRequestDeadline(String text) {
+        return text.startsWith(PROMPT_ADD_DEADLINE);
+    }
+
 }

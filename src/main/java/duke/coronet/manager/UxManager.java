@@ -97,7 +97,9 @@ public class UxManager {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.getPrintStream().print(String.join(" ", c.getArgs()) + System.lineSeparator());
-        } else {
+        }  else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
+            this.getPrintStream().print("Added Deadline: " + c.getArgs().get(2) + System.lineSeparator());
+        }  else {
             throw new Exception("Unhandled response type [" + rt +  "].");
         }
     }

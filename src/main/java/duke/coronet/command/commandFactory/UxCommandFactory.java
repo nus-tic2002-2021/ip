@@ -6,13 +6,16 @@ import duke.coronet.command.errorCommand.CommandInvalidRequest;
 import duke.coronet.command.errorCommand.CommandTaskNotFound;
 import duke.coronet.command.systemCommand.CommandEcho;
 import duke.coronet.command.systemCommand.CommandExit;
+import duke.coronet.command.taskCommand.taskAdd.CommandAddNewDeadline;
 import duke.coronet.command.taskCommand.taskAdd.CommandAddNewToDo;
 import duke.coronet.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.coronet.manager.FileResourceManager;
 import duke.coronet.manager.TaskManager;
 
+import java.time.LocalDateTime;
+
 import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.*;
-import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
+import static duke.coronet.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
 
 public abstract class UxCommandFactory extends CommandFactory {
     protected Command executeCommandEcho(String text) {
@@ -50,5 +53,25 @@ public abstract class UxCommandFactory extends CommandFactory {
         }
         return new CommandMarkTaskAsDone(taskManager, taskId);
 
+    }
+
+    protected Command executeCommandAddDeadline(String text, TaskManager taskManager) {
+
+        String argLine;
+        String[] argList;
+        String taskDescription;
+        LocalDateTime deadline;
+        try {
+            argLine = text.replaceFirst(PROMPT_ADD_DEADLINE, "");
+            argList = argLine.split(ADD_DEADLINE_DEADLINE_DELIMITER);
+            if (argList.length != 2) {
+                throw new Exception("Request line for adding deadline does not conform to syntax.");
+            }
+            taskDescription = argList[0];
+            deadline = parseStringAsLocalDateTime(argList[1]);
+        } catch (Exception e) {
+            return new CommandInvalidRequest(e.toString());
+        }
+        return new CommandAddNewDeadline(taskManager, taskDescription, deadline);
     }
 }
