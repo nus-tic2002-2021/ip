@@ -46,7 +46,7 @@ for development: tracking of tasks and project design
 - [ ] Create Event extends Task
   - With start and end time
 - Command
-  - [ ] `$ todo [task_description]` - add a ToDo \
+  - [x] `$ todo [task_description]` - add a ToDo \
   - [ ] `$ deadline [task_description] /by [dateString]` - add a Deadline \
   - [ ] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
   - [ ] `*` - default is unknownRequest
