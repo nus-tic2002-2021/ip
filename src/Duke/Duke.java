@@ -59,7 +59,7 @@ public class Duke {
             } catch (IndexOutOfBoundsException ioobe) {
                 System.out.println("IndexOutOfBoundsException.");
             } catch (InvalidCommandFormatException icfe) {
-                System.out.println("Invalid Command Format Exception.");
+                System.out.println(icfe);
             }
         }
 

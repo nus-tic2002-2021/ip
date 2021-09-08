@@ -23,7 +23,7 @@ public class TaskFactory {
                 String dueDate = deadlineMatch.group(KEY_DATE);
                 return new Deadline(description, dueDate);
             } else {
-                throw new InvalidCommandFormatException();
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
             }
         } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
             Matcher eventMatch = Pattern.compile(EVENT_PATTERN, Pattern.CASE_INSENSITIVE).matcher(args);
@@ -32,11 +32,15 @@ public class TaskFactory {
                 String timing = eventMatch.group(KEY_DATE);
                 return new Event(description, timing);
             } else {
-                throw new InvalidCommandFormatException();
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_EVENT);
             }
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
-            return new Todo(args);
+            if (args.length() > 0) {
+                return new Todo(args);
+            } else {
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_TODO);
+            }
         }
-        throw new InvalidCommandFormatException();
+        throw new InvalidCommandFormatException("Invalid Command Format:\n Cannot find the appropriate task to create.");
     }
 }

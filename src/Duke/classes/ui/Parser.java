@@ -6,14 +6,15 @@ import java.util.regex.Pattern;
 
 import Duke.enums.CommandType;
 import Duke.exceptions.InvalidCommandException;
+import Duke.exceptions.InvalidCommandFormatException;
 
 public class Parser {
-    private static final Pattern ADD_PATTERN = Pattern.compile("^(?<keyword>\\bdeadline\\b|\\bevent\\b|\\btodo\\b) (?<args>.+)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern ADD_PATTERN = Pattern.compile("^(?<keyword>\\bdeadline\\b|\\bevent\\b|\\btodo\\b)\\s?(?<args>.*)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DONE_PATTERN = Pattern.compile("^\\b(?<keyword>done)\\b (?<args>.+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern LIST_PATTERN = Pattern.compile("^(?<keyword>list)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern EXIT_PATTERN = Pattern.compile("^(?<keyword>bye)$", Pattern.CASE_INSENSITIVE);
 
-    public Command readInput(Scanner sc) throws InvalidCommandException {
+    public Command readInput(Scanner sc) throws InvalidCommandException, InvalidCommandFormatException {
         String input = sc.nextLine();
         Matcher addMatcher = ADD_PATTERN.matcher(input);
         Matcher doneMatcher = DONE_PATTERN.matcher(input);
