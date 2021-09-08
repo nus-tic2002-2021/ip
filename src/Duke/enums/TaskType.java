@@ -1,4 +1,4 @@
-package classes.enums;
+package Duke.enums;
 
 public enum TaskType {
     TODO("todo"),

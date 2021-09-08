@@ -1,11 +1,11 @@
-package classes.ui;
+package Duke.classes.ui;
 
-import classes.enums.TaskType;
-import classes.tasks.Deadline;
-import classes.tasks.Event;
-import classes.tasks.Task;
-import classes.tasks.Todo;
-import interfaces.Promptable;
+import Duke.enums.TaskType;
+import Duke.classes.tasks.Deadline;
+import Duke.classes.tasks.Event;
+import Duke.classes.tasks.Task;
+import Duke.classes.tasks.Todo;
+import Duke.classes.interfaces.Promptable;
 
 public class Prompt implements Promptable<Task> {
     private static final String PADDING = "    ";
@@ -22,12 +22,19 @@ public class Prompt implements Promptable<Task> {
 
     @Override
     public String add(Task printable, int length) {
-        return formatOutput(formatLine(ADD + printable.toString()) + formatLine("Now you have " + length + " task" + ((length > 1) ? "s" : "") + " in the list."));
+        StringBuilder output = new StringBuilder();
+        output.append(formatLine(ADD + printable.toString()));
+        output.append(formatLine("Now you have " + length + " task" + ((length > 1) ? "s" : "") + " in the list."));
+
+        return formatOutput(output.toString());
     }
 
     @Override
     public String done(Task printable) {
-        return formatOutput(formatLine(DONE) + formatLine("   " + printable.toStatusString()));
+        StringBuilder output = new StringBuilder();
+        output.append(formatLine(DONE) + formatLine("   " + printable.toStatusString()));
+
+        return formatOutput(output.toString());
     }
 
     @Override
@@ -50,15 +57,6 @@ public class Prompt implements Promptable<Task> {
             count++;
         }
         return formatOutput(output.toString());
-    }
-
-    @Override
-    public String list(Task[] inputs) {
-        StringBuilder output = new StringBuilder();
-        for (int i=0;i < inputs.length;i++) {
-            output.append(formatLine((i + 1) + ". " + inputs[i].toStatusString()));
-        }
-        return output.toString();
     }
 
     @Override

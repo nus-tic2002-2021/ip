@@ -1,6 +1,6 @@
-package classes.ui;
+package Duke.classes.ui;
 
-import classes.enums.CommandType;
+import Duke.enums.CommandType;
 
 public class Command {
     private CommandType type;

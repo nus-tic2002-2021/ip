@@ -1,6 +1,6 @@
-package classes.tasks;
+package Duke.classes.tasks;
 
-import classes.enums.TaskType;
+import Duke.enums.TaskType;
 
 public class Todo extends Task {
     public Todo(String description) {

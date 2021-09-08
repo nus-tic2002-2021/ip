@@ -1,10 +1,12 @@
-import classes.tasks.*;
-import classes.ui.Command;
-import classes.ui.Parser;
-import classes.ui.Prompt;
-import exceptions.InvalidCommandException;
-import exceptions.InvalidCommandFormatException;
-import interfaces.Promptable;
+package Duke;
+
+import Duke.classes.tasks.*;
+import Duke.classes.ui.Command;
+import Duke.classes.ui.Parser;
+import Duke.classes.ui.Prompt;
+import Duke.exceptions.InvalidCommandException;
+import Duke.exceptions.InvalidCommandFormatException;
+import Duke.classes.interfaces.Promptable;
 
 import java.util.ArrayList;
 import java.util.Scanner;

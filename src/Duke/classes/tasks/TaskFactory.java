@@ -1,8 +1,8 @@
-package classes.tasks;
+package Duke.classes.tasks;
 
-import classes.ui.Command;
-import classes.enums.TaskType;
-import exceptions.InvalidCommandFormatException;
+import Duke.classes.ui.Command;
+import Duke.enums.TaskType;
+import Duke.exceptions.InvalidCommandFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

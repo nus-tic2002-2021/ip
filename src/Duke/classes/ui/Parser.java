@@ -1,11 +1,11 @@
-package classes.ui;
+package Duke.classes.ui;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import classes.enums.CommandType;
-import exceptions.InvalidCommandException;
+import Duke.enums.CommandType;
+import Duke.exceptions.InvalidCommandException;
 
 public class Parser {
     private static final Pattern ADD_PATTERN = Pattern.compile("^(?<keyword>\\bdeadline\\b|\\bevent\\b|\\btodo\\b) (?<args>.+)$", Pattern.CASE_INSENSITIVE);
