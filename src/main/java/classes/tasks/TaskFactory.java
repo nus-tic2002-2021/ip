@@ -1,7 +1,7 @@
 package classes.tasks;
 
-import classes.ui.Command;
 import classes.enums.TaskType;
+import classes.ui.Command;
 import exceptions.InvalidCommandFormatException;
 
 import java.util.regex.Matcher;
@@ -45,6 +45,6 @@ public class TaskFactory {
             }
         }
         throw new InvalidCommandFormatException(
-                "Invalid Command Format:\n Cannot find the appropriate task to create.");
+                "Cannot find the appropriate task to create.");
     }
 }

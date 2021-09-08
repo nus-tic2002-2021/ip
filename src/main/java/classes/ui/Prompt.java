@@ -22,17 +22,19 @@ public class Prompt implements Promptable<Task> {
 
     @Override
     public String add(Task printable, int length) {
-        String output =
-                formatLine(ADD + printable.toString())
-                        + formatLine(
-                        "Now you have " + length + " task" + ((length > 1) ? "s" : "") + " in the list.");
+        String multipleStr = (length > 1) ? "tasks" : "task";
+        String taskStr = length + " " + multipleStr;
+        String output = formatLine(ADD + printable.toString());
+        output += formatLine("Now you have " + taskStr + " in the list.");
 
         return formatOutput(output);
     }
 
     @Override
     public String done(Task printable) {
-        return formatOutput(formatLine(DONE) + formatLine("   " + printable.toStatusString()));
+        String output = formatLine(DONE);
+        output += formatLine("   " + printable.toStatusString());
+        return formatOutput(output);
     }
 
     @Override

@@ -1,12 +1,11 @@
 package classes.ui;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import classes.enums.CommandType;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidCommandFormatException;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
     private static final Pattern ADD_PATTERN =
