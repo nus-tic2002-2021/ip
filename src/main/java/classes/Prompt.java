@@ -1,8 +1,5 @@
 import classes.Task;
-import interfaces.Printable;
 import interfaces.Promptable;
-
-import java.util.Iterator;
 
 public class Prompt implements Promptable<Task> {
     private static final String PADDING = "    ";

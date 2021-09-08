@@ -1,17 +1,19 @@
 package classes;
 
-import interfaces.Printable;
+import classes.enums.TaskType;
 
-public class Task implements Printable {
+public class Task {
     private String description;
     private Boolean isDone;
+    private TaskType type;
 
     public Task() {
         isDone = false;
     }
 
-    public Task(String description) {
+    public Task(TaskType type, String description) {
         this();
+        setType(type);
         setDescription(description);
     }
 
@@ -31,7 +33,14 @@ public class Task implements Printable {
         isDone = done;
     }
 
-    @Override
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
     public String toStatusString() {
         String doneStr = (isDone) ? "X" : " ";
         return "[" + doneStr + "] " + toString();
