@@ -1,6 +1,6 @@
 package classes.tasks;
 
-import classes.Command;
+import classes.ui.Command;
 import classes.enums.TaskType;
 import exceptions.InvalidCommandFormatException;
 

@@ -1,4 +1,4 @@
-package classes;
+package classes.ui;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

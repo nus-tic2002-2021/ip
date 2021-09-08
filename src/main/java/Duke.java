@@ -1,5 +1,7 @@
-import classes.*;
 import classes.tasks.*;
+import classes.ui.Command;
+import classes.ui.Parser;
+import classes.ui.Prompt;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidCommandFormatException;
 import interfaces.Promptable;
@@ -27,25 +29,27 @@ public class Duke {
         while (receiveInput && in.hasNext()) {
             try {
                 Command command = d.parser.readInput(in);
+                String output = "";
                 switch(command.getType()) {
                     case ADD:
                         Task newTask = TaskFactory.getInstance(command);
                         tasks.add(newTask);
-                        System.out.println(d.prompt.add(newTask, tasks.size()));
+                        output = d.prompt.add(newTask, tasks.size());
                         break;
                     case COMPLETE:
                         int idx = Integer.parseInt(command.getArgs());
                         Task doneTask = tasks.get(idx - 1);
                         doneTask.setDone(true);
-                        System.out.println(d.prompt.done(doneTask));
+                        output = d.prompt.done(doneTask);
                         break;
                     case LIST:
-                        System.out.println(d.prompt.list(tasks));
+                        output = d.prompt.list(tasks);
                         break;
                     case EXIT:
                         receiveInput = false;
                         break;
                 }
+                System.out.println(output);
             } catch (InvalidCommandException ice) {
                 System.out.println("Invalid Command Exception.");
             } catch (NumberFormatException nfe) {

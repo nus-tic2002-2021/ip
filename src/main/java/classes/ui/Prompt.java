@@ -1,4 +1,4 @@
-package classes;
+package classes.ui;
 
 import classes.enums.TaskType;
 import classes.tasks.Deadline;
