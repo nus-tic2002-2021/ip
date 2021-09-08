@@ -1,8 +1,8 @@
 package classes.enums;
 
 public enum CommandType {
-  ADD,
-  COMPLETE,
-  LIST,
-  EXIT
+    ADD,
+    COMPLETE,
+    LIST,
+    EXIT
 }
