@@ -1,4 +1,10 @@
-import classes.Task;
+package classes;
+
+import classes.enums.TaskType;
+import classes.tasks.Deadline;
+import classes.tasks.Event;
+import classes.tasks.Task;
+import classes.tasks.Todo;
 import interfaces.Promptable;
 
 public class Prompt implements Promptable<Task> {
@@ -9,21 +15,14 @@ public class Prompt implements Promptable<Task> {
     private static final String DONE = "Nice! I've marked this task as done:";
     private static final String ADD = "added: ";
 
-    public enum Prompts {
-        START,
-        END,
-        ADD,
-        MANUAL
-    }
-
     @Override
     public String start() {
         return formatOutput(formatLine(START));
     }
 
     @Override
-    public String add(Task printable) {
-        return formatOutput(formatLine(ADD + printable.toString()));
+    public String add(Task printable, int length) {
+        return formatOutput(formatLine(ADD + printable.toString()) + formatLine("Now you have " + length + " task" + ((length > 1) ? "s" : "") + " in the list."));
     }
 
     @Override
@@ -36,7 +35,18 @@ public class Prompt implements Promptable<Task> {
         StringBuilder output = new StringBuilder();
         int count = 1;
         for (Task input : inputs) {
-            output.append(formatLine(count + ". " + input.toStatusString()));
+            String taskStr = "";
+            if (input.getType() == TaskType.DEADLINE) {
+                Deadline down = (Deadline) input;
+                taskStr = down.toStatusString();
+            } else if (input.getType() == TaskType.EVENT) {
+                Event down = (Event) input;
+                taskStr = down.toStatusString();
+            } else if (input.getType() == TaskType.TODO) {
+                Todo down = (Todo) input;
+                taskStr = down.toStatusString();
+            }
+            output.append(formatLine(count + ". " + taskStr));
             count++;
         }
         return formatOutput(output.toString());

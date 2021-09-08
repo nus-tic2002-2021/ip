@@ -1,2 +1,4 @@
-package exceptions;public class InvalidCommandFormatException {
+package exceptions;
+
+public class InvalidCommandFormatException extends Throwable {
 }

@@ -1,2 +1,4 @@
-package exceptions;public class InvalidCommandException {
+package exceptions;
+
+public class InvalidCommandException extends Throwable {
 }

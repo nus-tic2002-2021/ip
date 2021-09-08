@@ -1,4 +1,4 @@
-package classes;
+package classes.tasks;
 
 import classes.enums.TaskType;
 
