@@ -1,7 +1,11 @@
-import classes.*;
-import classes.tasks.*;
+import classes.tasks.Task;
+import classes.tasks.TaskFactory;
+import classes.ui.Command;
+import classes.ui.Parser;
+import classes.ui.Prompt;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidCommandFormatException;
+import interfaces.IOParser;
 import interfaces.Promptable;
 
 import java.util.ArrayList;
@@ -9,9 +13,9 @@ import java.util.Scanner;
 
 public class Duke {
     private final Promptable<Task> prompt;
-    private final Parser parser;
+    private final IOParser<Command, Scanner> parser;
 
-    public Duke(Promptable<Task> prompt, Parser parser) {
+    public Duke(Promptable<Task> prompt, IOParser<Command, Scanner> parser) {
         this.prompt = prompt;
         this.parser = parser;
     }
@@ -27,33 +31,35 @@ public class Duke {
         while (receiveInput && in.hasNext()) {
             try {
                 Command command = d.parser.readInput(in);
-                switch(command.getType()) {
-                    case ADD:
-                        Task newTask = TaskFactory.getInstance(command);
-                        tasks.add(newTask);
-                        System.out.println(d.prompt.add(newTask, tasks.size()));
-                        break;
-                    case COMPLETE:
-                        int idx = Integer.parseInt(command.getArgs());
-                        Task doneTask = tasks.get(idx - 1);
-                        doneTask.setDone(true);
-                        System.out.println(d.prompt.done(doneTask));
-                        break;
-                    case LIST:
-                        System.out.println(d.prompt.list(tasks));
-                        break;
-                    case EXIT:
-                        receiveInput = false;
-                        break;
+                StringBuilder output = new StringBuilder();
+                switch (command.getType()) {
+                case ADD:
+                    Task newTask = TaskFactory.getInstance(command);
+                    tasks.add(newTask);
+                    output.append(d.prompt.add(newTask, tasks.size()));
+                    break;
+                case COMPLETE:
+                    int idx = Integer.parseInt(command.getArgs());
+                    Task doneTask = tasks.get(idx - 1);
+                    doneTask.setDone(true);
+                    output.append(d.prompt.done(doneTask));
+                    break;
+                case LIST:
+                    output.append(d.prompt.list(tasks));
+                    break;
+                case EXIT:
+                    receiveInput = false;
+                    break;
                 }
+                System.out.println(output.toString());
             } catch (InvalidCommandException ice) {
-                System.out.println("Invalid Command Exception.");
-            } catch (NumberFormatException nfe) {
-                System.out.println("Number Format Exception.");
-            } catch (IndexOutOfBoundsException ioobe) {
-                System.out.println("IndexOutOfBoundsException.");
+                System.out.println(d.prompt.error(ice.getErrorHeader(), ice.getMessage()));
             } catch (InvalidCommandFormatException icfe) {
-                System.out.println("Invalid Command Format Exception.");
+                System.out.println(d.prompt.error(icfe.getErrorHeader(), icfe.getMessage()));
+            } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                System.out.println(d.prompt.error(ex.getMessage()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
 
