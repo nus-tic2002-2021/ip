@@ -1,7 +1,16 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    public static ArrayList<String> storedResponses = new ArrayList<String>();
+
+    public static void getList(){
+        for (int i=1; i<storedResponses.size(); i++){
+            System.out.format("%d: " + storedResponses.get(i-1) + "\n" ,i);
+        }
+    }
+
     public static void response(String sentence){
         System.out.println("____________________________________________________________");
         switch (sentence) {
@@ -11,6 +20,9 @@ public class Duke {
             case "hi":
                 System.out.println("Hello");
                 break;
+            case "list":
+                getList();
+                break;
             default:
                 System.out.println(sentence);
                 break;
@@ -19,10 +31,13 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String line;
+        String line = "";
         System.out.println("Hello! I'm Duke\nWhat can I do for you today?");
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        response(line);
+        do {
+            Scanner in = new Scanner(System.in);
+            line = in.nextLine();
+            storedResponses.add(line);
+            response(line);
+        } while (!line.equals("bye"));
     }
 }
