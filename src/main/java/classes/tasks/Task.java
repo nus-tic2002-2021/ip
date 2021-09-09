@@ -43,7 +43,7 @@ public class Task {
 
     public String toStatusString() {
         String doneStr = (isDone) ? "X" : " ";
-        return "[" + doneStr + "] " + toString();
+        return "[" + doneStr + "] " + this;
     }
 
     @Override

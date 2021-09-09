@@ -3,9 +3,11 @@ package classes.enums;
 public enum TaskType {
     TODO("todo"),
     EVENT("event"),
-    DEADLINE("deadline");
+    DEADLINE("deadline"),
+    TASK("task");
 
     private String type;
+
     TaskType(String type) {
         setType(type);
     }

@@ -1,4 +1,4 @@
-package classes;
+package classes.ui;
 
 import classes.enums.TaskType;
 import classes.tasks.Deadline;
@@ -22,12 +22,30 @@ public class Prompt implements Promptable<Task> {
 
     @Override
     public String add(Task printable, int length) {
-        return formatOutput(formatLine(ADD + printable.toString()) + formatLine("Now you have " + length + " task" + ((length > 1) ? "s" : "") + " in the list."));
+        String multipleStr = (length > 1) ? "tasks" : "task";
+        String taskStr = length + " " + multipleStr;
+        String output = formatLine(ADD + printable.toString());
+        output += formatLine("Now you have " + taskStr + " in the list.");
+
+        return formatOutput(output);
     }
 
     @Override
     public String done(Task printable) {
-        return formatOutput(formatLine(DONE) + formatLine("   " + printable.toStatusString()));
+        String output = formatLine(DONE);
+        output += formatLine("   " + printable.toStatusString());
+        return formatOutput(output);
+    }
+
+    @Override
+    public String error(String header, String errorMessage) {
+        String output = formatLine(header) + formatLine(errorMessage);
+        return formatOutput(output);
+    }
+
+    @Override
+    public String error(String errorMessage) {
+        return formatOutput(formatLine(errorMessage));
     }
 
     @Override
@@ -50,15 +68,6 @@ public class Prompt implements Promptable<Task> {
             count++;
         }
         return formatOutput(output.toString());
-    }
-
-    @Override
-    public String list(Task[] inputs) {
-        StringBuilder output = new StringBuilder();
-        for (int i=0;i < inputs.length;i++) {
-            output.append(formatLine((i + 1) + ". " + inputs[i].toStatusString()));
-        }
-        return output.toString();
     }
 
     @Override
