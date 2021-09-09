@@ -3,11 +3,13 @@ package classes.ui;
 import classes.enums.CommandType;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidCommandFormatException;
+import interfaces.IOParser;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+public class Parser implements IOParser<Command, Scanner> {
     private static final Pattern ADD_PATTERN =
             Pattern.compile(
             "^(?<keyword>\\bdeadline\\b|\\bevent\\b|\\btodo\\b)\\s?(?<args>.*)$",
@@ -20,7 +22,7 @@ public class Parser {
             Pattern.compile("^(?<keyword>bye)$", Pattern.CASE_INSENSITIVE);
 
     public Command readInput(Scanner sc)
-            throws InvalidCommandException, InvalidCommandFormatException {
+            throws InvalidCommandException {
         String input = sc.nextLine();
         Matcher addMatcher = ADD_PATTERN.matcher(input);
         Matcher doneMatcher = DONE_PATTERN.matcher(input);

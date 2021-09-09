@@ -5,6 +5,7 @@ import classes.ui.Parser;
 import classes.ui.Prompt;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidCommandFormatException;
+import interfaces.IOParser;
 import interfaces.Promptable;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class Duke {
     private final Promptable<Task> prompt;
-    private final Parser parser;
+    private final IOParser<Command, Scanner> parser;
 
     public Duke(Promptable<Task> prompt, Parser parser) {
         this.prompt = prompt;
@@ -57,6 +58,8 @@ public class Duke {
                 System.out.println(d.prompt.error(icfe.getErrorHeader(), icfe.getMessage()));
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                 System.out.println(d.prompt.error(ex.getMessage()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
 
