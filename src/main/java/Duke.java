@@ -1,11 +1,28 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Duke {
+    public static void response(String sentence){
+        System.out.println("____________________________________________________________");
+        switch (sentence) {
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            case "hi":
+                System.out.println("Hello");
+                break;
+            default:
+                System.out.println(sentence);
+                break;
+        }
+        System.out.println("____________________________________________________________");
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Kc will be embarking on this project");
+        String line;
+        System.out.println("Hello! I'm Duke\nWhat can I do for you today?");
+        Scanner in = new Scanner(System.in);
+        line = in.nextLine();
+        response(line);
     }
 }
