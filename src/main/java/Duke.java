@@ -15,7 +15,7 @@ public class Duke {
     private final Promptable<Task> prompt;
     private final IOParser<Command, Scanner> parser;
 
-    public Duke(Promptable<Task> prompt, Parser parser) {
+    public Duke(Promptable<Task> prompt, IOParser<Command, Scanner> parser) {
         this.prompt = prompt;
         this.parser = parser;
     }
@@ -31,27 +31,27 @@ public class Duke {
         while (receiveInput && in.hasNext()) {
             try {
                 Command command = d.parser.readInput(in);
-                String output = "";
+                StringBuilder output = new StringBuilder();
                 switch (command.getType()) {
                 case ADD:
                     Task newTask = TaskFactory.getInstance(command);
                     tasks.add(newTask);
-                    output = d.prompt.add(newTask, tasks.size());
+                    output.append(d.prompt.add(newTask, tasks.size()));
                     break;
                 case COMPLETE:
                     int idx = Integer.parseInt(command.getArgs());
                     Task doneTask = tasks.get(idx - 1);
                     doneTask.setDone(true);
-                    output = d.prompt.done(doneTask);
+                    output.append(d.prompt.done(doneTask));
                     break;
                 case LIST:
-                    output = d.prompt.list(tasks);
+                    output.append(d.prompt.list(tasks));
                     break;
                 case EXIT:
                     receiveInput = false;
                     break;
                 }
-                System.out.println(output);
+                System.out.println(output.toString());
             } catch (InvalidCommandException ice) {
                 System.out.println(d.prompt.error(ice.getErrorHeader(), ice.getMessage()));
             } catch (InvalidCommandFormatException icfe) {
