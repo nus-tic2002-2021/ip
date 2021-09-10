@@ -1,5 +1,6 @@
 import classes.tasks.Task;
 import classes.tasks.TaskFactory;
+import classes.tasks.TaskList;
 import classes.ui.Command;
 import classes.ui.Parser;
 import classes.ui.Prompt;
@@ -22,10 +23,10 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke d = new Duke(new Prompt(), new Parser());
+        TaskList tasks = TaskList.getInstance();
         System.out.println(d.prompt.start());
 
         Scanner in = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
         boolean receiveInput = true;
 
         while (receiveInput && in.hasNext()) {
@@ -40,18 +41,18 @@ public class Duke {
                     break;
                 case COMPLETE:
                     int idx = Integer.parseInt(command.getArgs());
-                    Task doneTask = tasks.get(idx - 1);
+                    Task doneTask = tasks.getTask(idx - 1);
                     doneTask.setDone(true);
                     output.append(d.prompt.done(doneTask));
                     break;
                 case LIST:
-                    output.append(d.prompt.list(tasks));
+                    output.append(d.prompt.list(tasks.get()));
                     break;
                 case EXIT:
                     receiveInput = false;
                     break;
                 }
-                System.out.println(output.toString());
+                System.out.println(output);
             } catch (InvalidCommandException ice) {
                 System.out.println(d.prompt.error(ice.getErrorHeader(), ice.getMessage()));
             } catch (InvalidCommandFormatException icfe) {
