@@ -4,41 +4,76 @@ import java.util.Scanner;
 public class Duke {
     private static Task[] taskList = new Task[100];
     private static int taskCount = 0;
+    private static PrintHelper printer = new PrintHelper();
 
     public static void addCommand(String command){
-        taskList[taskCount] = new Task(command);
+        String[] toWords = command.split(" ", 2);
+        String keyword = toWords[0];
+        String cmd = toWords[1];
+        //System.out.println("keyword: "+keyWord[0]);
+        switch(keyword){
+            case "todo":
+                taskList[taskCount] = new ToDos(cmd, cmd);
+                break;
+            case "deadline":
+                String[] dl = cmd.split("/by", 2);
+                //System.out.println("cmd: "+dl[0]);
+                //System.out.println("by: "+dl[1]);
+                taskList[taskCount] = new Deadline(dl[0],dl[1]);
+                break;
+            case "events":
+                String[] dt = cmd.split("/at", 2);
+                //System.out.println("cmd: "+dt[0]);
+                //System.out.println("at: "+dt[1]);
+                taskList[taskCount] = new Events(dt[0], dt[1]);
+                break;
+            default:
+                taskList[taskCount] = new Task(command);
+                break;
+        }
+        /*if(keyword.equals("")){
+            taskList[taskCount] = new ToDos(cmd, cmd);
+        }
+        else if(keyword.equals("deadline")){
+            String[] dl = cmd.split("/by", 2);
+            //System.out.println("cmd: "+dl[0]);
+            //System.out.println("by: "+dl[1]);
+            taskList[taskCount] = new Deadline(dl[0],dl[1]);
+        }
+        else if(keyword .equals("event")){
+            String[] dt = cmd.split("/at", 2);
+            //System.out.println("cmd: "+dt[0]);
+            //System.out.println("at: "+dt[1]);
+            taskList[taskCount] = new Events(dt[0], dt[1]);
+        }
+        else{
+            //System.out.println("Keyword not found");
+            taskList[taskCount] = new Task(command);
+        }*/
         taskCount++;
     }
+
     public static void reply(String command){
         if(command.contains("done")){
             String[] doneCmd = command.split(" ");
             taskList[Integer.parseInt(doneCmd[1])-1].setDone();
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("     "+"[X] "+taskList[Integer.parseInt(doneCmd[1])-1].getTaskInfo());
-            System.out.println("    ____________________________________________________________");
+            printer.taskDoneFeedback();
+            System.out.println("     "+ taskList[Integer.parseInt(doneCmd[1])-1].toString());
+            printer.separator();
             return;
         }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     added: "+command);
-        System.out.println("    ____________________________________________________________");
-
+        printer.taskAddFeedback();
+        System.out.println("     "+ taskList[taskCount-1].toString());
+        System.out.println("     Now you have "+ taskCount + " tasks in the list.");
+        printer.separator();
     }
 
     public static void printAll(){
         if(taskCount==0){
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    Nothing in list yet...");
-            System.out.println("    ____________________________________________________________");
+            printer.emptyList();
             return;
         }
-        int numbering = 1;
-        System.out.println("    ____________________________________________________________");
-        for(int i=0;i<taskCount;i++){
-            System.out.println("    "+numbering+". ["+taskList[i].getStatusIcon()+"] "+taskList[i].getTaskInfo());
-            numbering++;
-        }
-        System.out.println("    ____________________________________________________________");
+        printer.taskFullListFeedback(taskCount,taskList);
     }
 
     public static void main(String[] args) {
@@ -51,11 +86,9 @@ public class Duke {
         boolean end = false;
         String command;
         Scanner in = new Scanner(System.in);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        printer.welcomeFeedback();
         command = in.nextLine();
+
         while(!end){
             if(command.equals("bye")){
                 end = true;
@@ -64,16 +97,16 @@ public class Duke {
                 printAll();
                 command = in.nextLine();
             }
-            else{
+            else if(command.contains("done")){
                 reply(command);
-                if(!command.contains("done")){
-                    addCommand(command);
-                }
+                command = in.nextLine();
+            }
+            else{
+                addCommand(command);
+                reply(command);
                 command = in.nextLine();
             }
         }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        printer.exitFeedback();
     }
 }

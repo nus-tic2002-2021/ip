@@ -1,3 +1,9 @@
 read book
-return book
-buy bread
+deadline return book /by June 6th
+project meeting /at Aug 6th 2-4PM
+to do join sports club
+to do borrow book
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p

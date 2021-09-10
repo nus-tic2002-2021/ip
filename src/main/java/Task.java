@@ -19,4 +19,9 @@ public class Task {
     public void setDone(){
         isDone = true;
     }
+
+    public String toString() {
+        return "["+getStatusIcon()+"] " + description;
+    }
+
 }
