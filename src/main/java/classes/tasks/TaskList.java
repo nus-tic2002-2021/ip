@@ -23,15 +23,8 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public Optional<Task> remove(Task task) {
-        if (taskList.remove(task)) {
-            return Optional.ofNullable(task);
-        }
-        return Optional.empty();
-    }
-
-    public Optional<Task> remove(int idx) {
-        return Optional.ofNullable(taskList.remove(idx));
+    public Task remove(int idx) {
+        return taskList.remove(idx);
     }
 
     public ArrayList<Task> get() {
