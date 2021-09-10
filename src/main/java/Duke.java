@@ -1,7 +1,8 @@
+import classes.enums.CommandType;
 import classes.tasks.Task;
 import classes.tasks.TaskFactory;
 import classes.tasks.TaskList;
-import classes.ui.Command;
+import classes.commands.Command;
 import classes.ui.Parser;
 import classes.ui.Prompt;
 import exceptions.InvalidCommandException;
@@ -9,8 +10,6 @@ import exceptions.InvalidCommandFormatException;
 import interfaces.IOParser;
 import interfaces.Promptable;
 
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,38 +30,6 @@ public class Duke {
         return instance;
     }
 
-    private static String handleAdd(Command cmd) throws InvalidCommandFormatException {
-        Task newTask = TaskFactory.getInstance(cmd);
-        Duke main = Duke.getInstance();
-        TaskList tasks = TaskList.getInstance();
-        tasks.add(newTask);
-
-        return main.prompt.add(newTask, tasks.size());
-    }
-
-    private static String handleComplete(Command cmd) throws NumberFormatException {
-        int idx = Integer.parseInt(cmd.getArgs()) - 1;
-        TaskList tasks = TaskList.getInstance();
-        Duke main = Duke.getInstance();
-        Task doneTask = tasks.getTask(idx);
-        doneTask.setDone(!doneTask.getDone());
-        return main.prompt.done(doneTask);
-    }
-
-    private static String handleRemove(Command cmd) throws NumberFormatException {
-        int idx = Integer.parseInt(cmd.getArgs()) - 1;
-        TaskList tasks = TaskList.getInstance();
-        Duke main = Duke.getInstance();
-        Task removedTask = tasks.remove(idx);
-        return main.prompt.remove(removedTask, tasks.size());
-    }
-
-    private static String handleList() {
-        TaskList tasks = TaskList.getInstance();
-        Duke main = Duke.getInstance();
-        return main.prompt.list(tasks.get());
-    }
-
     public static void main(String[] args) {
         Duke main = Duke.getInstance();
         TaskList tasks = TaskList.getInstance();
@@ -74,24 +41,10 @@ public class Duke {
         while (receiveInput && in.hasNext()) {
             try {
                 Command command = main.parser.readInput(in);
-                StringBuilder output = new StringBuilder();
-                switch (command.getType()) {
-                case ADD:
-                    output.append(handleAdd(command));
-                    break;
-                case COMPLETE:
-                    output.append(handleComplete(command));
-                    break;
-                case LIST:
-                    output.append(handleList());
-                    break;
-                case REMOVE:
-                    output.append(handleRemove(command));
-                    break;
-                case EXIT:
+                if (command.getType() == CommandType.EXIT) {
                     receiveInput = false;
-                    break;
                 }
+                String output = command.execute(tasks, main.prompt);
                 System.out.println(output);
             } catch (InvalidCommandException ice) {
                 System.out.println(main.prompt.error(ice.getErrorHeader(), ice.getMessage()));
@@ -103,7 +56,5 @@ public class Duke {
                 ex.printStackTrace();
             }
         }
-
-        System.out.println(main.prompt.exit());
     }
 }

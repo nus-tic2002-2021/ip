@@ -1,8 +1,12 @@
-package classes.ui;
+package classes.commands;
 
 import classes.enums.CommandType;
+import classes.tasks.Task;
+import classes.tasks.TaskList;
+import exceptions.InvalidCommandFormatException;
+import interfaces.Promptable;
 
-public class Command {
+public abstract class Command {
     private CommandType type;
     private String keyword;
     private String args;
@@ -40,4 +44,6 @@ public class Command {
     public void setArgs(String args) {
         this.args = args;
     }
+
+    public abstract String execute(TaskList tasks, Promptable<Task> prompt) throws InvalidCommandFormatException;
 }

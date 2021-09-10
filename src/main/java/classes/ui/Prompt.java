@@ -59,17 +59,7 @@ public class Prompt implements Promptable<Task> {
         StringBuilder output = new StringBuilder();
         int count = 1;
         for (Task input : inputs) {
-            String taskStr = "";
-            if (input.getType() == TaskType.DEADLINE) {
-                Deadline down = (Deadline) input;
-                taskStr = down.toStatusString();
-            } else if (input.getType() == TaskType.EVENT) {
-                Event down = (Event) input;
-                taskStr = down.toStatusString();
-            } else if (input.getType() == TaskType.TODO) {
-                Todo down = (Todo) input;
-                taskStr = down.toStatusString();
-            }
+            String taskStr = input.toStatusString();
             output.append(formatLine(count + ". " + taskStr));
             count++;
         }

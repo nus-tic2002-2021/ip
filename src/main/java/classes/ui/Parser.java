@@ -1,5 +1,6 @@
 package classes.ui;
 
+import classes.commands.*;
 import classes.enums.CommandType;
 import exceptions.InvalidCommandException;
 import interfaces.IOParser;
@@ -20,6 +21,8 @@ public class Parser implements IOParser<Command, Scanner> {
             Pattern.compile("^(?<keyword>bye)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DELETE_PATTERN =
             Pattern.compile("^\\b(?<keyword>delete)\\b (?<args>.+)$", Pattern.CASE_INSENSITIVE);
+    private final String KEY_ARGS = "args";
+    private final String KEY_WORD = "keyword";
 
     public Command readInput(Scanner sc)
             throws InvalidCommandException {
@@ -31,23 +34,23 @@ public class Parser implements IOParser<Command, Scanner> {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
 
         if (addMatcher.matches()) {
-            String args = addMatcher.group("args");
-            String keyword = addMatcher.group("keyword");
-            return new Command(CommandType.ADD, keyword, args);
+            String args = addMatcher.group(KEY_ARGS);
+            String keyword = addMatcher.group(KEY_WORD);
+            return new AddCommand(CommandType.ADD, keyword, args);
         } else if (doneMatcher.matches()) {
-            String args = doneMatcher.group("args");
-            String keyword = doneMatcher.group("keyword");
-            return new Command(CommandType.COMPLETE, keyword, args);
+            String args = doneMatcher.group(KEY_ARGS);
+            String keyword = doneMatcher.group(KEY_WORD);
+            return new CompleteCommand(CommandType.COMPLETE, keyword, args);
         } else if (listMatcher.matches()) {
-            String keyword = listMatcher.group("keyword");
-            return new Command(CommandType.LIST, keyword);
+            String keyword = listMatcher.group(KEY_WORD);
+            return new ListCommand(CommandType.LIST, keyword);
         } else if (exitMatcher.matches()) {
-            String keyword = exitMatcher.group("keyword");
-            return new Command(CommandType.EXIT, keyword);
+            String keyword = exitMatcher.group(KEY_WORD);
+            return new ExitCommand(CommandType.EXIT, keyword);
         } else if (deleteMatcher.matches()) {
-            String args = deleteMatcher.group("args");
-            String keyword = deleteMatcher.group("keyword");
-            return new Command(CommandType.REMOVE, keyword, args);
+            String args = deleteMatcher.group(KEY_ARGS);
+            String keyword = deleteMatcher.group(KEY_WORD);
+            return new DeleteCommand(CommandType.REMOVE, keyword, args);
         }
         throw new InvalidCommandException(InvalidCommandException.ERROR_GENERIC);
     }

@@ -1,5 +1,6 @@
 package classes.ui;
 
+import classes.commands.Command;
 import classes.enums.CommandType;
 import exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
