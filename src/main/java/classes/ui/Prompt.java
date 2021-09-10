@@ -1,10 +1,6 @@
 package classes.ui;
 
-import classes.enums.TaskType;
-import classes.tasks.Deadline;
-import classes.tasks.Event;
 import classes.tasks.Task;
-import classes.tasks.Todo;
 import interfaces.Promptable;
 
 public class Prompt implements Promptable<Task> {

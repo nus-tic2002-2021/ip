@@ -43,9 +43,10 @@ public class Duke {
                 Command command = main.parser.readInput(in);
                 if (command.getType() == CommandType.EXIT) {
                     receiveInput = false;
+                } else {
+                    String output = command.execute(tasks, main.prompt);
+                    System.out.println(output);
                 }
-                String output = command.execute(tasks, main.prompt);
-                System.out.println(output);
             } catch (InvalidCommandException ice) {
                 System.out.println(main.prompt.error(ice.getErrorHeader(), ice.getMessage()));
             } catch (InvalidCommandFormatException icfe) {
@@ -56,5 +57,7 @@ public class Duke {
                 ex.printStackTrace();
             }
         }
+
+        System.out.println(main.prompt.exit());
     }
 }
