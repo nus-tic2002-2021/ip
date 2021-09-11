@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-cp -R ../src/main/resources/ ../bin
+cp -R ../src/main/resources/META-INF ../bin
 if ! find ../src/main/java -name "*.java" -print | xargs javac -cp ../src/main/java -Xlint:none -d ../bin
 then
     echo "********** BUILD FAILURE **********"
