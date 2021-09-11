@@ -33,6 +33,8 @@ else
     echo "dos2unix command not found. To prevent potential issues, please install dos2unix."
 fi
 
+find ../bin -type f
+
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]

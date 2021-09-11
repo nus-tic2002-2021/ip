@@ -14,10 +14,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        operating-system: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
-      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
