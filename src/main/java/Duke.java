@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +14,6 @@ public class Duke {
 
         //takes in user input
         text = in.nextLine();
-        tasks[task_count] = new Task(text);
 
         //use while loop to program running
         while(text != null){
@@ -21,15 +21,18 @@ public class Duke {
             if (text.equalsIgnoreCase("list")) {
                 Task.printList(tasks);
                 System.out.println("=======================================================");
-            } else if(text.contains("done")){
+            } else if(text.contains("done")){ //
                 String[] word = text.split(" ");
                 int i = Integer.parseInt(word[1]) - 1;
                 tasks[i].setDone(true);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + tasks[i].getStatusIcon() +"] " + tasks[i].getDescription());
+                System.out.println("    [" + tasks[i].getStatusIcon() +"] " + tasks[i].getDescription());
                 System.out.println("=======================================================");
-            } else {
-                //every other words will be added to the list by calling addToList method
+            } else if(text.contains("bye")) {
+                System.out.println("Bye, i will miss you.");
+                System.out.println("=========================END===========================");
+                System.exit(0);
+            } else { //every other words will be added to the list by calling addToList method
                 Task.addToList(text, tasks);
             }
             text = in.nextLine();
