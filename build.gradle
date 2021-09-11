@@ -27,4 +27,4 @@ dependencies {
 run {
     standardInput = System.in
 }
-mainClassName = 'Duke'
+mainClassName = 'com.alexooi.duke.Duke'
