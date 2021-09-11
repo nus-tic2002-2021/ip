@@ -28,3 +28,5 @@ jobs:
     - name: Test with runtest.sh
       working-directory: ./text-ui-test
       run: ./runtest.sh
+    - name: List all files
+      run: find ./bin type -f "."
