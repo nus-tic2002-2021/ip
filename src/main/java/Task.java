@@ -3,66 +3,48 @@ import java.util.Locale;
 
 public class Task {
 
+    protected String description;
+    protected boolean isDone;
     protected int id = 0;
-    protected String name = "";
-    protected boolean isToDo = false;
-    protected boolean isDeadline = false;
-    protected boolean isDone = false;
     protected static int totalCount = 0;
 
-    public Task(String cmd) {
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
         id = totalCount + 1;
         totalCount++;
+    }
 
-        if (cmd.toLowerCase(Locale.ROOT).startsWith("todo")) {
-            name = cmd.substring(5);
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        else if (cmd.toLowerCase(Locale.ROOT).startsWith("deadline")) {
-            name = cmd.substring(9);
-        }
+    public String getDoneStatus() {
+        return (isDone ? "X" : " ");
+    }
 
-        else name = cmd;
-
+    // ?
+    public String getTaskType() {
+        return " ";
     }
 
     public int getID() {
         return id;
     }
 
-    public String getType() {
-        if (isToDo == true) return "T";
-        else if (isDeadline == true) return "D";
-        else return " ";
-    }
-
-    public String getDone() {
-        return (isDone ? "X" : " ");
-    }
-
+    // ?
     public String getTotalCount() {
         if (totalCount == 1) return totalCount + " task";
         else return totalCount + " tasks";
     }
 
-    public String getTask() {
-        return "[" + getType() + "]" + "[" + getDone() + "] " + name;
-    }
-
-    public String listTask() {
-        return id + ". [" + getType() + "]" + "[" + getDone() + "] " + name;
-    }
-
-    public void setToDo() {
-        isToDo = true;
-    }
-
-    public void setDeadline() {
-        isDeadline = true;
-    }
-
     public void setDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s. [%s][%s] %s", id, getTaskType(), getDoneStatus(), description);
     }
 
 }

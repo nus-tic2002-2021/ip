@@ -1,5 +1,4 @@
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Locale;
@@ -40,7 +39,7 @@ public class Duke {
                 else {
                     System.out.print(LINE+"Here are the tasks in your list:\n");
                     for (Task task : listOfTasks)
-                        System.out.println(task.listTask());
+                        System.out.println(task.toString());
                     System.out.print(LINE);
                 }
             }
@@ -50,7 +49,7 @@ public class Duke {
                     int id = Integer.parseInt(String.valueOf(cmd.charAt(5)));
                     if (task.getID() == id) {
                         task.setDone();
-                        System.out.print(LINE+"Nice! I've marked this task as done.\n"+task.getTask()+"\n"+LINE);
+                        System.out.print(LINE+"Nice! I've marked this task as done.\n"+task.toString()+"\n"+LINE);
                     }
                 }
             }
@@ -60,17 +59,30 @@ public class Duke {
 
             else {
 
-                Task newTask = new Task(cmd);
+                Task newTask;
+
+                if (cmd.toLowerCase(Locale.ROOT).startsWith("todo")) {
+                    newTask = new Todo(cmd);
+                }
+
+                else if (cmd.toLowerCase(Locale.ROOT).startsWith("event")) {
+                    String[] cmdType = cmd.split("event |/at");
+                    newTask = new Event(cmdType[1], cmdType[2]);
+                }
+
+                else if (cmd.toLowerCase(Locale.ROOT).startsWith("deadline")) {
+                    String[] cmdType = cmd.split("deadline |/by");
+                    newTask = new Deadline(cmdType[1], cmdType[2]);
+                }
+
+                else {
+                    newTask = new Task(cmd);
+                }
+
                 listOfTasks.add(newTask);
 
-                if (cmd.toLowerCase(Locale.ROOT).startsWith("todo"))
-                    newTask.setToDo();
-
-                else if (cmd.toLowerCase(Locale.ROOT).startsWith("deadline"))
-                    newTask.setDeadline();
-
                 System.out.print(LINE);
-                System.out.println("Got it! I've added this task.\n" + newTask.getTask());
+                System.out.println("Got it! I've added this task.\n" + newTask.toString());
                 System.out.println("Now you have " + newTask.getTotalCount() + " in the list.");
                 System.out.print(LINE);
 
