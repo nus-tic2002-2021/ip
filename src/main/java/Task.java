@@ -3,6 +3,7 @@ public class Task {
     Integer id;
 
     public Task(String description, Integer id) {
+        System.out.println("set task: " + description + id);
         this.id = id;
         this.description = description;
     }
