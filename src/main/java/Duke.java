@@ -21,15 +21,22 @@ public class Duke {
             System.out.println(req + "\n");
             printLine();
             if(req.equals("list")){
+                System.out.println("     Here are the tasks in your list:");
                 for(int i = 0; i < list.size(); i++){
-                    System.out.println("     " + (i + 1) + ". " + list.get(i));
+                    System.out.println("     " + (i + 1) + "." + list.get(i));
                 }
-                System.out.println();
+            }
+            else if(req.substring(0, 4).equals("done")){
+                System.out.println("     Nice! I've marked this task as done:");
+                int idx = Integer.parseInt(req.trim().split(" ")[1]) - 1;
+                list.set(idx, "[X] " + list.get(idx).substring(4));
+                System.out.println("       " + list.get(idx));
             }
             else{
-                System.out.println("     added: " + req + "\n");
-                list.add(req);
+                System.out.println("     added: " + req);
+                list.add("[ ] " + req);
             }
+            System.out.println();
             printLine();
 
         }
