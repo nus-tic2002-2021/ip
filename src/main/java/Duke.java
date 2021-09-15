@@ -10,9 +10,16 @@ public class Duke {
         System.out.println(horiLine + "\n" + buff + greeting + "\n" + horiLine);
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();  // Read user input
+        Task newlist = new Task();
+
         while(!userInput.trim().equalsIgnoreCase("bye")){
-            System.out.println(horiLine + "\n" + buff + userInput.trim() + "\n" + horiLine);
+            newlist.addTask(userInput);
+            if(userInput.trim().equalsIgnoreCase("list")){
+                System.out.println(newlist.showList());
+            }
+//            System.out.println(horiLine + "\n" + buff + userInput.trim() + "\n" + horiLine); // echo function
             userInput = myObj.nextLine();
+
         }
 
         System.out.println(horiLine + "\n" + buff + valediction + "\n" + horiLine);
