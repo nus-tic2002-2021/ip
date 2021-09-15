@@ -10,8 +10,8 @@ public class Duke {
         System.out.println(horiLine + "\n" + buff + greeting + "\n" + horiLine);
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();  // Read user input
-        while(!userInput.equals("bye")){
-            System.out.println(horiLine + "\n" + buff + userInput + "\n" + horiLine);
+        while(!userInput.trim().equalsIgnoreCase("bye")){
+            System.out.println(horiLine + "\n" + buff + userInput.trim() + "\n" + horiLine);
             userInput = myObj.nextLine();
         }
 
