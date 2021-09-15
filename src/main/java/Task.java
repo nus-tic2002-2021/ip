@@ -22,9 +22,9 @@ public class Task {
         for(int i = 0; i < indx; i++){
             String tem = itemList[i];
             int indx = i + 1;
-            output += ("\n" +  buff + Integer.toString(indx) + ". "+ tem + "\n");
+            output += ("\n" +  buff + Integer.toString(indx) + ". "+ tem );
         }
-        output += horiLine;
+        output += ("\n" + horiLine);
         return output;
     }
 }
