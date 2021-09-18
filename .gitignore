@@ -18,5 +18,8 @@ bin/
 /*.logs
 modules.xml
 
+/*.class
+*.class
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
