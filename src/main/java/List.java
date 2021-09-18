@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class List {
     private static int inputCounter;
     private static Task[] inputArray;
@@ -6,21 +8,23 @@ public class List {
         inputCounter = 1; // array 0 is empty to remove + 1 in all codes
         inputArray =  new Task[size];
     }
-    public void checkAction(String inputMsg){
-        String action[] = inputMsg.split(" ");
+    public void checkAction(String inputMsg) throws UnrecognizedException,InvalidFormatException{
+
         String inputLow = inputMsg.toLowerCase();
+        String action[] = inputLow.split(" ");
         int initialCounter = inputCounter;
-        if(inputLow.startsWith("todo ")){
-            addTodo(inputMsg.substring(5));
+
+        if(action[0].equals("todo")){
+            addTodo(inputMsg.substring(4).trim());
         }
-        else if(inputLow.startsWith("deadline ")){
-            addDeadline(inputMsg.substring(9));
+        else if(action[0].equals("deadline")){
+            addDeadline(inputMsg.substring(8).trim());
         }
-        else if(inputLow.startsWith("event ")){
-            addEvent(inputMsg.substring(6));
+        else if(action[0].equals("event")){
+            addEvent(inputMsg.substring(5).trim());
         }
         else{
-            System.out.println("\tError occurred.");
+            throw new UnrecognizedException();
         }
         if(initialCounter < inputCounter){
             System.out.println("\tGot it. Item successfully added to the list: ");
@@ -29,36 +33,43 @@ public class List {
         }
     }
 
-    public void addTodo(String inputMsg){
+    public void addTodo(String inputMsg)throws InvalidFormatException{
+        if(inputMsg.isEmpty()){
+            throw new InvalidFormatException("Todo is missing a description.");
+        }
         inputArray[inputCounter] = new Todo(inputMsg);
         inputCounter = inputCounter + 1;
     }
 
-    public void addDeadline(String inputMsg){
+    public void addDeadline(String inputMsg)throws InvalidFormatException{
         String [] input = inputMsg.split(" /by ");
-        if(input.length == 2){
-            inputArray[inputCounter] = new Deadline(input[0],input[1]);
-            inputCounter = inputCounter + 1;
+        if(input.length < 2){
+            throw new InvalidFormatException("Deadline command is missing a description and/or deadline.");
         }
-        else{
-            System.out.println("Invalid deadline entry.");
+        if(input.length > 2){
+            throw new InvalidFormatException("Deadline command has too many /by.");
         }
+        inputArray[inputCounter] = new Deadline(input[0],input[1]);
+        inputCounter = inputCounter + 1;
     }
-    public void addEvent(String inputMsg){
+    public void addEvent(String inputMsg)throws InvalidFormatException{
         String [] input = inputMsg.split(" /at ");
-        if(input.length == 2){
-            inputArray[inputCounter] = new Event(input[0],input[1]);
-            inputCounter = inputCounter + 1;
+        if(input.length < 2){
+            throw new InvalidFormatException("Event command is missing a description and/or time.");
         }
-        else{
-            System.out.println("Invalid event entry.");
+        if(input.length > 2){
+            throw new InvalidFormatException("Event command has too many /at.");
         }
+        inputArray[inputCounter] = new Event(input[0],input[1]);
+        inputCounter = inputCounter + 1;
     }
 
-    public void taskDone(String counter){
+    public void taskDone(String counter)throws NotFoundException{
         Integer inputNumber = Integer.parseInt(counter);
+        if (inputCounter < inputNumber){
+            throw new NotFoundException();
+        }
         inputArray[inputNumber].setDone();
-
     }
 
     public void printList() {

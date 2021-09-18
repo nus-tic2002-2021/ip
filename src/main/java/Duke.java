@@ -38,11 +38,24 @@ public class Duke {
         else if(inputLow.equals("list")){
             inputList.printList();
         }
-        else if (inputLow.startsWith("done ")){
-            inputList.taskDone(inputMsg.substring(5));
+        else if (inputLow.startsWith("done")){
+            try{
+                inputList.taskDone(inputMsg.substring(4).trim());
+            } catch(NotFoundException e){
+                System.out.println("\tTask cannot be found.");
+            }  catch (NumberFormatException e){
+                System.out.println("\tInvalid task number entry.");
+            }
+
         }
         else{
-            inputList.checkAction(inputMsg);
+            try{
+                inputList.checkAction(inputMsg);
+            } catch (InvalidFormatException e){
+                System.out.println("\t" + e.getMessage() );
+            } catch (UnrecognizedException e){
+                System.out.println("\tCommand not recognized. Please try again.");
+            }
         }
         System.out.println(lineBreak);
     }
