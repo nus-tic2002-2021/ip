@@ -58,7 +58,13 @@ public class Duke {
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
         String instruction = tokens.get(0);
         Integer id = 0;
-        String taskInfo = "";
+        String taskInfo = tokens
+                .subList(1, tokens.size())
+                .toString()
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
 
         while (!instruction.toLowerCase(Locale.ROOT).equals(DETECT_END)) {
             if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_LIST)) {
@@ -73,7 +79,6 @@ public class Duke {
                 Task task = null;
                 switch (instruction) {
                     case DETECT_ADD_TODO:
-                        System.out.println(taskInfo);
                         task = new Todo(taskInfo, id);
                         break;
                     case DETECT_ADD_EVENT:
@@ -91,7 +96,6 @@ public class Duke {
                 } catch (Exception e) {
                     printErrorMessage(Message.ERROR_UNRECOGNISED);
                 }
-
             }
 
             input = in.nextLine();
@@ -99,7 +103,13 @@ public class Duke {
             tokens = new ArrayList(Arrays.asList(input.split(" ")));
             instruction = tokens.get(0);
             System.out.println("instruction: " + instruction);
-            taskInfo = tokens.subList(1, tokens.size()).toString();
+            taskInfo = tokens
+                    .subList(1, tokens.size())
+                    .toString()
+                    .replace(",", "")
+                    .replace("[", "")
+                    .replace("]", "")
+                    .trim();
             id = list.size();
         }
         System.out.println(STMT_END);

@@ -17,6 +17,6 @@ public class Event extends Todo {
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        return id + ". [E][" + status + "] " + super.toString() + " (at: " + at + ")";
+        return id + ". [E][" + status + "] " + super.getDescription() + " (at: " + at + ")";
     }
 }
