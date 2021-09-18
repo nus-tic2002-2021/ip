@@ -17,7 +17,7 @@ public class Duke {
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
-    public static void list(ArrayList<Task> list) {
+    public static void list(ArrayList<Task> list) throws Exception {
         list.forEach(l -> System.out.println(l.toString()));
     }
 
@@ -38,10 +38,13 @@ public class Duke {
     public static void printErrorMessage(Message m) {
         switch (m) {
             case ERROR_UNRECOGNISED:
-                System.out.println(ERROR_PREFIX + "Unrecognised operation.");
+                System.out.println(ERROR_PREFIX + " Unrecognised operation.");
                 break;
             case ERROR_INVALID:
-                System.out.println(ERROR_PREFIX + "Invalid input.");
+                System.out.println(ERROR_PREFIX + " Invalid input.");
+                break;
+            case EMPTY_LIST:
+                System.out.println(ERROR_PREFIX + " Empty list.");
                 break;
         }
     }
@@ -59,7 +62,11 @@ public class Duke {
 
         while (!instruction.toLowerCase(Locale.ROOT).equals(DETECT_END)) {
             if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_LIST)) {
-                list(list);
+                try {
+                    list(list);
+                } catch (Exception e) {
+                    printErrorMessage(Message.EMPTY_LIST);
+                }
             } else if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_DONE) && tokens.size() >= 2) {
                 markDone(list, Integer.parseInt((tokens.get(1))));
             } else {
@@ -79,15 +86,19 @@ public class Duke {
                         break;
                 }
 
-                if (task == null) {
+                try {
+                    add(list, task);
+                } catch (Exception e) {
                     printErrorMessage(Message.ERROR_UNRECOGNISED);
                 }
-                add(list, task);
+
             }
 
             input = in.nextLine();
+            System.out.println("input: " + input);
             tokens = new ArrayList(Arrays.asList(input.split(" ")));
             instruction = tokens.get(0);
+            System.out.println("instruction: " + instruction);
             taskInfo = tokens.subList(1, tokens.size()).toString();
             id = list.size();
         }
