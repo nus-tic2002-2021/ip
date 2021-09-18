@@ -5,15 +5,19 @@ import java.util.Scanner;
 
 
 public class Duke {
+    // TODO: Change these to enums
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
+    private final static String DETECT_DELETE = "delete";
+
     private final static String STMT_END = "Bye. Hope to see you again soon!";
     private final static String STMT_START = "Hello! I'm Duke\nWhat can I do for you?";
     private final static String STMT_DONE = "Nice! I've marked this task as done: ";
+    private final static String STMT_DELETE = "Noted. I've removed this task: ";
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
@@ -35,6 +39,17 @@ public class Duke {
         });
     }
 
+    public static void markDelete(ArrayList<Task> list, Integer taskId) throws Exception {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() != null && list.get(i).getId().equals(taskId)) {
+                System.out.println(STMT_DELETE);
+                System.out.println(list.get(i).toString());
+                list.remove(list.get(i));
+                return;
+            }
+        }
+    }
+
     public static void printErrorMessage(Message m) {
         switch (m) {
             case ERROR_UNRECOGNISED:
@@ -45,6 +60,9 @@ public class Duke {
                 break;
             case EMPTY_LIST:
                 System.out.println(ERROR_PREFIX + " Empty list.");
+                break;
+            case UNKNOWN_OBJECT:
+                System.out.println(ERROR_PREFIX + " Could not find resource.");
                 break;
         }
     }
@@ -58,7 +76,7 @@ public class Duke {
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
         String instruction = tokens.get(0);
         Integer id = 0;
-        String taskInfo = tokens
+        String taskInfo = tokens // TODO: Fix this (duh)
                 .subList(1, tokens.size())
                 .toString()
                 .replace(",", "")
@@ -75,6 +93,13 @@ public class Duke {
                 }
             } else if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_DONE) && tokens.size() >= 2) {
                 markDone(list, Integer.parseInt((tokens.get(1))));
+            } else if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2) {
+                try {
+                    markDelete(list, Integer.parseInt((tokens.get(1))));
+                } catch (Exception e) {
+                    printErrorMessage(Message.UNKNOWN_OBJECT);
+                }
+
             } else {
                 Task task = null;
                 switch (instruction) {
@@ -110,6 +135,7 @@ public class Duke {
                     .replace("[", "")
                     .replace("]", "")
                     .trim();
+            System.out.println("task info:" + taskInfo);
             id = list.size();
         }
         System.out.println(STMT_END);
