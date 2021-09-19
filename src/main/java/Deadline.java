@@ -1,9 +1,7 @@
 public class Deadline extends Task{
-    protected String datetime;
-
     public Deadline(String description){
         super(description);
-        super.type = "D";
+        this.type = "D";
     }
 
     @Override
@@ -20,7 +18,9 @@ public class Deadline extends Task{
         System.out.println("=======================================================");
     }
 
-    public static void printTask(Task s){
-        System.out.println("." + "[" + s.getType() +"]" + "[" + s.getStatusIcon() +"] " + s.getDescription() + "(by: " + s.getDatetime() + ")");
+    public String printList (){
+        //print out every element in the array
+        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by:" + getDatetime() + ")";
     }
+
 }

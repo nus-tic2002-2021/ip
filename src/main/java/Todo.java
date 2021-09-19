@@ -1,7 +1,7 @@
 public class Todo extends Task{
     public Todo(String description){
         super(description);
-        super.type = "T";
+        this.type = "T";
     }
 
     public String getDescription() {return description.substring(5);}
@@ -12,4 +12,9 @@ public class Todo extends Task{
         System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
         System.out.println("=======================================================");
     }
+
+    public String printList (){
+        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription();
+    }
+
 }

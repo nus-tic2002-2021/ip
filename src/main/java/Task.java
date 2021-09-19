@@ -13,10 +13,10 @@ public class Task {
     }
 
     //description.Getter
-    public String getDescription() {return description;}
+    public  String getDescription() {return description;}
 
     //isDone.Setter
-    public void setDone(boolean isDone) {this.isDone = isDone;}
+    public void setDone() {isDone = true;}
 
     //isDone.Getter
     public String getStatusIcon() {
@@ -29,10 +29,7 @@ public class Task {
         return datetime;
     }
 
-
     public static Task[] addToList (String text, Task[] tasks){
-        //print out added: text by calling Echo method
-        //echo(text);
         if (text.contains("todo")) {
             tasks[task_count] = new Todo(text);
             Todo.print(tasks);
@@ -52,14 +49,6 @@ public class Task {
         return Arrays.copyOf(tasks, task_count);
     }
 
-    public static void printList (Task[] s){
-        //print out every element in the array
-        System.out.println("Here are the tasks in your list:");
-        for (int i =0; i < s.length; i ++){
-            if (s[i] != null){
-                System.out.println(i+1 + "." + "[" + s[i].getType() +"]" + "[" + s[i].getStatusIcon() +"] " + s[i].getDescription() + "(by:" + s[i].getDatetime() + ")");
-            }
-        }
-    }
+    public String printList (){return "";}
 
 }
