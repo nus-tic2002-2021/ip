@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-//     public static Task[] tasks = new Task[100];
     public static ArrayList<Task> tasks = new ArrayList<Task>();
 
     private static int tasksCount = 0;
@@ -52,7 +51,6 @@ public class Duke {
                 else {
                     taskDescription = taskSplit[1].stripLeading();
                     responseParse(taskStatus,taskDescription);
-                    //TODO should this task return the task then added to the list?
                 }
 
             }
@@ -79,34 +77,37 @@ public class Duke {
                     Todo todo = new Todo(describe);
                     todo.setTaskStatus("T");
                     tasks.add(todo);
-                    System.out.println(todo.toString());
-                    System.out.println("Now you have "+tasks.size()+" tasks in the list.");
+                    System.out.println(breakLine+todo.toString());
                     break;
                 case DEADLINE:
                     String[] deadlineAndTime = describe.split("/by");
                     Deadline deadline = new Deadline(deadlineAndTime[0],deadlineAndTime[1]);
                     deadline.setTaskStatus("D");
                     tasks.add(deadline);
-                    System.out.println(deadline.toString());
-                    System.out.println("Now you have "+tasks.size()+" tasks in the list.");
+                    System.out.println(breakLine+deadline.toString());
                     break;
                 case EVENT:
                     String[] eventAndTime = describe.split("/at");
                     Event event = new Event(eventAndTime[0],eventAndTime[1]);
                     event.setTaskStatus("E");
                     tasks.add(event);
-                    System.out.println(event.toString());
-                    System.out.println("Now you have "+tasks.size()+" tasks in the list.");
+                    System.out.println(breakLine+event.toString());
                     break;
                 case DELETE:
                     taskIndex = Integer.parseInt(describe)-1;
+                    tasks.get(taskIndex).markAsDone();
+                    System.out.println(breakLine+"Noted. I've removed this task: \n" +
+                            " ["+tasks.get(taskIndex).getStatusIcon()+"] " + tasks.get(taskIndex).getDescription());
+                    tasks.remove(taskIndex);
                     break;
                 case DONE:
                     taskIndex = Integer.parseInt(describe)-1;
                     tasks.get(taskIndex).markAsDone();
-                    printTaskDone(tasks.get(taskIndex));
+                    System.out.println(breakLine+"Nice! I've marked this task as done: \n" +
+                            " ["+tasks.get(taskIndex).getStatusIcon()+"] " + tasks.get(taskIndex).getDescription());
                     break;
             }
+            System.out.println("Now you have "+tasks.size()+" tasks in the list.\n"+breakLine);
         }
 
          //check the input is not 0, is not exceed the total tasks index
@@ -117,6 +118,9 @@ public class Duke {
          catch(ArrayIndexOutOfBoundsException e){
              System.out.println("There are only "+tasksCount+" tasks, please enter the correct task number");
          }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("Task number entered is invalid");
+        }
     }
 
     public static boolean contains(String test) {
@@ -136,7 +140,6 @@ public class Duke {
         System.out.print(breakLine);
         System.out.println("Here are the tasks in your list:");
         //print out all items in list
-        // TODO change this part to ArrayList
         for(int i = 0; i< tasks.size();i++){
             output = tasks.get(i).toString().split("\n ");
             System.out.println(i+1 + "."+output[1]);
@@ -152,11 +155,6 @@ public class Duke {
         }
     }
 
-
-    public static void printTaskDone(Task t){
-        System.out.println(breakLine+"Nice! I've marked this task as done: \n" +
-                " ["+t.getStatusIcon()+"] " + t.getDescription() + "\n"+breakLine);
-    }
 
     public static void main(String[] args) {
         greeting();
