@@ -38,10 +38,8 @@ public class Duke {
         do {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
-            Pattern pattern = Pattern.compile("bye", Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(line);
-            boolean matchFound = matcher.find();
-            if(matchFound) {
+            Inspect userText = new Inspect(line);
+            if(userText.bye()) {
               line = "bye";
             }
             storedResponses.add(line);
