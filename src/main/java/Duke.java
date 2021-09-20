@@ -22,45 +22,54 @@ public class Duke {
     }
 
     private static String[] checkUserInput(String command) throws InvalidUserInputException {
-        //TODO: improve this method
+        /*TODO: improve this method
+        currently the list of errors handled by this method:
+        Type 1. task description (for all the types of task):
+            a. empty description
+            b. invalid description, i.e. contains only numbers
+        Type 2. task time (for deadline and event only)
+            a. wrong preposition, missing "by"/"at"
+            b. missing "/" for time indication
+        To add more...
+         */
         String taskType = command.split(" ")[0].toLowerCase();
-        String taskName = "";
+        String taskName;
         String time = null;
         //handle task type
         if (!Arrays.asList(validTypesTask).contains(taskType)) {
             throw new InvalidUserInputException("Please enter a valid type of task");
-        } else {
-            if (taskType.equals("deadline") || taskType.equals("event")){
-                try {
-                    taskName = command.split(" ", 2)[1].split("/")[0].trim();
-                    //handle task time
-                    String timeFormat = command.split("/")[1].substring(0, 2);
-                    time = command.split("/")[1].substring(2);
-                    //TODO: decide whether empty time is allowed
-                    if (!timeFormat.equalsIgnoreCase("by") && taskType.equals("deadline")) {
-                        throw new InvalidUserInputException("please specify a deadline using keyword \"by\"");
-                    } else if (!timeFormat.equalsIgnoreCase("at") && taskType.equals("event")) {
-                        throw new InvalidUserInputException("please specify a time for the event");
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidUserInputException("Please use \"/\" to specify the time");
-                }
-            }
-            //handle task description
+        }
+        if (taskType.equals("deadline") || taskType.equals("event")){
             try {
-                if (taskType.equals("todo")){
-                    taskName = command.split(" ", 2)[1];
+                taskName = command.split(" ", 2)[1].split("/")[0].trim();
+                //handle task time
+                String timeFormat = command.split("/")[1].substring(0, 2);
+                time = command.split("/")[1].substring(2);
+                //TODO: decide whether empty time is allowed
+                if (!timeFormat.equalsIgnoreCase("by") && taskType.equals("deadline")) {
+                    throw new InvalidUserInputException("please specify a deadline using keyword \"by\"");
+                } else if (!timeFormat.equalsIgnoreCase("at") && taskType.equals("event")) {
+                    throw new InvalidUserInputException("please specify a time for the event using keyword \"at\"");
                 }
-                if (taskName.matches("[0-9]+")) {
-                    throw new InvalidUserInputException("please enter a valid task description that contains alphabets");
-                } else if (taskName.equals("")){
-                    throw new InvalidUserInputException("empty task, please include the task description");
-                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidUserInputException("Please use \"/by\" or \"/at\" to specify the time");
+            }
+        } else {
+            try {
+                taskName = command.split(" ", 2)[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidUserInputException("empty task, please include the task description");
             }
-            //TODO: add more invalid cases
+
         }
+        //handle task description
+        if (taskName.matches("[0-9]+")) {
+            throw new InvalidUserInputException("please enter a valid task description that contains alphabets");
+        } else if (taskName.equals("")){
+            throw new InvalidUserInputException("empty task, please include the task description");
+        }
+
+        //TODO: add more invalid cases
         return new String[]{taskType, taskName, time};
     }
 
@@ -150,6 +159,11 @@ public class Duke {
     }
 
     private static void changeTaskStatus(String command) {
+        /*
+        The list of errors handled by this method:
+        a. list of task is empty
+        b. index exceeds the number of tasks
+         */
         int indexOfTask = Integer.parseInt(command.split(" ")[1]);
         //make sure the index is not out of the list
         try {
