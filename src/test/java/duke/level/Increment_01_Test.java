@@ -1,21 +1,21 @@
-package duke.coronet.level;
+package duke.level;
 
 import duke.coronet.manager.UxManager;
 import duke.coronet.orchestra.OrchestratorLevel01;
 import duke.coronet.testHelper.TestStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 import java.io.ByteArrayInputStream;
 
-import static duke.coronet.testHelper.help.OutputUnderTest.*;
+import static duke.testHelper.help.OutputUnderTest.*;
 import static duke.coronet.testHelper.help.TextCommandUnderTest.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Implement a skeletal version of Duke that starts by greeting the user,
  * simply echos commands entered by the user, and exits when the user types bye.
  * <p>
- * Uses OrchestratorLevel01
  *
  * @see <a href="https://nus-tic2002-2021.github.io/website/se-book-adapted/projectDuke/index.html#level-1-greet-echo-exit">Level-1</a>
  */
