@@ -1,6 +1,6 @@
-package duke.coronet.dukeUtility.validator;
+package duke.dukeUtility.validator;
 
-import static duke.coronet.dukeUtility.definition.CommandPromptsAndOptions.*;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
 /**
  * Text Command Validation methods
  */

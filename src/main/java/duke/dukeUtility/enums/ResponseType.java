@@ -1,7 +1,7 @@
-package duke.coronet.dukeUtility.enums;
+package duke.dukeUtility.enums;
 
 /**
- * @see duke.coronet.command.Command
+ * @see duke.command.Command
  */
 public enum ResponseType {
     ECHO,
