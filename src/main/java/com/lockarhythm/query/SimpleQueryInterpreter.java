@@ -6,6 +6,7 @@ import com.lockarhythm.query.event.EventResponder;
 import com.lockarhythm.query.exit.ExitResponder;
 import com.lockarhythm.query.markasdone.MarkAsDoneResponder;
 import com.lockarhythm.query.todo.TodoResponder;
+import com.lockarhythm.query.delete.DeleteResponder;
 import com.lockarhythm.tasks.TaskList;
 
 /** SimpleQueryInterpreter finds the first QueryInterpreter that responds a non-null result. */
@@ -20,6 +21,7 @@ public final class SimpleQueryInterpreter implements QueryInterpreter {
       new ListResponder(list),
       new DeadlineResponder(list),
       new EventResponder(list),
+      new DeleteResponder(list),
     };
     interpreters = res;
   }

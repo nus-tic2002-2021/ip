@@ -37,6 +37,10 @@ public class TaskList {
     return t;
   }
 
+  public Task deleteTask(int index) {
+    return list.remove(index);
+  }
+
   @Override
   public String toString() {
     StringBuilder s = new StringBuilder();

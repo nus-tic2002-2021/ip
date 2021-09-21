@@ -8,4 +8,6 @@ done 2
 todo done 1
 list
 a-command-that-duke-doesnt-know
+delete 0
+delete 2
 bye
