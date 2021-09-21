@@ -1,8 +1,8 @@
-# Production Build (Maven)
+![level 0](/docs/screenshots/level-0.png)
 
+# Run
 
-``` mvn test ``` test from root test source \
-``` mvn install ``` install dependencies \
-``` mvn package ``` build jar \
-``` mvn compile ```compile from root test source \
-``` java -cp target/[package].jar duke.coronet.main.Duke``` specify path of jar and entry class \
+```act``` test \
+```mvn package``` package \
+```./target/Duke.jar``` generated jar \
+```java -jar ./target/Duke.jar``` run package
