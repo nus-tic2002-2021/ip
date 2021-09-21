@@ -1,0 +1,20 @@
+Hello from
+ _                   _                                _             
+| |                 | |                              | |                
+| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ 
+| __|  / _` | / __| | |/ / | '_ ` _ \   / _` | / __| | __|  / _ \ | '__|
+| |_  | (_| | \__ \ |   <  | | | | | | | (_| | \__ \ | |_  |  __/ | |   
+ \__|  \__,_| |___/ |_|\_\ |_| |_| |_|  \__,_| |___/  \__|  \___| |_|  
+How can i help you? (See docs for usage)
+Added To Do: taskDesc abc
+								 -
+Added To Do: todoDesc def
+								 -
+2 tasks in list
+.id#   Done  Type Task Description                 Chronology
+0000   [ ]   [ ]  taskDesc abc                      
+0000   [ ]   [ ]  todoDesc def                      
+								 -
+ok bye
+								 -
+See you again!
