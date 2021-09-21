@@ -1,7 +1,12 @@
 package duke;
 
 
+import duke.command.Command;
+import duke.command.commandFactory.UiCommandFactory;
+import duke.dukeUtility.enums.ResponseType;
+
 import java.io.PrintStream;
+import java.util.Scanner;
 
 
 /**
@@ -10,7 +15,13 @@ import java.io.PrintStream;
 public class Ui {
 
     private PrintStream _out;
-
+    private Boolean _loop = true;
+    private UiCommandFactory _UiCommandFactory = new UiCommandFactory(){
+        @Override
+        public Command executeTextCommand(String text){
+            return null;
+        }
+    };
     private Ui() {
     }
 
@@ -35,7 +46,46 @@ public class Ui {
         this.getPrintStream().print("Hello from\n" + logo);
         return this;
     }
+    public void printBeginInputLoop() {
+        this.getPrintStream().print("How can i help you? (See docs for usage)\n");
+    }
+    public void printExitLoopMessage() {
+        this.getPrintStream().print("ok bye" + System.lineSeparator());
+    }
+    public void printEchoMessage(String text) {
+        this.getPrintStream().print("Echoed after you: " + text + System.lineSeparator());
+    }
+    public void setUiCommandFactory(UiCommandFactory _UiCommandFactory) {
+        this._UiCommandFactory = _UiCommandFactory;
+    }
+    private UiCommandFactory getUiCommandFactory() {
+        return this._UiCommandFactory;
+    }
 
+    public void textCommandLoop() throws Exception {
+        this.printBeginInputLoop();
+        String textCommand;
+        Scanner in = new Scanner(System.in);
+        do {
+            textCommand = in.nextLine();
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand);
+            this.displayCommandResponse(command);
+            this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
+        } while (this._loop);
+    }
+    protected void displayCommandResponse(Command c) throws Exception {
+        ResponseType rt = c.getResponseType();
+        if (rt == ResponseType.EXIT_LOOP) {
+            this._loop = false;
+            this.printExitLoopMessage();
+        } else if (rt == ResponseType.ECHO) {
+            this.printEchoMessage(c.getArgs().get(1));
+        }  else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
+            this.getPrintStream().print(c.getArgs().get(2));
+        }  else {
+            throw new Exception("Unhandled response type [" + rt +  "].");
+        }
+    }
     public void printTerminateMessage() {
         this.getPrintStream().print("See you again!\n");
     }

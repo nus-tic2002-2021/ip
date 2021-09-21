@@ -1,4 +1,4 @@
-![level 0](/docs/screenshots/level-0.png)
+[Current](./docs/CHANGELOG.md#feature-level-1)
 
 # Run
 
@@ -6,3 +6,4 @@
 ```mvn package``` package \
 ```./target/Duke.jar``` generated jar \
 ```java -jar ./target/Duke.jar``` run package
+
