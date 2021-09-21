@@ -1,15 +1,14 @@
 package duke.level;
 
-import duke.coronet.manager.UxManager;
-import duke.coronet.orchestra.OrchestratorLevel01;
-import duke.coronet.testHelper.TestStream;
+import duke.Main;
+import duke.Ui;
+import duke.testHelper.TestStream;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.ByteArrayInputStream;
 
+import static duke.testHelper.help.TextCommandUnderTest.*;
 import static duke.testHelper.help.OutputUnderTest.*;
-import static duke.coronet.testHelper.help.TextCommandUnderTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -20,9 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see <a href="https://nus-tic2002-2021.github.io/website/se-book-adapted/projectDuke/index.html#level-1-greet-echo-exit">Level-1</a>
  */
 public class Increment_01_Test extends TestStream {
-    /**
-     * Simulate running orchestrator, inputs texts and exit. Expect an exact response message in the test.
-     */
+
     @Test
     public void TestLevel1GreetEchoExit() throws Exception {
         StringBuilder commandBuilder = new StringBuilder();
@@ -42,7 +39,8 @@ public class Increment_01_Test extends TestStream {
         String expectedExitMessage = getMsgUnderTestTerminate();
 
         String expectedOutputResponse = getMsgUnderTestEntry() + getMsgUnderTestBeginInputLoop() + getMsgUnderTestResponseEcho(echoText1) + getMsgUnderTestResponseEcho(echoText2) + getMsgUnderTestExitLoop() + expectedExitMessage;
-        new OrchestratorLevel01(null, null, new UxManager(this.getPrintStream())).run();
+        Main.run(this.getPrintStream());
+
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 }
