@@ -1,6 +1,6 @@
-package duke.coronet.command;
+package duke.command;
 
-import duke.coronet.dukeUtility.enums.ResponseType;
+import duke.dukeUtility.enums.ResponseType;
 
 import java.util.List;
 
