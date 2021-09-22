@@ -3,9 +3,7 @@ import java.util.ArrayList;
 
 public class Parser extends Duke {
 
-    protected final static String BYE = "Bye. Hope to see you again soon!\n";
-    protected final static String NO_TASK = "You have no task in your list!\n";
-    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
+    protected static ArrayList<Task> taskList = new ArrayList<>();
 
     public static boolean parse(String cmd) throws DukeException {
 
@@ -27,17 +25,13 @@ public class Parser extends Duke {
     }
 
     public static boolean parseBye () {
-        System.out.print(LINE+BYE+LINE);
+        printer.printBye();
         return false;
     }
 
     public static boolean parseList(String cmd) {
-        if (listOfTasks.size() == 0) System.out.print(LINE+NO_TASK+LINE);
-        else {
-            System.out.print(LINE + "Here are the tasks in your list:\n");
-            for (Task task : listOfTasks) System.out.println(task.toString());
-            System.out.print(LINE);
-        }
+        if (taskList.size() == 0) printer.printNoTask();
+        else printer.printList();
         return true;
     }
 

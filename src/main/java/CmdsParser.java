@@ -36,14 +36,14 @@ public class CmdsParser extends Parser {
         try {
             cmdTask = cmds[1];
             int id = Integer.parseInt(String.valueOf(cmdTask));
-            for (Task task : listOfTasks) {
+            for (Task task : taskList) {
                 if (task.getID() == id) {
                     task.setDone();
-                    System.out.print(LINE + "Nice! I've marked this task as done.\n" + task.toString() + "\n" + LINE);
+                    printer.printDone(task);
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.print(LINE+INVALID_DONE+LINE);
+            printer.printInvalidDone();
         }
     }
 
@@ -52,10 +52,10 @@ public class CmdsParser extends Parser {
             cmds = cmd.split("todo ", 2);
             cmdTask = cmds[1];
             Task newTask = new Todo(cmdTask);
-            listOfTasks.add(newTask);
-            printTask();
+            taskList.add(newTask);
+            printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            System.out.print(LINE+INVALID_TODO+LINE);
+            printer.printInvalidTodo();
         }
     }
 
@@ -65,10 +65,10 @@ public class CmdsParser extends Parser {
             cmdTask = cmds[1];
             cmdTaskType = cmds[2];
             Task newTask = new Event(cmdTask, cmdTaskType);
-            listOfTasks.add(newTask);
-            printTask();
+            taskList.add(newTask);
+            printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            System.out.print(LINE+INVALID_EVENT+LINE);
+            printer.printInvalidEvent();
         }
     }
 
@@ -78,18 +78,11 @@ public class CmdsParser extends Parser {
             cmdTask = cmds[1];
             cmdTaskType = cmds[2];
             Task newTask = new Deadline(cmdTask, cmdTaskType);
-            listOfTasks.add(newTask);
-            printTask();
+            taskList.add(newTask);
+            printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            System.out.print(LINE+INVALID_DEADLINE+LINE);
+            printer.printInvalidDeadline();
         }
-    }
-
-    public static void printTask() {
-        System.out.print(LINE);
-        System.out.println("Got it! I've added this task.\n" + listOfTasks.get(listOfTasks.size()-1).toString());
-        System.out.println("Now you have " + listOfTasks.get(listOfTasks.size()-1).getTotalCount() + " in the list.");
-        System.out.print(LINE);
     }
 
 }
