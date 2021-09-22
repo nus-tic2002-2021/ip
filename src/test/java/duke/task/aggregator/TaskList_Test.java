@@ -2,14 +2,12 @@ package duke.task.aggregator;
 
 import duke.task.model.ToDo;
 import duke.testHelper.TestStream;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TaskList_Test extends TestStream {
-    @Ignore
     @Test
     public void TestToDo() throws Exception {
 
