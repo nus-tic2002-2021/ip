@@ -13,15 +13,10 @@ public class Task {
         totalCount++;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getDoneStatus() {
         return (isDone ? "X" : " ");
     }
 
-    // ?
     public String getTaskType() {
         return " ";
     }
@@ -30,7 +25,6 @@ public class Task {
         return id;
     }
 
-    // ?
     public String getTotalCount() {
         if (totalCount == 1) return totalCount + " task";
         else return totalCount + " tasks";

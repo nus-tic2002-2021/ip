@@ -22,49 +22,53 @@ public class Printer {
         System.out.print(LINE+INTRO+LINE);
     }
 
-    public void printNewCmdHeader() {
+    public static void printIntro() {
+        System.out.print(LINE+INTRO+LINE);
+    }
+
+    public static void printHeader() {
         System.out.print("\ncmd: ");
     }
 
-    public void printInvalidCmd() {
+    public static void printInvalidCmd() {
         System.out.print(LINE+INVALID_CMD+LINE);
     }
 
-    public void printBye() {
+    public static void printBye() {
         System.out.print(LINE+BYE+LINE);
     }
 
-    public void printNoTask() {
+    public static void printNoTask() {
         System.out.print(LINE+NO_TASK+LINE);
     }
 
-    public void printList() {
+    public static void printList() {
         System.out.print(LINE + "Here are the tasks in your list:\n");
         for (Task task : Parser.taskList) System.out.println(task.toString());
         System.out.print(LINE);
     }
 
-    public void printDone(Task task) {
+    public static void printDone(Task task) {
         System.out.print(LINE + "Nice! I've marked this task as done.\n" + task.toString() + "\n" + LINE);
     }
 
-    public void printInvalidDone() {
+    public static void printInvalidDone() {
         System.out.print(LINE+INVALID_DONE+LINE);
     }
 
-    public void printInvalidTodo() {
+    public static void printInvalidTodo() {
         System.out.print(LINE+INVALID_TODO+LINE);
     }
 
-    public void printInvalidEvent() {
+    public static void printInvalidEvent() {
         System.out.print(LINE+INVALID_EVENT+LINE);
     }
 
-    public void printInvalidDeadline() {
+    public static void printInvalidDeadline() {
         System.out.print(LINE+INVALID_DEADLINE+LINE);
     }
 
-    public void printTask(ArrayList<Task> taskList) {
+    public static void printTask(ArrayList<Task> taskList) {
         System.out.print(LINE + "Got it! I've added this task.\n" + taskList.get(taskList.size() - 1).toString());
         System.out.print("\nNow you have " + taskList.get(taskList.size() - 1).getTotalCount() + " in the list.\n" + LINE);
     }

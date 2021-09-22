@@ -39,11 +39,11 @@ public class CmdsParser extends Parser {
             for (Task task : taskList) {
                 if (task.getID() == id) {
                     task.setDone();
-                    printer.printDone(task);
+                    Printer.printDone(task);
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            printer.printInvalidDone();
+            Printer.printInvalidDone();
         }
     }
 
@@ -53,9 +53,9 @@ public class CmdsParser extends Parser {
             cmdTask = cmds[1];
             Task newTask = new Todo(cmdTask);
             taskList.add(newTask);
-            printer.printTask(taskList);
+            Printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            printer.printInvalidTodo();
+            Printer.printInvalidTodo();
         }
     }
 
@@ -66,9 +66,9 @@ public class CmdsParser extends Parser {
             cmdTaskType = cmds[2];
             Task newTask = new Event(cmdTask, cmdTaskType);
             taskList.add(newTask);
-            printer.printTask(taskList);
+            Printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            printer.printInvalidEvent();
+            Printer.printInvalidEvent();
         }
     }
 
@@ -79,9 +79,9 @@ public class CmdsParser extends Parser {
             cmdTaskType = cmds[2];
             Task newTask = new Deadline(cmdTask, cmdTaskType);
             taskList.add(newTask);
-            printer.printTask(taskList);
+            Printer.printTask(taskList);
         } catch (IndexOutOfBoundsException e) {
-            printer.printInvalidDeadline();
+            Printer.printInvalidDeadline();
         }
     }
 

@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public class Parser extends Duke {
+public class Parser {
 
     protected static ArrayList<Task> taskList = new ArrayList<>();
 
@@ -25,13 +25,13 @@ public class Parser extends Duke {
     }
 
     public static boolean parseBye () {
-        printer.printBye();
+        Printer.printBye();
         return false;
     }
 
     public static boolean parseList(String cmd) {
-        if (taskList.size() == 0) printer.printNoTask();
-        else printer.printList();
+        if (taskList.size() == 0) Printer.printNoTask();
+        else Printer.printList();
         return true;
     }
 
