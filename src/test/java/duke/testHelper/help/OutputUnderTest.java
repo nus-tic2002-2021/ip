@@ -37,5 +37,7 @@ public class OutputUnderTest {
     public static String getMsgUnderTestResponseListAll(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-
+    public static String getMsgUnderTestResponseTaskSetCompleted(Integer taskId) {
+        return "update done #" + taskId.toString() + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
 }
