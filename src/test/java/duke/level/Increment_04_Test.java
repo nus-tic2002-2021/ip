@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class Increment_04_Test extends TestStream {
 
     @Test
-    public void TestLevel4_Greet_AddToDo() throws Exception {
+    public void TestLevel4_Greet_AddToDo_List_Exit() throws Exception {
 
         assertNotNull(this.getPrintStream(), "printstream null?");
 
