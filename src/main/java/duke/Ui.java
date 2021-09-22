@@ -92,10 +92,18 @@ public class Ui {
             this.getPrintStream().print(c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_TODO) {
             this.getPrintStream().print("Added To Do: " + c.getArgs().get(2) + System.lineSeparator());
-        } else if (rt == ResponseType.TASK_LIST_ALL) {
+        } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
+            this.getPrintStream().print("Added Deadline: " + c.getArgs().get(2) + System.lineSeparator());
+        }  else if (rt == ResponseType.TASK_CREATE_EVENT) {
+            this.getPrintStream().print("Added Event: " + c.getArgs().get(2) + System.lineSeparator());
+        }else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.getPrintStream().print(String.join(" ", c.getArgs()) + System.lineSeparator());
+        }  else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
+            this.getPrintStream().print("Invalid command " + c.getArgs().get(1) + System.lineSeparator());
+        } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
+            this.getPrintStream().print("Unknown command. . ." + System.lineSeparator());
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }

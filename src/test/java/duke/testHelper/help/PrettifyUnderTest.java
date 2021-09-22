@@ -1,18 +1,47 @@
 package duke.testHelper.help;
 
 
-import java.util.List;
+import duke.mock.mockTask.MockDeadline;
+import duke.mock.mockTask.MockEvent;
+import duke.mock.mockTask.MockTask;
+import duke.mock.mockTask.MockToDo;
+
 
 public class PrettifyUnderTest {
+
+    private static String getTaskCharCodeUnderTest(MockTask task){
+        if(task instanceof MockToDo){
+            return "T";
+        }
+        if(task instanceof MockEvent){
+            return "E";
+        }
+        if(task instanceof MockDeadline){
+            return "D";
+        }
+        return " ";
+    }
+    private static String getTaskChronologyString(MockTask task){
+        if(task instanceof MockToDo){
+            return "-";
+        }
+        if(task instanceof MockEvent){
+            return "From: " + ((MockEvent) task).getFromDateString() + ", To: " + ((MockEvent) task).getToDateString();
+        }
+        if(task instanceof MockDeadline){
+            return "By: " + ((MockDeadline) task).getbyDateString() ;
+        }
+        return " ";
+    }
     private static String fillCellUnderTest(String value, Integer lengthColMax) {
         int lengthValue = value.length();
         int lengthPad = lengthColMax - lengthValue;
         return String.format("%s%s", value, String.format("%" + (lengthPad > 0 ? lengthPad : "") + "s", " "));
     }
 
-    public static String getPrettifyUnderTestList(Integer taskQty, List<Integer> taskIds, List<Boolean> taskDoneStatuses, List<String> taskTypes, List<String> taskDescriptions, List<String> taskChronologies) {
+    public static String getPrettifyUnderTestList(MockTask... mockTasks) {
 
-
+        int taskQty = mockTasks.length;
         StringBuilder generating = new StringBuilder();
         generating.append((taskQty + " task" + (taskQty > 1 ? "s" : "") + " in list" + System.lineSeparator()));
         /* header values */
@@ -41,23 +70,23 @@ public class PrettifyUnderTest {
 
 
         for (int i = 0; i < taskQty; i++) {
-
+            MockTask task = mockTasks[i];
             // fill column Id
-            String idValue = String.format("%4d", taskIds.get(i)).replace(" ", "0");
+            String idValue = String.format("%4d", task.getId()).replace(" ", "0");
             String columnId = fillCellUnderTest(idValue, lengthColId);
 
             // fill column Done Status
-            String doneStatusValue = String.format("[%s]", taskDoneStatuses.get(i) ? "X" : " ");
+            String doneStatusValue = String.format("[%s]", task.getDone() ? "X" : " ");
             String columnDoneStatus = fillCellUnderTest(doneStatusValue, lengthColDoneStatus);
             // fill column Task Type Status
-            String taskTypeSymbolValue = String.format("[%s]", taskTypes.get(i));
+            String taskTypeSymbolValue = String.format("[%s]", getTaskCharCodeUnderTest(task));
             String columnTaskType = fillCellUnderTest(taskTypeSymbolValue, lengthColTaskType);
             // fill column Description
-            String descValueLong = taskDescriptions.get(i);
+            String descValueLong = task.getDesc();
             String descValue = descValueLong.substring(0, Math.min(descValueLong.length(), lengthColDesc - 1));
             String columnDescription = fillCellUnderTest(descValue, lengthColDesc);
             // fill column Chronology
-            String columnChronology = taskChronologies.get(i);
+            String columnChronology = getTaskChronologyString(task);
 
 
             generating.append(columnId);

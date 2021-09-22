@@ -16,6 +16,8 @@ public class OutputUnderTest {
 
     private static String PREFIX_ECHO = "Echoed after you: ";
     private static String PREFIX_ADDED_TO_DO = "Added To Do: ";
+    private static String PREFIX_ADDED_DEADLINE = "Added Deadline: ";
+    private static String PREFIX_ADDED_EVENT = "Added Event: ";
     private static String RESPONSE_TERMINATOR_UNDER_TEST = "\t\t\t\t\t\t\t\t -" + System.lineSeparator();
 
     public static String getMsgUnderTestEntry() {
@@ -31,13 +33,27 @@ public class OutputUnderTest {
     public static String getMsgUnderTestExitLoop() {
         return "ok bye" + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-    public static String getMsgUnderTestResponseTaskAdded(String taskDesc) {
+    public static String getMsgUnderTestResponseToDoAdded(String taskDesc) {
         return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+
+    public static String getMsgUnderTestResponseEventAdded(String eventDesc){
+        return PREFIX_ADDED_EVENT + eventDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+
+    public static String getMsgUnderTestResponseDeadlineAdded(String deadlineDesc){
+        return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
     public static String getMsgUnderTestResponseListAll(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
     public static String getMsgUnderTestResponseTaskSetCompleted(Integer taskId) {
         return "update done #" + taskId.toString() + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+    public static String getMsgUnderTestUnknownRequest(){
+        return "Unknown command. . ." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 }

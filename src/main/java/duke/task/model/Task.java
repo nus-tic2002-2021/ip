@@ -1,6 +1,5 @@
 package duke.task.model;
 
-import java.time.LocalDateTime;
 
 /**
  * Root class for tasks
@@ -9,7 +8,6 @@ public abstract class Task implements Comparable<Task> {
     private String _taskDescription;
     private Integer _taskId;
     private Boolean _done;
-    private LocalDateTime _deletedAt;
 
 
     protected Task(String taskDescription, Integer taskId, Boolean done) {
@@ -38,9 +36,6 @@ public abstract class Task implements Comparable<Task> {
         return this._taskId;
     }
 
-    public void setDeletedDate() {
-        this._deletedAt = LocalDateTime.now();
-    }
 
     public Boolean isDone() {
         return this._done;

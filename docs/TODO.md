@@ -35,3 +35,18 @@ for development tracking of project
 
 - textCommands
   - [x] `done [taskId]` - flag task as done
+
+# [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
+
+## New Feature
+
+
+- [x] Create Deadline extends Task
+  - With deadline
+- [x] Create Event extends Task
+  - With start and end time
+- Command
+  - [x] `$ todo [task_description]` - add a ToDo \
+  - [x] `$ deadline [task_description] /by [dateString]` - add a Deadline \
+  - [x] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
+  - [x] `*` - unknown request
