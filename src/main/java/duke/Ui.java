@@ -4,6 +4,7 @@ package duke;
 import duke.command.Command;
 import duke.command.commandFactory.UiCommandFactory;
 import duke.dukeUtility.enums.ResponseType;
+import duke.task.model.Task;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class Ui {
     private Boolean _loop = true;
     private UiCommandFactory _UiCommandFactory = new UiCommandFactory(){
         @Override
-        public Command executeTextCommand(String text){
+        public Command executeTextCommand(String text,TaskManager __){
             return null;
         }
     };
@@ -62,13 +63,13 @@ public class Ui {
         return this._UiCommandFactory;
     }
 
-    public void textCommandLoop() throws Exception {
+    public void textCommandLoop(TaskManager taskManager) throws Exception {
         this.printBeginInputLoop();
         String textCommand;
         Scanner in = new Scanner(System.in);
         do {
             textCommand = in.nextLine();
-            Command command = this.getUiCommandFactory().executeTextCommand(textCommand);
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand,taskManager);
             this.displayCommandResponse(command);
             this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
         } while (this._loop);
@@ -82,7 +83,11 @@ public class Ui {
             this.printEchoMessage(c.getArgs().get(1));
         }  else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
             this.getPrintStream().print(c.getArgs().get(2));
-        }  else {
+        }  else if (rt == ResponseType.TASK_CREATE_TODO) {
+            this.getPrintStream().print("Added To Do: " + c.getArgs().get(2) + System.lineSeparator());
+        } else if (rt == ResponseType.TASK_LIST_ALL) {
+            this.getPrintStream().print(c.getArgs().get(1));
+        }else {
             throw new Exception("Unhandled response type [" + rt +  "].");
         }
     }
