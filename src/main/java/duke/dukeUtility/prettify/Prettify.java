@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Prettify {
 
     private static char getTaskTypeSymbol(Task t) {
-        return ' ';
+        return t.getClass().getSimpleName().charAt(0);
     }
 
 
@@ -72,7 +72,7 @@ public class Prettify {
             String descValue = descValueLong.substring(0, Math.min(descValueLong.length(), lengthColDesc - 1));
             String columnDescription = fillCell(descValue, lengthColDesc);
             // fill column Chronology
-            String columnChronology = " ";
+            String columnChronology = t.getChronologyString();
             generating.append(columnId);
             generating.append(columnDoneStatus);
             generating.append(columnTaskType);

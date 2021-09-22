@@ -6,6 +6,8 @@ package duke.level;
 import duke.Main;
 import duke.TaskManager;
 import duke.Ui;
+import duke.mock.mockTask.MockTask;
+import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +32,7 @@ public class Increment_04_Test extends TestStream {
 
 
     @Test
-    public void TestLevel3_Greet_AddToDo() throws Exception {
+    public void TestLevel4_Greet_AddToDo() throws Exception {
 
         assertNotNull(this.getPrintStream(),"printstream null?");
 
@@ -46,9 +48,9 @@ public class Increment_04_Test extends TestStream {
 
         StringBuilder commandBuilder = new StringBuilder();
 
-        String storeText0 = "taskDesc abc";
+        String taskDesc0 = "taskDesc abc";
 
-        String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO,storeText0);
+        String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO,taskDesc0);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
@@ -70,26 +72,18 @@ public class Increment_04_Test extends TestStream {
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
 
-
-        Integer expectedTask00Id = 0;
-        Boolean expectedTask00DoneStatus = false;
-        String expectedTask00TaskType = " ";
-        String expectedTask00Description = storeText0;
-        String expectedTask00Chronology = " ";
+        MockToDo expectedToDo1 = new MockToDo(taskDesc0, 0, false);
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
-        expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask00Description));
+        expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(taskDesc0));
 
 
-        List<Integer> taskIdList = List.of(expectedTask00Id);
-        List<Boolean> taskDoneStatusList = List.of(expectedTask00DoneStatus);
-        List<String> taskTypeList = List.of(expectedTask00TaskType);
-        List<String> taskDoneDescription = List.of(expectedTask00Description);
-        List<String> taskChronologyList = List.of(expectedTask00Chronology);
+        MockTask[] MockToDos = {expectedToDo1};
 
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(taskQty, taskIdList, taskDoneStatusList, taskTypeList, taskDoneDescription, taskChronologyList)));
+
+        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockToDos)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
