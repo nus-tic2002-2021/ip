@@ -10,10 +10,12 @@ Added To Do: taskDesc abc
 								 -
 Added To Do: todoDesc def
 								 -
+update done #0
+								 -
 2 tasks in list
 .id#   Done  Type Task Description                 Chronology
-0000   [ ]   [ ]  taskDesc abc                      
-0000   [ ]   [ ]  todoDesc def                      
+0000   [X]   [ ]  taskDesc abc                      
+0001   [ ]   [ ]  todoDesc def                      
 								 -
 ok bye
 								 -
