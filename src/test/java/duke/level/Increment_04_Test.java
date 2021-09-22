@@ -1,18 +1,13 @@
-
-
-
 package duke.level;
 
 import duke.Main;
 import duke.TaskManager;
-import duke.Ui;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.util.List;
 
 import static duke.testHelper.help.OutputUnderTest.*;
 import static duke.testHelper.help.PrettifyUnderTest.getPrettifyUnderTestList;
@@ -26,15 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Events: tasks that start at a specific time and ends at a specific time.
  * At this point, dates/times can be treated as strings; there is no need to convert them to actual dates/times.
  * <p>
- *
  */
 public class Increment_04_Test extends TestStream {
-
 
     @Test
     public void TestLevel4_Greet_AddToDo() throws Exception {
 
-        assertNotNull(this.getPrintStream(),"printstream null?");
+        assertNotNull(this.getPrintStream(), "printstream null?");
 
         Integer taskQty = 1;
 
@@ -50,7 +43,7 @@ public class Increment_04_Test extends TestStream {
 
         String taskDesc0 = "taskDesc abc";
 
-        String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO,taskDesc0);
+        String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
@@ -58,7 +51,6 @@ public class Increment_04_Test extends TestStream {
         commandBuilder.append(listCommand);
         commandBuilder.append(exitCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
-
 
         /*
          * Should display:
@@ -71,24 +63,20 @@ public class Increment_04_Test extends TestStream {
          */
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
-
         MockToDo expectedToDo1 = new MockToDo(taskDesc0, 0, false);
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(taskDesc0));
 
-
         MockTask[] MockToDos = {expectedToDo1};
-
-
 
         expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockToDos)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(),new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager());
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -112,7 +100,7 @@ public class Increment_04_Test extends TestStream {
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
-        Main.run(this.getPrintStream(),new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager());
 
         assertEquals(expectedOutputResponse, this.getOutput());
 
