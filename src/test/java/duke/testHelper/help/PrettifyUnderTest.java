@@ -1,6 +1,7 @@
 package duke.testHelper.help;
 
 
+import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 
@@ -11,11 +12,17 @@ public class PrettifyUnderTest {
         if(task instanceof MockToDo){
             return "T";
         }
+        if(task instanceof MockEvent){
+            return "E";
+        }
         return " ";
     }
     private static String getTaskChronologyString(MockTask task){
         if(task instanceof MockToDo){
             return "-";
+        }
+        if(task instanceof MockEvent){
+            return "From: " + ((MockEvent) task).getFromDateString() + ", To: " + ((MockEvent) task).getToDateString();
         }
         return " ";
     }

@@ -2,6 +2,7 @@ package duke.level;
 
 import duke.Main;
 import duke.TaskManager;
+import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
@@ -67,11 +68,11 @@ public class Increment_04_Test extends TestStream {
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
-        expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(taskDesc0));
+        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
 
-        MockTask[] MockToDos = {expectedToDo1};
+        MockTask[] MockTasks = {expectedToDo1};
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockToDos)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockTasks)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
@@ -79,6 +80,64 @@ public class Increment_04_Test extends TestStream {
         Main.run(this.getPrintStream(), new TaskManager());
         assertEquals(expectedOutputResponse, this.getOutput());
     }
+
+    @Test
+    public void TestLevel4_Greet_AddEvent_List_Exit() throws Exception {
+
+        assertNotNull(this.getPrintStream(), "printstream null?");
+
+        /*
+         * Commands executed:
+         *
+         * add event 0 with task description
+         * list
+         * exit loop
+         */
+
+        StringBuilder commandBuilder = new StringBuilder();
+
+        String taskDesc0 = "event_desc_abc asfasfasf";
+
+
+        String fromDateString = "fromday";
+        String toDateString = "today";
+        String storeEventCommand0 = generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, taskDesc0,DELIMITER_EVENT_FROM,fromDateString,DELIMITER_EVENT_TO,toDateString);
+        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+
+        commandBuilder.append(storeEventCommand0);
+        commandBuilder.append(listCommand);
+        commandBuilder.append(exitCommand);
+        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
+
+        /*
+         * Should display:
+         * Entry Message
+         * Input Loop Message
+         * "Added event" message
+         * tabled tasks list
+         * exit loop
+         * terminate
+         */
+        StringBuilder expectedResponseBuilder = new StringBuilder();
+
+        MockEvent expectedEvent = new MockEvent(taskDesc0, 0, false, fromDateString,toDateString);
+
+        expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+        expectedResponseBuilder.append(getMsgUnderTestResponseEventAdded(taskDesc0));
+
+        MockTask[] MockEvents = {expectedEvent};
+
+        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockEvents)));
+        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
+        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+
+        String expectedOutputResponse = expectedResponseBuilder.toString();
+        Main.run(this.getPrintStream(), new TaskManager());
+        assertEquals(expectedOutputResponse, this.getOutput());
+    }
+
 
 
     @Test

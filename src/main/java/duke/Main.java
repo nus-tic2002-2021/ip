@@ -31,7 +31,9 @@ public class Main {
                         return this.executeCommandMarkTaskAsDone(text, taskManager);
                     } else if (isRequestAddToDo(text)) {
                         return this.executeCommandAddToDo(text, taskManager);
-                    } else {
+                    } else if(isRequestAddEvent(text)){
+                        return this.executeCommandAddEvent(text, taskManager);
+                    }else {
                         return new CommandUnknownRequest(text);
                     }
                 } catch (Exception e) {
