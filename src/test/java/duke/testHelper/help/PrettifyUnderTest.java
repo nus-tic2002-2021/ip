@@ -1,6 +1,7 @@
 package duke.testHelper.help;
 
 
+import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
@@ -15,6 +16,9 @@ public class PrettifyUnderTest {
         if(task instanceof MockEvent){
             return "E";
         }
+        if(task instanceof MockDeadline){
+            return "D";
+        }
         return " ";
     }
     private static String getTaskChronologyString(MockTask task){
@@ -23,6 +27,9 @@ public class PrettifyUnderTest {
         }
         if(task instanceof MockEvent){
             return "From: " + ((MockEvent) task).getFromDateString() + ", To: " + ((MockEvent) task).getToDateString();
+        }
+        if(task instanceof MockDeadline){
+            return "By: " + ((MockDeadline) task).getbyDateString() ;
         }
         return " ";
     }

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.aggregator.TaskList;
+import duke.task.model.Deadline;
 import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
@@ -29,7 +30,11 @@ public class TaskManager {
         this._activeTasks.addTask(event);
         return event;
     }
-
+    public Deadline addNewDeadline(String taskDescription, String deadlineString) {
+        Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
+        this._activeTasks.addTask(deadLine);
+        return deadLine;
+    }
 
     public Integer getSize(){
         return this._activeTasks.getSize();
