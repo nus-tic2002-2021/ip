@@ -28,3 +28,10 @@ for development tracking of project
 - textCommand
     - [x] default textCommand: create task with textCommand as task description
     - [x] add textCommand `list` to list all tasks
+  
+# [Feature Level 3](https://www.notion.so/Level-3-Mark-as-Done-b1fc5a70549d4f099631a786241d7ce5)
+
+## New Feature
+
+- textCommands
+  - [x] `done [taskId]` - flag task as done
