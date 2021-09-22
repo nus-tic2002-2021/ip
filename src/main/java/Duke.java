@@ -15,26 +15,35 @@ public class Duke {
         printLine();
     }
 
-    public static void addTask(String req){
+    public static void addTask(String req)throws InvalidException, MissReqException{
         Task newTask;
-        String type = req.trim().split(" ")[0];
+        String[] reqs = req.trim().split(" ");
+        String type = reqs[0];
         String description;
         if(type.equals("todo")){
+            if(reqs.length == 1){
+                throw new MissReqException("todo");
+            }
             description = req.replaceFirst("todo", "").trim();
             newTask = new Todo(description);
         } else if(type.equals("deadline")){
+            if(reqs.length == 1){
+                throw new MissReqException("deadline");
+            }
             String[] descriptions = req.replaceFirst("deadline", "").trim().split("/by ");
             description = descriptions[0].trim();
             String by = descriptions[1];
             newTask = new Deadline(description, by);
         } else if(type.equals("event")){
+            if(reqs.length == 1){
+                throw new MissReqException("event");
+            }
             String[] descriptions = req.replaceFirst("event", "").trim().split("/at ");
             description = descriptions[0].trim();
             String at = descriptions[1];
             newTask = new Event(description, at);
         } else{
-            System.out.println("Error: Input is invalid!");
-            return;
+            throw new InvalidException();
         }
         taskList.add(newTask);
         System.out.println("     Got it. I've added this task:");
@@ -47,16 +56,17 @@ public class Duke {
         String req;
         Scanner sc = new Scanner(System.in);
         while(!(req = sc.nextLine()).equals("bye")){
+            String[] reqs = req.split(" ");
             System.out.println(req + "\n");
             printLine();
-            if(req.equals("list")){
+            if(reqs[0].equals("list")){
                 System.out.println("     Here are the tasks in your list:");
                 for(int i = 0; i < taskList.size(); i++){
                     System.out.print("     " + (i + 1) + ".");
                     taskList.get(i).showTask();
                 }
             }
-            else if(req.substring(0, 4).equals("done")){
+            else if(reqs[0].equals("done")){
                 int idx = Integer.parseInt(req.substring(4).trim()) - 1;
                 taskList.get(idx).doTask();
                 System.out.println("     Nice! I've marked this task as done:");
@@ -64,7 +74,12 @@ public class Duke {
                 taskList.get(idx).showTask();
             }
             else {
-                addTask(req);
+                try{
+                    addTask(req);
+                }catch (Exception e){
+                    System.out.println("     " + e.getMessage());
+                }
+
             }
             System.out.println();
             printLine();
