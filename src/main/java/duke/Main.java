@@ -8,8 +8,7 @@ import duke.command.taskCommand.taskQuery.CommandListAll;
 
 import java.io.PrintStream;
 
-import static duke.dukeUtility.validator.TextCommandValidator.isRequestExitLoop;
-import static duke.dukeUtility.validator.TextCommandValidator.isRequestList;
+import static duke.dukeUtility.validator.TextCommandValidator.*;
 
 public class Main {
 
@@ -27,6 +26,8 @@ public class Main {
                         return this.executeCommandExitLoop();
                     } else if (isRequestList(text)) {
                         return new CommandListAll(taskManager);
+                    } else if (isRequestMarkTaskAsDone(text)) {
+                        return this.executeCommandMarkTaskAsDone(text, taskManager);
                     } else {
                         return this.executeCommandAddToDo(text, taskManager);
                     }

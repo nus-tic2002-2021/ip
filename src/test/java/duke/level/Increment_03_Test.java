@@ -66,7 +66,7 @@ public class Increment_03_Test extends TestStream {
          * Input Loop Message
          * "Added string" message
          * "Added string" message
-         * "Set as string" message
+         * "Set as done" message
          * tabled tasks list
          * exit loop
          * terminate
@@ -81,7 +81,7 @@ public class Increment_03_Test extends TestStream {
         String expectedTask00Description = storeText0;
         String expectedTask00Chronology = " ";
 
-        Integer expectedTask01Id = 0;
+        Integer expectedTask01Id = 1;
         Boolean expectedTask01DoneStatus = false;
         String expectedTask01TaskType = " ";
         String expectedTask01Description = storeText1;
@@ -92,6 +92,7 @@ public class Increment_03_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask00Description));
         expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask01Description));
+        expectedResponseBuilder.append(getMsgUnderTestResponseTaskSetCompleted(expectedTask00Id));
 
 
         List<Integer> taskIdList = List.of(expectedTask00Id, expectedTask01Id);
@@ -99,6 +100,7 @@ public class Increment_03_Test extends TestStream {
         List<String> taskTypeList = List.of(expectedTask00TaskType, expectedTask01TaskType);
         List<String> taskDoneDescription = List.of(expectedTask00Description, expectedTask01Description);
         List<String> taskChronologyList = List.of(expectedTask00Chronology, expectedTask01Chronology);
+
 
         expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(taskQty, taskIdList, taskDoneStatusList, taskTypeList, taskDoneDescription, taskChronologyList)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());

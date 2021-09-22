@@ -8,13 +8,12 @@ public class TaskManager {
     private TaskList _activeTasks = new TaskList();
     private int _serialNo = 0;
 
-    private int getSerialNo() {
-        return this._serialNo;
-    }
+
 
     private int rollSerialNo() {
-            this._serialNo++;
-        return this.getSerialNo();
+        int no = this._serialNo;
+        this._serialNo++;
+        return no;
     }
     public Task addNewToDo(String taskDescription) {
         Task task = new ToDo(taskDescription,this.rollSerialNo(),false);
@@ -28,6 +27,18 @@ public class TaskManager {
 
     public Task[] getAllAsArray(){
         return this._activeTasks.getAllAsArray();
+    }
+    public Boolean containsTaskId(Integer taskId) {
+        return this._activeTasks.containsKey(taskId);
+    }
+    public Task getTaskById(Integer taskId) {
+        return this._activeTasks.getTaskById(taskId);
+    }
+
+    public Task getTaskByIdAndSetDoneStatus(Integer taskId, Boolean done) {
+        Task target = this.getTaskById(taskId);
+        target.setDoneStatus(done);
+        return target;
     }
 
 }

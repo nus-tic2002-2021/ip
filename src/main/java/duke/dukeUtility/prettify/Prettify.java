@@ -58,11 +58,11 @@ public class Prettify {
         for (Task t : tl) {
 
             // fill column Id
-            String idValue = String.format("%4d", 0).replace(" ", "0");
+            String idValue = String.format("%4d", t.getTaskId()).replace(" ", "0");
             String columnId = fillCell(idValue, lengthColId);
 
             // fill column Done Status
-            String doneStatusValue = String.format("[%s]", false ? "X" : " ");
+            String doneStatusValue = String.format("[%s]", t.isDone() ? "X" : " ");
             String columnDoneStatus = fillCell(doneStatusValue, lengthColDoneStatus);
             // fill column Task Type Status
             String taskTypeSymbolValue = String.format("[%s]", getTaskTypeSymbol(t));

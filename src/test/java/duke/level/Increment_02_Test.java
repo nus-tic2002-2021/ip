@@ -67,31 +67,31 @@ public class Increment_02_Test extends TestStream {
              */
             StringBuilder expectedResponseBuilder = new StringBuilder();
 
-            Integer expectedTask01Id = 0;
+            Integer expectedTask00Id = 0;
+            Boolean expectedTask00DoneStatus = false;
+            String expectedTask00TaskType = " ";
+            String expectedTask00Description = storeText1;
+            String expectedTask00Chronology = " ";
+
+            Integer expectedTask01Id = 1;
             Boolean expectedTask01DoneStatus = false;
             String expectedTask01TaskType = " ";
-            String expectedTask01Description = storeText1;
+            String expectedTask01Description = storeText2;
             String expectedTask01Chronology = " ";
-
-            Integer expectedTask02Id = 0;
-            Boolean expectedTask02DoneStatus = false;
-            String expectedTask02TaskType = " ";
-            String expectedTask02Description = storeText2;
-            String expectedTask02Chronology = " ";
 
 
 
             expectedResponseBuilder.append(getMsgUnderTestEntry());
             expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+            expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask00Description));
             expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask01Description));
-            expectedResponseBuilder.append(getMsgUnderTestResponseTaskAdded(expectedTask02Description));
 
 
-            List<Integer> taskIdList = List.of(expectedTask01Id, expectedTask02Id);
-            List<Boolean> taskDoneStatusList = List.of(expectedTask01DoneStatus, expectedTask02DoneStatus);
-            List<String> taskTypeList = List.of(expectedTask01TaskType, expectedTask02TaskType);
-            List<String> taskDoneDescription = List.of(expectedTask01Description, expectedTask02Description);
-            List<String> taskChronologyList = List.of(expectedTask01Chronology, expectedTask02Chronology);
+            List<Integer> taskIdList = List.of(expectedTask00Id, expectedTask01Id);
+            List<Boolean> taskDoneStatusList = List.of(expectedTask00DoneStatus, expectedTask01DoneStatus);
+            List<String> taskTypeList = List.of(expectedTask00TaskType, expectedTask01TaskType);
+            List<String> taskDoneDescription = List.of(expectedTask00Description, expectedTask01Description);
+            List<String> taskChronologyList = List.of(expectedTask00Chronology, expectedTask01Chronology);
 
             expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(taskQty, taskIdList, taskDoneStatusList, taskTypeList, taskDoneDescription, taskChronologyList)));
             expectedResponseBuilder.append(getMsgUnderTestExitLoop());

@@ -4,9 +4,11 @@ import duke.TaskManager;
 import duke.command.Command;
 
 import duke.command.errorCommand.CommandInvalidRequestParameters;
+import duke.command.errorCommand.CommandTaskNotFound;
 import duke.command.systemCommand.CommandEcho;
 import duke.command.systemCommand.CommandExit;
 import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
+import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
 
@@ -23,4 +25,26 @@ public abstract class UiCommandFactory extends CommandFactory {
         }
         return new CommandAddNewToDo(taskManager, taskDescription);
     }
+
+    protected Command executeCommandMarkTaskAsDone(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        Integer taskId;
+        try {
+            argLine = text.replaceFirst(PROMPT_UPDATE_DONE, "");
+            argList = argLine.split(" ");
+            if (argList.length != 1) {
+                throw new Exception("Invalid syntax.");
+            }
+            taskId = Integer.parseInt(argList[0]);
+            if (!taskManager.containsTaskId(taskId)) {
+                return new CommandTaskNotFound(argList[0]);
+            }
+        } catch (Exception e) {
+            return new CommandInvalidRequestParameters(e.toString());
+        }
+        return new CommandMarkTaskAsDone(taskManager, taskId);
+
+    }
+
 }

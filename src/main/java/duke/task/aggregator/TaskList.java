@@ -32,5 +32,12 @@ public class TaskList {
         return this._pos;
     }
 
+    public Boolean containsKey(Integer taskId) {
+        return this._list[taskId] != null;
+    }
+    public Task getTaskById(Integer taskId) {
+        return this._list[taskId];
+    }
+
 
 }

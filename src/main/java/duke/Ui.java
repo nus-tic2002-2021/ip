@@ -4,7 +4,6 @@ package duke;
 import duke.command.Command;
 import duke.command.commandFactory.UiCommandFactory;
 import duke.dukeUtility.enums.ResponseType;
-import duke.task.model.Task;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -17,12 +16,13 @@ public class Ui {
 
     private PrintStream _out;
     private Boolean _loop = true;
-    private UiCommandFactory _UiCommandFactory = new UiCommandFactory(){
+    private UiCommandFactory _UiCommandFactory = new UiCommandFactory() {
         @Override
-        public Command executeTextCommand(String text,TaskManager __){
+        public Command executeTextCommand(String text, TaskManager __) {
             return null;
         }
     };
+
     private Ui() {
     }
 
@@ -33,6 +33,7 @@ public class Ui {
     private PrintStream getPrintStream() {
         return this._out;
     }
+
     public void setPrintStream(PrintStream ps) {
         this._out = ps;
     }
@@ -47,20 +48,25 @@ public class Ui {
         this.getPrintStream().print("Hello from\n" + logo);
         return this;
     }
+
     public void printBeginInputLoop() {
         this.getPrintStream().print("How can i help you? (See docs for usage)\n");
     }
+
     public void printExitLoopMessage() {
         this.getPrintStream().print("ok bye" + System.lineSeparator());
     }
+
     public void printEchoMessage(String text) {
         this.getPrintStream().print("Echoed after you: " + text + System.lineSeparator());
     }
-    public void setUiCommandFactory(UiCommandFactory _UiCommandFactory) {
-        this._UiCommandFactory = _UiCommandFactory;
-    }
+
     private UiCommandFactory getUiCommandFactory() {
         return this._UiCommandFactory;
+    }
+
+    public void setUiCommandFactory(UiCommandFactory _UiCommandFactory) {
+        this._UiCommandFactory = _UiCommandFactory;
     }
 
     public void textCommandLoop(TaskManager taskManager) throws Exception {
@@ -69,11 +75,12 @@ public class Ui {
         Scanner in = new Scanner(System.in);
         do {
             textCommand = in.nextLine();
-            Command command = this.getUiCommandFactory().executeTextCommand(textCommand,taskManager);
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager);
             this.displayCommandResponse(command);
             this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
         } while (this._loop);
     }
+
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
         if (rt == ResponseType.EXIT_LOOP) {
@@ -81,16 +88,19 @@ public class Ui {
             this.printExitLoopMessage();
         } else if (rt == ResponseType.ECHO) {
             this.printEchoMessage(c.getArgs().get(1));
-        }  else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
+        } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
             this.getPrintStream().print(c.getArgs().get(2));
-        }  else if (rt == ResponseType.TASK_CREATE_TODO) {
+        } else if (rt == ResponseType.TASK_CREATE_TODO) {
             this.getPrintStream().print("Added To Do: " + c.getArgs().get(2) + System.lineSeparator());
         } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
-        }else {
-            throw new Exception("Unhandled response type [" + rt +  "].");
+        } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
+            this.getPrintStream().print(String.join(" ", c.getArgs()) + System.lineSeparator());
+        } else {
+            throw new Exception("Unhandled response type [" + rt + "].");
         }
     }
+
     public void printTerminateMessage() {
         this.getPrintStream().print("See you again!\n");
     }
