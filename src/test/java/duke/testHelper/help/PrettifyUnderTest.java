@@ -47,7 +47,7 @@ public class PrettifyUnderTest {
             String columnId = fillCellUnderTest(idValue, lengthColId);
 
             // fill column Done Status
-            String doneStatusValue = String.format("[%s]", taskDoneStatuses.get(i) ? " " : " ");
+            String doneStatusValue = String.format("[%s]", taskDoneStatuses.get(i) ? "X" : " ");
             String columnDoneStatus = fillCellUnderTest(doneStatusValue, lengthColDoneStatus);
             // fill column Task Type Status
             String taskTypeSymbolValue = String.format("[%s]", taskTypes.get(i));

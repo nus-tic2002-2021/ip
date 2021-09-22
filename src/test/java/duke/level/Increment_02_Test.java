@@ -26,7 +26,7 @@ public class Increment_02_Test extends TestStream {
          * In-memory storage of 2 text commands as (To Do) descriptions and lists them
          */
         @Test
-        public void TestLevel2GreetEchoExit() throws Exception {
+        public void TestLevel2GreetAddTaskExit() throws Exception {
 
             Integer taskQty = 2;
 

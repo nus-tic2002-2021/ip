@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Prettify {
 
-    private static char getTaskTypeSymbol(String t) {
+    private static char getTaskTypeSymbol(Task t) {
         return ' ';
     }
 
@@ -25,7 +25,7 @@ public class Prettify {
      * @return String
      */
     public static String prettifyTaskMgr(TaskManager taskMgr) {
-        String[] tl = taskMgr.getAllAsArray();
+        Task[] tl = taskMgr.getAllAsArray();
 
         StringBuilder generating = new StringBuilder();
         int taskQty = taskMgr.getSize();
@@ -55,7 +55,7 @@ public class Prettify {
         int lengthColDesc = headerDescription.length();
 
         // body
-        for (String t : tl) {
+        for (Task t : tl) {
 
             // fill column Id
             String idValue = String.format("%4d", 0).replace(" ", "0");
@@ -68,7 +68,7 @@ public class Prettify {
             String taskTypeSymbolValue = String.format("[%s]", getTaskTypeSymbol(t));
             String columnTaskType = fillCell(taskTypeSymbolValue, lengthColTaskType);
             // fill column Description
-            String descValueLong = t;
+            String descValueLong = t.getTaskDescription();
             String descValue = descValueLong.substring(0, Math.min(descValueLong.length(), lengthColDesc - 1));
             String columnDescription = fillCell(descValue, lengthColDesc);
             // fill column Chronology

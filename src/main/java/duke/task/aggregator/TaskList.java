@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 
 public class TaskList {
-    private final String[] _list = new String[100];
+    private final Task[] _list = new Task[100];
 
     // helper class
     private Integer getTaskKey(Task task) {
@@ -16,15 +16,15 @@ public class TaskList {
     private Integer _pos = 0;
     public TaskList() {
     }
-    public void addTask(String t) {
+    public void addTask(Task t) {
         this.getContainer()[_pos] = t;
         this._pos++;
     }
-    private String[] getContainer(){
+    private Task[] getContainer(){
         return this._list;
     }
 
-    public String[] getAllAsArray() {
+    public Task[] getAllAsArray() {
         return Arrays.copyOfRange(this._list, 0, this._pos);
     }
 
