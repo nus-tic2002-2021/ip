@@ -112,11 +112,11 @@ public class Duke {
 
          //check the input is not 0, is not exceed the total tasks index
          catch(NullPointerException e){
-             System.out.println("There are only "+tasksCount+" tasks, please enter the correct task number");
+             System.out.println("There are only "+tasks.size()+" tasks, please enter the correct task number");
          }
          //check the 0 or negative
          catch(ArrayIndexOutOfBoundsException e){
-             System.out.println("There are only "+tasksCount+" tasks, please enter the correct task number");
+             System.out.println("There are only "+tasks.size()+" tasks, please enter the correct task number");
          }
         catch(IndexOutOfBoundsException e){
             System.out.println("Task number entered is invalid");
@@ -145,14 +145,6 @@ public class Duke {
             System.out.println(i+1 + "."+output[1]);
         }
         System.out.println(breakLine);
-    }
-
-    public static void updateList(String taskIsDone){
-        for(int i = 0; i< tasks.size();i++){
-            if (tasks.get(i).getDescription().contains(taskIsDone)) {
-                tasks.get(i).markAsDone();
-            }
-        }
     }
 
 
