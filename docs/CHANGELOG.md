@@ -21,3 +21,13 @@ Implement an initial skeletal version of the Duke that simply greets the user an
 
 Add the ability to store whatever text entered by the user and display them back to the user when requested.
 ![level 2](/docs/screenshots/branch-level-2.gif)
+
+## Feature Level 3
+### OrchestratorLevel03
+
+`bye` exit input loop
+`list` list tasks \
+`[description]` add ToDo \
+`done [id]` set task as done \
+
+![level 3](/docs/screenshots/branch-level-3.gif)
