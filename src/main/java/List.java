@@ -2,20 +2,27 @@ import java.util.Arrays;
 
 public class List extends Task {
     public Task[] List = new Task[100];
-    int count = 0;
+    public int count = 0;
 
-    public void addList(String description){
-        this.List[count] = new Task(description);
+    public void addList(Task t){
+        this.List[count] = t;
+        printTask(count);
         this.count++;
-        System.out.println("added: " + description +"\n________________________________________________");
     }
 
+    public void printCount(){
+        System.out.println("\tNow you have " + this.count + " tasks in the list.");
+    }
     public void printList () {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<count; i++) {
-            System.out.println((i+1) + ". " + List[i].printTask());
+            System.out.println("\t" + (i+1) + ". [" + List[i].printTask());
         }
     }
+
+    public void printTask(int ref) {
+            System.out.println("\t\t" + List[ref].printTask());
+        }
 
     public void setDone(int ref) {
         this.List[ref].setDone();

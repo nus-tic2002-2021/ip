@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void startDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -10,33 +10,77 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         //Hello command
-        System.out.println("Hello, I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello, I'm Duke\n" + "What tasks can I serve you?");
+    }
+
+    public static void endDuke() {
+        System.out.println("\tBye! Thanks for visiting The Duke!");
+        System.exit(0);
+    }
+
+    public static void newLine(){
+        System.out.println("________________________________________________");
+    }
+
+    public static void main(String[] args) {
+        startDuke();
+
         //read line
         String line;
+        String placeholder;
+        String description;
         Scanner in = new Scanner(System.in);
-        List list = new List();
-        System.out.println("________________________________________________");
+        List tasks = new List();
+        newLine();
         //to set what to do with the line in
         while(true){
             line = in.nextLine();
-            //check for done statements, to update to DONE
-            if (line.contains("done")) {
-                System.out.println("Nice! I've marked this task as done:");
-                int ref = Integer.parseInt(line.split(" ")[1]);
-                list.setDone(ref - 1);
-            }
-            //switch statements for other conditions
-            else {
-                switch(line){
-                    case "bye": System.out.println("\tBye! Thanks for visiting The Duke!");
-                        break;
+            newLine();
+            String command = line.split(" ")[0];
 
-                    case "list": list.printList();
-                        break;
+            //use lineCheck for case statements for cleaner code
+            switch (command) {
+                case "bye":
+                    endDuke();
 
-                    default: list.addList(line);
+                case "done":
+                    System.out.println("\tNice! I've marked this task as done:");
+                    int ref = Integer.parseInt(line.split(" ")[1]);
+                    tasks.setDone(ref - 1);
+                    newLine();
+                    break;
+
+                case "deadline":
+                    placeholder = line.replaceFirst(command + " ","");
+                    description = placeholder.split(" /")[0];
+                    String by = placeholder.split(" /by ")[1];
+                    tasks.addList(new Deadline(description, by));
+                    tasks.printCount();
+                    newLine();
+                    break;
+
+                case "todo":
+                    description = line.replaceFirst(command + " ","");
+                    tasks.addList(new Todo(description));
+                    tasks.printCount();
+                    newLine();
+                    break;
+
+                case "event":
+                    placeholder = line.replaceFirst(command + " ","");
+                    description = placeholder.split(" /")[0];
+                    String at = placeholder.split(" /at ")[1];
+                    tasks.addList(new Event(description, at));
+                    tasks.printCount();
+                    newLine();
+                    break;
+
+                case "list":
+                    tasks.printList();
+                    newLine();
+                    break;
                 }
             }
         }
     }
-}
+
