@@ -14,13 +14,19 @@ public class Duke {
         //read line
         String line;
         Scanner in = new Scanner(System.in);
+        List list = new List();
         System.out.println("________________________________________________");
         while(true){
         line = in.nextLine();
-        System.out.println("\t" + line +"\n________________________________________________");
             if(line.equals("bye")) {
                 System.out.println("\tBye! Thanks for visiting The Duke!");
                 break;
+            }
+            else if(line.equals("list")) {
+                list.printList();
+            }
+            else {
+                list.addList(line);
             }
         }
     }
