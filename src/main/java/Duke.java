@@ -17,9 +17,9 @@ public class Duke {
         System.out.println("________________________________________________");
         while(true){
         line = in.nextLine();
-        System.out.println(line +"\n________________________________________________");
+        System.out.println("\t" + line +"\n________________________________________________");
             if(line.equals("bye")) {
-                System.out.println("Bye! Thanks for visiting The Duke!");
+                System.out.println("\tBye! Thanks for visiting The Duke!");
                 break;
             }
         }
