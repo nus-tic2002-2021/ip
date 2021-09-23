@@ -16,17 +16,26 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         List list = new List();
         System.out.println("________________________________________________");
+        //to set what to do with the line in
         while(true){
-        line = in.nextLine();
-            if(line.equals("bye")) {
-                System.out.println("\tBye! Thanks for visiting The Duke!");
-                break;
+            line = in.nextLine();
+            //check for done statements, to update to DONE
+            if (line.contains("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                int ref = Integer.parseInt(line.split(" ")[1]);
+                list.setDone(ref - 1);
             }
-            else if(line.equals("list")) {
-                list.printList();
-            }
+            //switch statements for other conditions
             else {
-                list.addList(line);
+                switch(line){
+                    case "bye": System.out.println("\tBye! Thanks for visiting The Duke!");
+                        break;
+
+                    case "list": list.printList();
+                        break;
+
+                    default: list.addList(line);
+                }
             }
         }
     }
