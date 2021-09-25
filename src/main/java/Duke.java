@@ -23,7 +23,7 @@ public class Duke {
             String inputStr = sc.nextLine();
             System.out.println("__________________________________________");
 
-            String words[] = inputStr.split(" ", 2);
+            String[] words = inputStr.split(" ", 2);
             String keyword = words[0].toLowerCase();
 
             switch(keyword)
@@ -33,12 +33,18 @@ public class Duke {
                     break;
                 }
                 case "done":
+                case "delete":
                 {
                     try {
                         int taskId = Integer.parseInt(words[1]);
 
                         try {
-                            taskList.setDone(taskId);
+                            if(keyword.equals("done")) {
+                                taskList.setDone(taskId);
+                            }
+                            else{
+                                taskList.deleteTask(taskId);
+                            }
                         } catch (DukeArgumentException e) {
                             System.out.println("Task with id " + taskId + " is not found.");
                         }
@@ -51,7 +57,7 @@ public class Duke {
                 case "deadline":
                 case "event":
                 {
-                    Task task = null;
+                    Task task;
 
                     switch (keyword) {
                         case "todo": {
@@ -66,7 +72,7 @@ public class Duke {
                         }
                         case "deadline": {
                             try {
-                                String deadlineInfo[] = words[1].split(" /by ");
+                                String[] deadlineInfo = words[1].split(" /by ");
                                 task = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                                 taskList.addTask(task);
                             }
@@ -77,7 +83,7 @@ public class Duke {
                         }
                         case "event": {
                             try {
-                                String eventInfo[] = words[1].split(" /at ");
+                                String[] eventInfo = words[1].split(" /at ");
                                 task = new Event(eventInfo[0], eventInfo[1]);
                                 taskList.addTask(task);
                             }
