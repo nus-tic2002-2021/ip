@@ -10,15 +10,30 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    public static void msgError(Exception e) {
+        System.out.println("Error Occurs: " + e);
+    }
+
+    public static void msgEcho(String s) {
+        System.out.println("    added: " + s);
+        System.out.println("_________________________________");
+    }
+
+    public static void msgList(TaskList myList) {
+        for (int i = 0; i < myList.getNumOfItem(); i++) {
+            if (!myList.getTaskDoneStatus(i)) {
+                System.out.println("    " + Integer.toString(i) + ".[ ] " + myList.getTaskDetail(i));
+            } else {
+                System.out.println("    " + Integer.toString(i) + ".[X] " + myList.getTaskDetail(i));
+            }
+        }
+        System.out.println("_________________________________");
+    }
+
     public static void msgBye() throws IOException {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("_________________________________");
         Message.msgBuddahProtectMe();
-    }
-
-    public static void echo(String s) {
-        System.out.println("    added: " + s);
-        System.out.println("_________________________________");
     }
 
     public static void msgBuddahProtectMe() throws IOException {

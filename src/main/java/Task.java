@@ -1,22 +1,22 @@
 public class Task{
-    private String task;
+    private String taskDetail;
     private boolean done;
 
-    public Task(String task) {
-        this.task = task;
+    public Task(String taskDetail) {
+        this.taskDetail = taskDetail;
         this.done = false;
     }
 
     public void setTask(String modifiedTaskDetail) {
-        task = modifiedTaskDetail;
+        taskDetail = modifiedTaskDetail;
     }
 
     public void setTaskCompleted() {
         done = true;
     }
 
-    public String getTask() {
-        return task;
+    public String getTaskDetail() {
+        return taskDetail;
     }
 
     public boolean getDoneStatus() {

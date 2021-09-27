@@ -17,12 +17,25 @@ public class TaskList {
         list.remove(index);
     }
 
-    public String getItem(int index) {
+    // Getter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public Task getTask(int index) {
+        return list.get(index);
+    }
+
+    public String getTaskDetail(int index) {
         Task task = list.get(index);
-        return task.getTask();
+        return task.getTaskDetail();
+    }
+
+    public boolean getTaskDoneStatus(int index) {
+        Task task = list.get(index);
+        return task.getDoneStatus();
     }
 
     public int getNumOfItem() {
         return list.size();
     }
+
+    // Setter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 }
