@@ -24,7 +24,12 @@ public class Action {
                 // System.out.println(line.substring(5));
 
                 if (line.substring(0, 4).equals("done")) {
-                    line.substring(5);
+                    Integer taskNumber = Integer.parseInt(line.substring(5)) - 1;
+                    MarkTaskDone(myList, taskNumber);
+                    Message.msgMarkDone(myList, taskNumber);
+                } else {
+                    myList.addItem(line);
+                    Message.msgEcho(line);
                 }
             } else {
                 myList.addItem(line);
@@ -32,6 +37,10 @@ public class Action {
             }
         }
         in.close();
+    }
+
+    public static void MarkTaskDone(TaskList myList, int taskNumber) {
+        myList.setTaskDone(taskNumber);
     }
 
     public static void EndDuke() {

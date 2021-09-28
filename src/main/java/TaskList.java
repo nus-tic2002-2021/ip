@@ -38,4 +38,9 @@ public class TaskList {
     }
 
     // Setter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public void setTaskDone(int index) {
+        Task task = list.get(index);
+        task.setTaskCompleted();
+    }
 }

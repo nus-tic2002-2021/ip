@@ -1,26 +1,30 @@
-public class Task{
+public class Task {
     private String taskDetail;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String taskDetail) {
         this.taskDetail = taskDetail;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public void setTask(String modifiedTaskDetail) {
-        taskDetail = modifiedTaskDetail;
-    }
-
-    public void setTaskCompleted() {
-        done = true;
-    }
+    // Getter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public String getTaskDetail() {
         return taskDetail;
     }
 
     public boolean getDoneStatus() {
-        return done;
+        return isDone;
+    }
+
+    // Setter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public void setTask(String modifiedTaskDetail) {
+        taskDetail = modifiedTaskDetail;
+    }
+
+    public void setTaskCompleted() {
+        isDone = true;
     }
 
 }

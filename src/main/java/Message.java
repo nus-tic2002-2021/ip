@@ -15,16 +15,22 @@ public class Message {
     }
 
     public static void msgEcho(String s) {
-        System.out.println("    added: " + s);
+        System.out.println("    Task Added: " + s);
+        System.out.println("_________________________________");
+    }
+
+    public static void msgMarkDone(TaskList myList, int taskNumber) {
+        System.out.println("    Naisuuuu! This task is marked as done: ");
+        System.out.println("    " + (taskNumber + 1) + ".[X] " + myList.getTaskDetail(taskNumber));
         System.out.println("_________________________________");
     }
 
     public static void msgList(TaskList myList) {
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             if (!myList.getTaskDoneStatus(i)) {
-                System.out.println("    " + Integer.toString(i) + ".[ ] " + myList.getTaskDetail(i));
+                System.out.println("    " + Integer.toString(i + 1) + ".[ ] " + myList.getTaskDetail(i));
             } else {
-                System.out.println("    " + Integer.toString(i) + ".[X] " + myList.getTaskDetail(i));
+                System.out.println("    " + Integer.toString(i + 1) + ".[X] " + myList.getTaskDetail(i));
             }
         }
         System.out.println("_________________________________");
