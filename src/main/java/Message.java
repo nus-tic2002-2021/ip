@@ -44,7 +44,28 @@ public class Message {
 
     public static void msgBuddahProtectMe() throws IOException {
         String everything = "";
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/buddha.txt"))) {
+
+        // ... \Duke\src\main\resources\buddha.txt
+        // File.separator == " \ "
+
+        String pathRoot = System.getProperty("user.dir");
+        // pathRoot = D:\My Files\School Documents\Repository\Duke
+
+        String pathRssFolder = "src" + File.separator + "main" + File.separator + "resources";
+        // pathRssFolder = src\main\resources
+
+        String pathFileName = "buddha.txt";
+        // pathFileName = buddha.txt
+
+        String filePath = pathRoot + File.separator + pathRssFolder + File.separator + pathFileName;
+        // filePath = D:\My Files\School
+        // Documents\Repository\Duke\src\main\resources\buddha.txt
+
+        try {
+            FileReader fr = new FileReader(filePath);
+            // FileReader fr = new FileReader("\\My Files\\School
+            // Documents\\Repository\\Duke\\src\\main\\resources\\buddha.txt");
+            BufferedReader br = new BufferedReader(fr);
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -54,6 +75,10 @@ public class Message {
                 line = br.readLine();
             }
             everything = sb.toString();
+            br.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("\n >>> Buddah Protection is not in forced <<<\n");
+            System.out.println(e);
         } finally {
             System.out.println(everything);
         }

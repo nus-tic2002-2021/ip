@@ -5,3 +5,67 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+_________________________________
+    Task Added: Good morning sunshine
+_________________________________
+    Task Added: Enjoy morning breeze and drink coffee
+_________________________________
+    Task Added: Have lunch and a hearty meal
+_________________________________
+    Task Added: Nap ZzzzZzzzZzzzzzzzzzz
+_________________________________
+    Task Added: Have Dinner and watch Avenger
+_________________________________
+    Task Added: Play Switch 
+_________________________________
+    1.[ ] Good morning sunshine
+    2.[ ] Enjoy morning breeze and drink coffee
+    3.[ ] Have lunch and a hearty meal
+    4.[ ] Nap ZzzzZzzzZzzzzzzzzzz
+    5.[ ] Have Dinner and watch Avenger
+    6.[ ] Play Switch 
+_________________________________
+    Naisuuuu! This task is marked as done: 
+    2.[X] Enjoy morning breeze and drink coffee
+_________________________________
+    Naisuuuu! This task is marked as done: 
+    3.[X] Have lunch and a hearty meal
+_________________________________
+    1.[ ] Good morning sunshine
+    2.[X] Enjoy morning breeze and drink coffee
+    3.[X] Have lunch and a hearty meal
+    4.[ ] Nap ZzzzZzzzZzzzzzzzzzz
+    5.[ ] Have Dinner and watch Avenger
+    6.[ ] Play Switch 
+_________________________________
+    Task Added: Good Night!
+_________________________________
+Bye. Hope to see you again soon!
+_________________________________
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//     Buddha Protect Me       Say Bye to All Bug
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
