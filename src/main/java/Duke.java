@@ -8,8 +8,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         String[] list = new String[100];
-        int listCount = 1;
-
+        int listCount = 0;
 
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             input = in.nextLine();
@@ -18,7 +17,7 @@ public class Duke {
                 break;
             }
             else if (input.toLowerCase(Locale.forLanguageTag(input)).contains("list")){
-                for (int count = 1; count<listCount; count++) {
+                for (int count = 1; count<listCount+1; count++) {
                     if (count ==1){
                     System.out.println(count + ". " +"[X]"+ list[count]);
                     }else {
