@@ -12,6 +12,61 @@ public class Message {
 
     public static void msgError(Exception e) {
         System.out.println("Error Occurs: " + e);
+        System.out.println("_________________________________");
+    }
+
+    public static void msgAssignTask(TaskList myList, int taskNumber) {
+
+        TaskType taskType = myList.getTaskType(taskNumber);
+        String taskTypeInString = TaskType.taskTypeToString(taskType);
+
+        boolean isDone = myList.getTaskDoneStatus(taskNumber);
+        String isDoneInString = (isDone ? "X" : " ");
+
+        String taskDetail = myList.getTaskDetail(taskNumber);
+
+        System.out.println("    Got it. I've added this task: ");
+        System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
+        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgAssignTaskDeadline(TaskList myList, int taskNumber) {
+
+        TaskType taskType = myList.getTaskType(taskNumber);
+        String taskTypeInString = TaskType.taskTypeToString(taskType);
+
+        boolean isDone = myList.getTaskDoneStatus(taskNumber);
+        String isDoneInString = (isDone ? "X" : " ");
+
+        String taskDetail = myList.getTaskDetail(taskNumber);
+
+        String dateString = myList.getTaskDeadlineDateString(taskNumber);
+
+        System.out.println("    Got it. I've added this task: ");
+        System.out.println(
+                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: " + dateString + ")");
+        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgAssignTaskEvent(TaskList myList, int taskNumber) {
+
+        TaskType taskType = myList.getTaskType(taskNumber);
+        String taskTypeInString = TaskType.taskTypeToString(taskType);
+
+        boolean isDone = myList.getTaskDoneStatus(taskNumber);
+        String isDoneInString = (isDone ? "X" : " ");
+
+        String taskDetail = myList.getTaskDetail(taskNumber);
+
+        String dateTimeString = myList.getTaskEventDateTimeString(taskNumber);
+
+        System.out.println("    Got it. I've added this task: ");
+        System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(at: "
+                + dateTimeString + ")");
+        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("_________________________________");
     }
 
     public static void msgEcho(String s) {
@@ -27,12 +82,21 @@ public class Message {
 
     public static void msgList(TaskList myList) {
         for (int i = 0; i < myList.getNumOfItem(); i++) {
-            if (!myList.getTaskDoneStatus(i)) {
-                System.out.println("    " + Integer.toString(i + 1) + ".[ ] " + myList.getTaskDetail(i));
-            } else {
-                System.out.println("    " + Integer.toString(i + 1) + ".[X] " + myList.getTaskDetail(i));
-            }
+
+            TaskType taskType = myList.getTaskType(i);
+            String taskTypeInString = TaskType.taskTypeToString(taskType);
+
+            boolean isDone = myList.getTaskDoneStatus(i);
+            String isDoneInString = (isDone ? "X" : " ");
+
+            System.out.println("    " + Integer.toString(i + 1) + ".[" + taskTypeInString + "][" + isDoneInString + "] "
+                    + myList.getTaskDetail(i));
         }
+        System.out.println("_________________________________");
+    }
+
+    public static void msgInvalidInput() {
+        System.out.println("Sorry :(   Invalid Input. Try Again ~ ");
         System.out.println("_________________________________");
     }
 

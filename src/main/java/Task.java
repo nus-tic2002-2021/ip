@@ -1,10 +1,10 @@
-public class Task {
-    private String taskDetail;
-    private boolean isDone;
+public abstract class Task {
+    protected String taskDetail;
+    protected boolean isDone;
+    protected TaskType taskType;
 
     public Task(String taskDetail) {
         this.taskDetail = taskDetail;
-        this.isDone = false;
     }
 
     // Getter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -17,6 +17,10 @@ public class Task {
         return isDone;
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     // Setter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public void setTask(String modifiedTaskDetail) {
@@ -25,6 +29,10 @@ public class Task {
 
     public void setTaskCompleted() {
         isDone = true;
+    }
+
+    public void setTypeOfTask(TaskType taskType) {
+        this.taskType = taskType;
     }
 
 }
