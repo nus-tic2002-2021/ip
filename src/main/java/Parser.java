@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Parser {
 
     protected static ArrayList<Task> taskList = new ArrayList<>();
+    protected static Command test;
 
     public static boolean parse(String cmd) throws DukeException {
 

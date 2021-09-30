@@ -15,6 +15,9 @@ public class CmdsParser extends Parser {
             case "done":
                 parseDone();
                 break;
+            case "delete":
+                parseDelete();
+                break;
             case "todo":
                 parseTodo(cmd);
                 break;
@@ -36,14 +39,24 @@ public class CmdsParser extends Parser {
         try {
             cmdTask = cmds[1];
             int id = Integer.parseInt(String.valueOf(cmdTask));
-            for (Task task : taskList) {
-                if (task.getID() == id) {
-                    task.setDone();
-                    Printer.printDone(task);
-                }
-            }
+            Task task = taskList.get(id-1);
+            task.setDone();
+            Printer.printDone(task);
         } catch (IndexOutOfBoundsException e) {
             Printer.printInvalidDone();
+        }
+    }
+
+    public static void parseDelete() {
+        try {
+            cmdTask = cmds[1];
+            int id = Integer.parseInt(String.valueOf(cmdTask));
+            Task task = taskList.get(id-1);
+            taskList.remove(id-1);
+            Task.totalCount--;
+            Printer.printDelete(task);
+        } catch (IndexOutOfBoundsException e) {
+            Printer.printInvalidDelete();
         }
     }
 

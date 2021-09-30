@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Printer {
 
-    protected final static String LINE = "_____________________________________________________________\n";
+    protected final static String LINE = "______________________________________________________________\n";
     protected final static String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -13,7 +13,8 @@ public class Printer {
     protected final static String INVALID_CMD = "Oops! Sorry, I don't know what you mean ☹\n";
     protected final static String BYE = "Bye. Hope to see you again soon!\n";
     protected final static String NO_TASK = "You have no task in your list!\n";
-    protected final static String INVALID_DONE = "Oops! Please specify the task id to mark it as done ☹\n";
+    protected final static String INVALID_DONE = "Oops! Please specify the correct task id to mark it as done ☹\n";
+    protected final static String INVALID_DELETE = "Oops! Please specify the correct task id to remove it ☹\n";
     protected final static String INVALID_TODO = "Oops! Please provide the description of your todo task ☹\n";
     protected final static String INVALID_EVENT = "Oops! Please provide the description of your event task ☹\n";
     protected final static String INVALID_DEADLINE = "Oops! Please provide the description of your deadline task ☹\n";
@@ -44,7 +45,10 @@ public class Printer {
 
     public static void printList() {
         System.out.print(LINE + "Here are the tasks in your list:\n");
-        for (Task task : Parser.taskList) System.out.println(task.toString());
+        for (int i = 0; i < Parser.taskList.size(); i++) {
+            Task task = Parser.taskList.get(i);
+            System.out.println(i+1+". " + task.toString());
+        }
         System.out.print(LINE);
     }
 
@@ -52,8 +56,17 @@ public class Printer {
         System.out.print(LINE + "Nice! I've marked this task as done.\n" + task.toString() + "\n" + LINE);
     }
 
+    public static void printDelete(Task task) {
+        System.out.print(LINE + "Noted! I've removed this task.\n" + task.toString());
+        System.out.print("\nNow you have " + task.getTotalCount() + " in the list.\n" + LINE);
+    }
+
     public static void printInvalidDone() {
         System.out.print(LINE+INVALID_DONE+LINE);
+    }
+
+    public static void printInvalidDelete() {
+        System.out.print(LINE+INVALID_DELETE+LINE);
     }
 
     public static void printInvalidTodo() {
