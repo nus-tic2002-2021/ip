@@ -11,9 +11,21 @@ public class ListTask extends Task{
         String[] tmp = item.trim().split(" ");
         switch (tmp[0].trim()){
             case "done":
-                itemList[Integer.parseInt(tmp[1]) - 1].setDone(true);
-                System.out.println("Nice! I've marked this task as done: " + "\n"
-                        + "[X] " + itemList[Integer.parseInt(tmp[1]) - 1].getDescription());
+                try {
+                    if ((Integer.parseInt(tmp[1]) - 1) < indx) {
+                        itemList[Integer.parseInt(tmp[1]) - 1].setDone(true);
+                        System.out.println(buff + "Nice! I've marked this task as done: " + "\n" +
+                                buff + "[X] " + itemList[Integer.parseInt(tmp[1]) - 1].getDescription());
+                    }else if (indx > 0) {
+                        System.out.println(buff + "Item No. " + Integer.parseInt(tmp[1]) + " is not added in the list yet." + "\n" +
+                                buff + "Select between " + 0 + " and " + indx + "to mark as done.");
+                    }else{
+                        System.out.println(buff + "Empty! No item in the list.");
+                     }
+                }catch (NumberFormatException e){
+                    System.out.println("This is not a number!");
+                    System.out.println(e.getMessage());
+                }
                 break;
 
             case "list":
