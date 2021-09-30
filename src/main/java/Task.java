@@ -10,21 +10,13 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-
-    public void setDone(boolean done){
-        this.isDone = done;
+    public void setDone() {
+        isDone = true;
     }
 
-    public String getDescription(){
-        return description;
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String print(){
-        String print = " [" + getStatusIcon()+"] "+getDescription();
-        return print;
-    }
 }

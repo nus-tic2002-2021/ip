@@ -2,37 +2,42 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\nHow can I help you today?");
-        String input;
-        Scanner in = new Scanner(System.in);
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello! I'm Duke" + "\n"+ logo + "\n" + "How can I help you today?");
+        Task[] list = new Task[100];
+        int currentTask = 0;
 
-        String[] list = new String[100];
-        int listCount = 0;
-
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            input = in.nextLine();
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            String input = sc.next();
             if (input.toLowerCase(Locale.forLanguageTag(input)).contains("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!"+ "\n"+ logo);
                 break;
-            }
-            else if (input.toLowerCase(Locale.forLanguageTag(input)).contains("list")){
-                for (int count = 1; count<listCount+1; count++) {
-                    if (count ==1){
-                    System.out.println(count + ". " +"[X]"+ list[count]);
-                    }else {
-                        System.out.println(count + ". " +"[ ]"+ list[count]);
-                    }
+            } else if (input.toLowerCase(Locale.forLanguageTag(input)).contains("list")) {
+                System.out.println("\tHere are the tasks in your list:");
+                int taskID = 1;
+                while (list[taskID - 1] != null) {
+                    System.out.println("\t" + taskID + ". " + list[taskID - 1]);
+                    taskID++;
                 }
-            }
-            else {
-
-                System.out.println(input);
-                list[listCount] = input;
-                listCount++;
-                System.out.println("added: " + input);
+            } else if (input.equals("done")) {
+                int task = sc.nextInt();
+                Task FinishedTask = list[task - 1];
+                FinishedTask.setDone();
+                System.out.println("\tNice! I've marked this task as done: ");
+                System.out.println("\t" + "  "+list[task - 1]);
+            } else {
+                System.out.println("\tadded: " + input);
+                Task newTask = new Task(input);
+                list[currentTask] = newTask;
+                currentTask++;
             }
         }
     }
-
 }
