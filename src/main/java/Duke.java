@@ -5,73 +5,76 @@ public class Duke {
     private static Task[] taskList = new Task[100];
     private static int taskCount = 0;
     private static PrintHelper printer = new PrintHelper();
-
-    public static void addCommand(String command){
-        String[] toWords = command.split(" ", 2);
-        String keyword = toWords[0];
-        String cmd = toWords[1];
-        //System.out.println("keyword: "+keyWord[0]);
-        switch(keyword){
-            case "todo":
-                taskList[taskCount] = new ToDos(cmd, cmd);
-                break;
-            case "deadline":
-                String[] dl = cmd.split("/by", 2);
-                //System.out.println("cmd: "+dl[0]);
-                //System.out.println("by: "+dl[1]);
-                taskList[taskCount] = new Deadline(dl[0],dl[1]);
-                break;
-            case "events":
-                String[] dt = cmd.split("/at", 2);
-                //System.out.println("cmd: "+dt[0]);
-                //System.out.println("at: "+dt[1]);
-                taskList[taskCount] = new Events(dt[0], dt[1]);
-                break;
-            default:
-                taskList[taskCount] = new Task(command);
-                break;
+    public static void addCommand(String command) throws UnknownSyntaxException, EmptyDescriptionException, TimeManagementException{
+        String keyword;
+        String detail;
+        try {
+            String[] toWords = command.split(" ", 2);
+            keyword = toWords[0];
+            detail = toWords[1];
         }
-        /*if(keyword.equals("")){
-            taskList[taskCount] = new ToDos(cmd, cmd);
+        catch(ArrayIndexOutOfBoundsException aio) {
+            if(command.contains("todo") || command.contains("deadline") || command.contains("event")){
+                throw new EmptyDescriptionException();
+            }
+            else {
+                throw new UnknownSyntaxException();
+            }
         }
-        else if(keyword.equals("deadline")){
-            String[] dl = cmd.split("/by", 2);
-            //System.out.println("cmd: "+dl[0]);
-            //System.out.println("by: "+dl[1]);
-            taskList[taskCount] = new Deadline(dl[0],dl[1]);
+        try{
+            switch (keyword) {
+                case "todo":
+                    taskList[taskCount] = new ToDos(detail, detail);
+                    break;
+                case "deadline":
+                    String[] dl = detail.split("/by", 2);
+                    taskList[taskCount] = new Deadline(dl[0], dl[1]);
+                    break;
+                case "event":
+                    String[] dt = detail.split("/at", 2);
+                    taskList[taskCount] = new Events(dt[0], dt[1]);
+                    break;
+                default:
+                    throw new UnknownSyntaxException();
+            }
         }
-        else if(keyword .equals("event")){
-            String[] dt = cmd.split("/at", 2);
-            //System.out.println("cmd: "+dt[0]);
-            //System.out.println("at: "+dt[1]);
-            taskList[taskCount] = new Events(dt[0], dt[1]);
+        catch(IndexOutOfBoundsException e){
+            if(command.contains("deadline") || command.contains("event")){
+                throw new TimeManagementException();
+            }
+            throw new UnknownSyntaxException();
         }
-        else{
-            //System.out.println("Keyword not found");
-            taskList[taskCount] = new Task(command);
-        }*/
         taskCount++;
     }
 
-    public static void reply(String command){
+    public static void reply(String command) throws EmptyTaskListException, UnknownSyntaxException,TaskNotFoundException{
         if(command.contains("done")){
-            String[] doneCmd = command.split(" ");
-            taskList[Integer.parseInt(doneCmd[1])-1].setDone();
-            printer.taskDoneFeedback();
-            System.out.println("     "+ taskList[Integer.parseInt(doneCmd[1])-1].toString());
-            printer.separator();
-            return;
+            try {
+                String[] doneCmd = command.split(" ");
+                taskList[Integer.parseInt(doneCmd[1]) - 1].setDone();
+                printer.taskDoneFeedback();
+                System.out.println("     " + taskList[Integer.parseInt(doneCmd[1]) - 1].toString());
+                printer.separator();
+                return;
+            }
+            catch(NumberFormatException nf){
+                throw new TaskNotFoundException();
+            }
         }
         printer.taskAddFeedback();
-        System.out.println("     "+ taskList[taskCount-1].toString());
-        System.out.println("     Now you have "+ taskCount + " tasks in the list.");
-        printer.separator();
+        try {
+            System.out.println("     " + taskList[taskCount - 1].toString());
+            System.out.println("     Now you have " + taskCount + " tasks in the list.");
+            printer.separator();
+        }
+        catch(ArrayIndexOutOfBoundsException a){
+            throw new EmptyTaskListException();
+        }
     }
 
-    public static void printAll(){
+    public static void printAll() throws EmptyTaskListException{
         if(taskCount==0){
-            printer.emptyList();
-            return;
+            throw new EmptyTaskListException();
         }
         printer.taskFullListFeedback(taskCount,taskList);
     }
@@ -94,19 +97,61 @@ public class Duke {
                 end = true;
             }
             else if(command.equals("list")){
-                printAll();
+                try {
+                    printAll();
+                }
+                catch(EmptyTaskListException etl){
+                    printer.emptyTaskList();
+                }
                 command = in.nextLine();
             }
             else if(command.contains("done")){
-                reply(command);
+                try {
+                    reply(command);
+                }
+                catch(EmptyTaskListException etl){
+                    printer.emptyTaskList();
+                }
+                catch(UnknownSyntaxException us){
+                    printer.unknownSyntax(command);
+                }
+                catch(TaskNotFoundException tnf){
+                    printer.taskNotFound(command.split(" ", 2)[1]);
+                }
                 command = in.nextLine();
             }
             else{
-                addCommand(command);
-                reply(command);
+                boolean success = true;
+                try {
+                    addCommand(command);
+                }
+                catch(UnknownSyntaxException us){
+                    success = false;
+                    printer.unknownSyntax(command);
+                }
+                catch(EmptyDescriptionException ed){
+                    success = false;
+                    printer.emptyDescription(command);
+                }
+                catch(TimeManagementException tm){
+                    success = false;
+                    printer.noTimeConcept();
+                }
+                if(success) {
+                    try {
+                        reply(command);
+                    } catch (EmptyTaskListException etl) {
+                        printer.emptyTaskList();
+                    }
+                    catch(UnknownSyntaxException | TaskNotFoundException exception){
+                        printer.unknownSyntax(command);
+                    }
+                }
                 command = in.nextLine();
             }
         }
+
+
         printer.exitFeedback();
     }
 }
