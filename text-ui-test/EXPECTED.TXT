@@ -8,39 +8,58 @@ Hello from
 Hello! I'm Duke
 What can I do for you?
 _________________________________
-    Task Added: Good morning sunshine
+    Got it. I've added this task: 
+      [T][ ] borrow book
+    Now you have 1 tasks in the list.
 _________________________________
-    Task Added: Enjoy morning breeze and drink coffee
+    Got it. I've added this task: 
+      [D][ ] return book (by: Sunday)
+    Now you have 2 tasks in the list.
 _________________________________
-    Task Added: Have lunch and a hearty meal
+    Got it. I've added this task: 
+      [E][ ] project meeting (at: Mon 2-4pm)
+    Now you have 3 tasks in the list.
 _________________________________
-    Task Added: Nap ZzzzZzzzZzzzzzzzzzz
-_________________________________
-    Task Added: Have Dinner and watch Avenger
-_________________________________
-    Task Added: Play Switch 
-_________________________________
-    1.[ ] Good morning sunshine
-    2.[ ] Enjoy morning breeze and drink coffee
-    3.[ ] Have lunch and a hearty meal
-    4.[ ] Nap ZzzzZzzzZzzzzzzzzzz
-    5.[ ] Have Dinner and watch Avenger
-    6.[ ] Play Switch 
+    1.[T][ ] borrow book
+    2.[D][ ] return book (by: Sunday)
+    3.[E][ ] project meeting (at: Mon 2-4pm)
 _________________________________
     Naisuuuu! This task is marked as done: 
-    2.[X] Enjoy morning breeze and drink coffee
+      [D][X] return book (by: Sunday)
 _________________________________
-    Naisuuuu! This task is marked as done: 
-    3.[X] Have lunch and a hearty meal
+    Sorry :(   Invalid Input. Try Again ~ 
 _________________________________
-    1.[ ] Good morning sunshine
-    2.[X] Enjoy morning breeze and drink coffee
-    3.[X] Have lunch and a hearty meal
-    4.[ ] Nap ZzzzZzzzZzzzzzzzzzz
-    5.[ ] Have Dinner and watch Avenger
-    6.[ ] Play Switch 
+Error Occurs: java.lang.IndexOutOfBoundsException: Index 9 out of bounds for length 3
 _________________________________
-    Task Added: Good Night!
+    Sorry :(   Invalid Input. Try Again ~ 
+_________________________________
+Error Occurs: java.lang.StringIndexOutOfBoundsException: begin 0, end 6, length 5
+_________________________________
+    Noted. I've removed this task:
+      [T][ ] borrow book
+    Now you have 3 tasks in the list.
+_________________________________
+    Noted. I've removed this task:
+          ☹  OOPS!!! The task number is invalid.
+_________________________________
+    1.[D][X] return book (by: Sunday)
+    2.[E][ ] project meeting (at: Mon 2-4pm)
+_________________________________
+    Got it. I've added this task: 
+      [D][ ] do homework (by: no idea :-p)
+    Now you have 3 tasks in the list.
+_________________________________
+    1.[D][X] return book (by: Sunday)
+    2.[E][ ] project meeting (at: Mon 2-4pm)
+    3.[D][ ] do homework (by: no idea :-p)
+_________________________________
+    ☹  OOPS!!! The day cannot be empty.
+_________________________________
+    ☹  OOPS!!! The description cannot be empty.
+_________________________________
+    1.[D][X] return book (by: Sunday)
+    2.[E][ ] project meeting (at: Mon 2-4pm)
+    3.[D][ ] do homework (by: no idea :-p)
 _________________________________
 Bye. Hope to see you again soon!
 _________________________________

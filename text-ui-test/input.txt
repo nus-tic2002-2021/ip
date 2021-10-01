@@ -1,12 +1,16 @@
-Good morning sunshine
-Enjoy morning breeze and drink coffee
-Have lunch and a hearty meal
-Nap ZzzzZzzzZzzzzzzzzzz
-Have Dinner and watch Avenger
-Play Switch 
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
 list
 done 2
-done 3
+done 10
+list 
+delete 1
+delete 10
 list
-Good Night!
+deadline do homework /by no idea :-p
+list
+deadline do homework 
+deadline
+list
 bye

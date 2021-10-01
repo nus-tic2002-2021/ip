@@ -76,23 +76,49 @@ public class Message {
 
     public static void msgMarkDone(TaskList myList, int taskNumber) {
         System.out.println("    Naisuuuu! This task is marked as done: ");
-        System.out.println("    " + (taskNumber + 1) + ".[X] " + myList.getTaskDetail(taskNumber));
+        Message.msgBlankBeforeTaskDetail();
+        Message.msgTaskDetail(myList, taskNumber);
         System.out.println("_________________________________");
     }
 
     public static void msgList(TaskList myList) {
         for (int i = 0; i < myList.getNumOfItem(); i++) {
-
-            TaskType taskType = myList.getTaskType(i);
-            String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-            boolean isDone = myList.getTaskDoneStatus(i);
-            String isDoneInString = (isDone ? "X" : " ");
-
-            System.out.println("    " + Integer.toString(i + 1) + ".[" + taskTypeInString + "][" + isDoneInString + "] "
-                    + myList.getTaskDetail(i));
+            System.out.print("    " + Integer.toString(i + 1) + ".");
+            Message.msgTaskDetail(myList, i);
         }
         System.out.println("_________________________________");
+    }
+
+    public static void msgBlankBeforeTaskDetail() {
+        System.out.print("      ");
+    }
+
+    public static void msgTaskDetail(TaskList myList, int taskNumber) {
+        TaskType taskType = myList.getTaskType(taskNumber);
+        String taskTypeInString = TaskType.taskTypeToString(taskType);
+
+        boolean isDone = myList.getTaskDoneStatus(taskNumber);
+        String isDoneInString = (isDone ? "X" : " ");
+
+        String taskDetail = myList.getTaskDetail(taskNumber);
+
+        String dateTimeString = "";
+
+        switch (taskType) {
+            case TODOS:
+                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
+                break;
+            case DEADLINE:
+                dateTimeString = myList.getTaskDeadlineDateString(taskNumber);
+                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: "
+                        + dateTimeString + ")");
+                break;
+            case EVENT:
+                dateTimeString = myList.getTaskEventDateTimeString(taskNumber);
+                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(at: "
+                        + dateTimeString + ")");
+                break;
+        }
     }
 
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -122,6 +148,19 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    public static void msgRemoveItem(TaskList myList, int taskNumber) {
+
+        System.out.println("    Noted. I've removed this task:");
+        Message.msgBlankBeforeTaskDetail();
+        Message.msgTaskDetail(myList, taskNumber);
+        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgWrongTaskNumber() {
+        System.out.println("    ☹  OOPS!!! The task number is invalid.");
+        System.out.println("_________________________________");
+    }
     // Ending Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgBye() throws IOException {
