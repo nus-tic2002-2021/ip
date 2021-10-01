@@ -2,6 +2,7 @@ import java.io.*;
 
 public class Message {
 
+    // Starting Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     public static void msgGreet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -10,10 +11,7 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgError(Exception e) {
-        System.out.println("Error Occurs: " + e);
-        System.out.println("_________________________________");
-    }
+    // Assignment Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgAssignTask(TaskList myList, int taskNumber) {
 
@@ -74,6 +72,8 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
     public static void msgMarkDone(TaskList myList, int taskNumber) {
         System.out.println("    Naisuuuu! This task is marked as done: ");
         System.out.println("    " + (taskNumber + 1) + ".[X] " + myList.getTaskDetail(taskNumber));
@@ -95,10 +95,34 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidInput() {
-        System.out.println("Sorry :(   Invalid Input. Try Again ~ ");
+    // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public static void msgError(Exception e) {
+        System.out.println("Error Occurs: " + e);
         System.out.println("_________________________________");
     }
+
+    public static void msgInvalidInput() {
+        System.out.println("    Sorry :(   Invalid Input. Try Again ~ ");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgInvalidInputMissingDescription() {
+        System.out.println("    ☹  OOPS!!! The description cannot be empty.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgInvalidInputMissingDay() {
+        System.out.println("    ☹  OOPS!!! The day cannot be empty.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgInvalidInputMissingTime() {
+        System.out.println("    ☹  OOPS!!! The time cannot be empty.");
+        System.out.println("_________________________________");
+    }
+
+    // Ending Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgBye() throws IOException {
         System.out.println("Bye. Hope to see you again soon!");
