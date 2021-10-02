@@ -5,7 +5,7 @@ read book
 to do read book
 deadline return book
 deadline return book /by June 6th
-event project meeting /at
+event project meeting
 event project meeting /at Aug 6th 2-4PM
 to do join sports club
 to do borrow book
