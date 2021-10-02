@@ -69,10 +69,14 @@ __________________________________________
 Task with id 5 is not found.
 __________________________________________
 __________________________________________
+Noted. I've removed this task: 
+[D][ ] return the book (by: 6th Sep)
+Now you have 2 task(s) in the list
+__________________________________________
+__________________________________________
 Here are the task(s) in your list:
 1. [T][X] read a book
-2. [D][ ] return the book (by: 6th Sep)
-3. [E][X] meeting (at: 9th Sep 2pm-3pm)
+2. [E][X] meeting (at: 9th Sep 2pm-3pm)
 __________________________________________
 __________________________________________
 Bye. Hope to see you again soon!

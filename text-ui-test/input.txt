@@ -13,5 +13,6 @@ done 1
 done 3
 done
 done 5
+delete 2
 list
 bye

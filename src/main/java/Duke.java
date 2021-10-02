@@ -19,27 +19,36 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("__________________________________________");
 
-        while (!exit){
+        while (!exit) {
             String inputStr = sc.nextLine();
             System.out.println("__________________________________________");
 
+            // Validate command
             String[] words = inputStr.split(" ", 2);
-            String keyword = words[0].toLowerCase();
+            String keyword = words[0].toUpperCase();
+            Command command;
+            try {
+                command = Command.valueOf(keyword);
+            } catch(IllegalArgumentException e) {
+                System.out.println("Sorry, no command <" + keyword.toLowerCase() + "> found :(");
+                System.out.println("__________________________________________");
+                continue;
+            }
 
-            switch(keyword)
+            switch(command)
             {
-                case "list": {
+                case LIST: {
                     taskList.printTasks();
                     break;
                 }
-                case "done":
-                case "delete":
+                case DONE:
+                case DELETE:
                 {
                     try {
                         int taskId = Integer.parseInt(words[1]);
 
                         try {
-                            if(keyword.equals("done")) {
+                            if(command == Command.DONE) {
                                 taskList.setDone(taskId);
                             }
                             else{
@@ -53,41 +62,38 @@ public class Duke {
                     }
                     break;
                 }
-                case "todo":
-                case "deadline":
-                case "event":
+                case TODO:
+                case DEADLINE:
+                case EVENT:
                 {
                     Task task;
 
-                    switch (keyword) {
-                        case "todo": {
+                    switch (command) {
+                        case TODO: {
                             try {
                                 task = new ToDo(words[1]);
                                 taskList.addTask(task);
-                            }
-                            catch (IndexOutOfBoundsException e) {
+                            } catch (IndexOutOfBoundsException e) {
                                 System.out.println("Task cannot be added: \nDescription is missing.");
                             }
                             break;
                         }
-                        case "deadline": {
+                        case DEADLINE: {
                             try {
                                 String[] deadlineInfo = words[1].split(" /by ");
                                 task = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                                 taskList.addTask(task);
-                            }
-                            catch(IndexOutOfBoundsException e) {
+                            } catch(IndexOutOfBoundsException e) {
                                 System.out.println("Task cannot be added: \nDeadline or description is missing.");
                             }
                             break;
                         }
-                        case "event": {
+                        case EVENT: {
                             try {
                                 String[] eventInfo = words[1].split(" /at ");
                                 task = new Event(eventInfo[0], eventInfo[1]);
                                 taskList.addTask(task);
-                            }
-                            catch(IndexOutOfBoundsException e) {
+                            } catch(IndexOutOfBoundsException e) {
                                 System.out.println("Task cannot be added: \nEvent time or description is missing");
                             }
                             break;
@@ -95,13 +101,13 @@ public class Duke {
                     }
                     break;
                 }
-                case "bye": {
+                case BYE: {
                     System.out.println("Bye. Hope to see you again soon!");
                     exit = true;
                     break;
                 }
                 default: {
-                    System.out.println("Sorry, no command <" + keyword + "> found :(");
+                    System.out.println("Sorry, no command <" + keyword.toLowerCase() + "> found :(");
                     break;
                 }
             }
