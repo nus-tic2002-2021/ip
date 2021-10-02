@@ -4,11 +4,11 @@ public class Event extends Task{
     public Event(String description, String at){
         super(description);
         this.at = at;
-        taskType = 'E';
+        type = Types.EVENT;
     }
 
     public void showTask(){
         String mark = isDone ? "X" : " ";
-        System.out.println("[" + taskType + "][" + mark + "] " + description + " (at: " + at + ")");
+        System.out.println("[E][" + mark + "] " + description + " (at: " + at + ")");
     }
 }

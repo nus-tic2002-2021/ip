@@ -1,12 +1,12 @@
 public class Task {
     String description;
     boolean isDone;
-    char taskType;
+    Types type;
 
     public Task(String description){
         this.description = description;
         isDone = false;
-        taskType = '#';
+        type = Types.UNKNOWN;
     }
 
     public void showTask(){}

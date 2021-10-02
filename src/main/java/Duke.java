@@ -73,6 +73,14 @@ public class Duke {
                 System.out.print("       ");
                 taskList.get(idx).showTask();
             }
+            else if(reqs[0].equals("delete")){
+                int idx = Integer.parseInt(reqs[1]) - 1;
+                System.out.println("     Noted! I've removed this task:");
+                System.out.print("       ");
+                taskList.get(idx).showTask();
+                taskList.remove(idx);
+                System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+            }
             else {
                 try{
                     addTask(req);
@@ -99,6 +107,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         dukeGreet();
         dukeEcho();
-
     }
 }

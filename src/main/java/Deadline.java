@@ -4,12 +4,12 @@ public class Deadline extends Task{
     public Deadline(String description, String by){
         super(description);
         this.by = by;
-        taskType = 'D';
+        type = Types.DEADLINE;
     }
 
     public void showTask(){
         String mark = isDone ? "X" : " ";
-        System.out.println("[" + taskType + "][" + mark + "] " + description + " (by: " + by + ")");
+        System.out.println("[D][" + mark + "] " + description + " (by: " + by + ")");
     }
 
 }
