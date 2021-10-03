@@ -5,6 +5,7 @@ public class List {
     private static int inputCounter;
     //private static Task[] inputArray;
     private static ArrayList<Task> taskArrayList;
+    public static Task recentDelete;
 
     public List(int size){
         inputCounter = 1; // array 0 is empty to remove + 1 in all codes
@@ -62,7 +63,7 @@ public class List {
         taskArrayList.add(new Todo(inputMsg));
         //inputArray[inputCounter] = new Todo(inputMsg);
         inputCounter = inputCounter + 1;
-        printSuccessAdd();
+        printAdd();
     }
 
     public void addDeadline(String inputMsg)throws InvalidFormatException{
@@ -76,7 +77,7 @@ public class List {
         taskArrayList.add(new Deadline(input[0],input[1]));
         //inputArray[inputCounter] = new Deadline(input[0],input[1]);
         inputCounter = inputCounter + 1;
-        printSuccessAdd();
+        printAdd();
     }
     public void addEvent(String inputMsg)throws InvalidFormatException{
         String [] input = inputMsg.split(" /at ");
@@ -89,7 +90,7 @@ public class List {
         taskArrayList.add(new Event(input[0],input[1]));
         //inputArray[inputCounter] = new Event(input[0],input[1]);
         inputCounter = inputCounter + 1;
-        printSuccessAdd();
+        printAdd();
     }
 
     public void taskDone(String counter)throws NotFoundException{
@@ -105,9 +106,11 @@ public class List {
         if (inputCounter <= inputNumber){
             throw new NotFoundException();
         }
+        recentDelete = taskArrayList.get(inputNumber - 1);
         taskArrayList.remove(inputNumber - 1);
         inputCounter = inputCounter - 1;
         //inputArray[inputNumber].setDone();
+        printDelete();
     }
 
     public void printList() {
@@ -121,10 +124,16 @@ public class List {
         }
     }
 
-    public void printSuccessAdd() {
+    public void printAdd() {
         System.out.println("\tGot it. Item successfully added to the list: ");
         //inputArray[inputCounter - 1].print();
         taskArrayList.get(taskArrayList.size() - 1).print();
+        System.out.println("\tNow you have " + (inputCounter-1) +" task(s) in the list");
+    }
+    public void printDelete() {
+        System.out.println("\tNoted. I have removed the task: ");
+        //inputArray[inputCounter - 1].print();
+        recentDelete.print();
         System.out.println("\tNow you have " + (inputCounter-1) +" task(s) in the list");
     }
 

@@ -11,7 +11,13 @@ public class Deadline extends Todo{
                 "\t  [D][X] " + description + "(by: " + by + ")");
     }
     public void print(){
-        System.out.println("\t  [D][ ] " + description + "(by: " + by + ")");
+        if (isDone) {
+            System.out.println("\t  [D][X] " + description + "(by: " + by + ")");
+        }
+        else {
+            System.out.println("\t  [D][ ] " + description + "(by: " + by + ")");
+        }
+
     }
     public void setBy(String by)
     {

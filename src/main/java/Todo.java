@@ -13,7 +13,12 @@ public class Todo extends Task{
     }
 
     public void print(){
-        System.out.println("\t  [T][ ] " + description);
+        if (isDone) {
+            System.out.println("\t  [T][X] " + description);
+        }
+        else {
+            System.out.println("\t  [T][ ] " + description);
+        }
     }
 
     @Override

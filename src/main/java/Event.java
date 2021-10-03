@@ -11,7 +11,13 @@ public class Event extends Todo {
                 "\t  [E][X] " + description + "(at: " + eventTime + ")");
     }
     public void print(){
-        System.out.println("\t  [E][ ] " + description + "(at: " + eventTime + ")");
+        if (isDone) {
+            System.out.println("\t  [E][X] " + description + "(at: " + eventTime + ")");
+        }
+        else {
+            System.out.println("\t  [E][ ] " + description + "(at: " + eventTime + ")");
+        }
+
     }
     public void setEvent(String eventTime)
     {
