@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import Exception.DukeInvalidCommandException;
+import Exception.DukeTaskNotFoundException;
 
 public class Duke {
     static String command;
@@ -31,7 +33,7 @@ public class Duke {
     }
 
 
-    public static void parseAddTask(String input) {
+    public static void parseAddTask (String input) throws DukeInvalidCommandException {
         String temp = "";
 
         temp = input.split(" ")[0];
@@ -50,24 +52,34 @@ public class Duke {
                 command = temp;
                 break;
             default:
-                System.out.println("invalid task command");
+                //System.out.println("invalid task command");
                 checkCommand = false;
+                throw new DukeInvalidCommandException("Invalid add command. Try 'todo' 'event' 'deadline'");
         }
+
         //System.out.println("Command:" + command);
         //remove command + space
         temp = input.replaceFirst(temp + " ", "");
+
         task = temp.split(" /")[0];
+
         //System.out.println("Task :" + task);
-        condition = temp.split(" /")[1];
-        parseCondition(condition);
+        try {
+            condition = temp.split(" /")[1];
+            parseCondition(condition);
+        } catch (Exception ex) {
+            throw new DukeInvalidCommandException("Missing Description/Date Time");
+        }
+
         //System.out.println("Condition :" + condition);
     }
+
     public static void parseCondition(String input) {
         String temp[] = input.split(" ");
         dateTime = new DateTime(temp[0], temp[1]);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeTaskNotFoundException {
 
         initProgram();
 
@@ -86,16 +98,26 @@ public class Duke {
                 isAddTask = false;
             } else if (line.contains("done")) {
                 //System.out.println(line);
-                int index = Integer.parseInt(line.split(" ")[1]);
-                tl.setDone(index - 1);
                 isAddTask = false;
+                try {
+                    int index = Integer.parseInt(line.split(" ")[1]);
+                    tl.setDone(index - 1);
+                } catch (DukeTaskNotFoundException ex) {
+                    System.out.println(ex);
+                }
+
             }
 
             if(isAddTask) {
-                parseAddTask(line);
-                if(checkCommand) {
-                    tl.addTask(task,type, dateTime);
+                try {
+                    parseAddTask(line);
+                    if(checkCommand) {
+                        tl.addTask(task,type, dateTime);
+                    }
+                } catch (DukeInvalidCommandException ex) {
+                    System.out.println(ex);
                 }
+
                 //System.out.println(line);
             }
             isAddTask = true;

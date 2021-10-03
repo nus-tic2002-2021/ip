@@ -1,3 +1,5 @@
+import Exception.DukeTaskNotFoundException;
+
 public class TaskList extends Task{
 
     public Task[] taskList = new Task[100];
@@ -15,11 +17,16 @@ public class TaskList extends Task{
         System.out.println("Now you have " + this.counter +" tasks in the list.");
     }
 
-    public void setDone(int index) {
-        this.taskList[index].setDone();
-        System.out.println("Nice! I've marked this task as done: ");
-//        System.out.println("[" + this.taskList[index].getStatusIcon() + "] " + this.taskList[index].getDescription());
-        System.out.println(getTaskDetails(index));
+    public void setDone(int index) throws DukeTaskNotFoundException {
+        try{
+            this.taskList[index].setDone();
+            System.out.println("Nice! I've marked this task as done: ");
+            //System.out.println("[" + this.taskList[index].getStatusIcon() + "] " + this.taskList[index].getDescription());
+            System.out.println(getTaskDetails(index));
+        } catch (Exception ex) {
+            throw new DukeTaskNotFoundException("Invalid task number");
+        }
+
     }
 
     public void printTaskList() {
