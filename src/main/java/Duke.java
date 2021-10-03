@@ -3,12 +3,11 @@ public class Duke {
 
     private static String lineBreak = "\t_______________________________________________________";
     private static List inputList;
-    static final int LIST_SIZE = 100;
 
     public static void initialize (){
         Scanner in = new Scanner(System.in);
         String inputLine = "";
-        inputList = new List(LIST_SIZE);
+        inputList = new List();
 
         printIntro();
         while (!inputLine.equals("bye")) {
@@ -37,16 +36,6 @@ public class Duke {
         }
         else if(inputLow.equals("list")){
             inputList.printList();
-        }
-        else if (inputLow.startsWith("done")){
-            try{
-                inputList.taskDone(inputMsg.substring(4).trim());
-            } catch(NotFoundException e){
-                System.out.println("\tTask cannot be found.");
-            }  catch (NumberFormatException e){
-                System.out.println("\tInvalid task number entry.");
-            }
-
         }
         else{
             try{

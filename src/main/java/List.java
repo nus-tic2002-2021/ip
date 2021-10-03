@@ -7,7 +7,7 @@ public class List {
     private static ArrayList<Task> taskArrayList;
     public static Task recentDelete;
 
-    public List(int size){
+    public List(){
         inputCounter = 1; // array 0 is empty to remove + 1 in all codes
         //inputArray =  new Task[size];
         taskArrayList = new ArrayList<>();
