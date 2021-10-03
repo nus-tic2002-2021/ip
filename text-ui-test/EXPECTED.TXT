@@ -12,7 +12,7 @@ __________________________________________
 There's no task now :D
 __________________________________________
 __________________________________________
-Sorry, no command <read> found :(
+Sorry, no commandEnum <read> found :(
 __________________________________________
 __________________________________________
 Task cannot be added: 
@@ -37,7 +37,7 @@ Got it! I've added this task:
 Now you have 2 task(s) in the list
 __________________________________________
 __________________________________________
-Sorry, no command <eventt> found :(
+Sorry, no commandEnum <eventt> found :(
 __________________________________________
 __________________________________________
 Task cannot be added: 

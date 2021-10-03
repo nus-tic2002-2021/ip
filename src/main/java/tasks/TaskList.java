@@ -11,55 +11,39 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    public int getListSize() { return taskList.size(); }
-
-    public void printTasks() {
-        if(taskList.size() == 0){
-            System.out.println("There's no task now :D");
-        }
-        else {
-            System.out.println("Here are the task(s) in your list:");
-
-            int index = 1;
-            for (Task task : taskList) {
-                System.out.println(index + ". " + task);
-                index++;
-            }
-        }
+    public TaskList(ArrayList<Task> tasks) {
+        taskList = tasks;
     }
 
-    public void setDone(int taskId) throws DukeArgumentException {
-        if (taskId > taskList.size()){
-            throw new DukeArgumentException();
+    public int getListSize() { return taskList.size(); }
+
+    public String setDone(int taskId) throws DukeException {
+        if (taskId > taskList.size() || taskId < 1){
+            throw new DukeException("Task with id " + taskId + " is not found.");
         }
         else {
             Task doneTask = taskList.get(taskId - 1);
             doneTask.markAsDone();
-
-            System.out.println("Amazing! The task is marked as done now:");
-            System.out.println(doneTask);
+            return doneTask.toString();
         }
     }
 
-    public void deleteTask(int taskId) throws DukeArgumentException {
-        if (taskId > taskList.size()){
-            throw new DukeArgumentException();
+    public String deleteTask(int taskId) throws DukeException {
+        if (taskId > taskList.size() || taskId < 1){
+            throw new DukeException("Task with id " + taskId + " is not found.");
         }
         else {
             Task deletedTask = taskList.get(taskId - 1);
             taskList.remove(taskId - 1);
-
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(deletedTask);
-            System.out.println("Now you have " + getListSize() + " task(s) in the list");
+            return deletedTask.toString();
         }
     }
 
     public void addTask(Task task){
         taskList.add(task);
+    }
 
-        System.out.println("Got it! I've added this task: ");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + getListSize() + " task(s) in the list");
+    public ArrayList<Task> getTasks() {
+        return taskList;
     }
 }
