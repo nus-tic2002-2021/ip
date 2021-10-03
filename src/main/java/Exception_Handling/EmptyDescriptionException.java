@@ -1,3 +1,5 @@
+package Exception_Handling;
+
 public class EmptyDescriptionException extends Exception{
     /*Prints the following
         printer.separator();

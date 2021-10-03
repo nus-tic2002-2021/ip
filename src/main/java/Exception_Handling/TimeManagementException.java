@@ -1,3 +1,5 @@
+package Exception_Handling;
+
 public class TimeManagementException extends Exception{
     /*Prints the following
         printer.separator();

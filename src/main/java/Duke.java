@@ -1,11 +1,13 @@
-import java.util.Arrays;
+import Exception_Handling.*;
+import Tasks.*;
+
 import java.util.Scanner;
 
 public class Duke {
     private static TaskList taskList = new TaskList();
     private static PrintHelper printer = new PrintHelper();
 
-    public static void addCommand(String command) throws UnknownSyntaxException, EmptyDescriptionException, TimeManagementException{
+    public static void addCommand(String command) throws UnknownSyntaxException, EmptyDescriptionException, TimeManagementException {
         String keyword;
         String detail;
         Task temp_task;
@@ -48,7 +50,7 @@ public class Duke {
         taskList.addTask(temp_task);
     }
 
-    public static void reply(String command) throws EmptyTaskListException, UnknownSyntaxException,TaskNotFoundException{
+    public static void reply(String command) throws EmptyTaskListException, UnknownSyntaxException, TaskNotFoundException {
         if(command.contains("done")){
             try {
                 String[] doneCmd = command.split(" ");
@@ -112,6 +114,21 @@ public class Duke {
                 }
                 catch(TaskNotFoundException tnf){
                     printer.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
+                }
+                command = in.nextLine();
+            }
+            else if(command.contains("delete")){
+                try{
+                    taskList.deleteTask(Integer.parseInt(command.split(" ", 2)[1]));
+                }
+                catch(TaskNotFoundException tnf){
+                    printer.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
+                }
+                catch(NumberFormatException e){
+                    printer.exception_feedback_unknownSyntax(command);
+                }
+                catch(EmptyTaskListException etl){
+                    printer.exception_feedback_emptyTaskList();
                 }
                 command = in.nextLine();
             }

@@ -1,3 +1,5 @@
+package Tasks;
+
 public class PrintHelper {
     public void separator(){
         System.out.println("    ____________________________________________________________");
@@ -39,7 +41,7 @@ public class PrintHelper {
     }
     public void exception_feedback_taskNotFound(String message){
         separator();
-        System.out.printf("     ☹ OOPS!!! Please key in by Task ID instead of [%s]\n", message);
+        System.out.printf("     ☹ OOPS!!! Please key in by Tasks.Task ID instead of [%s]\n", message);
         separator();
     }
     public void exception_feedback_noTimeConcept(){

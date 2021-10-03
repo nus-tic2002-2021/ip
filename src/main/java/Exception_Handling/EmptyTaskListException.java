@@ -1,3 +1,5 @@
+package Exception_Handling;
+
 public class EmptyTaskListException extends Exception{
     /*Prints the following
         printer.separator();
