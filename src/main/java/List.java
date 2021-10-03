@@ -11,12 +11,34 @@ public class List {
         //inputArray =  new Task[size];
         taskArrayList = new ArrayList<>();
     }
-    public void checkAction(String inputMsg) throws UnrecognizedException,InvalidFormatException{
+    public void checkAction(String inputMsg) throws UnrecognizedException,InvalidFormatException,NotFoundException{
 
         String inputLow = inputMsg.toLowerCase();
         String action[] = inputLow.split(" ");
-        int initialCounter = inputCounter;
+        switch(action[0]){
+            /*add to array */
+            case "todo":
+                addTodo(inputMsg.substring(4).trim());
+                break;
+            case "deadline":
+                addDeadline(inputMsg.substring(8).trim());
+                break;
+            case "event":
+                addEvent(inputMsg.substring(5).trim());
+                break;
+            /* modify array */
+            case "done":
+                taskDone(inputMsg.substring(4).trim());
+                break;
+            case "delete":
+                taskDelete(inputMsg.substring(6).trim());
+                break;
 
+            default:
+                throw new UnrecognizedException();
+
+        }
+        /*
         if(action[0].equals("todo")){
             addTodo(inputMsg.substring(4).trim());
         }
@@ -29,12 +51,8 @@ public class List {
         else{
             throw new UnrecognizedException();
         }
-        if(initialCounter < inputCounter){
-            System.out.println("\tGot it. Item successfully added to the list: ");
-            //inputArray[inputCounter - 1].print();
-            taskArrayList.get(taskArrayList.size() - 1).print();
-            System.out.println("\tNow you have " + (inputCounter-1) +" task(s) in the list");
-        }
+         */
+
     }
 
     public void addTodo(String inputMsg)throws InvalidFormatException{
@@ -44,6 +62,7 @@ public class List {
         taskArrayList.add(new Todo(inputMsg));
         //inputArray[inputCounter] = new Todo(inputMsg);
         inputCounter = inputCounter + 1;
+        printSuccessAdd();
     }
 
     public void addDeadline(String inputMsg)throws InvalidFormatException{
@@ -57,6 +76,7 @@ public class List {
         taskArrayList.add(new Deadline(input[0],input[1]));
         //inputArray[inputCounter] = new Deadline(input[0],input[1]);
         inputCounter = inputCounter + 1;
+        printSuccessAdd();
     }
     public void addEvent(String inputMsg)throws InvalidFormatException{
         String [] input = inputMsg.split(" /at ");
@@ -69,6 +89,7 @@ public class List {
         taskArrayList.add(new Event(input[0],input[1]));
         //inputArray[inputCounter] = new Event(input[0],input[1]);
         inputCounter = inputCounter + 1;
+        printSuccessAdd();
     }
 
     public void taskDone(String counter)throws NotFoundException{
@@ -76,7 +97,16 @@ public class List {
         if (inputCounter <= inputNumber){
             throw new NotFoundException();
         }
-        taskArrayList.get(inputNumber).setDone();
+        taskArrayList.get(inputNumber - 1).setDone();
+        //inputArray[inputNumber].setDone();
+    }
+    public void taskDelete(String counter)throws NotFoundException{
+        Integer inputNumber = Integer.parseInt(counter);
+        if (inputCounter <= inputNumber){
+            throw new NotFoundException();
+        }
+        taskArrayList.remove(inputNumber - 1);
+        inputCounter = inputCounter - 1;
         //inputArray[inputNumber].setDone();
     }
 
@@ -89,6 +119,13 @@ public class List {
                 System.out.println("\t" + (i) + "." + taskArrayList.get(i-1) );
             }
         }
+    }
+
+    public void printSuccessAdd() {
+        System.out.println("\tGot it. Item successfully added to the list: ");
+        //inputArray[inputCounter - 1].print();
+        taskArrayList.get(taskArrayList.size() - 1).print();
+        System.out.println("\tNow you have " + (inputCounter-1) +" task(s) in the list");
     }
 
 }

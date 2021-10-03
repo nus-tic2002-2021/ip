@@ -55,6 +55,10 @@ public class Duke {
                 System.out.println("\t" + e.getMessage() );
             } catch (UnrecognizedException e){
                 System.out.println("\tCommand not recognized. Please try again.");
+            } catch(NotFoundException e) {
+                System.out.println("\tTask cannot be found.");
+            } catch (NumberFormatException e){
+                System.out.println("\tInvalid task number entry.");
             }
         }
         System.out.println(lineBreak);
