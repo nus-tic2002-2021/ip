@@ -1,10 +1,5 @@
 package duke.task.model;
 
-
-import duke.task.model.Task;
-
-
-
 public final class Event extends Task {
     private String _from;
     private String _to;

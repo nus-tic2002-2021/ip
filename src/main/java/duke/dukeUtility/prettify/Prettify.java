@@ -3,7 +3,6 @@ package duke.dukeUtility.prettify;
 import duke.TaskManager;
 import duke.task.model.Task;
 
-import java.util.ArrayList;
 
 public class Prettify {
 

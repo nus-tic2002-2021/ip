@@ -37,11 +37,9 @@ public class OutputUnderTest {
         return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
-
     public static String getMsgUnderTestResponseEventAdded(String eventDesc){
         return PREFIX_ADDED_EVENT + eventDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-
 
     public static String getMsgUnderTestResponseDeadlineAdded(String deadlineDesc){
         return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;

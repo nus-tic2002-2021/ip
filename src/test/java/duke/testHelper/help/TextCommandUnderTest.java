@@ -13,19 +13,12 @@ public class TextCommandUnderTest {
     public static final String DELIMITER_EVENT_FROM = " /at ";
     public static final String DELIMITER_EVENT_TO = "-";
 
-
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
     }
 
     public static String generateTextCommandExit(String invoke) {
         return singleArgumentCommand(invoke);
-    }
-    public static String generateTextCommandFullTextAsEcho(String text) {
-        return singleArgumentCommand(text);
-    }
-    public static String generateTextCommandFullTextAsNewToDoDescription(String text) {
-        return singleArgumentCommand(text);
     }
     public static String generateTextCommandRandom(String text){
         return singleArgumentCommand(text);
@@ -36,14 +29,12 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSetCompleted(String invoke, Integer taskId) {
         return invoke + taskId + System.lineSeparator();
     }
-
     public static String generateTextCommandLineAddToDo(String invoke, String description) {
         return invoke + description + System.lineSeparator();
     }
     public static String generateTextCommandLineAddDeadline(String invoke, String description, String deadlineStringDelimiter, String deadlineString) {
         return invoke + description + deadlineStringDelimiter + deadlineString + System.lineSeparator();
     }
-
     public static String generateTextCommandLineAddEvent(String invoke, String eventDescription, String addEventScheduleDelimiter, String from, String fromToDelimiter, String to) {
         return invoke + eventDescription + addEventScheduleDelimiter + from + fromToDelimiter + to + System.lineSeparator();
     }
