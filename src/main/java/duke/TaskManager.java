@@ -6,21 +6,26 @@ import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
 
+import java.util.ArrayList;
+
 public class TaskManager {
     private TaskList _activeTasks = new TaskList();
     private int _serialNo = 0;
 
     private int rollSerialNo() {
-        int no = this._serialNo;
-        this._serialNo++;
-        return no;
+        while (this._activeTasks.containsKey(this._serialNo)) {
+            this._serialNo++;
+        }
+        return this.getSerialNo();
+    }
+    private int getSerialNo() {
+        return this._serialNo;
     }
     public ToDo addNewToDo(String taskDescription) {
         ToDo task = new ToDo(taskDescription,this.rollSerialNo(),false);
         this._activeTasks.addTask(task);
         return task;
     }
-
     public Event addNewEvent(String taskDescription, String from, String to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
         this._activeTasks.addTask(event);
@@ -31,12 +36,10 @@ public class TaskManager {
         this._activeTasks.addTask(deadLine);
         return deadLine;
     }
-
     public Integer getSize(){
         return this._activeTasks.getSize();
     }
-
-    public Task[] getAllAsArray(){
+    public ArrayList<Task> getAllAsArray() {
         return this._activeTasks.getAllAsArray();
     }
     public Boolean containsTaskId(Integer taskId) {
@@ -45,11 +48,12 @@ public class TaskManager {
     public Task getTaskById(Integer taskId) {
         return this._activeTasks.getTaskById(taskId);
     }
-
     public Task getTaskByIdAndSetDoneStatus(Integer taskId, Boolean done) {
         Task target = this.getTaskById(taskId);
         target.setDoneStatus(done);
         return target;
     }
-
+    public Task softDeleteById(Integer taskId) {
+        return this._activeTasks.removeTaskById(taskId);
+    }
 }

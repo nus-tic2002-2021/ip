@@ -3,13 +3,14 @@ package duke.dukeUtility.prettify;
 import duke.TaskManager;
 import duke.task.model.Task;
 
+import java.util.ArrayList;
+
 
 public class Prettify {
 
     private static char getTaskTypeSymbol(Task t) {
         return t.getClass().getSimpleName().charAt(0);
     }
-
 
     private static String fillCell(String value, Integer lengthColMax) {
         int lengthValue = value.length();
@@ -24,7 +25,7 @@ public class Prettify {
      * @return String
      */
     public static String prettifyTaskMgr(TaskManager taskMgr) {
-        Task[] tl = taskMgr.getAllAsArray();
+        ArrayList<Task> tl = taskMgr.getAllAsArray();
 
         StringBuilder generating = new StringBuilder();
         int taskQty = taskMgr.getSize();
@@ -54,8 +55,7 @@ public class Prettify {
         int lengthColDesc = headerDescription.length();
 
         // body
-        for (Task t : tl) {
-
+        for (Task t : tl)  {
             // fill column Id
             String idValue = String.format("%4d", t.getTaskId()).replace(" ", "0");
             String columnId = fillCell(idValue, lengthColId);
@@ -79,8 +79,7 @@ public class Prettify {
             generating.append(columnChronology);
             generating.append(System.lineSeparator());
         }
-        String generated = generating.toString();
-        return generated;
+        return generating.toString();
     }
 
 }
