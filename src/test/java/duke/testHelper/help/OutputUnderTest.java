@@ -54,4 +54,9 @@ public class OutputUnderTest {
     public static String getMsgUnderTestUnknownRequest(){
         return "Unknown command. . ." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
+
+    public static String getMsgUnderTestResponseTaskDeleted(Integer taskId){
+        return "Task Deleted: " + taskId + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+
+    }
 }
