@@ -14,4 +14,8 @@ public class Deadlines extends Task{
         }
     }
 
+    public String getTaskInfo() {
+        return super.getTaskInfo() + " ( by: " + deadline + ")";
+    }
+
 }
