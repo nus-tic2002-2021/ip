@@ -50,3 +50,8 @@ for development tracking of project
   - [x] `$ deadline [task_description] /by [dateString]` - add a Deadline \
   - [x] `$ event [task_description] /at [fromDateString]-[toDateString]` - add an event \
   - [x] `*` - unknown request
+
+## Feature Level 5
+
+No feature changes (error handling)
+

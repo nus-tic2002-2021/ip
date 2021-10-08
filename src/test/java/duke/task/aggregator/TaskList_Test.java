@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class TaskList_Test extends TestStream {
     @Test
-    public void TestToDo() throws Exception {
+    public void TestToDo(){
 
         TaskList tl = new TaskList();
         String task0Description = "task 0";

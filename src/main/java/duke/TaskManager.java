@@ -6,13 +6,9 @@ import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
 
-import java.time.LocalDateTime;
-
 public class TaskManager {
     private TaskList _activeTasks = new TaskList();
     private int _serialNo = 0;
-
-
 
     private int rollSerialNo() {
         int no = this._serialNo;

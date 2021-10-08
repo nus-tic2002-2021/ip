@@ -13,10 +13,6 @@ import duke.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
-import duke.dukeExceptions.DukeParseDateTimeException;
-
-
-import java.time.LocalDateTime;
 
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
 

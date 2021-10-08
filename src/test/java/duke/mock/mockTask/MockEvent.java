@@ -1,6 +1,5 @@
 package duke.mock.mockTask;
 
-
 public class MockEvent extends MockTask{
     private String _from;
     private String _to;

@@ -3,10 +3,16 @@ package duke;
 
 import duke.command.Command;
 import duke.command.commandFactory.UiCommandFactory;
+import duke.command.errorCommand.CommandExecutionError;
+import duke.command.errorCommand.CommandUnknownRequest;
+import duke.command.taskCommand.taskQuery.CommandListAll;
 import duke.dukeUtility.enums.ResponseType;
 
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import static duke.dukeUtility.validator.TextCommandValidator.*;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestAddEvent;
 
 
 /**
@@ -18,8 +24,26 @@ public class Ui {
     private Boolean _loop = true;
     private UiCommandFactory _UiCommandFactory = new UiCommandFactory() {
         @Override
-        public Command executeTextCommand(String text, TaskManager __) {
-            return null;
+        public Command executeTextCommand(String text, TaskManager taskManager) {
+            try {
+                if (isRequestExitLoop(text)) {
+                    return this.executeCommandExitLoop();
+                } else if (isRequestList(text)) {
+                    return new CommandListAll(taskManager);
+                } else if (isRequestMarkTaskAsDone(text)) {
+                    return this.executeCommandMarkTaskAsDone(text, taskManager);
+                } else if (isRequestAddToDo(text)) {
+                    return this.executeCommandAddToDo(text, taskManager);
+                } else if(isRequestAddDeadline(text)){
+                    return this.executeCommandAddDeadline(text, taskManager);
+                } else if(isRequestAddEvent(text)){
+                    return this.executeCommandAddEvent(text, taskManager);
+                }else {
+                    return new CommandUnknownRequest(text);
+                }
+            } catch (Exception e) {
+                return new CommandExecutionError(e, "command execution @ cli");
+            }
         }
     };
 
