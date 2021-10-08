@@ -14,4 +14,7 @@ public class CommandPromptsAndOptions {
     public static final String PROMPT_UPDATE_DONE = "done ";
 
     public static final String PROMPT_EXIT_LOOP = "bye";
+
+    public static final String PROMPT_DELETE_TASK = "delete ";
+
 }

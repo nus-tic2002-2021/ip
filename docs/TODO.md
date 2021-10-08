@@ -55,3 +55,8 @@ for development tracking of project
 
 No feature changes (error handling)
 
+# [Feature Level 6](https://www.notion.so/Level-6-Delete-01e01049c8ef41748ba3be9b035b0e5d)
+
+## New Feature
+
+- [ ] `$ delete [task_id]` - delete a task \

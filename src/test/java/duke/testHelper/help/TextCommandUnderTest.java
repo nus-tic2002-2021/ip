@@ -13,6 +13,8 @@ public class TextCommandUnderTest {
     public static final String DELIMITER_EVENT_FROM = " /at ";
     public static final String DELIMITER_EVENT_TO = "-";
 
+    public static final String PROMPT_UNDER_TEST_DELETE_TASK = "delete ";
+
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
     }
@@ -38,5 +40,7 @@ public class TextCommandUnderTest {
     public static String generateTextCommandLineAddEvent(String invoke, String eventDescription, String addEventScheduleDelimiter, String from, String fromToDelimiter, String to) {
         return invoke + eventDescription + addEventScheduleDelimiter + from + fromToDelimiter + to + System.lineSeparator();
     }
-
+    public static String generateTextCommandDeleteTaskByTaskId(String invoke,Integer taskId){
+        return invoke + taskId + System.lineSeparator();
+    }
 }

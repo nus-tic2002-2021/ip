@@ -11,6 +11,7 @@ import duke.command.systemCommand.CommandExitLoop;
 import duke.command.taskCommand.taskAdd.CommandAddNewDeadline;
 import duke.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
+import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
 
@@ -101,6 +102,25 @@ public abstract class UiCommandFactory extends CommandFactory {
             return new CommandInvalidRequestParameters(e.toString());
         }
         return new CommandMarkTaskAsDone(taskManager, taskId);
+    }
 
+    protected Command executeCommandDeleteTask(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        Integer taskId;
+        try {
+            argLine = text.replaceFirst(PROMPT_DELETE_TASK, "");
+            argList = argLine.split(" ");
+            if (argList.length != 1) {
+                throw new Exception("Invalid syntax.");
+            }
+            taskId = Integer.parseInt(argList[0]);
+            if (!taskManager.containsTaskId(taskId)) {
+                return new CommandTaskNotFound(argList[0]);
+            }
+        } catch (Exception e) {
+            return new CommandInvalidRequestParameters(e.toString());
+        }
+        return new CommandDeleteTask(taskManager, taskId);
     }
 }

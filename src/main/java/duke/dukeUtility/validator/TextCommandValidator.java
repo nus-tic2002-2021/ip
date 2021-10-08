@@ -25,5 +25,8 @@ public class TextCommandValidator {
     public static Boolean isRequestAddEvent(String text) {
         return text.startsWith(PROMPT_ADD_EVENT);
     }
+    public static Boolean isRequestDeleteTask(String text) {
+        return text.startsWith(PROMPT_DELETE_TASK);
+    }
 
 }

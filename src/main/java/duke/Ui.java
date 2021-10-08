@@ -38,7 +38,9 @@ public class Ui {
                     return this.executeCommandAddDeadline(text, taskManager);
                 } else if(isRequestAddEvent(text)){
                     return this.executeCommandAddEvent(text, taskManager);
-                }else {
+                } else if (isRequestDeleteTask(text)) {
+                    return this.executeCommandDeleteTask(text, taskManager);
+                } else {
                     return new CommandUnknownRequest(text);
                 }
             } catch (Exception e) {
@@ -128,7 +130,13 @@ public class Ui {
             this.getPrintStream().print("Invalid command " + c.getArgs().get(1) + System.lineSeparator());
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
             this.getPrintStream().print("Unknown command. . ." + System.lineSeparator());
-        } else {
+        } else if (rt == ResponseType.TASK_NOT_FOUND){
+            this.getPrintStream().print("Task Not Found: " + c.getArgs().get(1) + System.lineSeparator());
+        } else if (rt == ResponseType.TASK_DELETE_TASK) {
+            this.getPrintStream().print("Task Deleted: " + c.getArgs().get(1) + System.lineSeparator());
+        }  else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
+            this.getPrintStream().print("Invalid parameters: " + c.getArgs().get(1) + System.lineSeparator());
+        }else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
     }
