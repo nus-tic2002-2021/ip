@@ -48,7 +48,7 @@ Add the ability to store whatever text entered by the user and display them back
 No feature changes (error handling)
 
 
-## Feature Level 4
+## Feature Level 6
 
 `bye` exit input loop
 `list` list tasks \
