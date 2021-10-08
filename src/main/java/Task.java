@@ -16,7 +16,7 @@ public class Task {
         if (Completed) {
             return "[X]";
         } else {
-            return "[]";
+            return "[ ]";
         }
     }
 
