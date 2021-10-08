@@ -5,4 +5,13 @@ public class Deadlines extends Task{
         super(newTask);
         deadline = datetime;
     }
+
+    public String getCompletedSymbol() {
+        if (Completed) {
+            return "[D][X]";
+        } else {
+            return "[D][ ]";
+        }
+    }
+
 }
