@@ -1,5 +1,6 @@
 package duke;
 
+import com.google.gson.JsonArray;
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -7,6 +8,8 @@ import duke.task.model.Task;
 import duke.task.model.ToDo;
 
 import java.util.ArrayList;
+
+import static duke.dukeUtility.parser.TaskToJsonParser.*;
 
 public class TaskManager {
     private TaskList _activeTasks = new TaskList();
@@ -55,5 +58,19 @@ public class TaskManager {
     }
     public Task softDeleteById(Integer taskId) {
         return this._activeTasks.removeTaskById(taskId);
+    }
+    public JsonArray getAllAsJson() {
+        ArrayList<Task> tasks = this.getAllAsArray();
+        JsonArray tasksJson = new JsonArray();
+        for (Task task : tasks) {
+            if (task instanceof Event) {
+                tasksJson.add(parseEventAsJson((Event) task));
+            } else if (task instanceof Deadline) {
+                tasksJson.add(parseDeadlineAsJson((Deadline) task));
+            } else if (task instanceof ToDo) {
+                tasksJson.add(parseToDoAsJson((ToDo) task));
+            }
+        }
+        return tasksJson;
     }
 }

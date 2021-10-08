@@ -1,5 +1,8 @@
 package duke.dukeUtility.validator;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
 /**
  * Text Command Validation methods
@@ -28,5 +31,7 @@ public class TextCommandValidator {
     public static Boolean isRequestDeleteTask(String text) {
         return text.startsWith(PROMPT_DELETE_TASK);
     }
-
+    public static Boolean isParentDirectoryValid(Path p) {
+        return Files.exists(p.getParent());
+    }
 }
