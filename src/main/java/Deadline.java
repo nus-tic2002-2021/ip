@@ -1,9 +1,9 @@
-public class Deadlines extends Task{
-    protected String deadline;
+public class Deadline extends Task{
+    protected String by;
 
-    public Deadlines(String newTask, String datetime) {
+    public Deadline(String newTask, String datetime) {
         super(newTask);
-        deadline = datetime;
+        by = datetime;
     }
 
     public String getCompletedSymbol() {
@@ -15,7 +15,7 @@ public class Deadlines extends Task{
     }
 
     public String getTaskInfo() {
-        return super.getTaskInfo() + " ( by: " + deadline + ")";
+        return super.getTaskInfo() + " ( by: " + by + ")";
     }
 
 }
