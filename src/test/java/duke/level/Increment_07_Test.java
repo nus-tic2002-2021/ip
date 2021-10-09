@@ -6,6 +6,7 @@ import duke.Main;
 import duke.TaskManager;
 import duke.command.commandFactory.FileCommandFactory;
 import duke.testHelper.TestStream;
+import duke.testHelper.help.config.dukeIOTestPath;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +76,8 @@ public class Increment_07_Test extends TestStream {
 
     @Test
     public void GenerateExpectedTestFile() throws Exception {
-        FileResourceManager frm1 = new FileResourceManager(null, null);
+        String importPathString = dukeIOTestPath.getDefaultTasksImportPathString();
+        FileResourceManager frm1 = new FileResourceManager(null, importPathString);
         TaskManager tm1 = new TaskManager();
         Scanner in = new Scanner(new FileReader(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt"));
         StringBuilder sb = new StringBuilder();
