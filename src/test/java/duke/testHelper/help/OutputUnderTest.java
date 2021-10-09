@@ -33,7 +33,7 @@ public class OutputUnderTest {
     }
 
     public static String getMsgUnderTestAttemptImport(Path path){
-        return "Attempting to import tasks from " + path + ". " + System.lineSeparator();
+        return "Attempting to import tasks from " + path + "." + System.lineSeparator();
     }
     public static String getMsgUnderTestReadPathNotFound(){
         return "Read path not found/invalid. " + System.lineSeparator();

@@ -154,7 +154,7 @@ public class Ui {
         if (path == null) {
             this.getPrintStream().print("Import path empty. " + System.lineSeparator());
         } else {
-            this.getPrintStream().print("Attempting to import tasks from " + path + ". " + System.lineSeparator());
+            this.getPrintStream().print("Attempting to import tasks from " + path + "." + System.lineSeparator());
         }
     }
     public void printReadSuccess(String pathString) {
