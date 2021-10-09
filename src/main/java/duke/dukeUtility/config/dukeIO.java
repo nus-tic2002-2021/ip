@@ -11,14 +11,14 @@ public class dukeIO {
     public static  String PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH = null;
     public static  String getDefaultTasksImportPathString() {
         if (dukeIO.PATH_STRING_DEFAULT_TASKS_IMPORT_PATH == null) {
-            dukeIO.PATH_STRING_DEFAULT_TASKS_IMPORT_PATH = resourcePath + File.separator + File.separator + "tasks.json";
+            dukeIO.PATH_STRING_DEFAULT_TASKS_IMPORT_PATH = resourcePath + File.separator + "tasks.json";
         }
         return dukeIO.PATH_STRING_DEFAULT_TASKS_IMPORT_PATH;
     }
 
     public static  String getDefaultTasksExportPathString() {
         if (dukeIO.PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH == null) {
-            dukeIO.PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH = resourcePath + File.separator + File.separator + "tasks.json";
+            dukeIO.PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH = resourcePath + File.separator + "tasks.json";
         }
         return dukeIO.PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH;
     }
