@@ -9,6 +9,7 @@ import duke.command.taskCommand.taskQuery.CommandListAll;
 import duke.dukeUtility.enums.ResponseType;
 
 import java.io.PrintStream;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import static duke.dukeUtility.validator.TextCommandValidator.*;
@@ -24,7 +25,7 @@ public class Ui {
     private Boolean _loop = true;
     private UiCommandFactory _UiCommandFactory = new UiCommandFactory() {
         @Override
-        public Command executeTextCommand(String text, TaskManager taskManager) {
+        public Command executeTextCommand(String text, TaskManager taskManager,FileResourceManager frm) {
             try {
                 if (isRequestExitLoop(text)) {
                     return this.executeCommandExitLoop();
@@ -40,7 +41,9 @@ public class Ui {
                     return this.executeCommandAddEvent(text, taskManager);
                 } else if (isRequestDeleteTask(text)) {
                     return this.executeCommandDeleteTask(text, taskManager);
-                } else {
+                } else if (isRequestSave(text)) {
+                    return frm.executeCommandSave(taskManager);
+                }else {
                     return new CommandUnknownRequest(text);
                 }
             } catch (Exception e) {
@@ -95,13 +98,13 @@ public class Ui {
         this._UiCommandFactory = _UiCommandFactory;
     }
 
-    public void textCommandLoop(TaskManager taskManager) throws Exception {
+    public void textCommandLoop(TaskManager taskManager,FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
         String textCommand;
         Scanner in = new Scanner(System.in);
         do {
             textCommand = in.nextLine();
-            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager);
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager,frm);
             this.displayCommandResponse(command);
             this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
         } while (this._loop);
@@ -136,9 +139,26 @@ public class Ui {
             this.getPrintStream().print("Task Deleted: " + c.getArgs().get(1) + System.lineSeparator());
         }  else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
             this.getPrintStream().print("Invalid parameters: " + c.getArgs().get(1) + System.lineSeparator());
-        }else {
+        }else if (rt == ResponseType.FILE_SAVED) {
+            this.getPrintStream().print("File saved." + System.lineSeparator());
+        }else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH){
+            this.getPrintStream().print("Read path not found/invalid. " + System.lineSeparator());
+        }else if(rt == ResponseType.FILE_READ){
+            this.printReadSuccess(c.getArgs().get(2));
+        } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
+
+    }
+    public void printInitialLoadTaskAttempt(Path path) {
+        if (path == null) {
+            this.getPrintStream().print("Import path empty. " + System.lineSeparator());
+        } else {
+            this.getPrintStream().print("Attempting to import tasks from " + path + ". " + System.lineSeparator());
+        }
+    }
+    public void printReadSuccess(String pathString) {
+        this.getPrintStream().print("Success reading file " + pathString + System.lineSeparator());
     }
 
     public void printTerminateMessage() {

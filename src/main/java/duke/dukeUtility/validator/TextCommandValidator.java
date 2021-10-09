@@ -34,4 +34,8 @@ public class TextCommandValidator {
     public static Boolean isParentDirectoryValid(Path p) {
         return Files.exists(p.getParent());
     }
+
+    public static Boolean isRequestSave(String text) {
+        return text.equals(PROMPT_SAVE);
+    }
 }

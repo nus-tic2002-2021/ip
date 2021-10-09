@@ -1,5 +1,6 @@
 package duke.command.commandFactory;
 
+import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
 
@@ -22,7 +23,7 @@ public abstract class UiCommandFactory extends CommandFactory {
     protected Command executeCommandExitLoop() {
         return new CommandExitLoop(PROMPT_EXIT_LOOP);
     }
-    public abstract Command executeTextCommand(String text, TaskManager taskManager);
+    public abstract Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm);
 
     protected Command executeCommandAddToDo(String text, TaskManager taskManager) {
         int minDescLength = 0;
