@@ -35,6 +35,8 @@ then
     echo "Test result: PASSED"
     exit 0
 else
+    cat ./src/test/resources/test-output/actual.txt
+    cat ./src/test/resources/test-output/expected.txt
     echo "Test result: FAILED"
     exit 1
 fi
