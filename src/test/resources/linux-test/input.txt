@@ -6,4 +6,5 @@ done 2
 delete 0
 list
 somerandomtexxt
+save
 bye

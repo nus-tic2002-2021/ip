@@ -10,8 +10,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import static duke.testHelper.help.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
@@ -19,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Increment_07_Test extends TestStream {
     @Test
-    public void Greet_AddToDo_Delete_List_Exit() throws Exception {
+    public void Greet_AddToDo_Delete_List_Save_Exit() throws Exception {
         String thisTestSign = "saveEventsToJsonFile";
         String export1PathString = resourceTestFolder + 1 + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
         String export2PathString = resourceTestFolder + 2 + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
@@ -66,6 +70,26 @@ public class Increment_07_Test extends TestStream {
             assertEquals(export1, export2);
         } catch (Exception e) {
             fail("Failure during comparing exports. " + e + this.getOutput());
+        }
+    }
+
+    @Test
+    public void GenerateExpectedTestFile() throws Exception {
+        FileResourceManager frm1 = new FileResourceManager(null, null);
+        TaskManager tm1 = new TaskManager();
+        Scanner in = new Scanner(new FileReader(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt"));
+        StringBuilder sb = new StringBuilder();
+        while(in.hasNext()) {
+            sb.append(in.nextLine());
+            sb.append(System.lineSeparator());
+        }
+        in.close();
+        System.setIn(new ByteArrayInputStream(sb.toString().getBytes()));
+        this.setPrintStream(new PrintStream(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt"));
+        try {
+            Main.run(this.getPrintStream(), tm1,frm1);
+        } catch (Exception e) {
+            fail(e.toString());
         }
     }
 }
