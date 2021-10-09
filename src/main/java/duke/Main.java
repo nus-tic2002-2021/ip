@@ -1,10 +1,7 @@
 package duke;
 
-import com.google.gson.JsonArray;
-import duke.command.CommandJsonResponse;
 
 import java.io.PrintStream;
-import java.nio.file.Path;
 
 import static duke.dukeUtility.config.dukeIO.*;
 

@@ -1,5 +1,6 @@
 package duke.level;
 
+import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.mock.mockTask.MockDeadline;
@@ -14,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import static duke.testHelper.help.OutputUnderTest.*;
 import static duke.testHelper.help.PrettifyUnderTest.getPrettifyUnderTestList;
 import static duke.testHelper.help.TextCommandUnderTest.*;
+import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -67,8 +70,11 @@ public class Increment_06_Test extends TestStream {
          * terminate
          */
         StringBuilder expectedResponseBuilder = new StringBuilder();
-
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
         expectedResponseBuilder.append(getMsgUnderTestResponseTaskDeleted(0));
@@ -80,7 +86,7 @@ public class Increment_06_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager(), null);
+             Main.run(this.getPrintStream(), tm,frm);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -128,8 +134,11 @@ public class Increment_06_Test extends TestStream {
          * terminate
          */
         StringBuilder expectedResponseBuilder = new StringBuilder();
-
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc1));
@@ -144,7 +153,7 @@ public class Increment_06_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager(),null);
+        Main.run(this.getPrintStream(), tm,frm);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 

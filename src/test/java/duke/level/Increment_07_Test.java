@@ -18,7 +18,6 @@ import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Increment_07_Test extends TestStream {
-    @Disabled
     @Test
     public void Greet_AddToDo_Delete_List_Exit() throws Exception {
         String thisTestSign = "saveEventsToJsonFile";
@@ -29,7 +28,7 @@ public class Increment_07_Test extends TestStream {
         StringBuilder commandLines = new StringBuilder();
         //  sets of add tasks textCommands
         int countPerTaskType = 10;
-        Integer totalTasks = 0;
+        int totalTasks = 0;
         for (int i = 1; i <= countPerTaskType; i++) {
             commandLines.append("todo todo" + i + System.lineSeparator());
             totalTasks++;
@@ -45,7 +44,7 @@ public class Increment_07_Test extends TestStream {
         System.setIn(new ByteArrayInputStream(commandLines.toString().getBytes()));
         try {
             Main.run(this.getPrintStream(), tm1,frm1);
-            assertTrue(tm1.getSize() == (totalTasks),"expected amount " + totalTasks + ", actual " + tm1.getSize() + System.lineSeparator());
+            assertSame(tm1.getSize(),totalTasks,"expected amount " + totalTasks + ", actual " + tm1.getSize() + System.lineSeparator());
         } catch (Exception e) {
             fail(e.toString());
         }
