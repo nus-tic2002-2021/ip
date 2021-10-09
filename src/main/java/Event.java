@@ -5,5 +5,13 @@ public class Event extends Task {
         super(newTask);
         at = datetime;
     }
+
+    public String getCompletedSymbol() {
+        if (Completed) {
+            return "[E][X]";
+        } else {
+            return "[E][ ]";
+        }
+    }
     
 }
