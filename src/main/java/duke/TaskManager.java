@@ -1,6 +1,7 @@
 package duke;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -9,7 +10,9 @@ import duke.task.model.ToDo;
 
 import java.util.ArrayList;
 
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.*;
 import static duke.dukeUtility.parser.TaskToJsonParser.*;
+import static duke.dukeUtility.validator.JsonObjectValidator.*;
 
 public class TaskManager {
     private TaskList _activeTasks = new TaskList();
@@ -73,4 +76,47 @@ public class TaskManager {
         }
         return tasksJson;
     }
+
+    public ToDo importToDo(ToDo toDo) {
+        this._activeTasks.addTask(toDo);
+        return toDo;
+    }
+
+    public Event importEvent(Event event) {
+        this._activeTasks.addTask(event);
+        return event;
+    }
+
+    public Deadline importDeadline(Deadline deadline) {
+        this._activeTasks.addTask(deadline);
+        return deadline;
+
+    }
+
+    public final Task objectify(JsonObject jsonObj) throws Exception {
+        if (!isNotNullJsonPropertyTaskType(jsonObj)) {
+            throw new Exception("No task type");
+        } else if (isJsonTypeToDo(jsonObj)) {
+            Integer taskId = getJsonPropertyTaskId(jsonObj);
+            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
+            Boolean done = getJsonPropertyDoneStatus(jsonObj);
+            return new ToDo(taskDescription, taskId, done);
+        } else if (isJsonTypeDeadline(jsonObj)) {
+            Integer taskId = getJsonPropertyTaskId(jsonObj);
+            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
+            Boolean done = getJsonPropertyDoneStatus(jsonObj);
+            String deadline = getJsonPropertyDeadline(jsonObj);
+            return new Deadline(taskDescription, deadline, taskId, done);
+        } else if (isJsonTypeEvent(jsonObj)) {
+            Integer taskId = getJsonPropertyTaskId(jsonObj);
+            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
+            Boolean done = getJsonPropertyDoneStatus(jsonObj);
+            String from = getJsonPropertyFrom(jsonObj);
+            String to = getJsonPropertyTo(jsonObj);
+            return new Event(taskDescription, from, to, taskId, done);
+        }
+        throw new Exception("Json object not recognised as a task Object");
+    }
+    
+    
 }

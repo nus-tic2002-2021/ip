@@ -1,9 +1,14 @@
 package duke;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import duke.command.Command;
+import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;
+import duke.command.commandFactory.FileCommandFactory;
+import duke.command.commandFactory.ImportCommandFactory;
 import duke.command.errorCommand.CommandExecutionError;
 
 import java.io.FileWriter;
@@ -16,18 +21,43 @@ import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryV
 public class FileResourceManager {
 
     private final ExportCommandFactory _exportCommandFactory = new ExportCommandFactory();
+    private final ImportCommandFactory _importCommandFactory = new ImportCommandFactory();
+    private final FileCommandFactory _fileCommandFactory = new FileCommandFactory();
+
     private String exportPathString;
+    private String importPathString;
+
     private ExportCommandFactory getExportCommandFactory() {
         return this._exportCommandFactory;
     }
     public FileResourceManager(String exportPathString, String importPathString) {
         this.setExportPathString(exportPathString);
+        this.setImportPathString(importPathString);
+
     }
     private FileResourceManager() {
+    }
+    private String getImportPathString() {
+        return this.importPathString;
     }
 
     public Command executeExportTasks(JsonArray tasksJson, JsonWriter jw) {
         return this.getExportCommandFactory().exportTasks(tasksJson, jw);
+    }
+    public CommandJsonResponse executeExtractTasksFromFile(){
+        Path path = this.getImportPath();
+        return this.getFileCommandFactory().executeExtractTasksFromFile(path);
+    }
+    private FileCommandFactory getFileCommandFactory() {
+        return this._fileCommandFactory;
+    }
+
+    public Path getImportPath() {
+        try {
+            return Paths.get(this.getImportPathString());
+        } catch (Exception e) {
+            return null;
+        }
     }
     private String getExportPathString() {
         return this.exportPathString;
@@ -42,7 +72,9 @@ public class FileResourceManager {
             return null;
         }
     }
-
+    private void setImportPathString(String importPathString) {
+        this.importPathString = importPathString;
+    }
     public Command executeCommandSave(TaskManager taskManager) {
         JsonWriter jw;
         JsonArray tasksJson = new JsonArray();
@@ -71,4 +103,30 @@ public class FileResourceManager {
         }
         return this.executeExportTasks(tasksJson, jw);
     }
+
+    public void importTasksJson(JsonArray array, TaskManager taskManager) {
+        if (array == null || array.isEmpty()) {
+            return;
+        }
+        for (JsonElement element : array) {
+            if (element.isJsonObject()) {
+                JsonObject jsonTask = element.getAsJsonObject();
+                this.getImportCommandFactory().executeImportJsonTask(jsonTask, taskManager);
+            }
+        }
+    }
+
+    public void etlTasksFromJsonFileString(TaskManager taskManager, Ui ui) throws Exception {
+        Path path = this.getImportPath();
+        ui.printInitialLoadTaskAttempt(path);
+        CommandJsonResponse reading = this.getFileCommandFactory().executeExtractTasksFromFile(path);
+        ui.displayCommandResponse(reading);
+        JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
+        this.importTasksJson(tasksFromFile, taskManager);
+    }
+
+    private ImportCommandFactory getImportCommandFactory() {
+        return this._importCommandFactory;
+    }
+
 }
