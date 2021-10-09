@@ -1,4 +1,6 @@
-public class Task {
+package duke.task;
+
+public abstract class Task {
     String description;
     boolean isDone;
     Types type;
@@ -9,9 +11,11 @@ public class Task {
         type = Types.UNKNOWN;
     }
 
-    public void showTask(){}
+    public abstract void showTask();
 
     public void doTask(){
         this.isDone = true;
     }
+
+    public abstract String toStoreString();
 }
