@@ -77,7 +77,7 @@ public class Increment_07_Test extends TestStream {
     @Test
     public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
         String importPathString = dukeIOTestPath.getDefaultTasksImportPathString();
-        String exportPathString = dukeIOTestPath.getDefaultTasksExportPathString();
+        String exportPathString = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "do-not-use.txt";
         FileResourceManager frm1 = new FileResourceManager(exportPathString, importPathString);
         TaskManager tm1 = new TaskManager();
         Scanner in = new Scanner(new FileReader(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt"));

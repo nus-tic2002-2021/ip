@@ -118,7 +118,7 @@ public class Ui {
         } else if (rt == ResponseType.ECHO) {
             this.printEchoMessage(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
-            this.getPrintStream().print(c.getArgs().get(2));
+            this.getPrintStream().print(c.getArgs().get(2) + System.lineSeparator());
         } else if (rt == ResponseType.TASK_CREATE_TODO) {
             this.getPrintStream().print("Added To Do: " + c.getArgs().get(2) + System.lineSeparator());
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
