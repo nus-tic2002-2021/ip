@@ -15,6 +15,8 @@ public class TextCommandUnderTest {
 
     public static final String PROMPT_UNDER_TEST_DELETE_TASK = "delete ";
 
+    public static final String PROMPT_UNDER_TEST_SAVE = "save";
+
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
     }
@@ -43,4 +45,8 @@ public class TextCommandUnderTest {
     public static String generateTextCommandDeleteTaskByTaskId(String invoke,Integer taskId){
         return invoke + taskId + System.lineSeparator();
     }
+    public static String generateTextCommandSave(String invoke) {
+        return singleArgumentCommand(invoke);
+    }
+
 }

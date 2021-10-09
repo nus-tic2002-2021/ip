@@ -78,7 +78,7 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -135,7 +135,7 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -191,7 +191,7 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -217,7 +217,7 @@ public class Increment_04_Test extends TestStream {
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
 
         assertEquals(expectedOutputResponse, this.getOutput());
 
@@ -283,7 +283,7 @@ public class Increment_04_Test extends TestStream {
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
         assertEquals(expectedOutputResponse, this.getOutput());
 
     }

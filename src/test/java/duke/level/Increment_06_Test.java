@@ -80,7 +80,7 @@ public class Increment_06_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(), null);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -144,7 +144,7 @@ public class Increment_06_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), new TaskManager(),null);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
