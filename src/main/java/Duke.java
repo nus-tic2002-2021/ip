@@ -3,13 +3,23 @@ public class Duke {
 
     private static String lineBreak = "\t_______________________________________________________";
     private static List inputList;
+    private UI ui;
+
+
+    public Duke (String filePath) {
+        ui = new UI();
+
+    }
+
+    public void run(){
+
+    }
 
     public static void initialize (){
         Scanner in = new Scanner(System.in);
         String inputLine = "";
         inputList = new List();
 
-        printIntro();
         while (!inputLine.equals("bye")) {
             inputLine = in.nextLine();
             printResponse(inputLine);
@@ -55,14 +65,9 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        initialize();
+        new Duke("data/tasks.txt").run();
+        //printIntro();
+        //initialize();
 
     }
 }
