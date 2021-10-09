@@ -117,6 +117,10 @@ public class Duke {
         Checklist[index].markCompleted();
     }
 
+    public static void PrintTaskCount() {
+        System.out.println("Now you have " + TaskCount + " tasks in the list.");
+    }
+
     public static void Level1() {
         Greet();
         Echo();
