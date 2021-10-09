@@ -1,5 +1,7 @@
 package duke.testHelper.help;
 
+import java.nio.file.Path;
+
 public class OutputUnderTest {
     private static String LOGO = " _                   _                                _             "
             + System.lineSeparator()
@@ -30,6 +32,12 @@ public class OutputUnderTest {
         return "How can i help you? (See docs for usage)" + System.lineSeparator();
     }
 
+    public static String getMsgUnderTestAttemptImport(Path path){
+        return "Attempting to import tasks from " + path + "." + System.lineSeparator();
+    }
+    public static String getMsgUnderTestReadPathNotFound(){
+        return "Read path not found/invalid. " + System.lineSeparator();
+    }
     public static String getMsgUnderTestExitLoop() {
         return "ok bye" + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }

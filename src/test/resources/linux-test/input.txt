@@ -1,0 +1,10 @@
+todo td_desc0
+todo td_desc1
+deadline some deadline /by someDate
+event some event /at from-to
+done 2
+delete 0
+list
+somerandomtexxt
+save
+bye

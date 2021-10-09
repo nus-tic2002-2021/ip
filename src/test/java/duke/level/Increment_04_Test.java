@@ -1,5 +1,6 @@
 package duke.level;
 
+import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.mock.mockTask.MockDeadline;
@@ -14,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import static duke.testHelper.help.OutputUnderTest.*;
 import static duke.testHelper.help.PrettifyUnderTest.getPrettifyUnderTestList;
 import static duke.testHelper.help.TextCommandUnderTest.*;
+import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -66,8 +69,11 @@ public class Increment_04_Test extends TestStream {
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
         MockToDo expectedToDo1 = new MockToDo(taskDesc0, 0, false);
-
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
 
@@ -78,7 +84,8 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), tm,frm);
+
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -121,10 +128,13 @@ public class Increment_04_Test extends TestStream {
          * terminate
          */
         StringBuilder expectedResponseBuilder = new StringBuilder();
-
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         MockEvent expectedEvent = new MockEvent(taskDesc0, 0, false, fromDateString,toDateString);
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseEventAdded(taskDesc0));
 
@@ -135,7 +145,7 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), tm,frm);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -178,9 +188,15 @@ public class Increment_04_Test extends TestStream {
          */
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+
+
         MockDeadline expectedEvent = new MockDeadline(taskDesc0, 0, false, byDateString);
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseDeadlineAdded(taskDesc0));
 
@@ -191,7 +207,7 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), tm,frm);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
 
@@ -207,7 +223,13 @@ public class Increment_04_Test extends TestStream {
         System.setIn(new ByteArrayInputStream(commandLines.getBytes()));
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
+
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
 
         expectedResponseBuilder.append(getMsgUnderTestUnknownRequest());
@@ -217,7 +239,7 @@ public class Increment_04_Test extends TestStream {
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
-        Main.run(this.getPrintStream(), new TaskManager());
+        Main.run(this.getPrintStream(), tm,frm);
 
         assertEquals(expectedOutputResponse, this.getOutput());
 
@@ -269,7 +291,12 @@ public class Increment_04_Test extends TestStream {
         MockDeadline expectedDeadline = new MockDeadline(task1DeadlineDescription, 1, false, task1DeadlineByString);
         MockEvent expectedEvent = new MockEvent(task2EventDescription, 2, false, task2EventFromDateString,task2EventToDateString);
 
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+
         expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(task0ToDoDescription));
         expectedResponseBuilder.append(getMsgUnderTestResponseDeadlineAdded(task1DeadlineDescription));
@@ -282,8 +309,8 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
         String expectedOutputResponse = expectedResponseBuilder.toString();
+        Main.run(this.getPrintStream(), tm,frm);
 
-        Main.run(this.getPrintStream(), new TaskManager());
         assertEquals(expectedOutputResponse, this.getOutput());
 
     }

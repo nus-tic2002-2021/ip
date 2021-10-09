@@ -59,4 +59,13 @@ No feature changes (error handling)
 
 ## New Feature
 
-- [ ] `$ delete [task_id]` - delete a task \
+- [x] `$ delete [task_id]` - delete a task \
+
+
+# [Feature Level 7]
+
+## New Feature
+
+- app will load task resource, if any
+  - [ ] load on start
+  - [ ] `save` - save tasks

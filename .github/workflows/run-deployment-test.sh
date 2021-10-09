@@ -25,16 +25,17 @@ mvn test
 
 # package into jar
 mvn package
-
 # test jar output
-java -jar target/Duke.jar < ./src/test/resources/test-input/input.txt > ./src/test/resources/test-output/actual.txt
+java -jar target/Duke.jar < ./src/test/resources/linux-test/input.txt > ./src/test/resources/linux-test/actual.txt
 
-cmp --print-chars ./src/test/resources/test-output/actual.txt ./src/test/resources/test-output/expected.txt
+cmp --print-chars ./src/test/resources/linux-test/actual.txt ./src/test/resources/linux-test/expected.txt
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
     exit 0
 else
+    cat ./src/test/resources/linux-test/actual.txt
+    cat ./src/test/resources/linux-test/expected.txt
     echo "Test result: FAILED"
     exit 1
 fi

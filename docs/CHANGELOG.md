@@ -15,7 +15,7 @@ Implement an initial skeletal version of the Duke that simply greets the user an
 
 ## Feature Level 2
 
-`bye` exit input loop
+`bye` exit input loop \
 `list` list tasks \
 `[description]` add String \
 
@@ -24,7 +24,7 @@ Add the ability to store whatever text entered by the user and display them back
 
 ## Feature Level 3
 
-`bye` exit input loop
+`bye` exit input loop \
 `list` list tasks \
 `[description]` add ToDo \
 `done [id]` set task as done \
@@ -33,7 +33,7 @@ Add the ability to store whatever text entered by the user and display them back
 
 ## Feature Level 4
 
-`bye` exit input loop
+`bye` exit input loop \
 `list` list tasks \
 `todo [description]` add ToDo \
 `deadline [description] /by [date]` add Deadline \
@@ -50,7 +50,7 @@ No feature changes (error handling)
 
 ## Feature Level 6
 
-`bye` exit input loop
+`bye` exit input loop \
 `list` list tasks \
 `todo [description]` add ToDo \
 `deadline [description] /by [date]` add Deadline \
@@ -58,4 +58,18 @@ No feature changes (error handling)
 `done [id]` set task as done \
 `delete [id]` delete task by id \
 
-![level 4](/docs/screenshots/branch-level-5.gif)
+![level 6](/docs/screenshots/branch-level-6.gif)
+
+
+## Feature Level 7
+
+`bye` exit input loop \
+`list` list tasks \
+`todo [description]` add ToDo \
+`deadline [description] /by [date]` add Deadline \
+`event [description] /at [from]-[to]` add Event \
+`done [id]` set task as done \
+`delete [id]` delete task by id \
+`save` save tasks to file \
+
+![level 7](/docs/screenshots/branch-level-7.gif)
