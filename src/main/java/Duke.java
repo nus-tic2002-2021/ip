@@ -212,10 +212,16 @@ public class Duke {
         TaskList();
     }
 
+    public static void Level4() {
+        Greet();
+        ExtendTaskList();
+    }
+
     public static void main(String[] args) {
         StartDuke();
         // Level1();
         // Level2();
-        Level3();
+        // Level3();
+        Level4();
     }
 }
