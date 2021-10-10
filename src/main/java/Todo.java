@@ -1,9 +1,9 @@
+import java.util.ArrayList;
+
 public class Todo extends Task{
-    protected boolean isDone;
 
     public Todo(String description){
         super(description);
-        isDone = false;
     }
 
     public void setDone(){
@@ -19,6 +19,17 @@ public class Todo extends Task{
         else {
             System.out.println("\t  [T][ ] " + description);
         }
+    }
+    public String getTask(){
+        return "T";
+    }
+
+    public String getDescription(){
+        return description;
+    }
+    public String getSave(){
+        String s = getTask() + " | " +  getDone() + " | " + getDescription();
+        return s;
     }
 
     @Override

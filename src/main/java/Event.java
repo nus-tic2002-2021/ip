@@ -23,6 +23,21 @@ public class Event extends Task {
     {
         this.eventTime = eventTime;
     }
+
+    public String getTask(){
+        return "E";
+    }
+    public String getDescription(){
+        return description;
+    }
+    public String getEventTime(){
+        return eventTime;
+    }
+
+    public String getSave(){
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getEventTime();
+        return s;
+    }
     @Override
     public String toString() {
         String box = "[E][ ] ";

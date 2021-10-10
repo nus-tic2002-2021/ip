@@ -23,6 +23,22 @@ public class Deadline extends Task{
     {
         this.by = by;
     }
+
+    public String getTask(){
+        return "D";
+    }
+    public String getDescription(){
+        return description;
+    }
+    public String getBy(){
+        return by;
+    }
+
+    public String getSave(){
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getBy();
+        return s;
+    }
+
     @Override
     public String toString() {
         String box = "[D][ ] ";

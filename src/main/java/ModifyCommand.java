@@ -1,20 +1,19 @@
-public class DeleteCommand extends Command{
-    protected String delete;
-    public DeleteCommand(String action, String delete){
+public class ModifyCommand extends Command{
+    protected String modify;
+    public ModifyCommand(String action, String modify){
         super(action);
-        setDelete(delete);
+        setModify(modify);
     }
-    public void setDelete(String delete) {
-        this.delete = delete;
+    public void setModify(String modify) {
+        this.modify = modify;
     }
     public void execute(List tasks, Storage storage){
         try {
-            tasks.taskDelete(delete);
+            tasks.taskDone(modify);
         } catch(NotFoundException e) {
             System.out.println("\tTask cannot be found.");
         } catch (NumberFormatException e){
             System.out.println("\tInvalid task number entry.");
         }
     }
-
 }

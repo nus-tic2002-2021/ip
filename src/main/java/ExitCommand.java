@@ -1,7 +1,14 @@
 public class ExitCommand extends Command{
-    protected boolean isExit;
     public ExitCommand(String action){
         super(action);
-        isExit = true;
+    }
+    public void execute(List tasks, Storage storage){
+        tasks.saveList();
+        //tasks.getSave().listIterator();
+        storage.saveFile(tasks.getSave());
+    }
+    @Override
+    public boolean isExit() {
+        return true;
     }
 }
