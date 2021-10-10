@@ -143,11 +143,11 @@ public class Duke {
             } else if (input.contains("deadline") && (input.substring(0,8)).equals("deadline")) {
                 if (input.contains("/by")) {
                     String[] parts = input.substring(8).split("/by");
-                    if (parts.length > 2){
-                        System.out.println("Invalid input.");
-                    } else if (parts[0].equals("")) {
+                    if (parts.length != 2){
+                        System.out.println("Invalid deadline input. Missing info.");
+                    } else if (parts[0].trim().equals("")) {
                         System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-                    } else if (parts[1].equals("")) {
+                    } else if (parts[1].trim().equals("")) {
                         System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
                     } else {
                         Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
@@ -157,15 +157,17 @@ public class Duke {
                         PrintTaskCount();
                         System.out.println(line);
                     }
+                } else {
+                    System.out.println("Invalid deadline input.");
                 }
             } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
                 if (input.contains("/at")) {
                     String[] parts = input.substring(5).split("/at");
-                    if (parts.length > 2) {
-                        System.out.println("Invalid input.");
-                    } else if (parts[0].equals("")) {
+                    if (parts.length != 2) {
+                        System.out.println("Invalid event input. Missing info.");
+                    } else if (parts[0].trim().equals("")) {
                         System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-                    } else if (parts[1].equals("")) {
+                    } else if (parts[1].trim().equals("")) {
                         System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
                     } else {
                         Event newEvent = new Event(parts[0].trim(), parts[1].trim());
@@ -175,6 +177,8 @@ public class Duke {
                         PrintTaskCount();
                         System.out.println(line);
                     }
+                } else {
+                    System.out.println("Invalid event input.");
                 }
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 if (input.length() < 5) {
