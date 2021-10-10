@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 
 public class Storage {
@@ -17,6 +19,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    // need to check for file syntax error?
     public ArrayList<Task> loadTasks() throws FileNotFoundException {
         File taskFile = new File(filePath);
         boolean fileExists = taskFile.exists();
@@ -69,12 +72,14 @@ public class Storage {
                 break;
             }
             case "D": {
-                String deadline = args[3];
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+                LocalDate deadline = LocalDate.parse(args[3], formatter);
                 task = new DeadlineTask(description, deadline);
                 break;
             }
             case "E": {
-                String eventTime = args[3];
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+                LocalDateTime eventTime = LocalDateTime.parse(args[3], formatter);
                 task = new EventTask(description, eventTime);
                 break;
             }

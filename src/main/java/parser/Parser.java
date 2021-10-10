@@ -6,6 +6,11 @@ import tasks.EventTask;
 import tasks.Task;
 import tasks.ToDoTask;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     public static Command parse(String fullCommand) {
@@ -59,22 +64,33 @@ public class Parser {
     private static Command doAddDeadline(String[] args){
         try {
             String[] deadlineInfo = args[1].split(" /by ");
-            Task task = new DeadlineTask(deadlineInfo[0], deadlineInfo[1]);
+            String description = deadlineInfo[0];
+            LocalDate by = LocalDate.parse(deadlineInfo[1]);
+            Task task = new DeadlineTask(description, by);
             return new AddCommand(task);
         }
         catch(IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \nDeadline or description is missing.");
         }
+        catch(DateTimeParseException e) {
+            return new InvalidCommand("Task cannot be added. \nPlease enter deadline in the format of 'yyyy-MM-dd'");
+        }
     }
 
     private static Command doAddEvent(String[] args){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             String[] eventInfo = args[1].split(" /at ");
-            Task task = new EventTask(eventInfo[0], eventInfo[1]);
+            String description = eventInfo[0];
+            LocalDateTime at = LocalDateTime.parse(eventInfo[1], formatter);
+            Task task = new EventTask(description, at);
             return new AddCommand(task);
         }
         catch(IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \nEvent time or description is missing");
+        }
+        catch(DateTimeParseException e) {
+            return new InvalidCommand("Task cannot be added. \nPlease enter event datetime in the format of 'yyyy-MM-dd HH:mm'");
         }
     }
 
