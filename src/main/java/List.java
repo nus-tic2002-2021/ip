@@ -10,6 +10,37 @@ public class List {
         taskSave = new ArrayList<>();
     }
 
+    public List(ArrayList<String> loadFile){
+        taskArrayList = new ArrayList<>();
+        taskSave = new ArrayList<>();
+        String[] taskArr;
+        loadFile.listIterator();
+        for(String task : loadFile){
+            taskArr = task.split(" \\| ");
+            String taskType, taskDone, taskDescription;
+            Boolean isDone = false;
+            taskType = taskArr[0];
+            taskDone = taskArr[1];
+            taskDescription = taskArr[2];
+            if(taskDone.equals("1")){
+                isDone = true;
+            }
+
+            switch (taskType){
+                case "T":
+                    taskArrayList.add(new Todo(taskDescription,isDone));
+                    break;
+                case "D":
+                    taskArrayList.add(new Deadline(taskDescription,taskArr[3],isDone));
+                    break;
+                case "E":
+                    taskArrayList.add(new Event(taskDescription,taskArr[3],isDone));
+                    break;
+            }
+        }
+
+    }
+
     public void addTodo(String inputMsg)throws InvalidFormatException{
         if(inputMsg.isEmpty()){
             throw new InvalidFormatException("Todo is missing a description.");

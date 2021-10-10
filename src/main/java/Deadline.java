@@ -5,6 +5,13 @@ public class Deadline extends Task{
         super(description);
         setBy(by);
     }
+
+    public Deadline(String description, String by, Boolean isDone) {
+        super(description);
+        setBy(by);
+        this.isDone = isDone;
+    }
+
     public void setDone(){
         this.isDone = true;
         System.out.println("\tNice! I've marked this task as done:\n" +

@@ -7,9 +7,10 @@ import java.io.IOException;
 
 public class Storage {
     private static String filePath;
-
+    private ArrayList <String> loadFile;
     public Storage(String filePath){
         this.filePath = filePath;
+        loadFile = new ArrayList<>();
     }
 
     public void newFile(){
@@ -24,7 +25,6 @@ public class Storage {
         catch (Exception e) {
             System.err.println(e);
         }
-
     }
     public void saveFile(ArrayList<String> saveFileList){
         try {
@@ -33,6 +33,15 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+    public ArrayList<String> load(){
+        try {
+            readFile(filePath);
+        } catch (FileNotFoundException e) {
+            newFile(); //create new file
+            System.out.println("File not found");
+        }
+        return loadFile;
+    }
 
     private void writeToFile(ArrayList<String> saveFileList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -40,6 +49,15 @@ public class Storage {
             fw.write(saveFile + System.lineSeparator());
         }
         fw.close();
+    }
+
+    private void readFile(String filePath) throws FileNotFoundException  {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String read = s.nextLine();
+            loadFile.add(read);
+        }
     }
 
 }

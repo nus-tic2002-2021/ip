@@ -5,6 +5,13 @@ public class Event extends Task {
         super(description);
         setEvent(eventTime);
     }
+
+    public Event(String description, String eventTime, Boolean isDone) {
+        super(description);
+        setEvent(eventTime);
+        this.isDone = isDone;
+    }
+
     public void setDone(){
         this.isDone = true;
         System.out.println("\tNice! I've marked this task as done:\n" +

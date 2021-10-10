@@ -6,12 +6,18 @@ abstract class Task {
 
     public Task(String description) {
         setDescription(description);
+        isDone = false;
+    }
+
+    public Task(String description, Boolean isDone) {
+        setDescription(description);
+        this.isDone = isDone;
     }
 
     public void setDescription(String description) {
         this.description = description;
-        isDone = false;
     }
+
 
     public abstract void setDone();
     public abstract void print();

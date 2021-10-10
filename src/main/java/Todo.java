@@ -6,6 +6,11 @@ public class Todo extends Task{
         super(description);
     }
 
+    public Todo(String description, Boolean isDone) {
+        super(description);
+        this.isDone = isDone;
+    }
+
     public void setDone(){
         this.isDone = true;
         System.out.println("\tNice! I've marked this task as done:\n" +

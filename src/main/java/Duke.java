@@ -6,13 +6,19 @@ public class Duke {
     private Parser Parser;
     private List tasks;
     private Storage storage;
+    private static String Path = "data/tasks.txt";;
 
     public Duke (String filePath) {
         ui = new UI();
         Parser = new Parser();
-        tasks = new List();
         storage = new Storage(filePath);
-        storage.newFile();
+        try{
+            tasks = new List(storage.load());
+            System.out.println("File loaded successfully");
+        }catch (Exception e){
+            System.out.println("Error reading file");
+            tasks = new List();
+        }
     }
 
     public void run(){
@@ -66,7 +72,7 @@ public class Duke {
 */
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke(Path).run();
         //printIntro();
         //initialize();
 

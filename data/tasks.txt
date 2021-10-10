@@ -1,3 +1,4 @@
 D | 1 | tickl | 5
 E | 0 | tik tok | 10
 T | 0 | leave
+T | 0 | Die
