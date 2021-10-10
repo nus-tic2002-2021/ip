@@ -10,7 +10,7 @@ abstract class Command {
     public boolean isExit(){
         return false;
     }
-    public abstract void execute(List tasks, Storage storage);
+    public abstract void execute(List tasks, Storage storage,UI ui);
 
 
 }

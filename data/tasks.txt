@@ -1,4 +1,5 @@
-D | 1 | tickl | 5
-E | 0 | tik tok | 10
-T | 0 | leave
-T | 0 | Die
+T | 0 | world
+T | 1 | HELLO
+T | 0 | WORLD
+D | 0 | HELLO | WORLD
+E | 1 | HELLo | WORLD

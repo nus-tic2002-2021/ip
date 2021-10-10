@@ -8,7 +8,7 @@ public class AddCommand extends Command{
         this.add = add;
     }
 
-    public void execute(List tasks,Storage storage) {
+    public void execute(List tasks,Storage storage, UI ui) {
         try {
             tasks.addTask(action, add);
         } catch (InvalidFormatException e) {

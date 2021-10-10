@@ -7,13 +7,13 @@ public class DeleteCommand extends Command{
     public void setDelete(String delete) {
         this.delete = delete;
     }
-    public void execute(List tasks, Storage storage){
+    public void execute(List tasks, Storage storage, UI ui){
         try {
             tasks.taskDelete(delete);
         } catch(NotFoundException e) {
-            System.out.println("\tTask cannot be found.");
+            ui.printNotFound();
         } catch (NumberFormatException e){
-            System.out.println("\tInvalid task number entry.");
+            ui.printInvalidEntry();
         }
     }
 

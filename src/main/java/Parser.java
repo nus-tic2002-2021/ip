@@ -1,5 +1,8 @@
 public class Parser {
-    public Command parse(String input) throws UnrecognizedException{
+    public Command parse(String input) throws UnrecognizedException, InvalidFormatException{
+        if (input.contains("|")){
+            throw new InvalidFormatException("Please do not use '|' as it breaks the program");
+        }
         String action;
         String[] inputArray;
         inputArray = input.split(" ", 2);

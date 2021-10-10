@@ -105,7 +105,6 @@ public class List {
 
     public void saveList() {
         for(Task task : taskArrayList){
-            System.out.println(task.getSave());
             taskSave.add(task.getSave());
         }
     }

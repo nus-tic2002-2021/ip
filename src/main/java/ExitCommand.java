@@ -2,9 +2,9 @@ public class ExitCommand extends Command{
     public ExitCommand(String action){
         super(action);
     }
-    public void execute(List tasks, Storage storage){
+    public void execute(List tasks, Storage storage,UI ui){
         tasks.saveList();
-        //tasks.getSave().listIterator();
+        ui.printExit();
         storage.saveFile(tasks.getSave());
     }
     @Override

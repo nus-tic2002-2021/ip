@@ -29,12 +29,14 @@ public class Duke {
                 ui.printLine();
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks,storage);
+                c.execute(tasks,storage,ui);
                 isExit = c.isExit();
             } catch (UnrecognizedException e){
-                System.out.println("Unrecognized Command");
+                System.out.println("\tUnrecognized Command");
             } catch (ArrayIndexOutOfBoundsException e){
-                System.out.println("Invalid task entry");
+                System.out.println("\tInvalid task entry");
+            } catch (InvalidFormatException e){
+                System.out.println("\t" + e.getMessage());
             }
             finally {
                 ui.printLine();

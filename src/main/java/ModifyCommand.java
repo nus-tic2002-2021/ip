@@ -7,13 +7,13 @@ public class ModifyCommand extends Command{
     public void setModify(String modify) {
         this.modify = modify;
     }
-    public void execute(List tasks, Storage storage){
+    public void execute(List tasks, Storage storage,UI ui){
         try {
             tasks.taskDone(modify);
         } catch(NotFoundException e) {
-            System.out.println("\tTask cannot be found.");
+            ui.printNotFound();
         } catch (NumberFormatException e){
-            System.out.println("\tInvalid task number entry.");
+            ui.printInvalidEntry();
         }
     }
 }
