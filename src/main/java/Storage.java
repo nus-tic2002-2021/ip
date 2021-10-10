@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.Scanner;
 import java.nio.file.Paths;
@@ -15,7 +14,6 @@ public class Storage{
         f = new File(filePath);
     }
 
-    //read from the new created path -> absolute pate
     public void checkThePath() throws IOException {
         //get the full path of the file
         String tmpPath = f.getAbsolutePath();
@@ -43,18 +41,16 @@ public class Storage{
         load();
     }
 
-//    TODO: transform the data into tasks, public void decipher()
-
+//    TODO: transform the data into tasks,void decipher()
     public void load() throws FileNotFoundException {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
         while (s.hasNext()) {
             System.out.println(s.nextLine());
         }
-
-//    Here are todo items on your list, do you want to overwrite it? Y/n");
-//    TODO: ask prof do we need to consider overrite case? or when the program start we assume remove all tasks?
-//    TODO: ask prof if the duplicate tasks need to consider
+    }
+    //TODO: ask prof if the duplicate tasks need to consider
+    //TODO: ask if need to overwrite the file everytime user load
 
     public void appendToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath,true);
@@ -105,6 +101,7 @@ public class Storage{
         fw.close();
         fileMoving(filePath,tempPath);
     }
+
     public void fileMoving(String src, String dest) throws IOException{
         File f = new File(src);
         if(f.exists()){
