@@ -1,4 +1,10 @@
-import java.util.Arrays;
+/********
+ * Created by IntelliJ IDEA.
+ * User: Leanne.Sun
+ * Date: 19/9/21
+ * Time: 10:28 am
+ * All rights reserved.
+ */
 
 public class Task {
     protected String description;
@@ -17,6 +23,10 @@ public class Task {
 
     public void setIsDone(boolean done){
         this.isDone = done;
+    }
+
+    public boolean getIsDone(){
+        return this.isDone;
     }
 
     public void setTaskStatus(String status){

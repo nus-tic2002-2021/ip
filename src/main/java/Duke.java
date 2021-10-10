@@ -1,9 +1,38 @@
+/********
+ * Created by IntelliJ IDEA.
+ * User: Leanne.Sun
+ * Date: 19/9/21
+ * Time: 10:28 am
+ * All rights reserved.
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
+import java.nio.file.*;
 
 public class Duke {
 
     public static ArrayList<Task> tasks = new ArrayList<Task>();
+
+    private Storage storage;
+//    private Task tasks;
+//    private Ui ui;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            storage.checkThePath();
+        }catch (IOException e){
+            System.out.println("File not found");
+        }
+    }
+
+    public void run(){
+        greeting();
+        getResponse();
+    }
+
 
     private static final String DASHES =
                       "----------------------------------------"
@@ -12,12 +41,12 @@ public class Duke {
     public static void greeting(){
         System.out.println(
         DASHES
-        + "Hello! I'm Duke\n"
-        + "What can I do for you?\n"
+        + "Hello! Are you ready to start your day?\n"
+        + "Enter today's task: \n"
         + DASHES);
     }
 
-    public static void getResponse(){
+    public void getResponse(){
         Scanner in = new Scanner(System.in);
         String line = "";
         String taskStatus = "";
@@ -41,7 +70,7 @@ public class Duke {
                     System.exit(0);
                 }
 
-                else if (line.contains("list")){
+                else if (taskSplit[0].contains("list")){
                     printList();
                 }
 
@@ -70,11 +99,14 @@ public class Duke {
         }
     }
 
-    public static void responseParse(String taskStatus, String taskDescribe){
+    public void responseParse(String taskStatus, String taskDescribe){
         //parse the Status of task
         Status status = Status.valueOf(taskStatus);
         String describe = taskDescribe;
-        int taskIndex;
+
+        int doneId = 0;
+        int mode = 0;
+
         try{
             switch (status){
                 case TODO:
@@ -82,6 +114,7 @@ public class Duke {
                     todo.setTaskStatus("T");
                     tasks.add(todo);
                     System.out.println(DASHES+todo.toString());
+                    storage.appendToFile(todo);
                     break;
                 case DEADLINE:
                     String[] deadlineAndTime = describe.split("/by");
@@ -89,6 +122,7 @@ public class Duke {
                     deadline.setTaskStatus("D");
                     tasks.add(deadline);
                     System.out.println(DASHES+deadline.toString());
+                    storage.appendToFile(deadline);
                     break;
                 case EVENT:
                     String[] eventAndTime = describe.split("/at");
@@ -96,24 +130,34 @@ public class Duke {
                     event.setTaskStatus("E");
                     tasks.add(event);
                     System.out.println(DASHES+event.toString());
+                    storage.appendToFile(event);
                     break;
                 case DELETE:
-                    taskIndex = Integer.parseInt(describe)-1;
-                    tasks.get(taskIndex).markAsDone();
+                    doneId = Integer.parseInt(describe)-1;
+                    tasks.get(doneId).markAsDone();
                     System.out.println(DASHES+"Noted. I've removed this task: \n" +
-                            " ["+tasks.get(taskIndex).getStatusIcon()+"] " + tasks.get(taskIndex).getDescription());
-                    tasks.remove(taskIndex);
+                            " ["+tasks.get(doneId).getStatusIcon()+"] " + tasks.get(doneId).getDescription());
+                    tasks.remove(doneId);
+                    storage.modifyFile(doneId+1,true);
                     break;
                 case DONE:
-                    taskIndex = Integer.parseInt(describe)-1;
-                    tasks.get(taskIndex).markAsDone();
+                    doneId = Integer.parseInt(describe)-1;
+                    tasks.get(doneId).markAsDone();
                     System.out.println(DASHES+"Nice! I've marked this task as done: \n" +
-                            " ["+tasks.get(taskIndex).getStatusIcon()+"] " + tasks.get(taskIndex).getDescription());
+                            " ["+tasks.get(doneId).getStatusIcon()+"] " + tasks.get(doneId).getDescription());
+                    storage.modifyFile(doneId+1,false);
                     break;
             }
+
+
+//            if(mode>0){
+//                storage.modifyFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description,doneId,mode);
+//            }else{
+//                storage.appendToFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description);
+//            }
+
             System.out.println("Now you have "+tasks.size()+" tasks in the list.\n"+DASHES);
         }
-
          //check the input is not 0, is not exceed the total tasks index
          catch(NullPointerException e){
              System.out.println("There are only "+tasks.size()+" tasks, please enter the correct task number");
@@ -125,9 +169,13 @@ public class Duke {
         catch(IndexOutOfBoundsException e){
             System.out.println("Task number entered: "+describe+" is invalid");
         }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static boolean contains(String test) {
+    public boolean contains(String test) {
         for (Status c : Status.values()) {
             if (c.name().equals(test)) {
                 return true;
@@ -137,8 +185,8 @@ public class Duke {
     }
 
 
-    public static void printList(){
-        String[] output = new String[10];
+    public void printList(){
+        String[] output = new String[100];
         System.out.print(DASHES);
         System.out.println("Here are the tasks in your list:");
         //print out all items in list
@@ -149,9 +197,17 @@ public class Duke {
         System.out.println(DASHES);
     }
 
-
     public static void main(String[] args) {
-        greeting();
-        getResponse();
+//        try{
+        Duke d = new Duke("/Users/leanne/duke/todolist.txt");
+        d.run();
+//        d.greeting();
+//            getResponse();
+//        }
+//        catch(ArrayIndexOutOfBoundsException e){
+//            System.out.println("Enter the location to the file");
+//        }
+
+
     }
 }
