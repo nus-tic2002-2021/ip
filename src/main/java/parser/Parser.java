@@ -11,8 +11,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ *  A <code>Parser</code> object deals with making sense of the user command
+ */
 public class Parser {
-
+    /**
+     * Returns a <code>Command</code> object converted from the input command string.
+     * If the input command string is invalid, an <code>InvalidCommand</code> object will be returned.
+     *
+     * @param fullCommand Input command string.
+     */
     public static Command parse(String fullCommand) {
 
         // split the fullCommand and get the command keyword

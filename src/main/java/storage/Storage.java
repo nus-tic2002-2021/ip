@@ -1,6 +1,5 @@
 package storage;
 
-import exceptions.DukeException;
 import tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,14 +11,28 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
 
+/**
+ * A <code>Storage</code> object deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor of <code>Storage</code>.
+     *
+     * @param filePath Filepath of which the file to store tasks is located.
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
-    // need to check for file syntax error?
+    /**
+     * Read tasks stored in specific file and load them into a <code>TaskList</code>.
+     * Returns an ArrayList of <code>Task</code> objects.
+     * The filepath has to be specified when constructing the <code>Storage</code> object.
+     *
+     * @throws FileNotFoundException If file specified is not found.
+     */
     public ArrayList<Task> loadTasks() throws FileNotFoundException {
         File taskFile = new File(filePath);
         boolean fileExists = taskFile.exists();
@@ -46,6 +59,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialise/ create directory and file at specific filepath for storing tasks.
+     * The filepath has to be specified when constructing the <code>Storage</code> object.
+     *
+     * @throws IOException If the creation of file or directory is unsuccessful.
+     */
     public void init() throws IOException {
         File tasks = new File(filePath);
 
@@ -58,6 +77,11 @@ public class Storage {
         boolean fileCreated = tasks.createNewFile();
     }
 
+    /**
+     * Returns a <code>Task</code> object converted from the input string.
+     *
+     * @param taskStr Task in string format.
+     */
     private Task convertToTask(String taskStr){
         String[] args = taskStr.split(" \\| ");
 
@@ -88,6 +112,13 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Save the list of tasks into specific file.
+     * The filepath has to be specified when constructing the <code>Storage</code> object.
+     *
+     * @param tasks ArrayList of <code>Task</code> objects to be saved.
+     * @throws IOException If the file writing/ saving operation is unsuccessful.
+     */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
 
@@ -118,7 +149,8 @@ public class Storage {
                 fw.write(taskStr);
             }
             fw.close();
-        } catch (IOException e){
+        }
+        catch (IOException e){
             System.out.println(e.getMessage());
         }
     }
