@@ -20,8 +20,10 @@ public class TaskList {
         tasks.add(newTask);
     }
 
-    public void deleteTasks(Task task) {
-
+    public Task deleteTasks(int num) {
+        int index = num - 1;
+        Task removeTask = tasks.remove(index);
+        return removeTask;
     }
 
 
