@@ -1,4 +1,12 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class CmdsParser extends Parser {
 
     protected static String[] cmds = new String[3];
@@ -6,29 +14,43 @@ public class CmdsParser extends Parser {
     protected static String cmdTask;
     protected static String cmdTaskType;
 
-    public static boolean parse(String cmd) throws DukeException {
+    public static boolean parse(String cmd) throws DukeException, FileNotFoundException, java.io.IOException {
 
         cmds = cmd.split(" ");
         cmdType = cmds[0];
 
-        switch (cmdType) {
-            case "done":
-                parseDone();
-                break;
-            case "delete":
-                parseDelete();
-                break;
-            case "todo":
-                parseTodo(cmd);
-                break;
-            case "event":
-                parseEvent(cmd);
-                break;
-            case "deadline":
-                parseDeadline(cmd);
-                break;
-            default:
-                throw new DukeException();
+        try {
+            switch (cmdType) {
+                case "done":
+                    parseDone();
+                    break;
+                case "delete":
+                    parseDelete();
+                    break;
+                case "todo":
+                    parseTodo(cmd);
+                    parseSave(cmd);
+                    break;
+                case "event":
+                    parseEvent(cmd);
+                    parseSave(cmd);
+                    break;
+                case "deadline":
+                    parseDeadline(cmd);
+                    parseSave(cmd);
+                    break;
+                default:
+                    throw new DukeException();
+            }
+        }
+
+        catch (IndexOutOfBoundsException e) {
+            //Printer.printInvalidFile();
+            System.out.println("File not found");
+        }
+
+        catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
 
         return true;
@@ -57,6 +79,29 @@ public class CmdsParser extends Parser {
             Printer.printDelete(task);
         } catch (IndexOutOfBoundsException e) {
             Printer.printInvalidDelete();
+        }
+    }
+
+    public static void parseSave(String taskToAdd) throws FileNotFoundException, java.io.IOException {
+        try {
+            String filePath = "src/main/java/data/tasks.txt";
+            //Files.delete(Paths.get(filePath));
+            File f = new File(filePath);
+            //System.out.println("full path: " + f.getAbsolutePath());
+            //System.out.println("file exists?: " + f.exists());
+            //System.out.println("is Directory?: " + f.isDirectory());
+            //Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            //while (s.hasNext()) {
+                //System.out.println(s.nextLine());
+            //}
+            FileWriter fw = new FileWriter(f, true);
+            fw.write("\n"+taskToAdd);
+            fw.close();
+        } catch (IndexOutOfBoundsException e) {
+            //Printer.printInvalidFile();
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 

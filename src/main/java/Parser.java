@@ -1,11 +1,13 @@
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parser {
 
     protected static ArrayList<Task> taskList = new ArrayList<>();
 
-    public static boolean parse(String cmd) throws DukeException {
+    public static boolean parse(String cmd) throws DukeException, FileNotFoundException, java.io.IOException {
 
         try {
             switch (cmd) {
