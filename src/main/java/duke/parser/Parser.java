@@ -17,14 +17,22 @@ public class Parser {
         String[] taskFullDesc = fullCommand.split(" ", 2);
         String taskType = taskFullDesc[0].toUpperCase();
         String taskDesc = taskFullDesc[1];
+        EnumCommand enumCommand = null;
 
         try {
-            switch (taskType) {
-                case "bye":
+            enumCommand = EnumCommand.valueOf(taskType);
+        } catch(IllegalArgumentException e) {
+            //Use ui to display error later
+            //return new InvalidCommand("Command <" + taskType.toLowerCase() + "> not found :(");
+        }
+
+        try {
+            switch (enumCommand) {
+                case BYE:
                     //return parseBye();
-                case "list":
+                case LIST:
                     //return parseList(cmd);
-                case "TODO":
+                case TODO:
                     Task task = new Todo(taskDesc);
                     return new AddCommand(task);
                 default:
