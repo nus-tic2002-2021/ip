@@ -22,21 +22,20 @@ public class TaskList {
 
     public int getListSize() { return taskList.size(); }
 
-    /*
     public String setDone(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1){
-            //throw new DukeException("Task with id " + taskId + " is not found.");
+            throw new DukeException("Task with id " + taskId + " is not found.");
         }
         else {
             Task doneTask = taskList.get(taskId - 1);
-            //doneTask.markAsDone();
+            doneTask.setDone();
             return doneTask.toString();
         }
     }
 
     public String deleteTask(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1){
-            //throw new DukeException("Task with id " + taskId + " is not found.");
+            throw new DukeException("Task with id " + taskId + " is not found.");
         }
         else {
             Task deletedTask = taskList.get(taskId - 1);
@@ -44,7 +43,6 @@ public class TaskList {
             return deletedTask.toString();
         }
     }
-    */
 
     public ArrayList<Task> getTaskList() {
         return taskList;

@@ -50,7 +50,7 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (IOException e){
+            } catch (IOException e) {
                     System.out.println(e.getMessage());
             } finally {
                 ui.showLine();

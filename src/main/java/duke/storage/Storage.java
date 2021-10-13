@@ -118,16 +118,16 @@ public class Storage {
 
     }
 
-        public void init() throws IOException {
-            File tasks = new File(filePath);
+    public void init() throws IOException {
+        File tasks = new File(filePath);
 
-            String directory = tasks.getParent();
-            File folders = new File(directory);
-            if(!folders.exists()) {
-                boolean dirCreated = folders.mkdirs();
-            }
+        String directory = tasks.getParent();
+        File folders = new File(directory);
+        if(!folders.exists()) {
+            boolean dirCreated = folders.mkdirs();
+        }
 
-            boolean fileCreated = tasks.createNewFile();
+        boolean fileCreated = tasks.createNewFile();
     }
 
 }
