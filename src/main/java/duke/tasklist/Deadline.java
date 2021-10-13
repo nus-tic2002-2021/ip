@@ -1,3 +1,4 @@
+package duke.tasklist;
 
 public class Deadline extends Task {
 
@@ -6,6 +7,10 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    public String getBy() {
+        return by;
     }
 
     @Override

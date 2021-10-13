@@ -1,20 +1,26 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.tasklist.Deadline;
+import duke.tasklist.Event;
+import duke.tasklist.Task;
+import duke.tasklist.Todo;
+import duke.exception.DukeException;
+import duke.ui.Printer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class CmdsParser extends Parser {
+public class CmdsParser {
 
     protected static String[] cmds = new String[3];
     protected static String cmdType;
     protected static String cmdTask;
     protected static String cmdTaskType;
 
-    public static boolean parse(String cmd) throws DukeException, FileNotFoundException, java.io.IOException {
+    public static void parse(String cmd) throws DukeException, FileNotFoundException, java.io.IOException {
 
         cmds = cmd.split(" ");
         cmdType = cmds[0];
@@ -28,15 +34,15 @@ public class CmdsParser extends Parser {
                     parseDelete();
                     break;
                 case "todo":
-                    parseTodo(cmd);
+                    //parseTodo(cmd);
                     parseSave(cmd);
                     break;
                 case "event":
-                    parseEvent(cmd);
+                    //parseEvent(cmd);
                     parseSave(cmd);
                     break;
                 case "deadline":
-                    parseDeadline(cmd);
+                    //parseDeadline(cmd);
                     parseSave(cmd);
                     break;
                 default:
@@ -45,7 +51,7 @@ public class CmdsParser extends Parser {
         }
 
         catch (IndexOutOfBoundsException e) {
-            //Printer.printInvalidFile();
+            //duke.ui.Printer.printInvalidFile();
             System.out.println("File not found");
         }
 
@@ -53,7 +59,7 @@ public class CmdsParser extends Parser {
             System.out.println("Something went wrong: " + e.getMessage());
         }
 
-        return true;
+        //return true;
 
     }
 
@@ -61,9 +67,9 @@ public class CmdsParser extends Parser {
         try {
             cmdTask = cmds[1];
             int id = Integer.parseInt(String.valueOf(cmdTask));
-            Task task = taskList.get(id-1);
-            task.setDone();
-            Printer.printDone(task);
+            //Task task = taskList.get(id-1);
+            //task.setDone();
+            //Printer.printDone(task);
         } catch (IndexOutOfBoundsException e) {
             Printer.printInvalidDone();
         }
@@ -73,10 +79,10 @@ public class CmdsParser extends Parser {
         try {
             cmdTask = cmds[1];
             int id = Integer.parseInt(String.valueOf(cmdTask));
-            Task task = taskList.get(id-1);
-            taskList.remove(id-1);
-            Task.totalCount--;
-            Printer.printDelete(task);
+            //Task task = taskList.get(id-1);
+            //taskList.remove(id-1);
+            //Task.totalCount--;
+            //Printer.printDelete(task);
         } catch (IndexOutOfBoundsException e) {
             Printer.printInvalidDelete();
         }
@@ -84,7 +90,7 @@ public class CmdsParser extends Parser {
 
     public static void parseSave(String taskToAdd) throws FileNotFoundException, java.io.IOException {
         try {
-            String filePath = "src/main/java/data/tasks.txt";
+            String filePath = "src/main/java/duke.data/tasks.txt";
             //Files.delete(Paths.get(filePath));
             File f = new File(filePath);
             //System.out.println("full path: " + f.getAbsolutePath());
@@ -98,13 +104,14 @@ public class CmdsParser extends Parser {
             fw.write("\n"+taskToAdd);
             fw.close();
         } catch (IndexOutOfBoundsException e) {
-            //Printer.printInvalidFile();
+            //duke.ui.Printer.printInvalidFile();
             System.out.println("File not found");
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
+    /*
     public static void parseTodo(String cmd) {
         try {
             cmds = cmd.split("todo ", 2);
@@ -142,5 +149,6 @@ public class CmdsParser extends Parser {
             Printer.printInvalidDeadline();
         }
     }
+    */
 
 }

@@ -1,3 +1,4 @@
+package duke.tasklist;
 
 public class Task {
 
@@ -11,18 +12,26 @@ public class Task {
         totalCount++;
     }
 
-    public String getDoneStatus() {
-        return (isDone ? "X" : " ");
-    }
-
     public String getTaskType() {
         return " ";
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDoneStatus() {
+        return (isDone ? "X" : " ");
     }
 
     public String getTotalCount() {
         if (totalCount <= 1) return totalCount + " task";
         else return totalCount + " tasks";
     }
+
+    public String getBy() { return "";}
+
+    public String getAt() { return "";}
 
     public void setDone() {
         isDone = true;

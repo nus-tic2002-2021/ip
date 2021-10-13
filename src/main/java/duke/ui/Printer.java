@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.parser.Parser;
+import duke.tasklist.Task;
 
 import java.util.ArrayList;
 
@@ -9,7 +13,7 @@ public class Printer {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    protected final static String INTRO = "Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n" + LOGO;
+    protected final static String INTRO = "Hello! I'm duke.Duke By Justin ☺\nWhat can I do for you?\n" + LOGO;
     protected final static String INVALID_CMD = "Oops! Sorry, I don't know what you mean ☹\n";
     protected final static String BYE = "Bye. Hope to see you again soon!\n";
     protected final static String NO_TASK = "You have no task in your list!\n";
@@ -43,6 +47,7 @@ public class Printer {
         System.out.print(LINE+NO_TASK+LINE);
     }
 
+    /*
     public static void printList() {
         System.out.print(LINE + "Here are the tasks in your list:\n");
         for (int i = 0; i < Parser.taskList.size(); i++) {
@@ -51,6 +56,7 @@ public class Printer {
         }
         System.out.print(LINE);
     }
+    */
 
     public static void printDone(Task task) {
         System.out.print(LINE + "Nice! I've marked this task as done.\n" + task.toString() + "\n" + LINE);
