@@ -1,54 +1,40 @@
 package duke.parser;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.ui.Printer;
 import duke.tasklist.*;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Parser {
 
-    //protected static ArrayList<Task> taskList = new ArrayList<>();
-
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) {
 
         String[] taskFullDesc = fullCommand.split(" ", 2);
         String taskType = taskFullDesc[0].toUpperCase();
-        EnumCommand enumCommand = null;
+        EnumCommand userCommand = null;
 
         try {
-            enumCommand = EnumCommand.valueOf(taskType);
-        } catch(IllegalArgumentException e) {
-            //Use ui to display error later
-            return new InvalidCommand("Command <" + taskType.toLowerCase() + "> not found :(");
+            userCommand = EnumCommand.valueOf(taskType);
+        } catch (IllegalArgumentException e) {
+            return new InvalidCommand("Oops! No such command found.\n" +
+                                      "Only list, todo, deadline, event, done, delete and bye ☺");
         }
 
-        try {
-            switch (enumCommand) {
-                case LIST:
-                    return parseList();
-                case TODO:
-                    return parseTodo(taskFullDesc);
-                case DEADLINE:
-                    return parseDeadline(taskFullDesc);
-                case EVENT:
-                    return parseEvent(taskFullDesc);
-                case DONE:
-                    return parseDone(taskFullDesc);
-                case DELETE:
-                    return parseDelete(taskFullDesc);
-                case BYE:
-                    return parseBye();
-                default:
-                    //return new InvalidCommand("Error executing command");
-                    throw new DukeException();
-            }
-        }
-
-        catch (DukeException e) {
-            throw new DukeException();
+        switch (userCommand) {
+            case LIST:
+                return parseList();
+            case TODO:
+                return parseTodo(taskFullDesc);
+            case DEADLINE:
+                return parseDeadline(taskFullDesc);
+            case EVENT:
+                return parseEvent(taskFullDesc);
+            case DONE:
+                return parseDone(taskFullDesc);
+            case DELETE:
+                return parseDelete(taskFullDesc);
+            case BYE:
+                return parseBye();
+            default:
+                return new InvalidCommand("There is an error while executing your command ☹");
         }
 
     }
@@ -63,8 +49,7 @@ public class Parser {
             Task task = new Todo(taskDesc);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            //Printer.printInvalidTodo();
-            return new InvalidCommand("Task cannot be added. \nDescription is missing.");
+            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description ☺");
         }
     }
 
@@ -75,8 +60,7 @@ public class Parser {
             Task task = new Deadline(taskDescBy[0], taskDescBy[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            //Printer.printInvalidTodo();
-            return new InvalidCommand("Task cannot be added. \nDeadline or description is missing.");
+            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description and deadline ☺");
         }
     }
 
@@ -87,8 +71,7 @@ public class Parser {
             Task task = new Event(taskDescAt[0], taskDescAt[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            //Printer.printInvalidTodo();
-            return new InvalidCommand("Task cannot be added. \nEvent time or description is missing");
+            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description and datetime ☺");
         }
     }
 

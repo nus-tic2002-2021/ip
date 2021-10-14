@@ -20,22 +20,9 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public int getListSize() { return taskList.size(); }
-
-    public String setDone(int taskId) throws DukeException {
-        if (taskId > taskList.size() || taskId < 1){
-            throw new DukeException("Task with id " + taskId + " is not found.");
-        }
-        else {
-            Task doneTask = taskList.get(taskId - 1);
-            doneTask.setDone();
-            return doneTask.toString();
-        }
-    }
-
     public String deleteTask(int taskId) throws DukeException {
-        if (taskId > taskList.size() || taskId < 1){
-            throw new DukeException("Task with id " + taskId + " is not found.");
+        if (taskId > taskList.size() || taskId < 1) {
+            throw new DukeException("Oops! Please specify the correct task id to remove it ☹");
         }
         else {
             Task deletedTask = taskList.get(taskId - 1);
@@ -44,8 +31,21 @@ public class TaskList {
         }
     }
 
+    public int getSize() { return taskList.size(); }
+
     public ArrayList<Task> getTaskList() {
         return taskList;
+    }
+
+    public String setDone(int taskId) throws DukeException {
+        if (taskId > taskList.size() || taskId < 1) {
+            throw new DukeException("Oops! Please specify the correct task id to mark it as done ☹");
+        }
+        else {
+            Task completedTask = taskList.get(taskId - 1);
+            completedTask.setDone();
+            return completedTask.toString();
+        }
     }
 
 }

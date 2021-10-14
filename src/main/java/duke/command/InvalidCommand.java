@@ -1,20 +1,20 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.tasklist.*;
+import duke.storage.*;
+import duke.ui.*;
+import duke.exception.*;
 
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
 
-    private String errorMsg;
+    private String message;
 
-    public InvalidCommand(String errorMsg){
-        this.errorMsg = errorMsg;
+    public InvalidCommand(String message){
+        this.message = message;
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException(errorMsg);
+        throw new DukeException(message);
     }
 
 }

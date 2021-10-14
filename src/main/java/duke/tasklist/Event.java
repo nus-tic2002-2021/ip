@@ -20,7 +20,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s(at:%s)", super.toString(), at);
+        return String.format("%s (at:%s)", super.toString(), at);
     }
 
 }

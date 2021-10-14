@@ -39,7 +39,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format(" [%s][%s] %s", getTaskType(), getDoneStatus(), description);
+        return String.format("[%s][%s] %s", getTaskType(), getDoneStatus(), description);
     }
 
 }

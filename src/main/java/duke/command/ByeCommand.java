@@ -1,13 +1,14 @@
 package duke.command;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.tasklist.*;
+import duke.storage.*;
+import duke.ui.*;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage){
         ui.showExit();
         super.setExit(true);
     }
+
 }
