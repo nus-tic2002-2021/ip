@@ -9,6 +9,13 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class Parser {
+    /**
+     *
+     * @param req Extract task from command
+     * @return a task object
+     * @throws MissReqException
+     * @throws InvalidException
+     */
     public static Task getTask(String req) throws MissReqException, InvalidException {
         String[] reqs = req.trim().split(" ");
         String type = reqs[0];
@@ -40,6 +47,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Extract command
+     * @param req
+     * @return
+     * @throws MissReqException
+     * @throws InvalidException
+     */
     public static Command parse(String req) throws MissReqException, InvalidException {
         Command command;
         String[] reqs = req.split(" ");

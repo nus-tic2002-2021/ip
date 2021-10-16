@@ -14,11 +14,20 @@ import java.util.Scanner;
 public class Storage {
     public String filepath;
 
+    /**
+     * storage constructor
+     * @param filepath the address of file path
+     */
     public Storage(String filepath){
         this.filepath = filepath;
 
     }
 
+    /**
+     * store the task list to selected file
+     * @param tasks
+     * @throws IOException
+     */
 
     public void store(TaskList tasks) throws IOException {
         File file = new File(filepath);
@@ -37,6 +46,11 @@ public class Storage {
     }
 
 
+    /**
+     * load task list from selected file
+     * @return
+     * @throws FileNotFoundException
+     */
     public TaskList load() throws FileNotFoundException {
         TaskList tasks = new TaskList();
         File file = new File(filepath);
