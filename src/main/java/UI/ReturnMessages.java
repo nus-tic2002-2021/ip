@@ -1,6 +1,6 @@
-package Tasks;
+package UI;
 
-public class PrintHelper {
+public class ReturnMessages {
     public void separator(){
         System.out.println("    ____________________________________________________________");
     }
@@ -15,7 +15,7 @@ public class PrintHelper {
     }
     public void welcomeFeedback(){
         separator();
-        System.out.println("    Hello! I'm Duke");
+        System.out.println("    Hello! I'm Duke.Duke");
         System.out.println("    What can I do for you?");
         separator();
     }
@@ -47,6 +47,21 @@ public class PrintHelper {
     public void exception_feedback_noTimeConcept(){
         separator();
         System.out.println("     ☹ HEY!!! Please give a due date for deadlines and events. Let's have some sense of time >_<|||");
+        separator();
+    }
+    public void exception_feedback_cantSave(){
+        separator();
+        System.out.println("     ☹ OOPS!!! Exception caught while saving >_<|||");
+        separator();
+    }
+    public void exception_feedback_loadingError(){
+        separator();
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("     ☹ OOPS!!! Something went wrong while loading");
         separator();
     }
 }

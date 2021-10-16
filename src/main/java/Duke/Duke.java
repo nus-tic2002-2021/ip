@@ -1,12 +1,17 @@
-import Exception_Handling.*;
-import Tasks.*;
+package Duke;
 
+import Exception_Handler.*;
+import TaskList.*;
+import UI.*;
+import Storage.*;
 import java.util.Scanner;
-
+import java.io.*;
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
     private static TaskList taskList = new TaskList();
-    private static PrintHelper printer = new PrintHelper();
-
+    private static ReturnMessages returnMessage = new ReturnMessages();
     public static void addCommand(String command) throws UnknownSyntaxException, EmptyDescriptionException, TimeManagementException {
         String keyword;
         String detail;
@@ -56,37 +61,43 @@ public class Duke {
                 String[] doneCmd = command.split(" ");
                 taskList.getTask(Integer.parseInt(doneCmd[1]) - 1).setDone();
                 //taskList[Integer.parseInt(doneCmd[1]) - 1].setDone();
-                printer.taskDoneFeedback();
+                returnMessage.taskDoneFeedback();
                 System.out.println("     " + taskList.getTask(Integer.parseInt(doneCmd[1]) - 1).toString());
-                printer.separator();
+                returnMessage.separator();
                 return;
             }
             catch(NumberFormatException nf){
                 throw new TaskNotFoundException();
             }
         }
-        printer.taskAddFeedback();
+        returnMessage.taskAddFeedback();
         try {
             System.out.println("     " + taskList.getLastTask().toString());
             System.out.println("     Now you have " + taskList.getListSize() + " tasks in the list.");
-            printer.separator();
+            returnMessage.separator();
         }
         catch(ArrayIndexOutOfBoundsException a){
             throw new EmptyTaskListException();
         }
     }
 
+    public Duke(String fileName) throws DukeException, FileNotFoundException, IOException {
+        ui = new UI();
+        storage = new Storage(fileName);
+        tasks = new TaskList();
+        storage.load(tasks);
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);*/
         boolean end = false;
         String command;
         Scanner in = new Scanner(System.in);
-        printer.welcomeFeedback();
+        returnMessage.welcomeFeedback();
         command = in.nextLine();
 
         while(!end){
@@ -98,7 +109,7 @@ public class Duke {
                     taskList.printTaskList();
                 }
                 catch(EmptyTaskListException etl){
-                    printer.exception_feedback_emptyTaskList();
+                    returnMessage.exception_feedback_emptyTaskList();
                 }
                 command = in.nextLine();
             }
@@ -107,13 +118,13 @@ public class Duke {
                     reply(command);
                 }
                 catch(EmptyTaskListException etl){
-                    printer.exception_feedback_emptyTaskList();
+                    returnMessage.exception_feedback_emptyTaskList();
                 }
                 catch(UnknownSyntaxException us){
-                    printer.exception_feedback_unknownSyntax(command);
+                    returnMessage.exception_feedback_unknownSyntax(command);
                 }
                 catch(TaskNotFoundException tnf){
-                    printer.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
+                    returnMessage.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
                 }
                 command = in.nextLine();
             }
@@ -122,13 +133,13 @@ public class Duke {
                     taskList.deleteTask(Integer.parseInt(command.split(" ", 2)[1]));
                 }
                 catch(TaskNotFoundException tnf){
-                    printer.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
+                    returnMessage.exception_feedback_taskNotFound(command.split(" ", 2)[1]);
                 }
                 catch(NumberFormatException e){
-                    printer.exception_feedback_unknownSyntax(command);
+                    returnMessage.exception_feedback_unknownSyntax(command);
                 }
                 catch(EmptyTaskListException etl){
-                    printer.exception_feedback_emptyTaskList();
+                    returnMessage.exception_feedback_emptyTaskList();
                 }
                 command = in.nextLine();
             }
@@ -139,31 +150,29 @@ public class Duke {
                 }
                 catch(UnknownSyntaxException us){
                     success = false;
-                    printer.exception_feedback_unknownSyntax(command);
+                    returnMessage.exception_feedback_unknownSyntax(command);
                 }
                 catch(EmptyDescriptionException ed){
                     success = false;
-                    printer.exception_feedback_emptyDescription(command);
+                    returnMessage.exception_feedback_emptyDescription(command);
                 }
                 catch(TimeManagementException tm){
                     success = false;
-                    printer.exception_feedback_noTimeConcept();
+                    returnMessage.exception_feedback_noTimeConcept();
                 }
                 if(success) {
                     try {
                         reply(command);
                     } catch (EmptyTaskListException etl) {
-                        printer.exception_feedback_emptyTaskList();
+                        returnMessage.exception_feedback_emptyTaskList();
                     }
                     catch(UnknownSyntaxException | TaskNotFoundException exception){
-                        printer.exception_feedback_unknownSyntax(command);
+                        returnMessage.exception_feedback_unknownSyntax(command);
                     }
                 }
                 command = in.nextLine();
             }
         }
-
-
-        printer.exitFeedback();
+        returnMessage.exitFeedback();
     }
 }

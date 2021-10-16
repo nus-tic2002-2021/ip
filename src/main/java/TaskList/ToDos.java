@@ -1,4 +1,4 @@
-package Tasks;
+package TaskList;
 
 public class ToDos extends Task {
     protected String action;

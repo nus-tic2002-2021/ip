@@ -1,4 +1,4 @@
-package Exception_Handling;
+package Exception_Handler;
 
 public class EmptyTaskListException extends Exception{
     /*Prints the following

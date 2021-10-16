@@ -1,11 +1,13 @@
-package Tasks;
-import Exception_Handling.*;
+package TaskList;
+import Exception_Handler.*;
+import UI.ReturnMessages;
+
 import java.util.ArrayList;
 
 public class TaskList {
     protected int listSize;
     private ArrayList<Task> taskList;
-    private static PrintHelper printer = new PrintHelper();
+    private static ReturnMessages printer = new ReturnMessages();
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -43,6 +45,8 @@ public class TaskList {
     public int getListSize(){
         return this.listSize;
     }
+
+    public void save(){}
     public void printTaskList() throws EmptyTaskListException {
         printer.separator();
         if(this.listSize == 0){
