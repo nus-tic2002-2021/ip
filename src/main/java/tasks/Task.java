@@ -6,7 +6,6 @@ package tasks;
 public class Task {
     private static int taskCount;
 
-    protected int id;
     protected String description;
     protected boolean isDone;
 
@@ -19,7 +18,6 @@ public class Task {
     {
         taskCount++;
 
-        this.id = taskCount;
         this.description = description;
         this.isDone = false;
     }

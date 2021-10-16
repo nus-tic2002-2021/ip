@@ -61,6 +61,9 @@ public class Parser {
 
     private static Command doAddTodo (String[] args){
         try {
+            if(args[1].isBlank() || args[1].isEmpty()){
+                return new InvalidCommand("Task cannot be added. \nDescription is missing.");
+            }
             Task task = new ToDoTask(args[1]);
             return new AddCommand(task);
         }
@@ -72,6 +75,9 @@ public class Parser {
     private static Command doAddDeadline(String[] args){
         try {
             String[] deadlineInfo = args[1].split(" /by ");
+            if(deadlineInfo[0].isBlank() || deadlineInfo[0].isEmpty()){
+                return new InvalidCommand("Task cannot be added. \nDescription is missing.");
+            }
             String description = deadlineInfo[0];
             LocalDate by = LocalDate.parse(deadlineInfo[1]);
             Task task = new DeadlineTask(description, by);
@@ -89,6 +95,9 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             String[] eventInfo = args[1].split(" /at ");
+            if(eventInfo[0].isBlank() || eventInfo[0].isEmpty()){
+                return new InvalidCommand("Task cannot be added. \nDescription is missing.");
+            }
             String description = eventInfo[0];
             LocalDateTime at = LocalDateTime.parse(eventInfo[1], formatter);
             Task task = new EventTask(description, at);
