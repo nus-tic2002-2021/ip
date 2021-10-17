@@ -1,6 +1,6 @@
 package tasks;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -10,7 +10,7 @@ import java.time.format.FormatStyle;
  */
 public class DeadlineTask extends Task {
 
-    protected LocalDate by;
+    protected LocalDateTime by;
 
     /**
      * Constructor of <code>DeadLineTask</code>.
@@ -18,7 +18,7 @@ public class DeadlineTask extends Task {
      * @param description Brief description of the task.
      * @param by Deadline of the task.
      */
-    public DeadlineTask(String description, LocalDate by) {
+    public DeadlineTask(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
@@ -26,7 +26,7 @@ public class DeadlineTask extends Task {
     /**
      * Returns the deadline of the <code>DeadLineTask</code> object.
      */
-    public String getBy(){ return by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)); }
+    public String getBy(){ return by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)); }
 
     @Override
     public String toString(){ return "[D]" + super.toString() + " (by: " + getBy() + ")"; }

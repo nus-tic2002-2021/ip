@@ -47,7 +47,7 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public void showError(String message){
-        System.out.println("Error: " + message);
+        System.out.println(message);
     }
 
     /** Prints task added successful message. */

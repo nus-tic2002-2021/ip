@@ -1,5 +1,6 @@
 package tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -10,23 +11,42 @@ import java.time.format.FormatStyle;
  */
 public class EventTask extends Task {
 
-    protected LocalDateTime at;
+    protected LocalDateTime start;
+    protected LocalDateTime end;
 
     /**
      * Constructor of <code>EventTask</code>.
      *
      * @param description Brief description of the task.
-     * @param at DateTime of the task (event).
+     * @param start Start DateTime of the task (event).
+     * @param end End DateTime of the task (event).
      */
-    public EventTask(String description, LocalDateTime at) {
+    public EventTask(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.at = at;
+        this.start = start;
+        this.end = end;
     }
 
     /**
-     * Returns the event date time of the <code>EventTask</code> object.
+     * Returns the event start date time of the <code>EventTask</code> object.
      */
-    public String getAt() { return at.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)); }
+    public String getStart(){
+        return start.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    }
+
+    /**
+     * Returns the event start date time of the <code>EventTask</code> object.
+     */
+    public String getEnd(){
+        return end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    }
+
+    /**
+     * Returns the event date time (period) of the <code>EventTask</code> object.
+     */
+    public String getAt() {
+        return getStart() + " - " + getEnd();
+    }
 
     @Override
     public String toString()

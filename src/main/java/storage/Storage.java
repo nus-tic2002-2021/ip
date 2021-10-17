@@ -96,15 +96,16 @@ public class Storage {
                 break;
             }
             case "D": {
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-                LocalDate deadline = LocalDate.parse(args[3], formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+                LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
                 task = new DeadlineTask(description, deadline);
                 break;
             }
             case "E": {
                 DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-                LocalDateTime eventTime = LocalDateTime.parse(args[3], formatter);
-                task = new EventTask(description, eventTime);
+                LocalDateTime start = LocalDateTime.parse(args[3], formatter);
+                LocalDateTime end = LocalDateTime.parse(args[4], formatter);
+                task = new EventTask(description, start, end);
                 break;
             }
         }
@@ -142,7 +143,8 @@ public class Storage {
                     }
                     case "EventTask": {
                         EventTask eventTask = (EventTask)task;
-                        taskStr = "E | " + status + " | " + description + " | " + eventTask.getAt() + "\n";
+                        taskStr = "E | " + status + " | " + description + " | " + eventTask.getStart() +
+                                " | " + eventTask.getEnd() + "\n";
                         break;
                     }
                 }
