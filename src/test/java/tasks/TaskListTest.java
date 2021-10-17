@@ -64,7 +64,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void addTask_validTaskId_success(){
+    public void addTask_multipleTasks_success(){
         TaskList taskList = new TaskList();
         assertEquals(0, taskList.getListSize());
 

@@ -8,9 +8,11 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+    private Scheduler scheduler;
 
     public TaskList() {
         taskList = new ArrayList<>();
+        scheduler = new Scheduler();
     }
 
     /**
@@ -21,6 +23,8 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         taskList = tasks;
+        scheduler = new Scheduler();
+        scheduler.updateSchedule(tasks);
     }
 
     /** Returns the list size (task count) of the TaskList. */
@@ -67,8 +71,16 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task){
-        taskList.add(task);
+    public boolean addTask(Task task){
+        boolean canBeAdded = true;
+        if(task.getClass().equals(EventTask.class)) {
+            canBeAdded = scheduler.schedule(((EventTask) task).start, ((EventTask) task).end);
+        }
+
+        if(canBeAdded) {
+            taskList.add(task);
+        }
+        return canBeAdded;
     }
 
     /**

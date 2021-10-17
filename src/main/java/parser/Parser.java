@@ -106,7 +106,7 @@ public class Parser {
             // Format yyyy-MM-dd HHmm to yyyy-MM-dd HHmm
             String[] times = eventInfo[1].split(" to ");
             LocalDateTime start = LocalDateTime.parse(times[0], formatter);
-            LocalDateTime end = LocalDateTime.parse(times[0], formatter);
+            LocalDateTime end = LocalDateTime.parse(times[1], formatter);
             Task task = new EventTask(description, start, end);
             return new AddCommand(task);
         }
@@ -114,7 +114,8 @@ public class Parser {
             return new InvalidCommand("Task cannot be added. \nEvent time or description is missing");
         }
         catch(DateTimeParseException e) {
-            return new InvalidCommand("Task cannot be added. \nPlease enter event datetime in the format of 'yyyy-MM-dd HHmm'");
+            return new InvalidCommand("Task cannot be added. \n" +
+                    "Please enter event datetime in the format of 'yyyy-MM-dd HHmm to yyyy-MM-dd HHmm'");
         }
     }
 
