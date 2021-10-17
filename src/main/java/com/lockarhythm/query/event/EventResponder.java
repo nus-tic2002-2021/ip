@@ -18,7 +18,11 @@ public class EventResponder extends RegexQueryInterpreter {
   }
 
   public Result onMatch(String[] groups) {
-    Task task = list.addEventTask(groups[1], groups[2]);
-    return new AddedTaskResult(task, list.size());
+    try {
+      Task task = list.addEventTask(groups[1], groups[2]);
+      return new AddedTaskResult(task, list.size());
+    } catch(java.time.format.DateTimeParseException e) {
+      return new Result(String.format("Please give me a valid LocalDate pattern: %s", e.getMessage()));
+    }
   }
 }

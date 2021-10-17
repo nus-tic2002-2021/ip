@@ -12,9 +12,16 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete tasks.json from previous run
+if [ -e "./tasks.json" ]
+then
+    rm tasks.json
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! bazel build //:TerminalDuke 
 then
+    rm tasks.json
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
@@ -25,6 +32,9 @@ fi
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+
+# Clean up
+rm tasks.json
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT

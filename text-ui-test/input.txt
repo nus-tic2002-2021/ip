@@ -1,6 +1,8 @@
 todo borrow book
 deadline return book /by 10pm
 event buy bread /at Sunday 11pm
+deadline return book /by 2021-12-31T23:59:59
+event buy bread /at 2021-11-30T23:59:59
 done 1
 list
 done 2

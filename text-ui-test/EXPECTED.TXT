@@ -18,15 +18,25 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	Please give me a valid LocalDate pattern: Text '10pm' could not be parsed at index 0
+
+	____________________________________________________________
+
+	____________________________________________________________
+	Please give me a valid LocalDate pattern: Text 'Sunday 11pm' could not be parsed at index 0
+
+	____________________________________________________________
+
+	____________________________________________________________
 	Got it. I've added this task:
-		[D][ ] return book (by: 10pm)
+		[D][ ] return book (by: Dec 31 2021)
 	Now you have 2 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
-		[E][ ] buy bread (at: Sunday 11pm)
+		[E][ ] buy bread (at: Nov 30 2021)
 	Now you have 3 tasks in the list.
 
 	____________________________________________________________
@@ -40,20 +50,20 @@
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[D][ ] return book (by: 10pm)
-	3.[E][ ] buy bread (at: Sunday 11pm)
+	2.[D][ ] return book (by: Dec 31 2021)
+	3.[E][ ] buy bread (at: Nov 30 2021)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] return book (by: 10pm)
+		[D][X] return book (by: Dec 31 2021)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] return book (by: 10pm)
+		[D][X] return book (by: Dec 31 2021)
 
 	____________________________________________________________
 
@@ -67,8 +77,8 @@
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[D][X] return book (by: 10pm)
-	3.[E][ ] buy bread (at: Sunday 11pm)
+	2.[D][X] return book (by: Dec 31 2021)
+	3.[E][ ] buy bread (at: Nov 30 2021)
 	4.[T][ ] done 1
 
 	____________________________________________________________
@@ -85,7 +95,7 @@
 
 	____________________________________________________________
 	Noted. I've removed this task:
-		[D][X] return book (by: 10pm)
+		[D][X] return book (by: Dec 31 2021)
 	Now you have 3 tasks in the list.
 
 	____________________________________________________________

@@ -1,12 +1,12 @@
 package com.lockarhythm.tasks;
 
 final class EventTask extends Task {
-  private String at;
+  private TaskDate at;
   private String _type = "EVENT";
 
   public EventTask(String description, String at) {
     super(description);
-    this.at = at;
+    this.at = new TaskDate(at);
   }
 
   @Override

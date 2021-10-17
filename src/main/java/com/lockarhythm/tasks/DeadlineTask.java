@@ -1,12 +1,12 @@
 package com.lockarhythm.tasks;
 
 final class DeadlineTask extends Task {
-  private String by;
+  private TaskDate by;
   private String _type = "DEADLINE";
 
   public DeadlineTask(String description, String by) {
     super(description);
-    this.by = by;
+    this.by = new TaskDate(by);
   }
 
   @Override
