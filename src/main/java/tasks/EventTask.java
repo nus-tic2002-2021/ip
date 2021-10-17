@@ -1,18 +1,36 @@
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+/**
+ * A <code>EventTask</code> object stores a task (event) with date time.
+ * Extends the <code>Task</code> class.
+ */
 public class EventTask extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public EventTask(String description, String at) {
+    /**
+     * Constructor of <code>EventTask</code>.
+     *
+     * @param description Brief description of the task.
+     * @param at DateTime of the task (event).
+     */
+    public EventTask(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
-    public String getAt() { return at; }
+
+    /**
+     * Returns the event date time of the <code>EventTask</code> object.
+     */
+    public String getAt() { return at.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)); }
 
     @Override
     public String toString()
     {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + getAt() + ")";
     }
 }

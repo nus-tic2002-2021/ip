@@ -8,13 +8,21 @@ import exceptions.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Main class of the Duke program.
+ * The Duke program is a ChatBot that helps user to keep track of to-dos, deadlines and events.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    //Constructor of Duke, do initialisation
+    /**
+     * Constructor of <code>Duke</code>.
+     *
+     * @param filePath Location of the file which stores the tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,6 +42,7 @@ public class Duke {
         }
     }
 
+    /** Method to start running the Duke program. */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

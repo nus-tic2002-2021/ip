@@ -8,6 +8,10 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * <code>AddCommand</code> is used to add new task into the TaskList.
+ * Extends the <code>Command</code> class.
+ */
 public class AddCommand extends Command{
     Task task;
 

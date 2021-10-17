@@ -6,6 +6,10 @@ import tasks.TaskList;
 import ui.Ui;
 import java.io.IOException;
 
+/**
+ * <code>DeleteCommand</code> is used to delete a task from the TaskList.
+ * Extends the <code>Command</code> class.
+ */
 public class DeleteCommand extends Command{
 
     int taskId;

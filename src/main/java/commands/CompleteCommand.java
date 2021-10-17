@@ -6,6 +6,10 @@ import tasks.TaskList;
 import ui.Ui;
 import java.io.IOException;
 
+/**
+ * <code>CompleteCommand</code> is used to set the status of a task to "done".
+ * Extends the <code>Command</code> class.
+ */
 public class CompleteCommand extends Command{
 
     int taskId;

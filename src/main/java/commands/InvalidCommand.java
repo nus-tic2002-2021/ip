@@ -5,6 +5,10 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * <code>InvalidCommand</code> is used to capture invalid input command that cannot be executed.
+ * Extends the <code>Command</code> class.
+ */
 public class InvalidCommand extends Command{
 
     private String errorMsg;
