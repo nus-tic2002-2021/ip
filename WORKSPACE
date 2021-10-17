@@ -15,7 +15,8 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
         #"com.google.guava:guava:21.0",
-        "org.apache.commons:commons-lang3:3.11"
+        "org.apache.commons:commons-lang3:3.11",
+        "com.google.code.gson:gson:2.8.8"
     ],
     repositories = [
         # Private repositories are supported through HTTP Basic auth

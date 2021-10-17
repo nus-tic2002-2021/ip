@@ -2,6 +2,7 @@ package com.lockarhythm.tasks;
 
 final class DeadlineTask extends Task {
   private String by;
+  private String _type = "DEADLINE";
 
   public DeadlineTask(String description, String by) {
     super(description);
