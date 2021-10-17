@@ -21,7 +21,6 @@ fi
 # compile the code into the bin folder, terminates if error occurred
 if ! bazel build //:TerminalDuke 
 then
-    rm tasks.json
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
@@ -33,16 +32,23 @@ fi
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
-# Clean up
-rm tasks.json
-
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test result: PASSED"
+    echo "Test result: PASSED [UI TESTS]"
+else
+    echo "Test result: FAILED [UI TESTS]"
+    exit 1
+fi
+
+# compare the output to the expected output
+diff tasks.json EXPECTED.json
+if [ $? -eq 0 ]
+then
+    echo "Test result: PASSED [SERIALIZATION TESTS]"
     exit 0
 else
-    echo "Test result: FAILED"
+    echo "Test result: FAILED [SERIALIZATION TESTS]"
     exit 1
 fi

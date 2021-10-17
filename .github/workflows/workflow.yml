@@ -24,6 +24,12 @@ jobs:
       run: |
         "${GITHUB_WORKSPACE}/bin/bazel" test //...
 
+    - name: Run UI and Serialization Tests
+      working-directory: ./text-ui-test
+      run: |
+        chmod +x runtest.sh
+        ./runtest.sh
+
     - name: Build JAR File
       run: |
         "${GITHUB_WORKSPACE}/bin/bazel" build //:TerminalDuke_deploy.jar
