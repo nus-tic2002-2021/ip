@@ -51,13 +51,19 @@ public class Ui {
     }
 
     /** Prints task added successful message. */
-    public void showAdded() { System.out.println("Got it! I've added this task: "); }
+    public void showAdded() { System.out.println("Got it! I've added this task:"); }
 
     /** Prints task completed successful message. */
     public void showCompleted() { System.out.println("Amazing! The task is marked as done now:"); }
 
     /** Prints task deleted successful message. */
-    public void showDeleted() { System.out.println("Noted. I've removed this task: "); }
+    public void showDeleted() { System.out.println("Noted. I've removed this task:"); }
+
+    /** Prints tasks listed message. */
+    public void showListed() { System.out.println("Here are the task(s) in your list:"); }
+
+    /** Prints search completed message. */
+    public void showSearchCompleted() { System.out.println("Here are the matching task(s) in your list:"); }
 
     /** Prints exit message. */
     public void showExit() { System.out.println("Bye. Hope to see you again soon!"); }
@@ -86,8 +92,6 @@ public class Ui {
             System.out.println("There's no task now :D");
         }
         else {
-            System.out.println("Here are the task(s) in your list:");
-
             int index = 1;
             for (Task task : taskList) {
                 System.out.println(index + ". " + task);

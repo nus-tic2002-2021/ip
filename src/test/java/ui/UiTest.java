@@ -15,18 +15,18 @@ public class UiTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    public void setUpStreams() {
+    public void setUp() {
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
-    public void restoreStreams() {
+    public void tearDown() {
         System.setOut(originalOut);
     }
 
     @Test
     public void testShowLine(){
         new Ui().showLine();
-        assertEquals("__________________________________________", outContent);
+        assertEquals("__________________________________________", outContent.toString().trim());
     }
 }

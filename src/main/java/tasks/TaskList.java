@@ -72,6 +72,22 @@ public class TaskList {
     }
 
     /**
+     * Search whether a task with input keyword exists in the TaskList.
+     *
+     * @param keyword Search keyword.
+     */
+    public ArrayList<Task> searchTask(String keyword) {
+        ArrayList<Task> results = new ArrayList<>();
+
+        for (Task task: taskList) {
+            if(task.description.contains(keyword)){
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Returns all tasks in the TaskList.
      */
     public ArrayList<Task> getTasks() {

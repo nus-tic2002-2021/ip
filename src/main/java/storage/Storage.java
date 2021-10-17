@@ -154,4 +154,11 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Returns the filepath of current Storage object.
+     */
+    public String getFilePath() {
+        return filePath;
+    }
 }

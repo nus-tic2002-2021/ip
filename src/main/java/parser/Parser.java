@@ -48,6 +48,8 @@ public class Parser {
                 return doComplete(args);
             case DELETE:
                 return doDelete(args);
+            case FIND:
+                return doFind(args);
             case BYE:
                 return doExit();
             default:
@@ -128,6 +130,16 @@ public class Parser {
         }
         catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id is missing.");
+        }
+    }
+
+    private static Command doFind(String[] args){
+        try{
+            String keyword = args[1];
+            return new FindCommand(keyword);
+        }
+        catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand("Search keyword is missing.");
         }
     }
 
