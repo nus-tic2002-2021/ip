@@ -123,7 +123,7 @@ public class Duke {
                 throw new DukeException(line + "\n☹ OOPS!!! " +
                         "The task description of a deadline cannot be empty.\n" + line);
             } else if (parts[1].trim().equals("")) {
-                throw new DukeException(line + "\nI☹ OOPS!!! " +
+                throw new DukeException(line + "\n☹ OOPS!!! " +
                         "The due date/time of a deadline cannot be empty.\n" + line);
             } else {
                 return true;
