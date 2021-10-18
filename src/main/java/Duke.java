@@ -219,6 +219,19 @@ public class Duke {
         }
     }
 
+    public static void DeleteIndex(String input) {
+        int index = Integer.parseInt(input.substring(6).trim()) - 1;
+        if (index < TaskCount) {
+            String DeletedInfo = TaskList.get(index).getTaskInfo();
+            RemoveTask(index);
+            System.out.println(line + "Noted! I've removed this task:\n  "
+                    + DeletedInfo + "\n" + line);
+        } else {
+            System.out.println(line + "\nInvalid task index number\n" + line);
+        }
+    }
+
+
     public static void main(String[] args) {
         StartDuke();
         Greet();
