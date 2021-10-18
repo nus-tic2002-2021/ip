@@ -62,7 +62,7 @@ public class Duke {
             } else if (input.equals("list")) {
                 PrintChecklist();
             } else if (input.contains("todo") && (input.substring(0,4)).equals("todo")) {
-                CheckValidTodo(input);
+                AddTodo(input);
             } else if (input.contains("deadline") && (input.substring(0,8)).equals("deadline")) {
                 CheckValidDeadline(input);
             } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
@@ -80,17 +80,27 @@ public class Duke {
         }
     }
 
-    public static void CheckValidTodo(String input) {
+    public static void AddTodo(String input) {
+        try {
+            if (CheckValidTodo(input)) {
+                String newTask = input.substring(4).trim();
+                Todo newTodo = new Todo(newTask);
+                AddTask(newTodo);
+                PrintTaskAdded(newTodo);
+                PrintTaskCount();
+                System.out.println(line);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static boolean CheckValidTodo(String input) throws DukeException {
         if (input.length() < 5) {
-            System.out.println(line + "\nInvalid input, the task is missing.\n"
+            throw new DukeException(line + "\nInvalid input, the task is missing.\n"
                     + line);
         } else {
-            String newTask = input.substring(4).trim();
-            Todo newTodo = new Todo(newTask);
-            AddTask(newTodo);
-            PrintTaskAdded(newTodo);
-            PrintTaskCount();
-            System.out.println(line);
+            return true;
         }
     }
 
