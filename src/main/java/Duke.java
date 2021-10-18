@@ -68,12 +68,7 @@ public class Duke {
             } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
                 AddEvent(input);
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
-                if (input.length() < 5) {
-                    System.out.println(line + "\nInput missing the index of the task that is done.\n"
-                            + line);
-                } else {
-                    MarkIndex(input);
-                }
+                MarkDone(input);
             } else {
                 System.out.println("Invalid input");
             }
@@ -165,6 +160,25 @@ public class Duke {
             }
         } else {
             throw new DukeException("Invalid event input.");
+        }
+    }
+
+    public static void MarkDone(String input) {
+        try {
+            if(CheckValidDone(input)) {
+                MarkIndex(input);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static boolean CheckValidDone(String input) throws DukeException {
+        if (input.length() < 5) {
+            throw new DukeException(line + "\nInput missing the index of the task that is done.\n"
+                    + line);
+        } else {
+            return true;
         }
     }
 
