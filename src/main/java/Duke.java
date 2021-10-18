@@ -104,24 +104,35 @@ public class Duke {
         }
     }
 
-    public static void CheckValidDeadline(String input){
-        if (input.contains("/by")) {
-            String[] parts = input.substring(8).split("/by");
-            if (parts.length != 2){
-                System.out.println("Invalid deadline input. Missing info.");
-            } else if (parts[0].trim().equals("")) {
-                System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-            } else if (parts[1].trim().equals("")) {
-                System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
-            } else {
+    public static void AddDeadline(String input) {
+        try {
+            if(CheckValidDeadline(input)){
+                String[] parts = input.substring(8).split("/by");
                 Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
                 AddTask(newDeadline);
                 PrintTaskAdded(newDeadline);
                 PrintTaskCount();
                 System.out.println(line);
             }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static boolean CheckValidDeadline(String input) throws DukeException{
+        if (input.contains("/by")) {
+            String[] parts = input.substring(8).split("/by");
+            if (parts.length != 2){
+                throw new DukeException("Invalid deadline input. Missing info.");
+            } else if (parts[0].trim().equals("")) {
+                throw new DukeException(line + "\nInvalid input, the task is missing.\n" + line);
+            } else if (parts[1].trim().equals("")) {
+                throw new DukeException(line + "\nInvalid input, the deadline is missing.\n" + line);
+            } else {
+                return true;
+            }
         } else {
-            System.out.println("Invalid deadline input.");
+            throw new DukeException("Invalid deadline input.");
         }
     }
 
