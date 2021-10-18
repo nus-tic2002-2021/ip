@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     public String getTaskInfo() {
-        return super.getTaskInfo() + " ( at: " + at + ")";
+        return super.getTaskInfo() + " (at: " + at + ")";
     }
 
 }
