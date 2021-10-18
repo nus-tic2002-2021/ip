@@ -70,7 +70,7 @@ public class Duke {
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 MarkDone(input);
             } else {
-                System.out.println("Invalid input");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -92,7 +92,7 @@ public class Duke {
 
     public static boolean CheckValidTodo(String input) throws DukeException {
         if (input.length() < 5) {
-            throw new DukeException(line + "\nInvalid input, the task is missing.\n"
+            throw new DukeException(line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
                     + line);
         } else {
             return true;
@@ -118,16 +118,18 @@ public class Duke {
         if (input.contains("/by")) {
             String[] parts = input.substring(8).split("/by");
             if (parts.length != 2){
-                throw new DukeException("Invalid deadline input. Missing info.");
+                throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
             } else if (parts[0].trim().equals("")) {
-                throw new DukeException(line + "\nInvalid input, the task is missing.\n" + line);
+                throw new DukeException(line + "\n☹ OOPS!!! " +
+                        "The task description of a deadline cannot be empty.\n" + line);
             } else if (parts[1].trim().equals("")) {
-                throw new DukeException(line + "\nInvalid input, the deadline is missing.\n" + line);
+                throw new DukeException(line + "\nI☹ OOPS!!! " +
+                        "The due date/time of a deadline cannot be empty.\n" + line);
             } else {
                 return true;
             }
         } else {
-            throw new DukeException("Invalid deadline input.");
+            throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
         }
     }
 
@@ -150,16 +152,18 @@ public class Duke {
         if (input.contains("/at")) {
             String[] parts = input.substring(5).split("/at");
             if (parts.length != 2) {
-                throw new DukeException("Invalid event input. Missing info.");
+                throw new DukeException("☹ OOPS!!! Invalid syntax for adding event.");
             } else if (parts[0].trim().equals("")) {
-                throw new DukeException(line + "\nInvalid input, the task is missing.\n" + line);
+                throw new DukeException(line + "\n☹ OOPS!!! " +
+                        "The task description of an event cannot be empty.\n" + line);
             } else if (parts[1].trim().equals("")) {
-                throw new DukeException(line + "\nInvalid input, the deadline is missing.\n" + line);
+                throw new DukeException(line + "\n☹ OOPS!!! " +
+                        "The date/time of an event cannot be empty.\n" + line);
             } else {
                 return true;
             }
         } else {
-            throw new DukeException("Invalid event input.");
+            throw new DukeException("☹ OOPS!!! Invalid syntax for adding event.");
         }
     }
 
@@ -175,7 +179,8 @@ public class Duke {
 
     public static boolean CheckValidDone(String input) throws DukeException {
         if (input.length() < 5) {
-            throw new DukeException(line + "\nInput missing the index of the task that is done.\n"
+            throw new DukeException(line + "\n☹ OOPS!!! " +
+                    "The index of the task to delete is missing.\n"
                     + line);
         } else {
             return true;
