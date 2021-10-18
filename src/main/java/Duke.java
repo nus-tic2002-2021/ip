@@ -209,6 +209,16 @@ public class Duke {
         }
     }
 
+    public static boolean CheckValidDelete(String input) throws DukeException {
+        if (input.length() < 7) {
+            throw new DukeException(line + "\n☹ OOPS!!! " +
+                    "The index of the task to delete is missing.\n"
+                    + line);
+        } else {
+            return true;
+        }
+    }
+
     public static void main(String[] args) {
         StartDuke();
         Greet();
