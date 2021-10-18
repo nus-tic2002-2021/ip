@@ -70,7 +70,8 @@ public class Duke {
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 MarkDone(input);
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(line + "☹ OOPS!!! " +
+                        "I'm sorry, but I don't know what that means :-(\n" + line);
             }
         }
     }
@@ -196,13 +197,9 @@ public class Duke {
                 + newTask.getTaskInfo());
     }
 
-    public static void Level4() {
-        ExtendTaskList();
-    }
-
     public static void main(String[] args) {
         StartDuke();
         Greet();
-        Level4();
+        ExtendTaskList();
     }
 }
