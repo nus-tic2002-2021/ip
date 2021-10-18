@@ -88,8 +88,7 @@ public class Duke {
             String newTask = input.substring(4).trim();
             Todo newTodo = new Todo(newTask);
             AddTask(newTodo);
-            System.out.println(line + "\nGot it. I've added this task:\n"
-                    + newTodo.getTaskInfo());
+            PrintTaskAdded(newTodo);
             PrintTaskCount();
             System.out.println(line);
         }
@@ -107,8 +106,7 @@ public class Duke {
             } else {
                 Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
                 AddTask(newDeadline);
-                System.out.println(line + "\nGot it. I've added this task:\n"
-                        + newDeadline.getTaskInfo());
+                PrintTaskAdded(newDeadline);
                 PrintTaskCount();
                 System.out.println(line);
             }
@@ -129,8 +127,7 @@ public class Duke {
             } else {
                 Event newEvent = new Event(parts[0].trim(), parts[1].trim());
                 AddTask(newEvent);
-                System.out.println(line + "\nGot it. I've added this task:\n"
-                        + newEvent.getTaskInfo());
+                PrintTaskAdded(newEvent);
                 PrintTaskCount();
                 System.out.println(line);
             }
@@ -141,6 +138,11 @@ public class Duke {
 
     public static void PrintTaskCount() {
         System.out.println("Now you have " + TaskCount + " tasks in the list.");
+    }
+
+    public static void PrintTaskAdded(Task newTask) {
+        System.out.println(line + "\nGot it. I've added this task:\n"
+                + newTask.getTaskInfo());
     }
 
     public static void Level4() {
