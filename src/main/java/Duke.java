@@ -36,14 +36,15 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void MarkIndex(String input) {
+    public static void MarkIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < TaskCount) {
             MarkTask(index);
             System.out.println(line + "Nice! I've marked this task as done:\n  "
                     + TaskList.get(index).getTaskInfo() + "\n" + line);
         } else {
-            System.out.println(line + "\nInvalid task index number\n" + line);
+            throw new DukeException(line + "\n☹ OOPS!!! " +
+                    "The index number of the task to be done is invalid\n" + line);
         }
     }
 
@@ -219,7 +220,7 @@ public class Duke {
         }
     }
 
-    public static void DeleteIndex(String input) {
+    public static void DeleteIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
         if (index < TaskCount) {
             String DeletedInfo = TaskList.get(index).getTaskInfo();
@@ -228,7 +229,8 @@ public class Duke {
                     + DeletedInfo + "\n" + line);
             PrintTaskCount();
         } else {
-            System.out.println(line + "\nInvalid task index number\n" + line);
+            throw new DukeException(line + "\n☹ OOPS!!! " +
+                    "The index number of the task to delete is invalid!\n" + line);
         }
     }
 
