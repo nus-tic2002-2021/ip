@@ -10,11 +10,23 @@ import Duke.ui.UI;
 
 
 public class CMD_Deadline extends CMD{
-
+    /**
+     * Deadline Command Constructor
+     *
+     */
     public CMD_Deadline(String command){
         super(command);
     }
 
+
+    /**
+     * Function Overloading for execution of deadline command
+     *
+     * @param taskList the full task list for saving purpose
+     * @param ui       UI object
+     * @param storage  storage object
+     *
+     */
     @Override
     public boolean execute(TaskList taskList, UI ui, Storage storage) {
         boolean success = true;

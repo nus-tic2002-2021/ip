@@ -1,6 +1,11 @@
 package Duke.parser;
 public class Parser {
 
+    /**
+     * Determines which known command is been input
+     *
+     * @param fullCommand takes in the full command, check via ENUM
+     */
     public static Command parse(String fullCommand) {
         Command command = new Command();
         if (fullCommand.contains(CMD_Enum.DONE.getName())) {

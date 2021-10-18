@@ -10,7 +10,10 @@ public enum CMD_Enum {
     EVENT("event"),
     DEADLINE("deadline")
     ;
-
+    /**
+     * Eunm class for Command Constructor
+     *
+     */
     CMD_Enum(String name) {
         this.name = name;
     }

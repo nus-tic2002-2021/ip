@@ -9,6 +9,10 @@ import Duke.task.TaskList;
 import Duke.ui.UI;
 
 public class CMD_Event extends CMD{
+    /**
+     * Event Command Constructor
+     *
+     */
     public CMD_Event(String command)  {
         super(command);
     }

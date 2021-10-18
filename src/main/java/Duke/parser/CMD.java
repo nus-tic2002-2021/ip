@@ -19,6 +19,12 @@ public class CMD {
 
     private static ReturnMessages returnMessage = new ReturnMessages();
 
+    /**
+     * Constructor command
+     *
+     * @param command   the command input
+     *
+     */
     public CMD(String command) {
         this.fullCommand = command;
         if(command.contains(CMD_Enum.TODO.getName()) || command.contains(CMD_Enum.DEADLINE.getName()) || command.contains(CMD_Enum.EVENT.getName())){
@@ -42,10 +48,24 @@ public class CMD {
 
     }
 
+    /**
+     * Base class for different execution
+     *
+     * @param taskList the full task list for saving purpose
+     * @param ui       UI object
+     * @param storage  storage object
+     *
+     */
     public boolean execute(TaskList taskList, UI ui, Storage storage){
         return false;
     }
 
+    /**
+     * Replies a done/add command
+     *
+     * @param taskList gets the full task list
+     *
+     */
     public  void reply(TaskList taskList) throws EmptyTaskListException, UnknownSyntaxException, TaskNotFoundException {
         if(fullCommand.contains("done")){
             try {

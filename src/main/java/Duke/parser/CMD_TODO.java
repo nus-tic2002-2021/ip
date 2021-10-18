@@ -8,6 +8,10 @@ import Duke.task.ToDos;
 import Duke.ui.UI;
 
 public class CMD_TODO extends CMD {
+    /**
+     * TO DO Command Constructor
+     *
+     */
     public CMD_TODO(String command) {
         super(command);
     }

@@ -14,11 +14,23 @@ public class Storage {
     private static ReturnMessages returnMessage = new ReturnMessages();
     Scanner scanner;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param fileName   the file saving the information of task list
+     *
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
         this.file = new File(System.getProperty("user.dir") + "/src/main/java/Duke.Storage/"+fileName); // create a File for the given file path
     }
 
+    /**
+     * Loads the information pre-stored in the file or saved on last exit.
+     *
+     * @exception DukeException Throws a general Duke Exception with Message Self-defined
+     *
+     */
     public TaskList load() throws DukeException {
         TaskList taskList = new TaskList();
         if (file.exists()) {
@@ -30,23 +42,29 @@ public class Storage {
                     taskList.addTask(decodeStr2Task(line));
                 }
             } catch (IOException e) {
-                // 文件解析失败
+                //fail to parse
                 throw new DukeException("file parse fail");
             }
         } else {
             try {
                 createFile();
             } catch (IOException e) {
-                // 文件创建失败
+                //fail to create file
                 throw new DukeException("create file fail");
             }
         }
         return taskList;
     }
 
+    /**
+     * Creates File if first time initializing
+     *
+     * @exception  IOException throws a IO Exception if file exists
+     *
+     */
     public void createFile() throws IOException {
         try {
-            file.createNewFile();
+            boolean create = file.createNewFile();
         } catch (IOException ioe) {
             this.isExist = true;
             System.out.println("File exists");
@@ -54,6 +72,12 @@ public class Storage {
         System.out.println("File created: " + file.getName());
     }
 
+    /**
+     * Save function for current runtime task list
+     *
+     * @param taskList   save the task list of current run time
+     *
+     */
     public void save(TaskList taskList)  {
 
         FileWriter myWriter;
@@ -78,6 +102,12 @@ public class Storage {
         System.out.println("Successfully wrote to the file.");
     }
 
+    /**
+     * Decodes The Saved String back to its task format
+     *
+     * @param str   the string of each line of information stored in the text file
+     *
+     */
     public Task decodeStr2Task(String str) {
         String[] line = str.split(" \\| ");
         Task task = null;
