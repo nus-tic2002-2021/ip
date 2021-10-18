@@ -44,7 +44,7 @@ public class Duke {
                     + TaskList.get(index).getTaskInfo() + "\n" + line);
         } else {
             throw new DukeException(line + "\n☹ OOPS!!! " +
-                    "The index number of the task to be done is invalid\n" + line);
+                    "The index number of the task to be done is invalid!\n" + line);
         }
     }
 
