@@ -231,6 +231,9 @@ public class Duke {
         }
     }
 
+    public static void RemoveTask(int index) {
+        TaskList.remove(index);
+    }
 
     public static void main(String[] args) {
         StartDuke();
