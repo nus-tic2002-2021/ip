@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] task_list = new String[100];
+    private static ArrayList<Task> taskListing = new ArrayList<Task>();
     private static int count = 0;
     private static String lineBreak = "-------------------";
     public static void main(String[] args) {
@@ -22,10 +23,12 @@ public class Duke {
                 printThis("Bye. Hope to see you again soon!",true);
                 break;
             }else if(line.equalsIgnoreCase("list")){
-                print_list();
+                printList();
+                in = new Scanner(System.in);
+                markTask(in.nextLine());
             }
             else{
-                add_task(line);
+                addTask(line);
             }
         }
     }
@@ -33,16 +36,53 @@ public class Duke {
         if(withLB) System.out.println(lineBreak+"\n" +st+"\n"+lineBreak);
         else System.out.println(st);
     }
-    public static void add_task(String task){
-        task_list[count] = task;
-        count++;
-        printThis("added: " + task , true);
-    }
-    public static void print_list(){
-        System.out.println(lineBreak);
-        for(int i = 0; i < count; i++){
-           printThis(Integer.toString(i+1) + ". " + task_list[i],false);
+
+    public static void printList() {
+        int c = 1;
+        printThis(lineBreak,false);
+        for (Task tk : taskListing) {
+            System.out.println(c+": ["+tk.getStatusIcon()+"] " + tk.getItem());
+            c ++;
         }
-        System.out.println(lineBreak);
+        printThis(lineBreak,false);
     }
+
+    public static void markTask(String str){
+        String[] splited = str.split("\\s+");
+        if(splited.length == 2){
+            System.out.println("here " + splited[0] + " " + splited[1]);
+
+            if (splited[0].equalsIgnoreCase("done")) {
+                int num;
+                try {
+                    num = Integer.parseInt(splited[1]) - 1;
+                } catch (NumberFormatException nfe) {
+                    printThis("Invalid number, Kindly enter 'List' to re-access",true);
+                    return;
+                }
+
+                if(num >= 0 && num < taskListing.size() ){
+                    printThis(lineBreak,false);
+                    printThis("Nice! I've marked this task as done:",false);
+                    taskListing.get(num).setDone();
+                    printThis("[X] " + taskListing.get(num).getItem(),false);
+                    printThis(lineBreak,false);
+                }else{
+                    printThis("Invalid Number",true);
+                }
+            }else{
+                printThis("Invalid command please enter 'List' again",true);
+            }
+        }
+    }
+
+    public static void addTask(String item) {
+        taskListing.add(new Task(item));
+        printThis("added: " + item , true);
+    }
+
+    public static void removeTask(int num){
+        taskListing.remove(num-1);
+    }
+
 }
