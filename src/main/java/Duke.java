@@ -62,58 +62,11 @@ public class Duke {
             } else if (input.equals("list")) {
                 PrintChecklist();
             } else if (input.contains("todo") && (input.substring(0,4)).equals("todo")) {
-                if (input.length() < 5) {
-                    System.out.println(line + "\nInvalid input, the task is missing.\n"
-                            + line);
-                } else {
-                    String newTask = input.substring(4).trim();
-                    Todo newTodo = new Todo(newTask);
-                    AddTask(newTodo);
-                    System.out.println(line + "\nGot it. I've added this task:\n"
-                            + newTodo.getTaskInfo());
-                    PrintTaskCount();
-                    System.out.println(line);
-                }
+                CheckValidTodo(input);
             } else if (input.contains("deadline") && (input.substring(0,8)).equals("deadline")) {
-                if (input.contains("/by")) {
-                    String[] parts = input.substring(8).split("/by");
-                    if (parts.length != 2){
-                        System.out.println("Invalid deadline input. Missing info.");
-                    } else if (parts[0].trim().equals("")) {
-                        System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-                    } else if (parts[1].trim().equals("")) {
-                        System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
-                    } else {
-                        Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
-                        AddTask(newDeadline);
-                        System.out.println(line + "\nGot it. I've added this task:\n"
-                                + newDeadline.getTaskInfo());
-                        PrintTaskCount();
-                        System.out.println(line);
-                    }
-                } else {
-                    System.out.println("Invalid deadline input.");
-                }
+                CheckValidDeadline(input);
             } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
-                if (input.contains("/at")) {
-                    String[] parts = input.substring(5).split("/at");
-                    if (parts.length != 2) {
-                        System.out.println("Invalid event input. Missing info.");
-                    } else if (parts[0].trim().equals("")) {
-                        System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-                    } else if (parts[1].trim().equals("")) {
-                        System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
-                    } else {
-                        Event newEvent = new Event(parts[0].trim(), parts[1].trim());
-                        AddTask(newEvent);
-                        System.out.println(line + "\nGot it. I've added this task:\n"
-                                + newEvent.getTaskInfo());
-                        PrintTaskCount();
-                        System.out.println(line);
-                    }
-                } else {
-                    System.out.println("Invalid event input.");
-                }
+                CheckValidEvent(input);
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 if (input.length() < 5) {
                     System.out.println(line + "\nInput missing the index of the task that is done.\n"
@@ -124,6 +77,65 @@ public class Duke {
             } else {
                 System.out.println("Invalid input");
             }
+        }
+    }
+
+    public static void CheckValidTodo(String input) {
+        if (input.length() < 5) {
+            System.out.println(line + "\nInvalid input, the task is missing.\n"
+                    + line);
+        } else {
+            String newTask = input.substring(4).trim();
+            Todo newTodo = new Todo(newTask);
+            AddTask(newTodo);
+            System.out.println(line + "\nGot it. I've added this task:\n"
+                    + newTodo.getTaskInfo());
+            PrintTaskCount();
+            System.out.println(line);
+        }
+    }
+
+    public static void CheckValidDeadline(String input){
+        if (input.contains("/by")) {
+            String[] parts = input.substring(8).split("/by");
+            if (parts.length != 2){
+                System.out.println("Invalid deadline input. Missing info.");
+            } else if (parts[0].trim().equals("")) {
+                System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
+            } else if (parts[1].trim().equals("")) {
+                System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
+            } else {
+                Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+                AddTask(newDeadline);
+                System.out.println(line + "\nGot it. I've added this task:\n"
+                        + newDeadline.getTaskInfo());
+                PrintTaskCount();
+                System.out.println(line);
+            }
+        } else {
+            System.out.println("Invalid deadline input.");
+        }
+    }
+
+    public static void CheckValidEvent(String input) {
+        if (input.contains("/at")) {
+            String[] parts = input.substring(5).split("/at");
+            if (parts.length != 2) {
+                System.out.println("Invalid event input. Missing info.");
+            } else if (parts[0].trim().equals("")) {
+                System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
+            } else if (parts[1].trim().equals("")) {
+                System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
+            } else {
+                Event newEvent = new Event(parts[0].trim(), parts[1].trim());
+                AddTask(newEvent);
+                System.out.println(line + "\nGot it. I've added this task:\n"
+                        + newEvent.getTaskInfo());
+                PrintTaskCount();
+                System.out.println(line);
+            }
+        } else {
+            System.out.println("Invalid event input.");
         }
     }
 
