@@ -64,9 +64,9 @@ public class Duke {
             } else if (input.contains("todo") && (input.substring(0,4)).equals("todo")) {
                 AddTodo(input);
             } else if (input.contains("deadline") && (input.substring(0,8)).equals("deadline")) {
-                CheckValidDeadline(input);
+                AddDeadline(input);
             } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
-                CheckValidEvent(input);
+                AddEvent(input);
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 if (input.length() < 5) {
                     System.out.println(line + "\nInput missing the index of the task that is done.\n"
@@ -136,24 +136,35 @@ public class Duke {
         }
     }
 
-    public static void CheckValidEvent(String input) {
-        if (input.contains("/at")) {
-            String[] parts = input.substring(5).split("/at");
-            if (parts.length != 2) {
-                System.out.println("Invalid event input. Missing info.");
-            } else if (parts[0].trim().equals("")) {
-                System.out.println(line + "\nInvalid input, the task is missing.\n" + line);
-            } else if (parts[1].trim().equals("")) {
-                System.out.println(line + "\nInvalid input, the deadline is missing.\n" + line);
-            } else {
+    public static void AddEvent(String input) {
+        try {
+            if (CheckValidEvent(input)) {
+                String[] parts = input.substring(5).split("/at");
                 Event newEvent = new Event(parts[0].trim(), parts[1].trim());
                 AddTask(newEvent);
                 PrintTaskAdded(newEvent);
                 PrintTaskCount();
                 System.out.println(line);
             }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static boolean CheckValidEvent(String input) throws DukeException {
+        if (input.contains("/at")) {
+            String[] parts = input.substring(5).split("/at");
+            if (parts.length != 2) {
+                throw new DukeException("Invalid event input. Missing info.");
+            } else if (parts[0].trim().equals("")) {
+                throw new DukeException(line + "\nInvalid input, the task is missing.\n" + line);
+            } else if (parts[1].trim().equals("")) {
+                throw new DukeException(line + "\nInvalid input, the deadline is missing.\n" + line);
+            } else {
+                return true;
+            }
         } else {
-            System.out.println("Invalid event input.");
+            throw new DukeException("Invalid event input.");
         }
     }
 
