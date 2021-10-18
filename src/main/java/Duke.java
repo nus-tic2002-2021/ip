@@ -199,7 +199,16 @@ public class Duke {
                 + newTask.getTaskInfo());
     }
 
-    
+    public static void DeleteTask(String input) {
+        try {
+            if (CheckValidDelete(input)) {
+                DeleteIndex(input);
+            }
+        } catch (DukeException e){
+            e.printErrMsg();
+        }
+    }
+
     public static void main(String[] args) {
         StartDuke();
         Greet();
