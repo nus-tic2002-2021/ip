@@ -70,7 +70,7 @@ public class Duke {
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 MarkDone(input);
             } else if (input.contains("delete") && (input.startsWith("delete"))) {
-                //DeleteTask(input);
+                DeleteTask(input);
             } else {
                 System.out.println(line + "☹ OOPS!!! " +
                         "I'm sorry, but I don't know what that means :-(\n" + line);
@@ -233,6 +233,7 @@ public class Duke {
 
     public static void RemoveTask(int index) {
         TaskList.remove(index);
+        TaskCount--;
     }
 
     public static void main(String[] args) {
