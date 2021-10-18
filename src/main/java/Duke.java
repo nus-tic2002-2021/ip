@@ -1,12 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     static Scanner in = new Scanner(System.in);
     static String line = "____________________________________________________________\n";
-    static Task[] Checklist = new Task[100];
+    static ArrayList<Task> TaskList = new ArrayList<>();
     static int TaskCount = 0;
-
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -24,14 +24,14 @@ public class Duke {
     }
 
     public static void AddTask(Task newEntry) {
-        Checklist[TaskCount] = newEntry;
+        TaskList.add(newEntry);
         TaskCount++;
     }
 
     public static void PrintChecklist() {
         System.out.println(line + "\nHere are the tasks in your list:");
         for (int i = 0; i < TaskCount; i++) {
-            System.out.println((i+1) + "." + Checklist[i].getTaskInfo());
+            System.out.println((i+1) + "." + TaskList.get(i).getTaskInfo());
         }
         System.out.println(line);
     }
@@ -41,14 +41,14 @@ public class Duke {
         if (index < TaskCount) {
             MarkTask(index);
             System.out.println(line + "Nice! I've marked this task as done:\n  "
-                    + Checklist[index].getTaskInfo() + "\n" + line);
+                    + TaskList.get(index).getTaskInfo() + "\n" + line);
         } else {
             System.out.println(line + "\nInvalid task index number\n" + line);
         }
     }
 
     public static void MarkTask(int index) {
-        Checklist[index].markCompleted();
+        TaskList.get(index).markCompleted();
     }
 
     public static void ExtendTaskList() {
