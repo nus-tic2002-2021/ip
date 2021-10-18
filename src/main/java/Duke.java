@@ -183,7 +183,7 @@ public class Duke {
     public static boolean CheckValidDone(String input) throws DukeException {
         if (input.length() < 5) {
             throw new DukeException(line + "\n☹ OOPS!!! " +
-                    "The index of the task to delete is missing.\n"
+                    "The index of the task to be marked as done is missing.\n"
                     + line);
         } else {
             return true;
@@ -226,6 +226,7 @@ public class Duke {
             RemoveTask(index);
             System.out.println(line + "Noted! I've removed this task:\n  "
                     + DeletedInfo + "\n" + line);
+            PrintTaskCount();
         } else {
             System.out.println(line + "\nInvalid task index number\n" + line);
         }
