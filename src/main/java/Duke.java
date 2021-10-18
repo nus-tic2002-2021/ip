@@ -69,6 +69,8 @@ public class Duke {
                 AddEvent(input);
             } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
                 MarkDone(input);
+            } else if (input.contains("delete") && (input.startsWith("delete"))) {
+                //DeleteTask(input);
             } else {
                 System.out.println(line + "☹ OOPS!!! " +
                         "I'm sorry, but I don't know what that means :-(\n" + line);
@@ -197,6 +199,7 @@ public class Duke {
                 + newTask.getTaskInfo());
     }
 
+    
     public static void main(String[] args) {
         StartDuke();
         Greet();
