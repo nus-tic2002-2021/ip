@@ -98,6 +98,9 @@ public class Duke {
         if (input.length() < 5) {
             throw new DukeException(line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
                     + line);
+        } else if (input.substring(4).trim().equals("")) {
+            throw new DukeException(line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
+                    + line);
         } else {
             return true;
         }
