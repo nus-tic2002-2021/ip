@@ -62,13 +62,13 @@ public class Duke {
                 stop = true;
             } else if (input.equals("list")) {
                 PrintChecklist();
-            } else if (input.contains("todo") && (input.substring(0,4)).equals("todo")) {
+            } else if (input.contains("todo") && (input).startsWith("todo")) {
                 AddTodo(input);
-            } else if (input.contains("deadline") && (input.substring(0,8)).equals("deadline")) {
+            } else if (input.contains("deadline") && (input).startsWith("deadline")) {
                 AddDeadline(input);
-            } else if (input.contains("event") && (input.substring(0,5)).equals("event")) {
+            } else if (input.contains("event") && (input).startsWith("event")) {
                 AddEvent(input);
-            } else if (input.contains("done") && (input.substring(0,4)).equals("done")) {
+            } else if (input.contains("done") && (input).startsWith("done")) {
                 MarkDone(input);
             } else if (input.contains("delete") && (input.startsWith("delete"))) {
                 DeleteTask(input);
