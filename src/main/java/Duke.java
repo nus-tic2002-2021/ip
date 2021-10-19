@@ -38,7 +38,7 @@ public class Duke {
 
     public static void MarkIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
-        if (index < TaskCount) {
+        if (index < TaskCount && index > -1) {
             MarkTask(index);
             System.out.println(line + "Nice! I've marked this task as done:\n  "
                     + TaskList.get(index).getTaskInfo() + "\n" + line);
@@ -190,6 +190,12 @@ public class Duke {
                     "The index of the task to be marked as done is missing.\n"
                     + line);
         } else {
+            try {
+                int index = Integer.parseInt(input.substring(4).trim()) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException(line + "\n☹ OOPS!!! " +
+                        "The index of the task to mark as done has to be an integer!\n" + line);
+            }
             return true;
         }
     }
