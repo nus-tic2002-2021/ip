@@ -60,17 +60,17 @@ public class Duke {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 TaskCount = 0;
                 stop = true;
-            } else if (input.equals("list")) {
+            } else if (input.equals("list ")) {
                 PrintChecklist();
-            } else if (input.contains("todo") && (input).startsWith("todo")) {
+            } else if (input.startsWith("todo ")) {
                 AddTodo(input);
-            } else if (input.contains("deadline") && (input).startsWith("deadline")) {
+            } else if (input.startsWith("deadline ")) {
                 AddDeadline(input);
-            } else if (input.contains("event") && (input).startsWith("event")) {
+            } else if (input.startsWith("event ")) {
                 AddEvent(input);
-            } else if (input.contains("done") && (input).startsWith("done")) {
+            } else if (input.startsWith("done ")) {
                 MarkDone(input);
-            } else if (input.contains("delete") && (input.startsWith("delete"))) {
+            } else if (input.startsWith("delete ")) {
                 DeleteTask(input);
             } else {
                 System.out.println(line + "☹ OOPS!!! " +
