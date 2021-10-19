@@ -60,7 +60,10 @@ public class Parser {
             Task task = new Deadline(taskDescBy[0], taskDescBy[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description and deadline ☺");
+            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
+                    " description and deadline ☺");
+        } catch (Exception e) {
+            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
         }
     }
 
@@ -71,7 +74,10 @@ public class Parser {
             Task task = new Event(taskDescAt[0], taskDescAt[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description and datetime ☺");
+            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
+                    " description and datetime ☺");
+        } catch (Exception e) {
+            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
         }
     }
 

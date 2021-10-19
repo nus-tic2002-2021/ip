@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Storage {
 
@@ -23,7 +25,7 @@ public class Storage {
         while (s.hasNext()) {
             String taskStr = s.nextLine();
             try {
-                Task task = convertToTask(taskStr);
+                Task task = convertStrToTask(taskStr);
                 taskList.add(task);
             }
             catch (IndexOutOfBoundsException e){
@@ -63,7 +65,7 @@ public class Storage {
         fw.close();
     }
 
-    private Task convertToTask(String taskStr) throws IndexOutOfBoundsException {
+    private Task convertStrToTask(String taskStr) throws IndexOutOfBoundsException {
         String[] taskFullDesc = taskStr.split(",");
         String taskType = taskFullDesc[0];
         String taskStatus = taskFullDesc[1];
@@ -75,18 +77,27 @@ public class Storage {
                 break;
             }
             case "D": {
-                String taskDatetime = taskFullDesc[3];
-                task = new Deadline(taskDesc, taskDatetime);
+                String taskDateTime = taskFullDesc[3];
+                taskDateTime = dateTimeFormatter(taskDateTime);
+                task = new Deadline(taskDesc, taskDateTime);
                 break;
             }
             case "E": {
-                String taskDatetime = taskFullDesc[3];
-                task = new Event(taskDesc, taskDatetime);
+                String taskDateTime = taskFullDesc[3];
+                taskDateTime = dateTimeFormatter(taskDateTime);
+                task = new Event(taskDesc, taskDateTime);
                 break;
             }
         }
         if (taskStatus.equalsIgnoreCase("X")) task.setDone();
         return task;
+    }
+
+    private String dateTimeFormatter(String taskDateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+        LocalDateTime dt = LocalDateTime.parse(taskDateTime, dtf);
+        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return taskDateTime = dt.format(dtf);
     }
 
 }
