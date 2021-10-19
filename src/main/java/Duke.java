@@ -224,12 +224,12 @@ public class Duke {
     }
 
     public static void DeleteIndex(String input) throws DukeException {
-        int index = TaskCount + 1;
+        int index = -1;
         try {
             index = Integer.parseInt(input.substring(6).trim()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException(line + "\n☹ OOPS!!! " +
-                    "The index number of the task to delete is invalid!\n" + line);
+                    "The index of the task to delete has to be an integer!\n" + line);
         }
         if (index < TaskCount && index > -1) {
             String DeletedInfo = TaskList.get(index).getTaskInfo();
