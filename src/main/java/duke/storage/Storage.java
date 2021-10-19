@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exception.DukeException;
 import duke.tasklist.*;
 
 import java.util.*;
@@ -10,15 +11,30 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A <code>Storage</code> object for task list access and storage.
+ * Extends the <code>Task</code> class.
+ */
 public class Storage {
 
     private String filePath;
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Constructs Storage with this task list file path.
+     *
+     * @param filePath The task list file path.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the stored task list.
+     *
+     * @return An arraylist of tasks.
+     * @throws FileNotFoundException If there is no file found.
+     */
     public ArrayList<Task> getTaskList() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -37,6 +53,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes task list to file.
+     *
+     * @param taskList The arraylist of tasks to write to file.
+     * @throws FileNotFoundException If there is no file found.
+     */
     public void setTaskList(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : taskList) {
@@ -94,10 +116,10 @@ public class Storage {
     }
 
     private String dateTimeFormatter(String taskDateTime) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-        LocalDateTime dt = LocalDateTime.parse(taskDateTime, dtf);
-        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return taskDateTime = dt.format(dtf);
+        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dt = LocalDateTime.parse(taskDateTime, oldFormat);
+        return taskDateTime = dt.format(newFormat);
     }
 
 }

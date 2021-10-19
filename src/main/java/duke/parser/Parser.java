@@ -3,16 +3,24 @@ package duke.parser;
 import duke.command.*;
 import duke.tasklist.*;
 
+/**
+ *  A <code>Parser</code> object to parse user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns a Command object from a user command String object.
+     *
+     * @param fullCommand Full user command string.
+     */
     public static Command parse(String fullCommand) {
 
         String[] taskFullDesc = fullCommand.split(" ", 2);
         String taskType = taskFullDesc[0].toUpperCase();
-        EnumCommand userCommand = null;
+        CommandEnum userCommand = null;
 
         try {
-            userCommand = EnumCommand.valueOf(taskType);
+            userCommand = CommandEnum.valueOf(taskType);
         } catch (IllegalArgumentException e) {
             return new InvalidCommand("Oops! No such command found.\n" +
                                       "Only list, todo, deadline, event, done, delete and bye ☺");

@@ -8,12 +8,20 @@ import duke.ui.*;
 
 import java.io.FileNotFoundException;
 
+/**
+ * A <code>Duke</code> object, who is your personal assistant to keep track of all your tasks in a task list.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructs Duke with this file path.
+     *
+     * @param filePath The file location to store and access the task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke interactively.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,6 +56,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructs and runs Duke.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("src/main/java/duke/data/tasklist.csv").run();
     }
