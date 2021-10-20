@@ -4,10 +4,8 @@ import Duke.exception.DukeException;
 import Duke.parser.Command;
 import Duke.parser.Parser;
 import Duke.storage.Storage;
-import Duke.task.*;
+import Duke.task.TaskList;
 import Duke.ui.UI;
-
-import java.io.IOException;
 
 
 public class Duke {
@@ -15,6 +13,11 @@ public class Duke {
     private UI ui;
     private TaskList taskList;
 
+    /**
+     * Beginning function taking in filepath
+     *
+     * @param filePath - filepath to storage
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
@@ -26,7 +29,7 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException {
+    public void run() throws DukeException {
         ui.showWelcome();
         boolean isExit = false;
 
@@ -46,7 +49,7 @@ public class Duke {
         ui.showExit();
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException {
         new Duke("duke.txt").run();
     }
 }
