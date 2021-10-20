@@ -15,7 +15,7 @@ import java.util.*;
  * A <code>Storage</code> object deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor of <code>Storage</code>.
@@ -43,14 +43,12 @@ public class Storage {
 
             while (s.hasNext()) {
                 String taskStr = s.nextLine();
-
                 try {
                     Task newTask = convertToTask(taskStr);
                     tasks.add(newTask);
                 } catch (Exception e){
                     System.out.println(e.getMessage());
                 }
-
             }
             return tasks;
         }
@@ -73,7 +71,6 @@ public class Storage {
         if(!folders.exists()) {
             boolean dirCreated = folders.mkdirs();
         }
-
         boolean fileCreated = tasks.createNewFile();
     }
 
@@ -83,6 +80,7 @@ public class Storage {
      * @param taskStr Task in string format.
      */
     private Task convertToTask(String taskStr){
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         String[] args = taskStr.split(" \\| ");
 
         String keyword = args[0];
@@ -91,23 +89,20 @@ public class Storage {
 
         Task task = null;
         switch(keyword){
-            case "T": {
-                task = new ToDoTask(description);
-                break;
-            }
-            case "D": {
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-                LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
-                task = new DeadlineTask(description, deadline);
-                break;
-            }
-            case "E": {
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-                LocalDateTime start = LocalDateTime.parse(args[3], formatter);
-                LocalDateTime end = LocalDateTime.parse(args[4], formatter);
-                task = new EventTask(description, start, end);
-                break;
-            }
+        case "T": {
+            task = new ToDoTask(description);
+            break;
+        }
+        case "D":
+            LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
+            task = new DeadlineTask(description, deadline);
+            break;
+
+        case "E":
+            LocalDateTime start = LocalDateTime.parse(args[3], formatter);
+            LocalDateTime end = LocalDateTime.parse(args[4], formatter);
+            task = new EventTask(description, start, end);
+            break;
         }
         if (status.equals("1")){ task.markAsDone(); }
         return task;
@@ -132,27 +127,25 @@ public class Storage {
                 String status = task.isDone() ? "1" : "0";
 
                 switch (taskType) {
-                    case "ToDoTask": {
-                        taskStr = "T | " + status + " | " + description + "\n";
-                        break;
-                    }
-                    case "DeadlineTask": {
-                        DeadlineTask deadlineTask = (DeadlineTask)task;
-                        taskStr = "D | " + status + " | " + description + " | " + deadlineTask.getBy() + "\n";
-                        break;
-                    }
-                    case "EventTask": {
-                        EventTask eventTask = (EventTask)task;
-                        taskStr = "E | " + status + " | " + description + " | " + eventTask.getStart() +
-                                " | " + eventTask.getEnd() + "\n";
-                        break;
-                    }
+                case "ToDoTask":
+                    taskStr = "T | " + status + " | " + description + "\n";
+                    break;
+
+                case "DeadlineTask":
+                    DeadlineTask deadlineTask = (DeadlineTask)task;
+                    taskStr = "D | " + status + " | " + description + " | " + deadlineTask.getBy() + "\n";
+                    break;
+
+                case "EventTask":
+                    EventTask eventTask = (EventTask)task;
+                    taskStr = "E | " + status + " | " + description + " | " + eventTask.getStart() +
+                            " | " + eventTask.getEnd() + "\n";
+                    break;
                 }
                 fw.write(taskStr);
             }
             fw.close();
-        }
-        catch (IOException e){
+        } catch (IOException e){
             System.out.println(e.getMessage());
         }
     }

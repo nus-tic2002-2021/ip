@@ -4,7 +4,6 @@ package tasks;
  * A <code>Task</code> is a high-level Task class to be extended.
  */
 public class Task {
-    private static int taskCount;
 
     protected String description;
     protected boolean isDone;
@@ -14,10 +13,7 @@ public class Task {
      *
      * @param description Brief description of the task.
      */
-    public Task(String description)
-    {
-        taskCount++;
-
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -39,8 +35,7 @@ public class Task {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 }

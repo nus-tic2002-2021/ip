@@ -7,8 +7,8 @@ import java.util.ArrayList;
  * A <code>TaskList</code> object stores all available tasks (to-dos, deadlines, events).
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
-    private Scheduler scheduler;
+    private final ArrayList<Task> taskList;
+    private final Scheduler scheduler;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -40,8 +40,7 @@ public class TaskList {
     public String setDone(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1){
             throw new DukeException("Task with id " + taskId + " is not found.");
-        }
-        else {
+        } else {
             Task doneTask = taskList.get(taskId - 1);
             doneTask.markAsDone();
             return doneTask.toString();
@@ -58,8 +57,7 @@ public class TaskList {
     public String deleteTask(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1){
             throw new DukeException("Task with id " + taskId + " is not found.");
-        }
-        else {
+        } else {
             Task deletedTask = taskList.get(taskId - 1);
             taskList.remove(taskId - 1);
             return deletedTask.toString();
@@ -76,7 +74,6 @@ public class TaskList {
         if(task.getClass().equals(EventTask.class)) {
             canBeAdded = scheduler.schedule(((EventTask) task).start, ((EventTask) task).end);
         }
-
         if(canBeAdded) {
             taskList.add(task);
         }

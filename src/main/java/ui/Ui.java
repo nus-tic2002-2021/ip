@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Prints response in the Terminal based on user's inputs.
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     /** Prints Duke logo and Hello message. */
     public void showWelcome() {
@@ -88,10 +88,9 @@ public class Ui {
      * @param taskList ArrayList of Tasks to be printed
      */
     public void printAllTasks(ArrayList<Task> taskList) {
-        if(taskList.size() == 0){
+        if (taskList.size() == 0){
             System.out.println("There's no task now :D");
-        }
-        else {
+        } else {
             int index = 1;
             for (Task task : taskList) {
                 System.out.println(index + ". " + task);

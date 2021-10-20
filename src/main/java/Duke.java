@@ -1,8 +1,8 @@
 import commands.Command;
-import parser.*;
+import parser.Parser;
 import storage.Storage;
-import tasks.*;
 import ui.Ui;
+import tasks.*;
 import exceptions.*;
 
 import java.io.FileNotFoundException;
@@ -14,9 +14,9 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor of <code>Duke</code>.

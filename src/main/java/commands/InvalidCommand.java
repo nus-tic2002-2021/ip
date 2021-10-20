@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public class InvalidCommand extends Command{
 
-    private String errorMsg;
+    private final String errorMsg;
 
     public InvalidCommand(String errorMsg){
         this.errorMsg = errorMsg;

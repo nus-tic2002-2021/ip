@@ -27,8 +27,7 @@ public class AddCommand extends Command{
             ui.showAdded();
             ui.printTask(task.toString());
             ui.printTaskCount(taskList.getListSize());
-        }
-        else{
+        } else {
             ui.showError("Task is not added. There is a schedule clash!");
         }
     }

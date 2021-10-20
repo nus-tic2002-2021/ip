@@ -30,30 +30,30 @@ public class Parser {
         CommandEnum commandEnum = null;
         try {
             commandEnum = CommandEnum.valueOf(keyword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             //Use ui to display error later
             return new InvalidCommand("Command <" + keyword.toLowerCase() + "> not found :(");
         }
 
         switch(commandEnum){
-            case LIST:
-                return doList();
-            case TODO:
-                return doAddTodo(args);
-            case DEADLINE:
-                return doAddDeadline(args);
-            case EVENT:
-                return doAddEvent(args);
-            case DONE:
-                return doComplete(args);
-            case DELETE:
-                return doDelete(args);
-            case FIND:
-                return doFind(args);
-            case BYE:
-                return doExit();
-            default:
-                return new InvalidCommand("Error executing command");
+        case LIST:
+            return doList();
+        case TODO:
+            return doAddTodo(args);
+        case DEADLINE:
+            return doAddDeadline(args);
+        case EVENT:
+            return doAddEvent(args);
+        case DONE:
+            return doComplete(args);
+        case DELETE:
+            return doDelete(args);
+        case FIND:
+            return doFind(args);
+        case BYE:
+            return doExit();
+        default:
+            return new InvalidCommand("Error executing command");
         }
     }
 
@@ -68,8 +68,7 @@ public class Parser {
             }
             Task task = new ToDoTask(args[1]);
             return new AddCommand(task);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \nDescription is missing.");
         }
     }
@@ -85,11 +84,9 @@ public class Parser {
             LocalDateTime by = LocalDateTime.parse(deadlineInfo[1], formatter);
             Task task = new DeadlineTask(description, by);
             return new AddCommand(task);
-        }
-        catch(IndexOutOfBoundsException e) {
+        } catch(IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \nDeadline or description is missing.");
-        }
-        catch(DateTimeParseException e) {
+        } catch(DateTimeParseException e) {
             return new InvalidCommand("Task cannot be added. \nPlease enter deadline in the format of 'yyyy-MM-dd HHmm'");
         }
     }
@@ -109,11 +106,9 @@ public class Parser {
             LocalDateTime end = LocalDateTime.parse(times[1], formatter);
             Task task = new EventTask(description, start, end);
             return new AddCommand(task);
-        }
-        catch(IndexOutOfBoundsException e) {
+        } catch(IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \nEvent time or description is missing");
-        }
-        catch(DateTimeParseException e) {
+        } catch(DateTimeParseException e) {
             return new InvalidCommand("Task cannot be added. \n" +
                     "Please enter event datetime in the format of 'yyyy-MM-dd HHmm to yyyy-MM-dd HHmm'");
         }
@@ -123,8 +118,7 @@ public class Parser {
         try {
             int taskId = Integer.parseInt(args[1]);
             return new CompleteCommand(taskId);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id is missing.");
         }
     }
@@ -133,18 +127,16 @@ public class Parser {
         try {
             int taskId = Integer.parseInt(args[1]);
             return new DeleteCommand(taskId);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id is missing.");
         }
     }
 
     private static Command doFind(String[] args){
-        try{
+        try {
             String keyword = args[1];
             return new FindCommand(keyword);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Search keyword is missing.");
         }
     }

@@ -26,8 +26,12 @@ public class DeadlineTask extends Task {
     /**
      * Returns the deadline of the <code>DeadLineTask</code> object.
      */
-    public String getBy(){ return by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)); }
+    public String getBy(){
+        return by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    }
 
     @Override
-    public String toString(){ return "[D]" + super.toString() + " (by: " + getBy() + ")"; }
+    public String toString(){
+        return "[D]" + super.toString() + " (by: " + getBy() + ")";
+    }
 }
