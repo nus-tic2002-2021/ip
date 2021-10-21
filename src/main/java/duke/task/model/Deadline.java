@@ -1,9 +1,13 @@
 package duke.task.model;
 
-public final class Deadline extends Task {
-    private String _deadline;
+import java.time.LocalDateTime;
 
-    public Deadline(String taskDescription, String deadline, Integer taskId, Boolean done) {
+import static duke.dukeUtility.parser.DateParser.prettifyLocalDateTime;
+
+public final class Deadline extends Task {
+    private LocalDateTime _deadline;
+
+    public Deadline(String taskDescription, LocalDateTime deadline, Integer taskId, Boolean done) {
         super(taskDescription, taskId, done);
         this.setDeadline(deadline);
     }
@@ -11,17 +15,17 @@ public final class Deadline extends Task {
     private Deadline() {
     }
 
-    private void setDeadline(String deadline) {
+    private void setDeadline(LocalDateTime deadline) {
         this._deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this._deadline;
     }
 
 
 
     public String getChronologyString() {
-        return "By: " + this.getDeadline();
+        return "By: " + prettifyLocalDateTime(this.getDeadline());
     }
 }

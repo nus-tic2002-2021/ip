@@ -32,7 +32,7 @@ public class TaskToJsonParser extends Parser {
         obj.addProperty(TASK_FIELD_TASK_ID, deadline.getTaskId());
         obj.addProperty(TASK_FIELD_DESCRIPTION, deadline.getTaskDescription());
         obj.addProperty(TASK_FIELD_DONE_STATUS, deadline.isDone());
-        obj.addProperty(TASK_FIELD_DEADLINE, deadline.getDeadline());
+        obj.addProperty(TASK_FIELD_DEADLINE, parseLocalDateTimeAsString(deadline.getDeadline()));
         return obj;
     }
 

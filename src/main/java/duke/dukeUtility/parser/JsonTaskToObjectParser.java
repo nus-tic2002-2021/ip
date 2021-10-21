@@ -16,8 +16,8 @@ public class JsonTaskToObjectParser extends Parser {
         return jsonObj.get(TASK_FIELD_DESCRIPTION).getAsString();
     }
 
-    public static String getJsonPropertyDeadline(JsonObject jsonObj) throws Exception {
-        return (jsonObj.get(TASK_FIELD_DEADLINE).getAsString());
+    public static LocalDateTime getJsonPropertyDeadline(JsonObject jsonObj) throws Exception {
+        return parseStringAsLocalDateTime(jsonObj.get(TASK_FIELD_DEADLINE).getAsString());
     }
 
     public static LocalDateTime getJsonPropertyFrom(JsonObject jsonObj) throws Exception {

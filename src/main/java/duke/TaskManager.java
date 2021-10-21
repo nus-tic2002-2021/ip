@@ -38,7 +38,7 @@ public class TaskManager {
         this._activeTasks.addTask(event);
         return event;
     }
-    public Deadline addNewDeadline(String taskDescription, String deadlineString) {
+    public Deadline addNewDeadline(String taskDescription, LocalDateTime deadlineString) {
         Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
         this._activeTasks.addTask(deadLine);
         return deadLine;
@@ -106,7 +106,7 @@ public class TaskManager {
             Integer taskId = getJsonPropertyTaskId(jsonObj);
             String taskDescription = getJsonPropertyTaskDescription(jsonObj);
             Boolean done = getJsonPropertyDoneStatus(jsonObj);
-            String deadline = getJsonPropertyDeadline(jsonObj);
+            LocalDateTime deadline = getJsonPropertyDeadline(jsonObj);
             return new Deadline(taskDescription, deadline, taskId, done);
         } else if (isJsonTypeEvent(jsonObj)) {
             Integer taskId = getJsonPropertyTaskId(jsonObj);

@@ -43,7 +43,7 @@ public abstract class UiCommandFactory extends CommandFactory {
         String argLine;
         String[] argList;
         String taskDescription;
-        String deadline;
+        LocalDateTime deadline;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_DEADLINE, "");
             String addDeadlineStringDelimiter = ADD_DEADLINE_DEADLINE_DELIMITER;
@@ -53,7 +53,7 @@ public abstract class UiCommandFactory extends CommandFactory {
                 throw new DukeInvalidSyntaxException("Expected " + expectedArgsLength + " arguments delimited by \""+ addDeadlineStringDelimiter + "\"");
             }
             taskDescription = argList[0];
-            deadline = argList[1];
+            deadline = parseStringAsLocalDateTime(argList[1]);
         }catch(DukeInvalidSyntaxException e){
             return new CommandInvalidTextCommandSyntax(e.getMessage());
         } catch (Exception e){

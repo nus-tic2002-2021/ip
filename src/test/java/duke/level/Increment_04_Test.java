@@ -166,9 +166,8 @@ public class Increment_04_Test extends TestStream {
         StringBuilder commandBuilder = new StringBuilder();
 
         String taskDesc0 = "event_desc_abc asfasfasf";
+        String byDateString = "20200101";
 
-
-        String byDateString = "midnight";
         String storeDeadlineCommand0 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, taskDesc0,DELIMITER_DEADLINE_DEADLINE,byDateString);
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
@@ -193,7 +192,7 @@ public class Increment_04_Test extends TestStream {
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
 
-        MockDeadline expectedEvent = new MockDeadline(taskDesc0, 0, false, byDateString);
+        MockDeadline expectedEvent = new MockDeadline(taskDesc0, 0, false, ParserUnderTest.parseStringAsLocalDateTime(byDateString));
 
         expectedResponseBuilder.append(getMsgUnderTestEntry());
         expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
@@ -250,7 +249,7 @@ public class Increment_04_Test extends TestStream {
     public void TestLevel4_Greet_AddEachEvent_List_Exit() throws Exception{
         String task0ToDoDescription = "todo_desc asfasfasf";
         String task1DeadlineDescription = "deadline_desc ndfrgndfndfn";
-        String task1DeadlineByString = "someDeadline";
+        String task1DeadlineByString = "20010101";
         String task2EventDescription = "event_desc_abc 213t12 3b52";
         String task2EventFromDateString = "20200102";
         String task2EventToDateString = "20200102";
@@ -289,7 +288,8 @@ public class Increment_04_Test extends TestStream {
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
         MockToDo expectedToDo = new MockToDo(task0ToDoDescription, 0,false);
-        MockDeadline expectedDeadline = new MockDeadline(task1DeadlineDescription, 1, false, task1DeadlineByString);
+
+        MockDeadline expectedDeadline = new MockDeadline(task1DeadlineDescription, 1, false, ParserUnderTest.parseStringAsLocalDateTime(task1DeadlineByString));
         MockEvent expectedEvent = new MockEvent(task2EventDescription, 2, false, ParserUnderTest.parseStringAsLocalDateTime(task2EventFromDateString),ParserUnderTest.parseStringAsLocalDateTime(task2EventToDateString));
 
         TaskManager tm = new TaskManager();
