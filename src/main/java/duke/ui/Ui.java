@@ -15,7 +15,7 @@ public class Ui {
     /** Returns user command as a String object.
      *
      * @return User command.
-     * */
+     */
     public String readCommand() {
         return userInput.nextLine();
     }
