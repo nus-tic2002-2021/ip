@@ -73,3 +73,23 @@ No feature changes (error handling)
 `save` save tasks to file \
 
 ![level 7](/docs/screenshots/branch-level-7.gif)
+
+``` 
+[
+    {
+        "taskId": "0",
+        "description": "this is a ToDo"
+    },
+    {
+        "taskId": "1",
+        "description": "this is a Deadline",
+        "deadline": "some deadline"
+    },
+    {
+        "taskId": "2",
+        "description": "this is an event",
+        "from" : "from day",
+        "to" : "to day"
+    },
+]
+```
