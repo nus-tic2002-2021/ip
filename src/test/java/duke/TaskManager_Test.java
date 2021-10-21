@@ -44,4 +44,19 @@ public class TaskManager_Test extends TestStream {
         assertEquals(to1, ((Event)tm.getTaskById(1)).getTo());
     }
 
+    @Test
+    public void FindTasksByDescription() throws Exception{
+        TaskManager tm = new TaskManager();
+
+        String keyword = "MAGIK";
+        LocalDateTime from0 = ParserUnderTest.parseStringAsLocalDateTime("20210101");
+        LocalDateTime to0 = ParserUnderTest.parseStringAsLocalDateTime("20210202");
+        LocalDateTime from1 = ParserUnderTest.parseStringAsLocalDateTime("20210101");
+        LocalDateTime to1 = ParserUnderTest.parseStringAsLocalDateTime("20210202");
+        tm.addNewEvent("desc0",from0,to0);
+        tm.addNewEvent("desc1 "+keyword+" a",from1,to1); // with keyword
+
+        assertEquals(1,tm.getTasksWithWord(keyword).size());
+    }
+
 }
