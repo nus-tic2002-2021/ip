@@ -33,7 +33,7 @@ public class TaskManager {
         this._activeTasks.addTask(task);
         return task;
     }
-    public Event addNewEvent(String taskDescription, LocalDateTime from, String to) {
+    public Event addNewEvent(String taskDescription, LocalDateTime from, LocalDateTime to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
         this._activeTasks.addTask(event);
         return event;
@@ -113,7 +113,7 @@ public class TaskManager {
             String taskDescription = getJsonPropertyTaskDescription(jsonObj);
             Boolean done = getJsonPropertyDoneStatus(jsonObj);
             LocalDateTime from = getJsonPropertyFrom(jsonObj);
-            String to = getJsonPropertyTo(jsonObj);
+            LocalDateTime to = getJsonPropertyTo(jsonObj);
             return new Event(taskDescription, from, to, taskId, done);
         }
         throw new Exception("Json object not recognised as a task Object");

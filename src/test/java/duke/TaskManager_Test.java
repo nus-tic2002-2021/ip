@@ -31,10 +31,10 @@ public class TaskManager_Test extends TestStream {
 
         String desc0 = "desc0";
         String desc1 = "desc1";
-        tm.addNewEvent(desc0,ParserUnderTest.parseStringAsLocalDateTime("20210101"),"to");
+        tm.addNewEvent(desc0,ParserUnderTest.parseStringAsLocalDateTime("20210101"),ParserUnderTest.parseStringAsLocalDateTime("20210101"));
 
         LocalDateTime from1 = ParserUnderTest.parseStringAsLocalDateTime("20210101");
-        String to1 = "to1";
+        LocalDateTime to1 = ParserUnderTest.parseStringAsLocalDateTime("20210101");
         tm.addNewEvent(desc1,from1,to1);
 
         assertEquals(desc0, tm.getTaskById(0).getTaskDescription());

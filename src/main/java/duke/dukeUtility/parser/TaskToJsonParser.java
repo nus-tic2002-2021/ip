@@ -22,7 +22,7 @@ public class TaskToJsonParser extends Parser {
         obj.addProperty(TASK_FIELD_DESCRIPTION, event.getTaskDescription());
         obj.addProperty(TASK_FIELD_DONE_STATUS, event.isDone());
         obj.addProperty(TASK_FIELD_FROM, parseLocalDateTimeAsString(event.getFrom()));
-        obj.addProperty(TASK_FIELD_TO, event.getTo());
+        obj.addProperty(TASK_FIELD_TO, parseLocalDateTimeAsString(event.getTo()));
         return obj;
     }
 

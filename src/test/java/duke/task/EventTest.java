@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.task.model.Event;
 import duke.testHelper.help.ParserUnderTest;
 import org.junit.jupiter.api.Test;
 
@@ -8,14 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EventTest {
     @Test
-    void CreateEventTest() throws Exception{
+    void CreateEventTest(){
         String desc = "event1";
         String fromString = "nonsense day1";
-        String toString = "day2";
+        String toString = "asdasdasd asdasd ";
         int id = 1;
         boolean done = false;
 
-        Exception exception = assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(fromString));
+        assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(fromString));
+        assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(toString));
+
     }
 
 }

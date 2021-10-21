@@ -24,8 +24,8 @@ public class JsonTaskToObjectParser extends Parser {
         return parseStringAsLocalDateTime(jsonObj.get(TASK_FIELD_FROM).getAsString());
     }
 
-    public static String getJsonPropertyTo(JsonObject jsonObj) throws Exception {
-        return (jsonObj.get(TASK_FIELD_TO).getAsString());
+    public static LocalDateTime getJsonPropertyTo(JsonObject jsonObj) throws Exception {
+        return parseStringAsLocalDateTime(jsonObj.get(TASK_FIELD_TO).getAsString());
     }
 
     public static Integer getJsonPropertyTaskId(JsonObject jsonObj) {

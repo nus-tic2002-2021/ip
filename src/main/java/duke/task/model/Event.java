@@ -2,11 +2,13 @@ package duke.task.model;
 
 import java.time.LocalDateTime;
 
+import static duke.dukeUtility.parser.DateParser.prettifyLocalDateTime;
+
 public final class Event extends Task {
     private LocalDateTime _from;
-    private String _to;
+    private LocalDateTime _to;
 
-    public Event(String taskDescription, LocalDateTime from, String to, Integer taskId, Boolean done) {
+    public Event(String taskDescription, LocalDateTime from, LocalDateTime to, Integer taskId, Boolean done) {
         super(taskDescription, taskId, done);
         this.setFrom(from);
         this.setTo(to);
@@ -15,7 +17,7 @@ public final class Event extends Task {
     private Event() {
     }
 
-    public String getTo() {
+    public LocalDateTime getTo() {
         return this._to;
     }
 
@@ -27,12 +29,14 @@ public final class Event extends Task {
         this._from = from;
     }
 
-    private void setTo(String to) {
+    private void setTo(LocalDateTime to) {
         this._to = to;
     }
 
     public String getChronologyString() {
-        return String.format("From: %s, To: %s", this.getFrom(), this.getTo());
+
+        return String.format("From: %s, To: %s", prettifyLocalDateTime(this.getFrom()), prettifyLocalDateTime(this.getTo()));
+
     }
 
 }

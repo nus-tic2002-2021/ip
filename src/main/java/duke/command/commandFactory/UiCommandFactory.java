@@ -69,7 +69,7 @@ public abstract class UiCommandFactory extends CommandFactory {
         String[] scheduleOptionList;
         String taskDescription;
         LocalDateTime from;
-        String to;
+        LocalDateTime to;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_EVENT, "");
             argList = argLine.split(ADD_EVENT_SCHEDULE_DELIMITER);
@@ -84,7 +84,7 @@ public abstract class UiCommandFactory extends CommandFactory {
 
             from = parseStringAsLocalDateTime(scheduleOptionList[0]);
 
-            to = scheduleOptionList[1];
+            to = parseStringAsLocalDateTime(scheduleOptionList[1]);
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
