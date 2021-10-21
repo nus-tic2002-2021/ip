@@ -67,4 +67,9 @@ public class OutputUnderTest {
         return "Task Deleted: " + taskId + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
 
     }
+
+    public static String getMsgUnderTestErrorParseStringAsLocalDate(){
+
+        return "Invalid parameters: java.lang.Exception: Parse as LocalDateTime failed." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
 }

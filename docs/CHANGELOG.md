@@ -73,3 +73,43 @@ No feature changes (error handling)
 `save` save tasks to file \
 
 ![level 7](/docs/screenshots/branch-level-7.gif)
+
+``` 
+[
+    {
+        "taskId": "0",
+        "description": "this is a ToDo"
+    },
+    {
+        "taskId": "1",
+        "description": "this is a Deadline",
+        "deadline": "some deadline"
+    },
+    {
+        "taskId": "2",
+        "description": "this is an event",
+        "from" : "from day",
+        "to" : "to day"
+    },
+]
+```
+
+### level 8 Date and Times
+
+`$ *`   - unknown command \
+
+`todo [description]` add ToDo \
+`deadline [description] /by [date]` add Deadline \
+`event [description] /at [from]-[to]` add Event \
+
+- dateOption formats
+    - Input year, month and day : "20201231"
+    - Input year, month, day, hour, minutes : "20201231 23:59"
+
+
+`delete [id]` delete task by id \
+`done [id]` set task as done \
+
+`list` list tasks \
+`bye` exit input loop \
+`save` save tasks to file \

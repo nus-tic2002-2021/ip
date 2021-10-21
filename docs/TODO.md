@@ -1,17 +1,15 @@
 for development tracking of project
 
-# See [Epic](https://www.notion.so/Duke-Coronet-fc4c509a3abd42ffa0d7bcbd93a8114c)
-
 # Routine Task
 - [ ] progressive documentation
 
-# [Feature Level 0](https://www.notion.so/Level-0-Greet-71a7be8614a440169e7041813d1f943e)
+# Feature Level 0
 
 - [x] entry message
 - [x] exit message
 - [x] exits gently
 
-# [Feature Level 1](https://www.notion.so/Level-1-Greet-Echo-Exit-2b73e7e61b944e878b8150f937218f88)
+# Feature Level 1
 
 ## Test
 - user input loop
@@ -19,7 +17,7 @@ for development tracking of project
     - [x] exit loop on textCommand "bye"
 
 
-# [Feature Level 2](https://www.notion.so/Level-2-Add-List-ec463c120b9447a6be16443b3ecf3d5c)
+# Feature Level 2
 
 ## New Feature
 - [x] Create abstract Class Task
@@ -29,14 +27,14 @@ for development tracking of project
     - [x] default textCommand: create task with textCommand as task description
     - [x] add textCommand `list` to list all tasks
   
-# [Feature Level 3](https://www.notion.so/Level-3-Mark-as-Done-b1fc5a70549d4f099631a786241d7ce5)
+# Feature Level 3
 
 ## New Feature
 
 - textCommands
   - [x] `done [taskId]` - flag task as done
 
-# [Feature Level 4](https://www.notion.so/Level-4-ToDos-Events-Deadlines-7ed23a1dcfb5464f9262e5e13f61f028)
+# Feature Level 4
 
 ## New Feature
 
@@ -55,7 +53,7 @@ for development tracking of project
 
 No feature changes (error handling)
 
-# [Feature Level 6](https://www.notion.so/Level-6-Delete-01e01049c8ef41748ba3be9b035b0e5d)
+# [Feature Level 6]
 
 ## New Feature
 
@@ -67,5 +65,11 @@ No feature changes (error handling)
 ## New Feature
 
 - app will load task resource, if any
-  - [ ] load on start
-  - [ ] `save` - save tasks
+  - [x] load on start
+  - [x] `save` - save tasks
+
+# [Feature Level 8]
+
+## New Feature
+
+- [ ] change dateStrings to localDateTime

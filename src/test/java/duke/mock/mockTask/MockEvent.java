@@ -1,18 +1,24 @@
 package duke.mock.mockTask;
 
+
+import duke.testHelper.help.ParserUnderTest;
+
+import java.time.LocalDateTime;
+
 public class MockEvent extends MockTask{
-    private String _from;
-    private String _to;
-    public MockEvent(String desc, Integer id, Boolean done, String from, String to) {
+    private LocalDateTime _from;
+    private LocalDateTime _to;
+    public MockEvent(String desc, Integer id, Boolean done, LocalDateTime from, LocalDateTime to) {
         super(desc,id,done);
-        this._from = from;
-        this._to = to;
+        this._from = (from);
+        this._to = (to);
     }
 
     public String getToDateString(){
-        return this._to;
+        return ParserUnderTest.prettifyLocalDateTime(this._to);
     }
     public String getFromDateString(){
-        return this._from;
+        return ParserUnderTest.prettifyLocalDateTime(this._from);
+
     }
 }

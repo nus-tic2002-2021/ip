@@ -15,8 +15,12 @@ import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
 import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
+import duke.task.model.Event;
+
+import java.time.LocalDateTime;
 
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
+import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
 
 
 public abstract class UiCommandFactory extends CommandFactory {
@@ -39,7 +43,7 @@ public abstract class UiCommandFactory extends CommandFactory {
         String argLine;
         String[] argList;
         String taskDescription;
-        String deadline;
+        LocalDateTime deadline;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_DEADLINE, "");
             String addDeadlineStringDelimiter = ADD_DEADLINE_DEADLINE_DELIMITER;
@@ -49,7 +53,7 @@ public abstract class UiCommandFactory extends CommandFactory {
                 throw new DukeInvalidSyntaxException("Expected " + expectedArgsLength + " arguments delimited by \""+ addDeadlineStringDelimiter + "\"");
             }
             taskDescription = argList[0];
-            deadline = argList[1];
+            deadline = parseStringAsLocalDateTime(argList[1]);
         }catch(DukeInvalidSyntaxException e){
             return new CommandInvalidTextCommandSyntax(e.getMessage());
         } catch (Exception e){
@@ -59,12 +63,13 @@ public abstract class UiCommandFactory extends CommandFactory {
     }
 
     protected Command executeCommandAddEvent(String text, TaskManager taskManager) {
+
         String argLine;
         String[] argList;
         String[] scheduleOptionList;
         String taskDescription;
-        String from;
-        String to;
+        LocalDateTime from;
+        LocalDateTime to;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_EVENT, "");
             argList = argLine.split(ADD_EVENT_SCHEDULE_DELIMITER);
@@ -76,11 +81,14 @@ public abstract class UiCommandFactory extends CommandFactory {
             if (scheduleOptionList.length != 2) {
                 throw new Exception("Request line for adding event does not conform to syntax.");
             }
-            from = scheduleOptionList[0];
-            to = scheduleOptionList[1];
+
+            from = parseStringAsLocalDateTime(scheduleOptionList[0]);
+
+            to = parseStringAsLocalDateTime(scheduleOptionList[1]);
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
+
         return new CommandAddNewEvent(taskManager, taskDescription, from, to);
     }
 
