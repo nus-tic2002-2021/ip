@@ -1,11 +1,12 @@
 package duke.task.model;
 
+import java.time.LocalDateTime;
+
 public final class Event extends Task {
-    private String _from;
+    private LocalDateTime _from;
     private String _to;
 
-
-    public Event(String taskDescription, String from, String to, Integer taskId, Boolean done) {
+    public Event(String taskDescription, LocalDateTime from, String to, Integer taskId, Boolean done) {
         super(taskDescription, taskId, done);
         this.setFrom(from);
         this.setTo(to);
@@ -18,11 +19,11 @@ public final class Event extends Task {
         return this._to;
     }
 
-    public String getFrom() {
+    public LocalDateTime getFrom() {
         return this._from;
     }
 
-    private void setFrom(String from) {
+    private void setFrom(LocalDateTime from) {
         this._from = from;
     }
 

@@ -18,5 +18,4 @@ public class CommandPromptsAndOptions {
     public static final String PROMPT_DELETE_TASK = "delete ";
 
     public static final String PROMPT_SAVE = "save";
-
 }

@@ -18,7 +18,6 @@ public class FileCommandFactory extends CommandFactory {
             reader = Files.newBufferedReader(path,
                     StandardCharsets.UTF_8);
         } catch (Exception e) {
-
             return new CommandReadFileError("Invalid file read path. " + e);
         }
         return new CommandReadTasks(reader,path);

@@ -33,14 +33,14 @@ public class Increment_07_Test extends TestStream {
         StringBuilder commandLines = new StringBuilder();
         //  sets of add tasks textCommands
         int countPerTaskType = 10;
-        int totalTasks = 0;
+        int expectedTotalTaskCount = 0;
         for (int i = 1; i <= countPerTaskType; i++) {
             commandLines.append("todo todo" + i + System.lineSeparator());
-            totalTasks++;
+            expectedTotalTaskCount++;
             commandLines.append("deadline deadline /by 202002" + String.format("%2s", 19) + System.lineSeparator());
-            totalTasks++;
+            expectedTotalTaskCount++;
             commandLines.append("event e /at 20200202-20200203" + System.lineSeparator());
-            totalTasks++;
+            expectedTotalTaskCount++;
         }
         String setTask5DoneCommand = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE,5);
         commandLines.append(setTask5DoneCommand);
@@ -49,25 +49,33 @@ public class Increment_07_Test extends TestStream {
         System.setIn(new ByteArrayInputStream(commandLines.toString().getBytes()));
         try {
             Main.run(this.getPrintStream(), tm1,frm1);
-            assertSame(tm1.getSize(),totalTasks,"expected amount " + totalTasks + ", actual " + tm1.getSize() + System.lineSeparator());
+            assertSame(tm1.getSize(),expectedTotalTaskCount,"expected amount " + expectedTotalTaskCount
+                    + ", actual " + tm1.getSize() + System.lineSeparator());
         } catch (Exception e) {
             fail(e.toString());
         }
+
+
         commandLines = new StringBuilder();
         commandLines.append(generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
         commandLines.append(generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
         System.setIn(new ByteArrayInputStream(commandLines.toString().getBytes()));
         FileResourceManager frm2 = new FileResourceManager(export2PathString, export1PathString);
+
+        TaskManager tm2 = new TaskManager();
         try {
-            Main.run(this.getPrintStream(), new TaskManager(),frm2);
+            Main.run(this.getPrintStream(), tm2 ,frm2);
         } catch (Exception e) {
             fail(e.toString());
         }
+        assertEquals(30,tm2.getSize());
         try {
             JsonArray export1 = new FileCommandFactory().executeExtractTasksFromFile(frm1.getExportPath()).getJsonArg().getAsJsonArray();
             JsonArray export2 = new FileCommandFactory().executeExtractTasksFromFile(frm2.getExportPath()).getJsonArg().getAsJsonArray();
             assertNotNull(export1);
             assertNotNull(export2);
+            assertEquals(30,export1.size());
+            assertEquals(30,export2.size());
             assertEquals(export1, export2);
         } catch (Exception e) {
             fail("Failure during comparing exports. " + e + this.getOutput());

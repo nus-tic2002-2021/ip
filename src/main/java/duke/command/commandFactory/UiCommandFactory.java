@@ -15,8 +15,12 @@ import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
 import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
+import duke.task.model.Event;
+
+import java.time.LocalDateTime;
 
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
+import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
 
 
 public abstract class UiCommandFactory extends CommandFactory {
@@ -59,11 +63,12 @@ public abstract class UiCommandFactory extends CommandFactory {
     }
 
     protected Command executeCommandAddEvent(String text, TaskManager taskManager) {
+
         String argLine;
         String[] argList;
         String[] scheduleOptionList;
         String taskDescription;
-        String from;
+        LocalDateTime from;
         String to;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_EVENT, "");
@@ -76,11 +81,14 @@ public abstract class UiCommandFactory extends CommandFactory {
             if (scheduleOptionList.length != 2) {
                 throw new Exception("Request line for adding event does not conform to syntax.");
             }
-            from = scheduleOptionList[0];
+
+            from = parseStringAsLocalDateTime(scheduleOptionList[0]);
+
             to = scheduleOptionList[1];
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
+
         return new CommandAddNewEvent(taskManager, taskDescription, from, to);
     }
 

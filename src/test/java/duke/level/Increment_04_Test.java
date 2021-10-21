@@ -136,9 +136,9 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
         expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
-        expectedResponseBuilder.append(getMsgUnderTestResponseEventAdded(taskDesc0));
+        expectedResponseBuilder.append(getMsgUnderTestErrorParseStringAsLocalDate());
 
-        MockTask[] MockEvents = {expectedEvent};
+        MockTask[] MockEvents = {};
 
         expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockEvents)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
@@ -300,9 +300,9 @@ public class Increment_04_Test extends TestStream {
         expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
         expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(task0ToDoDescription));
         expectedResponseBuilder.append(getMsgUnderTestResponseDeadlineAdded(task1DeadlineDescription));
-        expectedResponseBuilder.append(getMsgUnderTestResponseEventAdded(task2EventDescription));
+        expectedResponseBuilder.append(getMsgUnderTestErrorParseStringAsLocalDate());
 
-        MockTask[] MockEvents = {expectedToDo,expectedDeadline,expectedEvent};
+        MockTask[] MockEvents = {expectedToDo,expectedDeadline};
 
         expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockEvents)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());

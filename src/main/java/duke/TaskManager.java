@@ -7,7 +7,8 @@ import duke.task.model.Deadline;
 import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
-
+import duke.dukeUtility.parser.DateParser;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static duke.dukeUtility.parser.JsonTaskToObjectParser.*;
@@ -32,7 +33,7 @@ public class TaskManager {
         this._activeTasks.addTask(task);
         return task;
     }
-    public Event addNewEvent(String taskDescription, String from, String to) {
+    public Event addNewEvent(String taskDescription, LocalDateTime from, String to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
         this._activeTasks.addTask(event);
         return event;
@@ -111,7 +112,7 @@ public class TaskManager {
             Integer taskId = getJsonPropertyTaskId(jsonObj);
             String taskDescription = getJsonPropertyTaskDescription(jsonObj);
             Boolean done = getJsonPropertyDoneStatus(jsonObj);
-            String from = getJsonPropertyFrom(jsonObj);
+            LocalDateTime from = getJsonPropertyFrom(jsonObj);
             String to = getJsonPropertyTo(jsonObj);
             return new Event(taskDescription, from, to, taskId, done);
         }

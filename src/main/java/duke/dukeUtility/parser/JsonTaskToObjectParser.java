@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.time.LocalDateTime;
 
 import static duke.dukeUtility.definition.TaskField.*;
+import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
 
 public class JsonTaskToObjectParser extends Parser {
     public static Boolean getJsonPropertyDoneStatus(JsonObject jsonObj) {
@@ -19,8 +20,8 @@ public class JsonTaskToObjectParser extends Parser {
         return (jsonObj.get(TASK_FIELD_DEADLINE).getAsString());
     }
 
-    public static String getJsonPropertyFrom(JsonObject jsonObj) throws Exception {
-        return (jsonObj.get(TASK_FIELD_FROM).getAsString());
+    public static LocalDateTime getJsonPropertyFrom(JsonObject jsonObj) throws Exception {
+        return parseStringAsLocalDateTime(jsonObj.get(TASK_FIELD_FROM).getAsString());
     }
 
     public static String getJsonPropertyTo(JsonObject jsonObj) throws Exception {

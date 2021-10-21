@@ -1,18 +1,21 @@
 package duke.task;
 
-import duke.task.model.Event;
+import duke.testHelper.help.ParserUnderTest;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class EventTest {
     @Test
-    void CreateEventTest(){
+    void CreateEventTest() throws Exception{
         String desc = "event1";
-        String fromString = "day1";
+        String fromString = "nonsense day1";
         String toString = "day2";
         int id = 1;
         boolean done = false;
-        new Event(desc,fromString,toString,id,done);
+
+        Exception exception = assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(fromString));
     }
 
 }
