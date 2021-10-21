@@ -72,4 +72,11 @@ No feature changes (error handling)
 
 ## New Feature
 
-- [ ] change dateStrings to localDateTime
+- [x] change dateStrings to localDateTime
+
+
+# [Feature Level 9]
+
+## New Feature
+
+- [ ] find by description

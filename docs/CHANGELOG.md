@@ -113,3 +113,25 @@ No feature changes (error handling)
 `list` list tasks \
 `bye` exit input loop \
 `save` save tasks to file \
+
+
+### level 9 Find
+
+`$ *`   - unknown command \
+
+`todo [description]` add ToDo \
+`deadline [description] /by [date]` add Deadline \
+`event [description] /at [from]-[to]` add Event \
+
+- dateOption formats
+  - Input year, month and day : "20201231"
+  - Input year, month, day, hour, minutes : "20201231 23:59"
+
+
+`delete [id]` delete task by id \
+`done [id]` set task as done \
+
+`list` list tasks \
+`find [string_in_description]` query tasks with string in description \
+`bye` exit input loop \
+`save` save tasks to file \
