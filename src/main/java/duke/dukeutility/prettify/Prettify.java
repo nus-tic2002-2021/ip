@@ -1,6 +1,7 @@
 package duke.dukeutility.prettify;
 
 import java.util.ArrayList;
+
 import duke.TaskManager;
 import duke.task.model.Task;
 
@@ -29,6 +30,11 @@ public class Prettify {
 
     }
 
+    /**
+     * Present an array of tasks.
+     * @param tl
+     * @return
+     */
     public static String prettifyTasks(ArrayList<Task> tl) {
 
         StringBuilder generating = new StringBuilder();
@@ -85,5 +91,4 @@ public class Prettify {
         }
         return generating.toString();
     }
-
 }

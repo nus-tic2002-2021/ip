@@ -28,6 +28,11 @@ public class FileResourceManager {
     private String exportPathString;
     private String importPathString;
 
+    /**
+     * Handles data imports and exports.
+     * @param exportPathString export path
+     * @param importPathString import path
+     */
     public FileResourceManager(String exportPathString, String importPathString) {
         this.setExportPathString(exportPathString);
         this.setImportPathString(importPathString);
@@ -49,10 +54,20 @@ public class FileResourceManager {
         this.importPathString = importPathString;
     }
 
+    /**
+     * Writes tasks to path.
+     * @param tasksJson tasks in JSON format
+     * @param jw writer
+     * @return
+     */
     public Command executeExportTasks(JsonArray tasksJson, JsonWriter jw) {
         return this.getExportCommandFactory().exportTasks(tasksJson, jw);
     }
 
+    /**
+     * Import tasks from this import path.
+     * @return
+     */
     public CommandJsonResponse executeExtractTasksFromFile() {
         Path path = this.getImportPath();
         return this.getFileCommandFactory().executeExtractTasksFromFile(path);
@@ -78,6 +93,11 @@ public class FileResourceManager {
         return stringToPath(this.getExportPathString());
     }
 
+    /**
+     * Save tasks in taskManager to this fileResourceManager's export path.
+     * @param taskManager task manager
+     * @return
+     */
     public Command executeCommandSave(TaskManager taskManager) {
         JsonWriter jw;
         JsonArray tasksJson = new JsonArray();
@@ -107,11 +127,16 @@ public class FileResourceManager {
         return this.executeExportTasks(tasksJson, jw);
     }
 
-    public void importTasksJson(JsonArray array, TaskManager taskManager) {
-        if (array == null || array.isEmpty()) {
+    /**
+     * Import tasks to task manager
+     * @param tasks json array of tasks
+     * @param taskManager task manager to import to.
+     */
+    public void importTasksJson(JsonArray tasks, TaskManager taskManager) {
+        if (tasks == null || tasks.isEmpty()) {
             return;
         }
-        for (JsonElement element : array) {
+        for (JsonElement element : tasks) {
             if (element.isJsonObject()) {
                 JsonObject jsonTask = element.getAsJsonObject();
                 this.getImportCommandFactory().executeImportJsonTask(jsonTask, taskManager);
@@ -119,6 +144,12 @@ public class FileResourceManager {
         }
     }
 
+    /**
+     * Extract from import path, transform to json and load into task manager.
+     * @param taskManager task manager to import to
+     * @param ui ui display
+     * @throws Exception
+     */
     public void etlTasksFromJsonFileString(TaskManager taskManager, Ui ui) throws Exception {
         Path path = this.getImportPath();
         ui.printInitialLoadTaskAttempt(path);

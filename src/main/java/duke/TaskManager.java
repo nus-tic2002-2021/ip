@@ -13,13 +13,10 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -41,23 +38,45 @@ public class TaskManager {
         return this.serialNo;
     }
 
+    /**
+     * Add a todo to this task manager.
+     *
+     * @param taskDescription
+     * @return
+     */
     public ToDo addNewToDo(String taskDescription) {
         ToDo task = new ToDo(taskDescription, this.rollSerialNo(), false);
         this.tasks.addTask(task);
         return task;
     }
 
+    /**
+     * Add a deadline to this task manager.
+     *
+     * @param taskDescription
+     * @param deadlineString
+     * @return
+     */
+    public Deadline addNewDeadline(String taskDescription, LocalDateTime deadlineString) {
+        Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
+        this.tasks.addTask(deadLine);
+        return deadLine;
+    }
+
+    /**
+     * Add a event to this task manager.
+     *
+     * @param taskDescription
+     * @param from
+     * @param to
+     * @return
+     */
     public Event addNewEvent(String taskDescription, LocalDateTime from, LocalDateTime to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
         this.tasks.addTask(event);
         return event;
     }
 
-    public Deadline addNewDeadline(String taskDescription, LocalDateTime deadlineString) {
-        Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
-        this.tasks.addTask(deadLine);
-        return deadLine;
-    }
 
     public Integer getSize() {
         return this.tasks.getSize();
@@ -92,7 +111,7 @@ public class TaskManager {
         return target;
     }
 
-    public Task softDeleteById(Integer taskId) {
+    public Task deleteTaskByTaskId(Integer taskId) {
         return this.tasks.removeTaskById(taskId);
     }
 
@@ -111,15 +130,25 @@ public class TaskManager {
         return tasksJson;
     }
 
+
+    /**
+     * add todo to collection
+     *
+     * @param toDo
+     * @return
+     */
     public ToDo importToDo(ToDo toDo) {
         this.tasks.addTask(toDo);
         return toDo;
     }
 
-    public Event importEvent(Event event) {
-        this.tasks.addTask(event);
-        return event;
-    }
+
+    /**
+     * add deadline to collection
+     *
+     * @param deadline
+     * @return
+     */
 
     public Deadline importDeadline(Deadline deadline) {
         this.tasks.addTask(deadline);
@@ -127,6 +156,26 @@ public class TaskManager {
 
     }
 
+
+    /**
+     * add event to collection
+     *
+     * @param event
+     * @return
+     */
+
+    public Event importEvent(Event event) {
+        this.tasks.addTask(event);
+        return event;
+    }
+
+    /**
+     * Converts a JSON formatted task to java object.
+     *
+     * @param jsonObj task
+     * @return
+     * @throws Exception if not recognised as a task
+     */
     public final Task objectify(JsonObject jsonObj) throws Exception {
         if (!isNotNullJsonPropertyTaskType(jsonObj)) {
             throw new Exception("No task type");

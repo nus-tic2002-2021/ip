@@ -45,8 +45,13 @@ public abstract class Task implements Comparable<Task> {
         return this.done;
     }
 
+    /**
+     * Check if this task description contains keyword.
+     * @param keyword
+     * @return
+     */
     public Boolean descContainsKeyword(String keyword) {
-        String desc = this.taskDescription;
+        String desc = this.getTaskDescription();
         String[] words = desc.split("\\s+");
         for (String word : words) {
             if (word.equals(keyword)) {

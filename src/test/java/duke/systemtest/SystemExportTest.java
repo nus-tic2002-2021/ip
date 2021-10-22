@@ -155,7 +155,7 @@ public class SystemExportTest extends TestStream {
     }
 
 
-    public void writeToFile(String pathString, String... data) throws Exception {
+    private void writeToFile(String pathString, String... data) throws Exception {
         Path exportPath = stringToPath(pathString);
         try {
             if (exportPath == null) {

@@ -17,14 +17,20 @@ public class ParserUnderTest {
         return DateTimeFormatter.ofPattern(ParserUnderTest.transitiveJsonAndTextPattern).format(ldt);
     }
 
-
+    /**
+     * Test Helper
+     * Format string as LocalDateTime. Multiple patterns will be attempted to match string.
+     *
+     * @param dateTimeString
+     * @return date
+     * @throws Exception if fail to format.
+     */
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
         LocalDateTime ldt = null;
         for (String pattern : ParserUnderTest.patterns) {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
-                ;
             }
         }
         try {
@@ -46,9 +52,15 @@ public class ParserUnderTest {
         return ldt.toString().replace("T", " ");
     }
 
-    public static Path stringToPath(String path) {
+    /**
+     * Helper for parsing string as path
+     *
+     * @param pathString
+     * @return
+     */
+    public static Path stringToPath(String pathString) {
         try {
-            return Paths.get(path);
+            return Paths.get(pathString);
         } catch (Exception e) {
             return null;
         }

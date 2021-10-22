@@ -13,7 +13,9 @@ import duke.testhelper.TestStream;
 
 
 public class ExportTasksTest extends TestStream {
-
+    /**
+     * This test checks if file path is writable.
+     */
     @Test
     public void addToDos_export_shouldBuffer() {
         TaskManager tm = new TaskManager();

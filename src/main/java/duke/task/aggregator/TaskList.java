@@ -44,6 +44,11 @@ public class TaskList {
         return this.getMap().get(taskId);
     }
 
+    /**
+     * Remove a task in a container by task id
+     * @param taskId
+     * @return
+     */
     public Task removeTaskById(Integer taskId) {
         Task task = this.getTaskById(taskId);
         this.getMap().remove(taskId);

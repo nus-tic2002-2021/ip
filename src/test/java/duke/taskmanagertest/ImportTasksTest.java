@@ -17,7 +17,10 @@ import duke.testhelper.TestStream;
 
 public class ImportTasksTest extends TestStream {
 
-
+    /**
+     * save tasks from task manager 1 to a file, extract from file and load (import) to task manager 2.
+     * The tasks in each manager should be the same.
+     */
     @Test
     public void addToDos_exportExtractLoad() {
         TaskManager tm1 = new TaskManager();

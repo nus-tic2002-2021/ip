@@ -10,6 +10,9 @@ import duke.task.model.ToDo;
 import duke.testhelper.TestStream;
 
 public class TaskListTest extends TestStream {
+    /**
+     * Adds tasks to task manager.
+     */
     @Test
     public void addToDos() {
 
