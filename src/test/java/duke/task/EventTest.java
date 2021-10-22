@@ -1,7 +1,6 @@
 package duke.task;
 
-import duke.task.model.Event;
-import duke.testHelper.help.ParserUnderTest;
+import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -2,7 +2,7 @@ package duke;
 
 import duke.task.model.Event;
 import duke.testHelper.TestStream;
-import duke.testHelper.help.ParserUnderTest;
+import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

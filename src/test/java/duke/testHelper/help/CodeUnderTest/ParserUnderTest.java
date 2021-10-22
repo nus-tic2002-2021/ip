@@ -1,4 +1,4 @@
-package duke.testHelper.help;
+package duke.testHelper.help.CodeUnderTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,12 +22,13 @@ public class ParserUnderTest {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
-
+                ;
             }
         }
         try {
             ldt = parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
+            ;
         }
         if (ldt == null) {
             throw new Exception("Parse as LocalDateTime failed.");

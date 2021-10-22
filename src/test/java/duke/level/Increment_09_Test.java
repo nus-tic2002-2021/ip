@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static duke.testHelper.help.OutputUnderTest.*;
-import static duke.testHelper.help.PrettifyUnderTest.getPrettifyUnderTestList;
-import static duke.testHelper.help.TextCommandUnderTest.*;
-import static duke.testHelper.help.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getPrettifyUnderTestList;
+import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
+import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class Increment_09_Test extends TestStream {
     @Test
-    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit() throws Exception {
+    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit() {
 
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
@@ -85,7 +85,7 @@ public class Increment_09_Test extends TestStream {
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result() throws Exception {
+    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result()  {
 
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
@@ -139,7 +139,7 @@ public class Increment_09_Test extends TestStream {
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit() throws Exception {
+    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit()  {
 
         String keyword = "MAGIK asfasf";
         String taskDesc0 = "nons afasf09qhy2gr";

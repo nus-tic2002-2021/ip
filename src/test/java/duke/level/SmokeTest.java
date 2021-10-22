@@ -4,7 +4,7 @@ package duke.level;
 
 import duke.Ui;
 import duke.testHelper.TestStream;
-import duke.testHelper.help.OutputUnderTest;
+import duke.testHelper.help.CodeUnderTest.OutputUnderTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

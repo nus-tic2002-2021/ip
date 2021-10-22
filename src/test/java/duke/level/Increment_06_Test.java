@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static duke.testHelper.help.OutputUnderTest.*;
-import static duke.testHelper.help.PrettifyUnderTest.getPrettifyUnderTestList;
-import static duke.testHelper.help.TextCommandUnderTest.*;
+import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getPrettifyUnderTestList;
+import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
