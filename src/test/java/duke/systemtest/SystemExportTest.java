@@ -4,42 +4,42 @@ import static duke.dukeutility.config.dukeIO.getDefaultTasksImportPathString;
 import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildString;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedDeadline;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedEvent;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedToDo;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputCommandDeleted;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputEntry;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputList;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTaskSetCompleted;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeUnderTest.ParserUnderTest.parseStringAsLocalDateTime;
-import static duke.testhelper.help.codeUnderTest.ParserUnderTest.stringToPath;
-import static duke.testhelper.help.codeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_DEADLINE_DEADLINE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_EVENT_TO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_MARK_AS_DONE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_SAVE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandExit;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddEvent;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddToDo;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandList;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandSave;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandSetCompleted;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedDeadline;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedEvent;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedToDo;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputCommandDeleted;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTaskSetCompleted;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.codeundertest.ParserUnderTest.parseStringAsLocalDateTime;
+import static duke.testhelper.help.codeundertest.ParserUnderTest.stringToPath;
+import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_DEADLINE_DEADLINE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_MARK_AS_DONE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_SAVE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddEvent;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSave;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSetCompleted;
 import static duke.testhelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -73,12 +73,11 @@ public class SystemExportTest extends TestStream {
      * export1 == export2 ? pass
      */
     @Test
-    public void IdempotentExport() {
-        String thisTestSign = "saveEventsToJsonFile";
-        String export1PathString = resourceTestFolder + "-added" + thisTestSign +
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
-        String export2PathString = resourceTestFolder + "-load" + thisTestSign +
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
+    public void idempotentExport() {
+        String thisTestSign = "saveEventsToJsonTestFile";
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"));
+        String export1PathString = resourceTestFolder + "-added" + thisTestSign + date + ".json";
+        String export2PathString = resourceTestFolder + "-load" + thisTestSign + date + ".json";
         FileResourceManager frm1 = new FileResourceManager(export1PathString, null);
         TaskManager tm1 = new TaskManager();
         //  sets of add tasks textCommands
@@ -174,15 +173,13 @@ public class SystemExportTest extends TestStream {
      * @throws Exception Unable to generate files, may impact on test phase.
      */
     @Test
-    public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
+    public void generateExpectedTestFileInActualEnvironment() throws Exception {
         String importPathString = getDefaultTasksImportPathString();
 
         String loadInputPath =
-            System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator +
-                "resources" + File.separator + "linux-test" + File.separator + "input.txt";
+            String.join(File.separator, new String[] {"src", "test", "resources", "linux-test", "input.txt"});
         String expectedOutputPath =
-            System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator +
-                "resources" + File.separator + "linux-test" + File.separator + "expected.txt";
+            String.join(File.separator, new String[] {"src", "test", "resources", "linux-test", "expected.txt"});
 
         String out0 = (getExpectedOutputEntry());
 

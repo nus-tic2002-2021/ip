@@ -3,7 +3,7 @@ package duke.mock.mocktask;
 
 import java.time.LocalDateTime;
 
-import duke.testhelper.help.codeUnderTest.ParserUnderTest;
+import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 public class MockEvent extends MockTask {
     private final LocalDateTime from;

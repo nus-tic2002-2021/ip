@@ -1,29 +1,31 @@
-package duke.inputOutputTest;
+package duke.inputoutputtest;
 
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedToDo;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputEntry;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputList;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getMsgUnderTestErrorSpacedKeyword;
-import static duke.testhelper.help.codeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandExit;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddToDo;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedToDo;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getMsgUnderTestErrorSpacedKeyword;
+import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -33,7 +35,7 @@ import duke.testhelper.TestStream;
 
 public class TestIoFind extends TestStream {
     @Test
-    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit() {
+    public void greet_addToDoListTasksWithKeywordSave_exit() {
 
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
@@ -85,7 +87,7 @@ public class TestIoFind extends TestStream {
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result() {
+    public void greet_addToDoListTasksWithKeywordSaveExit_emptyResult() {
 
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
@@ -130,7 +132,7 @@ public class TestIoFind extends TestStream {
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit() {
+    public void greet_addToDoListTasksWithInvalidKeywordSave_exit() {
 
         String keyword = "MAGIK asfasf";
         String taskDesc0 = "nons afasf09qhy2gr";

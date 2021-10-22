@@ -1,4 +1,4 @@
-package duke.testhelper.help.codeUnderTest;
+package duke.testhelper.help.codeundertest;
 
 import java.nio.file.Path;
 

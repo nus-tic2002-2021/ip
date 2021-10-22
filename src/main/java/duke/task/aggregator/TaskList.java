@@ -2,11 +2,12 @@ package duke.task.aggregator;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+
 import duke.task.model.Task;
 
 
 public class TaskList {
-    private final ConcurrentHashMap<Integer, Task> _map = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Task> map = new ConcurrentHashMap<>();
 
     // helper class
     private Integer getTaskKey(Task task) {
@@ -17,11 +18,11 @@ public class TaskList {
     }
 
     public void addTask(Task t) {
-        this._map.put(this.getTaskKey(t), t);
+        this.map.put(this.getTaskKey(t), t);
     }
 
     private ConcurrentHashMap<Integer, Task> getContainer() {
-        return this._map;
+        return this.map;
     }
 
 
@@ -49,10 +50,7 @@ public class TaskList {
         return task;
     }
 
-
     private ConcurrentHashMap<Integer, Task> getMap() {
-        return this._map;
+        return this.map;
     }
-
-
 }

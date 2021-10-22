@@ -1,17 +1,20 @@
 package duke.taskmanagertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
+
 import duke.TaskManager;
 import duke.task.model.Event;
 import duke.testhelper.TestStream;
-import duke.testhelper.help.codeUnderTest.ParserUnderTest;
+import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 public class TaskManagerTest extends TestStream {
 
     @Test
-    public void AddToDos() {
+    public void addToDos() {
         TaskManager tm = new TaskManager();
 
         String desc0 = "desc0";
@@ -24,7 +27,7 @@ public class TaskManagerTest extends TestStream {
 
 
     @Test
-    public void AddEvents() throws Exception {
+    public void addEvents() throws Exception {
         TaskManager tm = new TaskManager();
 
         String desc0 = "desc0";
@@ -44,7 +47,7 @@ public class TaskManagerTest extends TestStream {
     }
 
     @Test
-    public void FindTasksByDescription() throws Exception {
+    public void findTasksByDescription() throws Exception {
         TaskManager tm = new TaskManager();
 
         String keyword = "MAGIK";

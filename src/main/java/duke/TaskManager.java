@@ -13,10 +13,13 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -24,48 +27,48 @@ import duke.task.model.Task;
 import duke.task.model.ToDo;
 
 public class TaskManager {
-    private final TaskList _activeTasks = new TaskList();
-    private int _serialNo = 0;
+    private final TaskList tasks = new TaskList();
+    private int serialNo = 0;
 
     private int rollSerialNo() {
-        while (this._activeTasks.containsKey(this._serialNo)) {
-            this._serialNo++;
+        while (this.tasks.containsKey(this.serialNo)) {
+            this.serialNo++;
         }
         return this.getSerialNo();
     }
 
     private int getSerialNo() {
-        return this._serialNo;
+        return this.serialNo;
     }
 
     public ToDo addNewToDo(String taskDescription) {
         ToDo task = new ToDo(taskDescription, this.rollSerialNo(), false);
-        this._activeTasks.addTask(task);
+        this.tasks.addTask(task);
         return task;
     }
 
     public Event addNewEvent(String taskDescription, LocalDateTime from, LocalDateTime to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
-        this._activeTasks.addTask(event);
+        this.tasks.addTask(event);
         return event;
     }
 
     public Deadline addNewDeadline(String taskDescription, LocalDateTime deadlineString) {
         Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
-        this._activeTasks.addTask(deadLine);
+        this.tasks.addTask(deadLine);
         return deadLine;
     }
 
     public Integer getSize() {
-        return this._activeTasks.getSize();
+        return this.tasks.getSize();
     }
 
     public ArrayList<Task> getAllAsArray() {
-        return this._activeTasks.getAllAsArray();
+        return this.tasks.getAllAsArray();
     }
 
     public ArrayList<Task> getTasksWithWord(String keyword) {
-        ArrayList<Task> all = this._activeTasks.getAllAsArray();
+        ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
         for (Task t : all) {
             if (t.descContainsKeyword(keyword)) {
@@ -76,11 +79,11 @@ public class TaskManager {
     }
 
     public Boolean containsTaskId(Integer taskId) {
-        return this._activeTasks.containsKey(taskId);
+        return this.tasks.containsKey(taskId);
     }
 
     public Task getTaskById(Integer taskId) {
-        return this._activeTasks.getTaskById(taskId);
+        return this.tasks.getTaskById(taskId);
     }
 
     public Task getTaskByIdAndSetDoneStatus(Integer taskId, Boolean done) {
@@ -90,7 +93,7 @@ public class TaskManager {
     }
 
     public Task softDeleteById(Integer taskId) {
-        return this._activeTasks.removeTaskById(taskId);
+        return this.tasks.removeTaskById(taskId);
     }
 
     public JsonArray getAllAsJson() {
@@ -109,17 +112,17 @@ public class TaskManager {
     }
 
     public ToDo importToDo(ToDo toDo) {
-        this._activeTasks.addTask(toDo);
+        this.tasks.addTask(toDo);
         return toDo;
     }
 
     public Event importEvent(Event event) {
-        this._activeTasks.addTask(event);
+        this.tasks.addTask(event);
         return event;
     }
 
     public Deadline importDeadline(Deadline deadline) {
-        this._activeTasks.addTask(deadline);
+        this.tasks.addTask(deadline);
         return deadline;
 
     }

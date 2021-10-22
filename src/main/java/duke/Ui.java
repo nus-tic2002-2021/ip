@@ -13,6 +13,9 @@ import duke.dukeutility.enums.ResponseType;
  * Handles terminal display.
  */
 public class Ui {
+    private final UiCommandFactory uiCommandFactory = new UiCommandFactory();
+    private PrintStream out;
+    private Boolean loop = true;
 
     private Ui() {
     }
@@ -21,28 +24,25 @@ public class Ui {
         this.setPrintStream(ps);
     }
 
-    private PrintStream _out;
-    private Boolean _loop = true;
-    private final UiCommandFactory _UiCommandFactory = new UiCommandFactory();
 
     private PrintStream getPrintStream() {
-        return this._out;
+        return this.out;
     }
 
     public void setPrintStream(PrintStream ps) {
-        this._out = ps;
+        this.out = ps;
     }
 
     private Boolean isLoop() {
-        return this._loop;
+        return this.loop;
     }
 
     private void setLoop(Boolean p) {
-        this._loop = p;
+        this.loop = p;
     }
 
     private UiCommandFactory getUiCommandFactory() {
-        return this._UiCommandFactory;
+        return this.uiCommandFactory;
     }
 
     public Ui printEntryMessage() {

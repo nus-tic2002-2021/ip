@@ -1,36 +1,38 @@
-package duke.inputOutputTest;
+package duke.inputoutputtest;
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
 import static duke.testhelper.help.Builder.buildString;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedDeadline;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedEvent;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedToDo;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputEntry;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputList;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_DEADLINE_DEADLINE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.DELIMITER_EVENT_TO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandExit;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddEvent;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddToDo;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedDeadline;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedEvent;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedToDo;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_DEADLINE_DEADLINE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddEvent;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -39,12 +41,12 @@ import duke.mock.mocktask.MockEvent;
 import duke.mock.mocktask.MockTask;
 import duke.mock.mocktask.MockToDo;
 import duke.testhelper.TestStream;
-import duke.testhelper.help.codeUnderTest.ParserUnderTest;
+import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 public class TestIoAddTasks extends TestStream {
 
     @Test
-    public void Greet_AddToDoList_Exit() throws Exception {
+    public void greet_addToDoList_exit() throws Exception {
 
         // Arrange Input
 
@@ -99,7 +101,7 @@ public class TestIoAddTasks extends TestStream {
     }
 
     @Test
-    public void Greet_AddEventList_Exit() throws Exception {
+    public void greet_addEventList_exit() throws Exception {
 
         /* Arrange Input
          * Commands executed:
@@ -158,7 +160,7 @@ public class TestIoAddTasks extends TestStream {
     }
 
     @Test
-    public void Greet_AddDeadline_List_Exit() throws Exception {
+    public void greet_addDeadlineList_exit() throws Exception {
 
         /* Arrange Input
          * Commands executed:
@@ -213,7 +215,7 @@ public class TestIoAddTasks extends TestStream {
     }
 
     @Test
-    public void GreetAddEachTaskType_List() throws Exception {
+    public void greet_addEachTaskType_list() throws Exception {
         // Arrange Input
 
         String task0ToDoDescription = "todo_desc asfasfasf";

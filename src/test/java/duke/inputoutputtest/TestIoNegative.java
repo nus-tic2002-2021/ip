@@ -1,21 +1,23 @@
-package duke.inputOutputTest;
+package duke.inputoutputtest;
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputCommandUnknown;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputEntry;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandExit;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandRandom;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputCommandUnknown;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandRandom;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -24,7 +26,7 @@ import duke.testhelper.TestStream;
 public class TestIoNegative extends TestStream {
 
     @Test
-    public void TestUnknownCommand() throws Exception {
+    public void testUnknownCommand() throws Exception {
 
         String randomTextCommand = generateTextCommandRandom("s0meUnknownPrompt");
         String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);

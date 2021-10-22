@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.testhelper.help.codeUnderTest.ParserUnderTest;
+import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 
 public class EventTest {

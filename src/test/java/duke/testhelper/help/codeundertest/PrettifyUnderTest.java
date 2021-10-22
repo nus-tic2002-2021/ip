@@ -1,4 +1,4 @@
-package duke.testhelper.help.codeUnderTest;
+package duke.testhelper.help.codeundertest;
 
 import duke.mock.mocktask.MockDeadline;
 import duke.mock.mocktask.MockEvent;

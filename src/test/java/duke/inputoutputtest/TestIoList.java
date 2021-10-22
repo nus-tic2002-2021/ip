@@ -1,29 +1,31 @@
-package duke.inputOutputTest;
+package duke.inputoutputtest;
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputAddedToDo;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputCommandDeleted;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputEntry;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputList;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
-import static duke.testhelper.help.codeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandExit;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandLineAddToDo;
-import static duke.testhelper.help.codeUnderTest.TextCommandUnderTest.generateTextCommandList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputAddedToDo;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputCommandDeleted;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -34,7 +36,7 @@ import duke.testhelper.TestStream;
 public class TestIoList extends TestStream {
 
     @Test
-    public void Greet_AddThenDeleteToDoList_Exit() throws Exception {
+    public void greet_addThenDeleteToDoList_exit() throws Exception {
 
         /* Arrange Input
          * Commands executed:
@@ -85,7 +87,7 @@ public class TestIoList extends TestStream {
 
 
     @Test
-    public void Greet_Add2ToDosDeleteList_Exit() throws Exception {
+    public void greet_add2ToDosDeleteList_exit() throws Exception {
 
         /*
          * Commands executed:
@@ -138,6 +140,5 @@ public class TestIoList extends TestStream {
         Main.run(this.getPrintStream(), tm, frm);
         assertEquals(expectedOutputResponse, this.getOutput());
     }
-
 
 }
