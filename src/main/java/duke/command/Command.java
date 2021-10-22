@@ -21,6 +21,7 @@ public abstract class Command {
     }
     private Command() {
     }
+
     public ResponseType getResponseType() {
         return responseType;
     }
@@ -30,7 +31,7 @@ public abstract class Command {
     public List<String> getArgs() {
         return this.args;
     }
-    private void setArgs(List<String> args) {
-        this.args = args;
+    private void setArgs(List<String> inputArgs) {
+        this.args = inputArgs;
     }
 }
