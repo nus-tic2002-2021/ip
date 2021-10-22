@@ -17,35 +17,56 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import static duke.testHelper.help.Builder.buildCommandInputStream;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Increment_07_Test extends TestStream {
+public class ExportTest extends TestStream {
+
+    /**
+     * Execute add commands and save as export1
+     * import export1, save as export2
+     * export1 == export2 ? pass
+     */
     @Test
-    public void Greet_AddToDo_Delete_List_Save_Exit() {
+    public void IdempotentExport() {
         String thisTestSign = "saveEventsToJsonFile";
-        String export1PathString = resourceTestFolder + 1 + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
-        String export2PathString = resourceTestFolder + 2 + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
+        String export1PathString = resourceTestFolder + "-added" + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
+        String export2PathString = resourceTestFolder + "-load" + thisTestSign + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")) + ".json";
         FileResourceManager frm1 = new FileResourceManager(export1PathString, null);
         TaskManager tm1 = new TaskManager();
-        StringBuilder commandLines = new StringBuilder();
         //  sets of add tasks textCommands
         int countPerTaskType = 10;
         int expectedTotalTaskCount = 0;
-        for (int i = 1; i <= countPerTaskType; i++) {
-            commandLines.append("todo todo" + i + System.lineSeparator());
+
+        String[] addCommands = new String[countPerTaskType];
+        for (int i = 0; i < countPerTaskType; i++) {
+
+            String todoDesc = "tododesc" + i;
+
+            String deadlineDesc = "deadlinedesc";
+            String deadlineBy = "202002"  + String.format("%2s", 19);
+
+            String eventDesc = "eventdesc";
+            String eventFrom = "20200202";
+            String eventTo = "20210202";
+
+            String addToDoCommand = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
             expectedTotalTaskCount++;
-            commandLines.append("deadline deadline /by 202002" + String.format("%2s", 19) + System.lineSeparator());
+            String addDeadlineCommand = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,DELIMITER_DEADLINE_DEADLINE,deadlineBy);
             expectedTotalTaskCount++;
-            commandLines.append("event e /at 20200202-20200203" + System.lineSeparator());
+            String addEventCommand = generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom, DELIMITER_EVENT_TO, eventTo);
             expectedTotalTaskCount++;
+
+            addCommands[i] = addToDoCommand + addDeadlineCommand + addEventCommand;
         }
-        String setTask5DoneCommand = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE,5);
-        commandLines.append(setTask5DoneCommand);
-        commandLines.append(generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
-        commandLines.append(generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
-        System.setIn(new ByteArrayInputStream(commandLines.toString().getBytes()));
+
+        String in0 = String.join("",addCommands);
+        String in1 = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE,5);
+        String in2 = (generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
+        String in3 = (generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
+        System.setIn(buildCommandInputStream(in0,in1,in2,in3));
         try {
             Main.run(this.getPrintStream(), tm1,frm1);
             assertSame(tm1.getSize(),expectedTotalTaskCount,"expected amount " + expectedTotalTaskCount
@@ -54,11 +75,10 @@ public class Increment_07_Test extends TestStream {
             fail(e.toString());
         }
 
+        String secondIn0 = generateTextCommandSave(PROMPT_UNDER_TEST_SAVE);
+        String secondIn1 = generateTextCommandSave(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        commandLines = new StringBuilder();
-        commandLines.append(generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
-        commandLines.append(generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
-        System.setIn(new ByteArrayInputStream(commandLines.toString().getBytes()));
+        System.setIn(buildCommandInputStream(secondIn0,secondIn1));
         FileResourceManager frm2 = new FileResourceManager(export2PathString, export1PathString);
 
         TaskManager tm2 = new TaskManager();
