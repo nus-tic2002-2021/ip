@@ -79,4 +79,4 @@ No feature changes (error handling)
 
 ## New Feature
 
-- [ ] find by description
+- [x] find by description

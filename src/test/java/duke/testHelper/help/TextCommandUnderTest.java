@@ -51,6 +51,6 @@ public class TextCommandUnderTest {
         return singleArgumentCommand(invoke);
     }
     public static String generateTextCommandFindKeywordInDescription(String invoke, String keyword) {
-        return singleArgumentCommand("Find tasks with keyword: " + keyword);
+        return invoke + keyword + System.lineSeparator();
     }
 }

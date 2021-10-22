@@ -68,6 +68,11 @@ public class OutputUnderTest {
 
     }
 
+    public static String getMsgUnderTestErrorSpacedKeyword() {
+        return "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+
     public static String getMsgUnderTestErrorParseStringAsLocalDate(){
 
         return "Invalid parameters: java.lang.Exception: Parse as LocalDateTime failed." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;

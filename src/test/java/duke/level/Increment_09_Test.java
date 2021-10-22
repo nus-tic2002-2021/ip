@@ -24,19 +24,6 @@ public class Increment_09_Test extends TestStream {
     @Test
     public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit() throws Exception {
 
-
-
-
-        /*
-         * Should display:
-         * Entry Message
-         * Input Loop Message
-         * "Added todo" message
-         * tabled tasks list
-         * exit loop
-         * terminate
-         */
-
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
         String taskDesc1 = "aasfg " + keyword + " c124124";
@@ -52,6 +39,19 @@ public class Increment_09_Test extends TestStream {
         commandBuilder.append(findCommand);
         commandBuilder.append(exitCommand);
         System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
+
+
+        /*
+         * Should display:
+         * Entry Message
+         * Input Loop Message
+         * "Added todo0" message
+         * "Added todo0" message
+         * queried tasks list
+         * exit loop
+         * terminate
+         */
+
 
         StringBuilder expectedResponseBuilder = new StringBuilder();
 
@@ -82,8 +82,115 @@ public class Increment_09_Test extends TestStream {
         }
 
         assertEquals(expectedOutputResponse,this.getOutput());
+    }
+
+    @Test
+    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result() throws Exception {
+
+        String keyword = "MAGIK";
+        String taskDesc0 = "nons afasf09qhy2gr";
+        String store0Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+
+        StringBuilder commandBuilder = new StringBuilder();
+
+        commandBuilder.append(store0Command);
+        commandBuilder.append(findCommand);
+        commandBuilder.append(exitCommand);
+        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
 
 
+        /*
+         * Should display:
+         * Entry Message
+         * Input Loop Message
+         * "Added todo0" message
+         * queried tasks list
+         * exit loop
+         * terminate
+         */
+
+        StringBuilder expectedResponseBuilder = new StringBuilder();
+
+
+        MockTask[] MockTasks = {}; // no should be displayed after query
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+
+        expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
+        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+
+        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
+
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
+        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
+        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+        String expectedOutputResponse = expectedResponseBuilder.toString();
+
+        try {
+            Main.run(this.getPrintStream(), tm,frm);
+        } catch (Exception e) {
+            fail(e.toString());
+        }
+        assertEquals(expectedOutputResponse,this.getOutput());
+    }
+
+    @Test
+    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit() throws Exception {
+
+        String keyword = "MAGIK asfasf";
+        String taskDesc0 = "nons afasf09qhy2gr";
+        String store0Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+
+        StringBuilder commandBuilder = new StringBuilder();
+
+        commandBuilder.append(store0Command);
+        commandBuilder.append(findCommand);
+        commandBuilder.append(exitCommand);
+        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
+
+        /*
+         * Should display:
+         * Entry Message
+         * Input Loop Message
+         * "Added todo0" message
+         * queried tasks list
+         * exit loop
+         * terminate
+         */
+
+
+        StringBuilder expectedResponseBuilder = new StringBuilder();
+
+
+        MockTask[] MockTasks = {}; // no should be displayed after query
+        TaskManager tm = new TaskManager();
+        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+
+        expectedResponseBuilder.append(getMsgUnderTestEntry());
+        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
+        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
+        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+
+        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
+
+        expectedResponseBuilder.append(getMsgUnderTestErrorSpacedKeyword());
+        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
+        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+        String expectedOutputResponse = expectedResponseBuilder.toString();
+
+        try {
+            Main.run(this.getPrintStream(), tm,frm);
+        } catch (Exception e) {
+            fail(e.toString());
+        }
+
+        assertEquals(expectedOutputResponse,this.getOutput());
     }
 
 
