@@ -9,8 +9,6 @@ import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-
 import static duke.testHelper.help.Builder.buildCommandInputStream;
 import static duke.testHelper.help.Builder.buildExpectedResponse;
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
@@ -22,7 +20,7 @@ import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExpo
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class Increment_09_Test extends TestStream {
+public class TestIoFind extends TestStream {
     @Test
     public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit() {
 
@@ -47,9 +45,6 @@ public class Increment_09_Test extends TestStream {
          * exit loop
          * terminate
          */
-
-
-        StringBuilder expectedResponseBuilder = new StringBuilder();
 
         MockToDo expectedToDo1 = new MockToDo(taskDesc1, 1, false);
 

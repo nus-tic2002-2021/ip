@@ -11,7 +11,6 @@ import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
-import duke.testHelper.help.config.dukeIOTestPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
