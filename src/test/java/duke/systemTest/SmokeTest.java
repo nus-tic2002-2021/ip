@@ -1,6 +1,6 @@
 
 
-package duke.level;
+package duke.systemTest;
 
 import duke.Ui;
 import duke.testHelper.TestStream;

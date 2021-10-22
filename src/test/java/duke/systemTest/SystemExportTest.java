@@ -1,11 +1,10 @@
-package duke.level;
+package duke.systemTest;
 
 import com.google.gson.JsonArray;
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.command.commandFactory.FileCommandFactory;
-import duke.command.errorCommand.CommandExecutionError;
 import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
@@ -33,10 +32,10 @@ import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ExportTest extends TestStream {
+public class SystemExportTest extends TestStream {
 
     /**
-     * Execute add commands and save as export1
+     * Execute add tasks commands and save as export1
      * import export1, save as export2
      * export1 == export2 ? pass
      */
@@ -129,6 +128,10 @@ public class ExportTest extends TestStream {
         Files.write(exportPath, buildString(data).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
     }
 
+    /**
+     * This method generates 1) the input and 2) its expected output for system level test. No assertions required.
+     * @throws Exception Unable to generate files, may impact on test phase.
+     */
     @Test
     public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
         String importPathString = getDefaultTasksImportPathString();
@@ -136,14 +139,12 @@ public class ExportTest extends TestStream {
         String loadInputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt";
         String expectedOutputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt";
 
-
         String out0 = (getExpectedOutputEntry());
 
         String out1 = (getExpectedOutputImportAttempt(stringToPath(importPathString)));
         String out2 = (getExpectedOutputReadPathNotFound());
 
         String out3 = (getExpectedOutputBeginInputLoop());
-
 
         String todoDesc = "tododesc";
 
@@ -183,7 +184,6 @@ public class ExportTest extends TestStream {
         String in7 = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
         MockTask[] selectedMockTasks = new MockTask[]{new MockEvent(eventDesc,2,true,parseStringAsLocalDateTime(eventFrom),parseStringAsLocalDateTime(eventTo))};
         String out11 = (getExpectedOutputList(getExpectedTaskList(selectedMockTasks)));
-
 
         String in8 = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
         String out12 = (getExpectedOutputExitInputLoop());

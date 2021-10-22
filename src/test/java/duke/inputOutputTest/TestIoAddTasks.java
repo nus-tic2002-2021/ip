@@ -1,4 +1,4 @@
-package duke.level;
+package duke.inputOutputTest;
 
 import duke.FileResourceManager;
 import duke.Main;
@@ -19,7 +19,7 @@ import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTe
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class IoTest extends TestStream {
+public class TestIoAddTasks extends TestStream {
 
     @Test
     public void Greet_AddToDoList_Exit() throws Exception {
@@ -198,7 +198,7 @@ public class IoTest extends TestStream {
         String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        System.setIn(buildCommandInputStream(new String[]{storeToDoCommand0,storeDeadlineCommand1,storeEventCommand2,listCommand,exitCommand}));
+        System.setIn(buildCommandInputStream(storeToDoCommand0,storeDeadlineCommand1,storeEventCommand2,listCommand,exitCommand));
 
 
         /*

@@ -1,4 +1,4 @@
-package duke.level;
+package duke.inputOutputTest;
 
 import duke.FileResourceManager;
 import duke.Main;
@@ -17,7 +17,7 @@ import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTe
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Io2Test extends TestStream {
+public class TestIoList extends TestStream {
 
     @Test
     public void Greet_AddThenDeleteToDoList_Exit() throws Exception {

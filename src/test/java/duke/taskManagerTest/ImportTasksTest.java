@@ -1,6 +1,8 @@
-package duke;
+package duke.taskManagerTest;
 
 import com.google.gson.JsonArray;
+import duke.FileResourceManager;
+import duke.TaskManager;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.dukeUtility.enums.ResponseType;
@@ -11,7 +13,7 @@ import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExpo
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class ImportTasks_Test extends TestStream {
+public class ImportTasksTest extends TestStream {
 
 
     @Test

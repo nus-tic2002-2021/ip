@@ -1,5 +1,7 @@
-package duke;
+package duke.taskManagerTest;
 
+import duke.FileResourceManager;
+import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
 import duke.testHelper.TestStream;
@@ -9,7 +11,7 @@ import static duke.testHelper.help.config.dukeIOTestPath.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class ExportTasks_Test extends TestStream {
+public class ExportTasksTest extends TestStream {
 
     @Test
     public void Test_AddToDos_Export_Should_Buffer_Test(){

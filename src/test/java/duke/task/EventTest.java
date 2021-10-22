@@ -14,10 +14,8 @@ public class EventTest {
         String toString = "asdasdasd asdasd ";
         int id = 1;
         boolean done = false;
-
         assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(fromString));
         assertThrows(Exception.class, () -> ParserUnderTest.parseStringAsLocalDateTime(toString));
-
     }
 
 }

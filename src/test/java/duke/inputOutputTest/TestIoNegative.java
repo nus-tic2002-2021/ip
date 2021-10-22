@@ -1,4 +1,4 @@
-package duke.level;
+package duke.inputOutputTest;
 
 import duke.FileResourceManager;
 import duke.Main;

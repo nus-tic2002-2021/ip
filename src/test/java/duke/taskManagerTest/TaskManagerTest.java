@@ -1,5 +1,6 @@
-package duke;
+package duke.taskManagerTest;
 
+import duke.TaskManager;
 import duke.task.model.Event;
 import duke.testHelper.TestStream;
 import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
@@ -9,11 +10,10 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-public class TaskManager_Test extends TestStream {
+public class TaskManagerTest extends TestStream {
 
     @Test
-    public void Test_AddToDos(){
+    public void AddToDos(){
         TaskManager tm = new TaskManager();
 
         String desc0 = "desc0";
@@ -26,7 +26,7 @@ public class TaskManager_Test extends TestStream {
 
 
     @Test
-    public void Test_AddEvents() throws Exception{
+    public void AddEvents() throws Exception{
         TaskManager tm = new TaskManager();
 
         String desc0 = "desc0";
