@@ -6,13 +6,13 @@ import duke.command.Command;
 
 import duke.command.errorCommand.*;
 import duke.command.systemCommand.CommandExitLoop;
-import duke.command.taskCommand.taskAdd.CommandAddNewDeadline;
-import duke.command.taskCommand.taskAdd.CommandAddNewEvent;
-import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
-import duke.command.taskCommand.taskQuery.CommandListAll;
-import duke.command.taskCommand.taskQuery.CommandListTasksWithKeyword;
-import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
-import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
+import duke.command.taskcommand.taskadd.CommandAddNewDeadline;
+import duke.command.taskcommand.taskadd.CommandAddNewEvent;
+import duke.command.taskcommand.taskadd.CommandAddNewToDo;
+import duke.command.taskcommand.taskQuery.CommandListAll;
+import duke.command.taskcommand.taskQuery.CommandListTasksWithKeyword;
+import duke.command.taskcommand.taskUpdate.CommandDeleteTask;
+import duke.command.taskcommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
 
 import java.time.LocalDateTime;

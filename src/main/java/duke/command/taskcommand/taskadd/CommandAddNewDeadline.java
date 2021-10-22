@@ -1,4 +1,4 @@
-package duke.command.taskCommand.taskAdd;
+package duke.command.taskcommand.taskadd;
 
 import java.time.LocalDateTime;
 import java.util.List;

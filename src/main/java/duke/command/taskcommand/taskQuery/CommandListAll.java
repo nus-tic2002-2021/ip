@@ -1,4 +1,4 @@
-package duke.command.taskCommand.taskQuery;
+package duke.command.taskcommand.taskQuery;
 
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
