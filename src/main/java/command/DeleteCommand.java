@@ -1,7 +1,14 @@
+package command;
+
+import duke.Storage;
+import duke.UI;
+import task.List;
+import error.*;
+
 public class DeleteCommand extends Command{
     protected String delete;
     public DeleteCommand(String action, String delete){
-        super(action);
+        setAction(action);
         setDelete(delete);
     }
     public void setDelete(String delete) {

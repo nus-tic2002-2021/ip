@@ -1,7 +1,11 @@
+package duke;
+import command.*;
+import error.*;
+
 public class Parser {
-    public Command parse(String input) throws UnrecognizedException, InvalidFormatException{
+    public Command parse(String input) throws UnrecognizedException, DukeException {
         if (input.contains("|")){
-            throw new InvalidFormatException("Please do not use '|' as it breaks the program");
+            throw new DukeException("INPUT_FORMAT_ERROR");
         }
         String action;
         String[] inputArray;
@@ -9,7 +13,7 @@ public class Parser {
         action = inputArray[0].toLowerCase();
         switch(action){
             case "bye":
-                return new ExitCommand("bye");
+                return new ExitCommand();
             case "todo":
             case "deadline":
             case "event":
@@ -19,7 +23,7 @@ public class Parser {
             case "done":
                 return new ModifyCommand(action, inputArray[1]);
             case "list":
-                return new ListCommand("list");
+                return new ListCommand();
             default: throw new UnrecognizedException();
         }
     }

@@ -1,4 +1,8 @@
+package task;
+
 import java.util.ArrayList;
+import error.*;
+
 
 public class List {
     private static ArrayList<Task> taskArrayList;
@@ -41,38 +45,38 @@ public class List {
 
     }
 
-    public void addTodo(String inputMsg)throws InvalidFormatException{
+    public void addTodo(String inputMsg)throws DukeException {
         if(inputMsg.isEmpty()){
-            throw new InvalidFormatException("Todo is missing a description.");
+            throw new DukeException("TODO_DESCRIPTION_ERROR");
         }
         taskArrayList.add(new Todo(inputMsg));
         printAdd();
     }
 
-    public void addDeadline(String inputMsg)throws InvalidFormatException{
+    public void addDeadline(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /by ");
         if(input.length < 2){
-            throw new InvalidFormatException("Deadline command is missing a description and/or deadline.");
+            throw new DukeException("DEADLINE_DESCRIPTION_ERROR");
         }
         if(input.length > 2){
-            throw new InvalidFormatException("Deadline command has too many /by.");
+            throw new DukeException("DEADLINE_LENGTH_ERROR");
         }
         taskArrayList.add(new Deadline(input[0],input[1]));
         printAdd();
     }
-    public void addEvent(String inputMsg)throws InvalidFormatException{
+    public void addEvent(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /at ");
         if(input.length < 2){
-            throw new InvalidFormatException("Event command is missing a description and/or time.");
+            throw new DukeException("EVENT_DESCRIPTION_ERROR");
         }
         if(input.length > 2){
-            throw new InvalidFormatException("Event command has too many /at.");
+            throw new DukeException("EVENT_LENGTH_ERROR");
         }
         taskArrayList.add(new Event(input[0],input[1]));
         printAdd();
     }
 
-    public void taskDone(String counter)throws NotFoundException{
+    public void taskDone(String counter)throws NotFoundException {
         Integer inputNumber = Integer.parseInt(counter);
         if (taskArrayList.size() < inputNumber){
             throw new NotFoundException();
@@ -80,7 +84,7 @@ public class List {
         taskArrayList.get(inputNumber - 1).setDone();
     }
 
-    public void taskDelete(String counter)throws NotFoundException{
+    public void taskDelete(String counter)throws NotFoundException {
         Integer inputNumber = Integer.parseInt(counter);
         if (taskArrayList.size() < inputNumber){
             throw new NotFoundException();
@@ -92,7 +96,7 @@ public class List {
 
     public void printList() {
         if(taskArrayList.size() == 0){ //0 items in list
-            System.out.println("\tList is empty!"); //throw empty list
+            System.out.println("\ttask.List is empty!"); //throw empty list
         }
         else{
             int count = 1;
@@ -122,7 +126,7 @@ public class List {
         recentDelete.print();
         System.out.println("\tNow you have " + (taskArrayList.size()) +" task(s) in the list");
     }
-    public void addTask(String action,String inputMsg) throws InvalidFormatException {
+    public void addTask(String action,String inputMsg) throws DukeException {
         switch (action) {
             /*add to array */
             case "todo":
