@@ -145,7 +145,7 @@ public class Ui {
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
             this.printResponseAddedDeadline(c.getArgs().get(2));
         }  else if (rt == ResponseType.TASK_CREATE_EVENT) {
-            this.printResponseAddedEvent(c.getArgs().get(2));
+            this.printResponseAddedEvent(c.getArgs().get(0));
         }else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
