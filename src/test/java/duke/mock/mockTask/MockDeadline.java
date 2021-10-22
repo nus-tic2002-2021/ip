@@ -1,18 +1,17 @@
 package duke.mock.mockTask;
 
+import java.time.LocalDateTime;
 import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
 
-import java.time.LocalDateTime;
-
-public class MockDeadline extends MockTask{
-    private LocalDateTime by;
+public class MockDeadline extends MockTask {
+    private final LocalDateTime by;
 
     public MockDeadline(String desc, Integer id, Boolean done, LocalDateTime by) {
-        super(desc,id,done);
+        super(desc, id, done);
         this.by = by;
     }
 
-    public String getbyDateString(){
+    public String getbyDateString() {
         return ParserUnderTest.prettifyLocalDateTime(this.by);
     }
 }

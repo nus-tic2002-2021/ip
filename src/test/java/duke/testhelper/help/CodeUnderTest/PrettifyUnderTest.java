@@ -7,30 +7,32 @@ import duke.mock.mockTask.MockToDo;
 
 public class PrettifyUnderTest {
 
-    private static String getTaskCharCodeUnderTest(MockTask task){
-        if(task instanceof MockToDo){
+    private static String getTaskCharCodeUnderTest(MockTask task) {
+        if (task instanceof MockToDo) {
             return "T";
         }
-        if(task instanceof MockEvent){
+        if (task instanceof MockEvent) {
             return "E";
         }
-        if(task instanceof MockDeadline){
+        if (task instanceof MockDeadline) {
             return "D";
         }
         return " ";
     }
-    private static String getTaskChronologyString(MockTask task){
-        if(task instanceof MockToDo){
+
+    private static String getTaskChronologyString(MockTask task) {
+        if (task instanceof MockToDo) {
             return "-";
         }
-        if(task instanceof MockEvent){
+        if (task instanceof MockEvent) {
             return "From: " + ((MockEvent) task).getFromDateString() + ", To: " + ((MockEvent) task).getToDateString();
         }
-        if(task instanceof MockDeadline){
-            return "By: " + ((MockDeadline) task).getbyDateString() ;
+        if (task instanceof MockDeadline) {
+            return "By: " + ((MockDeadline) task).getbyDateString();
         }
         return " ";
     }
+
     private static String fillCellUnderTest(String value, Integer lengthColMax) {
         int lengthValue = value.length();
         int lengthPad = lengthColMax - lengthValue;

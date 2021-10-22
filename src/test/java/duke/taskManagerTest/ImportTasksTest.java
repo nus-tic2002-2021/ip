@@ -1,5 +1,8 @@
 package duke.taskManagerTest;
 
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 import com.google.gson.JsonArray;
 import duke.FileResourceManager;
 import duke.TaskManager;
@@ -7,17 +10,13 @@ import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.dukeUtility.enums.ResponseType;
 import duke.testhelper.TestStream;
-import org.junit.jupiter.api.Test;
-
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ImportTasksTest extends TestStream {
 
 
     @Test
-    public void AddToDos_Export_Extract_Load_Test(){
+    public void AddToDos_Export_Extract_Load_Test() {
         TaskManager tm1 = new TaskManager();
 
         String desc0 = "desc0";
@@ -29,14 +28,14 @@ public class ImportTasksTest extends TestStream {
 
         String exportPathString = getDefaultTasksTestExportPathString();
         String importPathString = exportPathString;
-        FileResourceManager frm = new FileResourceManager(exportPathString,importPathString);
+        FileResourceManager frm = new FileResourceManager(exportPathString, importPathString);
 
         // export
         Command c = frm.executeCommandSave(tm1);
-        assertEquals(ResponseType.FILE_SAVED,c.getResponseType());
+        assertEquals(ResponseType.FILE_SAVED, c.getResponseType());
         // extract
         CommandJsonResponse reading = frm.executeExtractTasksFromFile();
-        assertEquals(ResponseType.FILE_READ,reading.getResponseType());
+        assertEquals(ResponseType.FILE_READ, reading.getResponseType());
         // load
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
 

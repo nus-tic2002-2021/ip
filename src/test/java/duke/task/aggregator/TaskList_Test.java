@@ -1,14 +1,15 @@
 package duke.task.aggregator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 import duke.task.model.ToDo;
 import duke.testhelper.TestStream;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskList_Test extends TestStream {
     @Test
-    public void TestToDo(){
+    public void TestToDo() {
 
         TaskList tl = new TaskList();
         String task0Description = "task 0";

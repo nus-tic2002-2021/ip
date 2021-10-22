@@ -11,6 +11,7 @@ public class Builder {
 
     /**
      * Helper to combine array of strings.
+     *
      * @param commands
      * @return
      */
@@ -24,6 +25,7 @@ public class Builder {
 
     /**
      * Helper to build expected output response.
+     *
      * @param responses
      * @return output response
      */

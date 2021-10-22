@@ -1,13 +1,10 @@
-
-
 package duke.systemTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 import duke.Ui;
 import duke.testhelper.TestStream;
 import duke.testhelper.help.CodeUnderTest.OutputUnderTest;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Implement an initial skeletal version of the Duke that simply greets the user and exits.

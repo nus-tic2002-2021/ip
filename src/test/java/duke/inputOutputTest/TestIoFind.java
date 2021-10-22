@@ -1,24 +1,35 @@
 package duke.inputOutputTest;
 
 
+import static duke.testhelper.help.Builder.buildCommandInputStream;
+import static duke.testhelper.help.Builder.buildExpectedResponse;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputAddedToDo;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputBeginInputLoop;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputEntry;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputExitInputLoop;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputImportAttempt;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputReadPathNotFound;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputTerminate;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getMsgUnderTestErrorSpacedKeyword;
+import static duke.testhelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.generateTextCommandExit;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.generateTextCommandLineAddToDo;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 import duke.testhelper.TestStream;
-import org.junit.jupiter.api.Test;
-
-import static duke.testhelper.help.Builder.buildCommandInputStream;
-import static duke.testhelper.help.Builder.buildExpectedResponse;
-import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testhelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.*;
-import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestIoFind extends TestStream {
     @Test
@@ -27,12 +38,12 @@ public class TestIoFind extends TestStream {
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
         String taskDesc1 = "aasfg " + keyword + " c124124";
-        String store0Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
-        String store1Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc1);
-        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String store1Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc1);
+        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        System.setIn(buildCommandInputStream(store0Command,store1Command,findCommand,exitCommand));
+        System.setIn(buildCommandInputStream(store0Command, store1Command, findCommand, exitCommand));
 
 
         /*
@@ -50,7 +61,8 @@ public class TestIoFind extends TestStream {
 
         MockTask[] MockTasks = {expectedToDo1}; // only task 1 should be displayed after query
         TaskManager tm = new TaskManager();
-        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+        FileResourceManager frm =
+            new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
 
         String out0 = (getExpectedOutputEntry());
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
@@ -61,27 +73,27 @@ public class TestIoFind extends TestStream {
         String out6 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
         String out7 = (getExpectedOutputExitInputLoop());
         String out8 = (getExpectedOutputTerminate());
-        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7,out8);
+        String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8);
 
         try {
-            Main.run(this.getPrintStream(), tm,frm);
+            Main.run(this.getPrintStream(), tm, frm);
         } catch (Exception e) {
             fail(e.toString());
         }
 
-        assertEquals(expectedOutputResponse,this.getOutput());
+        assertEquals(expectedOutputResponse, this.getOutput());
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result()  {
+    public void Greet_AddToDo_ListTasksWithKeyword_Save_Exit_Empty_Result() {
 
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
-        String store0Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
-        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        System.setIn(buildCommandInputStream(store0Command,findCommand,exitCommand));
+        System.setIn(buildCommandInputStream(store0Command, findCommand, exitCommand));
 
         /*
          * Should display:
@@ -96,7 +108,8 @@ public class TestIoFind extends TestStream {
 
         MockTask[] MockTasks = {}; // no should be displayed after query
         TaskManager tm = new TaskManager();
-        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+        FileResourceManager frm =
+            new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
 
         String out0 = (getExpectedOutputEntry());
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
@@ -106,26 +119,26 @@ public class TestIoFind extends TestStream {
         String out5 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
         String out6 = (getExpectedOutputExitInputLoop());
         String out7 = (getExpectedOutputTerminate());
-        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7);
+        String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7);
 
         try {
-            Main.run(this.getPrintStream(), tm,frm);
+            Main.run(this.getPrintStream(), tm, frm);
         } catch (Exception e) {
             fail(e.toString());
         }
-        assertEquals(expectedOutputResponse,this.getOutput());
+        assertEquals(expectedOutputResponse, this.getOutput());
     }
 
     @Test
-    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit()  {
+    public void Greet_AddToDo_ListTasksWithInvalidKeyword_Save_Exit() {
 
         String keyword = "MAGIK asfasf";
         String taskDesc0 = "nons afasf09qhy2gr";
-        String store0Command= generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
-        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        System.setIn(buildCommandInputStream(store0Command,findCommand,exitCommand));
+        System.setIn(buildCommandInputStream(store0Command, findCommand, exitCommand));
 
         /*
          * Should display:
@@ -138,7 +151,8 @@ public class TestIoFind extends TestStream {
          */
 
         TaskManager tm = new TaskManager();
-        FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
+        FileResourceManager frm =
+            new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
 
         String out0 = (getExpectedOutputEntry());
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
@@ -148,15 +162,15 @@ public class TestIoFind extends TestStream {
         String out5 = (getMsgUnderTestErrorSpacedKeyword());
         String out6 = (getExpectedOutputExitInputLoop());
         String out7 = (getExpectedOutputTerminate());
-        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7);
+        String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7);
 
         try {
-            Main.run(this.getPrintStream(), tm,frm);
+            Main.run(this.getPrintStream(), tm, frm);
         } catch (Exception e) {
             fail(e.toString());
         }
 
-        assertEquals(expectedOutputResponse,this.getOutput());
+        assertEquals(expectedOutputResponse, this.getOutput());
     }
 
 

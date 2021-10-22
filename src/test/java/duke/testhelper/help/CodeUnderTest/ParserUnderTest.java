@@ -8,15 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
-
 public class ParserUnderTest {
     private static final String transitiveJsonAndTextPattern = "yyyy-MM-dd-HH-mm-ss";
-    private static final List<String> patterns = List.of("yyyyMMdd", "yyyyMMdd HH:mm", ParserUnderTest.transitiveJsonAndTextPattern);
+    private static final List<String> patterns =
+        List.of("yyyyMMdd", "yyyyMMdd HH:mm", ParserUnderTest.transitiveJsonAndTextPattern);
 
     public static String parseLocalDateTimeAsString(LocalDateTime ldt) {
         return DateTimeFormatter.ofPattern(ParserUnderTest.transitiveJsonAndTextPattern).format(ldt);
     }
-
 
 
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
@@ -26,13 +25,11 @@ public class ParserUnderTest {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
-                ;
             }
         }
         try {
             ldt = parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
-            ;
         }
         if (ldt == null) {
             throw new Exception("Parse as LocalDateTime failed.");
@@ -48,7 +45,7 @@ public class ParserUnderTest {
         return ldt.toString().replace("T", " ");
     }
 
-    public static Path stringToPath(String path){
+    public static Path stringToPath(String path) {
         try {
             return Paths.get(path);
         } catch (Exception e) {
