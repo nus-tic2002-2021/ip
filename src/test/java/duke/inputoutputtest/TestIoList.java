@@ -20,8 +20,8 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -69,14 +69,14 @@ public class TestIoList extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
             new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
-        MockTask[] MockTasks = {}; // since task is deleted
+        MockTask[] mockTasks = {}; // since task is deleted
         String out0 = (getExpectedOutputEntry());
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
         String out4 = (getExpectedOutputAddedToDo(taskDesc0));
         String out5 = (getExpectedOutputCommandDeleted(0));
-        String out6 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out6 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out7 = (getExpectedOutputExitInputLoop());
         String out8 = (getExpectedOutputTerminate());
 
@@ -120,7 +120,7 @@ public class TestIoList extends TestStream {
          * terminate
          */
         MockToDo expectedToDo1 = new MockToDo(taskDesc1, 1, false);
-        MockTask[] MockTasks = {expectedToDo1}; // since task0 is deleted
+        MockTask[] mockTasks = {expectedToDo1}; // since task0 is deleted
 
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
@@ -132,7 +132,7 @@ public class TestIoList extends TestStream {
         String out4 = (getExpectedOutputAddedToDo(taskDesc0));
         String out5 = (getExpectedOutputAddedToDo(taskDesc1));
         String out6 = (getExpectedOutputCommandDeleted(0));
-        String out7 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out7 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out8 = (getExpectedOutputExitInputLoop());
         String out9 = (getExpectedOutputTerminate());
         String expectedOutputResponse =

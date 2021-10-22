@@ -27,8 +27,8 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddEvent;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -83,13 +83,13 @@ public class TestIoAddTasks extends TestStream {
         FileResourceManager frm =
             new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
 
-        MockTask[] MockTasks = {expectedToDo1};
+        MockTask[] mockTasks = {expectedToDo1};
         String out0 = getExpectedOutputEntry();
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
         String out4 = getExpectedOutputAddedToDo(taskDesc0);
-        String out5 = getExpectedOutputList(getExpectedTaskList(MockTasks));
+        String out5 = getExpectedOutputList(getExpectedTaskList(mockTasks));
         String out6 = getExpectedOutputExitInputLoop();
         String out7 = getExpectedOutputTerminate();
         String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7);
@@ -138,7 +138,7 @@ public class TestIoAddTasks extends TestStream {
         MockEvent expectedEvent =
             new MockEvent(taskDesc0, 0, false, ParserUnderTest.parseStringAsLocalDateTime(fromDateString),
                 ParserUnderTest.parseStringAsLocalDateTime(toDateString));
-        MockTask[] MockEvents = {expectedEvent};
+        MockTask[] mockEvents = {expectedEvent};
 
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
@@ -149,7 +149,7 @@ public class TestIoAddTasks extends TestStream {
         String out3 = getExpectedOutputReadPathNotFound();
         String out4 = getExpectedOutputBeginInputLoop();
         String out5 = getExpectedOutputAddedEvent(expectedEvent.getDesc());
-        String out6 = getExpectedOutputList(getExpectedTaskList(MockEvents));
+        String out6 = getExpectedOutputList(getExpectedTaskList(mockEvents));
         String out7 = getExpectedOutputExitInputLoop();
         String out8 = getExpectedOutputTerminate();
 
@@ -198,14 +198,14 @@ public class TestIoAddTasks extends TestStream {
 
         MockDeadline expectedEvent =
             new MockDeadline(taskDesc0, 0, false, ParserUnderTest.parseStringAsLocalDateTime(byDateString));
-        MockTask[] MockDeadlines = {expectedEvent};
+        MockTask[] mockDeadlines = {expectedEvent};
 
         String out0 = getExpectedOutputEntry();
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
         String out4 = getExpectedOutputAddedDeadline(taskDesc0);
-        String out5 = getExpectedOutputList(getExpectedTaskList(MockDeadlines));
+        String out5 = getExpectedOutputList(getExpectedTaskList(mockDeadlines));
         String out6 = getExpectedOutputExitInputLoop();
         String out7 = getExpectedOutputTerminate();
 
@@ -261,7 +261,7 @@ public class TestIoAddTasks extends TestStream {
             ParserUnderTest.parseStringAsLocalDateTime(task2EventFromDateString),
             ParserUnderTest.parseStringAsLocalDateTime(task2EventToDateString));
 
-        MockTask[] MockEvents = {expectedToDo, expectedDeadline, expectedEvent};
+        MockTask[] mockEvents = {expectedToDo, expectedDeadline, expectedEvent};
 
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
@@ -274,7 +274,7 @@ public class TestIoAddTasks extends TestStream {
         String out4 = getExpectedOutputAddedToDo(task0ToDoDescription);
         String out5 = getExpectedOutputAddedDeadline(task1DeadlineDescription);
         String out6 = getExpectedOutputAddedEvent(task2EventDescription);
-        String out7 = getExpectedOutputList(getExpectedTaskList(MockEvents));
+        String out7 = getExpectedOutputList(getExpectedTaskList(mockEvents));
         String out8 = getExpectedOutputExitInputLoop();
         String out9 = getExpectedOutputTerminate();
 

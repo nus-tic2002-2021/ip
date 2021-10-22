@@ -19,8 +19,8 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UND
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -61,7 +61,7 @@ public class TestIoFind extends TestStream {
 
         MockToDo expectedToDo1 = new MockToDo(taskDesc1, 1, false);
 
-        MockTask[] MockTasks = {expectedToDo1}; // only task 1 should be displayed after query
+        MockTask[] mockTasks = {expectedToDo1}; // only task 1 should be displayed after query
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
             new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
@@ -72,7 +72,7 @@ public class TestIoFind extends TestStream {
         String out3 = (getExpectedOutputBeginInputLoop());
         String out4 = (getExpectedOutputAddedToDo(taskDesc0));
         String out5 = (getExpectedOutputAddedToDo(taskDesc1));
-        String out6 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out6 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out7 = (getExpectedOutputExitInputLoop());
         String out8 = (getExpectedOutputTerminate());
         String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8);
@@ -108,7 +108,7 @@ public class TestIoFind extends TestStream {
          */
 
 
-        MockTask[] MockTasks = {}; // no should be displayed after query
+        MockTask[] mockTasks = {}; // no should be displayed after query
         TaskManager tm = new TaskManager();
         FileResourceManager frm =
             new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
@@ -118,7 +118,7 @@ public class TestIoFind extends TestStream {
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
         String out4 = (getExpectedOutputAddedToDo(taskDesc0));
-        String out5 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out5 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out6 = (getExpectedOutputExitInputLoop());
         String out7 = (getExpectedOutputTerminate());
         String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7);

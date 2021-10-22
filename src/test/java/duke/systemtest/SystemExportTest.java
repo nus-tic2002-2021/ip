@@ -1,6 +1,6 @@
 package duke.systemtest;
 
-import static duke.dukeutility.config.dukeIO.getDefaultTasksImportPathString;
+import static duke.dukeutility.config.dukeIo.getDefaultTasksImportPathString;
 import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildString;
@@ -40,11 +40,12 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSave;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSetCompleted;
-import static duke.testhelper.help.config.dukeIOTestPath.resourceTestFolder;
+import static duke.testhelper.help.config.dukeIoTestPath.getResourceTestFolder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -53,8 +54,11 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
+
 import com.google.gson.JsonArray;
+
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -76,8 +80,8 @@ public class SystemExportTest extends TestStream {
     public void idempotentExport() {
         String thisTestSign = "saveEventsToJsonTestFile";
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"));
-        String export1PathString = resourceTestFolder + "-added" + thisTestSign + date + ".json";
-        String export2PathString = resourceTestFolder + "-load" + thisTestSign + date + ".json";
+        String export1PathString = getResourceTestFolder() + "-added" + thisTestSign + date + ".json";
+        String export2PathString = getResourceTestFolder() + "-load" + thisTestSign + date + ".json";
         FileResourceManager frm1 = new FileResourceManager(export1PathString, null);
         TaskManager tm1 = new TaskManager();
         //  sets of add tasks textCommands
