@@ -10,6 +10,6 @@ import static duke.dukeUtility.prettify.Prettify.prettifyTasks;
 
 public class CommandListTasksWithKeyword extends Command {
     public CommandListTasksWithKeyword(TaskManager taskMgr, String keyword) {
-        super(ResponseType.TASK_LIST, List.of("list", prettifyTasks(taskMgr.getTasksWithWord(keyword))));
+        super(ResponseType.TASK_LIST_ALL, List.of("list", prettifyTasks(taskMgr.getTasksWithWord(keyword))));
     }
 }

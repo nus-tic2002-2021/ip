@@ -106,6 +106,31 @@ public class Ui {
     private void printResponseInvalidCommand(String text){
         this.printResponseTemplate("Invalid command " + text);
     }
+
+    private void printResponseUnknownRequest(){
+        this.printResponseTemplate("Unknown command. . .");
+    }
+
+
+    private void printResponseTaskNotFound(String text){
+        this.printResponseTemplate("Task Not Found: " + text);
+    }
+
+    private void printResponseTaskDeleted(String text){
+        this.printResponseTemplate("Task Deleted: " + text);
+    }
+
+    private void printResponseTaskRequestInvalidParameters(String text){
+        this.printResponseTemplate("Invalid parameters: " + text);
+    }
+
+    private void printResponseTaskFileSaved(){
+        this.printResponseTemplate("File saved.");
+    }
+
+    private void printResponseTaskReadPathInvalid(){
+        this.printResponseTemplate("Read path not found/invalid. ");
+    }
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
         if (rt == ResponseType.EXIT_LOOP) {
@@ -122,27 +147,25 @@ public class Ui {
         }  else if (rt == ResponseType.TASK_CREATE_EVENT) {
             this.printResponseAddedEvent(c.getArgs().get(2));
         }else if (rt == ResponseType.TASK_LIST_ALL) {
-            this.getPrintStream().print(c.getArgs().get(1) );
+            this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
+        }  else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
+            this.printResponseUnknownRequest();
+        } else if (rt == ResponseType.TASK_NOT_FOUND){
+            this.printResponseTaskNotFound(c.getArgs().get(1));
+        } else if (rt == ResponseType.TASK_DELETE_TASK) {
+            this.printResponseTaskDeleted(c.getArgs().get(1));
         }  else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
             this.printResponseInvalidCommand(c.getArgs().get(1));
-        } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
-            this.getPrintStream().print("Unknown command. . ." + System.lineSeparator());
-        } else if (rt == ResponseType.TASK_NOT_FOUND){
-            this.getPrintStream().print("Task Not Found: " + c.getArgs().get(1) + System.lineSeparator());
-        } else if (rt == ResponseType.TASK_DELETE_TASK) {
-            this.getPrintStream().print("Task Deleted: " + c.getArgs().get(1) + System.lineSeparator());
-        }  else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
-            this.getPrintStream().print("Invalid parameters: " + c.getArgs().get(1) + System.lineSeparator());
+        } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
+            this.printResponseTaskRequestInvalidParameters(c.getArgs().get(1));
         }else if (rt == ResponseType.FILE_SAVED) {
-            this.getPrintStream().print("File saved." + System.lineSeparator());
+            this.printResponseTaskFileSaved();
         }else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH){
-            this.getPrintStream().print("Read path not found/invalid. " + System.lineSeparator());
+            this.printResponseTaskReadPathInvalid();
         }else if(rt == ResponseType.FILE_READ){
             this.printReadSuccess(c.getArgs().get(2));
-        }else if(rt == ResponseType.TASK_LIST){
-            this.getPrintStream().print(c.getArgs().get(1));
         }else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
