@@ -1,6 +1,6 @@
 package duke.mock.mockTask;
 
-import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
+import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
 
 import java.time.LocalDateTime;
 

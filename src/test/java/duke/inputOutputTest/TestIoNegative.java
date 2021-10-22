@@ -3,14 +3,14 @@ package duke.inputOutputTest;
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
-import duke.testHelper.TestStream;
+import duke.testhelper.TestStream;
 import org.junit.jupiter.api.Test;
 
-import static duke.testHelper.help.Builder.*;
-import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.Builder.*;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.*;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestIoNegative extends TestStream {

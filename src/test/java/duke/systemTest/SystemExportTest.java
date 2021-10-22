@@ -9,7 +9,7 @@ import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
-import duke.testHelper.TestStream;
+import duke.testhelper.TestStream;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -22,14 +22,14 @@ import java.time.format.DateTimeFormatter;
 
 import static duke.dukeUtility.config.dukeIO.getDefaultTasksImportPathString;
 import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
-import static duke.testHelper.help.Builder.buildCommandInputStream;
-import static duke.testHelper.help.Builder.buildString;
-import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.ParserUnderTest.parseStringAsLocalDateTime;
-import static duke.testHelper.help.CodeUnderTest.ParserUnderTest.stringToPath;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
-import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
+import static duke.testhelper.help.Builder.buildCommandInputStream;
+import static duke.testhelper.help.Builder.buildString;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testhelper.help.CodeUnderTest.ParserUnderTest.parseStringAsLocalDateTime;
+import static duke.testhelper.help.CodeUnderTest.ParserUnderTest.stringToPath;
+import static duke.testhelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.*;
+import static duke.testhelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemExportTest extends TestStream {

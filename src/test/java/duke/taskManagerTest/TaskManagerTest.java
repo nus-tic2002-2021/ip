@@ -2,8 +2,8 @@ package duke.taskManagerTest;
 
 import duke.TaskManager;
 import duke.task.model.Event;
-import duke.testHelper.TestStream;
-import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
+import duke.testhelper.TestStream;
+import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

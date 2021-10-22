@@ -5,16 +5,16 @@ import duke.Main;
 import duke.TaskManager;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
-import duke.testHelper.TestStream;
+import duke.testhelper.TestStream;
 import org.junit.jupiter.api.Test;
 
-import static duke.testHelper.help.Builder.buildCommandInputStream;
-import static duke.testHelper.help.Builder.buildExpectedResponse;
-import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.Builder.buildCommandInputStream;
+import static duke.testhelper.help.Builder.buildExpectedResponse;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testhelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.*;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestIoList extends TestStream {

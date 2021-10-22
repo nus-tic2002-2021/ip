@@ -1,4 +1,4 @@
-package duke.testHelper.help.CodeUnderTest;
+package duke.testhelper.help.CodeUnderTest;
 
 public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";

@@ -6,10 +6,10 @@ import duke.TaskManager;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.dukeUtility.enums.ResponseType;
-import duke.testHelper.TestStream;
+import duke.testhelper.TestStream;
 import org.junit.jupiter.api.Test;
 
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 

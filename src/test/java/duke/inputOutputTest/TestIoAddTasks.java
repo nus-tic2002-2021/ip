@@ -7,16 +7,16 @@ import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
-import duke.testHelper.TestStream;
-import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
+import duke.testhelper.TestStream;
+import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
 import org.junit.jupiter.api.Test;
 
-import static duke.testHelper.help.Builder.*;
-import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
-import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.Builder.*;
+import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testhelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
+import static duke.testhelper.help.CodeUnderTest.TextCommandUnderTest.*;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestIoAddTasks extends TestStream {

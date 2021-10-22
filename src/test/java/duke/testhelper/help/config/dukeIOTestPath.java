@@ -1,7 +1,5 @@
-package duke.testHelper.help.config;
+package duke.testhelper.help.config;
 
-
-import duke.dukeUtility.config.dukeIO;
 
 import java.io.File;
 

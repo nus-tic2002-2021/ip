@@ -3,8 +3,8 @@
 package duke.systemTest;
 
 import duke.Ui;
-import duke.testHelper.TestStream;
-import duke.testHelper.help.CodeUnderTest.OutputUnderTest;
+import duke.testhelper.TestStream;
+import duke.testhelper.help.CodeUnderTest.OutputUnderTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

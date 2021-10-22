@@ -1,7 +1,7 @@
 package duke.task.aggregator;
 
 import duke.task.model.ToDo;
-import duke.testHelper.TestStream;
+import duke.testhelper.TestStream;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

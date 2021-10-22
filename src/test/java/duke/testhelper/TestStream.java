@@ -1,4 +1,4 @@
-package duke.testHelper;
+package duke.testhelper;
 
 
 
