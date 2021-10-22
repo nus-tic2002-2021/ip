@@ -1,7 +1,7 @@
 package duke.command.commandFactory;
 
 import duke.command.CommandJsonResponse;
-import duke.command.errorCommand.CommandReadFileError;
+import duke.command.errorcommand.CommandReadFileError;
 import duke.command.systemCommand.CommandReadTasks;
 
 import java.io.Reader;

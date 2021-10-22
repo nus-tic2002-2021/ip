@@ -1,9 +1,9 @@
-package duke.command.errorCommand;
+package duke.command.errorcommand;
+
+import java.util.List;
 
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
-
-import java.util.List;
 
 public class CommandExecutionError extends Command {
     public CommandExecutionError(Exception e, String when) {

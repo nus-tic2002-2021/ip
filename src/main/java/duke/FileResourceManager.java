@@ -9,12 +9,11 @@ import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;
 import duke.command.commandFactory.FileCommandFactory;
 import duke.command.commandFactory.ImportCommandFactory;
-import duke.command.errorCommand.CommandExecutionError;
+import duke.command.errorcommand.CommandExecutionError;
 
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static duke.dukeUtility.parser.PathParser.stringToPath;
 import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;

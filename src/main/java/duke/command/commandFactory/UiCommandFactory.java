@@ -4,7 +4,7 @@ import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
 
-import duke.command.errorCommand.*;
+import duke.command.errorcommand.*;
 import duke.command.systemCommand.CommandExitLoop;
 import duke.command.taskcommand.taskadd.CommandAddNewDeadline;
 import duke.command.taskcommand.taskadd.CommandAddNewEvent;

@@ -1,4 +1,4 @@
-package duke.command.errorCommand;
+package duke.command.errorcommand;
 
 import duke.command.CommandJsonResponse;
 import duke.dukeUtility.enums.ResponseType;
