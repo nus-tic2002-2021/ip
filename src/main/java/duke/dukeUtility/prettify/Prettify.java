@@ -26,9 +26,14 @@ public class Prettify {
      */
     public static String prettifyTaskMgr(TaskManager taskMgr) {
         ArrayList<Task> tl = taskMgr.getAllAsArray();
+        return prettifyTasks(tl);
+
+    }
+
+    public static String prettifyTasks(ArrayList<Task> tl){
 
         StringBuilder generating = new StringBuilder();
-        int taskQty = taskMgr.getSize();
+        int taskQty = tl.size();
         generating.append((taskQty + " task" + (taskQty > 1 ? "s" : "") + " in list" + System.lineSeparator()));
         /* header values */
 

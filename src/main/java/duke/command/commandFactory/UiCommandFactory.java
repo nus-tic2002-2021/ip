@@ -12,10 +12,10 @@ import duke.command.systemCommand.CommandExitLoop;
 import duke.command.taskCommand.taskAdd.CommandAddNewDeadline;
 import duke.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
+import duke.command.taskCommand.taskQuery.CommandListTasksWithKeyword;
 import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
-import duke.task.model.Event;
 
 import java.time.LocalDateTime;
 
@@ -131,5 +131,21 @@ public abstract class UiCommandFactory extends CommandFactory {
             return new CommandInvalidRequestParameters(e.toString());
         }
         return new CommandDeleteTask(taskManager, taskId);
+    }
+    protected Command executeCommandFindByKeywordInDescription(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        String keyword;
+        try {
+            argLine = text.replaceFirst(PROMPT_FIND_BY_KEYWORD_DESCRIPTION, "");
+            argList = argLine.split(" ");
+            if (argList.length != 1) {
+                throw new Exception("Invalid syntax. Keyword should not have spacing.");
+            }
+            keyword = argList[0];
+        } catch (Exception e) {
+            return new CommandInvalidRequestParameters(e.toString());
+        }
+        return new CommandListTasksWithKeyword(taskManager, keyword);
     }
 }

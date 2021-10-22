@@ -31,6 +31,9 @@ public class TextCommandValidator {
     public static Boolean isRequestDeleteTask(String text) {
         return text.startsWith(PROMPT_DELETE_TASK);
     }
+    public static Boolean isRequestFind(String text) {
+        return text.startsWith(PROMPT_FIND_BY_KEYWORD_DESCRIPTION);
+    }
     public static Boolean isParentDirectoryValid(Path p) {
         return Files.exists(p.getParent());
     }

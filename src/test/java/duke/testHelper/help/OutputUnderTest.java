@@ -52,7 +52,7 @@ public class OutputUnderTest {
     public static String getMsgUnderTestResponseDeadlineAdded(String deadlineDesc){
         return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-    public static String getMsgUnderTestResponseListAll(String list) {
+    public static String getMsgUnderTestResponseList(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
     public static String getMsgUnderTestResponseTaskSetCompleted(Integer taskId) {
@@ -67,6 +67,11 @@ public class OutputUnderTest {
         return "Task Deleted: " + taskId + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
 
     }
+
+    public static String getMsgUnderTestErrorSpacedKeyword() {
+        return "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
 
     public static String getMsgUnderTestErrorParseStringAsLocalDate(){
 

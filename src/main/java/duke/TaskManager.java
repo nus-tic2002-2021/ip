@@ -49,6 +49,17 @@ public class TaskManager {
     public ArrayList<Task> getAllAsArray() {
         return this._activeTasks.getAllAsArray();
     }
+
+    public ArrayList<Task> getTasksWithWord(String keyword){
+        ArrayList<Task> all = this._activeTasks.getAllAsArray();
+        ArrayList<Task> filtering = new ArrayList<>();
+        for(Task t : all){
+            if(t.descContainsKeyword(keyword)){
+                filtering.add(t);
+            }
+        }
+        return filtering;
+    }
     public Boolean containsTaskId(Integer taskId) {
         return this._activeTasks.containsKey(taskId);
     }
@@ -118,6 +129,6 @@ public class TaskManager {
         }
         throw new Exception("Json object not recognised as a task Object");
     }
-    
+
     
 }

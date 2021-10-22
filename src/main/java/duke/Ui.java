@@ -43,6 +43,8 @@ public class Ui {
                     return this.executeCommandDeleteTask(text, taskManager);
                 } else if (isRequestSave(text)) {
                     return frm.executeCommandSave(taskManager);
+                }else if (isRequestFind(text)) {
+                    return this.executeCommandFindByKeywordInDescription(text, taskManager);
                 }else {
                     return new CommandUnknownRequest(text);
                 }
@@ -145,7 +147,9 @@ public class Ui {
             this.getPrintStream().print("Read path not found/invalid. " + System.lineSeparator());
         }else if(rt == ResponseType.FILE_READ){
             this.printReadSuccess(c.getArgs().get(2));
-        } else {
+        }else if(rt == ResponseType.TASK_LIST){
+            this.getPrintStream().print(c.getArgs().get(1));
+        }else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
 
