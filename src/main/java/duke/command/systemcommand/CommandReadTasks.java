@@ -1,4 +1,4 @@
-package duke.command.systemCommand;
+package duke.command.systemcommand;
 
 import com.google.gson.JsonParser;
 import duke.command.CommandJsonResponse;

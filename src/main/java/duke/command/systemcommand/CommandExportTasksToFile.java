@@ -1,4 +1,4 @@
-package duke.command.systemCommand;
+package duke.command.systemcommand;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

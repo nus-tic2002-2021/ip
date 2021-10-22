@@ -5,7 +5,7 @@ import duke.TaskManager;
 import duke.command.Command;
 
 import duke.command.errorcommand.*;
-import duke.command.systemCommand.CommandExitLoop;
+import duke.command.systemcommand.CommandExitLoop;
 import duke.command.taskcommand.taskadd.CommandAddNewDeadline;
 import duke.command.taskcommand.taskadd.CommandAddNewEvent;
 import duke.command.taskcommand.taskadd.CommandAddNewToDo;
