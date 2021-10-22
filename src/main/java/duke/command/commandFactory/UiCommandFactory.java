@@ -4,14 +4,12 @@ import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
 
-import duke.command.errorCommand.CommandExecutionError;
-import duke.command.errorCommand.CommandInvalidRequestParameters;
-import duke.command.errorCommand.CommandInvalidTextCommandSyntax;
-import duke.command.errorCommand.CommandTaskNotFound;
+import duke.command.errorCommand.*;
 import duke.command.systemCommand.CommandExitLoop;
 import duke.command.taskCommand.taskAdd.CommandAddNewDeadline;
 import duke.command.taskCommand.taskAdd.CommandAddNewEvent;
 import duke.command.taskCommand.taskAdd.CommandAddNewToDo;
+import duke.command.taskCommand.taskQuery.CommandListAll;
 import duke.command.taskCommand.taskQuery.CommandListTasksWithKeyword;
 import duke.command.taskCommand.taskUpdate.CommandDeleteTask;
 import duke.command.taskCommand.taskUpdate.CommandMarkTaskAsDone;
@@ -21,13 +19,40 @@ import java.time.LocalDateTime;
 
 import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
 import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
+import static duke.dukeUtility.validator.TextCommandValidator.*;
 
 
-public abstract class UiCommandFactory extends CommandFactory {
+public class UiCommandFactory extends CommandFactory {
     protected Command executeCommandExitLoop() {
         return new CommandExitLoop(PROMPT_EXIT_LOOP);
     }
-    public abstract Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm);
+    public Command executeTextCommand(String text, TaskManager taskManager,FileResourceManager frm) {
+        try {
+            if (isRequestExitLoop(text)) {
+                return this.executeCommandExitLoop();
+            } else if (isRequestList(text)) {
+                return new CommandListAll(taskManager);
+            } else if (isRequestMarkTaskAsDone(text)) {
+                return this.executeCommandMarkTaskAsDone(text, taskManager);
+            } else if (isRequestAddToDo(text)) {
+                return this.executeCommandAddToDo(text, taskManager);
+            } else if(isRequestAddDeadline(text)){
+                return this.executeCommandAddDeadline(text, taskManager);
+            } else if(isRequestAddEvent(text)){
+                return this.executeCommandAddEvent(text, taskManager);
+            } else if (isRequestDeleteTask(text)) {
+                return this.executeCommandDeleteTask(text, taskManager);
+            } else if (isRequestSave(text)) {
+                return frm.executeCommandSave(taskManager);
+            }else if (isRequestFind(text)) {
+                return this.executeCommandFindByKeywordInDescription(text, taskManager);
+            }else {
+                return new CommandUnknownRequest(text);
+            }
+        } catch (Exception e) {
+            return new CommandExecutionError(e, "command execution @ cli");
+        }
+    }
 
     protected Command executeCommandAddToDo(String text, TaskManager taskManager) {
         int minDescLength = 0;
