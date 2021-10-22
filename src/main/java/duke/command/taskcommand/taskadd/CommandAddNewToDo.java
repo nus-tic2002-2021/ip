@@ -1,14 +1,22 @@
 package duke.command.taskcommand.taskadd;
 
+import java.util.List;
+
+import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
-import duke.TaskManager;
-
-import java.util.List;
 
 
 public class CommandAddNewToDo extends Command {
-    public CommandAddNewToDo(TaskManager taskManager, String taskDescription) {
-        super(ResponseType.TASK_CREATE_TODO, List.of("create", taskDescription, taskManager.addNewToDo(taskDescription).getTaskDescription()));
+
+    /**
+     * Task manager will add a new todo to its collection with provided parameters
+     * @param tm task manager
+     * @param desc of todo
+     */
+
+    public CommandAddNewToDo(TaskManager tm, String desc) {
+        super(ResponseType.TASK_CREATE_TODO,
+            List.of("create", desc, tm.addNewToDo(desc).getTaskDescription()));
     }
 }
