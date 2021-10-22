@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static duke.testHelper.help.Builder.*;
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getPrettifyUnderTestList;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
@@ -59,14 +59,14 @@ public class IoTest extends TestStream {
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
         MockTask[] MockTasks = {expectedToDo1};
-        String out0 = getMsgUnderTestEntry();
-        String out1 = getMsgUnderTestAttemptImport(frm.getImportPath() );
-        String out2 = getMsgUnderTestReadPathNotFound();
-        String out3 = getMsgUnderTestBeginInputLoop();
-        String out4 = getMsgUnderTestResponseToDoAdded(taskDesc0);
-        String out5 = getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks));
-        String out6 = getMsgUnderTestExitLoop();
-        String out7 = getMsgUnderTestTerminate();
+        String out0 = getExpectedOutputEntry();
+        String out1 = getExpectedOutputImportAttempt(frm.getImportPath() );
+        String out2 = getExpectedOutputReadPathNotFound();
+        String out3 = getExpectedOutputBeginInputLoop();
+        String out4 = getExpectedOutputAddedToDo(taskDesc0);
+        String out5 = getExpectedOutputList(getExpectedTaskList(MockTasks));
+        String out6 = getExpectedOutputExitInputLoop();
+        String out7 = getExpectedOutputTerminate();
         String expectedOutputResponse = buildExpectedResponse(out0,out1, out2, out3, out4,out5,out6,out7);
 
         // Act
@@ -114,14 +114,14 @@ public class IoTest extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        String out1 = getMsgUnderTestEntry();
-        String out2 = getMsgUnderTestAttemptImport(frm.getImportPath());
-        String out3 = getMsgUnderTestReadPathNotFound();
-        String out4 = getMsgUnderTestBeginInputLoop();
-        String out5 = getMsgUnderTestResponseEventAdded(expectedEvent.getDesc());
-        String out6 = getMsgUnderTestResponseList(getPrettifyUnderTestList(MockEvents));
-        String out7 = getMsgUnderTestExitLoop();
-        String out8 = getMsgUnderTestTerminate();
+        String out1 = getExpectedOutputEntry();
+        String out2 = getExpectedOutputImportAttempt(frm.getImportPath());
+        String out3 = getExpectedOutputReadPathNotFound();
+        String out4 = getExpectedOutputBeginInputLoop();
+        String out5 = getExpectedOutputAddedEvent(expectedEvent.getDesc());
+        String out6 = getExpectedOutputList(getExpectedTaskList(MockEvents));
+        String out7 = getExpectedOutputExitInputLoop();
+        String out8 = getExpectedOutputTerminate();
 
         String expectedOutputResponse = buildString(out1,out2,out3,out4,out5,out6,out7,out8);
 
@@ -166,14 +166,14 @@ public class IoTest extends TestStream {
         MockDeadline expectedEvent = new MockDeadline(taskDesc0, 0, false, ParserUnderTest.parseStringAsLocalDateTime(byDateString));
         MockTask[] MockDeadlines = {expectedEvent};
 
-        String out0 = getMsgUnderTestEntry();
-        String out1 = getMsgUnderTestAttemptImport(frm.getImportPath());
-        String out2 = getMsgUnderTestReadPathNotFound();
-        String out3 = getMsgUnderTestBeginInputLoop();
-        String out4 = getMsgUnderTestResponseDeadlineAdded(taskDesc0);
-        String out5 = getMsgUnderTestResponseList(getPrettifyUnderTestList(MockDeadlines));
-        String out6 = getMsgUnderTestExitLoop();
-        String out7 = getMsgUnderTestTerminate();
+        String out0 = getExpectedOutputEntry();
+        String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
+        String out2 = getExpectedOutputReadPathNotFound();
+        String out3 = getExpectedOutputBeginInputLoop();
+        String out4 = getExpectedOutputAddedDeadline(taskDesc0);
+        String out5 = getExpectedOutputList(getExpectedTaskList(MockDeadlines));
+        String out6 = getExpectedOutputExitInputLoop();
+        String out7 = getExpectedOutputTerminate();
 
         String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7);
         Main.run(this.getPrintStream(), tm,frm);
@@ -225,16 +225,16 @@ public class IoTest extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        String out0 = getMsgUnderTestEntry();
-        String out1 = getMsgUnderTestAttemptImport(frm.getImportPath());
-        String out2 = getMsgUnderTestReadPathNotFound();
-        String out3 = getMsgUnderTestBeginInputLoop();
-        String out4 = getMsgUnderTestResponseToDoAdded(task0ToDoDescription);
-        String out5 = getMsgUnderTestResponseDeadlineAdded(task1DeadlineDescription);
-        String out6 = getMsgUnderTestResponseEventAdded(task2EventDescription);
-        String out7 = getMsgUnderTestResponseList(getPrettifyUnderTestList(MockEvents));
-        String out8 = getMsgUnderTestExitLoop();
-        String out9 = getMsgUnderTestTerminate();
+        String out0 = getExpectedOutputEntry();
+        String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
+        String out2 = getExpectedOutputReadPathNotFound();
+        String out3 = getExpectedOutputBeginInputLoop();
+        String out4 = getExpectedOutputAddedToDo(task0ToDoDescription);
+        String out5 = getExpectedOutputAddedDeadline(task1DeadlineDescription);
+        String out6 = getExpectedOutputAddedEvent(task2EventDescription);
+        String out7 = getExpectedOutputList(getExpectedTaskList(MockEvents));
+        String out8 = getExpectedOutputExitInputLoop();
+        String out9 = getExpectedOutputTerminate();
 
         String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7,out8,out9);
         Main.run(this.getPrintStream(), tm,frm);
@@ -252,13 +252,13 @@ public class IoTest extends TestStream {
 
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
-        String out0 = getMsgUnderTestEntry();
-        String out1 = getMsgUnderTestAttemptImport(frm.getImportPath());
-        String out2 = getMsgUnderTestReadPathNotFound();
-        String out3 = getMsgUnderTestBeginInputLoop();
-        String out4 = getMsgUnderTestUnknownRequest();
-        String out5 = getMsgUnderTestExitLoop();
-        String out6 = getMsgUnderTestTerminate();
+        String out0 = getExpectedOutputEntry();
+        String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
+        String out2 = getExpectedOutputReadPathNotFound();
+        String out3 = getExpectedOutputBeginInputLoop();
+        String out4 = getExpectedOutputCommandUnknown();
+        String out5 = getExpectedOutputExitInputLoop();
+        String out6 = getExpectedOutputTerminate();
 
         String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6);
 

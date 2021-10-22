@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getPrettifyUnderTestList;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
@@ -61,17 +61,17 @@ public class Increment_09_Test extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getMsgUnderTestEntry());
-        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
-        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
-        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputEntry());
+        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
+        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
+        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
-        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc1));
+        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
+        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc1));
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
-        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
-        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+        expectedResponseBuilder.append(getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputTerminate());
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
 
@@ -118,16 +118,16 @@ public class Increment_09_Test extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getMsgUnderTestEntry());
-        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
-        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
-        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputEntry());
+        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
+        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
+        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
+        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
-        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
-        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+        expectedResponseBuilder.append(getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputTerminate());
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
         try {
@@ -172,16 +172,16 @@ public class Increment_09_Test extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getMsgUnderTestEntry());
-        expectedResponseBuilder.append(getMsgUnderTestAttemptImport(frm.getImportPath()));
-        expectedResponseBuilder.append(getMsgUnderTestReadPathNotFound());
-        expectedResponseBuilder.append(getMsgUnderTestBeginInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputEntry());
+        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
+        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
+        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseToDoAdded(taskDesc0));
+        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
 
         expectedResponseBuilder.append(getMsgUnderTestErrorSpacedKeyword());
-        expectedResponseBuilder.append(getMsgUnderTestExitLoop());
-        expectedResponseBuilder.append(getMsgUnderTestTerminate());
+        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
+        expectedResponseBuilder.append(getExpectedOutputTerminate());
         String expectedOutputResponse = expectedResponseBuilder.toString();
 
         try {

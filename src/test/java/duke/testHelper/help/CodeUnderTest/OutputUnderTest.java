@@ -22,48 +22,48 @@ public class OutputUnderTest {
     private static String PREFIX_ADDED_EVENT = "Added Event: ";
     private static String RESPONSE_TERMINATOR_UNDER_TEST = "\t\t\t\t\t\t\t\t -" + System.lineSeparator();
 
-    public static String getMsgUnderTestEntry() {
+    public static String getExpectedOutputEntry() {
         return "Hello from" + System.lineSeparator() + LOGO;
     }
-    public static String getMsgUnderTestTerminate() {
+    public static String getExpectedOutputTerminate() {
         return "See you again!" + System.lineSeparator();
     }
-    public static String getMsgUnderTestBeginInputLoop() {
+    public static String getExpectedOutputBeginInputLoop() {
         return "How can i help you? (See docs for usage)" + System.lineSeparator();
     }
-
-    public static String getMsgUnderTestAttemptImport(Path path){
-        return "Attempting to import tasks from " + path + "." + System.lineSeparator();
-    }
-    public static String getMsgUnderTestReadPathNotFound(){
-        return "Read path not found/invalid. " + System.lineSeparator();
-    }
-    public static String getMsgUnderTestExitLoop() {
+    public static String getExpectedOutputExitInputLoop() {
         return "ok bye" + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-    public static String getMsgUnderTestResponseToDoAdded(String taskDesc) {
-        return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    public static String getExpectedOutputImportAttempt(Path path){
+        return "Attempting to import tasks from " + path + "." + System.lineSeparator();
+    }
+    public static String getExpectedOutputReadPathNotFound(){
+        return "Read path not found/invalid. " + System.lineSeparator();
     }
 
-    public static String getMsgUnderTestResponseEventAdded(String eventDesc){
+    public static String getExpectedOutputAddedToDo(String taskDesc) {
+        return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+    public static String getExpectedOutputAddedDeadline(String deadlineDesc){
+        return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+    public static String getExpectedOutputAddedEvent(String eventDesc){
         return PREFIX_ADDED_EVENT + eventDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
-    public static String getMsgUnderTestResponseDeadlineAdded(String deadlineDesc){
-        return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
-    }
-    public static String getMsgUnderTestResponseList(String list) {
+
+    public static String getExpectedOutputList(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
-    public static String getMsgUnderTestResponseTaskSetCompleted(Integer taskId) {
+    public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
         return "update done #" + taskId.toString() + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
-    public static String getMsgUnderTestUnknownRequest(){
+    public static String getExpectedOutputCommandUnknown(){
         return "Unknown command. . ." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
-    public static String getMsgUnderTestResponseTaskDeleted(Integer taskId){
+    public static String getExpectedOutputCommandDeleted(Integer taskId){
         return "Task Deleted: " + taskId + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
 
     }

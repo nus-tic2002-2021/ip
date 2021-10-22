@@ -8,12 +8,10 @@ import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-
 import static duke.testHelper.help.Builder.buildCommandInputStream;
 import static duke.testHelper.help.Builder.buildExpectedResponse;
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
-import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getPrettifyUnderTestList;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksImportTestPathString;
 import static duke.testHelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
@@ -55,15 +53,15 @@ public class Io2Test extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
         MockTask[] MockTasks = {}; // since task is deleted
-        String out0 = (getMsgUnderTestEntry());
-        String out1 = (getMsgUnderTestAttemptImport(frm.getImportPath()));
-        String out2 = (getMsgUnderTestReadPathNotFound());
-        String out3 = (getMsgUnderTestBeginInputLoop());
-        String out4 = (getMsgUnderTestResponseToDoAdded(taskDesc0));
-        String out5 = (getMsgUnderTestResponseTaskDeleted(0));
-        String out6 = (getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
-        String out7 = (getMsgUnderTestExitLoop());
-        String out8 = (getMsgUnderTestTerminate());
+        String out0 = (getExpectedOutputEntry());
+        String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
+        String out2 = (getExpectedOutputReadPathNotFound());
+        String out3 = (getExpectedOutputBeginInputLoop());
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out5 = (getExpectedOutputCommandDeleted(0));
+        String out6 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out7 = (getExpectedOutputExitInputLoop());
+        String out8 = (getExpectedOutputTerminate());
 
         String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8);
         Main.run(this.getPrintStream(), tm,frm);
@@ -109,16 +107,16 @@ public class Io2Test extends TestStream {
 
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
-        String out0 = (getMsgUnderTestEntry());
-        String out1 = (getMsgUnderTestAttemptImport(frm.getImportPath()));
-        String out2 = (getMsgUnderTestReadPathNotFound());
-        String out3 = (getMsgUnderTestBeginInputLoop());
-        String out4 = (getMsgUnderTestResponseToDoAdded(taskDesc0));
-        String out5 = (getMsgUnderTestResponseToDoAdded(taskDesc1));
-        String out6 = (getMsgUnderTestResponseTaskDeleted(0));
-        String out7 = (getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
-        String out8 = (getMsgUnderTestExitLoop());
-        String out9 = (getMsgUnderTestTerminate());
+        String out0 = (getExpectedOutputEntry());
+        String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
+        String out2 = (getExpectedOutputReadPathNotFound());
+        String out3 = (getExpectedOutputBeginInputLoop());
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out5 = (getExpectedOutputAddedToDo(taskDesc1));
+        String out6 = (getExpectedOutputCommandDeleted(0));
+        String out7 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out8 = (getExpectedOutputExitInputLoop());
+        String out9 = (getExpectedOutputTerminate());
         String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7,out8,out9);
         Main.run(this.getPrintStream(), tm,frm);
         assertEquals(expectedOutputResponse, this.getOutput());

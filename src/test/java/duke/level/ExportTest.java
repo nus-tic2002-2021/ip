@@ -103,7 +103,7 @@ public class ExportTest extends TestStream {
 
     @Test
     public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
-        String importPathString = dukeIOTestPath.getDefaultTasksImportPathString();
+        String importPathString = dukeIOTestPath.getDefaultTasksImportTestPathString();
         String exportPathString = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "do-not-use.txt";
         FileResourceManager frm1 = new FileResourceManager(exportPathString, importPathString);
         TaskManager tm1 = new TaskManager();
@@ -115,7 +115,9 @@ public class ExportTest extends TestStream {
         }
         in.close();
         System.setIn(new ByteArrayInputStream(sb.toString().getBytes()));
-        this.setPrintStream(new PrintStream(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt"));
+
+        String expectedOutputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt";
+        this.setPrintStream(new PrintStream(expectedOutputPath));
         try {
             Main.run(this.getPrintStream(), tm1,frm1);
         } catch (Exception e) {

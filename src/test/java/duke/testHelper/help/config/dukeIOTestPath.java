@@ -18,12 +18,7 @@ public class dukeIOTestPath {
         return dukeIOTestPath.TEST_PATH_STRING_DEFAULT_TASKS_EXPORT_JSON_PATH;
     }
 
-    public static String getDefaultTasksImportPathString(){
-        return dukeIO.getDefaultTasksImportPathString();
-    }
-    public static String getDefaultTasksExportPathString(){
-        return dukeIO.getDefaultTasksExportPathString();
-    }
+
     public static  String getDefaultTasksImportTestPathString() {
         if (dukeIOTestPath.TEST_PATH_STRING_DEFAULT_TASKS_IMPORT_PATH == null) {
             dukeIOTestPath.TEST_PATH_STRING_DEFAULT_TASKS_IMPORT_PATH = dukeIOTestPath.resourceTestFolder + File.separator + "imports" + File.separator + "tasks.json";

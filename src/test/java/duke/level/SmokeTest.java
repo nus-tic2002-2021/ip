@@ -22,8 +22,8 @@ public class SmokeTest extends TestStream {
      */
     @Test
     public void TestGreetAndExit() {
-        String expectedEntryMessage = OutputUnderTest.getMsgUnderTestEntry();
-        String expectedExitMessage = OutputUnderTest.getMsgUnderTestTerminate();
+        String expectedEntryMessage = OutputUnderTest.getExpectedOutputEntry();
+        String expectedExitMessage = OutputUnderTest.getExpectedOutputTerminate();
         String expectedOutput = expectedEntryMessage + expectedExitMessage;
         Ui ui = new Ui(this.getPrintStream());
         ui.printEntryMessage();

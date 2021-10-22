@@ -1,11 +1,9 @@
 package duke.testHelper.help.CodeUnderTest;
 
-
 import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
-
 
 public class PrettifyUnderTest {
 
@@ -39,7 +37,7 @@ public class PrettifyUnderTest {
         return String.format("%s%s", value, String.format("%" + (lengthPad > 0 ? lengthPad : "") + "s", " "));
     }
 
-    public static String getPrettifyUnderTestList(MockTask... mockTasks) {
+    public static String getExpectedTaskList(MockTask... mockTasks) {
 
         int taskQty = mockTasks.length;
         StringBuilder generating = new StringBuilder();
