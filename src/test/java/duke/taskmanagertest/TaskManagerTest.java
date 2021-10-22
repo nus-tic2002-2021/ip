@@ -1,4 +1,4 @@
-package duke.taskManagerTest;
+package duke.taskmanagertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDateTime;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import duke.TaskManager;
 import duke.task.model.Event;
 import duke.testhelper.TestStream;
-import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
+import duke.testhelper.help.codeUnderTest.ParserUnderTest;
 
 public class TaskManagerTest extends TestStream {
 

@@ -1,4 +1,4 @@
-package duke.mock.mockTask;
+package duke.mock.mocktask;
 
 public abstract class MockTask {
     private String desc;

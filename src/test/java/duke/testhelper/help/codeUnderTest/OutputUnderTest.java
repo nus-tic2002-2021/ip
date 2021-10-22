@@ -1,4 +1,4 @@
-package duke.testhelper.help.CodeUnderTest;
+package duke.testhelper.help.codeUnderTest;
 
 import java.nio.file.Path;
 
@@ -16,10 +16,6 @@ public class OutputUnderTest {
         + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  "
         + System.lineSeparator();
 
-    private static final String PREFIX_ECHO = "Echoed after you: ";
-    private static final String PREFIX_ADDED_TO_DO = "Added To Do: ";
-    private static final String PREFIX_ADDED_DEADLINE = "Added Deadline: ";
-    private static final String PREFIX_ADDED_EVENT = "Added Event: ";
     private static final String RESPONSE_TERMINATOR_UNDER_TEST = "\t\t\t\t\t\t\t\t -" + System.lineSeparator();
 
     public static String getExpectedOutputEntry() {
@@ -34,10 +30,6 @@ public class OutputUnderTest {
         return "How can i help you? (See docs for usage)" + System.lineSeparator();
     }
 
-    public static String getExpectedOutputExitInputLoop() {
-        return "ok bye" + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
-    }
-
     public static String getExpectedOutputImportAttempt(Path path) {
         return "Attempting to import tasks from " + path + "." + System.lineSeparator();
     }
@@ -46,45 +38,50 @@ public class OutputUnderTest {
         return "Read path not found/invalid. " + System.lineSeparator();
     }
 
+    public static String getExpectedOutputTemplate(String text) {
+        return text + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+    public static String getExpectedOutputExitInputLoop() {
+        return getExpectedOutputTemplate("ok bye");
+    }
+
     public static String getExpectedOutputAddedToDo(String taskDesc) {
-        return PREFIX_ADDED_TO_DO + taskDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+        return getExpectedOutputTemplate("Added To Do: " + taskDesc);
     }
 
     public static String getExpectedOutputAddedDeadline(String deadlineDesc) {
-        return PREFIX_ADDED_DEADLINE + deadlineDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+        return getExpectedOutputTemplate("Added Deadline: " + deadlineDesc);
     }
 
     public static String getExpectedOutputAddedEvent(String eventDesc) {
-        return PREFIX_ADDED_EVENT + eventDesc + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+        return getExpectedOutputTemplate("Added Event: " + eventDesc);
     }
-
 
     public static String getExpectedOutputList(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
-        return "update done #" + taskId.toString() + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+
+        return getExpectedOutputTemplate("update done #" + taskId.toString());
     }
 
     public static String getExpectedOutputCommandUnknown() {
-        return "Unknown command. . ." + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+
+        return getExpectedOutputTemplate("Unknown command. . .");
     }
 
     public static String getExpectedOutputCommandDeleted(Integer taskId) {
-        return "Task Deleted: " + taskId + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
-
+        return getExpectedOutputTemplate("Task Deleted: " + taskId);
     }
 
     public static String getMsgUnderTestErrorSpacedKeyword() {
-        return "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing." +
-            System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
+        String text = "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing.";
+        return getExpectedOutputTemplate(text);
     }
 
-
     public static String getMsgUnderTestErrorParseStringAsLocalDate() {
-
-        return "Invalid parameters: java.lang.Exception: Parse as LocalDateTime failed." + System.lineSeparator() +
-            RESPONSE_TERMINATOR_UNDER_TEST;
+        return getExpectedOutputTemplate("Invalid parameters: java.lang.Exception: Parse as LocalDateTime failed.");
     }
 }

@@ -1,4 +1,4 @@
-package duke.testhelper.help.CodeUnderTest;
+package duke.testhelper.help.codeUnderTest;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,17 +19,18 @@ public class ParserUnderTest {
 
 
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
-
         LocalDateTime ldt = null;
         for (String pattern : ParserUnderTest.patterns) {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
+                ;
             }
         }
         try {
             ldt = parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
+            ;
         }
         if (ldt == null) {
             throw new Exception("Parse as LocalDateTime failed.");

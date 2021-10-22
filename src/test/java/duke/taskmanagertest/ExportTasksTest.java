@@ -1,4 +1,4 @@
-package duke.taskManagerTest;
+package duke.taskmanagertest;
 
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;

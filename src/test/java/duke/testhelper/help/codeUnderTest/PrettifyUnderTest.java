@@ -1,9 +1,9 @@
-package duke.testhelper.help.CodeUnderTest;
+package duke.testhelper.help.codeUnderTest;
 
-import duke.mock.mockTask.MockDeadline;
-import duke.mock.mockTask.MockEvent;
-import duke.mock.mockTask.MockTask;
-import duke.mock.mockTask.MockToDo;
+import duke.mock.mocktask.MockDeadline;
+import duke.mock.mocktask.MockEvent;
+import duke.mock.mocktask.MockTask;
+import duke.mock.mocktask.MockToDo;
 
 public class PrettifyUnderTest {
 
@@ -68,9 +68,7 @@ public class PrettifyUnderTest {
         int lengthColDoneStatus = headerDoneStatus.length();
         int lengthColDesc = headerDescription.length();
 
-
-        for (int i = 0; i < taskQty; i++) {
-            MockTask task = mockTasks[i];
+        for (MockTask task : mockTasks) {
             // fill column Id
             String idValue = String.format("%4d", task.getId()).replace(" ", "0");
             String columnId = fillCellUnderTest(idValue, lengthColId);
@@ -88,7 +86,6 @@ public class PrettifyUnderTest {
             // fill column Chronology
             String columnChronology = getTaskChronologyString(task);
 
-
             generating.append(columnId);
             generating.append(columnDoneStatus);
             generating.append(columnTaskType);
@@ -99,5 +96,4 @@ public class PrettifyUnderTest {
         String generated = generating.toString();
         return generated;
     }
-
 }

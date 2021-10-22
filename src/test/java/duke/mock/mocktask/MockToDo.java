@@ -1,4 +1,4 @@
-package duke.mock.mockTask;
+package duke.mock.mocktask;
 
 public class MockToDo extends MockTask {
 

@@ -1,7 +1,8 @@
-package duke.mock.mockTask;
+package duke.mock.mocktask;
 
 import java.time.LocalDateTime;
-import duke.testhelper.help.CodeUnderTest.ParserUnderTest;
+
+import duke.testhelper.help.codeUnderTest.ParserUnderTest;
 
 public class MockDeadline extends MockTask {
     private final LocalDateTime by;

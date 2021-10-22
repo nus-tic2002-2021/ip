@@ -7,10 +7,15 @@ import static duke.dukeutility.definition.TaskField.TASK_FIELD_FROM;
 import static duke.dukeutility.definition.TaskField.TASK_FIELD_TASK_ID;
 import static duke.dukeutility.definition.TaskField.TASK_FIELD_TO;
 import static duke.dukeutility.parser.DateParser.parseStringAsLocalDateTime;
+
 import java.time.LocalDateTime;
+
 import com.google.gson.JsonObject;
 
 public class JsonTaskToObjectParser extends Parser {
+    private JsonTaskToObjectParser() {
+    }
+
     public static Boolean getJsonPropertyDoneStatus(JsonObject jsonObj) {
         return jsonObj.get(TASK_FIELD_DONE_STATUS).getAsBoolean();
     }
@@ -33,8 +38,5 @@ public class JsonTaskToObjectParser extends Parser {
 
     public static Integer getJsonPropertyTaskId(JsonObject jsonObj) {
         return jsonObj.get(TASK_FIELD_TASK_ID).getAsInt();
-    }
-
-    private JsonTaskToObjectParser() {
     }
 }

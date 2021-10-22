@@ -1,9 +1,12 @@
-package duke.taskManagerTest;
+package duke.taskmanagertest;
 
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import com.google.gson.JsonArray;
+
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
@@ -16,7 +19,7 @@ public class ImportTasksTest extends TestStream {
 
 
     @Test
-    public void AddToDos_Export_Extract_Load_Test() {
+    public void addToDos_exportExtractLoad() {
         TaskManager tm1 = new TaskManager();
 
         String desc0 = "desc0";

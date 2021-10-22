@@ -21,9 +21,9 @@ import duke.command.errorcommand.CommandExecutionError;
 
 public class FileResourceManager {
 
-    private final ExportCommandFactory _exportCommandFactory = new ExportCommandFactory();
-    private final ImportCommandFactory _importCommandFactory = new ImportCommandFactory();
-    private final FileCommandFactory _fileCommandFactory = new FileCommandFactory();
+    private final ExportCommandFactory exportCommandFactory = new ExportCommandFactory();
+    private final ImportCommandFactory importCommandFactory = new ImportCommandFactory();
+    private final FileCommandFactory fileCommandFactory = new FileCommandFactory();
 
     private String exportPathString;
     private String importPathString;
@@ -38,7 +38,7 @@ public class FileResourceManager {
     }
 
     private ExportCommandFactory getExportCommandFactory() {
-        return this._exportCommandFactory;
+        return this.exportCommandFactory;
     }
 
     private String getImportPathString() {
@@ -59,7 +59,7 @@ public class FileResourceManager {
     }
 
     private FileCommandFactory getFileCommandFactory() {
-        return this._fileCommandFactory;
+        return this.fileCommandFactory;
     }
 
     public Path getImportPath() {
@@ -128,6 +128,6 @@ public class FileResourceManager {
         this.importTasksJson(tasksFromFile, taskManager);
     }
     private ImportCommandFactory getImportCommandFactory() {
-        return this._importCommandFactory;
+        return this.importCommandFactory;
     }
 }
