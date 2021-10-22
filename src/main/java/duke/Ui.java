@@ -4,6 +4,7 @@ package duke;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.commandfactory.UiCommandFactory;
 import duke.dukeutility.enums.ResponseType;
@@ -45,15 +46,17 @@ public class Ui {
         return this.uiCommandFactory;
     }
 
-    public Ui printEntryMessage() {
+    /**
+     * Welcome Message
+     */
+    public void printEntryMessage() {
         String logo = " _                   _                                _             \n"
             + "| |                 | |                              | |                \n"
             + "| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ \n"
             + "| __|  / _` | / __| | |/ / | '_ ` _ \\   / _` | / __| | __|  / _ \\ | '__|\n"
             + "| |_  | (_| | \\__ \\ |   <  | | | | | | | (_| | \\__ \\ | |_  |  __/ | |   \n"
             + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  \n";
-        this.getPrintStream().print("Hello from\n" + logo);
-        return this;
+        this.getPrintStream().print("Hello from" + System.lineSeparator() + logo);
     }
 
     public void printBeginInputLoop() {
@@ -64,6 +67,10 @@ public class Ui {
         this.getPrintStream().print("ok bye" + System.lineSeparator());
     }
 
+    /**
+     * Message: Attempt to load task.
+     * @param path
+     */
     public void printInitialLoadTaskAttempt(Path path) {
         if (path == null) {
             this.getPrintStream().print("Import path empty. " + System.lineSeparator());
@@ -88,6 +95,12 @@ public class Ui {
         this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
     }
 
+    /**
+     * cli session with request-response cycle
+     * @param taskManager
+     * @param frm
+     * @throws Exception
+     */
     public void textCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
         String textCommand;

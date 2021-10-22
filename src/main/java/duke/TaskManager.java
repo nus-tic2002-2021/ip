@@ -174,7 +174,7 @@ public class TaskManager {
      *
      * @param jsonObj task
      * @return
-     * @throws Exception if not recognised as a task
+     * @throws Exception if not recognised as a task.
      */
     public final Task objectify(JsonObject jsonObj) throws Exception {
         if (!isNotNullJsonPropertyTaskType(jsonObj)) {

@@ -95,9 +95,9 @@ public class UiCommandFactory extends CommandFactory {
             argList = argLine.split(addDeadlineStringDelimiter);
             int expectedArgsLength = 2;
             if (argList.length != expectedArgsLength) {
-                throw new DukeInvalidSyntaxException(
-                    "Expected " + expectedArgsLength + " arguments delimited by \"" + addDeadlineStringDelimiter +
-                        "\"");
+                String msg =
+                    "Expected " + expectedArgsLength + " arguments delimited by \"" + addDeadlineStringDelimiter + "\"";
+                throw new DukeInvalidSyntaxException(msg);
             }
             taskDescription = argList[0];
             deadline = parseStringAsLocalDateTime(argList[1]);

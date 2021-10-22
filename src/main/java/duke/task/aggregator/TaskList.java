@@ -9,12 +9,11 @@ import duke.task.model.Task;
 public class TaskList {
     private final ConcurrentHashMap<Integer, Task> map = new ConcurrentHashMap<>();
 
-    // helper class
-    private Integer getTaskKey(Task task) {
-        return task.getTaskId();
+    public TaskList() {
     }
 
-    public TaskList() {
+    private Integer getTaskKey(Task task) {
+        return task.getTaskId();
     }
 
     public void addTask(Task t) {
@@ -34,7 +33,6 @@ public class TaskList {
     public Integer getSize() {
         return this.getMap().size();
     }
-
 
     public Boolean containsKey(Integer key) {
         return this.getMap().containsKey(key);
@@ -56,6 +54,6 @@ public class TaskList {
     }
 
     private ConcurrentHashMap<Integer, Task> getMap() {
-        return this.map;
+        return this.getContainer();
     }
 }

@@ -12,8 +12,8 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandRandom;
-import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksImportTestPathString;
-import static duke.testhelper.help.config.dukeIoTestPath.getDefaultTasksTestExportPathString;
+import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
+import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;

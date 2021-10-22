@@ -1,8 +1,7 @@
 package duke;
 
-
-import static duke.dukeutility.config.dukeIo.getDefaultTasksExportPathString;
-import static duke.dukeutility.config.dukeIo.getDefaultTasksImportPathString;
+import static duke.dukeutility.config.DukeIo.getDefaultTasksExportPathString;
+import static duke.dukeutility.config.DukeIo.getDefaultTasksImportPathString;
 
 import java.io.PrintStream;
 

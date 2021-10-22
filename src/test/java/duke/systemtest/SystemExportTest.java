@@ -1,6 +1,6 @@
 package duke.systemtest;
 
-import static duke.dukeutility.config.dukeIo.getDefaultTasksImportPathString;
+import static duke.dukeutility.config.DukeIo.getDefaultTasksImportPathString;
 import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildString;
@@ -40,7 +40,7 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSave;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSetCompleted;
-import static duke.testhelper.help.config.dukeIoTestPath.getResourceTestFolder;
+import static duke.testhelper.help.config.DukeIoTestPath.getResourceTestFolder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
