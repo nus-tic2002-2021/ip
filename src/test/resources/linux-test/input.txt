@@ -1,10 +1,9 @@
-todo td_desc0
-todo td_desc1
-deadline some deadline /by someDate
-event some event /at from-to
-done 2
+todo tododesc
+deadline deadlinedesc /by 20200219
+event eventdesc asdasdasd /at 20200202-20210202
+list
 delete 0
 list
-somerandomtexxt
-save
+done 2
+find eventdesc
 bye

@@ -5,19 +5,26 @@ import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.command.commandFactory.FileCommandFactory;
+import duke.mock.mockTask.MockDeadline;
+import duke.mock.mockTask.MockEvent;
+import duke.mock.mockTask.MockTask;
+import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
 import duke.testHelper.help.config.dukeIOTestPath;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileReader;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static duke.testHelper.help.Builder.buildCommandInputStream;
+import static duke.testHelper.help.Builder.buildString;
+import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
+import static duke.testHelper.help.CodeUnderTest.ParserUnderTest.parseStringAsLocalDateTime;
+import static duke.testHelper.help.CodeUnderTest.ParserUnderTest.stringToPath;
+import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
 import static duke.testHelper.help.config.dukeIOTestPath.resourceTestFolder;
 import static org.junit.jupiter.api.Assertions.*;
@@ -101,25 +108,85 @@ public class ExportTest extends TestStream {
         }
     }
 
+
+    public void writeToFile(String path, String... data) throws IOException{
+        FileWriter fileWriter = new FileWriter(path);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(buildString(data));
+        printWriter.close();
+
+    }
+
     @Test
     public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
         String importPathString = dukeIOTestPath.getDefaultTasksImportTestPathString();
         String exportPathString = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "do-not-use.txt";
-        FileResourceManager frm1 = new FileResourceManager(exportPathString, importPathString);
-        TaskManager tm1 = new TaskManager();
-        Scanner in = new Scanner(new FileReader(System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt"));
-        StringBuilder sb = new StringBuilder();
-        while(in.hasNext()) {
-            sb.append(in.nextLine());
-            sb.append(System.lineSeparator());
-        }
-        in.close();
-        System.setIn(new ByteArrayInputStream(sb.toString().getBytes()));
 
+        String loadInputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt";
         String expectedOutputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt";
-        this.setPrintStream(new PrintStream(expectedOutputPath));
+
+
+        String out0 = (getExpectedOutputEntry());
+
+        String out1 = (getExpectedOutputImportAttempt(stringToPath(importPathString)));
+        String out2 = (getExpectedOutputReadPathNotFound());
+
+        String out3 = (getExpectedOutputBeginInputLoop());
+
+
+        String todoDesc = "tododesc";
+
+        String deadlineDesc = "deadlinedesc";
+        String deadlineBy = "202002"  + String.format("%2s", 19);
+
+        String eventDesc = "eventdesc asdasdasd";
+        String eventFrom = "20200202";
+        String eventTo = "20210202";
+
+        String in0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
+        String out4 = (getExpectedOutputAddedToDo(todoDesc));
+
+        String in1 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,DELIMITER_DEADLINE_DEADLINE,deadlineBy);
+        String out5 = (getExpectedOutputAddedDeadline(deadlineDesc));
+
+        String in2 = generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom, DELIMITER_EVENT_TO, eventTo);
+        String out6 = (getExpectedOutputAddedToDo(eventDesc));
+
+
+
+
+        String in3 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+
+        MockTask[] allMockTasks = new MockTask[]{new MockToDo(todoDesc,0,false),new MockDeadline(deadlineDesc,1,false,parseStringAsLocalDateTime(deadlineBy)), new MockEvent(eventDesc,2,false,parseStringAsLocalDateTime(eventFrom),parseStringAsLocalDateTime(eventTo))};
+        String out7 = (getExpectedOutputList(getExpectedTaskList(allMockTasks)));
+
+
+        String in4 = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK,0);
+        String out8 = (getExpectedOutputCommandDeleted(0));
+
+        String in5 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+
+        MockTask[] remainingMockTasks = new MockTask[]{new MockDeadline(deadlineDesc,1,false,parseStringAsLocalDateTime(deadlineBy)), new MockEvent(eventDesc,2,false,parseStringAsLocalDateTime(eventFrom),parseStringAsLocalDateTime(eventTo))};
+        String out9 = (getExpectedOutputList(getExpectedTaskList(remainingMockTasks)));
+
+        String in6 = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE, 2);
+        String out10 = getExpectedOutputTaskSetCompleted(2);
+
+        String keyword = "eventdesc";
+        String in7 = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
+        MockTask[] selectedMockTasks = new MockTask[]{new MockEvent(eventDesc,2,true,parseStringAsLocalDateTime(eventFrom),parseStringAsLocalDateTime(eventTo))};
+        String out11 = (getExpectedOutputList(getExpectedTaskList(selectedMockTasks)));
+
+
+        String in8 = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String out12 = (getExpectedOutputExitInputLoop());
+
+        String out13 = (getExpectedOutputTerminate());
+
+        writeToFile(loadInputPath, in0, in1, in2, in3, in4, in5, in6, in7,in8);
+        writeToFile(expectedOutputPath,out0,out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12,out13);
+
         try {
-            Main.run(this.getPrintStream(), tm1,frm1);
         } catch (Exception e) {
             fail(e.toString());
         }

@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static duke.dukeUtility.parser.PathParser.stringToPath;
 import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
 
 public class FileResourceManager {
@@ -53,11 +54,7 @@ public class FileResourceManager {
     }
 
     public Path getImportPath() {
-        try {
-            return Paths.get(this.getImportPathString());
-        } catch (Exception e) {
-            return null;
-        }
+        return stringToPath(this.getImportPathString());
     }
     private String getExportPathString() {
         return this.exportPathString;

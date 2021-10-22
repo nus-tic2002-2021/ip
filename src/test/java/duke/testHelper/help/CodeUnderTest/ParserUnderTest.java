@@ -1,5 +1,7 @@
 package duke.testHelper.help.CodeUnderTest;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +16,8 @@ public class ParserUnderTest {
     public static String parseLocalDateTimeAsString(LocalDateTime ldt) {
         return DateTimeFormatter.ofPattern(ParserUnderTest.transitiveJsonAndTextPattern).format(ldt);
     }
+
+
 
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
 
@@ -42,5 +46,13 @@ public class ParserUnderTest {
 
     public static String prettifyLocalDateTime(LocalDateTime ldt) {
         return ldt.toString().replace("T", " ");
+    }
+
+    public static Path stringToPath(String path){
+        try {
+            return Paths.get(path);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
