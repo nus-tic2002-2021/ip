@@ -7,7 +7,8 @@ import java.util.List;
 
 public class DateParser {
     private static final String transitiveJsonAndTextPattern = "yyyy-MM-dd-HH-mm-ss";
-    private static final List<String> patterns = List.of("yyyyMMdd", "yyyyMMdd HH:mm", DateParser.transitiveJsonAndTextPattern);
+    private static final List<String> patterns =
+        List.of("yyyyMMdd", "yyyyMMdd HH:mm", DateParser.transitiveJsonAndTextPattern);
 
     public static String parseLocalDateTimeAsString(LocalDateTime ldt) {
         return DateTimeFormatter.ofPattern(DateParser.transitiveJsonAndTextPattern).format(ldt);

@@ -1,9 +1,8 @@
 package duke.command.errorcommand;
 
+import java.util.List;
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
-
-import java.util.List;
 
 public class CommandTaskNotFound extends Command {
     public CommandTaskNotFound(String text) {

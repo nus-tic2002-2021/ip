@@ -1,13 +1,12 @@
 package duke;
 
 
-import duke.command.Command;
-import duke.command.commandfactory.UiCommandFactory;
-import duke.dukeUtility.enums.ResponseType;
-
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
+import duke.command.Command;
+import duke.command.commandfactory.UiCommandFactory;
+import duke.dukeUtility.enums.ResponseType;
 
 
 /**
@@ -17,22 +16,28 @@ public class Ui {
 
     private Ui() {
     }
+
     public Ui(PrintStream ps) {
         this.setPrintStream(ps);
     }
 
     private PrintStream _out;
     private Boolean _loop = true;
-    private UiCommandFactory _UiCommandFactory = new UiCommandFactory();
+    private final UiCommandFactory _UiCommandFactory = new UiCommandFactory();
 
     private PrintStream getPrintStream() {
         return this._out;
     }
+
     public void setPrintStream(PrintStream ps) {
         this._out = ps;
     }
-    private Boolean isLoop(){return this._loop;}
-    private void setLoop(Boolean p){
+
+    private Boolean isLoop() {
+        return this._loop;
+    }
+
+    private void setLoop(Boolean p) {
         this._loop = p;
     }
 
@@ -42,11 +47,11 @@ public class Ui {
 
     public Ui printEntryMessage() {
         String logo = " _                   _                                _             \n"
-                + "| |                 | |                              | |                \n"
-                + "| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ \n"
-                + "| __|  / _` | / __| | |/ / | '_ ` _ \\   / _` | / __| | __|  / _ \\ | '__|\n"
-                + "| |_  | (_| | \\__ \\ |   <  | | | | | | | (_| | \\__ \\ | |_  |  __/ | |   \n"
-                + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  \n";
+            + "| |                 | |                              | |                \n"
+            + "| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ \n"
+            + "| __|  / _` | / __| | |/ / | '_ ` _ \\   / _` | / __| | __|  / _ \\ | '__|\n"
+            + "| |_  | (_| | \\__ \\ |   <  | | | | | | | (_| | \\__ \\ | |_  |  __/ | |   \n"
+            + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  \n";
         this.getPrintStream().print("Hello from\n" + logo);
         return this;
     }
@@ -54,6 +59,7 @@ public class Ui {
     public void printBeginInputLoop() {
         this.getPrintStream().print("How can i help you? (See docs for usage)\n");
     }
+
     public void printExitLoop() {
         this.getPrintStream().print("ok bye" + System.lineSeparator());
     }
@@ -65,72 +71,81 @@ public class Ui {
             this.getPrintStream().print("Attempting to import tasks from " + path + "." + System.lineSeparator());
         }
     }
+
     public void printReadSuccess(String pathString) {
         this.getPrintStream().print("Success reading file " + pathString + System.lineSeparator());
     }
+
     public void printTerminateMessage() {
         this.getPrintStream().print("See you again!" + System.lineSeparator());
     }
+
     public void printEchoMessage(String text) {
         this.getPrintStream().print("Echoed after you: " + text + System.lineSeparator());
     }
-    public void printEndOfResponse(){
+
+    public void printEndOfResponse() {
         this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
     }
-    public void textCommandLoop(TaskManager taskManager,FileResourceManager frm) throws Exception {
+
+    public void textCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
         String textCommand;
         Scanner in = new Scanner(System.in);
         do {
             textCommand = in.nextLine();
-            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager,frm);
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager, frm);
             this.displayCommandResponse(command);
             this.printEndOfResponse();
         } while (this.isLoop());
     }
-    private void printResponseTemplate(String text){
+
+    private void printResponseTemplate(String text) {
         this.getPrintStream().print(text + System.lineSeparator());
 
     }
 
-    private void printResponseAddedToDo(String text){
+    private void printResponseAddedToDo(String text) {
         this.printResponseTemplate("Added To Do: " + text);
-    }    private void printResponseAddedDeadline(String text){
+    }
+
+    private void printResponseAddedDeadline(String text) {
         this.printResponseTemplate("Added Deadline: " + text);
     }
 
-    private void printResponseAddedEvent(String text){
+    private void printResponseAddedEvent(String text) {
         this.printResponseTemplate("Added Event: " + text);
     }
 
-    private void printResponseInvalidCommand(String text){
+    private void printResponseInvalidCommand(String text) {
         this.printResponseTemplate("Invalid command " + text);
     }
 
-    private void printResponseUnknownRequest(){
+    private void printResponseUnknownRequest() {
         this.printResponseTemplate("Unknown command. . .");
     }
 
 
-    private void printResponseTaskNotFound(String text){
+    private void printResponseTaskNotFound(String text) {
         this.printResponseTemplate("Task Not Found: " + text);
     }
 
-    private void printResponseTaskDeleted(String text){
+    private void printResponseTaskDeleted(String text) {
         this.printResponseTemplate("Task Deleted: " + text);
     }
 
-    private void printResponseTaskRequestInvalidParameters(String text){
+    private void printResponseTaskRequestInvalidParameters(String text) {
         this.printResponseTemplate("Invalid parameters: " + text);
     }
 
-    private void printResponseTaskFileSaved(){
+    private void printResponseTaskFileSaved() {
         this.printResponseTemplate("File saved.");
     }
 
-    private void printResponseTaskReadPathInvalid(){
+    private void printResponseTaskReadPathInvalid() {
         this.printResponseTemplate("Read path not found/invalid. ");
     }
+
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
         if (rt == ResponseType.EXIT_LOOP) {
@@ -144,29 +159,29 @@ public class Ui {
             this.printResponseAddedToDo(c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
             this.printResponseAddedDeadline(c.getArgs().get(2));
-        }  else if (rt == ResponseType.TASK_CREATE_EVENT) {
+        } else if (rt == ResponseType.TASK_CREATE_EVENT) {
             this.printResponseAddedEvent(c.getArgs().get(0));
-        }else if (rt == ResponseType.TASK_LIST_ALL) {
+        } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
-        }  else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
+        } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
             this.printResponseUnknownRequest();
-        } else if (rt == ResponseType.TASK_NOT_FOUND){
+        } else if (rt == ResponseType.TASK_NOT_FOUND) {
             this.printResponseTaskNotFound(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_DELETE_TASK) {
             this.printResponseTaskDeleted(c.getArgs().get(1));
-        }  else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
+        } else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
             this.printResponseInvalidCommand(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
             this.printResponseTaskRequestInvalidParameters(c.getArgs().get(1));
-        }else if (rt == ResponseType.FILE_SAVED) {
+        } else if (rt == ResponseType.FILE_SAVED) {
             this.printResponseTaskFileSaved();
-        }else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH){
+        } else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH) {
             this.printResponseTaskReadPathInvalid();
-        }else if(rt == ResponseType.FILE_READ){
+        } else if (rt == ResponseType.FILE_READ) {
             this.printReadSuccess(c.getArgs().get(2));
-        }else {
+        } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
     }

@@ -1,8 +1,7 @@
 package duke.task.model;
 
-import java.time.LocalDateTime;
-
 import static duke.dukeUtility.parser.DateParser.prettifyLocalDateTime;
+import java.time.LocalDateTime;
 
 public final class Event extends Task {
     private LocalDateTime _from;
@@ -35,7 +34,8 @@ public final class Event extends Task {
 
     public String getChronologyString() {
 
-        return String.format("From: %s, To: %s", prettifyLocalDateTime(this.getFrom()), prettifyLocalDateTime(this.getTo()));
+        return String.format("From: %s, To: %s", prettifyLocalDateTime(this.getFrom()),
+            prettifyLocalDateTime(this.getTo()));
 
     }
 

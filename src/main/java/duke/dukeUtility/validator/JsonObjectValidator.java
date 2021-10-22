@@ -1,10 +1,9 @@
 package duke.dukeUtility.validator;
 
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TYPE;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import duke.dukeUtility.enums.JsonTaskType;
-
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TYPE;
 
 public class JsonObjectValidator {
 
@@ -25,9 +24,11 @@ public class JsonObjectValidator {
     public static Boolean isJsonTypeToDo(JsonObject jsonObj) {
         return isJsonTypeOf(jsonObj, JsonTaskType.ToDo);
     }
+
     public static Boolean isJsonTypeDeadline(JsonObject jsonObj) {
         return isJsonTypeOf(jsonObj, JsonTaskType.Deadline);
     }
+
     public static Boolean isJsonTypeEvent(JsonObject jsonObj) {
         return isJsonTypeOf(jsonObj, JsonTaskType.Event);
     }

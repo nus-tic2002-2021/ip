@@ -1,9 +1,8 @@
 package duke.dukeUtility.prettify;
 
+import java.util.ArrayList;
 import duke.TaskManager;
 import duke.task.model.Task;
-
-import java.util.ArrayList;
 
 
 public class Prettify {
@@ -30,7 +29,7 @@ public class Prettify {
 
     }
 
-    public static String prettifyTasks(ArrayList<Task> tl){
+    public static String prettifyTasks(ArrayList<Task> tl) {
 
         StringBuilder generating = new StringBuilder();
         int taskQty = tl.size();
@@ -60,7 +59,7 @@ public class Prettify {
         int lengthColDesc = headerDescription.length();
 
         // body
-        for (Task t : tl)  {
+        for (Task t : tl) {
             // fill column Id
             String idValue = String.format("%4d", t.getTaskId()).replace(" ", "0");
             String columnId = fillCell(idValue, lengthColId);

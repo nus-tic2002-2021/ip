@@ -1,32 +1,50 @@
 package duke.command.commandfactory;
 
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.ADD_DEADLINE_DEADLINE_DELIMITER;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.ADD_EVENT_SCHEDULE_DELIMITER;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_DEADLINE;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_EVENT;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
+import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
+import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestAddDeadline;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestAddEvent;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestAddToDo;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestDeleteTask;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestExitLoop;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestFind;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestList;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestMarkTaskAsDone;
+import static duke.dukeUtility.validator.TextCommandValidator.isRequestSave;
+import java.time.LocalDateTime;
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
-
-import duke.command.errorcommand.*;
+import duke.command.errorcommand.CommandExecutionError;
+import duke.command.errorcommand.CommandInvalidRequestParameters;
+import duke.command.errorcommand.CommandInvalidTextCommandSyntax;
+import duke.command.errorcommand.CommandTaskNotFound;
+import duke.command.errorcommand.CommandUnknownRequest;
 import duke.command.systemcommand.CommandExitLoop;
+import duke.command.taskcommand.taskQuery.CommandListAll;
+import duke.command.taskcommand.taskQuery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskadd.CommandAddNewDeadline;
 import duke.command.taskcommand.taskadd.CommandAddNewEvent;
 import duke.command.taskcommand.taskadd.CommandAddNewToDo;
-import duke.command.taskcommand.taskQuery.CommandListAll;
-import duke.command.taskcommand.taskQuery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
 import duke.dukeExceptions.DukeInvalidSyntaxException;
-
-import java.time.LocalDateTime;
-
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.*;
-import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
-import static duke.dukeUtility.validator.TextCommandValidator.*;
 
 
 public class UiCommandFactory extends CommandFactory {
     protected Command executeCommandExitLoop() {
         return new CommandExitLoop(PROMPT_EXIT_LOOP);
     }
-    public Command executeTextCommand(String text, TaskManager taskManager,FileResourceManager frm) {
+
+    public Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm) {
         try {
             if (isRequestExitLoop(text)) {
                 return this.executeCommandExitLoop();
@@ -36,17 +54,17 @@ public class UiCommandFactory extends CommandFactory {
                 return this.executeCommandMarkTaskAsDone(text, taskManager);
             } else if (isRequestAddToDo(text)) {
                 return this.executeCommandAddToDo(text, taskManager);
-            } else if(isRequestAddDeadline(text)){
+            } else if (isRequestAddDeadline(text)) {
                 return this.executeCommandAddDeadline(text, taskManager);
-            } else if(isRequestAddEvent(text)){
+            } else if (isRequestAddEvent(text)) {
                 return this.executeCommandAddEvent(text, taskManager);
             } else if (isRequestDeleteTask(text)) {
                 return this.executeCommandDeleteTask(text, taskManager);
             } else if (isRequestSave(text)) {
                 return frm.executeCommandSave(taskManager);
-            }else if (isRequestFind(text)) {
+            } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
-            }else {
+            } else {
                 return new CommandUnknownRequest(text);
             }
         } catch (Exception e) {
@@ -75,14 +93,16 @@ public class UiCommandFactory extends CommandFactory {
             argList = argLine.split(addDeadlineStringDelimiter);
             int expectedArgsLength = 2;
             if (argList.length != expectedArgsLength) {
-                throw new DukeInvalidSyntaxException("Expected " + expectedArgsLength + " arguments delimited by \""+ addDeadlineStringDelimiter + "\"");
+                throw new DukeInvalidSyntaxException(
+                    "Expected " + expectedArgsLength + " arguments delimited by \"" + addDeadlineStringDelimiter +
+                        "\"");
             }
             taskDescription = argList[0];
             deadline = parseStringAsLocalDateTime(argList[1]);
-        }catch(DukeInvalidSyntaxException e){
+        } catch (DukeInvalidSyntaxException e) {
             return new CommandInvalidTextCommandSyntax(e.getMessage());
-        } catch (Exception e){
-            return new CommandExecutionError(e,"Unknown Error");
+        } catch (Exception e) {
+            return new CommandExecutionError(e, "Unknown Error");
         }
         return new CommandAddNewDeadline(taskManager, taskDescription, deadline);
     }
@@ -157,6 +177,7 @@ public class UiCommandFactory extends CommandFactory {
         }
         return new CommandDeleteTask(taskManager, taskId);
     }
+
     protected Command executeCommandFindByKeywordInDescription(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;

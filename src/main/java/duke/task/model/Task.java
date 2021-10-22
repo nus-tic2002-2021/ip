@@ -46,11 +46,11 @@ public abstract class Task implements Comparable<Task> {
         return this._done;
     }
 
-    public Boolean descContainsKeyword(String keyword){
+    public Boolean descContainsKeyword(String keyword) {
         String desc = this._taskDescription;
         String[] words = desc.split("\\s+");
-        for(String word : words){
-            if(word.equals(keyword)){
+        for (String word : words) {
+            if (word.equals(keyword)) {
                 return true;
             }
         }

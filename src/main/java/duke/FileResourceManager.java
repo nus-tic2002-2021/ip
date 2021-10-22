@@ -1,5 +1,10 @@
 package duke;
 
+import static duke.dukeUtility.parser.PathParser.stringToPath;
+import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -10,13 +15,6 @@ import duke.command.ExportCommandFactory;
 import duke.command.commandfactory.FileCommandFactory;
 import duke.command.commandfactory.ImportCommandFactory;
 import duke.command.errorcommand.CommandExecutionError;
-
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static duke.dukeUtility.parser.PathParser.stringToPath;
-import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
 
 public class FileResourceManager {
 
@@ -30,13 +28,16 @@ public class FileResourceManager {
     private ExportCommandFactory getExportCommandFactory() {
         return this._exportCommandFactory;
     }
+
     public FileResourceManager(String exportPathString, String importPathString) {
         this.setExportPathString(exportPathString);
         this.setImportPathString(importPathString);
 
     }
+
     private FileResourceManager() {
     }
+
     private String getImportPathString() {
         return this.importPathString;
     }
@@ -44,10 +45,12 @@ public class FileResourceManager {
     public Command executeExportTasks(JsonArray tasksJson, JsonWriter jw) {
         return this.getExportCommandFactory().exportTasks(tasksJson, jw);
     }
-    public CommandJsonResponse executeExtractTasksFromFile(){
+
+    public CommandJsonResponse executeExtractTasksFromFile() {
         Path path = this.getImportPath();
         return this.getFileCommandFactory().executeExtractTasksFromFile(path);
     }
+
     private FileCommandFactory getFileCommandFactory() {
         return this._fileCommandFactory;
     }
@@ -55,25 +58,30 @@ public class FileResourceManager {
     public Path getImportPath() {
         return stringToPath(this.getImportPathString());
     }
+
     private String getExportPathString() {
         return this.exportPathString;
     }
+
     private void setExportPathString(String exportPathString) {
         this.exportPathString = exportPathString;
     }
-    public Path getExportPath()  {
+
+    public Path getExportPath() {
         return stringToPath(this.getExportPathString());
     }
+
     private void setImportPathString(String importPathString) {
         this.importPathString = importPathString;
     }
+
     public Command executeCommandSave(TaskManager taskManager) {
         JsonWriter jw;
         JsonArray tasksJson = new JsonArray();
         Path exportPath;
         try {
             exportPath = this.getExportPath();
-            if(exportPath == null){
+            if (exportPath == null) {
                 throw new Exception("Export path validation failed.");
             }
             Files.createDirectories(exportPath.getParent());
@@ -81,7 +89,7 @@ public class FileResourceManager {
                 throw new Exception("Export path validation failed.");
             }
         } catch (Exception e) {
-            return new CommandExecutionError(e,e.getMessage() );
+            return new CommandExecutionError(e, e.getMessage());
         }
         try {
             jw = new JsonWriter(new FileWriter(exportPath.toString(), false));

@@ -1,7 +1,6 @@
 package duke.command.taskcommand.taskimport;
 
 import java.util.List;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
@@ -11,7 +10,8 @@ import duke.task.model.ToDo;
 public class CommandImportToDo extends Command {
     /**
      * Import a todo to a task manager
-     * @param toDo todo
+     *
+     * @param toDo    todo
      * @param taskMgr task manager
      */
     public CommandImportToDo(ToDo toDo, TaskManager taskMgr) {

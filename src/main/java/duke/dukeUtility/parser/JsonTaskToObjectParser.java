@@ -1,11 +1,14 @@
 package duke.dukeUtility.parser;
 
-import com.google.gson.JsonObject;
-
-import java.time.LocalDateTime;
-
-import static duke.dukeUtility.definition.TaskField.*;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DEADLINE;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DESCRIPTION;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DONE_STATUS;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_FROM;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TASK_ID;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TO;
 import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
+import java.time.LocalDateTime;
+import com.google.gson.JsonObject;
 
 public class JsonTaskToObjectParser extends Parser {
     public static Boolean getJsonPropertyDoneStatus(JsonObject jsonObj) {

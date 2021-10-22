@@ -1,5 +1,20 @@
 package duke;
 
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyDeadline;
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyDoneStatus;
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyFrom;
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyTaskDescription;
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyTaskId;
+import static duke.dukeUtility.parser.JsonTaskToObjectParser.getJsonPropertyTo;
+import static duke.dukeUtility.parser.TaskToJsonParser.parseDeadlineAsJson;
+import static duke.dukeUtility.parser.TaskToJsonParser.parseEventAsJson;
+import static duke.dukeUtility.parser.TaskToJsonParser.parseToDoAsJson;
+import static duke.dukeUtility.validator.JsonObjectValidator.isJsonTypeDeadline;
+import static duke.dukeUtility.validator.JsonObjectValidator.isJsonTypeEvent;
+import static duke.dukeUtility.validator.JsonObjectValidator.isJsonTypeToDo;
+import static duke.dukeUtility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import duke.task.aggregator.TaskList;
@@ -7,16 +22,9 @@ import duke.task.model.Deadline;
 import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
-import duke.dukeUtility.parser.DateParser;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import static duke.dukeUtility.parser.JsonTaskToObjectParser.*;
-import static duke.dukeUtility.parser.TaskToJsonParser.*;
-import static duke.dukeUtility.validator.JsonObjectValidator.*;
 
 public class TaskManager {
-    private TaskList _activeTasks = new TaskList();
+    private final TaskList _activeTasks = new TaskList();
     private int _serialNo = 0;
 
     private int rollSerialNo() {
@@ -25,55 +33,66 @@ public class TaskManager {
         }
         return this.getSerialNo();
     }
+
     private int getSerialNo() {
         return this._serialNo;
     }
+
     public ToDo addNewToDo(String taskDescription) {
-        ToDo task = new ToDo(taskDescription,this.rollSerialNo(),false);
+        ToDo task = new ToDo(taskDescription, this.rollSerialNo(), false);
         this._activeTasks.addTask(task);
         return task;
     }
+
     public Event addNewEvent(String taskDescription, LocalDateTime from, LocalDateTime to) {
         Event event = new Event(taskDescription, from, to, this.rollSerialNo(), false);
         this._activeTasks.addTask(event);
         return event;
     }
+
     public Deadline addNewDeadline(String taskDescription, LocalDateTime deadlineString) {
         Deadline deadLine = new Deadline(taskDescription, deadlineString, this.rollSerialNo(), false);
         this._activeTasks.addTask(deadLine);
         return deadLine;
     }
-    public Integer getSize(){
+
+    public Integer getSize() {
         return this._activeTasks.getSize();
     }
+
     public ArrayList<Task> getAllAsArray() {
         return this._activeTasks.getAllAsArray();
     }
 
-    public ArrayList<Task> getTasksWithWord(String keyword){
+    public ArrayList<Task> getTasksWithWord(String keyword) {
         ArrayList<Task> all = this._activeTasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
-        for(Task t : all){
-            if(t.descContainsKeyword(keyword)){
+        for (Task t : all) {
+            if (t.descContainsKeyword(keyword)) {
                 filtering.add(t);
             }
         }
         return filtering;
     }
+
     public Boolean containsTaskId(Integer taskId) {
         return this._activeTasks.containsKey(taskId);
     }
+
     public Task getTaskById(Integer taskId) {
         return this._activeTasks.getTaskById(taskId);
     }
+
     public Task getTaskByIdAndSetDoneStatus(Integer taskId, Boolean done) {
         Task target = this.getTaskById(taskId);
         target.setDoneStatus(done);
         return target;
     }
+
     public Task softDeleteById(Integer taskId) {
         return this._activeTasks.removeTaskById(taskId);
     }
+
     public JsonArray getAllAsJson() {
         ArrayList<Task> tasks = this.getAllAsArray();
         JsonArray tasksJson = new JsonArray();
@@ -130,5 +149,5 @@ public class TaskManager {
         throw new Exception("Json object not recognised as a task Object");
     }
 
-    
+
 }

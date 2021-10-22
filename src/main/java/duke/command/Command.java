@@ -1,7 +1,6 @@
 package duke.command;
 
 import java.util.List;
-
 import duke.dukeUtility.enums.ResponseType;
 
 
@@ -19,18 +18,22 @@ public abstract class Command {
         this.setResponseType(rt);
         this.setArgs(args);
     }
+
     private Command() {
     }
 
     public ResponseType getResponseType() {
         return responseType;
     }
+
     protected void setResponseType(ResponseType rt) {
         responseType = rt;
     }
+
     public List<String> getArgs() {
         return this.args;
     }
+
     private void setArgs(List<String> inputArgs) {
         this.args = inputArgs;
     }

@@ -1,13 +1,18 @@
 package duke.dukeUtility.parser;
 
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DEADLINE;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DESCRIPTION;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DONE_STATUS;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_FROM;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TASK_ID;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TO;
+import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TYPE;
+import static duke.dukeUtility.parser.DateParser.parseLocalDateTimeAsString;
 import com.google.gson.JsonObject;
 import duke.dukeUtility.enums.JsonTaskType;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
 import duke.task.model.ToDo;
-
-import static duke.dukeUtility.definition.TaskField.*;
-import static duke.dukeUtility.parser.DateParser.parseLocalDateTimeAsString;
 
 
 public class TaskToJsonParser extends Parser {

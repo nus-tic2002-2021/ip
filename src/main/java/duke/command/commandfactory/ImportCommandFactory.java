@@ -23,6 +23,7 @@ public class ImportCommandFactory extends CommandFactory {
         }
         return this.executeImportTaskImportStage(task, taskManager);
     }
+
     private Command executeImportTaskImportStage(Task task, TaskManager taskManager) {
         if (task instanceof Event) {
             return new CommandImportEvent((Event) task, taskManager);
@@ -33,6 +34,7 @@ public class ImportCommandFactory extends CommandFactory {
         }
         return new CommandUnknownRequest("Unrecognised Task type.");
     }
+
     public Command executeImportJsonTask(JsonObject jsonObj, TaskManager taskManager) {
         return this.executeImportJsonTaskParseStage(jsonObj, taskManager);
     }

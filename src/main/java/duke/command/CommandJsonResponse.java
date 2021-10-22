@@ -1,9 +1,8 @@
 package duke.command;
 
+import java.util.List;
 import com.google.gson.JsonElement;
 import duke.dukeUtility.enums.ResponseType;
-
-import java.util.List;
 
 
 public abstract class CommandJsonResponse extends Command {
