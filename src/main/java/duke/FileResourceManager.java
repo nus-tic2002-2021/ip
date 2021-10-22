@@ -2,13 +2,16 @@ package duke;
 
 import static duke.dukeutility.parser.PathParser.stringToPath;
 import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
+
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
+
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;
@@ -25,10 +28,6 @@ public class FileResourceManager {
     private String exportPathString;
     private String importPathString;
 
-    private ExportCommandFactory getExportCommandFactory() {
-        return this._exportCommandFactory;
-    }
-
     public FileResourceManager(String exportPathString, String importPathString) {
         this.setExportPathString(exportPathString);
         this.setImportPathString(importPathString);
@@ -38,8 +37,16 @@ public class FileResourceManager {
     private FileResourceManager() {
     }
 
+    private ExportCommandFactory getExportCommandFactory() {
+        return this._exportCommandFactory;
+    }
+
     private String getImportPathString() {
         return this.importPathString;
+    }
+
+    private void setImportPathString(String importPathString) {
+        this.importPathString = importPathString;
     }
 
     public Command executeExportTasks(JsonArray tasksJson, JsonWriter jw) {
@@ -69,10 +76,6 @@ public class FileResourceManager {
 
     public Path getExportPath() {
         return stringToPath(this.getExportPathString());
-    }
-
-    private void setImportPathString(String importPathString) {
-        this.importPathString = importPathString;
     }
 
     public Command executeCommandSave(TaskManager taskManager) {
@@ -124,9 +127,7 @@ public class FileResourceManager {
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasksJson(tasksFromFile, taskManager);
     }
-
     private ImportCommandFactory getImportCommandFactory() {
         return this._importCommandFactory;
     }
-
 }

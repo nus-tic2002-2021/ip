@@ -1,8 +1,8 @@
 package duke.command.taskcommand.taskadd;
 
 import java.util.List;
-import duke.TaskManager;
 
+import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 

@@ -36,7 +36,7 @@ import duke.command.taskcommand.taskadd.CommandAddNewEvent;
 import duke.command.taskcommand.taskadd.CommandAddNewToDo;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
-import duke.dukeExceptions.DukeInvalidSyntaxException;
+import duke.dukeexception.DukeInvalidSyntaxException;
 
 
 public class UiCommandFactory extends CommandFactory {

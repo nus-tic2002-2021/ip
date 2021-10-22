@@ -2,7 +2,9 @@ package duke.taskManagerTest;
 
 import static duke.testhelper.help.config.dukeIOTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
@@ -13,7 +15,7 @@ import duke.testhelper.TestStream;
 public class ExportTasksTest extends TestStream {
 
     @Test
-    public void Test_AddToDos_Export_Should_Buffer_Test() {
+    public void addToDos_export_shouldBuffer() {
         TaskManager tm = new TaskManager();
 
         String desc0 = "desc0";

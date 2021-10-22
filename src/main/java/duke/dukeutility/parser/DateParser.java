@@ -14,6 +14,12 @@ public class DateParser {
         return DateTimeFormatter.ofPattern(DateParser.transitiveJsonAndTextPattern).format(ldt);
     }
 
+    /**
+     * format string as LocalDateTime
+     * @param dateTimeString
+     * @return date in LocalDateTime format.
+     * @throws Exception Formatting failed
+     */
     public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
 
         LocalDateTime ldt = null;
@@ -21,12 +27,14 @@ public class DateParser {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
+                ;
             }
         }
 
         try {
             ldt = parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
+            ;
         }
         if (ldt == null) {
             throw new Exception("Parse as LocalDateTime failed.");
