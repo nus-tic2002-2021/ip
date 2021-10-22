@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
+import static duke.testHelper.help.Builder.buildCommandInputStream;
+import static duke.testHelper.help.Builder.buildExpectedResponse;
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
 import static duke.testHelper.help.CodeUnderTest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testHelper.help.CodeUnderTest.TextCommandUnderTest.*;
@@ -32,13 +34,7 @@ public class Increment_09_Test extends TestStream {
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        StringBuilder commandBuilder = new StringBuilder();
-
-        commandBuilder.append(store0Command);
-        commandBuilder.append(store1Command);
-        commandBuilder.append(findCommand);
-        commandBuilder.append(exitCommand);
-        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
+        System.setIn(buildCommandInputStream(store0Command,store1Command,findCommand,exitCommand));
 
 
         /*
@@ -61,19 +57,16 @@ public class Increment_09_Test extends TestStream {
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getExpectedOutputEntry());
-        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
-        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
-        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
-
-        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
-        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc1));
-
-        expectedResponseBuilder.append(getExpectedOutputList(getExpectedTaskList(MockTasks)));
-        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
-        expectedResponseBuilder.append(getExpectedOutputTerminate());
-        String expectedOutputResponse = expectedResponseBuilder.toString();
-
+        String out0 = (getExpectedOutputEntry());
+        String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
+        String out2 = (getExpectedOutputReadPathNotFound());
+        String out3 = (getExpectedOutputBeginInputLoop());
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out5 = (getExpectedOutputAddedToDo(taskDesc1));
+        String out6 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out7 = (getExpectedOutputExitInputLoop());
+        String out8 = (getExpectedOutputTerminate());
+        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7,out8);
 
         try {
             Main.run(this.getPrintStream(), tm,frm);
@@ -93,13 +86,7 @@ public class Increment_09_Test extends TestStream {
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        StringBuilder commandBuilder = new StringBuilder();
-
-        commandBuilder.append(store0Command);
-        commandBuilder.append(findCommand);
-        commandBuilder.append(exitCommand);
-        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
-
+        System.setIn(buildCommandInputStream(store0Command,findCommand,exitCommand));
 
         /*
          * Should display:
@@ -111,24 +98,20 @@ public class Increment_09_Test extends TestStream {
          * terminate
          */
 
-        StringBuilder expectedResponseBuilder = new StringBuilder();
-
 
         MockTask[] MockTasks = {}; // no should be displayed after query
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getExpectedOutputEntry());
-        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
-        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
-        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
-
-        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
-
-        expectedResponseBuilder.append(getExpectedOutputList(getExpectedTaskList(MockTasks)));
-        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
-        expectedResponseBuilder.append(getExpectedOutputTerminate());
-        String expectedOutputResponse = expectedResponseBuilder.toString();
+        String out0 = (getExpectedOutputEntry());
+        String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
+        String out2 = (getExpectedOutputReadPathNotFound());
+        String out3 = (getExpectedOutputBeginInputLoop());
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out5 = (getExpectedOutputList(getExpectedTaskList(MockTasks)));
+        String out6 = (getExpectedOutputExitInputLoop());
+        String out7 = (getExpectedOutputTerminate());
+        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7);
 
         try {
             Main.run(this.getPrintStream(), tm,frm);
@@ -147,12 +130,7 @@ public class Increment_09_Test extends TestStream {
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND,keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        StringBuilder commandBuilder = new StringBuilder();
-
-        commandBuilder.append(store0Command);
-        commandBuilder.append(findCommand);
-        commandBuilder.append(exitCommand);
-        System.setIn(new ByteArrayInputStream(commandBuilder.toString().getBytes()));
+        System.setIn(buildCommandInputStream(store0Command,findCommand,exitCommand));
 
         /*
          * Should display:
@@ -164,25 +142,18 @@ public class Increment_09_Test extends TestStream {
          * terminate
          */
 
-
-        StringBuilder expectedResponseBuilder = new StringBuilder();
-
-
-        MockTask[] MockTasks = {}; // no should be displayed after query
         TaskManager tm = new TaskManager();
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(),getDefaultTasksImportTestPathString());
 
-        expectedResponseBuilder.append(getExpectedOutputEntry());
-        expectedResponseBuilder.append(getExpectedOutputImportAttempt(frm.getImportPath()));
-        expectedResponseBuilder.append(getExpectedOutputReadPathNotFound());
-        expectedResponseBuilder.append(getExpectedOutputBeginInputLoop());
-
-        expectedResponseBuilder.append(getExpectedOutputAddedToDo(taskDesc0));
-
-        expectedResponseBuilder.append(getMsgUnderTestErrorSpacedKeyword());
-        expectedResponseBuilder.append(getExpectedOutputExitInputLoop());
-        expectedResponseBuilder.append(getExpectedOutputTerminate());
-        String expectedOutputResponse = expectedResponseBuilder.toString();
+        String out0 = (getExpectedOutputEntry());
+        String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
+        String out2 = (getExpectedOutputReadPathNotFound());
+        String out3 = (getExpectedOutputBeginInputLoop());
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out5 = (getMsgUnderTestErrorSpacedKeyword());
+        String out6 = (getExpectedOutputExitInputLoop());
+        String out7 = (getExpectedOutputTerminate());
+        String expectedOutputResponse = buildExpectedResponse(out0,out1,out2,out3,out4,out5,out6,out7);
 
         try {
             Main.run(this.getPrintStream(), tm,frm);
