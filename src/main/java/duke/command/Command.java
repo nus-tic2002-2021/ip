@@ -1,7 +1,8 @@
 package duke.command;
 
 import java.util.List;
-import duke.dukeUtility.enums.ResponseType;
+
+import duke.dukeutility.enums.ResponseType;
 
 
 /**

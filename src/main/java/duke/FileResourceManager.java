@@ -1,7 +1,7 @@
 package duke;
 
-import static duke.dukeUtility.parser.PathParser.stringToPath;
-import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
+import static duke.dukeutility.parser.PathParser.stringToPath;
+import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;

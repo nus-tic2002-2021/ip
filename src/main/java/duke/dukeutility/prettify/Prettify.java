@@ -1,4 +1,4 @@
-package duke.dukeUtility.prettify;
+package duke.dukeutility.prettify;
 
 import java.util.ArrayList;
 import duke.TaskManager;

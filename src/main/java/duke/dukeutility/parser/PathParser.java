@@ -1,4 +1,4 @@
-package duke.dukeUtility.parser;
+package duke.dukeutility.parser;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

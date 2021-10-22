@@ -1,4 +1,4 @@
-package duke.dukeUtility.definition;
+package duke.dukeutility.definition;
 
 public class TaskField {
     public static final String TASK_FIELD_TYPE = "type";

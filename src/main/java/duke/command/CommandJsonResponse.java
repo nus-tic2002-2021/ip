@@ -1,12 +1,14 @@
 package duke.command;
 
 import java.util.List;
+
 import com.google.gson.JsonElement;
-import duke.dukeUtility.enums.ResponseType;
+
+import duke.dukeutility.enums.ResponseType;
 
 
 public abstract class CommandJsonResponse extends Command {
-    private JsonElement _jsonArg;
+    private JsonElement jsonArg;
 
     protected CommandJsonResponse(ResponseType rt, List<String> args, JsonElement jsonArg) {
         super(rt, args);
@@ -14,10 +16,10 @@ public abstract class CommandJsonResponse extends Command {
     }
 
     public JsonElement getJsonArg() {
-        return this._jsonArg;
+        return this.jsonArg;
     }
 
-    private void setJsonArg(JsonElement event) {
-        this._jsonArg = event;
+    private void setJsonArg(JsonElement arg) {
+        this.jsonArg = arg;
     }
 }

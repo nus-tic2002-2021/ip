@@ -1,7 +1,7 @@
 package duke.systemTest;
 
-import static duke.dukeUtility.config.dukeIO.getDefaultTasksImportPathString;
-import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
+import static duke.dukeutility.config.dukeIO.getDefaultTasksImportPathString;
+import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildString;
 import static duke.testhelper.help.CodeUnderTest.OutputUnderTest.getExpectedOutputAddedDeadline;

@@ -2,8 +2,9 @@ package duke.command.taskcommand.taskadd;
 
 import java.util.List;
 import duke.TaskManager;
+
 import duke.command.Command;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 
 public class CommandAddNewToDo extends Command {

@@ -2,7 +2,7 @@ package duke.command.errorcommand;
 
 import java.util.List;
 import duke.command.Command;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 public class CommandUnknownRequest extends Command {
     public CommandUnknownRequest(String text) {

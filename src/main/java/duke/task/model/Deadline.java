@@ -1,6 +1,6 @@
 package duke.task.model;
 
-import static duke.dukeUtility.parser.DateParser.prettifyLocalDateTime;
+import static duke.dukeutility.parser.DateParser.prettifyLocalDateTime;
 import java.time.LocalDateTime;
 
 public final class Deadline extends Task {

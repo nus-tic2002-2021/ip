@@ -1,14 +1,14 @@
-package duke.dukeUtility.validator;
+package duke.dukeutility.validator;
 
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_DEADLINE;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_EVENT;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_LIST;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
-import static duke.dukeUtility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_DEADLINE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_EVENT;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

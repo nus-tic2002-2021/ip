@@ -1,4 +1,4 @@
-package duke.dukeUtility.config;
+package duke.dukeutility.config;
 
 
 import java.io.File;

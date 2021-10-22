@@ -8,7 +8,7 @@ import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 import duke.testhelper.TestStream;
 
 

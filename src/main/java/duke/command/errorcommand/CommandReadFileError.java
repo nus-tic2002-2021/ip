@@ -1,8 +1,9 @@
 package duke.command.errorcommand;
 
 import java.util.List;
+
 import duke.command.CommandJsonResponse;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 public class CommandReadFileError extends CommandJsonResponse {
     public CommandReadFileError(String message) {

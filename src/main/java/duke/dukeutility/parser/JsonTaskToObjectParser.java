@@ -1,12 +1,12 @@
-package duke.dukeUtility.parser;
+package duke.dukeutility.parser;
 
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DEADLINE;
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DESCRIPTION;
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_DONE_STATUS;
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_FROM;
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TASK_ID;
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TO;
-import static duke.dukeUtility.parser.DateParser.parseStringAsLocalDateTime;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_DEADLINE;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_DESCRIPTION;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_DONE_STATUS;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_FROM;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_TASK_ID;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_TO;
+import static duke.dukeutility.parser.DateParser.parseStringAsLocalDateTime;
 import java.time.LocalDateTime;
 import com.google.gson.JsonObject;
 

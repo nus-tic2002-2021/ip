@@ -1,9 +1,9 @@
-package duke.dukeUtility.validator;
+package duke.dukeutility.validator;
 
-import static duke.dukeUtility.definition.TaskField.TASK_FIELD_TYPE;
+import static duke.dukeutility.definition.TaskField.TASK_FIELD_TYPE;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import duke.dukeUtility.enums.JsonTaskType;
+import duke.dukeutility.enums.JsonTaskType;
 
 public class JsonObjectValidator {
 

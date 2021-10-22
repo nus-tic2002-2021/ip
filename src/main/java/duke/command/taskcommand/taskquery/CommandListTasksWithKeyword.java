@@ -1,10 +1,12 @@
-package duke.command.taskcommand.taskQuery;
+package duke.command.taskcommand.taskquery;
 
-import static duke.dukeUtility.prettify.Prettify.prettifyTasks;
+import static duke.dukeutility.prettify.Prettify.prettifyTasks;
+
 import java.util.List;
+
 import duke.TaskManager;
 import duke.command.Command;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 public class CommandListTasksWithKeyword extends Command {
     public CommandListTasksWithKeyword(TaskManager taskMgr, String keyword) {

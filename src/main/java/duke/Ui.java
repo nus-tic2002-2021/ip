@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 import duke.command.Command;
 import duke.command.commandfactory.UiCommandFactory;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 
 /**

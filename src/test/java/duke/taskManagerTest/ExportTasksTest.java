@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 import duke.testhelper.TestStream;
 
 

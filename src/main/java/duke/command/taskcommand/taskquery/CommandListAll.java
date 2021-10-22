@@ -1,10 +1,12 @@
-package duke.command.taskcommand.taskQuery;
+package duke.command.taskcommand.taskquery;
 
-import static duke.dukeUtility.prettify.Prettify.prettifyTaskMgr;
+import static duke.dukeutility.prettify.Prettify.prettifyTaskMgr;
+
 import java.util.List;
+
 import duke.TaskManager;
 import duke.command.Command;
-import duke.dukeUtility.enums.ResponseType;
+import duke.dukeutility.enums.ResponseType;
 
 public class CommandListAll extends Command {
     public CommandListAll(TaskManager taskMgr) {

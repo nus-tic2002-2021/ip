@@ -1,4 +1,4 @@
-package duke.dukeUtility.enums;
+package duke.dukeutility.enums;
 
 /**
  * @see duke.command.Command
