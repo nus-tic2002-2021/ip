@@ -1,15 +1,20 @@
 package duke.command.taskcommand.taskimport;
 
+import java.util.List;
+
+import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeUtility.enums.ResponseType;
-import duke.TaskManager;
 import duke.task.model.Event;
-
-import java.util.List;
 
 
 public class CommandImportEvent extends Command {
+    /** Import a event to a task manager
+     * @param event event
+     * @param taskMgr task manager
+     */
     public CommandImportEvent(Event event, TaskManager taskMgr) {
-        super(ResponseType.TASK_IMPORT_EVENT, List.of("create", event.getTaskDescription(), taskMgr.importEvent(event).getTaskDescription()));
+        super(ResponseType.TASK_IMPORT_EVENT,
+            List.of("create", event.getTaskDescription(), taskMgr.importEvent(event).getTaskDescription()));
     }
 }
