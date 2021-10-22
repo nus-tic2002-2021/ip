@@ -7,8 +7,8 @@ import com.google.gson.stream.JsonWriter;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;
-import duke.command.commandFactory.FileCommandFactory;
-import duke.command.commandFactory.ImportCommandFactory;
+import duke.command.commandfactory.FileCommandFactory;
+import duke.command.commandfactory.ImportCommandFactory;
 import duke.command.errorcommand.CommandExecutionError;
 
 import java.io.FileWriter;

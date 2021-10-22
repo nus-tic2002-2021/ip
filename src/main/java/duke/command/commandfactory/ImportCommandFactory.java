@@ -1,4 +1,4 @@
-package duke.command.commandFactory;
+package duke.command.commandfactory;
 
 import com.google.gson.JsonObject;
 import duke.TaskManager;

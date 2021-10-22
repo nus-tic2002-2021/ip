@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
-import duke.command.commandFactory.FileCommandFactory;
+import duke.command.commandfactory.FileCommandFactory;
 import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;

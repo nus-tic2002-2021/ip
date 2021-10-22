@@ -2,7 +2,7 @@ package duke;
 
 
 import duke.command.Command;
-import duke.command.commandFactory.UiCommandFactory;
+import duke.command.commandfactory.UiCommandFactory;
 import duke.dukeUtility.enums.ResponseType;
 
 import java.io.PrintStream;

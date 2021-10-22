@@ -1,4 +1,4 @@
-package duke.command.commandFactory;
+package duke.command.commandfactory;
 
 /**
  * @see duke.command.Command
