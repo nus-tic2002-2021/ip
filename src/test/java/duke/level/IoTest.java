@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IoTest extends TestStream {
 
     @Test
-    public void TestLevel4_Greet_AddToDo_List_Exit() throws Exception {
+    public void Greet_AddToDoList_Exit() throws Exception {
 
         // Arrange Input
 
@@ -76,7 +76,7 @@ public class IoTest extends TestStream {
     }
 
     @Test
-    public void TestLevel4_Greet_AddEvent_List_Exit() throws Exception {
+    public void Greet_AddEventList_Exit() throws Exception {
 
         /* Arrange Input
          * Commands executed:
@@ -130,7 +130,7 @@ public class IoTest extends TestStream {
     }
 
     @Test
-    public void TestLevel4_Greet_AddDeadline_List_Exit() throws Exception {
+    public void Greet_AddDeadline_List_Exit() throws Exception {
 
         /* Arrange Input
          * Commands executed:
@@ -181,7 +181,7 @@ public class IoTest extends TestStream {
     }
 
     @Test
-    public void TestLevel4_GreetAddEachTaskType_List() throws Exception{
+    public void GreetAddEachTaskType_List() throws Exception{
         // Arrange Input
 
         String task0ToDoDescription = "todo_desc asfasfasf";
@@ -244,7 +244,7 @@ public class IoTest extends TestStream {
     }
 
     @Test
-    public void TestLevel4_UnknownCommand() throws Exception {
+    public void TestUnknownCommand() throws Exception {
 
         String randomTextCommand = generateTextCommandRandom("s0meUnknownPrompt");
         String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
