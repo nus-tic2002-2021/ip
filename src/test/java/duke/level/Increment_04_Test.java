@@ -80,7 +80,7 @@ public class Increment_04_Test extends TestStream {
 
         MockTask[] MockTasks = {expectedToDo1};
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockTasks)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
@@ -141,7 +141,7 @@ public class Increment_04_Test extends TestStream {
 
         MockTask[] MockEvents = {expectedEvent};
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockEvents)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockEvents)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
@@ -202,7 +202,7 @@ public class Increment_04_Test extends TestStream {
 
         MockTask[] MockDeadlines = {expectedEvent};
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockDeadlines)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockDeadlines)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
@@ -305,7 +305,7 @@ public class Increment_04_Test extends TestStream {
 
         MockTask[] MockEvents = {expectedToDo,expectedDeadline,expectedEvent};
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockEvents)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockEvents)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 

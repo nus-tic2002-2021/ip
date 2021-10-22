@@ -3,8 +3,6 @@ package duke.level;
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
-import duke.mock.mockTask.MockDeadline;
-import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
 import duke.mock.mockTask.MockToDo;
 import duke.testHelper.TestStream;
@@ -33,8 +31,6 @@ public class Increment_06_Test extends TestStream {
     public void Greet_AddToDo_Delete_List_Exit() throws Exception {
 
         assertNotNull(this.getPrintStream(), "printstream null?");
-
-        Integer taskQty = 1;
 
         /*
          * Commands executed:
@@ -81,7 +77,7 @@ public class Increment_06_Test extends TestStream {
 
         MockTask[] MockTasks = {}; // since task is deleted
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockTasks)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 
@@ -148,7 +144,7 @@ public class Increment_06_Test extends TestStream {
 
         MockTask[] MockTasks = {expectedToDo1}; // since task0 is deleted
 
-        expectedResponseBuilder.append(getMsgUnderTestResponseListAll(getPrettifyUnderTestList(MockTasks)));
+        expectedResponseBuilder.append(getMsgUnderTestResponseList(getPrettifyUnderTestList(MockTasks)));
         expectedResponseBuilder.append(getMsgUnderTestExitLoop());
         expectedResponseBuilder.append(getMsgUnderTestTerminate());
 

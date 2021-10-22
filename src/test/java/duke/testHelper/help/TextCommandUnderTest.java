@@ -17,6 +17,8 @@ public class TextCommandUnderTest {
 
     public static final String PROMPT_UNDER_TEST_SAVE = "save";
 
+    public static final String PROMPT_UNDER_TEST_FIND = "find ";
+
     private static String singleArgumentCommand(String text) {
         return text + System.lineSeparator();
     }
@@ -48,5 +50,7 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSave(String invoke) {
         return singleArgumentCommand(invoke);
     }
-
+    public static String generateTextCommandFindKeywordInDescription(String invoke, String keyword) {
+        return singleArgumentCommand("Find tasks with keyword: " + keyword);
+    }
 }
