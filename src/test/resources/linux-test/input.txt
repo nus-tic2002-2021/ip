@@ -1,9 +1,0 @@
-todo tododesc
-deadline deadlinedesc /by 20200219
-event eventdesc asdasdasd /at 20200202-20210202
-list
-delete 0
-list
-done 2
-find eventdesc
-bye

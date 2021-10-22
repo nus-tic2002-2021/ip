@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 public class PathParser extends Parser{
 
 
-    public static Path stringToPath(String path){
+    public static Path stringToPath(String pathString){
         try {
-            return Paths.get(path);
+            return Paths.get(pathString);
         } catch (Exception e) {
             return null;
         }

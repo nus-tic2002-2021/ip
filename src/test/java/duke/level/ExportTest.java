@@ -5,6 +5,7 @@ import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
 import duke.command.commandFactory.FileCommandFactory;
+import duke.command.errorCommand.CommandExecutionError;
 import duke.mock.mockTask.MockDeadline;
 import duke.mock.mockTask.MockEvent;
 import duke.mock.mockTask.MockTask;
@@ -14,11 +15,15 @@ import duke.testHelper.help.config.dukeIOTestPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
+import static duke.dukeUtility.config.dukeIO.getDefaultTasksImportPathString;
+import static duke.dukeUtility.validator.TextCommandValidator.isParentDirectoryValid;
 import static duke.testHelper.help.Builder.buildCommandInputStream;
 import static duke.testHelper.help.Builder.buildString;
 import static duke.testHelper.help.CodeUnderTest.OutputUnderTest.*;
@@ -109,18 +114,25 @@ public class ExportTest extends TestStream {
     }
 
 
-    public void writeToFile(String path, String... data) throws IOException{
-        FileWriter fileWriter = new FileWriter(path);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(buildString(data));
-        printWriter.close();
-
+    public void writeToFile(String pathString, String... data) throws Exception{
+        Path exportPath = stringToPath(pathString);
+        try {
+            if(exportPath == null){
+                throw new Exception("Export path validation failed.");
+            }
+            Files.createDirectories(exportPath.getParent());
+            if (!isParentDirectoryValid(exportPath)) {
+                throw new Exception("Export path validation failed.");
+            }
+        } catch (Exception e) {
+            throw new IOException("Export path validation failed.");
+        }
+        Files.write(exportPath, buildString(data).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
     }
 
     @Test
     public void GenerateExpectedTestFileInActualEnvironment() throws Exception {
-        String importPathString = dukeIOTestPath.getDefaultTasksImportTestPathString();
-        String exportPathString = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "do-not-use.txt";
+        String importPathString = getDefaultTasksImportPathString();
 
         String loadInputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "input.txt";
         String expectedOutputPath = System.getProperty("user.dir") + File.separator +"src" + File.separator + "test" + File.separator +"resources" + File.separator +"linux-test" + File.separator + "expected.txt";
@@ -150,16 +162,12 @@ public class ExportTest extends TestStream {
         String out5 = (getExpectedOutputAddedDeadline(deadlineDesc));
 
         String in2 = generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom, DELIMITER_EVENT_TO, eventTo);
-        String out6 = (getExpectedOutputAddedToDo(eventDesc));
-
-
-
+        String out6 = (getExpectedOutputAddedEvent(eventDesc));
 
         String in3 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
 
         MockTask[] allMockTasks = new MockTask[]{new MockToDo(todoDesc,0,false),new MockDeadline(deadlineDesc,1,false,parseStringAsLocalDateTime(deadlineBy)), new MockEvent(eventDesc,2,false,parseStringAsLocalDateTime(eventFrom),parseStringAsLocalDateTime(eventTo))};
         String out7 = (getExpectedOutputList(getExpectedTaskList(allMockTasks)));
-
 
         String in4 = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK,0);
         String out8 = (getExpectedOutputCommandDeleted(0));
@@ -185,10 +193,5 @@ public class ExportTest extends TestStream {
 
         writeToFile(loadInputPath, in0, in1, in2, in3, in4, in5, in6, in7,in8);
         writeToFile(expectedOutputPath,out0,out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12,out13);
-
-        try {
-        } catch (Exception e) {
-            fail(e.toString());
-        }
     }
 }

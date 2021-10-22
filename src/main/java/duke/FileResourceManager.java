@@ -63,11 +63,7 @@ public class FileResourceManager {
         this.exportPathString = exportPathString;
     }
     public Path getExportPath()  {
-        try {
-            return Paths.get(this.getExportPathString());
-        } catch (Exception e) {
-            return null;
-        }
+        return stringToPath(this.getExportPathString());
     }
     private void setImportPathString(String importPathString) {
         this.importPathString = importPathString;
