@@ -151,8 +151,8 @@ public class Ui {
         this.printResponseTemplate("Invalid parameters: " + text);
     }
 
-    private void printResponseTaskFileSaved() {
-        this.printResponseTemplate("File saved.");
+    private void printResponseTaskFileSaved(String pathString) {
+        this.printResponseTemplate("Saved task to file: " + pathString);
     }
 
     private void printResponseTaskReadPathInvalid() {
@@ -189,7 +189,7 @@ public class Ui {
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
             this.printResponseTaskRequestInvalidParameters(c.getArgs().get(1));
         } else if (rt == ResponseType.FILE_SAVED) {
-            this.printResponseTaskFileSaved();
+            this.printResponseTaskFileSaved(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH) {
             this.printResponseTaskReadPathInvalid();
         } else if (rt == ResponseType.FILE_READ) {

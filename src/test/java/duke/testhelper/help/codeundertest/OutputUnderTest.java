@@ -38,6 +38,10 @@ public class OutputUnderTest {
         return "Read path not found/invalid. " + System.lineSeparator();
     }
 
+    public static String getExpectedOutputSaved(String pathString) {
+        return getExpectedOutputTemplate("Saved task to file: " + pathString);
+    }
+
     public static String getExpectedOutputTemplate(String text) {
         return text + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
