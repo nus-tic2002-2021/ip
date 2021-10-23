@@ -23,9 +23,7 @@ import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -74,8 +72,8 @@ public class TestIoFind extends TestStream {
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
-        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
-        String out5 = (getExpectedOutputAddedToDo(taskDesc1));
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
+        String out5 = (getExpectedOutputAddedToDo(taskDesc1, 1));
         String out6 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out7 = (getExpectedOutputExitInputLoop());
         String out8 = (getExpectedOutputTerminate());
@@ -89,6 +87,7 @@ public class TestIoFind extends TestStream {
 
         assertEquals(expectedOutputResponse, this.getOutput());
     }
+
     /**
      * Test find routine.
      */
@@ -123,7 +122,7 @@ public class TestIoFind extends TestStream {
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
-        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
         String out5 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out6 = (getExpectedOutputExitInputLoop());
         String out7 = (getExpectedOutputTerminate());
@@ -136,6 +135,7 @@ public class TestIoFind extends TestStream {
         }
         assertEquals(expectedOutputResponse, this.getOutput());
     }
+
     /**
      * Test find routine with invalid keyword. Should not execute the search.
      */
@@ -168,7 +168,7 @@ public class TestIoFind extends TestStream {
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
-        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
         String out5 = (getMsgUnderTestErrorSpacedKeyword());
         String out6 = (getExpectedOutputExitInputLoop());
         String out7 = (getExpectedOutputTerminate());

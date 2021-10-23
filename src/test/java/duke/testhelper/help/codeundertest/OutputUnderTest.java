@@ -50,12 +50,12 @@ public class OutputUnderTest {
         return getExpectedOutputTemplate("ok bye");
     }
 
-    public static String getExpectedOutputAddedToDo(String taskDesc) {
-        return getExpectedOutputTemplate("Added To Do: " + taskDesc);
+    public static String getExpectedOutputAddedToDo(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added To Do [id #" + id + "]: " + desc);
     }
 
-    public static String getExpectedOutputAddedDeadline(String deadlineDesc) {
-        return getExpectedOutputTemplate("Added Deadline: " + deadlineDesc);
+    public static String getExpectedOutputAddedDeadline(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added Deadline [id #" + id + "]: " + desc);
     }
 
     public static String getExpectedOutputAddedEvent(String eventDesc) {

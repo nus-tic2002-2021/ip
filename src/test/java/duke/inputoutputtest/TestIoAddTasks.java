@@ -88,7 +88,7 @@ public class TestIoAddTasks extends TestStream {
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
-        String out4 = getExpectedOutputAddedToDo(taskDesc0);
+        String out4 = getExpectedOutputAddedToDo(taskDesc0, 0);
         String out5 = getExpectedOutputList(getExpectedTaskList(mockTasks));
         String out6 = getExpectedOutputExitInputLoop();
         String out7 = getExpectedOutputTerminate();
@@ -171,7 +171,7 @@ public class TestIoAddTasks extends TestStream {
          */
 
 
-        String taskDesc0 = "event_desc_abc asfasfasf";
+        String taskDesc0 = "deadline asfasfasf";
         String byDateString = "20200101";
 
         String storeDeadlineCommand0 =
@@ -204,7 +204,7 @@ public class TestIoAddTasks extends TestStream {
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
-        String out4 = getExpectedOutputAddedDeadline(taskDesc0);
+        String out4 = getExpectedOutputAddedDeadline(taskDesc0,0);
         String out5 = getExpectedOutputList(getExpectedTaskList(mockDeadlines));
         String out6 = getExpectedOutputExitInputLoop();
         String out7 = getExpectedOutputTerminate();
@@ -271,8 +271,8 @@ public class TestIoAddTasks extends TestStream {
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
-        String out4 = getExpectedOutputAddedToDo(task0ToDoDescription);
-        String out5 = getExpectedOutputAddedDeadline(task1DeadlineDescription);
+        String out4 = getExpectedOutputAddedToDo(task0ToDoDescription, 0);
+        String out5 = getExpectedOutputAddedDeadline(task1DeadlineDescription, 1);
         String out6 = getExpectedOutputAddedEvent(task2EventDescription);
         String out7 = getExpectedOutputList(getExpectedTaskList(mockEvents));
         String out8 = getExpectedOutputExitInputLoop();

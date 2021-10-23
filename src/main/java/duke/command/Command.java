@@ -35,7 +35,7 @@ public abstract class Command {
         return this.args;
     }
 
-    private void setArgs(List<String> inputArgs) {
+    protected void setArgs(List<String> inputArgs) {
         this.args = inputArgs;
     }
 }
