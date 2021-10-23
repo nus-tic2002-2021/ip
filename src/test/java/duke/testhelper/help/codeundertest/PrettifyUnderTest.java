@@ -46,7 +46,7 @@ public class PrettifyUnderTest {
         generating.append((taskQty + " task" + (taskQty > 1 ? "s" : "") + " in list" + System.lineSeparator()));
         /* header values */
 
-        String headerId = String.format(".%-4s  ", "id#");
+        String headerId = String.format(" %-4s  ", "id#");
         String headerDoneStatus = "Done  ";
         String headerTaskType = "Type ";
         String headerDescription = "Task Description                 ";
