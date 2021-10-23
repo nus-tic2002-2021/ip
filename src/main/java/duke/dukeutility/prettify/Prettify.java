@@ -46,7 +46,7 @@ public class Prettify {
 
         // Header Values
 
-        String headerId = String.format(".%-4s  ", "id#");
+        String headerId = String.format(" %-4s  ", "id#");
         String headerDoneStatus = "Done  ";
         String headerTaskType = "Type ";
         String headerDescription = "Task Description                 ";

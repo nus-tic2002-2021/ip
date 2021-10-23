@@ -13,6 +13,7 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithKeywordDescription;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTaskSetCompleted;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
@@ -202,16 +203,16 @@ public class SystemExportTest extends TestStream {
         String eventTo = "20210202";
 
         String in0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
-        String out4 = (getExpectedOutputAddedToDo(todoDesc));
+        String out4 = (getExpectedOutputAddedToDo(todoDesc, 0));
 
         String in1 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
             DELIMITER_DEADLINE_DEADLINE, deadlineBy);
-        String out5 = (getExpectedOutputAddedDeadline(deadlineDesc));
+        String out5 = (getExpectedOutputAddedDeadline(deadlineDesc, 1));
 
         String in2 =
             generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom,
                 DELIMITER_EVENT_TO, eventTo);
-        String out6 = (getExpectedOutputAddedEvent(eventDesc));
+        String out6 = (getExpectedOutputAddedEvent(eventDesc, 2));
 
         String in3 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
 
@@ -240,7 +241,7 @@ public class SystemExportTest extends TestStream {
         MockTask[] selectedMockTasks = new MockTask[] {
             new MockEvent(eventDesc, 2, true, parseStringAsLocalDateTime(eventFrom),
                 parseStringAsLocalDateTime(eventTo))};
-        String out11 = (getExpectedOutputList(getExpectedTaskList(selectedMockTasks)));
+        String out11 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword));
 
         String in8 = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
         String out12 = (getExpectedOutputExitInputLoop());

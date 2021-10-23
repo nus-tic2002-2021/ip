@@ -6,6 +6,7 @@ import java.util.List;
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
+import duke.task.model.Deadline;
 
 public class CommandAddNewDeadline extends Command {
     /**
@@ -16,7 +17,11 @@ public class CommandAddNewDeadline extends Command {
      * @param deadline of deadline
      */
     public CommandAddNewDeadline(TaskManager tm, String desc, LocalDateTime dl) {
-        super(ResponseType.TASK_CREATE_DEADLINE,
-            List.of("create", desc, tm.addNewDeadline(desc, dl).getTaskDescription()));
+        super(ResponseType.TASK_CREATING_IN_PROGRESS,
+            null);
+
+        Deadline deadline = tm.addNewDeadline(desc, dl);
+        this.setArgs(List.of("create", deadline.getTaskDescription(), deadline.getTaskId().toString()));
+        this.setResponseType(ResponseType.TASK_CREATE_DEADLINE);
     }
 }

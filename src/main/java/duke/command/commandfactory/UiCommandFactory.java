@@ -84,7 +84,6 @@ public class UiCommandFactory extends CommandFactory {
     }
 
     protected Command executeCommandAddDeadline(String text, TaskManager taskManager) {
-
         String argLine;
         String[] argList;
         String taskDescription;
@@ -97,7 +96,7 @@ public class UiCommandFactory extends CommandFactory {
             if (argList.length != expectedArgsLength) {
                 String msg =
                     "Expected " + expectedArgsLength + " arguments delimited by \"" + addDeadlineStringDelimiter + "\"";
-                throw new DukeInvalidSyntaxException(msg);
+                return new CommandInvalidTextCommandSyntax(msg);
             }
             taskDescription = argList[0];
             deadline = parseStringAsLocalDateTime(argList[1]);
@@ -121,21 +120,18 @@ public class UiCommandFactory extends CommandFactory {
             argLine = text.replaceFirst(PROMPT_ADD_EVENT, "");
             argList = argLine.split(ADD_EVENT_SCHEDULE_DELIMITER);
             if (argList.length != 2) {
-                throw new Exception("Request line for adding event does not conform to syntax.");
+                return new CommandInvalidTextCommandSyntax("Request line for adding event does not conform to syntax.");
             }
             taskDescription = argList[0];
             scheduleOptionList = argList[1].split("-");
             if (scheduleOptionList.length != 2) {
-                throw new Exception("Request line for adding event does not conform to syntax.");
+                return new CommandInvalidTextCommandSyntax("Request line for adding event does not conform to syntax.");
             }
-
             from = parseStringAsLocalDateTime(scheduleOptionList[0]);
-
             to = parseStringAsLocalDateTime(scheduleOptionList[1]);
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
-
         return new CommandAddNewEvent(taskManager, taskDescription, from, to);
     }
 
@@ -148,7 +144,7 @@ public class UiCommandFactory extends CommandFactory {
             argLine = text.replaceFirst(PROMPT_UPDATE_DONE, "");
             argList = argLine.split(" ");
             if (argList.length != 1) {
-                throw new Exception("Invalid syntax.");
+                return new CommandInvalidTextCommandSyntax("Invalid syntax.");
             }
             taskId = Integer.parseInt(argList[0]);
             if (!taskManager.containsTaskId(taskId)) {
@@ -168,7 +164,7 @@ public class UiCommandFactory extends CommandFactory {
             argLine = text.replaceFirst(PROMPT_DELETE_TASK, "");
             argList = argLine.split(" ");
             if (argList.length != 1) {
-                throw new Exception("Invalid syntax.");
+                return new CommandInvalidTextCommandSyntax("Invalid syntax.");
             }
             taskId = Integer.parseInt(argList[0]);
             if (!taskManager.containsTaskId(taskId)) {
@@ -188,7 +184,7 @@ public class UiCommandFactory extends CommandFactory {
             argLine = text.replaceFirst(PROMPT_FIND_BY_KEYWORD_DESCRIPTION, "");
             argList = argLine.split(" ");
             if (argList.length != 1) {
-                throw new Exception("Invalid syntax. Keyword should not have spacing.");
+                return new CommandInvalidTextCommandSyntax("Invalid syntax. Keyword should not have spacing.");
             }
             keyword = argList[0];
         } catch (Exception e) {

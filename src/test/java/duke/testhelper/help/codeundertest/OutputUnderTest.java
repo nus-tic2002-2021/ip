@@ -50,20 +50,25 @@ public class OutputUnderTest {
         return getExpectedOutputTemplate("ok bye");
     }
 
-    public static String getExpectedOutputAddedToDo(String taskDesc) {
-        return getExpectedOutputTemplate("Added To Do: " + taskDesc);
+    public static String getExpectedOutputAddedToDo(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added To Do [id #" + id + "]: " + desc);
     }
 
-    public static String getExpectedOutputAddedDeadline(String deadlineDesc) {
-        return getExpectedOutputTemplate("Added Deadline: " + deadlineDesc);
+    public static String getExpectedOutputAddedDeadline(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added Deadline [id #" + id + "]: " + desc);
     }
 
-    public static String getExpectedOutputAddedEvent(String eventDesc) {
-        return getExpectedOutputTemplate("Added Event: " + eventDesc);
+    public static String getExpectedOutputAddedEvent(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added Event [id #" + id + "]: " + desc);
+
     }
 
     public static String getExpectedOutputList(String list) {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+    public static String getExpectedOutputListTasksWithKeywordDescription(String list, String keyword) {
+        return "Query keyword in description: " + keyword + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
@@ -75,11 +80,11 @@ public class OutputUnderTest {
     }
 
     public static String getExpectedOutputCommandDeleted(Integer taskId) {
-        return getExpectedOutputTemplate("Task Deleted: " + taskId);
+        return getExpectedOutputTemplate("Task Deleted: #" + taskId);
     }
 
     public static String getMsgUnderTestErrorSpacedKeyword() {
-        String text = "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing.";
+        String text = "Invalid syntax. Keyword should not have spacing.";
         return getExpectedOutputTemplate(text);
     }
 

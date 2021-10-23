@@ -23,9 +23,7 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -74,7 +72,7 @@ public class TestIoList extends TestStream {
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
-        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
         String out5 = (getExpectedOutputCommandDeleted(0));
         String out6 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out7 = (getExpectedOutputExitInputLoop());
@@ -129,8 +127,8 @@ public class TestIoList extends TestStream {
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
         String out2 = (getExpectedOutputReadPathNotFound());
         String out3 = (getExpectedOutputBeginInputLoop());
-        String out4 = (getExpectedOutputAddedToDo(taskDesc0));
-        String out5 = (getExpectedOutputAddedToDo(taskDesc1));
+        String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
+        String out5 = (getExpectedOutputAddedToDo(taskDesc1, 1));
         String out6 = (getExpectedOutputCommandDeleted(0));
         String out7 = (getExpectedOutputList(getExpectedTaskList(mockTasks)));
         String out8 = (getExpectedOutputExitInputLoop());

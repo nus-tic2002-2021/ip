@@ -120,20 +120,20 @@ public class Ui {
 
     }
 
-    private void printResponseAddedToDo(String text) {
-        this.printResponseTemplate("Added To Do: " + text);
+    private void printResponseAddedToDo(String desc, String id) {
+        this.printResponseTemplate("Added To Do [id #" + id + "]: " + desc);
     }
 
-    private void printResponseAddedDeadline(String text) {
-        this.printResponseTemplate("Added Deadline: " + text);
+    private void printResponseAddedDeadline(String desc, String id) {
+        this.printResponseTemplate("Added Deadline [id #" + id + "]: " + desc);
     }
 
-    private void printResponseAddedEvent(String text) {
-        this.printResponseTemplate("Added Event: " + text);
+    private void printResponseAddedEvent(String desc, String id) {
+        this.printResponseTemplate("Added Event [id #" + id + "]: " + desc);
     }
 
     private void printResponseInvalidCommand(String text) {
-        this.printResponseTemplate("Invalid command " + text);
+        this.printResponseTemplate(text);
     }
 
     private void printResponseUnknownRequest() {
@@ -145,8 +145,8 @@ public class Ui {
         this.printResponseTemplate("Task Not Found: " + text);
     }
 
-    private void printResponseTaskDeleted(String text) {
-        this.printResponseTemplate("Task Deleted: " + text);
+    private void printResponseTaskDeleted(String id) {
+        this.printResponseTemplate("Task Deleted: #" + id);
     }
 
     private void printResponseTaskRequestInvalidParameters(String text) {
@@ -171,13 +171,15 @@ public class Ui {
         } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
             this.printResponseTemplate(c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_TODO) {
-            this.printResponseAddedToDo(c.getArgs().get(2));
+            this.printResponseAddedToDo(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
-            this.printResponseAddedDeadline(c.getArgs().get(2));
+            this.printResponseAddedDeadline(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_EVENT) {
-            this.printResponseAddedEvent(c.getArgs().get(0));
+            this.printResponseAddedEvent(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
+        } else if (rt == ResponseType.TASK_LIST_FIND) {
+            this.getPrintStream().print("Query keyword in description: " + c.getArgs().get(2) + System.lineSeparator() + c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
@@ -186,7 +188,7 @@ public class Ui {
             this.printResponseTaskNotFound(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_DELETE_TASK) {
             this.printResponseTaskDeleted(c.getArgs().get(1));
-        } else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
+        } else if (rt == ResponseType.ERROR_REQUEST_INVALID_SYNTAX) {
             this.printResponseInvalidCommand(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
             this.printResponseTaskRequestInvalidParameters(c.getArgs().get(1));
