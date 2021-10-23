@@ -1,13 +1,16 @@
 blah
 to do
-to do
+event
+deadline
 list
 read book
 to do read book
 deadline return book
-deadline return book /by June 6th
+deadline return book /by 2021-10-24 10PM  (wrong)
+deadline return book /by 2021/10/24 10PM  (correct)
 event project meeting
-event project meeting /at Aug 6th 2-4PM
+event project meeting /at 2021-10-24 2-4PM (wrong)
+event project meeting /at 2021/10/24 2PM-4PM (correct)
 to do join sports club
 to do borrow book
 list

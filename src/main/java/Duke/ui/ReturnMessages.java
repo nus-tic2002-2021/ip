@@ -1,5 +1,8 @@
 package Duke.ui;
 
+/**
+ * handle msg output
+ */
 public class ReturnMessages {
     public void separator(){
         System.out.println("    ____________________________________________________________");
@@ -26,8 +29,17 @@ public class ReturnMessages {
      */
     public void welcomeFeedback(){
         separator();
-        System.out.println("    Hello! I'm Duke.Duke");
-        System.out.println("    What can I do for you?");
+        System.out.println("    Hello! I'm Duke");
+        System.out.println("    Here are my functionality....");
+        System.out.println("    Check Existing Tasks:    list");
+        System.out.println("    Mark a Task done：        done {taskID}");
+        System.out.println("    Delete a Task:           delete {taskID}");
+        System.out.println("    Add a Todo Task:         todo read book");
+        System.out.println("    Save Current State:      save");
+        System.out.println("    Add a Event Task:        event xxxx /at {date by YYYY/MM/DD} {startTime}-{endTime}PM");
+        System.out.println("    Add a Deadline Task:     deadline xxxx /by {date by YYYY/MM/DD}");
+        System.out.println("    Add a Deadline Task:     deadline XXXX /by {date by YYYY/MM/DD} {Time}PM");
+        System.out.println("    End the program:         bye");
         separator();
     }
 
@@ -37,6 +49,42 @@ public class ReturnMessages {
     public void exitFeedback(){
         separator();
         System.out.println("    Bye. Hope to see you again soon!");
+        separator();
+    }
+
+    /**
+     * Feedback when loading file.
+     */
+    public void loadingFileFeedback(){
+        separator();
+        System.out.println("     Loading File...");
+        separator();
+    }
+
+    /**
+     * Feedback on file load success.
+     */
+    public void loadSuccessFeedback(){
+        separator();
+        System.out.println("     File Loaded Successfully, use command 'list' to view...");
+        separator();
+    }
+
+    /**
+     * Feedback on file save
+     */
+    public void saveSuccessFeedback(){
+        separator();
+        System.out.println("     Successfully wrote to the file.");
+        separator();
+    }
+
+    /**
+     * Feedback on file create
+     */
+    public void createSuccessFeedback(String name){
+        separator();
+        System.out.println("File created: " + name);
         separator();
     }
 
@@ -84,7 +132,16 @@ public class ReturnMessages {
      */
     public void exception_feedback_noTimeConcept(){
         separator();
-        System.out.println("     HEY!!! Please give a due date for deadlines and events. Let's have some sense of time >_<|||");
+        System.out.println("     HEY!!! Please give a due date for deadlines and events or the syntax could be wrong");
+        separator();
+    }
+
+    /**
+     * Feedback message on Time Parse Exception thrown
+     */
+    public void exception_feedback_timeParse(String message){
+        separator();
+        System.out.printf("     There seems to have problem with your time format [%s]\n", message);
         separator();
     }
 
@@ -108,6 +165,12 @@ public class ReturnMessages {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("     OOPS!!! Something went wrong while loading");
+        separator();
+    }
+
+    public void exception_feedback_unknownError(){
+        separator();
+        System.out.println("Sorry, An unknown error occurred");
         separator();
     }
 }

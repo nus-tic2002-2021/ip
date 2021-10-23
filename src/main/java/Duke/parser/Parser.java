@@ -2,9 +2,8 @@ package Duke.parser;
 public class Parser {
 
     /**
-     * Determines which known command is been input
-     *
-     * @param fullCommand takes in the full command, check via ENUM
+     * This is a factory that generates different CMD objects according to the input parameters
+     * @see CMD
      */
     public static Command parse(String fullCommand) {
         Command command = new Command();

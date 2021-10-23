@@ -20,6 +20,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new UI();
+        ui.showWelcome();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
@@ -30,7 +31,6 @@ public class Duke {
     }
 
     public void run() throws DukeException {
-        ui.showWelcome();
         boolean isExit = false;
 
         while (!isExit) {

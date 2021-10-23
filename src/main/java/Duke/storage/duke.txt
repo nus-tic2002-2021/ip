@@ -1,2 +1,0 @@
-T | 0 | sleep
-D | 0 | sleep | 3pm

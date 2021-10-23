@@ -25,6 +25,10 @@ public class UI{
         returnMessage.exception_feedback_loadingError();
     }
 
+    /**
+     * read cmd user input
+     * @return - command read from user Input
+     */
     public String readCommand() {
         boolean end = false;
         String command;
@@ -41,6 +45,11 @@ public class UI{
         System.out.println(message);
     }
 
+    /**
+     * all the error msg will output by this
+     * All exceptions inherit DukeException
+     * @param e the exception object
+     */
     public void showError(DukeException e) {
         if (e instanceof EmptyDescriptionException) {
             returnMessage.exception_feedback_emptyDescription(e.getMessage());
@@ -54,8 +63,10 @@ public class UI{
             returnMessage.exception_feedback_noTimeConcept();
         } else if (e instanceof UnknownSyntaxException){
             returnMessage.exception_feedback_unknownSyntax(e.getMessage());
+        } else if (e instanceof TimeParseException){
+            returnMessage.exception_feedback_timeParse(e.getMessage());
         } else {
-            System.out.println("system error");
+            returnMessage.exception_feedback_unknownError();
         }
     }
 

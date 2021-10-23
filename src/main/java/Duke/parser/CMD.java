@@ -9,21 +9,33 @@ import Duke.task.*;
 import Duke.ui.ReturnMessages;
 import Duke.ui.UI;
 
+/**
+ * base cmd class
+ * CMD is the base class of all command objects. It contains some public attributes and methods.
+ * Each class that inherits CMD only needs to perform its own duties.
+ */
 public class CMD {
 
+    /**
+     * command user input
+     */
     protected String fullCommand;
 
+    /**
+     * command to be executed
+     */
     protected String keyword;
 
+    /**
+     * command parameters
+     */
     protected String detail;
 
     private static ReturnMessages returnMessage = new ReturnMessages();
 
     /**
-     * Constructor command
-     *
-     * @param command   the command input
-     *
+     * This construction method tells the command to parse into keyword and detail(If needed)
+     * @param command {@code fullCommand} user input
      */
     public CMD(String command) {
         this.fullCommand = command;
@@ -49,12 +61,11 @@ public class CMD {
     }
 
     /**
-     * Base class for different execution
-     *
-     * @param taskList the full task list for saving purpose
-     * @param ui       UI object
-     * @param storage  storage object
-     *
+     * execute cmd
+     * @param taskList user generate
+     * @param ui show interactive information
+     * @param storage info where to storage
+     * @return if true, the program stops, otherwise it starts
      */
     public boolean execute(TaskList taskList, UI ui, Storage storage){
         return false;
@@ -64,7 +75,9 @@ public class CMD {
      * Replies a done/add command
      *
      * @param taskList gets the full task list
-     *
+     * @throws EmptyTaskListException - thrown if task list is empty
+     * @throws UnknownSyntaxException - thrown if syntax is unknown
+     * @throws TaskNotFoundException - thrown if task is not found
      */
     public  void reply(TaskList taskList) throws EmptyTaskListException, UnknownSyntaxException, TaskNotFoundException {
         if(fullCommand.contains("done")){
