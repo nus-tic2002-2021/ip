@@ -68,12 +68,19 @@ public class OutputUnderTest {
     }
 
     public static String getExpectedOutputListTasksWithKeywordDescription(String list, String keyword) {
-        return "Query keyword in description: " + keyword + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
+        return "Query keyword in description: " + keyword + System.lineSeparator() + list +
+            RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
+    public static String getExpectedOutputListTasksWithinPeriod(String list, Integer period) {
+        return "Tasks for the next " + period + " days: " + System.lineSeparator() + list +
+            RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
         return getExpectedOutputTemplate("update done #" + taskId.toString());
     }
+
     public static String getExpectedOutputTaskSetIncomplete(Integer taskId) {
         return getExpectedOutputTemplate("update not done #" + taskId.toString());
     }

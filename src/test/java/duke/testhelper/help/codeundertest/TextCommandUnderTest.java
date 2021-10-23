@@ -3,8 +3,11 @@ package duke.testhelper.help.codeundertest;
 public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
+    public static final String PROMPT_UNDER_TEST_PROJECTION = "projection ";
+
     public static final String PROMPT_UNDER_TEST_MARK_AS_DONE = "done ";
     public static final String PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE = "undone ";
+
     public static final String PROMPT_UNDER_TEST_ADD_TO_DO = "todo ";
 
     public static final String PROMPT_UNDER_TEST_ADD_DEADLINE = "deadline ";
@@ -49,10 +52,10 @@ public class TextCommandUnderTest {
         return invoke + description + deadlineStringDelimiter + deadlineString + System.lineSeparator();
     }
 
-    public static String generateTextCommandLineAddEvent(String invoke, String eventDescription,
-                                                         String addEventScheduleDelimiter, String from,
+    public static String generateTextCommandLineAddEvent(String invoke, String desc,
+                                                         String addScheduleDelimiter, String from,
                                                          String fromToDelimiter, String to) {
-        return invoke + eventDescription + addEventScheduleDelimiter + from + fromToDelimiter + to +
+        return invoke + desc + addScheduleDelimiter + from + fromToDelimiter + to +
             System.lineSeparator();
     }
 
@@ -66,5 +69,8 @@ public class TextCommandUnderTest {
 
     public static String generateTextCommandFindKeywordInDescription(String invoke, String keyword) {
         return invoke + keyword + System.lineSeparator();
+    }
+    public static String generateTextCommandProjection(Integer days) {
+        return PROMPT_UNDER_TEST_PROJECTION + days + System.lineSeparator();
     }
 }
