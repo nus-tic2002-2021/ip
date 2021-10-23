@@ -1,19 +1,24 @@
 package tasks;
 
+import jdk.jfr.Event;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Scheduler {
 
+    private final ArrayList<String> descriptions;
     private final ArrayList<LocalDateTime> starts;
     private final ArrayList<LocalDateTime> ends;
 
     public Scheduler(){
+        descriptions = new ArrayList<>();
         starts = new ArrayList<>();
         ends = new ArrayList<>();
     }
 
-    public boolean schedule(LocalDateTime newStart, LocalDateTime newEnd) {
+    public boolean schedule(String description, LocalDateTime newStart, LocalDateTime newEnd) {
         // start time is later than end time
         if (newEnd.isBefore(newStart)) {
             return false;
@@ -22,6 +27,7 @@ public class Scheduler {
         // no event in the schedule
         boolean scheduleIsEmpty = starts.size() == 0;
         if (scheduleIsEmpty) {
+            descriptions.add(description);
             starts.add(newStart);
             ends.add(newEnd);
             return true;
@@ -33,24 +39,27 @@ public class Scheduler {
         boolean endBeforeFirstEvent = newEnd.isBefore(starts.get(0)) || newEnd.equals(starts.get(0));
         if (startLate) {
             if (startAfterLastEvent) {
+                descriptions.add(description);
                 starts.add(newStart);
                 ends.add(newEnd);
                 return true;
             }
         } else if (startEarly) {
             if (endBeforeFirstEvent){
+                descriptions.add(0,description);
                 starts.add(0,newStart);
                 ends.add(0, newEnd);
                 return true;
             }
-        } else {
-            int index = searchForSlot(newStart);
+        } else { //start somewhere in the middle
+            int index = searchForNewSlot(newStart);
             if (index == -1) { //clashed
                 return false;
             }
             boolean startNotClash = newStart.isAfter(ends.get(index - 1)) || newStart.isEqual(ends.get(index - 1));
             boolean endNotClash = newEnd.isBefore(starts.get(index)) || newEnd.isBefore(starts.get(index));
             if (startNotClash && endNotClash) {
+                descriptions.add(index, description);
                 starts.add(index, newStart);
                 ends.add(index, newEnd);
                 return true;
@@ -60,7 +69,7 @@ public class Scheduler {
         return false;
     }
 
-    public int searchForSlot(LocalDateTime start){
+    public int searchForNewSlot(LocalDateTime start){
         int left = 0;
         int right = starts.size() - 1;
 
@@ -80,12 +89,13 @@ public class Scheduler {
     public void loadSchedule(ArrayList<Task> tasks){
         for (Task task: tasks) {
             if (task.getClass().equals(EventTask.class)) {
-                schedule(((EventTask) task).start, ((EventTask) task).end);
+                EventTask event = (EventTask) task;
+                schedule(event.description, event.start, event.end);
             }
         }
     }
 
-    public int getSlot(LocalDateTime start){
+    public int retrieveSlot(LocalDateTime start){
         int left = 0;
         int right = starts.size() - 1;
 
@@ -103,8 +113,24 @@ public class Scheduler {
     }
 
     public void freeUpSlot(LocalDateTime start){
-        int index = getSlot(start);
+        int index = retrieveSlot(start);
+        descriptions.remove(index);
         starts.remove(index);
         ends.remove(index);
+    }
+
+    public ArrayList<EventTask> getSchedule(LocalDate date) {
+        ArrayList<EventTask> events = new ArrayList<>();
+        for (int i = 0; i < starts.size(); i++) {
+            if(starts.get(i).toLocalDate().equals(date)){
+                String description = descriptions.get(i);
+                LocalDateTime start = starts.get(i);
+                LocalDateTime end = ends.get(i);
+                EventTask event = new EventTask(description, start, end);
+
+                events.add(event);
+            }
+        }
+        return events;
     }
 }

@@ -6,7 +6,6 @@ import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class FindCommand extends Command{

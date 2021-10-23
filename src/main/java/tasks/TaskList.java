@@ -1,6 +1,8 @@
 package tasks;
 
 import exceptions.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -82,7 +84,8 @@ public class TaskList {
         boolean isEvent = task.getClass().equals(EventTask.class);
         boolean canBeAdded = true;
         if (isEvent) {
-            canBeAdded = scheduler.schedule(((EventTask) task).start, ((EventTask) task).end);
+            EventTask event = (EventTask) task;
+            canBeAdded = scheduler.schedule(event.description, event.start, event.end);
         }
         if (canBeAdded) {
             taskList.add(task);
@@ -112,5 +115,15 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return taskList;
+    }
+
+    public ArrayList<Task> getTaskSchedule(LocalDate date) {
+        ArrayList<Task> schedule = new ArrayList<>();
+        ArrayList<EventTask> events = scheduler.getSchedule(date);
+
+        for (EventTask event: events) {
+            schedule.add(event);
+        }
+        return schedule;
     }
 }

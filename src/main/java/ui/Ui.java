@@ -2,6 +2,9 @@ package ui;
 
 import tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,6 +70,11 @@ public class Ui {
 
     /** Prints exit message. */
     public void showExit() { System.out.println("Bye. Hope to see you again soon!"); }
+
+    public void showScheduleFor(LocalDate date) {
+        System.out.println("Here are the task(s) scheduled on " +
+                date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ":");
+    }
 
     /**
      * Prints current task count.

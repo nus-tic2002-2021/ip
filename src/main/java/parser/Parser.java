@@ -49,6 +49,8 @@ public class Parser {
             return doDelete(args);
         case FIND:
             return doFind(args);
+        case VIEW:
+            return doView(args);
         case BYE:
             return doExit();
         default:
@@ -147,6 +149,18 @@ public class Parser {
             return new FindCommand(keyword);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Search keyword is missing.");
+        }
+    }
+
+    private static Command doView(String[] args) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate date = LocalDate.parse(args[1], formatter);
+            return new ViewCommand(date);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand("Date is missing.");
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand("Please enter the date in the format of 'yyyy-MM-dd'");
         }
     }
 
