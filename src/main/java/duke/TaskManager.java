@@ -16,6 +16,7 @@ import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonProper
 import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Locale;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import duke.task.TaskComparator;
@@ -91,6 +92,8 @@ public class TaskManager {
     public ArrayList<Task> getTasksWithWord(String keyword) {
         ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
+
+        keyword = keyword.toLowerCase();
         for (Task t : all) {
             if (t.descContainsKeyword(keyword)) {
                 filtering.add(t);

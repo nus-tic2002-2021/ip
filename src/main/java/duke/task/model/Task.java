@@ -54,7 +54,7 @@ public abstract class Task implements Comparable<Task> {
         String desc = this.getTaskDescription();
         String[] words = desc.split("\\s+");
         for (String word : words) {
-            if (word.equals(keyword)) {
+            if (word.toLowerCase().equals(keyword)) {
                 return true;
             }
         }

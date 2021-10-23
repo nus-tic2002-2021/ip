@@ -8,7 +8,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputEntry;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
-import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputList;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithKeywordDescription;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
@@ -24,9 +23,7 @@ import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -44,12 +41,14 @@ public class TestIoFind extends TestStream {
         String keyword = "MAGIK";
         String taskDesc0 = "nons afasf09qhy2gr";
         String taskDesc1 = "aasfg " + keyword + " c124124";
+        String taskDesc2 = "aasfg " + keyword.toLowerCase() + " negdndetnjd";
         String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
         String store1Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc1);
+        String store2Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc2);
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
-        System.setIn(buildCommandInputStream(store0Command, store1Command, findCommand, exitCommand));
+        System.setIn(buildCommandInputStream(store0Command, store1Command, store2Command, findCommand, exitCommand));
 
         /*
          * Should display:
@@ -62,9 +61,10 @@ public class TestIoFind extends TestStream {
          * terminate
          */
 
-        MockToDo expectedToDo1 = new MockToDo(taskDesc1, 1, false);
+        MockToDo expectedTask1 = new MockToDo(taskDesc1, 1, false);
+        MockToDo expectedTask2 = new MockToDo(taskDesc2, 2, false);
 
-        MockTask[] mockTasks = {expectedToDo1}; // only task 1 should be displayed after query
+        MockTask[] mockTasks = {expectedTask1, expectedTask2}; // only task 1 should be displayed after query
         TaskManager tm = new TaskManager();
 
         String importPathString = getDefaultTasksTestExportPathString();
@@ -77,10 +77,12 @@ public class TestIoFind extends TestStream {
         String out3 = (getExpectedOutputBeginInputLoop());
         String out4 = (getExpectedOutputAddedToDo(taskDesc0, 0));
         String out5 = (getExpectedOutputAddedToDo(taskDesc1, 1));
-        String out6 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(mockTasks), keyword));
-        String out7 = (getExpectedOutputExitInputLoop());
-        String out8 = (getExpectedOutputTerminate());
-        String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8);
+        String out6 = (getExpectedOutputAddedToDo(taskDesc2, 2));
+        String out7 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(mockTasks), keyword));
+        String out8 = (getExpectedOutputExitInputLoop());
+        String out9 = (getExpectedOutputTerminate());
+        String expectedOutputResponse =
+            buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8, out9);
 
         try {
             Main.run(this.getPrintStream(), tm, frm);
