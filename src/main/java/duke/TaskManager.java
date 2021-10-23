@@ -13,10 +13,13 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -171,7 +174,6 @@ public class TaskManager {
 
     /**
      * Converts a JSON formatted task to java object.
-     *
      * @param jsonObj task
      * @return
      * @throws Exception if not recognised as a task.

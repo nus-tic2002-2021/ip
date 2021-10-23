@@ -13,6 +13,10 @@ import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 public class TaskManagerTest extends TestStream {
 
+
+    /**
+     * Add todos to a task manager.
+     */
     @Test
     public void addToDos() {
         TaskManager tm = new TaskManager();
@@ -24,8 +28,9 @@ public class TaskManagerTest extends TestStream {
         assertEquals(desc0, tm.getTaskById(0).getTaskDescription());
         assertEquals(desc1, tm.getTaskById(1).getTaskDescription());
     }
-
-
+    /**
+     * Add events to a task manager.
+     */
     @Test
     public void addEvents() throws Exception {
         TaskManager tm = new TaskManager();
@@ -45,7 +50,9 @@ public class TaskManagerTest extends TestStream {
         assertEquals(from1, ((Event) tm.getTaskById(1)).getFrom());
         assertEquals(to1, ((Event) tm.getTaskById(1)).getTo());
     }
-
+    /**
+     * Add find tasks in a task manager.
+     */
     @Test
     public void findTasksByDescription() throws Exception {
         TaskManager tm = new TaskManager();
@@ -60,5 +67,4 @@ public class TaskManagerTest extends TestStream {
 
         assertEquals(1, tm.getTasksWithWord(keyword).size());
     }
-
 }

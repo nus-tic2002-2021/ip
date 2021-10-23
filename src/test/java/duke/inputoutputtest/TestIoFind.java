@@ -23,9 +23,7 @@ import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -34,6 +32,9 @@ import duke.mock.mocktask.MockToDo;
 import duke.testhelper.TestStream;
 
 public class TestIoFind extends TestStream {
+    /**
+     * Test find routine.
+     */
     @Test
     public void greet_addToDoListTasksWithKeywordSave_exit() {
 
@@ -46,7 +47,6 @@ public class TestIoFind extends TestStream {
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         System.setIn(buildCommandInputStream(store0Command, store1Command, findCommand, exitCommand));
-
 
         /*
          * Should display:
@@ -63,8 +63,10 @@ public class TestIoFind extends TestStream {
 
         MockTask[] mockTasks = {expectedToDo1}; // only task 1 should be displayed after query
         TaskManager tm = new TaskManager();
-        FileResourceManager frm =
-            new FileResourceManager(getDefaultTasksTestExportPathString(), getDefaultTasksImportTestPathString());
+
+        String importPathString = getDefaultTasksTestExportPathString();
+        String exportPathString = getDefaultTasksImportTestPathString();
+        FileResourceManager frm = new FileResourceManager(importPathString, exportPathString);
 
         String out0 = (getExpectedOutputEntry());
         String out1 = (getExpectedOutputImportAttempt(frm.getImportPath()));
@@ -85,7 +87,9 @@ public class TestIoFind extends TestStream {
 
         assertEquals(expectedOutputResponse, this.getOutput());
     }
-
+    /**
+     * Test find routine.
+     */
     @Test
     public void greet_addToDoListTasksWithKeywordSaveExit_emptyResult() {
 
@@ -130,7 +134,9 @@ public class TestIoFind extends TestStream {
         }
         assertEquals(expectedOutputResponse, this.getOutput());
     }
-
+    /**
+     * Test find routine with invalid keyword. Should not execute the search.
+     */
     @Test
     public void greet_addToDoListTasksWithInvalidKeywordSave_exit() {
 

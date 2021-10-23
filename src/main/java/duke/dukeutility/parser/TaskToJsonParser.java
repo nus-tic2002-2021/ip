@@ -22,6 +22,11 @@ public class TaskToJsonParser extends Parser {
     private TaskToJsonParser() {
     }
 
+    /**
+     * Format event as JSON
+     * @param event
+     * @return event as JSON
+     */
     public static JsonObject parseEventAsJson(Event event) {
         JsonObject obj = new JsonObject();
         obj.addProperty(TASK_FIELD_TYPE, JsonTaskType.Event.toString());
@@ -33,6 +38,12 @@ public class TaskToJsonParser extends Parser {
         return obj;
     }
 
+
+    /**
+     * Format deadline as JSON
+     * @param deadline
+     * @return deadline as JSON
+     */
     public static JsonObject parseDeadlineAsJson(Deadline deadline) {
         JsonObject obj = new JsonObject();
         obj.addProperty(TASK_FIELD_TYPE, JsonTaskType.Deadline.toString());
@@ -42,7 +53,11 @@ public class TaskToJsonParser extends Parser {
         obj.addProperty(TASK_FIELD_DEADLINE, parseLocalDateTimeAsString(deadline.getDeadline()));
         return obj;
     }
-
+    /**
+     * Format toDo as JSON
+     * @param toDo
+     * @return toDo as JSON
+     */
     public static JsonObject parseToDoAsJson(ToDo toDo) {
         JsonObject obj = new JsonObject();
         obj.addProperty(TASK_FIELD_TYPE, JsonTaskType.ToDo.toString());
