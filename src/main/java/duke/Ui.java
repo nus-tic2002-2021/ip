@@ -128,8 +128,8 @@ public class Ui {
         this.printResponseTemplate("Added Deadline [id #" + id + "]: " + desc);
     }
 
-    private void printResponseAddedEvent(String desc) {
-        this.printResponseTemplate("Added Event: " + desc);
+    private void printResponseAddedEvent(String desc, String id) {
+        this.printResponseTemplate("Added Event [id #" + id + "]: " + desc);
     }
 
     private void printResponseInvalidCommand(String text) {
@@ -145,8 +145,8 @@ public class Ui {
         this.printResponseTemplate("Task Not Found: " + text);
     }
 
-    private void printResponseTaskDeleted(String text) {
-        this.printResponseTemplate("Task Deleted: " + text);
+    private void printResponseTaskDeleted(String id) {
+        this.printResponseTemplate("Task Deleted: #" + id);
     }
 
     private void printResponseTaskRequestInvalidParameters(String text) {
@@ -175,7 +175,7 @@ public class Ui {
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
             this.printResponseAddedDeadline(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_CREATE_EVENT) {
-            this.printResponseAddedEvent(c.getArgs().get(0));
+            this.printResponseAddedEvent(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {

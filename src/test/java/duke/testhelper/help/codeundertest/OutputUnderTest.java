@@ -58,8 +58,9 @@ public class OutputUnderTest {
         return getExpectedOutputTemplate("Added Deadline [id #" + id + "]: " + desc);
     }
 
-    public static String getExpectedOutputAddedEvent(String eventDesc) {
-        return getExpectedOutputTemplate("Added Event: " + eventDesc);
+    public static String getExpectedOutputAddedEvent(String desc, Integer id) {
+        return getExpectedOutputTemplate("Added Event [id #" + id + "]: " + desc);
+
     }
 
     public static String getExpectedOutputList(String list) {
@@ -75,7 +76,7 @@ public class OutputUnderTest {
     }
 
     public static String getExpectedOutputCommandDeleted(Integer taskId) {
-        return getExpectedOutputTemplate("Task Deleted: " + taskId);
+        return getExpectedOutputTemplate("Task Deleted: #" + taskId);
     }
 
     public static String getMsgUnderTestErrorSpacedKeyword() {

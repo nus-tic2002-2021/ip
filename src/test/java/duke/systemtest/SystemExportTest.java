@@ -202,16 +202,16 @@ public class SystemExportTest extends TestStream {
         String eventTo = "20210202";
 
         String in0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
-        String out4 = (getExpectedOutputAddedToDo(todoDesc,0));
+        String out4 = (getExpectedOutputAddedToDo(todoDesc, 0));
 
         String in1 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
             DELIMITER_DEADLINE_DEADLINE, deadlineBy);
-        String out5 = (getExpectedOutputAddedDeadline(deadlineDesc,1));
+        String out5 = (getExpectedOutputAddedDeadline(deadlineDesc, 1));
 
         String in2 =
             generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom,
                 DELIMITER_EVENT_TO, eventTo);
-        String out6 = (getExpectedOutputAddedEvent(eventDesc));
+        String out6 = (getExpectedOutputAddedEvent(eventDesc, 2));
 
         String in3 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
 

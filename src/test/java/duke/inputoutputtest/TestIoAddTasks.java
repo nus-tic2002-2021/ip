@@ -148,7 +148,7 @@ public class TestIoAddTasks extends TestStream {
         String out2 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out3 = getExpectedOutputReadPathNotFound();
         String out4 = getExpectedOutputBeginInputLoop();
-        String out5 = getExpectedOutputAddedEvent(expectedEvent.getDesc());
+        String out5 = getExpectedOutputAddedEvent(expectedEvent.getDesc(), 0);
         String out6 = getExpectedOutputList(getExpectedTaskList(mockEvents));
         String out7 = getExpectedOutputExitInputLoop();
         String out8 = getExpectedOutputTerminate();
@@ -273,7 +273,7 @@ public class TestIoAddTasks extends TestStream {
         String out3 = getExpectedOutputBeginInputLoop();
         String out4 = getExpectedOutputAddedToDo(task0ToDoDescription, 0);
         String out5 = getExpectedOutputAddedDeadline(task1DeadlineDescription, 1);
-        String out6 = getExpectedOutputAddedEvent(task2EventDescription);
+        String out6 = getExpectedOutputAddedEvent(task2EventDescription, 2);
         String out7 = getExpectedOutputList(getExpectedTaskList(mockEvents));
         String out8 = getExpectedOutputExitInputLoop();
         String out9 = getExpectedOutputTerminate();
