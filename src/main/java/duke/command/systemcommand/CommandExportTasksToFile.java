@@ -1,5 +1,7 @@
 package duke.command.systemcommand;
 
+import java.io.FileWriter;
+import java.nio.file.Path;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -16,11 +18,12 @@ public class CommandExportTasksToFile extends Command {
      * @param tasks task objects to write
      * @param jw    writer
      */
-    public CommandExportTasksToFile(JsonArray tasks, JsonWriter jw) {
-        super(ResponseType.EXPORT_IN_PROGRESS, List.of("export", jw.toString()));
+    public CommandExportTasksToFile(JsonArray tasks, Path writePath) {
+        super(ResponseType.EXPORT_IN_PROGRESS, List.of("export", writePath.toString()));
         try {
-            new Gson().toJson(tasks, jw);
-            jw.close();
+            JsonWriter jsonWriter = new JsonWriter(new FileWriter(writePath.toString(), false));
+            new Gson().toJson(tasks, jsonWriter);
+            jsonWriter.close();
             this.setResponseType(ResponseType.FILE_SAVED);
         } catch (Exception error) {
             this.setResponseType(ResponseType.ERROR_SAVE_FAILURE);

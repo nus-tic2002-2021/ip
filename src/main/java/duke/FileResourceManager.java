@@ -30,6 +30,7 @@ public class FileResourceManager {
 
     /**
      * Handles data imports and exports.
+     *
      * @param exportPathString export path
      * @param importPathString import path
      */
@@ -56,16 +57,17 @@ public class FileResourceManager {
 
     /**
      * Writes tasks to path.
+     *
      * @param tasksJson tasks in JSON format
-     * @param jw writer
      * @return
      */
-    public Command executeExportTasks(JsonArray tasksJson, JsonWriter jw) {
-        return this.getExportCommandFactory().exportTasks(tasksJson, jw);
+    public Command executeExportTasks(JsonArray tasksJson, Path writePath) {
+        return this.getExportCommandFactory().exportTasks(tasksJson, writePath);
     }
 
     /**
      * Import tasks from this import path.
+     *
      * @return
      */
     public CommandJsonResponse executeExtractTasksFromFile() {
@@ -95,6 +97,7 @@ public class FileResourceManager {
 
     /**
      * Save tasks in taskManager to this fileResourceManager's export path.
+     *
      * @param taskManager task manager
      * @return
      */
@@ -124,12 +127,13 @@ public class FileResourceManager {
         } catch (Exception e) {
             return new CommandExecutionError(e, "Obtaining tasks collection from task manager failed " + tasksJson);
         }
-        return this.executeExportTasks(tasksJson, jw);
+        return this.executeExportTasks(tasksJson, exportPath);
     }
 
     /**
      * Import tasks to task manager
-     * @param tasks json array of tasks
+     *
+     * @param tasks       json array of tasks
      * @param taskManager task manager to import to.
      */
     public void importTasksJson(JsonArray tasks, TaskManager taskManager) {
@@ -146,8 +150,9 @@ public class FileResourceManager {
 
     /**
      * Extract from import path, transform to json and load into task manager.
+     *
      * @param taskManager task manager to import to
-     * @param ui ui display
+     * @param ui          ui display
      * @throws Exception
      */
     public void etlTasksFromJsonFileString(TaskManager taskManager, Ui ui) throws Exception {
@@ -158,6 +163,7 @@ public class FileResourceManager {
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasksJson(tasksFromFile, taskManager);
     }
+
     private ImportCommandFactory getImportCommandFactory() {
         return this.importCommandFactory;
     }
