@@ -175,9 +175,9 @@ public class TaskManager {
     /**
      * Converts a JSON formatted task to java object.
      * @param jsonObj task
-     * @return
-     * @throws Exception if not recognised as a task.
-     */
+     * @return task object
+     * @throws Exception if not recognised as a task
+     * */
     public final Task objectify(JsonObject jsonObj) throws Exception {
         if (!isNotNullJsonPropertyTaskType(jsonObj)) {
             throw new Exception("No task type");
