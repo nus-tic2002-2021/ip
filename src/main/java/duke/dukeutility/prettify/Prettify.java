@@ -1,10 +1,11 @@
 package duke.dukeutility.prettify;
 
+import static duke.dukeutility.helper.buildString;
+
 import java.util.ArrayList;
 
 import duke.TaskManager;
 import duke.task.model.Task;
-
 
 public class Prettify {
 
@@ -32,15 +33,18 @@ public class Prettify {
 
     /**
      * Present an array of tasks.
+     *
      * @param tl
      * @return
      */
     public static String prettifyTasks(ArrayList<Task> tl) {
 
         StringBuilder generating = new StringBuilder();
+        // Title
         int taskQty = tl.size();
         generating.append((taskQty + " task" + (taskQty > 1 ? "s" : "") + " in list" + System.lineSeparator()));
-        /* header values */
+
+        // Header Values
 
         String headerId = String.format(".%-4s  ", "id#");
         String headerDoneStatus = "Done  ";
@@ -48,14 +52,8 @@ public class Prettify {
         String headerDescription = "Task Description                 ";
         String headerChronology = "Chronology";
 
-        /* append headers */
-
-        generating.append(headerId);
-        generating.append(headerDoneStatus);
-        generating.append(headerTaskType);
-        generating.append(headerDescription);
-        generating.append(headerChronology);
-        generating.append("\n");
+        generating.append(buildString(headerId, headerDoneStatus, headerTaskType, headerDescription, headerChronology,
+            System.lineSeparator()));
 
         /* column width references */
 
@@ -64,30 +62,26 @@ public class Prettify {
         int lengthColDoneStatus = headerDoneStatus.length();
         int lengthColDesc = headerDescription.length();
 
-        // body
+        // Body Values
         for (Task t : tl) {
             // fill column Id
             String idValue = String.format("%4d", t.getTaskId()).replace(" ", "0");
-            String columnId = fillCell(idValue, lengthColId);
-
+            String id = fillCell(idValue, lengthColId);
             // fill column Done Status
             String doneStatusValue = String.format("[%s]", t.isDone() ? "X" : " ");
-            String columnDoneStatus = fillCell(doneStatusValue, lengthColDoneStatus);
+            String doneStatus = fillCell(doneStatusValue, lengthColDoneStatus);
             // fill column Task Type Status
             String taskTypeSymbolValue = String.format("[%s]", getTaskTypeSymbol(t));
-            String columnTaskType = fillCell(taskTypeSymbolValue, lengthColTaskType);
+            String type = fillCell(taskTypeSymbolValue, lengthColTaskType);
             // fill column Description
             String descValueLong = t.getTaskDescription();
             String descValue = descValueLong.substring(0, Math.min(descValueLong.length(), lengthColDesc - 1));
-            String columnDescription = fillCell(descValue, lengthColDesc);
+            String desc = fillCell(descValue, lengthColDesc);
             // fill column Chronology
-            String columnChronology = t.getChronologyString();
-            generating.append(columnId);
-            generating.append(columnDoneStatus);
-            generating.append(columnTaskType);
-            generating.append(columnDescription);
-            generating.append(columnChronology);
-            generating.append(System.lineSeparator());
+            String chronology = t.getChronologyString();
+
+            String line = buildString(id, doneStatus, type, desc, chronology, System.lineSeparator());
+            generating.append(line);
         }
         return generating.toString();
     }

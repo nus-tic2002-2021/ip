@@ -4,7 +4,6 @@ package duke;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.commandfactory.UiCommandFactory;
 import duke.dukeutility.enums.ResponseType;
@@ -50,12 +49,12 @@ public class Ui {
      * Welcome Message
      */
     public void printEntryMessage() {
-        String logo = " _                   _                                _             \n"
-            + "| |                 | |                              | |                \n"
-            + "| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ \n"
-            + "| __|  / _` | / __| | |/ / | '_ ` _ \\   / _` | / __| | __|  / _ \\ | '__|\n"
-            + "| |_  | (_| | \\__ \\ |   <  | | | | | | | (_| | \\__ \\ | |_  |  __/ | |   \n"
-            + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  \n";
+        String logo = " _                   _                                _             " + System.lineSeparator()
+            + "| |                 | |                              | |                " + System.lineSeparator()
+            + "| |_    __ _   ___  | | __  _ __ ___     __ _   ___  | |_    ___   _ __ " + System.lineSeparator()
+            + "| __|  / _` | / __| | |/ / | '_ ` _ \\   / _` | / __| | __|  / _ \\ | '__|" + System.lineSeparator()
+            + "| |_  | (_| | \\__ \\ |   <  | | | | | | | (_| | \\__ \\ | |_  |  __/ | |   " + System.lineSeparator()
+            + " \\__|  \\__,_| |___/ |_|\\_\\ |_| |_| |_|  \\__,_| |___/  \\__|  \\___| |_|  " + System.lineSeparator();
         this.getPrintStream().print("Hello from" + System.lineSeparator() + logo);
     }
 
@@ -69,6 +68,7 @@ public class Ui {
 
     /**
      * Message: Attempt to load task.
+     *
      * @param path
      */
     public void printInitialLoadTaskAttempt(Path path) {
@@ -97,6 +97,7 @@ public class Ui {
 
     /**
      * cli session with request-response cycle
+     *
      * @param taskManager
      * @param frm
      * @throws Exception
