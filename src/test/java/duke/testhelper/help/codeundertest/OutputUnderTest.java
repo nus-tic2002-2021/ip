@@ -67,6 +67,10 @@ public class OutputUnderTest {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
+    public static String getExpectedOutputListTasksWithKeywordDescription(String list, String keyword) {
+        return "Query keyword in description: " + keyword + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
         return getExpectedOutputTemplate("update done #" + taskId.toString());
     }

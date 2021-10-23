@@ -178,6 +178,8 @@ public class Ui {
             this.printResponseAddedEvent(c.getArgs().get(1), c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
+        } else if (rt == ResponseType.TASK_LIST_FIND) {
+            this.getPrintStream().print("Query keyword in description: " + c.getArgs().get(2) + System.lineSeparator() + c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
