@@ -32,13 +32,12 @@ public class ReturnMessages {
         System.out.println("    Hello! I'm Duke");
         System.out.println("    Here are my functionality....");
         System.out.println("    Check Existing Tasks:    list");
-        System.out.println("    Mark a Task done：        done {taskID}");
+        System.out.println("    Mark a Task done:        done {taskID}");
         System.out.println("    Delete a Task:           delete {taskID}");
         System.out.println("    Add a Todo Task:         todo read book");
         System.out.println("    Save Current State:      save");
-        System.out.println("    Add a Event Task:        event xxxx /at {date by YYYY/MM/DD} {startTime}-{endTime}PM");
-        System.out.println("    Add a Deadline Task:     deadline xxxx /by {date by YYYY/MM/DD}");
-        System.out.println("    Add a Deadline Task:     deadline XXXX /by {date by YYYY/MM/DD} {Time}PM");
+        System.out.println("    Add a Event Task:        event xxxx /at {date by YYYY/MM/DD} {startTime}AM/PM-{endTime}AM/PM");
+        System.out.println("    Add a Deadline Task:     deadline XXXX /by {date by YYYY/MM/DD} {Time}AM/PM");
         System.out.println("    End the program:         bye");
         separator();
     }

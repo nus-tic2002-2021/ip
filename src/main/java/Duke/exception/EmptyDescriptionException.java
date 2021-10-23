@@ -7,7 +7,7 @@ public class EmptyDescriptionException extends DukeException{
      *
      * Prints the following
      *         printer.separator();
-     *         System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", taskType);
+     *         System.out.printf("      OOPS!!! The description of a %s cannot be empty.\n", taskType);
      *         printer.separator();
      *
      * @param message   the pre-defined message
