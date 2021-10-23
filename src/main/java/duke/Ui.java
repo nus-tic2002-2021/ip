@@ -133,7 +133,7 @@ public class Ui {
     }
 
     private void printResponseInvalidCommand(String text) {
-        this.printResponseTemplate("Invalid command " + text);
+        this.printResponseTemplate(text);
     }
 
     private void printResponseUnknownRequest() {
@@ -188,7 +188,7 @@ public class Ui {
             this.printResponseTaskNotFound(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_DELETE_TASK) {
             this.printResponseTaskDeleted(c.getArgs().get(1));
-        } else if (rt == ResponseType.ERROR_REQUEST_INVALID) {
+        } else if (rt == ResponseType.ERROR_REQUEST_INVALID_SYNTAX) {
             this.printResponseInvalidCommand(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
             this.printResponseTaskRequestInvalidParameters(c.getArgs().get(1));

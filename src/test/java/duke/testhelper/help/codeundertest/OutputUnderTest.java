@@ -84,7 +84,7 @@ public class OutputUnderTest {
     }
 
     public static String getMsgUnderTestErrorSpacedKeyword() {
-        String text = "Invalid parameters: java.lang.Exception: Invalid syntax. Keyword should not have spacing.";
+        String text = "Invalid syntax. Keyword should not have spacing.";
         return getExpectedOutputTemplate(text);
     }
 
