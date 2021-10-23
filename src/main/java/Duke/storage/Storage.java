@@ -18,6 +18,13 @@ public class Storage {
     Scanner scanner;
 
     /**
+     * Check current file existence status
+     * @return true or false
+     */
+    public boolean existence(){
+        return isExist;
+    }
+    /**
      * Constructor for Storage
      *
      * @param fileName   the file saving the information of task list
@@ -71,6 +78,7 @@ public class Storage {
             this.isExist = true;
             System.out.println("File exists");
         }
+        this.isExist = true;
         returnMessage.createSuccessFeedback(file.getName());
     }
 
