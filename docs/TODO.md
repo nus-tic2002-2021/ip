@@ -80,3 +80,4 @@ No feature changes (error handling)
 ## New Feature
 
 - [x] find by description
+- [ ] projection for next 30 days

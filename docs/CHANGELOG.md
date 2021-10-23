@@ -155,5 +155,8 @@ No feature changes (error handling)
 
 `list` list tasks \
 `find [string_in_description]` query tasks with string in description \
+
+`projection` projection for next 30 days \
+
 `bye` exit input loop \
 `save` save tasks to file \
