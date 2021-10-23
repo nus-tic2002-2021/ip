@@ -90,7 +90,11 @@ CMD_Deadline extends CMD{
         return localDate;
     }
 
-
+    /**
+     * Transforms time to 24hour format
+     * @param t string such as [1AM] [10PM]
+     * @return integer time such as 1, 22
+     */
     private int get24HrFormat(String t){
         int timeVal;
         if(t.contains("AM")){

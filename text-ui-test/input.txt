@@ -1,22 +1,17 @@
-blah
-to do
-event
-deadline
-list
-read book
 to do read book
 deadline return book
-deadline return book /by 2021-10-24 10PM  (wrong)
-deadline return book /by 2021/10/24 10PM  (correct)
+deadline return book /by 2021-10-24 10PM
+deadline return book /by 2021/10/24 10PM
 event project meeting
-event project meeting /at 2021-10-24 2-4PM (wrong)
-event project meeting /at 2021/10/24 2PM-4PM (correct)
+event project meeting /at 2021-10-24 2-4PM
+event project meeting /at 2021/10/24 2PM-4PM
 to do join sports club
 to do borrow book
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+deadline return book /by 2021/11/5 10PM
+event project meeting /at 2022/7/30 2PM-4PM
+event new year /at 2022/2/2 0AM-12AM
+save
 list
 done 1
 done 2

@@ -1,6 +1,6 @@
 package Duke.parser;
 
-public enum CMD_Event_Enum_MTH {
+public enum CMD_Enum_MTH {
     JAN("Jan"),
     FEB("Feb"),
     MAR("Mar"),
@@ -15,7 +15,7 @@ public enum CMD_Event_Enum_MTH {
     DEC("Dec")
     ;
 
-    CMD_Event_Enum_MTH(String month) {
+    CMD_Enum_MTH(String month) {
         this.month = month;
     }
 

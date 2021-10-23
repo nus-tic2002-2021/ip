@@ -23,6 +23,14 @@ public class CMD_Event extends CMD{
     }
 
 
+    /**
+     * Function Overloading for execution of event command
+     *
+     * @param taskList the full task list for saving purpose
+     * @param ui       UI object
+     * @param storage  storage object
+     *
+     */
     @Override
     public boolean execute(TaskList taskList, UI ui, Storage storage) {
         boolean success = true;
@@ -80,6 +88,11 @@ public class CMD_Event extends CMD{
     }
 
 
+    /**
+     * Transforms time to 24hour format
+     * @param t string such as [1AM] [10PM]
+     * @return integer time such as 1, 22
+     */
     private int get24HrFormat(String t){
         int timeVal;
         if(t.contains("AM")){
@@ -92,6 +105,11 @@ public class CMD_Event extends CMD{
         return timeVal;
     }
 
+    /**
+     * converts time in integer to LocalTime
+     * @param t the integer time [1] [22]
+     * @return time in LocalTime [01:00:00] [22:00:00]
+     */
     private LocalTime timeParse(int t){
         return LocalTime.of(t,0,0);
     }

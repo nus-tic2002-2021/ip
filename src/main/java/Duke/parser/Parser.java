@@ -1,4 +1,5 @@
 package Duke.parser;
+
 public class Parser {
 
     /**

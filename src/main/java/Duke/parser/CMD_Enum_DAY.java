@@ -1,6 +1,6 @@
 package Duke.parser;
 
-public enum CMD_Event_Enum_DAY {
+public enum CMD_Enum_DAY {
     MON("Mon"),
     TUE("Tue"),
     WED("Wed"),
@@ -8,7 +8,7 @@ public enum CMD_Event_Enum_DAY {
     FRI("Fri")
     ;
 
-    CMD_Event_Enum_DAY(String day) {
+    CMD_Enum_DAY(String day) {
         this.day = day;
     }
 
