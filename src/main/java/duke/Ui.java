@@ -4,7 +4,6 @@ package duke;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.commandfactory.UiCommandFactory;
 import duke.dukeutility.enums.ResponseType;
@@ -179,7 +178,8 @@ public class Ui {
         } else if (rt == ResponseType.TASK_LIST_ALL) {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_LIST_FIND) {
-            this.getPrintStream().print("Query keyword in description: " + c.getArgs().get(2) + System.lineSeparator() + c.getArgs().get(1));
+            this.getPrintStream().print(
+                "Query keyword in description: " + c.getArgs().get(2) + System.lineSeparator() + c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_UPDATE_COMPLETE) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
@@ -200,6 +200,9 @@ public class Ui {
             this.printReadSuccess(c.getArgs().get(2));
         } else if (rt == ResponseType.TASK_UPDATE_INCOMPLETE) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
+        } else if (rt == ResponseType.TASK_PROJECTION) {
+            this.getPrintStream().print(
+                "Tasks for the next " + c.getArgs().get(2) + " days: " + System.lineSeparator() + c.getArgs().get(1));
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }

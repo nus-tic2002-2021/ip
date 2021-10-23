@@ -13,13 +13,12 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
-
+import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
+import duke.task.TaskComparator;
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -97,6 +96,18 @@ public class TaskManager {
                 filtering.add(t);
             }
         }
+        return filtering;
+    }
+
+    public ArrayList<Task> getTasksForNextDays(Integer period) {
+        ArrayList<Task> all = this.tasks.getAllAsArray();
+        ArrayList<Task> filtering = new ArrayList<>();
+        for (Task t : all) {
+            if (isTaskWithinNextDays(t, period)) {
+                filtering.add(t);
+            }
+        }
+        filtering.sort(TaskComparator::compareTaskDate);
         return filtering;
     }
 
