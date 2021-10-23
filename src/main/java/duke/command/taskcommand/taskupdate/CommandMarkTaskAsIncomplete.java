@@ -6,14 +6,14 @@ import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 
-public class CommandMarkTaskAsDone extends Command {
+public class CommandMarkTaskAsIncomplete extends Command {
     /**
      * get task by id in task manager and set task as done
      * @param taskMgr task manager
      * @param taskId id of task
      */
-    public CommandMarkTaskAsDone(TaskManager taskMgr, Integer taskId) {
-        super(ResponseType.TASK_UPDATE_COMPLETE,
-            List.of("update", "done", "#" + taskMgr.getTaskByIdAndSetCompleted(taskId).getTaskId().toString()));
+    public CommandMarkTaskAsIncomplete(TaskManager taskMgr, Integer taskId) {
+        super(ResponseType.TASK_UPDATE_INCOMPLETE,
+            List.of("update", "not done", "#" + taskMgr.getTaskByIdAndSetIncomplete(taskId).getTaskId().toString()));
     }
 }

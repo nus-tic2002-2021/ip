@@ -74,6 +74,9 @@ public class OutputUnderTest {
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {
         return getExpectedOutputTemplate("update done #" + taskId.toString());
     }
+    public static String getExpectedOutputTaskSetIncomplete(Integer taskId) {
+        return getExpectedOutputTemplate("update not done #" + taskId.toString());
+    }
 
     public static String getExpectedOutputCommandUnknown() {
         return getExpectedOutputTemplate("Unknown command. . .");
