@@ -9,6 +9,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_B
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +28,9 @@ public class TextCommandValidator {
 
     public static Boolean isRequestMarkTaskAsDone(String text) {
         return text.startsWith(PROMPT_UPDATE_DONE);
+    }
+    public static Boolean isRequestMarkTaskAsIncomplete(String text) {
+        return text.startsWith(PROMPT_UPDATE_NOT_DONE);
     }
 
     public static Boolean isRequestAddToDo(String text) {

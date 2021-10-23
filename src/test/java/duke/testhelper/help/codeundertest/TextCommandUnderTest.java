@@ -4,6 +4,7 @@ public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
     public static final String PROMPT_UNDER_TEST_MARK_AS_DONE = "done ";
+    public static final String PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE = "undone ";
     public static final String PROMPT_UNDER_TEST_ADD_TO_DO = "todo ";
 
     public static final String PROMPT_UNDER_TEST_ADD_DEADLINE = "deadline ";

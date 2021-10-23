@@ -180,7 +180,7 @@ public class Ui {
             this.getPrintStream().print(c.getArgs().get(1));
         } else if (rt == ResponseType.TASK_LIST_FIND) {
             this.getPrintStream().print("Query keyword in description: " + c.getArgs().get(2) + System.lineSeparator() + c.getArgs().get(1));
-        } else if (rt == ResponseType.TASK_UPDATE_DONE_STATUS) {
+        } else if (rt == ResponseType.TASK_UPDATE_COMPLETE) {
             this.printResponseTemplate(String.join(" ", c.getArgs()));
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
             this.printResponseUnknownRequest();
@@ -198,6 +198,8 @@ public class Ui {
             this.printResponseTaskReadPathInvalid();
         } else if (rt == ResponseType.FILE_READ) {
             this.printReadSuccess(c.getArgs().get(2));
+        } else if (rt == ResponseType.TASK_UPDATE_INCOMPLETE) {
+            this.printResponseTemplate(String.join(" ", c.getArgs()));
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }

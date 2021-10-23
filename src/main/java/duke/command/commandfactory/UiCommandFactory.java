@@ -9,6 +9,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
 import static duke.dukeutility.parser.DateParser.parseStringAsLocalDateTime;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestAddDeadline;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestAddEvent;
@@ -18,6 +19,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestExitLoop;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestFind;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestList;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsDone;
+import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsIncomplete;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
 
 import java.time.LocalDateTime;
@@ -38,6 +40,7 @@ import duke.command.taskcommand.taskquery.CommandListAll;
 import duke.command.taskcommand.taskquery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
+import duke.command.taskcommand.taskupdate.CommandMarkTaskAsIncomplete;
 import duke.dukeexception.DukeInvalidSyntaxException;
 
 
@@ -54,7 +57,9 @@ public class UiCommandFactory extends CommandFactory {
                 return new CommandListAll(taskManager);
             } else if (isRequestMarkTaskAsDone(text)) {
                 return this.executeCommandMarkTaskAsDone(text, taskManager);
-            } else if (isRequestAddToDo(text)) {
+            } else if (isRequestMarkTaskAsIncomplete(text)) {
+                return this.executeCommandMarkTaskAsIncomplete(text, taskManager);
+            }  else if (isRequestAddToDo(text)) {
                 return this.executeCommandAddToDo(text, taskManager);
             } else if (isRequestAddDeadline(text)) {
                 return this.executeCommandAddDeadline(text, taskManager);
@@ -66,7 +71,7 @@ public class UiCommandFactory extends CommandFactory {
                 return frm.executeCommandSave(taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
-            } else {
+            }else {
                 return new CommandUnknownRequest(text);
             }
         } catch (Exception e) {
@@ -154,6 +159,25 @@ public class UiCommandFactory extends CommandFactory {
             return new CommandInvalidRequestParameters(e.toString());
         }
         return new CommandMarkTaskAsDone(taskManager, taskId);
+    }
+    protected Command executeCommandMarkTaskAsIncomplete(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        Integer taskId;
+        try {
+            argLine = text.replaceFirst(PROMPT_UPDATE_NOT_DONE, "");
+            argList = argLine.split(" ");
+            if (argList.length != 1) {
+                return new CommandInvalidTextCommandSyntax("Invalid syntax.");
+            }
+            taskId = Integer.parseInt(argList[0]);
+            if (!taskManager.containsTaskId(taskId)) {
+                return new CommandTaskNotFound(argList[0]);
+            }
+        } catch (Exception e) {
+            return new CommandInvalidRequestParameters(e.toString());
+        }
+        return new CommandMarkTaskAsIncomplete(taskManager, taskId);
     }
 
     protected Command executeCommandDeleteTask(String text, TaskManager taskManager) {
