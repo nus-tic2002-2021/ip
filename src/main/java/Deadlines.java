@@ -1,7 +1,8 @@
+import java.time.LocalDate;
 public class Deadlines extends Task  {
-    protected String by;
+    protected LocalDate by;
 
-    public Deadlines(String description, boolean isDone, String by) {
+    public Deadlines(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
         this.description = description;
         this.isDone = isDone;
