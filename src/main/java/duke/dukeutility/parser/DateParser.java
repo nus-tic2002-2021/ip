@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import duke.dukeexception.DukeParseDateTimeException;
+
 public class DateParser {
     private static final String transitiveJsonAndTextPattern = "yyyy-MM-dd-HH-mm-ss";
     private static final List<String> patterns =
@@ -16,11 +18,12 @@ public class DateParser {
 
     /**
      * format string as LocalDateTime
+     *
      * @param dateTimeString
      * @return date in LocalDateTime format.
-     * @throws Exception Formatting failed
+     * @throws DukeParseDateTimeException Formatting failed
      */
-    public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws Exception {
+    public static LocalDateTime parseStringAsLocalDateTime(String dateTimeString) throws DukeParseDateTimeException {
 
         LocalDateTime ldt = null;
         for (String pattern : DateParser.patterns) {
@@ -37,10 +40,10 @@ public class DateParser {
             ;
         }
         if (ldt == null) {
-            throw new Exception("Parse as LocalDateTime failed.");
+            throw new DukeParseDateTimeException(
+                "Date should be of the following format: " + String.join(", ", patterns));
         }
         return ldt;
-
     }
 
     public static LocalDate parseStringAsLocalDate(String dateString) {

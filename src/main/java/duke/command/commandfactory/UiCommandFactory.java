@@ -21,9 +21,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestList;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsDone;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsIncomplete;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
-
 import java.time.LocalDateTime;
-
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
@@ -42,6 +40,7 @@ import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsIncomplete;
 import duke.dukeexception.DukeInvalidSyntaxException;
+import duke.dukeexception.DukeParseDateTimeException;
 
 
 public class UiCommandFactory extends CommandFactory {
@@ -59,7 +58,7 @@ public class UiCommandFactory extends CommandFactory {
                 return this.executeCommandMarkTaskAsDone(text, taskManager);
             } else if (isRequestMarkTaskAsIncomplete(text)) {
                 return this.executeCommandMarkTaskAsIncomplete(text, taskManager);
-            }  else if (isRequestAddToDo(text)) {
+            } else if (isRequestAddToDo(text)) {
                 return this.executeCommandAddToDo(text, taskManager);
             } else if (isRequestAddDeadline(text)) {
                 return this.executeCommandAddDeadline(text, taskManager);
@@ -71,7 +70,7 @@ public class UiCommandFactory extends CommandFactory {
                 return frm.executeCommandSave(taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
-            }else {
+            } else {
                 return new CommandUnknownRequest(text);
             }
         } catch (Exception e) {
@@ -95,20 +94,23 @@ public class UiCommandFactory extends CommandFactory {
         LocalDateTime deadline;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_DEADLINE, "");
-            String addDeadlineStringDelimiter = ADD_DEADLINE_DEADLINE_DELIMITER;
-            argList = argLine.split(addDeadlineStringDelimiter);
+            argList = argLine.split(ADD_DEADLINE_DEADLINE_DELIMITER);
             int expectedArgsLength = 2;
             if (argList.length != expectedArgsLength) {
                 String msg =
-                    "Expected " + expectedArgsLength + " arguments delimited by \"" + addDeadlineStringDelimiter + "\"";
+                    "Expected " + expectedArgsLength + " arguments delimited by \"" + ADD_DEADLINE_DEADLINE_DELIMITER +
+                        "\"";
                 return new CommandInvalidTextCommandSyntax(msg);
             }
-            taskDescription = argList[0];
-            deadline = parseStringAsLocalDateTime(argList[1]);
-        } catch (DukeInvalidSyntaxException e) {
-            return new CommandInvalidTextCommandSyntax(e.getMessage());
+            try {
+                taskDescription = argList[0];
+                deadline = parseStringAsLocalDateTime(argList[1]);
+            } catch (DukeParseDateTimeException e) {
+                return new CommandInvalidRequestParameters(e.getMessage());
+            }
         } catch (Exception e) {
-            return new CommandExecutionError(e, "Unknown Error");
+            return new CommandInvalidTextCommandSyntax(e.getMessage());
+
         }
         return new CommandAddNewDeadline(taskManager, taskDescription, deadline);
     }
@@ -132,8 +134,12 @@ public class UiCommandFactory extends CommandFactory {
             if (scheduleOptionList.length != 2) {
                 return new CommandInvalidTextCommandSyntax("Request line for adding event does not conform to syntax.");
             }
-            from = parseStringAsLocalDateTime(scheduleOptionList[0]);
-            to = parseStringAsLocalDateTime(scheduleOptionList[1]);
+            try {
+                from = parseStringAsLocalDateTime(scheduleOptionList[0]);
+                to = parseStringAsLocalDateTime(scheduleOptionList[1]);
+            } catch (DukeParseDateTimeException e) {
+                return new CommandInvalidRequestParameters(e.getMessage());
+            }
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
@@ -160,6 +166,7 @@ public class UiCommandFactory extends CommandFactory {
         }
         return new CommandMarkTaskAsDone(taskManager, taskId);
     }
+
     protected Command executeCommandMarkTaskAsIncomplete(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
