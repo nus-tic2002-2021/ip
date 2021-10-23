@@ -2,6 +2,7 @@ package tasks;
 
 import exceptions.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A <code>TaskList</code> object stores all available tasks (to-dos, deadlines, events).
@@ -98,7 +99,8 @@ public class TaskList {
         ArrayList<Task> results = new ArrayList<>();
 
         for (Task task: taskList) {
-            if (task.description.contains(keyword)) {
+            String description = task.description.toLowerCase();
+            if (description.contains(keyword.toLowerCase())) {
                 results.add(task);
             }
         }
