@@ -22,4 +22,9 @@ public class Event extends Task {
     public String toStatusString() {
         return "[E]" + super.toStatusString() + " (at: " + timing + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return super.toSaveString() + "|" + timing;
+    }
 }

@@ -3,6 +3,8 @@ package com.alexooi.duke.tasks;
 import com.alexooi.duke.enums.TaskType;
 import com.alexooi.duke.commands.Command;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
+import com.alexooi.duke.exceptions.InvalidFileFormatException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,5 +47,29 @@ public class TaskFactory {
         }
         throw new InvalidCommandFormatException(
                 "Cannot find the appropriate task to create.");
+    }
+
+    public static Task getInstance(String s) throws InvalidFileFormatException {
+        String[] line = s.split("\\|");
+        boolean doneState = line[1].equalsIgnoreCase("t");
+        Task currentTask;
+
+        String keyword = line[0];
+        if (keyword.equalsIgnoreCase(TaskType.DEADLINE.toString())) {
+            String description = line[2];
+            String dueDate = line[3];
+            currentTask = new Deadline(description, dueDate);
+        } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
+            String description = line[2];
+            String timing = line[3];
+            currentTask = new Event(description, timing);
+        } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
+            currentTask = new Todo(line[2]);
+        } else {
+            throw new InvalidFileFormatException();
+        }
+
+        currentTask.setDone(doneState);
+        return currentTask;
     }
 }

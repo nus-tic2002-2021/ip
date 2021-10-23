@@ -22,4 +22,9 @@ public class Deadline extends Task {
     public String toStatusString() {
         return "[D]" + super.toStatusString() + " (by: " + dueDate + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return super.toSaveString() + "|" + dueDate;
+    }
 }

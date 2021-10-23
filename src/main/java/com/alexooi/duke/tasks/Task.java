@@ -42,12 +42,17 @@ public abstract class Task {
     }
 
     public String toStatusString() {
-        String doneStr = (isDone) ? "X" : " ";
+        String doneStr = (getDone()) ? "X" : " ";
         return "[" + doneStr + "] " + this;
     }
 
     @Override
     public String toString() {
         return getDescription();
+    }
+
+    public String toSaveString() {
+        String doneStr = (getDone()) ? "T" : "F";
+        return getType() + "|" + doneStr + "|" + getDescription();
     }
 }

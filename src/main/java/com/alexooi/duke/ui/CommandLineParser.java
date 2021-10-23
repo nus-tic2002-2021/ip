@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser implements IOParser<Command, Scanner> {
+public class CommandLineParser implements IOParser<Command, Scanner> {
     public Command readInput(Scanner sc, Iterable<Command> commands)
             throws InvalidCommandException {
         String input = sc.nextLine();

@@ -1,9 +1,10 @@
 package com.alexooi.duke;
 
 import com.alexooi.duke.commands.Command;
+import com.alexooi.duke.storage.FileStorage;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
-import com.alexooi.duke.ui.Parser;
+import com.alexooi.duke.ui.CommandLineParser;
 import com.alexooi.duke.ui.OutputFormatter;
 import com.alexooi.duke.exceptions.InvalidCommandException;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
@@ -25,7 +26,7 @@ public class Duke {
 
     public static Duke getInstance() {
         if (instance == null) {
-            instance = new Duke(new OutputFormatter(), new Parser());
+            instance = new Duke(new OutputFormatter(), new CommandLineParser());
         }
 
         return instance;
@@ -33,7 +34,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke main = Duke.getInstance();
-        TaskList tasks = TaskList.getInstance();
+        FileStorage client = new FileStorage("state.txt");
+        TaskList tasks = TaskList.getInstance(client);
         ServiceLoader<Command> commandLoader = ServiceLoader.load(Command.class);
         System.out.println(main.prompt.start());
 
@@ -58,6 +60,7 @@ public class Duke {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            tasks.save();
         }
 
         System.out.println(main.prompt.exit());
