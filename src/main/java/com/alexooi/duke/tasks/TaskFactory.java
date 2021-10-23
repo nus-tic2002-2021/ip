@@ -4,6 +4,8 @@ import com.alexooi.duke.enums.TaskType;
 import com.alexooi.duke.commands.Command;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.exceptions.InvalidFileFormatException;
+import com.alexooi.duke.interfaces.DateParser;
+import com.alexooi.duke.utility.InputDateParser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +17,7 @@ public class TaskFactory {
             "^(?<" + KEY_DESCRIPTION + ">.+) /by (?<" + KEY_DATE + ">.+)$";
     private static final String EVENT_PATTERN =
             "^(?<" + KEY_DESCRIPTION + ">.+) /at (?<" + KEY_DATE + ">.+)$";
+    private static final DateParser dateParser = new InputDateParser();
 
     public static Task getInstance(Command cmd) throws InvalidCommandFormatException {
         String keyword = cmd.getKeyword();
@@ -25,7 +28,7 @@ public class TaskFactory {
             if (deadlineMatch.matches()) {
                 String description = deadlineMatch.group(KEY_DESCRIPTION);
                 String dueDate = deadlineMatch.group(KEY_DATE);
-                return new Deadline(description, dueDate);
+                return new Deadline(description, dueDate, dateParser);
             } else {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
             }
@@ -34,7 +37,7 @@ public class TaskFactory {
             if (eventMatch.matches()) {
                 String description = eventMatch.group(KEY_DESCRIPTION);
                 String timing = eventMatch.group(KEY_DATE);
-                return new Event(description, timing);
+                return new Event(description, timing, dateParser);
             } else {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_EVENT);
             }
@@ -58,11 +61,11 @@ public class TaskFactory {
         if (keyword.equalsIgnoreCase(TaskType.DEADLINE.toString())) {
             String description = line[2];
             String dueDate = line[3];
-            currentTask = new Deadline(description, dueDate);
+            currentTask = new Deadline(description, dueDate, dateParser);
         } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
             String description = line[2];
             String timing = line[3];
-            currentTask = new Event(description, timing);
+            currentTask = new Event(description, timing, dateParser);
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
             currentTask = new Todo(line[2]);
         } else {

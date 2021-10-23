@@ -35,6 +35,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke main = Duke.getInstance();
         FileStorage client = new FileStorage("state.txt");
+
         TaskList tasks = TaskList.getInstance(client);
         ServiceLoader<Command> commandLoader = ServiceLoader.load(Command.class);
         System.out.println(main.prompt.start());
