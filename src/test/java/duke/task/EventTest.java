@@ -1,14 +1,15 @@
 package duke.task;
 
-import duke.testHelper.help.CodeUnderTest.ParserUnderTest;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 
 public class EventTest {
     @Test
-    void CreateEventTest(){
+    void createEventTest_expectInvalidDateStringToThrow() {
         String desc = "event1";
         String fromString = "nonsense day1";
         String toString = "asdasdasd asdasd ";

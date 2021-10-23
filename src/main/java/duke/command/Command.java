@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.dukeUtility.enums.ResponseType;
-
 import java.util.List;
+
+import duke.dukeutility.enums.ResponseType;
+
 
 /**
  * Abstract Class for commands.
@@ -10,26 +11,31 @@ import java.util.List;
  */
 public abstract class Command {
     /* Array of args to record parameters and results for task creation. */
-    private List<String> _args;
+    private List<String> args;
     /* Response type for users to identify the behavior that was executed in the command */
-    private ResponseType _responseType;
+    private ResponseType responseType;
 
     protected Command(ResponseType rt, List<String> args) {
         this.setResponseType(rt);
         this.setArgs(args);
     }
+
     private Command() {
     }
+
     public ResponseType getResponseType() {
-        return _responseType;
+        return responseType;
     }
+
     protected void setResponseType(ResponseType rt) {
-        _responseType = rt;
+        responseType = rt;
     }
+
     public List<String> getArgs() {
-        return this._args;
+        return this.args;
     }
-    private void setArgs(List<String> _args) {
-        this._args = _args;
+
+    private void setArgs(List<String> inputArgs) {
+        this.args = inputArgs;
     }
 }

@@ -5,10 +5,14 @@ package duke.task.model;
  * Root class for tasks
  */
 public abstract class Task implements Comparable<Task> {
-    private String _taskDescription;
-    private Integer _taskId;
-    private Boolean _done;
 
+
+    private String taskDescription;
+    private Integer taskId;
+    private Boolean done;
+
+    protected Task() {
+    }
 
     protected Task(String taskDescription, Integer taskId, Boolean done) {
         this.setTaskDescription(taskDescription);
@@ -16,41 +20,41 @@ public abstract class Task implements Comparable<Task> {
         this.setDoneStatus(done);
     }
 
-    public void setTaskId(Integer taskId) {
-        this._taskId = taskId;
+    public String getTaskDescription() {
+        return this.taskDescription;
     }
 
     public void setTaskDescription(String taskDescription) {
-        this._taskDescription = taskDescription;
+        this.taskDescription = taskDescription;
     }
-
-    protected Task() {
-    }
-
-    public String getTaskDescription() {
-        return this._taskDescription;
-    }
-
 
     public Integer getTaskId() {
-        return this._taskId;
+        return this.taskId;
     }
 
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
 
     public Boolean isDone() {
-        return this._done;
+        return this.done;
     }
 
     public Boolean setDoneStatus(Boolean next) {
-        this._done = next;
-        return this._done;
+        this.done = next;
+        return this.done;
     }
 
-    public Boolean descContainsKeyword(String keyword){
-        String desc = this._taskDescription;
+    /**
+     * Check if this task description contains keyword.
+     * @param keyword
+     * @return
+     */
+    public Boolean descContainsKeyword(String keyword) {
+        String desc = this.getTaskDescription();
         String[] words = desc.split("\\s+");
-        for(String word : words){
-            if(word.equals(keyword)){
+        for (String word : words) {
+            if (word.equals(keyword)) {
                 return true;
             }
         }
@@ -62,6 +66,4 @@ public abstract class Task implements Comparable<Task> {
     public int compareTo(Task u) {
         return Integer.compare(this.getTaskId(), u.getTaskId());
     }
-
-
 }

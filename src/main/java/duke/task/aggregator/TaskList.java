@@ -1,29 +1,27 @@
 package duke.task.aggregator;
 
-import duke.task.model.Task;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
+
+import duke.task.model.Task;
 
 
 public class TaskList {
-    private final ConcurrentHashMap<Integer, Task> _map = new ConcurrentHashMap<>();
-
-    // helper class
-    private Integer getTaskKey(Task task) {
-        return task.getTaskId();
-    }
+    private final ConcurrentHashMap<Integer, Task> map = new ConcurrentHashMap<>();
 
     public TaskList() {
     }
 
-    public void addTask(Task t) {
-        this._map.put(this.getTaskKey(t), t);
+    private Integer getTaskKey(Task task) {
+        return task.getTaskId();
     }
 
-    private ConcurrentHashMap<Integer, Task> getContainer(){
-        return this._map;
+    public void addTask(Task t) {
+        this.map.put(this.getTaskKey(t), t);
+    }
+
+    private ConcurrentHashMap<Integer, Task> getContainer() {
+        return this.map;
     }
 
 
@@ -36,7 +34,6 @@ public class TaskList {
         return this.getMap().size();
     }
 
-
     public Boolean containsKey(Integer key) {
         return this.getMap().containsKey(key);
     }
@@ -44,18 +41,19 @@ public class TaskList {
     public Task getTaskById(Integer taskId) {
         return this.getMap().get(taskId);
     }
+
+    /**
+     * Remove a task in a container by task id
+     * @param taskId
+     * @return
+     */
     public Task removeTaskById(Integer taskId) {
         Task task = this.getTaskById(taskId);
         this.getMap().remove(taskId);
         return task;
     }
 
-
-
     private ConcurrentHashMap<Integer, Task> getMap() {
-        return this._map;
+        return this.getContainer();
     }
-
-
-
 }
