@@ -30,14 +30,11 @@ public class Duke {
             taskList = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
-
-            //initialise storage
             try {
                 storage.init();
-            } catch (IOException error){
+            } catch (IOException error) {
                 ui.showError(error.getMessage());
             }
-
             taskList = new TaskList();
         }
     }
@@ -49,13 +46,11 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch ( IOException e){
+            } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

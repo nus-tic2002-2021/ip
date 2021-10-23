@@ -19,9 +19,7 @@ public class Task {
     }
 
     /** Returns the description of the task. */
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
     /** Returns the status flag of the task. */
     public String getStatusIcon() { return (isDone ? "X" : " "); }
@@ -30,9 +28,7 @@ public class Task {
     public boolean isDone() { return isDone; }
 
     /** Set the status of the task to "done". */
-    public void markAsDone(){
-        isDone = true;
-    }
+    public void markAsDone() { isDone = true; }
 
     @Override
     public String toString() {

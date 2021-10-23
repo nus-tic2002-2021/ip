@@ -11,7 +11,7 @@ public class DukeException extends Exception{
      *
      * @param message Duke error message to be printed.
      */
-    public DukeException(String message){ this.message = message; }
+    public DukeException(String message) { this.message = message; }
 
     @Override
     public String getMessage() {

@@ -10,7 +10,7 @@ import ui.Ui;
  */
 public class ListCommand extends Command{
 
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showListed();
         ui.printAllTasks(taskList.getTasks());
     }

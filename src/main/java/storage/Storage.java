@@ -37,7 +37,7 @@ public class Storage {
         File taskFile = new File(filePath);
         boolean fileExists = taskFile.exists();
 
-        if(fileExists) {
+        if (fileExists) {
             Scanner s = new Scanner(taskFile);
             ArrayList<Task> tasks = new ArrayList<>();
 
@@ -68,10 +68,10 @@ public class Storage {
 
         String directory = tasks.getParent();
         File folders = new File(directory);
-        if(!folders.exists()) {
-            boolean dirCreated = folders.mkdirs();
+        if (!folders.exists()) {
+            folders.mkdirs();
         }
-        boolean fileCreated = tasks.createNewFile();
+        tasks.createNewFile();
     }
 
     /**
@@ -88,7 +88,7 @@ public class Storage {
         String description = args[2];
 
         Task task = null;
-        switch(keyword){
+        switch (keyword) {
         case "T": {
             task = new ToDoTask(description);
             break;
@@ -104,7 +104,7 @@ public class Storage {
             task = new EventTask(description, start, end);
             break;
         }
-        if (status.equals("1")){ task.markAsDone(); }
+        if (status.equals("1")) { task.markAsDone(); }
         return task;
     }
 

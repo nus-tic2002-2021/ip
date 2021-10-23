@@ -10,28 +10,28 @@ import java.time.format.FormatStyle;
  */
 public class DeadlineTask extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime deadline;
 
     /**
      * Constructor of <code>DeadLineTask</code>.
      *
      * @param description Brief description of the task.
-     * @param by Deadline of the task.
+     * @param deadline Deadline of the task.
      */
-    public DeadlineTask(String description, LocalDateTime by) {
+    public DeadlineTask(String description, LocalDateTime deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     /**
      * Returns the deadline of the <code>DeadLineTask</code> object.
      */
-    public String getBy(){
-        return by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    public String getBy() {
+        return deadline.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + getBy() + ")";
     }
 }

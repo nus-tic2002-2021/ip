@@ -80,7 +80,7 @@ public class Ui {
      *
      * @param task Task to be printed
      */
-    public void printTask (String task) { System.out.println(task); }
+    public void printTask(String task) { System.out.println(task); }
 
     /**
      * Prints all tasks in the list.

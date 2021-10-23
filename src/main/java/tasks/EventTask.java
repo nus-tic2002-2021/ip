@@ -30,14 +30,14 @@ public class EventTask extends Task {
     /**
      * Returns the event start date time of the <code>EventTask</code> object.
      */
-    public String getStart(){
+    public String getStart() {
         return start.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
 
     /**
      * Returns the event start date time of the <code>EventTask</code> object.
      */
-    public String getEnd(){
+    public String getEnd() {
         return end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
 

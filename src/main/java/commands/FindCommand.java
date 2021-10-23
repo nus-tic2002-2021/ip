@@ -17,7 +17,7 @@ public class FindCommand extends Command{
         this.keyword = keyword;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> results = taskList.searchTask(keyword);
         ui.showSearchCompleted();
         ui.printAllTasks(results);

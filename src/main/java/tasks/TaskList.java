@@ -38,13 +38,15 @@ public class TaskList {
      * @throws DukeException If task with the specific ID is not found.
      */
     public String setDone(int taskId) throws DukeException {
-        if (taskId > taskList.size() || taskId < 1){
+        int taskIndex = taskId - 1;
+        boolean isOutOfRange = taskId > taskList.size() || taskId < 1;
+
+        if (isOutOfRange) {
             throw new DukeException("Task with id " + taskId + " is not found.");
-        } else {
-            Task doneTask = taskList.get(taskId - 1);
-            doneTask.markAsDone();
-            return doneTask.toString();
         }
+        Task doneTask = taskList.get(taskIndex);
+        doneTask.markAsDone();
+        return doneTask.toString();
     }
 
     /**
@@ -56,18 +58,18 @@ public class TaskList {
      */
     public String deleteTask(int taskId) throws DukeException {
         boolean isOutOfRange = taskId > taskList.size() || taskId < 1;
-        if (isOutOfRange){
-            throw new DukeException("Task with id " + taskId + " is not found.");
-        } else {
-            Task deletedTask = taskList.get(taskId - 1);
-            taskList.remove(taskId - 1);
 
-            boolean isEvent = deletedTask.getClass().equals(EventTask.class);
-            if(isEvent) {
-                scheduler.freeUpSlot(((EventTask) deletedTask).start);
-            }
-            return deletedTask.toString();
+        if (isOutOfRange) {
+            throw new DukeException("Task with id " + taskId + " is not found.");
         }
+        Task deletedTask = taskList.get(taskId - 1);
+        taskList.remove(taskId - 1);
+
+        boolean isEvent = deletedTask.getClass().equals(EventTask.class);
+        if (isEvent) {
+            scheduler.freeUpSlot(((EventTask) deletedTask).start);
+        }
+        return deletedTask.toString();
     }
 
     /**
@@ -75,13 +77,13 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public boolean addTask(Task task){
+    public boolean addTask(Task task) {
         boolean isEvent = task.getClass().equals(EventTask.class);
         boolean canBeAdded = true;
-        if(isEvent) {
+        if (isEvent) {
             canBeAdded = scheduler.schedule(((EventTask) task).start, ((EventTask) task).end);
         }
-        if(canBeAdded) {
+        if (canBeAdded) {
             taskList.add(task);
         }
         return canBeAdded;
@@ -96,7 +98,7 @@ public class TaskList {
         ArrayList<Task> results = new ArrayList<>();
 
         for (Task task: taskList) {
-            if(task.description.contains(keyword)){
+            if (task.description.contains(keyword)) {
                 results.add(task);
             }
         }
