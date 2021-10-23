@@ -14,6 +14,6 @@ public class CommandMarkTaskAsDone extends Command {
      */
     public CommandMarkTaskAsDone(TaskManager taskMgr, Integer taskId) {
         super(ResponseType.TASK_UPDATE_DONE_STATUS,
-            List.of("update", "done", "#" + taskMgr.getTaskByIdAndSetDoneStatus(taskId, true).getTaskId().toString()));
+            List.of("update", "done", "#" + taskMgr.getTaskByIdAndSetCompleted(taskId).getTaskId().toString()));
     }
 }
