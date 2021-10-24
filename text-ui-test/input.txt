@@ -22,4 +22,6 @@ sort by done
 sort by done asc
 sort by done desc
 list
+find bread
+find answer2life
 bye

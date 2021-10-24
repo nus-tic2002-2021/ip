@@ -75,6 +75,19 @@ public class TaskList {
     return new TaskList(copy);
   }
 
+  /**
+   * Returns a new TaskList that matches the given "query" string.
+   */
+  public TaskList find(String query) {
+    ArrayList<Task> filtered = new ArrayList<Task>();
+    for (Task task : list) {
+      if (task.getDescription().contains(query)) {
+        filtered.add(task);
+      }
+    }
+    return new TaskList(filtered);
+  }
+
   @Override
   public String toString() {
     StringBuilder s = new StringBuilder();
