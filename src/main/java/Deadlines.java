@@ -9,6 +9,9 @@ public class Deadlines extends Task  {
         this.by = by;
     }
 
+    public static Task taskDecode(String s) {
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

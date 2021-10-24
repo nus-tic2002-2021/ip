@@ -28,4 +28,8 @@ public abstract class Task {
 
     public abstract Task setName(String name);
     public abstract Task complete();
+
+    public abstract String taskEncode();
+    public abstract String taskdecode();
+
 }

@@ -7,6 +7,9 @@ public class Event extends Task {
         this.on = on;
     }
 
+    public static Task taskDecode(String s) {
+    }
+
 
     @Override
     public Task complete() {

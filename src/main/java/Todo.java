@@ -3,6 +3,9 @@ public class Todo extends Task {
         super(name, isDone);
     }
 
+    public static Task taskDecode(String s) {
+    }
+
     @Override
     public Task complete() {
         return new Todo(this.getName(),true);
