@@ -14,10 +14,13 @@ Prerequisites: Have `bazel` installed.
 To build for local development on macOS:
 ```bash
 # bazel makes a wrapper script around the jar file.
-bazel build //:Duke && ./bazel-bin/Duke
+bazel build //:TerminalDuke && ./bazel-bin/TerminalDuke
 
 # or simply
-bazel run //:Duke
+bazel run //:TerminalDuke
+
+# Use bazelisk for M1 Macs (Apple Silicon)
+USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk run //:TerminalDuke
 ```
 
 To build jar file for deployment purposes:

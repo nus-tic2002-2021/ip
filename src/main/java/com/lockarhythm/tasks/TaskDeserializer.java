@@ -5,6 +5,12 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.lockarhythm.storage.GsonLocalDateTime;
+import com.lockarhythm.storage.GsonLocalDate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Technique credit to https://www.baeldung.com/gson-list
  */
@@ -14,8 +20,12 @@ public class TaskDeserializer implements JsonDeserializer<Task> {
     private Map<String, Class<? extends Task>> taskTypeRegistry;
 
     public TaskDeserializer(String taskTypeElementName) {
+        this.gson = new GsonBuilder()
+          .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime())
+          .registerTypeAdapter(LocalDate.class, new GsonLocalDate())
+          .create();
+
         this.taskTypeElementName = taskTypeElementName;
-        this.gson = new Gson();
         this.taskTypeRegistry = new HashMap<>();
 
         this.registerTaskType("DEADLINE", DeadlineTask.class);

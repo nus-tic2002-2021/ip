@@ -10,6 +10,11 @@ final class DeadlineTask extends Task {
   }
 
   @Override
+  public TaskDate getTaskDate() {
+    return by;
+  }
+
+  @Override
   protected String getTaskTypeIcon() {
     return "D";
   }

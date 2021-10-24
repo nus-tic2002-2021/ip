@@ -11,6 +11,10 @@ class TaskDate implements Serializable {
     d = LocalDateTime.parse(s);
   }
 
+  public static int compare(TaskDate x, TaskDate y) {
+    return x.d.compareTo(y.d);
+  }
+
   @Override
   public String toString() {
     return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

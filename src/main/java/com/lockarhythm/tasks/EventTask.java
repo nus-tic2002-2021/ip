@@ -10,6 +10,11 @@ final class EventTask extends Task {
   }
 
   @Override
+  public TaskDate getTaskDate() {
+    return at;
+  }
+
+  @Override
   protected String getTaskTypeIcon() {
     return "E";
   }

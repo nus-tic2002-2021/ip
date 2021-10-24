@@ -3,6 +3,9 @@ package com.lockarhythm.tasks;
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
+  private transient static String DEFAULT_TASK_DATE_VALUE = "3000-12-31T23:59:59";
+  private transient static TaskDate DEFAULT_TASK_DATE = new TaskDate(DEFAULT_TASK_DATE_VALUE);
+
   private String description;
   private boolean isDone;
 
@@ -25,6 +28,10 @@ public abstract class Task implements Serializable {
 
   public boolean isDone() {
     return isDone;
+  }
+
+  public TaskDate getTaskDate() {
+    return DEFAULT_TASK_DATE;
   }
 
   private String getDoneIcon() {
