@@ -23,7 +23,7 @@ public class EventTaskTest {
     public void toString_withValidToDo_success() {
         EventTask t = new EventTask("do something", LocalDateTime.parse("2021-10-18 1200", formatter),
                 LocalDateTime.parse("2021-10-18 1300", formatter));
-        String expected = "[E][ ] do something (at: 18 Oct 2021, 12:00:00 PM - 18 Oct 2021, 13:00:00 PM)";
+        String expected = "[E][ ] do something (at: 18 Oct 2021, 12:00 PM - 18 Oct 2021, 1:00 PM)";
         assertEquals(expected, t.toString());
     }
 }
