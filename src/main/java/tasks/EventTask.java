@@ -31,20 +31,21 @@ public class EventTask extends Task {
      * Returns the event start date time of the <code>EventTask</code> object.
      */
     public String getStart() {
-        return start.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        return start.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
     /**
      * Returns the event start date time of the <code>EventTask</code> object.
      */
     public String getEnd() {
-        return end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        return end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
     /**
      * Returns the event date time (period) of the <code>EventTask</code> object.
      */
     public String getAt() {
+        // todo: reformat display
         return getStart() + " - " + getEnd();
     }
 

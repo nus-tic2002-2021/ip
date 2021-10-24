@@ -80,7 +80,7 @@ public class Storage {
      * @param taskStr Task in string format.
      */
     private Task convertToTask(String taskStr){
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
         String[] args = taskStr.split(" \\| ");
 
         String keyword = args[0];

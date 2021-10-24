@@ -1,11 +1,14 @@
 package tasks;
 
-import jdk.jfr.Event;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * A <code>Scheduler</code> object stores the start and end datetime of events.
+ * It will check for clashes before an event is added to the task list.
+ * Return true if the new event can be added and false otherwise.
+ */
 public class Scheduler {
 
     private final ArrayList<String> descriptions;
@@ -18,6 +21,14 @@ public class Scheduler {
         ends = new ArrayList<>();
     }
 
+    /**
+     * The core scheduling function.
+     * Return true if the event is scheduled, false if the event cannot be added.
+     *
+     * @param description Brief description of the new event.
+     * @param newStart Start DateTime of the new event.
+     * @param newEnd End DateTime of the new event.
+     */
     public boolean schedule(String description, LocalDateTime newStart, LocalDateTime newEnd) {
         // start time is later than end time
         if (newEnd.isBefore(newStart)) {
@@ -69,7 +80,13 @@ public class Scheduler {
         return false;
     }
 
-    public int searchForNewSlot(LocalDateTime start){
+    /**
+     * The helper function to binary search for slot based on event start time.
+     * Return -1 if there is time clashes, else return the index of the slot.
+     *
+     * @param start Start DateTime of the new event.
+     */
+    private int searchForNewSlot(LocalDateTime start){
         int left = 0;
         int right = starts.size() - 1;
 
@@ -86,6 +103,11 @@ public class Scheduler {
         return right;
     }
 
+    /**
+     * Load schedule of existing events.
+     *
+     * @param tasks List of tasks loaded from existing tasks file.
+     */
     public void loadSchedule(ArrayList<Task> tasks){
         for (Task task: tasks) {
             if (task.getClass().equals(EventTask.class)) {
@@ -95,7 +117,13 @@ public class Scheduler {
         }
     }
 
-    public int retrieveSlot(LocalDateTime start){
+    /**
+     * Another helper function to binary search for slot based on event start time.
+     * Return -1 if the slot is not found, else return the index of the slot.
+     *
+     * @param start Start DateTime of the new event.
+     */
+    private int retrieveSlot(LocalDateTime start){
         int left = 0;
         int right = starts.size() - 1;
 
@@ -112,6 +140,11 @@ public class Scheduler {
         return -1;
     }
 
+    /**
+     * Remove a particular event from the schedule (clear the slot).
+     *
+     * @param start Start DateTime of the new event.
+     */
     public void freeUpSlot(LocalDateTime start){
         int index = retrieveSlot(start);
         descriptions.remove(index);
@@ -119,6 +152,11 @@ public class Scheduler {
         ends.remove(index);
     }
 
+    /**
+     * Retrieve and return the list of events scheduled on the input date.
+     *
+     * @param date Date of schedule.
+     */
     public ArrayList<EventTask> getSchedule(LocalDate date) {
         ArrayList<EventTask> events = new ArrayList<>();
         for (int i = 0; i < starts.size(); i++) {
