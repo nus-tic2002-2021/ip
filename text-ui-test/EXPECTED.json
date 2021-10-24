@@ -6,6 +6,22 @@
   },
   {
     "at": {
+      "d": "2021-10-25T08:00:00"
+    },
+    "_type": "EVENT",
+    "description": "buy bread",
+    "isDone": false
+  },
+  {
+    "by": {
+      "d": "2021-12-31T23:59:59"
+    },
+    "_type": "DEADLINE",
+    "description": "return book",
+    "isDone": true
+  },
+  {
+    "at": {
       "d": "2021-11-30T23:59:59"
     },
     "_type": "EVENT",
@@ -15,7 +31,7 @@
   {
     "_type": "TODO",
     "description": "done 1",
-    "isDone": true
+    "isDone": false
   },
   {
     "at": {

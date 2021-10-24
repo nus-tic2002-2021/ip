@@ -18,26 +18,30 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	Please give me a valid LocalDate pattern: Text '10pm' could not be parsed at index 0
-
-	____________________________________________________________
-
-	____________________________________________________________
-	Please give me a valid LocalDate pattern: Text 'Sunday 11pm' could not be parsed at index 0
-
-	____________________________________________________________
-
-	____________________________________________________________
 	Got it. I've added this task:
-		[D][ ] return book (by: Dec 31 2021)
+		[D][ ] return book (by: Oct 25 2021, 22:00)
 	Now you have 2 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
-		[E][ ] buy bread (at: Nov 30 2021)
+		[E][ ] buy bread (at: Oct 25 2021, 08:00)
 	Now you have 3 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: Dec 31 2021, 23:59)
+	Now you have 4 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	Now you have 5 tasks in the list.
 
 	____________________________________________________________
 
@@ -50,36 +54,40 @@
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[D][ ] return book (by: Dec 31 2021)
-	3.[E][ ] buy bread (at: Nov 30 2021)
+	2.[D][ ] return book (by: Oct 25 2021, 22:00)
+	3.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	4.[D][ ] return book (by: Dec 31 2021, 23:59)
+	5.[E][ ] buy bread (at: Nov 30 2021, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] return book (by: Dec 31 2021)
+		[D][X] return book (by: Oct 25 2021, 22:00)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] return book (by: Dec 31 2021)
+		[D][X] return book (by: Oct 25 2021, 22:00)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
 		[T][ ] done 1
-	Now you have 4 tasks in the list.
+	Now you have 6 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[D][X] return book (by: Dec 31 2021)
-	3.[E][ ] buy bread (at: Nov 30 2021)
-	4.[T][ ] done 1
+	2.[D][X] return book (by: Oct 25 2021, 22:00)
+	3.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	4.[D][ ] return book (by: Dec 31 2021, 23:59)
+	5.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	6.[T][ ] done 1
 
 	____________________________________________________________
 
@@ -95,32 +103,34 @@
 
 	____________________________________________________________
 	Noted. I've removed this task:
-		[D][X] return book (by: Dec 31 2021)
-	Now you have 3 tasks in the list.
-
-	____________________________________________________________
-
-	____________________________________________________________
-	Got it. I've added this task:
-		[E][ ] this task is so 2008 (at: Oct 31 2008)
-	Now you have 4 tasks in the list.
-
-	____________________________________________________________
-
-	____________________________________________________________
-	Got it. I've added this task:
-		[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+		[D][X] return book (by: Oct 25 2021, 22:00)
 	Now you have 5 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
+	Got it. I've added this task:
+		[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	Now you have 6 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
+	Now you have 7 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
 	Ok! I have sorted the tasks by date in ascending order!
-	1.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
-	2.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	3.[E][ ] buy bread (at: Nov 30 2021)
-	4.[T][X] borrow book
-	5.[T][ ] done 1
+	1.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
+	2.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	3.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[D][ ] return book (by: Dec 31 2021, 23:59)
+	6.[T][X] borrow book
+	7.[T][ ] done 1
 
 	____________________________________________________________
 
@@ -128,71 +138,84 @@
 	Ok! I have sorted the tasks by date in descending order!
 	1.[T][X] borrow book
 	2.[T][ ] done 1
-	3.[E][ ] buy bread (at: Nov 30 2021)
-	4.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+	3.[D][ ] return book (by: Dec 31 2021, 23:59)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	6.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	7.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[E][ ] buy bread (at: Nov 30 2021)
-	3.[T][ ] done 1
-	4.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+	2.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	3.[D][ ] return book (by: Dec 31 2021, 23:59)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[T][ ] done 1
+	6.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	7.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Nice! I've marked this task as done:
-		[T][X] done 1
+		[D][X] return book (by: Dec 31 2021, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Ok! I have sorted the tasks by done in ascending order!
 	1.[T][X] borrow book
-	2.[T][X] done 1
-	3.[E][ ] buy bread (at: Nov 30 2021)
-	4.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+	2.[D][X] return book (by: Dec 31 2021, 23:59)
+	3.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[T][ ] done 1
+	6.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	7.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Ok! I have sorted the tasks by done in ascending order!
 	1.[T][X] borrow book
-	2.[T][X] done 1
-	3.[E][ ] buy bread (at: Nov 30 2021)
-	4.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+	2.[D][X] return book (by: Dec 31 2021, 23:59)
+	3.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[T][ ] done 1
+	6.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	7.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Ok! I have sorted the tasks by done in descending order!
-	1.[E][ ] buy bread (at: Nov 30 2021)
-	2.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	3.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
-	4.[T][X] borrow book
-	5.[T][X] done 1
+	1.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	2.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	3.[T][ ] done 1
+	4.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
+	6.[T][X] borrow book
+	7.[D][X] return book (by: Dec 31 2021, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] borrow book
-	2.[E][ ] buy bread (at: Nov 30 2021)
-	3.[T][X] done 1
-	4.[E][ ] this task is so 2008 (at: Oct 31 2008)
-	5.[E][ ] this task is so 2000-and-late (at: Dec 31 2000)
+	2.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	3.[D][X] return book (by: Dec 31 2021, 23:59)
+	4.[E][ ] buy bread (at: Nov 30 2021, 23:59)
+	5.[T][ ] done 1
+	6.[E][ ] this task is so 2008 (at: Oct 31 2008, 23:59)
+	7.[E][ ] this task is so 2000-and-late (at: Dec 31 2000, 23:59)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	Ok! I have found these tasks for your query 'bread'!
-	1.[E][ ] buy bread (at: Nov 30 2021)
+	1.[E][ ] buy bread (at: Oct 25 2021, 08:00)
+	2.[E][ ] buy bread (at: Nov 30 2021, 23:59)
 
 	____________________________________________________________
 

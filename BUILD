@@ -8,6 +8,7 @@ java_binary(
     deps = [
         "@maven//:org_apache_commons_commons_lang3",
         "@maven//:com_google_code_gson_gson",
+        "@maven//:org_ocpsoft_prettytime_prettytime_nlp",
         ]
 )
 
@@ -22,6 +23,7 @@ java_binary(
     deps = [
         "@maven//:org_apache_commons_commons_lang3",
         "@maven//:com_google_code_gson_gson",
+        "@maven//:org_ocpsoft_prettytime_prettytime_nlp",
         ]
   )
   for class_name in [

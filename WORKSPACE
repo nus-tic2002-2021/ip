@@ -16,7 +16,8 @@ maven_install(
     artifacts = [
         #"com.google.guava:guava:21.0",
         "org.apache.commons:commons-lang3:3.11",
-        "com.google.code.gson:gson:2.8.8"
+        "com.google.code.gson:gson:2.8.8",
+        "org.ocpsoft.prettytime:prettytime-nlp:5.0.2.Final"
     ],
     repositories = [
         # Private repositories are supported through HTTP Basic auth
