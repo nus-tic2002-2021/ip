@@ -5,11 +5,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    public static ArrayList<String> storedResponses = new ArrayList<String>();
+    public static ArrayList<Task> storedTask = new ArrayList<Task>();
 
     public static void getList(){
-        for (int i=1; i<storedResponses.size(); i++){
-            System.out.format("%d: " + "[ ] " + storedResponses.get(i-1) + "\n" ,i);
+        if( storedTask.size() < 1){
+            System.out.println("Todo list is empty. Try adding something by typing todo.");
+        }
+        for (int i=1; i<storedTask.size()+1; i++){
+            System.out.format("%d: " + "[" + storedTask.get(i-1).getStatusIcon() +  "] " +
+                    storedTask.get(i-1).getDescription() + "\n" , i);
+        }
+    }
+
+    public static void updateTaskStatus(String line){
+        boolean matched = false;
+        for (int i=0; i<storedTask.size(); i++) {
+            if (storedTask.get(i).getDescription().equals(line)) {
+                storedTask.get(i).markDone();
+                matched = true;
+                break;
+            }
+        }
+        if (!matched){
+            System.out.println("Cannot find " + '"' + line + '"' + ".");
         }
     }
 
@@ -21,6 +39,8 @@ public class Duke {
                 break;
             case "hi":
                 System.out.println("Hello");
+                break;
+            case "to_do":
                 break;
             case "list":
                 getList();
@@ -34,15 +54,32 @@ public class Duke {
 
     public static void main(String[] args) {
         String line;
+        String todo;
         System.out.println("Hello! I'm Duke\nWhat can I do for you today?");
         do {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
             Inspect userText = new Inspect(line);
+            // Closing app takes precedence #1
             if(userText.bye()) {
               line = "bye";
             }
-            storedResponses.add(line);
+            // Add task 2nd priority
+            if (userText.addTask()) {
+                System.out.println("Sure, what would you like add");
+                Scanner scanner = new Scanner(System.in);
+                todo = scanner.nextLine();
+                Task record = new Task(todo);
+                storedTask.add(record);
+                System.out.println("added");
+            }
+            // Check if user says completed
+            if (userText.doneTask()){
+                String taskName = line.replace("done", "").strip();
+                taskName = taskName.replace("completed", "").strip();
+                updateTaskStatus(taskName);
+            }
+
             response(line);
         } while (!line.equals("bye"));
     }
