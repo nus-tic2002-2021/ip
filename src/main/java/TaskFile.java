@@ -27,6 +27,7 @@ public class TaskFile extends FileAccessor {
         return list;
     }
 
+    //deadline,party to be at 26/20/2021,0
     public Task parseLineToTask(String l, int id) throws Exception {
         if (Objects.equals(l, "")) {
             throw new Exception("no content");
@@ -40,5 +41,15 @@ public class TaskFile extends FileAccessor {
         task.createTask(taskDesc, taskType);
         task.addStatus(taskStatus);
         return task;
+    }
+
+    public String parseTaskToLine(Task e) throws Exception {
+        if (e == null) {
+            throw new Exception("task to parse is empty");
+        }
+
+        Todo todo = (Todo) e;
+        // fix parsing
+        return "fix me";
     }
 }

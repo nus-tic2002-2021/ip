@@ -25,11 +25,6 @@ public class Duke {
         list.forEach(l -> System.out.println(l.toString()));
     }
 
-    public static void add(ArrayList<Task> list, Task todo) {
-        list.add(todo);
-        System.out.println("added: " + todo.toString());
-    }
-
     public static void markDone(ArrayList<Task> list, Integer taskId) {
         list.stream().filter(t -> t.getId().equals(taskId)).forEach(t -> {
             System.out.println(STMT_DONE);
@@ -108,7 +103,7 @@ public class Duke {
                 try {
                     Task task = new Task();
                     task.createTask(taskInfo, instruction);
-                    add(list, task);
+                    list.add(task);
                 } catch (Exception e) {
                     printErrorMessage(Message.ERROR_UNRECOGNISED);
                 }
