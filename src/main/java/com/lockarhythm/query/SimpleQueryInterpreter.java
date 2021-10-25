@@ -1,14 +1,14 @@
 package com.lockarhythm.query;
 
-import com.lockarhythm.query.list.ListResponder;
 import com.lockarhythm.query.deadline.DeadlineResponder;
+import com.lockarhythm.query.delete.DeleteResponder;
 import com.lockarhythm.query.event.EventResponder;
 import com.lockarhythm.query.exit.ExitResponder;
-import com.lockarhythm.query.markasdone.MarkAsDoneResponder;
-import com.lockarhythm.query.todo.TodoResponder;
-import com.lockarhythm.query.delete.DeleteResponder;
-import com.lockarhythm.query.sort.SortResponder;
 import com.lockarhythm.query.find.FindResponder;
+import com.lockarhythm.query.list.ListResponder;
+import com.lockarhythm.query.markasdone.MarkAsDoneResponder;
+import com.lockarhythm.query.sort.SortResponder;
+import com.lockarhythm.query.todo.TodoResponder;
 import com.lockarhythm.tasks.TaskList;
 
 /** SimpleQueryInterpreter finds the first QueryInterpreter that responds a non-null result. */

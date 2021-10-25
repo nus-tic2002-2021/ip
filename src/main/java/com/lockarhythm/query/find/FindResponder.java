@@ -21,8 +21,11 @@ public class FindResponder extends RegexQueryInterpreter {
     TaskList filteredList = list.find(query);
 
     if (filteredList.size() == 0) {
-      return new Result(String.format("I could not find any tasks matching your query '%s'", query));
+      return new Result(
+          String.format("I could not find any tasks matching your query '%s'", query));
     }
-    return new Result(String.format("Ok! I have found these tasks for your query '%s'!\n%s", query, filteredList));
+    return new Result(
+        String.format(
+            "Ok! I have found these tasks for your query '%s'!\n%s", query, filteredList));
   }
 }

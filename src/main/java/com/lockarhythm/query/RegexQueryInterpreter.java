@@ -19,14 +19,15 @@ public abstract class RegexQueryInterpreter implements QueryInterpreter {
   }
 
   private String[] toGroupStrings(Matcher matcher) {
-    String[] groups = new String[matcher.groupCount()+1];
+    String[] groups = new String[matcher.groupCount() + 1];
     for (int i = 0; i <= matcher.groupCount(); i++) {
       groups[i] = matcher.group(i);
     }
     return groups;
   }
 
-  // onMatch is called when regexp pattern matches. The regexp capturing groups is passed as arguments.
+  // onMatch is called when regexp pattern matches. The regexp capturing groups is passed as
+  // arguments.
   public abstract Result onMatch(String[] groups);
 
   protected abstract String commandRegex();

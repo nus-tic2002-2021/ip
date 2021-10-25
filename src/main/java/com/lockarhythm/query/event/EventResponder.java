@@ -1,8 +1,8 @@
 package com.lockarhythm.query.event;
 
+import com.lockarhythm.query.AddedTaskResult;
 import com.lockarhythm.query.RegexQueryInterpreter;
 import com.lockarhythm.query.Result;
-import com.lockarhythm.query.AddedTaskResult;
 import com.lockarhythm.tasks.Task;
 import com.lockarhythm.tasks.TaskList;
 
@@ -21,8 +21,9 @@ public class EventResponder extends RegexQueryInterpreter {
     try {
       Task task = list.addEventTask(groups[1], groups[2]);
       return new AddedTaskResult(task, list.size());
-    } catch(java.time.format.DateTimeParseException e) {
-      return new Result(String.format("Please give me a valid LocalDate pattern: %s", e.getMessage()));
+    } catch (java.time.format.DateTimeParseException e) {
+      return new Result(
+          String.format("Please give me a valid LocalDate pattern: %s", e.getMessage()));
     }
   }
 }

@@ -1,7 +1,6 @@
 package com.lockarhythm.tasks;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 
 public class TaskList {
@@ -47,37 +46,35 @@ public class TaskList {
     return list.remove(index);
   }
 
-  /**
-   * Returns a copy of TaskList sorted by the task date.
-   */
+  /** Returns a copy of TaskList sorted by the task date. */
   public TaskList sortByTaskDate(boolean isAscending) {
     ArrayList<Task> copy = new ArrayList<Task>(list);
-    Collections.sort(copy, (a, b) -> {
-      if (isAscending) {
-        return TaskDate.compare(a.getTaskDate(), b.getTaskDate());
-      }
-      return TaskDate.compare(b.getTaskDate(), a.getTaskDate());
-    });
+    Collections.sort(
+        copy,
+        (a, b) -> {
+          if (isAscending) {
+            return TaskDate.compare(a.getTaskDate(), b.getTaskDate());
+          }
+          return TaskDate.compare(b.getTaskDate(), a.getTaskDate());
+        });
     return new TaskList(copy);
   }
 
-  /**
-   * Returns a copy of TaskList sorted by the "done" field.
-   */
+  /** Returns a copy of TaskList sorted by the "done" field. */
   public TaskList sortByDone(boolean isAscending) {
     ArrayList<Task> copy = new ArrayList<Task>(list);
-    Collections.sort(copy, (a, b) -> {
-      if (isAscending) {
-        return Boolean.compare(b.isDone(), a.isDone());
-      }
-      return Boolean.compare(a.isDone(), b.isDone());
-    });
+    Collections.sort(
+        copy,
+        (a, b) -> {
+          if (isAscending) {
+            return Boolean.compare(b.isDone(), a.isDone());
+          }
+          return Boolean.compare(a.isDone(), b.isDone());
+        });
     return new TaskList(copy);
   }
 
-  /**
-   * Returns a new TaskList that matches the given "query" string.
-   */
+  /** Returns a new TaskList that matches the given "query" string. */
   public TaskList find(String query) {
     ArrayList<Task> filtered = new ArrayList<Task>();
     for (Task task : list) {

@@ -2,7 +2,6 @@ package com.lockarhythm.query.list;
 
 import com.lockarhythm.query.QueryInterpreter;
 import com.lockarhythm.query.Result;
-import com.lockarhythm.tasks.Task;
 import com.lockarhythm.tasks.TaskList;
 
 public final class ListResponder implements QueryInterpreter {

@@ -1,7 +1,6 @@
 package com.lockarhythm.query;
 
 import com.lockarhythm.tasks.Task;
-import com.lockarhythm.tasks.TaskList;
 
 public class AddedTaskResult extends Result {
   private Task task;
@@ -16,7 +15,6 @@ public class AddedTaskResult extends Result {
   @Override
   public String getText() {
     return String.format(
-          "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-          task, size);
+        "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, size);
   }
 }

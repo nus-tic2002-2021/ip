@@ -21,7 +21,7 @@ public class MarkAsDoneResponder extends RegexQueryInterpreter {
     try {
       Task task = list.markAsDone(i - 1);
       return new Result("Nice! I've marked this task as done:\n\t" + task.toString());
-    } catch(IndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       return new Result(String.format("Item %d is not on the list. I cannot mark it as done!", i));
     }
   }

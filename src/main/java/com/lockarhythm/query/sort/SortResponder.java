@@ -5,7 +5,7 @@ import com.lockarhythm.query.Result;
 import com.lockarhythm.tasks.TaskList;
 
 public class SortResponder extends RegexQueryInterpreter {
-  private final static boolean DEFAULT_SORT_ORDER = true;
+  private static final boolean DEFAULT_SORT_ORDER = true;
 
   private TaskList list;
 
@@ -23,7 +23,10 @@ public class SortResponder extends RegexQueryInterpreter {
 
     TaskList sortedList = sortBy(sortKey, isAscending);
 
-    return new Result(String.format("Ok! I have sorted the tasks by %s in %s order!\n%s", sortKey, isAscending ? "ascending" : "descending", sortedList));
+    return new Result(
+        String.format(
+            "Ok! I have sorted the tasks by %s in %s order!\n%s",
+            sortKey, isAscending ? "ascending" : "descending", sortedList));
   }
 
   private boolean parseIsAscending(String value) {
@@ -40,17 +43,16 @@ public class SortResponder extends RegexQueryInterpreter {
     }
   }
 
-  /**
-   * Sorts by the `sortKey` in the order given by `isAscending`.
-   */
+  /** Sorts by the `sortKey` in the order given by `isAscending`. */
   private TaskList sortBy(String sortKey, boolean isAscending) {
-    switch(sortKey) {
+    switch (sortKey) {
       case "done":
         return list.sortByDone(isAscending);
       case "date":
         return list.sortByTaskDate(isAscending);
       default:
-    };
+    }
+    ;
     return list.sortByTaskDate(isAscending);
   }
 }

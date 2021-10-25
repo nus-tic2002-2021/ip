@@ -2,11 +2,11 @@ package com.lockarhythm.tasks;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import java.util.Date;
 import java.util.List;
-import java.time.ZoneId;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 class TaskDate implements Serializable {
   private LocalDateTime d;
@@ -30,6 +30,6 @@ class TaskDate implements Serializable {
   }
 
   private LocalDateTime toLocalDateTime(Date dateToConvert) {
-      return LocalDateTime.ofInstant(dateToConvert.toInstant(), ZoneId.systemDefault());
+    return LocalDateTime.ofInstant(dateToConvert.toInstant(), ZoneId.systemDefault());
   }
 }

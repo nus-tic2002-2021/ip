@@ -1,8 +1,8 @@
 package com.lockarhythm.query.delete;
 
+import com.lockarhythm.query.DeletedTaskResult;
 import com.lockarhythm.query.RegexQueryInterpreter;
 import com.lockarhythm.query.Result;
-import com.lockarhythm.query.DeletedTaskResult;
 import com.lockarhythm.tasks.Task;
 import com.lockarhythm.tasks.TaskList;
 
