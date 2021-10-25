@@ -22,17 +22,18 @@ public class Duke {
         for (int i=0; i<storedTask.size(); i++) {
             if (storedTask.get(i).getDescription().equals(line)) {
                 storedTask.get(i).markDone();
+                System.out.println("Great! I've marked this task as done" + "\n"
+                        + "[" + storedTask.get(i).getStatusIcon() +  "] " + storedTask.get(i).getDescription());
                 matched = true;
                 break;
             }
         }
-        if (!matched){
+        if (!matched) {
             System.out.println("Cannot find " + '"' + line + '"' + ".");
         }
     }
 
     public static void response(String sentence){
-        System.out.println("____________________________________________________________");
         switch (sentence) {
             case "bye":
                 System.out.println("Bye. Hope to see you again soon!");
@@ -40,16 +41,12 @@ public class Duke {
             case "hi":
                 System.out.println("Hello");
                 break;
-            case "to_do":
-                break;
             case "list":
                 getList();
                 break;
             default:
-                System.out.println(sentence);
                 break;
         }
-        System.out.println("____________________________________________________________");
     }
 
     public static void main(String[] args) {
