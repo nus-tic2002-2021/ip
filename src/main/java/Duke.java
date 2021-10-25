@@ -105,10 +105,9 @@ public class Duke {
                     printErrorMessage(Message.UNKNOWN_OBJECT);
                 }
             } else {
-                Task task = new Task();
-                task.createTask(taskInfo, instruction);
-
                 try {
+                    Task task = new Task();
+                    task.createTask(taskInfo, instruction);
                     add(list, task);
                 } catch (Exception e) {
                     printErrorMessage(Message.ERROR_UNRECOGNISED);

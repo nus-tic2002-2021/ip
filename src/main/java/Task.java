@@ -51,5 +51,11 @@ public class Task {
                 break;
         }
     }
+
+    public void addStatus(boolean status) throws Exception {
+        Todo t = (Todo) task;
+        t.setDone(status);
+        task = (Task) t;
+    }
 }
 
