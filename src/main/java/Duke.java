@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -9,9 +10,6 @@ public class Duke {
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
-    private final static String DETECT_ADD_TODO = "todo";
-    private final static String DETECT_ADD_EVENT = "event";
-    private final static String DETECT_ADD_DEADLINE = "deadline";
     private final static String DETECT_DELETE = "delete";
 
     private final static String STMT_END = "Bye. Hope to see you again soon!";
@@ -20,6 +18,8 @@ public class Duke {
     private final static String STMT_DELETE = "Noted. I've removed this task: ";
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
+
+    private final static String FILEPATH_TASK = "";
 
     public static void list(ArrayList<Task> list) throws Exception {
         list.forEach(l -> System.out.println(l.toString()));
@@ -72,6 +72,11 @@ public class Duke {
         System.out.println(STMT_START);
         Scanner in = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+        try {
+            list = new TaskFile(FILEPATH_TASK).load();
+        } catch (Exception e) {
+            System.out.println("got error loading file" + e);
+        }
         String input = in.nextLine();
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
         String instruction = tokens.get(0);
@@ -99,22 +104,9 @@ public class Duke {
                 } catch (Exception e) {
                     printErrorMessage(Message.UNKNOWN_OBJECT);
                 }
-
             } else {
-                Task task = null;
-                switch (instruction) {
-                    case DETECT_ADD_TODO:
-                        task = new Todo(taskInfo, id);
-                        break;
-                    case DETECT_ADD_EVENT:
-                        ArrayList<String> addInfo = new ArrayList(Arrays.asList(taskInfo.split("/at")));
-                        task = new Event(addInfo.get(0), addInfo.get(1), id);
-                        break;
-                    case DETECT_ADD_DEADLINE:
-                        ArrayList<String> deadlineInfo = new ArrayList(Arrays.asList(taskInfo.split("/by")));
-                        task = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), id);
-                        break;
-                }
+                Task task = new Task();
+                task.createTask(taskInfo, instruction);
 
                 try {
                     add(list, task);
