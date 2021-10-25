@@ -4,16 +4,19 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke" + "\n"+ logo + "\n" + "How can I help you today?");
+        System.out.println("Hello! I'm Duke" + "\n" + logo + "\n" + "How can I help you today?");
         List<Task> list = new ArrayList<>();
         boolean isTrue = true;
 
@@ -21,6 +24,7 @@ public class Duke {
             Scanner sc = new Scanner(System.in);
             String[] input = sc.nextLine().split(" ", 2);
             Task newTask;
+            String [] s = new String[2];
             try {
                 switch (input[0]) {
 
@@ -39,6 +43,7 @@ public class Duke {
                             System.out.println("\t" + taskNumber + ". " + task);
                             taskNumber++;
                         }
+                        createFile("event","");
                         break;
                     case "done":
                         int doneTaskNumber = Integer.parseInt(input[1]);
@@ -69,6 +74,7 @@ public class Duke {
                         String[] task = input[1].split("/");
                         list.add(new Todo(input[1]));
                         Task.getTotalTasks();
+                        createFile("todo", s[1]);
                         break;
                     case "deadline":
                         if (input.length < 2) {
@@ -80,6 +86,7 @@ public class Duke {
                         }
                         list.add(new Deadline(by[0], by[1]));
                         Task.getTotalTasks();
+                        createFile("deadline", "");
 
                         break;
                     case "event":
@@ -100,11 +107,26 @@ public class Duke {
             } catch (DukeException e) {
                 System.err.println("\t" + e);
 
-                }
-
             }
 
-
+        }
+    }
+        public static void createFile(String command,String task) throws IOException{
+            String filePath = "duke.txt";
+            File f = new File(filePath);
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(command+" || "+task);
+            fw.close();
+            try {
+                boolean result = f.createNewFile();
+                Scanner s = new Scanner(f);
+                System.out.println("Load data from file ++++ ");
+                while(s.hasNext()){
+                    System.out.println(s.nextLine());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
     }
 }
