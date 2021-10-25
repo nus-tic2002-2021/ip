@@ -18,6 +18,7 @@ public class Duke {
             }
             else {
                 System.out.println(line);
+                
             }
         }
     }
