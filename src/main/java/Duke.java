@@ -336,6 +336,14 @@ public class Duke {
         return newDeadline;
     }
 
+    public static Event getEventFromLine(String[] parts) {
+        Event newEvent = new Event(parts[2].trim(), parts[3].trim());
+        if (parts[1].trim().equals("1")) {
+            MarkTask(newEvent);
+        }
+        return newEvent;
+    }
+
     public static void RunDuke() {
         try {
             File StorageFile = OpenStorageFile();
