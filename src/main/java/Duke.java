@@ -106,6 +106,15 @@ public class Duke {
                     System.out.println(ex);
                 }
 
+            } else if (line.contains("delete")) {
+                isAddTask = false;
+                try {
+                    int index = Integer.parseInt(line.split(" ")[1]);
+                    tl.deleteTask(index);
+                } catch (DukeTaskNotFoundException ex) {
+                    System.out.println(ex);
+                }
+
             }
 
             if(isAddTask) {
