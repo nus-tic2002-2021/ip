@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -280,10 +281,27 @@ public class Duke {
         }
     }
 
+    public static void ReadFileToArray(File storageFile) {
+        try {
+            Scanner s = new Scanner(storageFile);
+            while (s.hasNext()) {
+                try {
+                    AddTask(ParseStorageLine(s.nextLine()));
+                } catch (DukeException e) {
+                    e.printErrMsg();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File cannot be opened, " +
+                    "Duke will not have any prior stored task information");
+        }
+    }
+
 
     public static void RunDuke() {
         try {
             File StorageFile = OpenStorageFile();
+            ReadFileToArray(StorageFile);
         } catch (DukeException e) {
             e.printErrMsg();
         }
