@@ -96,6 +96,9 @@ public class Duke {
             } else if (line.equals("list")) {
                 tl.printTaskList();
                 isAddTask = false;
+            } else if (line.equals("save")) {
+                new DukeFile().writeSaveFile();
+                isAddTask = false;
             } else if (line.contains("done")) {
                 //System.out.println(line);
                 isAddTask = false;
