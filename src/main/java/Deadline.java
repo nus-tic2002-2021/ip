@@ -6,6 +6,10 @@ public class Deadline extends Task{
         by = datetime;
     }
 
+    public String getAdditionalInfo() {
+        return by;
+    }
+
     public String getCompletedSymbol() {
         if (Completed) {
             return "[D][X]";

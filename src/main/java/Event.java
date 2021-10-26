@@ -6,6 +6,10 @@ public class Event extends Task {
         at = datetime;
     }
 
+    public String getAdditionalInfo() {
+        return at;
+    }
+
     public String getCompletedSymbol() {
         if (Completed) {
             return "[E][X]";

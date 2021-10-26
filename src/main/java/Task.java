@@ -12,6 +12,10 @@ public class Task {
         return Description;
     }
 
+     public String getAdditionalInfo() {
+        return "";
+     }
+
     public String getCompletedSymbol() {
         if (Completed) {
             return "[X]";
