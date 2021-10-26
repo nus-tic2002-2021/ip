@@ -28,4 +28,8 @@ public class Task {
     public void markCompleted() {
         Completed = true;
     }
+
+    public String getTaskType() {
+        return "";
+    }
 }
