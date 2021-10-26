@@ -17,7 +17,7 @@ public class StorageTest {
     @Test
     public void storage() throws IOException {
         LocalDateTime sample = LocalDateTime.of(2021,12,25,16,0,0);
-        ToDos toDos = new ToDos("eat", "eat");
+        ToDos toDos = new ToDos("eat");
         Deadline deadline = new Deadline("return book", sample);
         Events event = new Events("Finish Homework",sample.toLocalDate(),sample.toLocalTime(),sample.toLocalTime().plusHours(2));
         TaskList tasks = new TaskList();

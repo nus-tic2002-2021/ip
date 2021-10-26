@@ -70,7 +70,6 @@ public class CMD {
     public boolean execute(TaskList taskList, UI ui, Storage storage){
         return false;
     }
-
     /**
      * Replies a done/add command
      *

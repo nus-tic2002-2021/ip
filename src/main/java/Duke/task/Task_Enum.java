@@ -7,7 +7,7 @@ package Duke.task;
  * 3. EVENT
  */
 public enum Task_Enum {
-    TODO,       //0
-    DEADLINE,   //1
-    EVENT,      //2
+    TODO,
+    DEADLINE,
+    EVENT,
 }

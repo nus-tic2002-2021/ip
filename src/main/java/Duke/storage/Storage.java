@@ -24,6 +24,7 @@ public class Storage {
     public boolean existence(){
         return isExist;
     }
+
     /**
      * Constructor for Storage
      *
@@ -122,7 +123,7 @@ public class Storage {
         Task task = null;
         switch (line[0]) {
             case "T":
-                task = new ToDos(line[2], line[2]);
+                task = new ToDos(line[2]);
 
                 break;
             case "D":
