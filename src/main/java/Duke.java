@@ -328,6 +328,14 @@ public class Duke {
         return newTodo;
     }
 
+    public static Deadline getDeadlineFromLine(String[] parts) {
+        Deadline newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
+        if (parts[1].trim().equals("1")) {
+            MarkTask(newDeadline);
+        }
+        return newDeadline;
+    }
+
     public static void RunDuke() {
         try {
             File StorageFile = OpenStorageFile();
