@@ -39,7 +39,7 @@ public class Storage_Unschedule {
     public UnscheduledTaskList load() throws DukeException {
         UnscheduledTaskList unscheduledRecords = new UnscheduledTaskList();
         if (file.exists()) {
-            returnMessage.loadingFileFeedback();
+            //returnMessage.loadingFileFeedback();
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -58,7 +58,7 @@ public class Storage_Unschedule {
                 throw new DukeException("create file fail");
             }
         }
-        returnMessage.loadSuccessFeedback();
+        //returnMessage.loadSuccessFeedback();
         return unscheduledRecords;
     }
 

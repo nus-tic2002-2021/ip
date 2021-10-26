@@ -112,4 +112,26 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+
+
+    /**
+     * Finds tasks containing specific keyword
+     * @param keyword - the keyword to find
+     * @throws EmptyTaskListException - thrown if task list is empty
+     */
+    public void printFoundTaskList(String keyword) throws EmptyTaskListException {
+        printer.separator();
+        if(this.listSize == 0){
+            throw new EmptyTaskListException("empty task");
+        }
+        int numbering = 1;
+        System.out.println("     Here are the matching tasks in your list:");
+        for(Task t : getTaskList()){
+            if(t.getTaskInfo().contains(keyword)){
+                System.out.println("    "+numbering+"."+t.toString());
+            }
+            numbering++;
+        }
+        printer.separator();
+    }
 }

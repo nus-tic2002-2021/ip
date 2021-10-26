@@ -8,7 +8,8 @@ public enum CMD_Enum {
     SAVE("save"),
     TODO("todo"),
     EVENT("event"),
-    DEADLINE("deadline")
+    DEADLINE("deadline"),
+    FIND("find")
     ;
     /**
      * Eunm class for Command Constructor

@@ -24,6 +24,8 @@ public class Parser {
             command.setCmd(new CMD_Event(fullCommand));
         } else if (fullCommand.contains(CMD_Enum.DEADLINE.getName())) {
             command.setCmd(new CMD_Deadline(fullCommand));
+        } else if(fullCommand.contains(CMD_Enum.FIND.getName())) {
+            command.setCmd(new CMD_Find(fullCommand));
         } else {
             command.setCmd(new CMD_Error(fullCommand));
         }

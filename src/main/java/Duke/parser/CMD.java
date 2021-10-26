@@ -39,7 +39,7 @@ public class CMD {
      */
     public CMD(String command) {
         this.fullCommand = command;
-        if(command.contains(CMD_Enum.TODO.getName()) || command.contains(CMD_Enum.DEADLINE.getName()) || command.contains(CMD_Enum.EVENT.getName())){
+        if(command.contains(CMD_Enum.TODO.getName()) || command.contains(CMD_Enum.DEADLINE.getName()) || command.contains(CMD_Enum.EVENT.getName()) || command.contains(CMD_Enum.FIND.getName())){
             try {
                 String[] toWords = command.split(" ", 2);
                 this.keyword = toWords[0];

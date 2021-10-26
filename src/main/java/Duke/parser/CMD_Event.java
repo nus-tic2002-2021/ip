@@ -36,7 +36,7 @@ public class CMD_Event extends CMD{
         boolean success = true;
         try {
             if (!CMD_Enum.EVENT.getName().equals(super.keyword)) throw new UnknownSyntaxException(super.keyword);
-            String[] dt = detail.split("/at", 2);
+            String[] dt = super.detail.split("/at", 2);
             String desc = dt[0];
             String dateTime = dt[1].substring(1);
             LocalDate date = dateParse(dateTime);
