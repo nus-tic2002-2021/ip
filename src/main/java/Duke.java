@@ -268,6 +268,18 @@ public class Duke {
         return newFile;
     }
 
+    public static File CreateStorageFile() throws DukeException {
+        File newFile = new File("data\\Storage.txt");
+        try {
+            newFile.getParentFile().mkdirs();
+            newFile.createNewFile();
+            System.out.println("New Storage.txt file created.");
+            return newFile;
+        } catch (IOException err) {
+            throw new DukeException("Failed to create new Storage.txt file.");
+        }
+    }
+
 
     public static void RunDuke() {
         try {
