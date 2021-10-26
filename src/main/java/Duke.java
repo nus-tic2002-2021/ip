@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -254,9 +256,31 @@ public class Duke {
         TaskCount--;
     }
 
-    public static void main(String[] args) {
+    public static File OpenStorageFile() throws DukeException {
+        File newFile = new File("data\\storage.txt");
+        if (!newFile.exists()) {
+            try {
+                newFile = CreateStorageFile();
+            } catch (DukeException e) {
+                throw new DukeException("Duke will run without any prior stored task information");
+            }
+        }
+        return newFile;
+    }
+
+
+    public static void RunDuke() {
+        try {
+            File StorageFile = OpenStorageFile();
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
         StartDuke();
         Greet();
+    }
+
+    public static void main(String[] args) throws IOException {
+        RunDuke();
         ExtendTaskList();
     }
 }
