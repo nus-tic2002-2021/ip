@@ -5,7 +5,7 @@ import com.lockarhythm.query.Result;
 import com.lockarhythm.tasks.TaskList;
 
 public class SortResponder extends RegexQueryInterpreter {
-  private static final boolean DEFAULT_SORT_ORDER = true;
+  private static final boolean IS_ASCENDING_DEFAULT = true;
 
   private TaskList list;
 
@@ -31,7 +31,7 @@ public class SortResponder extends RegexQueryInterpreter {
 
   private boolean parseIsAscending(String value) {
     if (value == null) {
-      return DEFAULT_SORT_ORDER;
+      return IS_ASCENDING_DEFAULT;
     }
     String s = value.trim();
     if (s.equals("desc")) {
@@ -39,7 +39,7 @@ public class SortResponder extends RegexQueryInterpreter {
     } else if (s.equals("asc")) {
       return true;
     } else {
-      return DEFAULT_SORT_ORDER;
+      return IS_ASCENDING_DEFAULT;
     }
   }
 
