@@ -19,14 +19,14 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk build //:TerminalDuke
+if ! USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk build //:TerminalDukeQA
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-../bazel-bin/TerminalDuke < input.txt > ACTUAL.TXT
+../bazel-bin/TerminalDukeQA < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

@@ -25,6 +25,7 @@ public final class TerminalUI implements UI {
   }
 
   public void print(Result res) {
+    assert res != null;
     print(res.getText());
   }
 }

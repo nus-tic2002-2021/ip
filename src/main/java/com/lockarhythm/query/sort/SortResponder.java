@@ -51,6 +51,7 @@ public class SortResponder extends RegexQueryInterpreter {
       case "date":
         return list.sortByTaskDate(isAscending);
       default:
+        assert false : "sortKey is not a valid value. Check command regex.";
     }
     ;
     return list.sortByTaskDate(isAscending);
