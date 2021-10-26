@@ -320,6 +320,13 @@ public class Duke {
         throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
     }
 
+    public static Todo getTodoFromLine(String[] parts) {
+        Todo newTodo = new Todo(parts[2].trim());
+        if (parts[1].trim().equals("1")) {
+            MarkTask(newTodo);
+        }
+        return newTodo;
+    }
 
     public static void RunDuke() {
         try {
