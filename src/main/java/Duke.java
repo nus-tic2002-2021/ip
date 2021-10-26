@@ -355,6 +355,16 @@ public class Duke {
         return true;
     }
 
+    public static boolean CheckDeadlineLine(String[] parts) {
+        if (parts.length != 4) {
+            return false;
+        } else if (parts[2].trim().equals("") || parts[3].trim().equals("")) {
+            return false;
+        } else if (!parts[1].trim().equals("1") && !parts[1].trim().equals("0")) {
+            return false;
+        }
+        return true;
+    }
 
     public static void RunDuke() {
         try {
