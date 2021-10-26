@@ -8,6 +8,18 @@ public class Task {
         this.Completed = false;
     }
 
+    public Task(String newTask, String toComplete) throws DukeException {
+        this.Description = newTask;
+        if (toComplete.equals("1")){
+            this.Completed = true;
+        } else if (toComplete.equals("0")) {
+            this.Completed = false;
+        } else {
+            throw new DukeException("Invalid input");
+        }
+    }
+
+
     public String getDescription() {
         return Description;
     }
