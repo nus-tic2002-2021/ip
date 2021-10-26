@@ -297,6 +297,29 @@ public class Duke {
         }
     }
 
+    public static Task ParseStorageLine(String FileLine) throws DukeException {
+        String[] parts = FileLine.split("\\|");
+        if (parts[0].trim().equals("T")) {
+            if(CheckTodoLine(parts)) {
+                Todo newTodo = getTodoFromLine(parts);
+                return newTodo;
+            }
+        } else if (parts[0].trim().equals("D")) {
+            if(CheckDeadlineLine(parts)) {
+                Deadline newDeadline = getDeadlineFromLine(parts);
+                return newDeadline;
+            }
+        } else if (parts[0].trim().equals("E")) {
+            if (CheckEventLine(parts)) {
+                Event newEvent = getEventFromLine(parts);
+                return newEvent;
+            }
+        } else {
+            System.out.println("Line is invalid");
+        }
+        throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
+    }
+
 
     public static void RunDuke() {
         try {
