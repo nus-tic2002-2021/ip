@@ -101,7 +101,7 @@ public class Duke {
                 isAddTask = false;
                 try {
                     int index = Integer.parseInt(line.split(" ")[1]);
-                    tl.setDone(index - 1);
+                    tl.setDone(index);
                 } catch (DukeTaskNotFoundException ex) {
                     System.out.println(ex);
                 }
