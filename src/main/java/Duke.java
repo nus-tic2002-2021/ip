@@ -344,6 +344,18 @@ public class Duke {
         return newEvent;
     }
 
+    public static boolean CheckTodoLine(String[] parts) {
+        if (parts.length != 3) {
+            return false;
+        } else if (parts[2].trim().equals("")) {
+            return false;
+        } else if (!parts[1].trim().equals("1") && !parts[1].trim().equals("0")) {
+            return false;
+        }
+        return true;
+    }
+
+
     public static void RunDuke() {
         try {
             File StorageFile = OpenStorageFile();
