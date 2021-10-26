@@ -31,7 +31,7 @@ public class Duke {
     public static void PrintChecklist() {
         System.out.println(line + "\nHere are the tasks in your list:");
         for (int i = 0; i < TaskCount; i++) {
-            System.out.println((i+1) + "." + TaskList.get(i).getTaskInfo());
+            System.out.println((i + 1) + "." + TaskList.get(i).getTaskInfo());
         }
         System.out.println(line);
     }
@@ -39,7 +39,7 @@ public class Duke {
     public static void MarkIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < TaskCount && index > -1) {
-            MarkTask(index);
+            MarkTask(TaskList.get(index));
             System.out.println(line + "Nice! I've marked this task as done:\n  "
                     + TaskList.get(index).getTaskInfo() + "\n" + line);
         } else {
@@ -48,8 +48,8 @@ public class Duke {
         }
     }
 
-    public static void MarkTask(int index) {
-        TaskList.get(index).markCompleted();
+    public static void MarkTask(Task inputTask) {
+        inputTask.markCompleted();
     }
 
     public static void ExtendTaskList() {
@@ -60,7 +60,7 @@ public class Duke {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 TaskCount = 0;
                 stop = true;
-            } else if (input.equals("list ")) {
+            } else if (input.trim().equals("list")) {
                 PrintChecklist();
             } else if (input.startsWith("todo ")) {
                 AddTodo(input);
@@ -108,7 +108,7 @@ public class Duke {
 
     public static void AddDeadline(String input) {
         try {
-            if(CheckValidDeadline(input)){
+            if (CheckValidDeadline(input)) {
                 String[] parts = input.substring(8).split("/by");
                 Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
                 AddTask(newDeadline);
@@ -121,10 +121,10 @@ public class Duke {
         }
     }
 
-    public static boolean CheckValidDeadline(String input) throws DukeException{
+    public static boolean CheckValidDeadline(String input) throws DukeException {
         if (input.contains("/by")) {
             String[] parts = input.substring(8).split("/by");
-            if (parts.length != 2){
+            if (parts.length != 2) {
                 throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
             } else if (parts[0].trim().equals("")) {
                 throw new DukeException(line + "\n☹ OOPS!!! " +
@@ -176,7 +176,7 @@ public class Duke {
 
     public static void MarkDone(String input) {
         try {
-            if(CheckValidDone(input)) {
+            if (CheckValidDone(input)) {
                 MarkIndex(input);
             }
         } catch (DukeException e) {
@@ -214,7 +214,7 @@ public class Duke {
             if (CheckValidDelete(input)) {
                 DeleteIndex(input);
             }
-        } catch (DukeException e){
+        } catch (DukeException e) {
             e.printErrMsg();
         }
     }

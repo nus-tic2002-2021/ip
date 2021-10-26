@@ -18,4 +18,8 @@ public class Event extends Task {
         return super.getTaskInfo() + " (at: " + at + ")";
     }
 
+    @Override
+    public String getTaskType() {
+        return "E";
+    }
 }
