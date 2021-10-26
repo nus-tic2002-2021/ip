@@ -399,6 +399,21 @@ public class Duke {
         }
     }
 
+    public static String buildStorageLine(Task targetTask) {
+        String divider = " | ";
+        String initial = targetTask.getTaskType();
+        String newLine = initial + divider;
+        if (targetTask.Completed) {
+            newLine = newLine + "1" + divider;
+        } else {
+            newLine = newLine + "0" + divider;
+        }
+        newLine = newLine + targetTask.Description;
+
+        if (initial.equals("D") || initial.equals("E"))
+        newLine = newLine + divider + targetTask.getAdditionalInfo();
+        return newLine;
+    }
 
     public static void RunDuke() {
         try {
