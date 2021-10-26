@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -377,6 +378,28 @@ public class Duke {
         return true;
     }
 
+    public static void writeListToFile(File FileWrite) {
+        try {
+            FileWriter fw = new FileWriter(FileWrite, false);
+            for (int i = 0; i < TaskList.size(); i++) {
+                String typeCheck = TaskList.get(i).getTaskType();
+                String newLine = "";
+                if (typeCheck.equals("T")) {
+                    newLine = buildStorageLine(TaskList.get(i)); // buildTodoLine(TaskList.get(i));
+                } else if (typeCheck.equals("D")) {
+                    newLine = buildStorageLine(TaskList.get(i)); //buildDeadlineLine(TaskList.get(i));
+                } else if (typeCheck.equals("E")) {
+                    newLine = buildStorageLine(TaskList.get(i)); //buildEventLine(TaskList.get(i));
+                }
+                fw.write(newLine + System.getProperty("line.separator"));
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Write to file failed");
+        }
+    }
+
+
     public static void RunDuke() {
         try {
             File StorageFile = OpenStorageFile();
@@ -391,5 +414,10 @@ public class Duke {
     public static void main(String[] args) throws IOException {
         RunDuke();
         ExtendTaskList();
+        try {
+            writeListToFile(OpenStorageFile());
+        } catch (DukeException e) {
+            System.out.println("Failed to write to file");
+        }
     }
 }
