@@ -29,8 +29,6 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UND
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_MARK_AS_DONE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_SAVE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
@@ -115,7 +113,7 @@ public class SystemExportTest extends TestStream {
         }
 
         String in0 = String.join("", addCommands);
-        String in1 = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE, 5);
+        String in1 = generateTextCommandSetCompleted(5);
         String in2 = (generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
         String in3 = (generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
         System.setIn(buildCommandInputStream(in0, in1, in2, in3));
@@ -214,7 +212,7 @@ public class SystemExportTest extends TestStream {
                 DELIMITER_EVENT_TO, eventTo);
         String out6 = (getExpectedOutputAddedEvent(eventDesc, 2));
 
-        String in3 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String in3 = generateTextCommandList();
 
         MockTask[] allMockTasks = new MockTask[] {new MockToDo(todoDesc, 0, false),
             new MockDeadline(deadlineDesc, 1, false, parseStringAsLocalDateTime(deadlineBy)),
@@ -225,7 +223,7 @@ public class SystemExportTest extends TestStream {
         String in4 = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK, 0);
         String out8 = (getExpectedOutputCommandDeleted(0));
 
-        String in5 = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String in5 = generateTextCommandList();
 
         MockTask[] remainingMockTasks =
             new MockTask[] {new MockDeadline(deadlineDesc, 1, false, parseStringAsLocalDateTime(deadlineBy)),
@@ -233,7 +231,7 @@ public class SystemExportTest extends TestStream {
                     parseStringAsLocalDateTime(eventTo))};
         String out9 = (getExpectedOutputList(getExpectedTaskList(remainingMockTasks)));
 
-        String in6 = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE, 2);
+        String in6 = generateTextCommandSetCompleted(2);
         String out10 = getExpectedOutputTaskSetCompleted(2);
 
         String keyword = "eventdesc";

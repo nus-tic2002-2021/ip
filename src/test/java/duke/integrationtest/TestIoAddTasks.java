@@ -21,7 +21,6 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UND
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddEvent;
@@ -62,7 +61,7 @@ public class TestIoAddTasks extends TestStream {
         String taskDesc0 = "taskDesc abc";
 
         String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
-        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         System.setIn(buildCommandInputStream(storeCommand0, listCommand, exitCommand));
@@ -119,7 +118,7 @@ public class TestIoAddTasks extends TestStream {
             generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, taskDesc0, DELIMITER_EVENT_FROM,
                 fromDateString, DELIMITER_EVENT_TO, toDateString);
 
-        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         System.setIn(buildCommandInputStream(storeEventCommand0, listCommand, exitCommand));
@@ -177,7 +176,7 @@ public class TestIoAddTasks extends TestStream {
         String storeDeadlineCommand0 =
             generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, taskDesc0, DELIMITER_DEADLINE_DEADLINE,
                 byDateString);
-        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
         System.setIn(buildCommandInputStream(storeDeadlineCommand0, listCommand, exitCommand));
 
@@ -233,7 +232,7 @@ public class TestIoAddTasks extends TestStream {
             generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, task2EventDescription, DELIMITER_EVENT_FROM,
                 task2EventFromDateString, DELIMITER_EVENT_TO, task2EventToDateString);
 
-        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
         System.setIn(buildCommandInputStream(storeToDoCommand0, storeDeadlineCommand1, storeEventCommand2, listCommand,

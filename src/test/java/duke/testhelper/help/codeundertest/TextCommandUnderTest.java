@@ -31,19 +31,21 @@ public class TextCommandUnderTest {
     public static String generateTextCommandExit(String invoke) {
         return singleArgumentCommand(invoke);
     }
-    public static String generateTextCommandStatsAll(){
+
+    public static String generateTextCommandStatsAll() {
         return singleArgumentCommand(PROMPT_UNDER_TEST_STATS_ALL);
     }
+
     public static String generateTextCommandRandom(String text) {
         return singleArgumentCommand(text);
     }
 
-    public static String generateTextCommandList(String invoke) {
-        return singleArgumentCommand(invoke);
+    public static String generateTextCommandList() {
+        return singleArgumentCommand(PROMPT_UNDER_TEST_LIST);
     }
 
-    public static String generateTextCommandSetCompleted(String invoke, Integer taskId) {
-        return invoke + taskId + System.lineSeparator();
+    public static String generateTextCommandSetCompleted(Integer taskId) {
+        return PROMPT_UNDER_TEST_MARK_AS_DONE + taskId + System.lineSeparator();
     }
 
     public static String generateTextCommandLineAddToDo(String invoke, String description) {
@@ -73,6 +75,7 @@ public class TextCommandUnderTest {
     public static String generateTextCommandFindKeywordInDescription(String invoke, String keyword) {
         return invoke + keyword + System.lineSeparator();
     }
+
     public static String generateTextCommandProjection(Integer days) {
         return PROMPT_UNDER_TEST_PROJECTION + days + System.lineSeparator();
     }

@@ -15,9 +15,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_LIST;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_MARK_AS_DONE;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
@@ -79,13 +76,13 @@ public class TestIoToggleDoneStatus extends TestStream {
         String out4 = getExpectedOutputAddedToDo(taskDesc0, 0);
 
 
-        String setCompleteCommand = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_DONE, 0);
+        String setCompleteCommand = generateTextCommandSetCompleted(0);
         String out5 = getExpectedOutputTaskSetCompleted(0);
 
-        String setIncompleteCommand = generateTextCommandSetCompleted(PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE, 0);
+        String setIncompleteCommand = generateTextCommandSetCompleted(0);
         String out6 = getExpectedOutputTaskSetIncomplete(0);
 
-        String listCommand = generateTextCommandList(PROMPT_UNDER_TEST_LIST);
+        String listCommand = generateTextCommandList();
 
         MockToDo expectedToDo1 = new MockToDo(taskDesc0, 0, false);
         MockTask[] mockTasks = {expectedToDo1};
