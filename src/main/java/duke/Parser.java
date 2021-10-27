@@ -55,23 +55,27 @@ public class Parser {
      * @throws InvalidException
      */
     public static Command parse(String req) throws MissReqException, InvalidException {
-        Command command;
         String[] reqs = req.split(" ");
         if(req.equals("bye")){
             return new ExitCommand(req);
         }
-        else if (reqs[0].equals("list")) {
+        if(reqs[0].equals("list")) {
             return new ListCommand(req);
-        } else if (reqs[0].equals("done")) {
+        }
+        if(reqs[0].equals("done")) {
             int idx = Integer.parseInt(req.substring(4).trim()) - 1;
             return new DoneCommand(req, idx);
-        } else if (reqs[0].equals("delete")) {
+        }
+        if(reqs[0].equals("delete")) {
             int idx = Integer.parseInt(reqs[1]) - 1;
             return new DeleteCommand(req, idx);
-        } else {
-            Task task = getTask(req);
-            return new AddCommand(req, task);
         }
+        if(reqs[0].equals("find")){
+            String search = reqs[1];
+            return new FindCommand(req, search);
+        }
+        Task task = getTask(req);
+        return new AddCommand(req, task);
     }
 
 

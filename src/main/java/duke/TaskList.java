@@ -25,4 +25,14 @@ public class TaskList {
     public int size(){
         return taskList.size();
     }
+
+    public TaskList find(String search){
+        TaskList tl = new TaskList();
+        for(Task task: taskList){
+            if(task.containInfo(search)){
+                tl.addTask(task);
+            }
+        }
+        return tl;
+    }
 }

@@ -18,4 +18,15 @@ public abstract class Task {
     }
 
     public abstract String toStoreString();
+
+    public boolean containInfo(String info){
+        double match = 0.6;
+        int minSize = (int)Math.ceil(info.length() * match);
+        for(int i = 0; i < info.length() - minSize + 1; i++){
+            if(description.contains(info.substring(i, i + minSize))){
+                return true;
+            }
+        }
+        return false;
+    }
 }

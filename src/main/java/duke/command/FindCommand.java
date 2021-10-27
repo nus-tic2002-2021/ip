@@ -3,23 +3,21 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 import java.io.IOException;
 
-public class AddCommand extends Command{
-    public Task task;
+public class FindCommand extends Command{
+    public String search;
 
-    public AddCommand(String req, Task task){
-        this.task = task;
+    public FindCommand(String req, String search){
         this.req = req;
+        this.search = search;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ui.showReq(req);
-        tasks.addTask(task);
-        ui.showAdd(tasks, task);
-        storage.store(tasks);
+        TaskList tl = tasks.find(search);
+        ui.showFind(tl);
     }
 
     public boolean isExit(){

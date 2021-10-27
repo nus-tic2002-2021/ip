@@ -8,6 +8,7 @@ import duke.task.Task;
 import java.io.IOException;
 
 public class DeleteCommand extends Command{
+    public int idx;
 
     public DeleteCommand(String req, int idx){
         this.idx = idx;

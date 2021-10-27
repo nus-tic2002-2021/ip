@@ -8,6 +8,7 @@ import duke.task.Task;
 import java.io.IOException;
 
 public class DoneCommand extends Command{
+    public int idx;
 
     public DoneCommand(String req, int idx){
         this.idx = idx;

@@ -61,6 +61,16 @@ public class Ui {
         showLine();
     }
 
+    public void showFind(TaskList tasks){
+        System.out.println("     Here are the matching tasks in your list:");
+        for(int i = 0; i < tasks.size(); i++){
+            System.out.print("     " + (i + 1) + ".");
+            tasks.taskList.get(i).showTask();
+        }
+        System.out.println();
+        showLine();
+    }
+
     public void showLoadException(){
         System.out.println("No data can be loaded! ");
         System.out.println();
