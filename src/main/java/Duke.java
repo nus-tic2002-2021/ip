@@ -9,43 +9,28 @@ public class Duke {
 
     static Scanner in = new Scanner(System.in);
     static String line = "____________________________________________________________\n";
-    static ArrayList<Task> TaskList = new ArrayList<>();
+    static ArrayList<Task> DukeList = new ArrayList<>();
     static int TaskCount = 0;
 
-    public static void StartDuke() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Welcome to\n" + logo + " chatbot! \n");
-    }
-
-    public static void Greet() {
-        String start = "Hello, I'm Duke\n"
-                + "What can I do for you?\n";
-        System.out.println(line + start + line);
-    }
-
-    public static void AddTask(Task newEntry) {
-        TaskList.add(newEntry);
+    public static void addTaskToList(Task newEntry) {
+        DukeList.add(newEntry);
         TaskCount++;
     }
 
-    public static void PrintChecklist() {
+    public static void printTaskList() {
         System.out.println(line + "\nHere are the tasks in your list:");
         for (int i = 0; i < TaskCount; i++) {
-            System.out.println((i + 1) + "." + TaskList.get(i).getTaskInfo());
+            System.out.println((i + 1) + "." + DukeList.get(i).getTaskInfo());
         }
         System.out.println(line);
     }
 
-    public static void MarkIndex(String input) throws DukeException {
+    public static void markTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < TaskCount && index > -1) {
-            MarkTask(TaskList.get(index));
+            MarkTask(DukeList.get(index));
             System.out.println(line + "Nice! I've marked this task as done:\n  "
-                    + TaskList.get(index).getTaskInfo() + "\n" + line);
+                    + DukeList.get(index).getTaskInfo() + "\n" + line);
         } else {
             throw new DukeException(line + "\n☹ OOPS!!! " +
                     "The index number of the task to be done is invalid!\n" + line);
@@ -58,14 +43,14 @@ public class Duke {
 
     public static void ExtendTaskList() {
         boolean stop = false;
-        while (stop == false) {
+        while (!stop) {
             String input = in.nextLine();
             if (input.equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 TaskCount = 0;
                 stop = true;
             } else if (input.trim().equals("list")) {
-                PrintChecklist();
+                printTaskList();
             } else if (input.startsWith("todo ")) {
                 AddTodo(input);
             } else if (input.startsWith("deadline ")) {
@@ -88,7 +73,7 @@ public class Duke {
             if (CheckValidTodo(input)) {
                 String newTask = input.substring(4).trim();
                 Todo newTodo = new Todo(newTask);
-                AddTask(newTodo);
+                addTaskToList(newTodo);
                 PrintTaskAdded(newTodo);
                 PrintTaskCount();
                 System.out.println(line);
@@ -115,7 +100,7 @@ public class Duke {
             if (CheckValidDeadline(input)) {
                 String[] parts = input.substring(8).split("/by");
                 Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
-                AddTask(newDeadline);
+                addTaskToList(newDeadline);
                 PrintTaskAdded(newDeadline);
                 PrintTaskCount();
                 System.out.println(line);
@@ -149,7 +134,7 @@ public class Duke {
             if (CheckValidEvent(input)) {
                 String[] parts = input.substring(5).split("/at");
                 Event newEvent = new Event(parts[0].trim(), parts[1].trim());
-                AddTask(newEvent);
+                addTaskToList(newEvent);
                 PrintTaskAdded(newEvent);
                 PrintTaskCount();
                 System.out.println(line);
@@ -181,7 +166,7 @@ public class Duke {
     public static void MarkDone(String input) {
         try {
             if (CheckValidDone(input)) {
-                MarkIndex(input);
+                markTaskAtIndex(input);
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -242,7 +227,7 @@ public class Duke {
     public static void DeleteIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
         if (index < TaskCount && index > -1) {
-            String DeletedInfo = TaskList.get(index).getTaskInfo();
+            String DeletedInfo = DukeList.get(index).getTaskInfo();
             RemoveTask(index);
             System.out.println(line + "Noted! I've removed this task:\n  "
                     + DeletedInfo + "\n" + line);
@@ -254,7 +239,7 @@ public class Duke {
     }
 
     public static void RemoveTask(int index) {
-        TaskList.remove(index);
+        DukeList.remove(index);
         TaskCount--;
     }
 
@@ -287,7 +272,7 @@ public class Duke {
             Scanner s = new Scanner(storageFile);
             while (s.hasNext()) {
                 try {
-                    AddTask(ParseStorageLine(s.nextLine()));
+                    addTaskToList(ParseStorageLine(s.nextLine()));
                 } catch (DukeException e) {
                     e.printErrMsg();
                 }
@@ -381,15 +366,15 @@ public class Duke {
     public static void writeListToFile(File FileWrite) {
         try {
             FileWriter fw = new FileWriter(FileWrite, false);
-            for (int i = 0; i < TaskList.size(); i++) {
-                String typeCheck = TaskList.get(i).getTaskType();
+            for (int i = 0; i < DukeList.size(); i++) {
+                String typeCheck = DukeList.get(i).getTaskType();
                 String newLine = "";
                 if (typeCheck.equals("T")) {
-                    newLine = buildStorageLine(TaskList.get(i)); // buildTodoLine(TaskList.get(i));
+                    newLine = buildStorageLine(DukeList.get(i)); // buildTodoLine(TaskList.get(i));
                 } else if (typeCheck.equals("D")) {
-                    newLine = buildStorageLine(TaskList.get(i)); //buildDeadlineLine(TaskList.get(i));
+                    newLine = buildStorageLine(DukeList.get(i)); //buildDeadlineLine(TaskList.get(i));
                 } else if (typeCheck.equals("E")) {
-                    newLine = buildStorageLine(TaskList.get(i)); //buildEventLine(TaskList.get(i));
+                    newLine = buildStorageLine(DukeList.get(i)); //buildEventLine(TaskList.get(i));
                 }
                 fw.write(newLine + System.getProperty("line.separator"));
             }
@@ -422,8 +407,8 @@ public class Duke {
         } catch (DukeException e) {
             e.printErrMsg();
         }
-        StartDuke();
-        Greet();
+        Ui.StartDuke();
+        Ui.Greet();
     }
 
     public static void main(String[] args) throws IOException {
