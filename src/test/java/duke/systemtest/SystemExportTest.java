@@ -20,9 +20,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.ParserUnderTest.parseStringAsLocalDateTime;
 import static duke.testhelper.help.codeundertest.ParserUnderTest.stringToPath;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
@@ -102,8 +99,8 @@ public class SystemExportTest extends TestStream {
                 deadlineBy);
             expectedTotalTaskCount++;
             String addEventCommand =
-                generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom,
-                    DELIMITER_EVENT_TO, eventTo);
+                generateTextCommandLineAddEvent(eventDesc, eventFrom,
+                    eventTo);
             expectedTotalTaskCount++;
 
             addCommands[i] = addToDoCommand + addDeadlineCommand + addEventCommand;
@@ -205,8 +202,8 @@ public class SystemExportTest extends TestStream {
         String out5 = (getExpectedOutputAddedDeadline(deadlineDesc, 1));
 
         String in2 =
-            generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom,
-                DELIMITER_EVENT_TO, eventTo);
+            generateTextCommandLineAddEvent(eventDesc, eventFrom,
+                eventTo);
         String out6 = (getExpectedOutputAddedEvent(eventDesc, 2));
 
         String in3 = generateTextCommandList();

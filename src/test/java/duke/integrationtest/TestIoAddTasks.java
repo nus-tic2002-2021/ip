@@ -14,9 +14,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddEvent;
@@ -111,8 +108,8 @@ public class TestIoAddTasks extends TestStream {
         String toDateString = "19990202";
 
         String storeEventCommand0 =
-            generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, taskDesc0, DELIMITER_EVENT_FROM,
-                fromDateString, DELIMITER_EVENT_TO, toDateString);
+            generateTextCommandLineAddEvent(taskDesc0,
+                fromDateString, toDateString);
 
         String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit();
@@ -225,8 +222,8 @@ public class TestIoAddTasks extends TestStream {
             generateTextCommandLineAddDeadline(task1DeadlineDescription,
                 task1DeadlineByString);
         String storeEventCommand2 =
-            generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, task2EventDescription, DELIMITER_EVENT_FROM,
-                task2EventFromDateString, DELIMITER_EVENT_TO, task2EventToDateString);
+            generateTextCommandLineAddEvent(task2EventDescription,
+                task2EventFromDateString, task2EventToDateString);
 
         String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit();

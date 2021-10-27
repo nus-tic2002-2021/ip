@@ -15,7 +15,7 @@ public class TextCommandUnderTest {
     public static final String DELIMITER_DEADLINE_DEADLINE = " /by ";
 
     public static final String PROMPT_UNDER_TEST_ADD_EVENT = "event ";
-    public static final String DELIMITER_EVENT_FROM = " /at ";
+    public static final String DELIMITER_EVENT_EVENT = " /at ";
     public static final String DELIMITER_EVENT_TO = "-";
 
     public static final String PROMPT_UNDER_TEST_DELETE_TASK = "delete ";
@@ -47,6 +47,7 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSetCompleted(Integer taskId) {
         return PROMPT_UNDER_TEST_MARK_AS_DONE + taskId + System.lineSeparator();
     }
+
     public static String generateTextCommandSetIncomplete(Integer taskId) {
         return PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE + taskId + System.lineSeparator();
     }
@@ -57,13 +58,14 @@ public class TextCommandUnderTest {
 
     public static String generateTextCommandLineAddDeadline(String description,
                                                             String deadlineString) {
-        return PROMPT_UNDER_TEST_ADD_DEADLINE + description + DELIMITER_DEADLINE_DEADLINE + deadlineString + System.lineSeparator();
+        return PROMPT_UNDER_TEST_ADD_DEADLINE + description + DELIMITER_DEADLINE_DEADLINE + deadlineString +
+            System.lineSeparator();
     }
 
-    public static String generateTextCommandLineAddEvent(String invoke, String desc,
-                                                         String addScheduleDelimiter, String from,
-                                                         String fromToDelimiter, String to) {
-        return invoke + desc + addScheduleDelimiter + from + fromToDelimiter + to +
+    public static String generateTextCommandLineAddEvent(String desc,
+                                                         String from,
+                                                         String to) {
+        return PROMPT_UNDER_TEST_ADD_EVENT + desc + DELIMITER_EVENT_EVENT + from + DELIMITER_EVENT_TO + to +
             System.lineSeparator();
     }
 
