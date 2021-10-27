@@ -8,7 +8,7 @@ public class DukeTest {
 
     private UiTest uiTest;
 
-    public DukeTest() { uiTest = new UiTest(); }
+    private DukeTest() { uiTest = new UiTest(); }
 
     @Test
     public void runTest() {}

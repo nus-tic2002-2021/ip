@@ -48,16 +48,6 @@ public class Task {
     }
 
     /**
-     * Returns the total count of all the tasks in the list.
-     *
-     * @return The total count.
-     */
-    public String getTotalCount() {
-        if (totalCount <= 1) return totalCount + " task";
-        else return totalCount + " tasks";
-    }
-
-    /**
      * Returns the task deadline.
      *
      * @return The task deadline.

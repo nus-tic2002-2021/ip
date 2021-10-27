@@ -90,13 +90,46 @@ public class Ui {
         if (taskList.size() == 0) {
             System.out.println("You have no task in your list!");
         }
-        else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-                System.out.println(i+1 + ". " + task.toString());
+        System.out.println("Here are the tasks in your list!");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            System.out.println(i+1 + ". " + task.toString());
+        }
+    }
+
+    /**
+     * Prints all matching tasks in the list.
+     *
+     * @param taskList The ArrayList of Tasks to find the task(s) with the keyword.
+     * @param keyword The keyword to find the task(s).
+     */
+    public void printMatchingTasks(ArrayList<Task> taskList, String keyword) {
+
+        boolean taskFound = false;
+        int i, j;
+
+        for (i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                taskFound = true;
+                break;
             }
         }
+
+        if ( taskFound ) {
+            System.out.println("Here are the matching tasks in your list!");
+            for ( j = i ; j < taskList.size(); j++) {
+                Task task = taskList.get(j);
+                if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                    System.out.println(j+1 + ". " + task.toString());
+                }
+            }
+        } else if (taskList.size() == 0) {
+            System.out.println("You have no task in your list!");
+        } else {
+            System.out.println("There is no task found!");
+        }
+
     }
 
 }

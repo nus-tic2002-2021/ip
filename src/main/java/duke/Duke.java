@@ -22,7 +22,7 @@ public class Duke {
      *
      * @param filePath The file location to store and access the task list.
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

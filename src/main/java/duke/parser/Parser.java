@@ -39,6 +39,8 @@ public class Parser {
                 return parseDone(taskFullDesc);
             case DELETE:
                 return parseDelete(taskFullDesc);
+            case FIND:
+                return parseFind(taskFullDesc);
             case BYE:
                 return parseBye();
             default:
@@ -94,8 +96,7 @@ public class Parser {
             String taskDesc = taskFullDesc[1];
             int taskId = Integer.parseInt(taskDesc);
             return new DoneCommand(taskId);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id is missing.");
         }
     }
@@ -105,9 +106,17 @@ public class Parser {
             String taskDesc = taskFullDesc[1];
             int taskId = Integer.parseInt(taskDesc);
             return new DeleteCommand(taskId);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id is missing.");
+        }
+    }
+
+    private static Command parseFind(String[] taskFullDesc) {
+        try {
+            String taskDesc = taskFullDesc[1];
+            return new FindCommand(taskDesc);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand("Task description is missing.");
         }
     }
 

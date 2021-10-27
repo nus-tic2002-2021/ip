@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
      *
      * @param taskId The task id to be marked as done.
      */
-    public DoneCommand(int taskId){
+    public DoneCommand(int taskId) {
         this.taskId = taskId;
     }
 
