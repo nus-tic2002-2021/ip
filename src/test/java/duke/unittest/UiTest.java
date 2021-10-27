@@ -1,4 +1,4 @@
-package duke;
+package duke.unittest;
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
+import duke.TaskManager;
+import duke.Ui;
 import duke.mock.mocktask.MockDeadline;
 import duke.mock.mocktask.MockEvent;
 import duke.task.model.Deadline;
