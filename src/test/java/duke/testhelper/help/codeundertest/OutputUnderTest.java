@@ -46,6 +46,7 @@ public class OutputUnderTest {
         return text + System.lineSeparator() + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
+
     public static String getExpectedOutputExitInputLoop() {
         return getExpectedOutputTemplate("ok bye");
     }
@@ -67,14 +68,18 @@ public class OutputUnderTest {
         return list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
+    public static String getExpectedOutputStatsAll(String stats) {
+        return "Task Summary " + System.lineSeparator() + stats + RESPONSE_TERMINATOR_UNDER_TEST;
+    }
+
     public static String getExpectedOutputListTasksWithKeywordDescription(String list, String keyword) {
-        return "Query keyword in description: " + keyword + System.lineSeparator() + list +
-            RESPONSE_TERMINATOR_UNDER_TEST;
+        String info = "Query keyword in description: " + keyword;
+        return info + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
     public static String getExpectedOutputListTasksWithinPeriod(String list, Integer period) {
-        return "Tasks for the next " + period + " days: " + System.lineSeparator() + list +
-            RESPONSE_TERMINATOR_UNDER_TEST;
+        String info = "Tasks for the next " + period + " days: ";
+        return info + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 
     public static String getExpectedOutputTaskSetCompleted(Integer taskId) {

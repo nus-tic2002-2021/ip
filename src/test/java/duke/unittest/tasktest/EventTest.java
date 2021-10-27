@@ -1,4 +1,4 @@
-package duke.task;
+package duke.unittest.tasktest;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

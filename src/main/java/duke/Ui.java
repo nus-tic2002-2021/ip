@@ -203,6 +203,9 @@ public class Ui {
         } else if (rt == ResponseType.TASK_PROJECTION) {
             this.getPrintStream().print(
                 "Tasks for the next " + c.getArgs().get(2) + " days: " + System.lineSeparator() + c.getArgs().get(1));
+        } else if (rt == ResponseType.TASK_STATS_ALL) {
+            this.getPrintStream().print(
+                "Task Summary " + System.lineSeparator() + c.getArgs().get(1));
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }

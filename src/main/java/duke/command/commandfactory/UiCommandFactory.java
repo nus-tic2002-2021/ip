@@ -23,6 +23,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskA
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsIncomplete;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestProjection;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
+import static duke.dukeutility.validator.TextCommandValidator.isRequestStatisticsAll;
 import java.time.LocalDateTime;
 import duke.FileResourceManager;
 import duke.TaskManager;
@@ -39,10 +40,10 @@ import duke.command.taskcommand.taskadd.CommandAddNewToDo;
 import duke.command.taskcommand.taskquery.CommandListAll;
 import duke.command.taskcommand.taskquery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskquery.CommandProjection;
+import duke.command.taskcommand.taskquery.CommandStatsAll;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsIncomplete;
-
 import duke.dukeexception.DukeParseDateTimeException;
 
 
@@ -73,9 +74,11 @@ public class UiCommandFactory extends CommandFactory {
                 return frm.executeCommandSave(taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
-            } else if (isRequestProjection(text)){
+            } else if (isRequestProjection(text)) {
                 return this.executeCommandProjection(text, taskManager);
-            }else {
+            } else if (isRequestStatisticsAll(text)) {
+                return new CommandStatsAll(taskManager);
+            } else {
                 return new CommandUnknownRequest(text);
             }
         } catch (Exception e) {
@@ -99,12 +102,12 @@ public class UiCommandFactory extends CommandFactory {
         LocalDateTime deadline;
         try {
             argLine = text.replaceFirst(PROMPT_ADD_DEADLINE, "");
-            argList = argLine.split(ADD_DEADLINE_DEADLINE_DELIMITER);
-            int expectedArgsLength = 2;
-            if (argList.length != expectedArgsLength) {
+            String addDlDlDelimiter = ADD_DEADLINE_DEADLINE_DELIMITER;
+            argList = argLine.split(addDlDlDelimiter);
+            int argsCount = 2;
+            if (argList.length != argsCount) {
                 String msg =
-                    "Expected " + expectedArgsLength + " arguments delimited by \"" + ADD_DEADLINE_DEADLINE_DELIMITER +
-                        "\"";
+                    "Expected " + argsCount + " arguments delimited by \"" + addDlDlDelimiter + "\"";
                 return new CommandInvalidTextCommandSyntax(msg);
             }
             try {
@@ -228,6 +231,7 @@ public class UiCommandFactory extends CommandFactory {
         }
         return new CommandListTasksWithKeyword(taskManager, keyword);
     }
+
     protected Command executeCommandProjection(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;

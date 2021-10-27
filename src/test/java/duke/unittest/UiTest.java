@@ -1,16 +1,22 @@
-package duke;
+package duke.unittest;
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
 import static duke.testhelper.help.Builder.buildExpectedResponse;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithinPeriod;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputStatsAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
+import duke.TaskManager;
+import duke.Ui;
 import duke.mock.mocktask.MockDeadline;
 import duke.mock.mocktask.MockEvent;
+import duke.task.model.Deadline;
+import duke.task.model.Event;
+import duke.task.model.ToDo;
 import duke.testhelper.TestStream;
 import duke.testhelper.help.codeundertest.PrettifyUnderTest;
 import duke.testhelper.help.codeundertest.TextCommandUnderTest;
@@ -63,6 +69,33 @@ public class UiTest extends TestStream {
 
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
         assertEquals(expectedOutput, this.getOutput());
+    }
 
+    /**
+     * create a collection of tasks, summarise by task type and completion status.
+     */
+    @Test
+    public void stats_ShowSummaryAll() throws Exception {
+
+        TaskManager tm = new TaskManager();
+        Integer expectedCountToDo = 0;
+        Integer expectedCountDeadline = 0;
+        Integer expectedCountEvent = 0;
+        LocalDateTime date = LocalDateTime.now();
+        ToDo task0 = tm.addNewToDo("todo done" + expectedCountToDo++);
+        task0.setDoneStatus(true);
+        Deadline task1 = tm.addNewDeadline("deadline" + expectedCountDeadline++, date);
+        Event task2 = tm.addNewEvent("event" + expectedCountEvent++, date, date);
+
+        String out0 = getExpectedOutputBeginInputLoop();
+        String in0 = TextCommandUnderTest.generateTextCommandStatsAll();
+        String stats = PrettifyUnderTest.getExpectedStatisticsAll(tm.getAllAsArray());
+        String out1 = getExpectedOutputStatsAll(stats);
+        String in1 = TextCommandUnderTest.generateTextCommandExit(TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP);
+        String out2 = getExpectedOutputExitInputLoop();
+        System.setIn(buildCommandInputStream(in0, in1));
+        String expectedOutput = buildExpectedResponse(out0, out1, out2);
+        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        assertEquals(expectedOutput, this.getOutput());
     }
 }

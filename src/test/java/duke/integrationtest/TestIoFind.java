@@ -1,4 +1,4 @@
-package duke.inputoutputtest;
+package duke.integrationtest;
 
 
 import static duke.testhelper.help.Builder.buildCommandInputStream;
