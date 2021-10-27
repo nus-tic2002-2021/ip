@@ -22,19 +22,19 @@ public class Ui {
 
     /** Prints welcome message. */
     public void showWelcome() {
-        System.out.print("___________________________________________________________________\n"
+        System.out.print("______________________________________________________________________\n"
                         + "Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n"
                         + " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
                         + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n"
                         + "|____/ \\__,_|_|\\_\\___|\n"
-                        + "___________________________________________________________________\n");
+                        + "______________________________________________________________________\n");
     }
 
     /** Prints divider line. */
     public void showDividerLine() {
-        System.out.println("___________________________________________________________________");
+        System.out.println("______________________________________________________________________");
     }
 
     /** Prints exception message - file not found. */
@@ -130,6 +130,15 @@ public class Ui {
             System.out.println("There is no task found!");
         }
 
+    }
+
+    /**
+     * Prints the tagged task.
+     *
+     * @param task The tagged task.
+     */
+    public void printTaggedTask(String task) {
+        System.out.println("Nice! I've tagged this task.\n" + task);
     }
 
 }

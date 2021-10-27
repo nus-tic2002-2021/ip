@@ -65,20 +65,21 @@ public class Storage {
             String taskType = task.getTaskType();
             String taskStatus = task.getDoneStatus();
             String taskDesc = task.getDescription();
+            String taskTagDesc = task.getTagDescription();
             String taskStr = null;
             switch (taskType) {
                 case "T": {
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "\n";
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + taskTagDesc + "\n";
                     break;
                 }
                 case "D": {
                     String taskDatetime = task.getBy();
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "\n";
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "," + taskTagDesc + "\n";
                     break;
                 }
                 case "E": {
                     String taskDatetime = task.getAt();
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "\n";
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "," + taskTagDesc + "\n";
                     break;
                 }
             }
@@ -92,26 +93,33 @@ public class Storage {
         String taskType = taskFullDesc[0];
         String taskStatus = taskFullDesc[1];
         String taskDesc = taskFullDesc[2];
+        String taskTagDesc = "";
         Task task = null;
         switch (taskType) {
             case "T": {
                 task = new Todo(taskDesc);
+                taskTagDesc = taskFullDesc[3];
                 break;
             }
             case "D": {
                 String taskDateTime = taskFullDesc[3];
                 taskDateTime = dateTimeFormatter(taskDateTime);
                 task = new Deadline(taskDesc, taskDateTime);
+                taskTagDesc = taskFullDesc[4];
                 break;
             }
             case "E": {
                 String taskDateTime = taskFullDesc[3];
                 taskDateTime = dateTimeFormatter(taskDateTime);
                 task = new Event(taskDesc, taskDateTime);
+                taskTagDesc = taskFullDesc[4];
                 break;
             }
         }
-        if (taskStatus.equalsIgnoreCase("X")) task.setDone();
+        if (taskStatus.equalsIgnoreCase("X")) {
+            task.setDone();
+        }
+        task.setTag(taskTagDesc);
         return task;
     }
 

@@ -80,11 +80,28 @@ public class TaskList {
     public String setDone(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1) {
             throw new DukeException("Oops! Please specify the correct task id to mark it as done ☹");
-        }
-        else {
+        } else {
             Task completedTask = taskList.get(taskId - 1);
             completedTask.setDone();
             return completedTask.toString();
+        }
+    }
+
+    /**
+     * Tags this task id with this description and returns its data as a String object.
+     *
+     * @param taskId The task id to be tagged.
+     * @param tagDesc The tag description.
+     * @return A String object containing the data of the task that was tagged.
+     * @throws DukeException If task id is less than 1 or more than the size of the task list.
+     */
+    public String setTag(int taskId, String tagDesc) throws DukeException {
+        if (taskId > taskList.size() || taskId < 1) {
+            throw new DukeException("Oops! Please specify the correct task id to tag it ☹");
+        } else {
+            Task taggedTask = taskList.get(taskId - 1);
+            taggedTask.setTag(tagDesc);
+            return taggedTask.toString();
         }
     }
 

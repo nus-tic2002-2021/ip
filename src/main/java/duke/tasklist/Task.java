@@ -5,9 +5,9 @@ package duke.tasklist;
  */
 public class Task {
 
-    protected String description;
     protected boolean isDone;
-    protected static int totalCount = 0;
+    protected String description;
+    protected String tagDescription;
 
     /**
      * Constructs Task with this description.
@@ -15,9 +15,8 @@ public class Task {
      * @param description The task description.
      */
     public Task(String description) {
-        this.description = description;
         this.isDone = false;
-        totalCount++;
+        this.description = description;
     }
 
     /**
@@ -62,15 +61,31 @@ public class Task {
     public String getAt() { return "";}
 
     /**
-     * Mark the task as done.
+     * Returns the task's tag description.
+     *
+     * @return The task's tag description.
+     */
+    public String getTagDescription() {
+        return tagDescription;
+    }
+
+    /**
+     * Marks the task as done.
      */
     public void setDone() {
         isDone = true;
     }
 
+    /**
+     * Tags the task with this description.
+     */
+    public String setTag(String tagDesc) {
+        return tagDescription = tagDesc;
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getTaskType(), getDoneStatus(), description);
+        return String.format("[%s][%s] %s #%s", getTaskType(), getDoneStatus(), description, tagDescription);
     }
 
 }

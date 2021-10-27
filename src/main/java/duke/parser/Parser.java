@@ -23,7 +23,7 @@ public class Parser {
             userCommand = CommandEnum.valueOf(taskType);
         } catch (IllegalArgumentException e) {
             return new InvalidCommand("Oops! No such command found.\n" +
-                                      "Only list, todo, deadline, event, done, delete and bye ☺");
+                                      "Only list, todo, deadline, event, done, delete, find, tag and bye ☺");
         }
 
         switch (userCommand) {
@@ -41,6 +41,8 @@ public class Parser {
                 return parseDelete(taskFullDesc);
             case FIND:
                 return parseFind(taskFullDesc);
+            case TAG:
+                return parseTag(taskFullDesc);
             case BYE:
                 return parseBye();
             default:
@@ -120,7 +122,19 @@ public class Parser {
         }
     }
 
-    private static Command parseBye () {
+    private static Command parseTag(String[] taskFullDesc) {
+        try {
+            String taskDesc = taskFullDesc[1];
+            String[] taskTag = taskDesc.split(" ", 2);
+            int taskId = Integer.parseInt(taskTag[0]);
+            String tagDesc = taskTag[1];
+            return new TagCommand(taskId, tagDesc);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand("Task id or tag description is missing.");
+        }
+    }
+
+    private static Command parseBye() {
         return new ByeCommand();
     }
 
