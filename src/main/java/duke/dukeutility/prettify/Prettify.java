@@ -1,6 +1,7 @@
 package duke.dukeutility.prettify;
 
 import static duke.dukeutility.helper.buildString;
+import static duke.dukeutility.prettify.Prettify.getStatisticsAll;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,7 +92,7 @@ public class Prettify {
         return generating.toString();
     }
 
-    public static String getExpectedStatisticsAll(ArrayList<Task> tasks) {
+    public static String getStatisticsAll(ArrayList<Task> tasks) {
         // Tabulate
         int col = 0;
         int colDone = col++;

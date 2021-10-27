@@ -3,6 +3,7 @@ package duke.testhelper.help.codeundertest;
 public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
+    public static final String PROMPT_UNDER_TEST_STATS_ALL = "stats all";
     public static final String PROMPT_UNDER_TEST_PROJECTION = "projection ";
 
     public static final String PROMPT_UNDER_TEST_MARK_AS_DONE = "done ";
@@ -30,7 +31,9 @@ public class TextCommandUnderTest {
     public static String generateTextCommandExit(String invoke) {
         return singleArgumentCommand(invoke);
     }
-
+    public static String generateTextCommandStatsAll(){
+        return singleArgumentCommand(PROMPT_UNDER_TEST_STATS_ALL);
+    }
     public static String generateTextCommandRandom(String text) {
         return singleArgumentCommand(text);
     }

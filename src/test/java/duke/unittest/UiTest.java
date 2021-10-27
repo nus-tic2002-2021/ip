@@ -5,8 +5,8 @@ import static duke.testhelper.help.Builder.buildExpectedResponse;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputBeginInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithinPeriod;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputStatsAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
@@ -75,7 +75,7 @@ public class UiTest extends TestStream {
      * create a collection of tasks, summarise by task type and completion status.
      */
     @Test
-    public void stats_ShowSummaryAll() {
+    public void stats_ShowSummaryAll() throws Exception {
 
         TaskManager tm = new TaskManager();
         Integer expectedCountToDo = 0;
@@ -87,7 +87,15 @@ public class UiTest extends TestStream {
         Deadline task1 = tm.addNewDeadline("deadline" + expectedCountDeadline++, date);
         Event task2 = tm.addNewEvent("event" + expectedCountEvent++, date, date);
 
-        String out = PrettifyUnderTest.getExpectedStatisticsAll(tm.getAllAsArray());
-        assertSame(out, " ");
+        String out0 = getExpectedOutputBeginInputLoop();
+        String in0 = TextCommandUnderTest.generateTextCommandStatsAll();
+        String stats = PrettifyUnderTest.getExpectedStatisticsAll(tm.getAllAsArray());
+        String out1 = getExpectedOutputStatsAll(stats);
+        String in1 = TextCommandUnderTest.generateTextCommandExit(TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP);
+        String out2 = getExpectedOutputExitInputLoop();
+        System.setIn(buildCommandInputStream(in0, in1));
+        String expectedOutput = buildExpectedResponse(out0, out1, out2);
+        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        assertEquals(expectedOutput, this.getOutput());
     }
 }
