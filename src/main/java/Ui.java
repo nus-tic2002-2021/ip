@@ -1,4 +1,6 @@
 public class Ui {
+    static String line = "____________________________________________________________\n";
+
     public static void StartDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -11,6 +13,6 @@ public class Ui {
     public static void Greet() {
         String start = "Hello, I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(Duke.line + start + Duke.line);
+        System.out.println(line + start + line);
     }
 }

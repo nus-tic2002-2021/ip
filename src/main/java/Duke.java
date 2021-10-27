@@ -8,32 +8,29 @@ import java.util.Scanner;
 public class Duke {
 
     static Scanner in = new Scanner(System.in);
-    static String line = "____________________________________________________________\n";
     static ArrayList<Task> DukeList = new ArrayList<>();
-    static int TaskCount = 0;
 
     public static void addTaskToList(Task newEntry) {
         DukeList.add(newEntry);
-        TaskCount++;
     }
 
     public static void printTaskList() {
-        System.out.println(line + "\nHere are the tasks in your list:");
-        for (int i = 0; i < TaskCount; i++) {
+        System.out.println(Ui.line + "\nHere are the tasks in your list:");
+        for (int i = 0; i < DukeList.size(); i++) {
             System.out.println((i + 1) + "." + DukeList.get(i).getTaskInfo());
         }
-        System.out.println(line);
+        System.out.println(Ui.line);
     }
 
     public static void markTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
-        if (index < TaskCount && index > -1) {
+        if (index < DukeList.size() && index > -1) {
             MarkTask(DukeList.get(index));
-            System.out.println(line + "Nice! I've marked this task as done:\n  "
-                    + DukeList.get(index).getTaskInfo() + "\n" + line);
+            System.out.println(Ui.line + "Nice! I've marked this task as done:\n  "
+                    + DukeList.get(index).getTaskInfo() + "\n" + Ui.line);
         } else {
-            throw new DukeException(line + "\n☹ OOPS!!! " +
-                    "The index number of the task to be done is invalid!\n" + line);
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                    "The index number of the task to be done is invalid!\n" + Ui.line);
         }
     }
 
@@ -46,8 +43,7 @@ public class Duke {
         while (!stop) {
             String input = in.nextLine();
             if (input.equals("bye")) {
-                System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
-                TaskCount = 0;
+                System.out.println(Ui.line + "Bye. Hope to see you again soon!\n" + Ui.line);
                 stop = true;
             } else if (input.trim().equals("list")) {
                 printTaskList();
@@ -62,8 +58,8 @@ public class Duke {
             } else if (input.startsWith("delete ")) {
                 DeleteTask(input);
             } else {
-                System.out.println(line + "☹ OOPS!!! " +
-                        "I'm sorry, but I don't know what that means :-(\n" + line);
+                System.out.println(Ui.line + "☹ OOPS!!! " +
+                        "I'm sorry, but I don't know what that means :-(\n" + Ui.line);
             }
         }
     }
@@ -76,7 +72,7 @@ public class Duke {
                 addTaskToList(newTodo);
                 PrintTaskAdded(newTodo);
                 PrintTaskCount();
-                System.out.println(line);
+                System.out.println(Ui.line);
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -85,11 +81,11 @@ public class Duke {
 
     public static boolean CheckValidTodo(String input) throws DukeException {
         if (input.length() < 5) {
-            throw new DukeException(line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
-                    + line);
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
+                    + Ui.line);
         } else if (input.substring(4).trim().equals("")) {
-            throw new DukeException(line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
-                    + line);
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! The description of a todo cannot be empty.\n"
+                    + Ui.line);
         } else {
             return true;
         }
@@ -103,7 +99,7 @@ public class Duke {
                 addTaskToList(newDeadline);
                 PrintTaskAdded(newDeadline);
                 PrintTaskCount();
-                System.out.println(line);
+                System.out.println(Ui.line);
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -116,11 +112,11 @@ public class Duke {
             if (parts.length != 2) {
                 throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
             } else if (parts[0].trim().equals("")) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The task description of a deadline cannot be empty.\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The task description of a deadline cannot be empty.\n" + Ui.line);
             } else if (parts[1].trim().equals("")) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The due date/time of a deadline cannot be empty.\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The due date/time of a deadline cannot be empty.\n" + Ui.line);
             } else {
                 return true;
             }
@@ -137,7 +133,7 @@ public class Duke {
                 addTaskToList(newEvent);
                 PrintTaskAdded(newEvent);
                 PrintTaskCount();
-                System.out.println(line);
+                System.out.println(Ui.line);
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -150,11 +146,11 @@ public class Duke {
             if (parts.length != 2) {
                 throw new DukeException("☹ OOPS!!! Invalid syntax for adding event.");
             } else if (parts[0].trim().equals("")) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The task description of an event cannot be empty.\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The task description of an event cannot be empty.\n" + Ui.line);
             } else if (parts[1].trim().equals("")) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The date/time of an event cannot be empty.\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The date/time of an event cannot be empty.\n" + Ui.line);
             } else {
                 return true;
             }
@@ -175,26 +171,26 @@ public class Duke {
 
     public static boolean CheckValidDone(String input) throws DukeException {
         if (input.length() < 5) {
-            throw new DukeException(line + "\n☹ OOPS!!! " +
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
                     "The index of the task to be marked as done is missing.\n"
-                    + line);
+                    + Ui.line);
         } else {
             try {
                 int index = Integer.parseInt(input.substring(4).trim()) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The index of the task to mark as done has to be an integer!\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The index of the task to mark as done has to be an integer!\n" + Ui.line);
             }
             return true;
         }
     }
 
     public static void PrintTaskCount() {
-        System.out.println("Now you have " + TaskCount + " tasks in the list.");
+        System.out.println("Now you have " + DukeList.size() + " tasks in the list.");
     }
 
     public static void PrintTaskAdded(Task newTask) {
-        System.out.println(line + "\nGot it. I've added this task:\n"
+        System.out.println(Ui.line + "\nGot it. I've added this task:\n"
                 + newTask.getTaskInfo());
     }
 
@@ -210,15 +206,15 @@ public class Duke {
 
     public static boolean CheckValidDelete(String input) throws DukeException {
         if (input.length() < 7) {
-            throw new DukeException(line + "\n☹ OOPS!!! " +
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
                     "The index of the task to delete is missing.\n"
-                    + line);
+                    + Ui.line);
         } else {
             try {
                 int test = Integer.parseInt(input.substring(6).trim()) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException(line + "\n☹ OOPS!!! " +
-                        "The index of the task to delete has to be an integer!\n" + line);
+                throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                        "The index of the task to delete has to be an integer!\n" + Ui.line);
             }
             return true;
         }
@@ -226,21 +222,20 @@ public class Duke {
 
     public static void DeleteIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
-        if (index < TaskCount && index > -1) {
+        if (index < DukeList.size() && index > -1) {
             String DeletedInfo = DukeList.get(index).getTaskInfo();
             RemoveTask(index);
-            System.out.println(line + "Noted! I've removed this task:\n  "
-                    + DeletedInfo + "\n" + line);
+            System.out.println(Ui.line + "Noted! I've removed this task:\n  "
+                    + DeletedInfo + "\n" + Ui.line);
             PrintTaskCount();
         } else {
-            throw new DukeException(line + "\n☹ OOPS!!! " +
-                    "The index number of the task to delete is invalid!\n" + line);
+            throw new DukeException(Ui.line + "\n☹ OOPS!!! " +
+                    "The index number of the task to delete is invalid!\n" + Ui.line);
         }
     }
 
     public static void RemoveTask(int index) {
         DukeList.remove(index);
-        TaskCount--;
     }
 
     public static File OpenStorageFile() throws DukeException {
