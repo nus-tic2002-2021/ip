@@ -17,6 +17,7 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandList;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSetCompleted;
+import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSetIncomplete;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,7 +78,7 @@ public class TestIoToggleDoneStatus extends TestStream {
         String setCompleteCommand = generateTextCommandSetCompleted(0);
         String out5 = getExpectedOutputTaskSetCompleted(0);
 
-        String setIncompleteCommand = generateTextCommandSetCompleted(0);
+        String setIncompleteCommand = generateTextCommandSetIncomplete(0);
         String out6 = getExpectedOutputTaskSetIncomplete(0);
 
         String listCommand = generateTextCommandList();
