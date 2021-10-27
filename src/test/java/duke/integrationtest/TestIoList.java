@@ -12,7 +12,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
@@ -47,7 +46,7 @@ public class TestIoList extends TestStream {
 
         String taskDesc0 = "taskDesc abc";
 
-        String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String store0Command = generateTextCommandLineAddToDo(taskDesc0);
         String delete0Command = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK, 0);
         String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
@@ -99,8 +98,8 @@ public class TestIoList extends TestStream {
         String taskDesc0 = "taskDesc abc";
         String taskDesc1 = "taskDesc def";
 
-        String store0Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
-        String store1Command = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc1);
+        String store0Command = generateTextCommandLineAddToDo(taskDesc0);
+        String store1Command = generateTextCommandLineAddToDo(taskDesc1);
         String delete0Command = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK, 0);
         String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);

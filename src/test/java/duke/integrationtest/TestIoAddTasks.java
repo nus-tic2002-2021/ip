@@ -19,7 +19,6 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddDeadline;
@@ -60,7 +59,7 @@ public class TestIoAddTasks extends TestStream {
 
         String taskDesc0 = "taskDesc abc";
 
-        String storeCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String storeCommand0 = generateTextCommandLineAddToDo(taskDesc0);
         String listCommand = generateTextCommandList();
         String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
 
@@ -224,7 +223,7 @@ public class TestIoAddTasks extends TestStream {
         String task2EventFromDateString = "20200102";
         String task2EventToDateString = "20200102";
 
-        String storeToDoCommand0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, task0ToDoDescription);
+        String storeToDoCommand0 = generateTextCommandLineAddToDo(task0ToDoDescription);
         String storeDeadlineCommand1 =
             generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, task1DeadlineDescription,
                 DELIMITER_DEADLINE_DEADLINE, task1DeadlineByString);

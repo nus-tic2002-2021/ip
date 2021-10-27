@@ -13,7 +13,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTaskSetIncomplete;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
@@ -72,7 +71,7 @@ public class TestIoToggleDoneStatus extends TestStream {
 
 
 
-        String storeCommand = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, taskDesc0);
+        String storeCommand = generateTextCommandLineAddToDo(taskDesc0);
         String out4 = getExpectedOutputAddedToDo(taskDesc0, 0);
 
 

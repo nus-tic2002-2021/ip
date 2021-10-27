@@ -48,8 +48,8 @@ public class TextCommandUnderTest {
         return PROMPT_UNDER_TEST_MARK_AS_DONE + taskId + System.lineSeparator();
     }
 
-    public static String generateTextCommandLineAddToDo(String invoke, String description) {
-        return invoke + description + System.lineSeparator();
+    public static String generateTextCommandLineAddToDo(String description) {
+        return PROMPT_UNDER_TEST_ADD_TO_DO + description + System.lineSeparator();
     }
 
     public static String generateTextCommandLineAddDeadline(String invoke, String description,

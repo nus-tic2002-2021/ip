@@ -25,7 +25,6 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_TO_DO;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
@@ -99,7 +98,7 @@ public class SystemExportTest extends TestStream {
             String eventFrom = "20200202";
             String eventTo = "20210202";
 
-            String addToDoCommand = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
+            String addToDoCommand = generateTextCommandLineAddToDo(todoDesc);
             expectedTotalTaskCount++;
             String addDeadlineCommand = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
                 DELIMITER_DEADLINE_DEADLINE, deadlineBy);
@@ -200,7 +199,7 @@ public class SystemExportTest extends TestStream {
         String eventFrom = "20200202";
         String eventTo = "20210202";
 
-        String in0 = generateTextCommandLineAddToDo(PROMPT_UNDER_TEST_ADD_TO_DO, todoDesc);
+        String in0 = generateTextCommandLineAddToDo(todoDesc);
         String out4 = (getExpectedOutputAddedToDo(todoDesc, 0));
 
         String in1 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
