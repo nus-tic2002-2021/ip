@@ -81,4 +81,4 @@ No feature changes (error handling)
 
 - [x] find by description
 - [x] projection for next x days
-- [ ] view task summary
+- [x] view task summary

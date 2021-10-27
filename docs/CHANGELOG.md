@@ -158,7 +158,6 @@ No feature changes (error handling)
 
 `stats all` summary of tasks \
 
-
 `projection [days]` projection for next days \
 
 `bye` exit input loop \
