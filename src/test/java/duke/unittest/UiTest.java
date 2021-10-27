@@ -61,7 +61,7 @@ public class UiTest extends TestStream {
         String expectedList = PrettifyUnderTest.getExpectedTaskList(task3, task1);
         String out1 = getExpectedOutputListTasksWithinPeriod(expectedList, period);
 
-        String in1 = TextCommandUnderTest.generateTextCommandExit(TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP);
+        String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
 
         System.setIn(buildCommandInputStream(in0, in1));
@@ -91,7 +91,7 @@ public class UiTest extends TestStream {
         String in0 = TextCommandUnderTest.generateTextCommandStatsAll();
         String stats = PrettifyUnderTest.getExpectedStatisticsAll(tm.getAllAsArray());
         String out1 = getExpectedOutputStatsAll(stats);
-        String in1 = TextCommandUnderTest.generateTextCommandExit(TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP);
+        String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);

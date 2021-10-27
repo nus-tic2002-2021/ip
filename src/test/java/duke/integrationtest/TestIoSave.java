@@ -9,7 +9,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputSaved;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_SAVE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandSave;
@@ -29,7 +28,7 @@ public class TestIoSave extends TestStream {
     @Test
     public void saveMessage() throws Exception {
         String saveCommand = generateTextCommandSave(PROMPT_UNDER_TEST_SAVE);
-        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit();
         System.setIn(buildCommandInputStream(saveCommand, exitLoopCommand));
 
         TaskManager tm = new TaskManager();

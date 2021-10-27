@@ -28,8 +28,8 @@ public class TextCommandUnderTest {
         return text + System.lineSeparator();
     }
 
-    public static String generateTextCommandExit(String invoke) {
-        return singleArgumentCommand(invoke);
+    public static String generateTextCommandExit() {
+        return singleArgumentCommand(PROMPT_UNDER_TEST_EXIT_LOOP);
     }
 
     public static String generateTextCommandStatsAll() {
@@ -52,9 +52,9 @@ public class TextCommandUnderTest {
         return PROMPT_UNDER_TEST_ADD_TO_DO + description + System.lineSeparator();
     }
 
-    public static String generateTextCommandLineAddDeadline(String invoke, String description,
-                                                            String deadlineStringDelimiter, String deadlineString) {
-        return invoke + description + deadlineStringDelimiter + deadlineString + System.lineSeparator();
+    public static String generateTextCommandLineAddDeadline(String description,
+                                                            String deadlineString) {
+        return PROMPT_UNDER_TEST_ADD_DEADLINE + description + DELIMITER_DEADLINE_DEADLINE + deadlineString + System.lineSeparator();
     }
 
     public static String generateTextCommandLineAddEvent(String invoke, String desc,

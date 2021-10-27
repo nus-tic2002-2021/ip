@@ -13,7 +13,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getMsgUnderTestErrorSpacedKeyword;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_FIND;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandFindKeywordInDescription;
@@ -45,7 +44,7 @@ public class TestIoFind extends TestStream {
         String store1Command = generateTextCommandLineAddToDo(taskDesc1);
         String store2Command = generateTextCommandLineAddToDo(taskDesc2);
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitCommand = generateTextCommandExit();
 
         System.setIn(buildCommandInputStream(store0Command, store1Command, store2Command, findCommand, exitCommand));
 
@@ -102,7 +101,7 @@ public class TestIoFind extends TestStream {
         String taskDesc0 = "nons afasf09qhy2gr";
         String store0Command = generateTextCommandLineAddToDo(taskDesc0);
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitCommand = generateTextCommandExit();
 
         System.setIn(buildCommandInputStream(store0Command, findCommand, exitCommand));
 
@@ -150,7 +149,7 @@ public class TestIoFind extends TestStream {
         String taskDesc0 = "nons afasf09qhy2gr";
         String store0Command = generateTextCommandLineAddToDo(taskDesc0);
         String findCommand = generateTextCommandFindKeywordInDescription(PROMPT_UNDER_TEST_FIND, keyword);
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitCommand = generateTextCommandExit();
 
         System.setIn(buildCommandInputStream(store0Command, findCommand, exitCommand));
 

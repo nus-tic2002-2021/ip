@@ -13,7 +13,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandDeleteTaskByTaskId;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandLineAddToDo;
@@ -49,7 +48,7 @@ public class TestIoList extends TestStream {
         String store0Command = generateTextCommandLineAddToDo(taskDesc0);
         String delete0Command = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK, 0);
         String listCommand = generateTextCommandList();
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitCommand = generateTextCommandExit();
 
         System.setIn(buildCommandInputStream(store0Command, delete0Command, listCommand, exitCommand));
 
@@ -102,7 +101,7 @@ public class TestIoList extends TestStream {
         String store1Command = generateTextCommandLineAddToDo(taskDesc1);
         String delete0Command = generateTextCommandDeleteTaskByTaskId(PROMPT_UNDER_TEST_DELETE_TASK, 0);
         String listCommand = generateTextCommandList();
-        String exitCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitCommand = generateTextCommandExit();
 
         System.setIn(buildCommandInputStream(store0Command, store1Command, delete0Command, listCommand, exitCommand));
 

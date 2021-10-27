@@ -9,7 +9,6 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputImportAttempt;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputReadPathNotFound;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTerminate;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandExit;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTextCommandRandom;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
@@ -29,7 +28,7 @@ public class TestIoNegative extends TestStream {
     public void testUnknownCommand() throws Exception {
 
         String randomTextCommand = generateTextCommandRandom("s0meUnknownPrompt");
-        String exitLoopCommand = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String exitLoopCommand = generateTextCommandExit();
         System.setIn(buildCommandInputStream(randomTextCommand, exitLoopCommand));
 
         TaskManager tm = new TaskManager();

@@ -20,10 +20,8 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.ParserUnderTest.parseStringAsLocalDateTime;
 import static duke.testhelper.help.codeundertest.ParserUnderTest.stringToPath;
 import static duke.testhelper.help.codeundertest.PrettifyUnderTest.getExpectedTaskList;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_DEADLINE_DEADLINE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_FROM;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.DELIMITER_EVENT_TO;
-import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_DEADLINE;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_ADD_EVENT;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_DELETE_TASK;
 import static duke.testhelper.help.codeundertest.TextCommandUnderTest.PROMPT_UNDER_TEST_EXIT_LOOP;
@@ -100,8 +98,8 @@ public class SystemExportTest extends TestStream {
 
             String addToDoCommand = generateTextCommandLineAddToDo(todoDesc);
             expectedTotalTaskCount++;
-            String addDeadlineCommand = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
-                DELIMITER_DEADLINE_DEADLINE, deadlineBy);
+            String addDeadlineCommand = generateTextCommandLineAddDeadline(deadlineDesc,
+                deadlineBy);
             expectedTotalTaskCount++;
             String addEventCommand =
                 generateTextCommandLineAddEvent(PROMPT_UNDER_TEST_ADD_EVENT, eventDesc, DELIMITER_EVENT_FROM, eventFrom,
@@ -114,7 +112,7 @@ public class SystemExportTest extends TestStream {
         String in0 = String.join("", addCommands);
         String in1 = generateTextCommandSetCompleted(5);
         String in2 = (generateTextCommandSave(PROMPT_UNDER_TEST_SAVE));
-        String in3 = (generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP));
+        String in3 = (generateTextCommandExit());
         System.setIn(buildCommandInputStream(in0, in1, in2, in3));
         try {
             Main.run(this.getPrintStream(), tm1, frm1);
@@ -202,8 +200,8 @@ public class SystemExportTest extends TestStream {
         String in0 = generateTextCommandLineAddToDo(todoDesc);
         String out4 = (getExpectedOutputAddedToDo(todoDesc, 0));
 
-        String in1 = generateTextCommandLineAddDeadline(PROMPT_UNDER_TEST_ADD_DEADLINE, deadlineDesc,
-            DELIMITER_DEADLINE_DEADLINE, deadlineBy);
+        String in1 = generateTextCommandLineAddDeadline(deadlineDesc,
+            deadlineBy);
         String out5 = (getExpectedOutputAddedDeadline(deadlineDesc, 1));
 
         String in2 =
@@ -240,7 +238,7 @@ public class SystemExportTest extends TestStream {
                 parseStringAsLocalDateTime(eventTo))};
         String out11 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword));
 
-        String in8 = generateTextCommandExit(PROMPT_UNDER_TEST_EXIT_LOOP);
+        String in8 = generateTextCommandExit();
         String out12 = (getExpectedOutputExitInputLoop());
 
         String out13 = (getExpectedOutputTerminate());
