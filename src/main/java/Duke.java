@@ -8,29 +8,6 @@ public class Duke {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void printTaskList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < TaskList.DukeList.size(); i++) {
-            System.out.println((i + 1) + "." + TaskList.DukeList.get(i).getTaskInfo());
-        }
-    }
-
-    public static void markTaskAtIndex(String input) throws DukeException {
-        int index = Integer.parseInt(input.substring(4).trim()) - 1;
-        if (index < TaskList.DukeList.size() && index > -1) {
-            MarkTask(TaskList.DukeList.get(index));
-            System.out.println("Nice! I've marked this task as done:\n  "
-                    + TaskList.DukeList.get(index).getTaskInfo());
-        } else {
-            throw new DukeException("☹ OOPS!!! " +
-                    "The index number of the task to be done is invalid!");
-        }
-    }
-
-    public static void MarkTask(Task inputTask) {
-        inputTask.markCompleted();
-    }
-
     public static void ExtendTaskList() {
         while (true) {
             String input = in.nextLine();
@@ -88,16 +65,6 @@ public class Duke {
         }
     }
 
-    public static void MarkDone(String input) {
-        try {
-            if (Parser.CheckValidDone(input)) {
-                markTaskAtIndex(input);
-            }
-        } catch (DukeException e) {
-            e.printErrMsg();
-        }
-    }
-
     public static void DeleteTask(String input) {
         try {
             if (Parser.CheckValidDelete(input)) {
@@ -146,7 +113,7 @@ public class Duke {
     public static Todo getTodoFromLine(String[] parts) {
         Todo newTodo = new Todo(parts[2].trim());
         if (parts[1].trim().equals("1")) {
-            MarkTask(newTodo);
+            TaskList.MarkTask(newTodo);
         }
         return newTodo;
     }
@@ -154,7 +121,7 @@ public class Duke {
     public static Deadline getDeadlineFromLine(String[] parts) {
         Deadline newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
         if (parts[1].trim().equals("1")) {
-            MarkTask(newDeadline);
+            TaskList.MarkTask(newDeadline);
         }
         return newDeadline;
     }
@@ -162,7 +129,7 @@ public class Duke {
     public static Event getEventFromLine(String[] parts) {
         Event newEvent = new Event(parts[2].trim(), parts[3].trim());
         if (parts[1].trim().equals("1")) {
-            MarkTask(newEvent);
+            TaskList.MarkTask(newEvent);
         }
         return newEvent;
     }
