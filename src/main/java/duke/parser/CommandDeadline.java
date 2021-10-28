@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class
 CommandDeadline extends CommandBase {
 
+    static final int  dateLength = 3;
     /**
      * Creates deadline constructor.
      *
@@ -77,7 +78,7 @@ CommandDeadline extends CommandBase {
         }
         // gen yyyy,mm,dd ssss
         String[] date = str.split("/", 3);
-        if (date.length < 3){
+        if (date.length < dateLength){
             throw new TimeParseException("DateTime Format DD/MM/YYYY");
         }
 
@@ -105,12 +106,13 @@ CommandDeadline extends CommandBase {
      * @return integer time such as 1, 22.
      */
     private int get24HrFormat(String t){
+        int timeInterval = 12;
         int timeVal;
         if(t.contains("AM")){
             timeVal = Integer.parseInt(t.replace("AM", "").stripTrailing());
         } else{
             timeVal = Integer.parseInt(t.replace("PM", "").stripTrailing());
-            timeVal +=12;
+            timeVal +=timeInterval;
         }
         return timeVal;
     }

@@ -52,7 +52,7 @@ public class StorageTaskList {
                 String line;
                 while ((line = br.readLine()) != null) {
                     // process the line
-                    taskList.addTask(decodeStr2Task(line));
+                    taskList.addTask(decodeStrToTask(line));
                 }
             } catch (IOException e) {
                 //fail to parse
@@ -120,7 +120,7 @@ public class StorageTaskList {
      * @param str the full string per line.
      * @return created task object.
      */
-    public Task decodeStr2Task(String str) {
+    public Task decodeStrToTask(String str) {
         String[] lines = str.split(" \\| ");
         Task task = null;
         switch (lines[0]) {

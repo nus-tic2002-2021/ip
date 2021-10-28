@@ -39,7 +39,7 @@ public class StorageFixedDurationReference {
                 String line;
                 while ((line = br.readLine()) != null) {
                     // process the line
-                    unscheduledRecords.addTask(decodeStr2Unscheduled(line));
+                    unscheduledRecords.addTask(decodeStrToFixedDurationTask(line));
                 }
             } catch (IOException e) {
                 //fail to parse
@@ -81,7 +81,7 @@ public class StorageFixedDurationReference {
      * @param str the full string per line.
      * @return created task object.
      */
-    public FixedDurationTask decodeStr2Unscheduled(String str) {
+    public FixedDurationTask decodeStrToFixedDurationTask(String str) {
         String[] line = str.split(" \\| ");
         FixedDurationTask unscheduledRecord;
         unscheduledRecord = new FixedDurationTask(line[0], Integer.parseInt(line[1]));
