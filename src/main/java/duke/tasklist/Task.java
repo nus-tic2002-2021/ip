@@ -95,7 +95,8 @@ public class Task {
         if (tagDescription.isEmpty()) {
             return String.format("[%s][%s] %s", getTaskType(), getDoneStatus(), description);
         } else {
-            return String.format("[%s][%s] %s%s%s", getTaskType(), getDoneStatus(), description, TAG_HEADER, tagDescription);
+            return String.format("[%s][%s] %s%s%s", getTaskType(), getDoneStatus(), description,
+                    TAG_HEADER, tagDescription);
         }
     }
 

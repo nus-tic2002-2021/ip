@@ -41,7 +41,8 @@ public class Deadline extends Task {
         if (tagDescription.isEmpty()) {
             return String.format("[%s][%s] %s (by: %s)", getTaskType(), getDoneStatus(), description, by);
         } else {
-            return String.format("[%s][%s] %s (by: %s)%s%s", getTaskType(), getDoneStatus(), description, by, TAG_HEADER, tagDescription);
+            return String.format("[%s][%s] %s (by: %s)%s%s", getTaskType(), getDoneStatus(), description, by,
+                    TAG_HEADER, tagDescription);
         }
     }
 

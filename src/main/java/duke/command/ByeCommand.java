@@ -14,6 +14,7 @@ public class ByeCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showExit();
         super.setExit(true);
+        assert super.isExit() == true : "The Bye Command should return true to exit Duke.";
     }
 
 }

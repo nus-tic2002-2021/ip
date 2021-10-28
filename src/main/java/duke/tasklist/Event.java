@@ -41,7 +41,8 @@ public class Event extends Task {
         if (tagDescription.isEmpty()) {
             return String.format("[%s][%s] %s (at: %s)", getTaskType(), getDoneStatus(), description, at);
         } else {
-            return String.format("[%s][%s] %s (at: %s)%s%s", getTaskType(), getDoneStatus(), description, at, TAG_HEADER, tagDescription);
+            return String.format("[%s][%s] %s (at: %s)%s%s", getTaskType(), getDoneStatus(), description, at,
+                    TAG_HEADER, tagDescription);
         }
     }
 
