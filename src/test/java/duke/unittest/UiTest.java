@@ -75,7 +75,7 @@ public class UiTest extends TestStream {
      * create a collection of tasks, summarise by task type and completion status.
      */
     @Test
-    public void stats_ShowSummaryAll() throws Exception {
+    public void stats_showSummaryAll() throws Exception {
 
         TaskManager tm = new TaskManager();
         Integer expectedCountToDo = 0;
