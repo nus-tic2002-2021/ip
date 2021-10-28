@@ -1,11 +1,9 @@
 package duke.dukeutility.prettify;
 
 import static duke.dukeutility.helper.buildString;
-import static duke.dukeutility.prettify.Prettify.getStatisticsAll;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.HashMap;
 import duke.TaskManager;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -189,5 +187,28 @@ public class Prettify {
 
     }
 
+    public static String getScanDuplicatesDescription(HashMap<String, ArrayList<Task>> descMap) {
 
+
+        StringBuilder result = new StringBuilder();
+
+        descMap.forEach((desc, dupe) -> result.append(
+            "\"" + desc + "\"" + ": " + stringifyTaskIdAndType(dupe) + System.lineSeparator()));
+        return result.toString();
+    }
+
+    public static String stringifyTaskIdAndType(ArrayList<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+        int size = tasks.size();
+        for (int i = 0; i < size; i++) {
+            Task task = tasks.get(i);
+            result.append(task.getTaskId().toString() + " (" + getTaskTypeSymbol(task) + ")");
+            if (i != size - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
 }

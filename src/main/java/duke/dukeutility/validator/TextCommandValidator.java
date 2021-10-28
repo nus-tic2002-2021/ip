@@ -9,6 +9,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_B
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SCAN_DUPLICATE_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_STATISTICS_ALL;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
@@ -36,6 +37,9 @@ public class TextCommandValidator {
     }
     public static Boolean isRequestMarkTaskAsIncomplete(String text) {
         return text.startsWith(PROMPT_UPDATE_NOT_DONE);
+    }
+    public static Boolean isRequestScanDuplicates(String text) {
+        return text.equals(PROMPT_SCAN_DUPLICATE_DESCRIPTION);
     }
 
     public static Boolean isRequestAddToDo(String text) {

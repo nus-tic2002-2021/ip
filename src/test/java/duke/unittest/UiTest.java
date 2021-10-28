@@ -6,6 +6,7 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithinPeriod;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputStatsAll;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTemplate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -103,7 +104,7 @@ public class UiTest extends TestStream {
      * Check and show task ids of duplicates.
      */
     @Test
-    public void scan_checkDuplicateDesciption() throws Exception{
+    public void scan_checkDuplicateDesciption() throws Exception {
         TaskManager tm = new TaskManager();
         LocalDateTime date = LocalDateTime.now();
 
@@ -115,11 +116,15 @@ public class UiTest extends TestStream {
         tm.addNewToDo("task1");
         tm.addNewDeadline("task1", date);
 
+
+        tm.addNewDeadline("unique desc", date);
+
         String out0 = getExpectedOutputBeginInputLoop();
 
         String in0 = TextCommandUnderTest.generateTextCommandScanDuplicateDescription();
-        String out1 = "Description: [...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": 0000, 0001, 0002";
-
+        String dupes = "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": [0 (E), 1 (T), 2 (D)]" +
+            System.lineSeparator() + "\"" + "task1" + "\"" + ": [3 (E), 4 (T), 5 (D)]";
+        String out1 = getExpectedOutputTemplate(dupes);
         String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
 

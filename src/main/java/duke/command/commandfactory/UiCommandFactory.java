@@ -23,6 +23,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskA
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsIncomplete;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestProjection;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
+import static duke.dukeutility.validator.TextCommandValidator.isRequestScanDuplicates;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestStatisticsAll;
 import java.time.LocalDateTime;
 import duke.FileResourceManager;
@@ -40,6 +41,7 @@ import duke.command.taskcommand.taskadd.CommandAddNewToDo;
 import duke.command.taskcommand.taskquery.CommandListAll;
 import duke.command.taskcommand.taskquery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskquery.CommandProjection;
+import duke.command.taskcommand.taskquery.CommandScanDuplicateDescriptions;
 import duke.command.taskcommand.taskquery.CommandStatsAll;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
 import duke.command.taskcommand.taskupdate.CommandMarkTaskAsDone;
@@ -78,6 +80,8 @@ public class UiCommandFactory extends CommandFactory {
                 return this.executeCommandProjection(text, taskManager);
             } else if (isRequestStatisticsAll(text)) {
                 return new CommandStatsAll(taskManager);
+            } else if (isRequestScanDuplicates(text)) {
+                return new CommandScanDuplicateDescriptions(taskManager);
             } else {
                 return new CommandUnknownRequest(text);
             }

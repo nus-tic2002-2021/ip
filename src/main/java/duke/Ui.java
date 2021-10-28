@@ -206,6 +206,9 @@ public class Ui {
         } else if (rt == ResponseType.TASK_STATS_ALL) {
             this.getPrintStream().print(
                 "Task Summary " + System.lineSeparator() + c.getArgs().get(1));
+        } else if (rt == ResponseType.SCAN_DUPLICATE_DESCRIPTION) {
+            this.getPrintStream().print(
+                "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + c.getArgs().get(1));
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }

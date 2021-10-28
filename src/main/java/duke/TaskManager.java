@@ -16,7 +16,7 @@ import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonProper
 import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.HashMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import duke.task.TaskComparator;
@@ -29,6 +29,24 @@ import duke.task.model.ToDo;
 public class TaskManager {
     private final TaskList tasks = new TaskList();
     private int serialNo = 0;
+
+    public HashMap<String, ArrayList<Task>> getDuplicateDescriptionsAsArray() {
+
+        HashMap<String, ArrayList<Task>> result = new HashMap<>();
+        this.tasks.getMap().forEach((thisId, task) -> {
+            String desc = task.getTaskDescription();
+            ArrayList<Task> tasks = result.get(desc);
+            if (tasks == null) {
+                tasks = new ArrayList<>();
+            }
+            tasks.add(task);
+            result.put(desc, tasks);
+        });
+
+        result.entrySet().removeIf(entry -> !(entry.getValue().size() > 1));
+
+        return result;
+    }
 
     private int rollSerialNo() {
         while (this.tasks.containsKey(this.serialNo)) {
@@ -79,7 +97,6 @@ public class TaskManager {
         this.tasks.addTask(event);
         return event;
     }
-
 
     public Integer getSize() {
         return this.tasks.getSize();
@@ -136,7 +153,6 @@ public class TaskManager {
         return this.getTaskByIdAndSetDoneStatus(taskId, false);
     }
 
-
     public Task deleteTaskByTaskId(Integer taskId) {
         return this.tasks.removeTaskById(taskId);
     }
@@ -156,7 +172,6 @@ public class TaskManager {
         return tasksJson;
     }
 
-
     /**
      * add todo to collection
      *
@@ -167,7 +182,6 @@ public class TaskManager {
         this.tasks.addTask(toDo);
         return toDo;
     }
-
 
     /**
      * add deadline to collection
@@ -181,7 +195,6 @@ public class TaskManager {
         return deadline;
 
     }
-
 
     /**
      * add event to collection

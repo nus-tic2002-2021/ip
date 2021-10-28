@@ -53,7 +53,7 @@ public class TaskList {
         return task;
     }
 
-    private ConcurrentHashMap<Integer, Task> getMap() {
+    public ConcurrentHashMap<Integer, Task> getMap() {
         return this.getContainer();
     }
 }
