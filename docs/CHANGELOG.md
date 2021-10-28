@@ -160,5 +160,7 @@ No feature changes (error handling)
 
 `projection [days]` projection for next days \
 
+`scan:duplicates` check for tasks with same description \
+
 `bye` exit input loop \
 `save` save tasks to file \

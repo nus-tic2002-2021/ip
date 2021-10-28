@@ -6,6 +6,7 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputExitInputLoop;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputListTasksWithinPeriod;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputStatsAll;
+import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTemplate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,7 +76,7 @@ public class UiTest extends TestStream {
      * create a collection of tasks, summarise by task type and completion status.
      */
     @Test
-    public void stats_ShowSummaryAll() throws Exception {
+    public void stats_showSummaryAll() throws Exception {
 
         TaskManager tm = new TaskManager();
         Integer expectedCountToDo = 0;
@@ -93,6 +94,40 @@ public class UiTest extends TestStream {
         String out1 = getExpectedOutputStatsAll(stats);
         String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
+        System.setIn(buildCommandInputStream(in0, in1));
+        String expectedOutput = buildExpectedResponse(out0, out1, out2);
+        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        assertEquals(expectedOutput, this.getOutput());
+    }
+
+    /**
+     * Check and show task ids of duplicates.
+     */
+    @Test
+    public void scan_checkDuplicateDesciption() throws Exception {
+        TaskManager tm = new TaskManager();
+        LocalDateTime date = LocalDateTime.now();
+
+        tm.addNewEvent("task0", date, date);
+        tm.addNewToDo("task0");
+        tm.addNewDeadline("task0", date);
+
+        tm.addNewEvent("task1", date, date);
+        tm.addNewToDo("task1");
+        tm.addNewDeadline("task1", date);
+
+
+        tm.addNewDeadline("unique desc", date);
+
+        String out0 = getExpectedOutputBeginInputLoop();
+
+        String in0 = TextCommandUnderTest.generateTextCommandScanDuplicateDescription();
+        String dupes = "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": [0 (E), 1 (T), 2 (D)]" +
+            System.lineSeparator() + "\"" + "task1" + "\"" + ": [3 (E), 4 (T), 5 (D)]";
+        String out1 = getExpectedOutputTemplate(dupes);
+        String in1 = TextCommandUnderTest.generateTextCommandExit();
+        String out2 = getExpectedOutputExitInputLoop();
+
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
         new Ui(this.getPrintStream()).textCommandLoop(tm, null);

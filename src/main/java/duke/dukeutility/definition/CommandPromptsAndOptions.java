@@ -22,4 +22,5 @@ public class CommandPromptsAndOptions {
     public static final String PROMPT_SAVE = "save";
 
     public static final String PROMPT_FIND_BY_KEYWORD_DESCRIPTION = "find ";
+    public static final String PROMPT_SCAN_DUPLICATE_DESCRIPTION = "scan:duplicates";
 }
