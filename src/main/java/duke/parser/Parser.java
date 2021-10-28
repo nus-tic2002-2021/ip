@@ -1,7 +1,19 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.tasklist.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandEnum;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TagCommand;
+import duke.tasklist.Task;
+import duke.tasklist.Todo;
+import duke.tasklist.Event;
+import duke.tasklist.Deadline;
 
 /**
  *  A <code>Parser</code> object to parse user commands.
@@ -27,26 +39,26 @@ public class Parser {
         }
 
         switch (userCommand) {
-            case LIST:
-                return parseList();
-            case TODO:
-                return parseTodo(taskFullDesc);
-            case DEADLINE:
-                return parseDeadline(taskFullDesc);
-            case EVENT:
-                return parseEvent(taskFullDesc);
-            case DONE:
-                return parseDone(taskFullDesc);
-            case DELETE:
-                return parseDelete(taskFullDesc);
-            case FIND:
-                return parseFind(taskFullDesc);
-            case TAG:
-                return parseTag(taskFullDesc);
-            case BYE:
-                return parseBye();
-            default:
-                return new InvalidCommand("There is an error while executing your command ☹");
+        case LIST:
+            return parseList();
+        case TODO:
+            return parseTodo(taskFullDesc);
+        case DEADLINE:
+            return parseDeadline(taskFullDesc);
+        case EVENT:
+            return parseEvent(taskFullDesc);
+        case DONE:
+            return parseDone(taskFullDesc);
+        case DELETE:
+            return parseDelete(taskFullDesc);
+        case FIND:
+            return parseFind(taskFullDesc);
+        case TAG:
+            return parseTag(taskFullDesc);
+        case BYE:
+            return parseBye();
+        default:
+            return new InvalidCommand("There is an error while executing your command ☹");
         }
 
     }

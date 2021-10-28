@@ -1,6 +1,6 @@
 package duke.tasklist;
 
-import duke.exception.*;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         taskList.add(task);
     }
 
@@ -46,8 +46,7 @@ public class TaskList {
     public String deleteTask(int taskId) throws DukeException {
         if (taskId > taskList.size() || taskId < 1) {
             throw new DukeException("Oops! Please specify the correct task id to remove it ☹");
-        }
-        else {
+        } else {
             Task deletedTask = taskList.get(taskId - 1);
             taskList.remove(taskId - 1);
             return deletedTask.toString();
@@ -59,7 +58,9 @@ public class TaskList {
      *
      * @return Size of the task list.
      */
-    public int getSize() { return taskList.size(); }
+    public int getSize() {
+        return taskList.size();
+    }
 
     /**
      * Returns all the tasks as an arraylist of tasks.

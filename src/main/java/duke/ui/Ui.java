@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.tasklist.*;
+import duke.tasklist.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,10 +47,14 @@ public class Ui {
      *
      * @param message The exception message to be printed.
      */
-    public void showException(String message) { System.out.println(message); }
+    public void showException(String message) {
+        System.out.println(message);
+    }
 
     /** Prints exit message. */
-    public void showExit() { System.out.println("Bye. Hope to see you again soon!"); }
+    public void showExit() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
 
     /**
      * Prints the added task.
@@ -107,9 +111,9 @@ public class Ui {
     public void printMatchingTasks(ArrayList<Task> taskList, String keyword) {
 
         boolean taskFound = false;
-        int i, j;
+        int i = 0;
 
-        for (i = 0; i < taskList.size(); i++) {
+        for (i = i; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
                 taskFound = true;
@@ -119,10 +123,10 @@ public class Ui {
 
         if ( taskFound ) {
             System.out.println("Here are the matching tasks in your list!");
-            for ( j = i ; j < taskList.size(); j++) {
-                Task task = taskList.get(j);
+            for ( i = i ; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
                 if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                    System.out.println(j+1 + ". " + task.toString());
+                    System.out.println(i+1 + ". " + task.toString());
                 }
             }
         } else if (taskList.size() == 0) {

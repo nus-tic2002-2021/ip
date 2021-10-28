@@ -26,8 +26,7 @@ public class TagCommand extends Command {
         this.taskId = taskId;
         if (tagDesc.equalsIgnoreCase("delete")) {
             this.tagDesc = "";
-        }
-        else {
+        } else {
             this.tagDesc = tagDesc;
         }
     }
@@ -38,8 +37,7 @@ public class TagCommand extends Command {
         storage.setTaskList(taskList.getTaskList());
         if (tagDesc.isEmpty()) {
             ui.printUnTaggedTask(task);
-        }
-        else {
+        } else {
             ui.printTaggedTask(task);
         }
     }

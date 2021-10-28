@@ -1,9 +1,12 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.tasklist.*;
+import duke.tasklist.Task;
+import duke.tasklist.Todo;
+import duke.tasklist.Event;
+import duke.tasklist.Deadline;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -43,8 +46,7 @@ public class Storage {
             try {
                 Task task = convertStrToTask(taskStr);
                 taskList.add(task);
-            }
-            catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("___________________________________________________________________\n" +
                         "The task \""+taskStr+"\" is not added due to IndexOutOfBoundsException.\n" +
                         "The data are likely to be corrupted.");
@@ -68,35 +70,32 @@ public class Storage {
             String taskTagDesc = task.getTagDescription();
             String taskStr = null;
             switch (taskType) {
-                case "T": {
-                    if (taskTagDesc.isEmpty()) {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "\n";
-                    }
-                    else {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + taskTagDesc + "\n";
-                    }
-                    break;
+            case "T": {
+                if (taskTagDesc.isEmpty()) {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "\n";
+                } else {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + taskTagDesc + "\n";
                 }
-                case "D": {
-                    String taskDatetime = task.getBy();
-                    if (taskTagDesc.isEmpty()) {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "\n";
-                    }
-                    else {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "," + taskTagDesc + "\n";
-                    }
-                    break;
+                break;
+            }
+            case "D": {
+                String taskDatetime = task.getBy();
+                if (taskTagDesc.isEmpty()) {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "\n";
+                } else {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "," + taskTagDesc + "\n";
                 }
-                case "E": {
-                    String taskDatetime = task.getAt();
-                    if (taskTagDesc.isEmpty()) {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "\n";
-                    }
-                    else {
-                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "," + taskTagDesc + "\n";
-                    }
-                    break;
+                break;
+            }
+            case "E": {
+                String taskDatetime = task.getAt();
+                if (taskTagDesc.isEmpty()) {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "\n";
+                } else {
+                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "," + taskTagDesc + "\n";
                 }
+                break;
+            }
             }
             fw.write(taskStr);
         }
@@ -111,31 +110,31 @@ public class Storage {
         String taskTagDesc = "";
         Task task = null;
         switch (taskType) {
-            case "T": {
-                task = new Todo(taskDesc);
-                if (taskFullDesc.length == 4) {
-                    taskTagDesc = taskFullDesc[3];
-                }
-                break;
+        case "T": {
+            task = new Todo(taskDesc);
+            if (taskFullDesc.length == 4) {
+                taskTagDesc = taskFullDesc[3];
             }
-            case "D": {
-                String taskDateTime = taskFullDesc[3];
-                taskDateTime = dateTimeFormatter(taskDateTime);
-                task = new Deadline(taskDesc, taskDateTime);
-                if (taskFullDesc.length == 5) {
-                    taskTagDesc = taskFullDesc[4];
-                }
-                break;
+            break;
+        }
+        case "D": {
+            String taskDateTime = taskFullDesc[3];
+            taskDateTime = dateTimeFormatter(taskDateTime);
+            task = new Deadline(taskDesc, taskDateTime);
+            if (taskFullDesc.length == 5) {
+                taskTagDesc = taskFullDesc[4];
             }
-            case "E": {
-                String taskDateTime = taskFullDesc[3];
-                taskDateTime = dateTimeFormatter(taskDateTime);
-                task = new Event(taskDesc, taskDateTime);
-                if (taskFullDesc.length == 5) {
-                    taskTagDesc = taskFullDesc[4];
-                }
-                break;
+            break;
+        }
+        case "E": {
+            String taskDateTime = taskFullDesc[3];
+            taskDateTime = dateTimeFormatter(taskDateTime);
+            task = new Event(taskDesc, taskDateTime);
+            if (taskFullDesc.length == 5) {
+                taskTagDesc = taskFullDesc[4];
             }
+            break;
+        }
         }
         if (taskStatus.equalsIgnoreCase("X")) {
             task.setDone();

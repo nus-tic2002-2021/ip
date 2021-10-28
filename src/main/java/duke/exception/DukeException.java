@@ -1,7 +1,5 @@
 package duke.exception;
 
-import java.io.FileNotFoundException;
-
 /**
  * A <code>DukeException</code> object for exceptions related to Duke.
  * Extends the <code>Exception</code> class.
@@ -20,7 +18,9 @@ public class DukeException extends Exception {
      *
      * @param message DukeException message.
      */
-    public DukeException(String message) { this.message = message; }
+    public DukeException(String message) {
+        this.message = message;
+    }
 
     @Override
     public String getMessage() {

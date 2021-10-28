@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.tasklist.*;
-import duke.storage.*;
-import duke.ui.*;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      *
      * @param taskId The task id to be deleted.
      */
-    public DeleteCommand(int taskId){
+    public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 

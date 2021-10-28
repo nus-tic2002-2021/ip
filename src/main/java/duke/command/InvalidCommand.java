@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.tasklist.*;
-import duke.storage.*;
-import duke.ui.*;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * An <code>InvalidCommand</code> object for the execution of any invalid command.

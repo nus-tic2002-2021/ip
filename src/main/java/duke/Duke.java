@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.*;
-import duke.parser.*;
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 
@@ -27,8 +27,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.getTaskList());
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             ui.showDividerLine();
             ui.showFileNotFound();
             taskList = new TaskList();

@@ -7,7 +7,7 @@ public class Task {
 
     protected boolean isDone;
     protected String description;
-    protected final String tagHeader = " #";
+    protected final String TAG_HEADER = " #";
     protected String tagDescription;
 
     /**
@@ -53,14 +53,18 @@ public class Task {
      *
      * @return The task deadline.
      */
-    public String getBy() { return "";}
+    public String getBy() {
+        return "";
+    }
 
     /**
      * Returns the task datetime.
      *
      * @return The task datetime.
      */
-    public String getAt() { return "";}
+    public String getAt() {
+        return "";
+    }
 
     /**
      * Returns the task's tag description.
@@ -83,16 +87,15 @@ public class Task {
      */
     public String setTag(String tagDesc) {
         tagDescription = tagDesc;
-        return tagHeader + tagDesc;
+        return TAG_HEADER + tagDesc;
     }
 
     @Override
     public String toString() {
         if (tagDescription.isEmpty()) {
             return String.format("[%s][%s] %s", getTaskType(), getDoneStatus(), description);
-        }
-        else {
-            return String.format("[%s][%s] %s%s%s", getTaskType(), getDoneStatus(), description, tagHeader, tagDescription);
+        } else {
+            return String.format("[%s][%s] %s%s%s", getTaskType(), getDoneStatus(), description, TAG_HEADER, tagDescription);
         }
     }
 

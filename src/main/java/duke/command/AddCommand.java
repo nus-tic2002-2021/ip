@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.tasklist.*;
-import duke.storage.*;
-import duke.ui.*;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasklist.Task;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class AddCommand extends Command {
      *
      * @param task The task to be added.
      */
-    public AddCommand(Task task){
+    public AddCommand(Task task) {
         this.task = task;
     }
 
