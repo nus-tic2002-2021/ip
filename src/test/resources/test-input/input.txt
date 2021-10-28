@@ -1,6 +1,0 @@
-todo some todo
-deadline some deadline /by someDate
-event some event /at from-to
-list
-somerandomtexxt
-bye

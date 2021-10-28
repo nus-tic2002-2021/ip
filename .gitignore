@@ -26,6 +26,7 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 /src/test/resources/generated/*
 /src/test/resources/test-output/actual.txt
+/src/test/resources/linux-test
 
 # act
 /workflow/
