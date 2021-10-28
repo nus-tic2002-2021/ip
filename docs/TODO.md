@@ -82,4 +82,4 @@ No feature changes (error handling)
 - [x] find by description
 - [x] projection for next x days
 - [x] view task summary
-- [ ] check for duplicates
+- [x] check for duplicates
