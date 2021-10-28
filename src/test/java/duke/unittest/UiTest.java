@@ -98,4 +98,34 @@ public class UiTest extends TestStream {
         new Ui(this.getPrintStream()).textCommandLoop(tm, null);
         assertEquals(expectedOutput, this.getOutput());
     }
+
+    /**
+     * Check and show task ids of duplicates.
+     */
+    @Test
+    public void scan_checkDuplicateDesciption() throws Exception{
+        TaskManager tm = new TaskManager();
+        LocalDateTime date = LocalDateTime.now();
+
+        tm.addNewEvent("task0", date, date);
+        tm.addNewToDo("task0");
+        tm.addNewDeadline("task0", date);
+
+        tm.addNewEvent("task1", date, date);
+        tm.addNewToDo("task1");
+        tm.addNewDeadline("task1", date);
+
+        String out0 = getExpectedOutputBeginInputLoop();
+
+        String in0 = TextCommandUnderTest.generateTextCommandScanDuplicateDescription();
+        String out1 = "Description: [...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": 0000, 0001, 0002";
+
+        String in1 = TextCommandUnderTest.generateTextCommandExit();
+        String out2 = getExpectedOutputExitInputLoop();
+
+        System.setIn(buildCommandInputStream(in0, in1));
+        String expectedOutput = buildExpectedResponse(out0, out1, out2);
+        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        assertEquals(expectedOutput, this.getOutput());
+    }
 }
