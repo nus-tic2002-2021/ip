@@ -170,7 +170,7 @@ public class Prettify {
         return lines.toString();
     }
 
-    public static String getRowValue(String[][] table, int r) {
+    private static String getRowValue(String[][] table, int r) {
         StringBuilder result = new StringBuilder();
         for (int c = 0; c < table.length; c++) {
             result.append(table[c][r]);
