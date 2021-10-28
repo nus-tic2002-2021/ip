@@ -69,17 +69,32 @@ public class Storage {
             String taskStr = null;
             switch (taskType) {
                 case "T": {
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + taskTagDesc + "\n";
+                    if (taskTagDesc.isEmpty()) {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "\n";
+                    }
+                    else {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + taskTagDesc + "\n";
+                    }
                     break;
                 }
                 case "D": {
                     String taskDatetime = task.getBy();
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "," + taskTagDesc + "\n";
+                    if (taskTagDesc.isEmpty()) {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "\n";
+                    }
+                    else {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getBy() + "," + taskTagDesc + "\n";
+                    }
                     break;
                 }
                 case "E": {
                     String taskDatetime = task.getAt();
-                    taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "," + taskTagDesc + "\n";
+                    if (taskTagDesc.isEmpty()) {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "\n";
+                    }
+                    else {
+                        taskStr = taskType + "," + taskStatus + "," + taskDesc + "," + task.getAt() + "," + taskTagDesc + "\n";
+                    }
                     break;
                 }
             }
@@ -98,21 +113,27 @@ public class Storage {
         switch (taskType) {
             case "T": {
                 task = new Todo(taskDesc);
-                taskTagDesc = taskFullDesc[3];
+                if (taskFullDesc.length == 4) {
+                    taskTagDesc = taskFullDesc[3];
+                }
                 break;
             }
             case "D": {
                 String taskDateTime = taskFullDesc[3];
                 taskDateTime = dateTimeFormatter(taskDateTime);
                 task = new Deadline(taskDesc, taskDateTime);
-                taskTagDesc = taskFullDesc[4];
+                if (taskFullDesc.length == 5) {
+                    taskTagDesc = taskFullDesc[4];
+                }
                 break;
             }
             case "E": {
                 String taskDateTime = taskFullDesc[3];
                 taskDateTime = dateTimeFormatter(taskDateTime);
                 task = new Event(taskDesc, taskDateTime);
-                taskTagDesc = taskFullDesc[4];
+                if (taskFullDesc.length == 5) {
+                    taskTagDesc = taskFullDesc[4];
+                }
                 break;
             }
         }

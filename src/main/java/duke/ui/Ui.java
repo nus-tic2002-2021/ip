@@ -89,6 +89,7 @@ public class Ui {
     public void printTaskList(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             System.out.println("You have no task in your list!");
+            return;
         }
         System.out.println("Here are the tasks in your list!");
         for (int i = 0; i < taskList.size(); i++) {
@@ -139,6 +140,15 @@ public class Ui {
      */
     public void printTaggedTask(String task) {
         System.out.println("Nice! I've tagged this task.\n" + task);
+    }
+
+    /**
+     * Prints the un-tagged task.
+     *
+     * @param task The un-tagged task.
+     */
+    public void printUnTaggedTask(String task) {
+        System.out.println("Nice! I've un-tagged this task.\n" + task);
     }
 
 }

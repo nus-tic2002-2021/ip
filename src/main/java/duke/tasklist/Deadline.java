@@ -38,7 +38,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s) #%s", getTaskType(), getDoneStatus(), description, by, tagDescription);
+        if (tagDescription.isEmpty()) {
+            return String.format("[%s][%s] %s (by: %s)", getTaskType(), getDoneStatus(), description, by);
+        }
+        else {
+            return String.format("[%s][%s] %s (by: %s)%s%s", getTaskType(), getDoneStatus(), description, by, tagHeader, tagDescription);
+        }
     }
 
 }

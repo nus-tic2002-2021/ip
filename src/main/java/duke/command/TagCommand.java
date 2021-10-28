@@ -24,14 +24,24 @@ public class TagCommand extends Command {
      */
     public TagCommand(int taskId, String tagDesc) {
         this.taskId = taskId;
-        this.tagDesc = tagDesc;
+        if (tagDesc.equalsIgnoreCase("delete")) {
+            this.tagDesc = "";
+        }
+        else {
+            this.tagDesc = tagDesc;
+        }
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        String taggedTask = taskList.setTag(taskId, tagDesc);
+        String task = taskList.setTag(taskId, tagDesc);
         storage.setTaskList(taskList.getTaskList());
-        ui.printTaggedTask(taggedTask);
+        if (tagDesc.isEmpty()) {
+            ui.printUnTaggedTask(task);
+        }
+        else {
+            ui.printTaggedTask(task);
+        }
     }
 
 }

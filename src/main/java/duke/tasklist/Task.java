@@ -7,16 +7,18 @@ public class Task {
 
     protected boolean isDone;
     protected String description;
+    protected final String tagHeader = " #";
     protected String tagDescription;
 
     /**
      * Constructs Task with this description.
      *
-     * @param description The task description.
+     * @param desc The task description.
      */
-    public Task(String description) {
-        this.isDone = false;
-        this.description = description;
+    public Task(String desc) {
+        isDone = false;
+        description = desc;
+        tagDescription = "";
     }
 
     /**
@@ -80,12 +82,18 @@ public class Task {
      * Tags the task with this description.
      */
     public String setTag(String tagDesc) {
-        return tagDescription = tagDesc;
+        tagDescription = tagDesc;
+        return tagHeader + tagDesc;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s #%s", getTaskType(), getDoneStatus(), description, tagDescription);
+        if (tagDescription.isEmpty()) {
+            return String.format("[%s][%s] %s", getTaskType(), getDoneStatus(), description);
+        }
+        else {
+            return String.format("[%s][%s] %s%s%s", getTaskType(), getDoneStatus(), description, tagHeader, tagDescription);
+        }
     }
 
 }

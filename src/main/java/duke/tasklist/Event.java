@@ -38,7 +38,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s) #%s", getTaskType(), getDoneStatus(), description, at, tagDescription);
+        if (tagDescription.isEmpty()) {
+            return String.format("[%s][%s] %s (at: %s)", getTaskType(), getDoneStatus(), description, at);
+        }
+        else {
+            return String.format("[%s][%s] %s (at: %s)%s%s", getTaskType(), getDoneStatus(), description, at, tagHeader, tagDescription);
+        }
     }
 
 }
