@@ -1,6 +1,7 @@
-package src.main.java;
+package src.java;
 
-import src.main.java.action.DukeAction;
+import src.java.action.DukeAction;
+import src.java.task.TaskList;
 
 import java.util.Scanner;
 import java.io.*;

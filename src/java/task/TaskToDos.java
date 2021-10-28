@@ -1,4 +1,4 @@
-package src.main.java;
+package src.java.task;
 
 public class TaskToDos extends Task {
 

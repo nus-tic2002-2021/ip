@@ -1,11 +1,12 @@
-package src.main.java.action;
+package src.java.action;
 
-import src.main.java.DukeActionFacade;
-import src.main.java.Message;
-import src.main.java.TaskList;
+import src.java.DukeActionFacade;
+import src.java.Message;
+import src.java.fileAccess.FileAccess;
+import src.java.task.TaskList;
+import src.java.task.TaskType;
 
 import java.io.FileWriter;
-import java.util.Scanner;
 
 public class DukeAction extends DukeActionFacade {
 
@@ -61,15 +62,8 @@ public class DukeAction extends DukeActionFacade {
     }
 
     private static void SaveTask(TaskList myList) {
-        String filepath = "myText.txt";
-        try {
-            FileWriter fw = new FileWriter(filepath);
-            fw.write("helloWold");
-            fw.close();
-            Message.msgSave();
-        } catch (Exception e){
-            Message.msgError(e);
-        }
+        String listOfTaskString = ReadTaskConvertToString(myList);
+        FileAccess.SaveProgressIntoFile(myList, listOfTaskString);
     }
 
     private static void AddTaskEvent(TaskList myList, String line) {
@@ -123,6 +117,20 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
+    protected static String ReadTaskConvertToString(TaskList myList) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < myList.getNumOfItem(); i++) {
+            String taskDetail = myList.getTaskDetail(i);
+            boolean isDone = myList.getTaskDoneStatus(i);
+            String isDoneString = (isDone ? "1" : "0");
+            String taskType = TaskType.taskTypeToString(myList.getTaskType(i));
+
+            sb.append(taskType).append("|");
+            sb.append(isDoneString).append("|");
+            sb.append(taskDetail).append("\n");
+        }
+        return sb.toString();
+    }
 }
 
 

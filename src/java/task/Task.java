@@ -1,4 +1,6 @@
-package src.main.java;
+package src.java.task;
+
+import src.java.task.TaskType;
 
 public abstract class Task {
     protected String taskDetail;

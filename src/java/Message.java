@@ -1,4 +1,7 @@
-package src.main.java;
+package src.java;
+
+import src.java.task.TaskList;
+import src.java.task.TaskType;
 
 import java.io.*;
 
@@ -185,7 +188,7 @@ public class Message {
         String pathRoot = System.getProperty("user.dir");
         // pathRoot = D:\My Files\School Documents\Repository\Duke
 
-        String pathRssFolder = "src" + File.separator + "main" + File.separator + "resources";
+        String pathRssFolder = "src" + File.separator + "resources";
         // pathRssFolder = src\main\resources
 
         String pathFileName = "buddha.txt";
