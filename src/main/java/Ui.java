@@ -1,5 +1,5 @@
 public class Ui {
-    static String line = "____________________________________________________________\n";
+    static String line = "____________________________________________________________";
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -7,13 +7,13 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Welcome to\n" + logo + " chatbot! \n");
+        System.out.println(line + "\nWelcome to\n" + logo + " chatbot!");
     }
 
     public static void Greet() {
         String start = "Hello, I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(line + start + line);
+        System.out.println(line + "\n" + start + line + "\n");
     }
 
     public static void PrintTaskCount() {
@@ -21,7 +21,7 @@ public class Ui {
     }
 
     public static void PrintTaskAdded(Task newTask) {
-        System.out.println(line + "\nGot it. I've added this task:\n"
+        System.out.println("Got it. I've added this task:\n"
                 + newTask.getTaskInfo());
     }
 }
