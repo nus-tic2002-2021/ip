@@ -1,3 +1,5 @@
+package src.main.java;
+
 import java.io.*;
 
 public class Message {
@@ -119,6 +121,11 @@ public class Message {
                         + dateTimeString + ")");
                 break;
         }
+    }
+
+    public static  void msgSave (){
+        System.out.println("    Progress Saved!");
+        System.out.println("_________________________________");
     }
 
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

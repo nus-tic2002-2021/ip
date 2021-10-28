@@ -1,3 +1,5 @@
+package src.main.java;
+
 public class TaskToDos extends Task {
 
     public TaskToDos(String taskDetail) {

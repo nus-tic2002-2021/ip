@@ -1,3 +1,5 @@
+package src.main.java;
+
 public abstract class Task {
     protected String taskDetail;
     protected boolean isDone;
