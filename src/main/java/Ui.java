@@ -15,4 +15,13 @@ public class Ui {
                 + "What can I do for you?\n";
         System.out.println(line + start + line);
     }
+
+    public static void PrintTaskCount() {
+        System.out.println("Now you have " + TaskList.DukeList.size() + " tasks in the list.");
+    }
+
+    public static void PrintTaskAdded(Task newTask) {
+        System.out.println(line + "\nGot it. I've added this task:\n"
+                + newTask.getTaskInfo());
+    }
 }
