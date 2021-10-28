@@ -27,8 +27,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         String completedTask = taskList.setDone(taskId);
-        assert taskList.getTaskList().get(taskId).getDoneStatus().equalsIgnoreCase("X")
-                : "The task id " + taskId + " should has the status done." ;
+        assert completedTask.contains("[X]") : "The task id " + taskId + " should has the status done.";
         storage.setTaskList(taskList.getTaskList());
         ui.printCompletedTask(completedTask);
     }

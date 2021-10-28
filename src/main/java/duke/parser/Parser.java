@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
 
-        String[] taskFullDesc = fullCommand.split(" ", 2);
+        String[] taskFullDesc = fullCommand.split(" ");
         String taskType = taskFullDesc[0].toUpperCase();
         CommandEnum userCommand = null;
 
