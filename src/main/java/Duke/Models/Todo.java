@@ -1,4 +1,8 @@
-public class Todo extends Task{
+package Duke.Models;
+
+import Duke.Models.Task;
+
+public class Todo extends Task {
 
     public Todo(String newTask) {
         super(newTask);

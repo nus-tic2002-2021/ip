@@ -1,3 +1,7 @@
+package Duke.Models;
+
+import Duke.DukeException;
+
 public class Task {
 
     protected String Description;
@@ -19,12 +23,15 @@ public class Task {
         }
     }
 
-
     public String getDescription() {
         return Description;
     }
 
-     public String getAdditionalInfo() {
+    public boolean isCompleted() {
+        return Completed;
+    }
+
+    public String getAdditionalInfo() {
         return "";
      }
 

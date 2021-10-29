@@ -1,4 +1,6 @@
-public class Deadline extends Task{
+package Duke.Models;
+
+public class Deadline extends Task {
     protected String by;
 
     public Deadline(String newTask, String datetime) {
