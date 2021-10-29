@@ -9,7 +9,8 @@ public enum CommandEnums {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
-    FIND("find")
+    FIND("find"),
+    VIEW("view")
     ;
 
     /**

@@ -40,7 +40,7 @@ public class CommandBase {
         this.fullCommand = command;
         this.keyword = "";
         this.detail = "";
-        if(command.contains(CommandEnums.TODO.getName()) || command.contains(CommandEnums.DEADLINE.getName()) || command.contains(CommandEnums.EVENT.getName()) || command.contains(CommandEnums.FIND.getName())){
+        if(command.contains(CommandEnums.TODO.getName()) || command.contains(CommandEnums.DEADLINE.getName()) || command.contains(CommandEnums.EVENT.getName())  || command.contains(CommandEnums.VIEW.getName()) || command.contains(CommandEnums.FIND.getName())){
             try {
                 String[] toWords = command.split(" ", 2);
                 this.keyword = toWords[0];

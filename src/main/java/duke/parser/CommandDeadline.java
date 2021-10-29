@@ -74,12 +74,12 @@ CommandDeadline extends CommandBase {
      */
     private LocalDateTime timeParse(String str) throws TimeParseException{
         if (!str.contains("/")){
-            throw new TimeParseException("DateTime Format DD/MM/YYYY");
+            throw new TimeParseException("DateTime Format YYYY/MM/DD");
         }
         // gen yyyy,mm,dd ssss
         String[] date = str.split("/", 3);
         if (date.length < dateLength){
-            throw new TimeParseException("DateTime Format DD/MM/YYYY");
+            throw new TimeParseException("DateTime Format YYYY/MM/DD");
         }
 
         // gen time

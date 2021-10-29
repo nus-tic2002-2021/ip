@@ -17,7 +17,7 @@ public class Events extends Task {
      * @param date - the date event is held.
      */
     public Events(String description, LocalDate date, LocalTime start, LocalTime end) {
-        super(description);
+        super(description, "event", date, start);
         this.date = date;
         this.start = start;
         this.end = end;
@@ -31,5 +31,13 @@ public class Events extends Task {
     @Override
     public String encodeTask() {
         return "E" + super.encodeTask() + " | " + date.toString() + " | " + start.toString() + " | " + end.toString();
+    }
+
+    public LocalDate getDate(){
+        return this.date;
+    }
+
+    public LocalTime getTime(){
+        return this.start;
     }
 }

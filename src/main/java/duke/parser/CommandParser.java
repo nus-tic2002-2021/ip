@@ -26,6 +26,8 @@ public class CommandParser {
             command.setCmd(new CommandDeadline(fullCommand));
         } else if(fullCommand.contains(CommandEnums.FIND.getName())) {
             command.setCmd(new CommandFind(fullCommand));
+        } else if(fullCommand.contains(CommandEnums.VIEW.getName())) {
+            command.setCmd(new CommandViewSchedule(fullCommand));
         } else {
             command.setCmd(new CommandError(fullCommand));
         }

@@ -1,8 +1,14 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType;
+    protected LocalDate date;
+    protected LocalTime time;
 
     public static final String DONE = "1";
     public static final String UNDONE = "0";
@@ -12,9 +18,12 @@ public class Task {
      *
      * @param description - the description string.
      */
-    public Task(String description) {
+    public Task(String description, String taskType, LocalDate date, LocalTime time) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
+        this.date = date;
+        this.time = time;
     }
 
     /**
@@ -44,6 +53,11 @@ public class Task {
         return description;
     }
 
+    public String getTaskType(){
+        return taskType;
+    }
+
+
     /** Sets the task to Done. */
     public void setDone(){
         isDone = true;
@@ -67,4 +81,11 @@ public class Task {
         return " | " + getStatusCode() + " | " + description;
     }
 
+    public LocalDate getDate(){
+        return this.date;
+    }
+
+    public LocalTime getTime(){
+        return this.time;
+    }
 }

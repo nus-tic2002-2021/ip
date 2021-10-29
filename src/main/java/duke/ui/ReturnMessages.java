@@ -3,7 +3,11 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 /** Handles message output. */
 public class ReturnMessages {
@@ -37,8 +41,10 @@ public class ReturnMessages {
         System.out.println("    Check Existing Tasks:    list");
         System.out.println("    Mark a Task done:        done {taskID}");
         System.out.println("    Delete a Task:           delete {taskID}");
-        System.out.println("    Add a Todo Task:         todo {action}");
+        System.out.println("    Find a Task:             find {keyword}");
+        System.out.println("    View Schedule:           view {date by YYYY/MM/DD}");
         System.out.println("    Save Current State:      save");
+        System.out.println("    Add a Todo Task:         todo {action}");
         System.out.println("    Add a Event Task:        event xxxx /at {date by YYYY/MM/DD} {startTime}AM/PM-{endTime}AM/PM");
         System.out.println("    Add a Deadline Task:     deadline XXXX /by {date by YYYY/MM/DD} {Time}AM/PM");
         System.out.println("    End the program:         bye");
@@ -96,13 +102,31 @@ public class ReturnMessages {
         separator();
     }
 
+    public void taskSchedulingFeedback(LocalDate datePrint, ArrayList<Task> list){
+        ArrayList<Task> printable = new ArrayList<>();
+        for(Task t: list){
+            if(t.getTaskType().equals("event") || t.getTaskType().equals("deadline")){
+                if(t.getDate().equals(datePrint)){
+                    printable.add(t);
+                }
+            }
+        }
+        separator();
+        System.out.println("     Here are the tasks in your list scheduled for: " +datePrint.toString());
+        for(Task t : printable){
+            System.out.println("    "+t.toString());
+        }
+        separator();
+    }
+
+
     /**
      * Returns task found with keyword with its correct numbering.
      *
      * @param key keyword.
      * @param list full task list.
      */
-    public void taskFound(String key, ArrayList<Task> list){
+    public void taskFoundFeedback(String key, ArrayList<Task> list){
         separator();
         int numbering = 1;
         System.out.println("     Here are the matching tasks in your list:");

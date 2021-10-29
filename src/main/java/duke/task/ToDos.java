@@ -3,7 +3,6 @@ package duke.task;
 public class ToDos extends Task {
     protected int duration;
 
-
     /**
      * Creates To Do task
      *
@@ -20,7 +19,7 @@ public class ToDos extends Task {
      * @param duration - unscheduled fixed duration.
      */
     public ToDos(String description, int duration) {
-        super(description);
+        super(description, "todo", null, null);
         this.duration = duration;
     }
     public int getDuration(){

@@ -4,7 +4,9 @@ import duke.exception.EmptyTaskListException;
 import duke.exception.TaskNotFoundException;
 import duke.ui.ReturnMessages;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskList {
     protected int listSize;
@@ -124,6 +126,26 @@ public class TaskList {
         if(this.listSize == 0){
             throw new EmptyTaskListException("empty task");
         }
-        printer.taskFound(keyword, taskList);
+        printer.taskFoundFeedback(keyword, taskList);
     }
+
+    /**
+     * prints schedule order by date
+     *
+     * @param dateToPrint the date that the schedule is needed
+     * @throws EmptyTaskListException if task list is empty, throws exception on empty task list
+     */
+    public void printAsSchedule(LocalDate dateToPrint) throws EmptyTaskListException{
+        if(this.listSize == 0){
+            throw new EmptyTaskListException("empty task");
+        }
+        printer.taskSchedulingFeedback(dateToPrint, taskList);
+    }
+
+    // Comparison done using compareTo function
+    public static void sort(ArrayList<Task> list)
+    {
+        list.sort(Comparator.comparing(Task::getTime));
+    }
+
 }
