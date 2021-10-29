@@ -1,3 +1,5 @@
+package Duke.Checker;
+
 public class FileLineChecker {
     public static boolean CheckTodoLine(String[] parts) {
         if (parts.length != 3) {

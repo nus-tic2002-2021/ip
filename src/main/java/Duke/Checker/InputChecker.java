@@ -1,3 +1,6 @@
+package Duke.Checker;
+import Duke.DukeException;
+
 public class InputChecker {
 
     public static boolean CheckValidTodo(String input) throws DukeException {
