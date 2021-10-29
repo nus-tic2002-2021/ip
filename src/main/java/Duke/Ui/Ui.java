@@ -1,9 +1,10 @@
-package Duke;
+package Duke.Ui;
 
 import Duke.Models.Task;
+import Duke.TaskList;
 
 public class Ui {
-    static String line = "____________________________________________________________";
+    public static String line = "____________________________________________________________";
 
     public static void StartDuke() {
         String logo = " ____        _        \n"
@@ -21,7 +22,7 @@ public class Ui {
     }
 
     public static void PrintTaskCount() {
-        System.out.println("Now you have " + TaskList.DukeList.size() + " tasks in the list.");
+        System.out.println("Now you have " + TaskList.size() + " tasks in the list.");
     }
 
     public static void PrintTaskAdded(Task newTask) {
