@@ -22,16 +22,13 @@ public class Ui {
 
     /** Prints welcome message. */
     public void showWelcome() {
-        System.out.print("________________________________________________________________________________________" +
-                "___________________________________\n"
-                        + "Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n"
+        showDividerLine();
+        System.out.print("Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n"
                         + " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
                         + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n"
-                        + "_______________________________________________________________________________________" +
-                "___________________________________\n");
+                        + "|____/ \\__,_|_|\\_\\___|\n");
     }
 
     /** Prints divider line. */
@@ -42,7 +39,7 @@ public class Ui {
 
     /** Prints exception message - file not found. */
     public void showFileNotFound() {
-        System.out.println("No task list found. I will create one for you now! ☺");
+        System.out.println("\nNote: No task list found. I will create one for you! ☺");
     }
 
     /**

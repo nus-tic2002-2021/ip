@@ -6,6 +6,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -25,12 +26,14 @@ public class Duke {
     private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        ui.showWelcome();
         try {
             taskList = new TaskList(storage.getTaskList());
         } catch (FileNotFoundException e) {
-            ui.showDividerLine();
             ui.showFileNotFound();
             taskList = new TaskList();
+        } finally {
+            ui.showDividerLine();
         }
     }
 
@@ -38,7 +41,6 @@ public class Duke {
      * Runs Duke interactively.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -55,14 +57,11 @@ public class Duke {
         }
     }
 
-    /**
-     * Constructs and runs Duke.
-     *
-     * @param args
-     */
     public static void main(String[] args) {
-        //new Duke("tasklist.csv").run();
-        new Duke("src/main/java/duke/data/tasklist.csv").run();
+        File filepath = new File("./data");
+        filepath.mkdir();
+        //new Duke("src/main/java/duke/data/tasklist.csv").run();
+        new Duke(filepath+"/tasklist.csv").run();
     }
 
 }
