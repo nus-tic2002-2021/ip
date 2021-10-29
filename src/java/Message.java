@@ -77,6 +77,18 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    // FileAccess Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public static  void msgSave (){
+        System.out.println("    Progress Saved!");
+        System.out.println("_________________________________");
+    }
+
+    public static  void msgSLoad (){
+        System.out.println("    Progress loaded!");
+        System.out.println("_________________________________");
+    }
+
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgMarkDone(TaskList myList, int taskNumber) {
@@ -126,11 +138,6 @@ public class Message {
         }
     }
 
-    public static  void msgSave (){
-        System.out.println("    Progress Saved!");
-        System.out.println("_________________________________");
-    }
-
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgError(Exception e) {
@@ -171,6 +178,7 @@ public class Message {
         System.out.println("    ☹  OOPS!!! The task number is invalid.");
         System.out.println("_________________________________");
     }
+
     // Ending Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public static void msgBye() throws IOException {
