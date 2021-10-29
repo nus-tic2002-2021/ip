@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.ui.Ui;
 import duke.tasklist.Task;
 import duke.tasklist.Todo;
 import duke.tasklist.Event;
@@ -47,8 +48,8 @@ public class Storage {
                 Task task = convertStrToTask(taskStr);
                 taskList.add(task);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("___________________________________________________________________\n" +
-                        "The task \""+taskStr+"\" is not added due to IndexOutOfBoundsException.\n" +
+                Ui.showDividerLine();
+                System.out.println("The task \""+taskStr+"\" is not added due to IndexOutOfBoundsException.\n" +
                         "The data are likely to be corrupted.");
             }
         }
