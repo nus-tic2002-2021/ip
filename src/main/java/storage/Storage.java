@@ -51,8 +51,7 @@ public class Storage {
                 }
             }
             return tasks;
-        }
-        else {
+        } else {
             throw new FileNotFoundException();
         }
     }
