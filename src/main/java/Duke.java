@@ -30,7 +30,21 @@ public class Duke {
                 in = new Scanner(System.in);
                 markTask(in.nextLine());
             }else{
-                addTask(line);
+                try{
+                    addTask(line);
+                }catch (ToDosBodyException e){
+                    printThis("OOPS!!! The description of a todo cannot be empty",3);
+                }catch (DeadlineBodyException e){
+                    printThis("OOPS!!! The description of a Deadline cannot be empty",3);
+                }catch (DeadlineByException e){
+                    printThis("OOPS!!! When is the Deadline ?",3);
+                }catch (EventBodyException e){
+                    printThis("OOPS!!! The description of a Event cannot be empty",3);
+                }catch (EventAtException e){
+                    printThis("OOPS!!! When is the Event ?",3);
+                }catch (InvalidCommandException e){
+                    printThis("OOPS!!! Invalid command please enter. Please try again",3);
+                }
             }
         }
     }
@@ -75,29 +89,31 @@ public class Duke {
         }
     }
 
-    public static void addTask(String item) {
+    public static void addTask(String item)
+            throws ToDosBodyException, DeadlineBodyException,DeadlineByException,EventAtException,EventBodyException,InvalidCommandException {
         String[] split_1 = item.split("\\s+");
         String[] split_2;
         boolean isAdded = false;
         if(split_1[0].equalsIgnoreCase("Todo")){
+            if(split_1.length == 1) throw new ToDosBodyException();
             taskListing.add(new ToDos(split_1[1]));
             isAdded = true;
         }else if(split_1[0].equalsIgnoreCase("Deadline")){
+            if(split_1.length == 1)throw new DeadlineBodyException();
             split_2 = item.split("/");
+            if(split_2.length == 1) throw new DeadlineByException();
             taskListing.add(new Deadline(split_1[1],split_2[1]));
-            isAdded = true;
+
         }else if(split_1[0].equalsIgnoreCase("Event")){
+            if(split_1.length == 1)throw new EventBodyException();
             split_2 = item.split("/");
+            if(split_2.length == 1) throw new EventAtException();
             taskListing.add(new Event(split_1[1],split_2[1]));
-            isAdded = true;
         }
-        if (isAdded){
-            printThis("Got it. I've added this task: " + item , 1);
-            printThis(taskListing.get(taskListing.size()-1).toString(), 0);
-            printThis("Now you have "+ taskListing.size()+ " tasks in the list." + item , 2);
-        }else{
-            printThis("Invalid command please enter your command again",3);
-        }
+        if (!isAdded) throw new InvalidCommandException();
+        printThis("Got it. I've added this task: " + item , 1);
+        printThis(taskListing.get(taskListing.size()-1).toString(), 0);
+        printThis("Now you have "+ taskListing.size()+ " tasks in the list." + item , 2);
     }
 
     public static void removeTask(int num){
