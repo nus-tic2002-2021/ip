@@ -1,11 +1,14 @@
-package Duke;
+package Duke.Parser;
+import Duke.DukeException;
 import Duke.Models.*;
 import Duke.Checker.FileLineChecker;
 import Duke.Checker.InputChecker;
+import Duke.TaskList;
+import Duke.Ui.Ui;
 
 public class Parser {
 
-    static void parseInput(String input) {
+    public static void parseInput(String input) {
         if (input.trim().equals("list")) {
             TaskList.printTaskList();
         } else if (input.startsWith("todo ")) {

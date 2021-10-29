@@ -1,13 +1,16 @@
 package Duke;
 
 import Duke.Models.*;
-import Duke.DukeException;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 import java.util.ArrayList;
 
 public class TaskList {
     static ArrayList<Task> DukeList = new ArrayList<>();
+
+    public static int size() {
+        return DukeList.size();
+    }
 
     public static void addTaskToList(Task newEntry) {
         DukeList.add(newEntry);

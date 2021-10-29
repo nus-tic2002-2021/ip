@@ -1,5 +1,8 @@
 package Duke;
 
+import Duke.Parser.*;
+import Duke.Ui.Ui;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
