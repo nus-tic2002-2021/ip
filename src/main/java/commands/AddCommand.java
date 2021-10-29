@@ -5,6 +5,7 @@ import storage.Storage;
 import tasks.*;
 import tasks.TaskList;
 import ui.Ui;
+import ui.Messages;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class AddCommand extends Command{
         this.task = task;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         boolean isAdded = taskList.addTask(task);
 
         if (isAdded){
@@ -27,8 +28,13 @@ public class AddCommand extends Command{
             ui.showAdded();
             ui.printTask(task.toString());
             ui.printTaskCount(taskList.getListSize());
+
+            return Messages.ADDED_MSG + Messages.getTaskMsg(task.toString()) +
+                    Messages.getTaskCountMsg(taskList.getListSize());
+
         } else {
             ui.showError("Task is not added. There is a schedule clash!");
+            return "Task is not added. There is a schedule clash!";
         }
     }
 }

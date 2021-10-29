@@ -37,6 +37,8 @@ public class Parser {
         switch(commandEnum){
         case LIST:
             return doList();
+        case HELP:
+            return doHelp();
         case TODO:
             return doAddTodo(args);
         case DEADLINE:
@@ -60,6 +62,10 @@ public class Parser {
 
     private static Command doList(){
         return new ListCommand();
+    }
+
+    private static Command doHelp(){
+        return new HelpCommand();
     }
 
     private static Command doAddTodo (String[] args){

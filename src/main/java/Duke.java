@@ -40,7 +40,7 @@ public class Duke {
     }
 
     /** Method to start running the Duke program. */
-    public void run() {
+    public void runCmd() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -58,7 +58,18 @@ public class Duke {
         }
     }
 
+    public String reply(String input) {
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException | IOException e) {
+            // ui.showError(e.getMessage());
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/tasks.txt").runCmd();
     }
 }

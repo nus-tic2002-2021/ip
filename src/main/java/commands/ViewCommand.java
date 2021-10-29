@@ -2,6 +2,7 @@ package commands;
 
 import storage.Storage;
 import tasks.TaskList;
+import ui.Messages;
 import ui.Ui;
 
 import java.time.LocalDate;
@@ -14,8 +15,9 @@ public class ViewCommand extends Command{
         this.date = date;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showScheduleFor(date);
         ui.printAllTasks(taskList.getTaskSchedule(date));
+        return Messages.getScheduledMsg(date) + Messages.getAllTasksMsg(taskList.getTaskSchedule(date));
     }
 }
