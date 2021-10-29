@@ -1,3 +1,9 @@
+package Duke;
+
+import Duke.DukeException;
+import Duke.Parser;
+import Duke.TaskList;
+import Duke.Models.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,14 +14,14 @@ import java.util.Scanner;
 public class Storage {
 
     public static File CreateStorageFile() throws DukeException {
-        File newFile = new File("data\\Storage.txt");
+        File newFile = new File("data\\Duke.Storage.txt");
         try {
             newFile.getParentFile().mkdirs();
             newFile.createNewFile();
-            System.out.println("New Storage.txt file created.");
+            System.out.println("New Duke.Storage.txt file created.");
             return newFile;
         } catch (IOException err) {
-            throw new DukeException("Failed to create new Storage.txt file.");
+            throw new DukeException("Failed to create new Duke.Storage.txt file.");
         }
     }
 
@@ -25,7 +31,7 @@ public class Storage {
             try {
                 newFile = CreateStorageFile();
             } catch (DukeException e) {
-                throw new DukeException("Duke will run without any prior stored task information");
+                throw new DukeException("Duke.Duke will run without any prior stored task information");
             }
         }
         return newFile;
@@ -43,7 +49,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File cannot be opened, " +
-                    "Duke will not have any prior stored task information");
+                    "Duke.Duke will not have any prior stored task information");
         }
     }
 
@@ -74,12 +80,12 @@ public class Storage {
         String divider = " | ";
         String initial = targetTask.getTaskType();
         String newLine = initial + divider;
-        if (targetTask.Completed) {
+        if (targetTask.isCompleted()) {
             newLine = newLine + "1" + divider;
         } else {
             newLine = newLine + "0" + divider;
         }
-        newLine = newLine + targetTask.Description;
+        newLine = newLine + targetTask.getDescription();
 
         if (initial.equals("D") || initial.equals("E"))
         newLine = newLine + divider + targetTask.getAdditionalInfo();

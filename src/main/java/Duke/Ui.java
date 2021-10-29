@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Models.Task;
+
 public class Ui {
     static String line = "____________________________________________________________";
 
@@ -11,7 +15,7 @@ public class Ui {
     }
 
     public static void Greet() {
-        String start = "Hello, I'm Duke\n"
+        String start = "Hello, I'm Duke.Duke\n"
                 + "What can I do for you?\n";
         System.out.println(line + "\n" + start + line + "\n");
     }

@@ -1,3 +1,8 @@
+package Duke;
+import Duke.Models.*;
+import Duke.Checker.FileLineChecker;
+import Duke.Checker.InputChecker;
+
 public class Parser {
 
     static void parseInput(String input) {
@@ -100,7 +105,7 @@ public class Parser {
         } else {
             System.out.println("Line is invalid");
         }
-        throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
+        throw new DukeException("A line from storage file is invalid and will not be added to Duke.Duke.");
     }
 
     public static Todo getTodoFromLine(String[] parts) {
