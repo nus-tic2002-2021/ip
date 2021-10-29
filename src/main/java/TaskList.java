@@ -44,4 +44,15 @@ public class TaskList {
         inputTask.markCompleted();
     }
 
+    public static void DeleteIndex(String input) throws DukeException {
+        int index = Integer.parseInt(input.substring(6).trim()) - 1;
+        if (index < DukeList.size() && index > -1) {
+            String DeletedInfo = DukeList.get(index).getTaskInfo();
+            RemoveTask(index);
+            System.out.println("Noted! I've removed this task:\n  " + DeletedInfo);
+            Ui.PrintTaskCount();
+        } else {
+            throw new DukeException("☹ OOPS!!! The index number of the task to delete is invalid!");
+        }
+    }
 }
