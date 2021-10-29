@@ -61,8 +61,8 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        //new Duke("src/main/java/duke/data/tasklist.csv").run();
-        new Duke("tasklist.csv").run();
+        //new Duke("tasklist.csv").run();
+        new Duke("src/main/java/duke/data/tasklist.csv").run();
     }
 
 }
