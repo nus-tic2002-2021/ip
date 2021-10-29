@@ -20,26 +20,41 @@ public class Ui {
         return userInput.nextLine();
     }
 
+    /** Prints command header. */
+    public void showCommandHeader() {
+        System.out.print("\n\n\ncmd: ");
+    }
+
     /** Prints welcome message. */
     public void showWelcome() {
         showDividerLine();
-        System.out.print("Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n"
-                        + " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n");
+        System.out.println("Hello! I'm Duke By Justin ☺\nWhat can I do for you?\n" +
+                        " ____        _        \n" +
+                        "|  _ \\ _   _| | _____ \n" +
+                        "| | | | | | | |/ / _ \\\n" +
+                        "| |_| | |_| |   <  __/\n" +
+                        "|____/ \\__,_|_|\\_\\___|\n" +
+                        "\nCOMMAND LIST:\n" +
+                        "1. list\n" +
+                        "2. todo {task description}\n" +
+                        "3. event {task description} /at {yyyy-mm-dd hh:mm}\n" +
+                        "4. deadline {task description} /by {yyyy-mm-dd hh:mm}\n" +
+                        "5. done {task id}\n" +
+                        "6. delete {task id}\n" +
+                        "7. find {keyword}\n" +
+                        "8. tag {task id} {tag description}\n" +
+                        "9. bye");
     }
 
     /** Prints divider line. */
-    public static void showDividerLine() {
+    public void showDividerLine() {
         System.out.println("_______________________________________________________________________________________" +
                 "__________________________________");
     }
 
     /** Prints exception message - file not found. */
     public void showFileNotFound() {
-        System.out.println("\nNote: No task list found. I will create one for you! ☺");
+        System.out.println("\nNote: No task list found. I will create one for you!");
     }
 
     /**

@@ -48,8 +48,7 @@ public class Storage {
                 Task task = convertStrToTask(taskStr);
                 taskList.add(task);
             } catch (IndexOutOfBoundsException e) {
-                Ui.showDividerLine();
-                System.out.println("The task \""+taskStr+"\" is not added due to IndexOutOfBoundsException.\n" +
+                System.out.println("\nThe task \""+taskStr+"\" is not added due to IndexOutOfBoundsException.\n" +
                         "The data are likely to be corrupted.");
             }
         }

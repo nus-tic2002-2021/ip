@@ -44,6 +44,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
+                ui.showCommandHeader();
                 String fullCommand = ui.readCommand();
                 ui.showDividerLine();
                 Command c = Parser.parse(fullCommand);
