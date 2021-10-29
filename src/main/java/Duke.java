@@ -27,11 +27,9 @@ public class Duke {
                 break;
             }else if(line.equalsIgnoreCase("list")){
                 printList();
-                in = new Scanner(System.in);
-                markTask(in.nextLine());
             }else{
                 try{
-                    addTask(line);
+                    addDeleteMarkTask(line);
                 }catch (ToDosBodyException e){
                     printThis("OOPS!!! The description of a todo cannot be empty",3);
                 }catch (DeadlineBodyException e){
@@ -44,6 +42,12 @@ public class Duke {
                     printThis("OOPS!!! When is the Event ?",3);
                 }catch (InvalidCommandException e){
                     printThis("OOPS!!! Invalid command please enter. Please try again",3);
+                }catch (DeleteBodyException e){
+                    printThis("OOPS!!! The description of a Delete cannot be empty",3);
+                }catch (NumberFormatException e){
+                    printThis("OOPS!!! Please enter a valid number",3);
+                }catch (IndexOutOfBoundsException e){
+                    printThis("OOPS!!! Please select between 1 to " + taskListing.size(),3);
                 }
             }
         }
@@ -63,8 +67,6 @@ public class Duke {
     public static void markTask(String str){
         String[] splited = str.split("\\s+");
         if(splited.length == 2){
-            System.out.println("here " + splited[0] + " " + splited[1]);
-
             if (splited[0].equalsIgnoreCase("done")) {
                 int num;
                 try {
@@ -89,11 +91,14 @@ public class Duke {
         }
     }
 
-    public static void addTask(String item)
-            throws ToDosBodyException, DeadlineBodyException,DeadlineByException,EventAtException,EventBodyException,InvalidCommandException {
+    public static void addDeleteMarkTask(String item)
+            throws ToDosBodyException, DeadlineBodyException,DeadlineByException,
+            EventAtException,EventBodyException,InvalidCommandException,DeleteBodyException {
         String[] split_1 = item.split("\\s+");
         String[] split_2;
         boolean isAdded = false;
+        boolean isRemoved = false;
+        boolean isDone = false;
         if(split_1[0].equalsIgnoreCase("Todo")){
             if(split_1.length == 1) throw new ToDosBodyException();
             taskListing.add(new ToDos(split_1[1]));
@@ -105,18 +110,31 @@ public class Duke {
             taskListing.add(new Deadline(split_1[1],split_2[1]));
 
         }else if(split_1[0].equalsIgnoreCase("Event")){
-            if(split_1.length == 1)throw new EventBodyException();
+            if(split_1.length == 1) throw new EventBodyException();
             split_2 = item.split("/");
             if(split_2.length == 1) throw new EventAtException();
             taskListing.add(new Event(split_1[1],split_2[1]));
+        }else if(split_1[0].equalsIgnoreCase("delete")){
+            if(split_1.length == 1) throw new DeleteBodyException();
+            removeTask(Integer.parseInt(split_1[1]));
+            isRemoved = true;
+        }else if(split_1[0].equalsIgnoreCase("done")){
+            markTask(item);
+            isDone = true;
         }
-        if (!isAdded) throw new InvalidCommandException();
-        printThis("Got it. I've added this task: " + item , 1);
-        printThis(taskListing.get(taskListing.size()-1).toString(), 0);
-        printThis("Now you have "+ taskListing.size()+ " tasks in the list." + item , 2);
+        if (!isAdded && !isRemoved && !isDone) throw new InvalidCommandException();
+        if(isAdded){
+            printThis("Got it. I've added this task: " , 1);
+            printThis(taskListing.get(taskListing.size()-1).toString(), 0);
+            printThis("Now you have "+ taskListing.size()+ " tasks in the list." , 2);
+        }
     }
 
-    public static void removeTask(int num){
+    public static void removeTask(int num) {
+        if(num > taskListing.size()) throw new IndexOutOfBoundsException();
+        printThis("Noted. I've removed this task:" , 1);
+        printThis(taskListing.get(num-1).toString(), 0);
+        printThis("Now you have "+ taskListing.size()+ " tasks in the list." , 2);
         taskListing.remove(num-1);
     }
 
