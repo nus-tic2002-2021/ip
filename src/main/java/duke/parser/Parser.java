@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
 
-        String[] taskFullDesc = fullCommand.split(" ");
+        String[] taskFullDesc = fullCommand.split(" ", 2);
         String taskType = taskFullDesc[0].toUpperCase();
         CommandEnum userCommand = null;
 
@@ -43,10 +43,10 @@ public class Parser {
             return parseList();
         case TODO:
             return parseTodo(taskFullDesc);
-        case DEADLINE:
-            return parseDeadline(taskFullDesc);
         case EVENT:
             return parseEvent(taskFullDesc);
+        case DEADLINE:
+            return parseDeadline(taskFullDesc);
         case DONE:
             return parseDone(taskFullDesc);
         case DELETE:
@@ -77,20 +77,6 @@ public class Parser {
         }
     }
 
-    private static Command parseDeadline(String[] taskFullDesc) {
-        try {
-            String taskDesc = taskFullDesc[1];
-            String[] taskDescBy = taskDesc.split(" /by ");
-            Task task = new Deadline(taskDescBy[0], taskDescBy[1]);
-            return new AddCommand(task);
-        } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
-                    " description and deadline ☺");
-        } catch (Exception e) {
-            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
-        }
-    }
-
     private static Command parseEvent(String[] taskFullDesc) {
         try {
             String taskDesc = taskFullDesc[1];
@@ -100,6 +86,20 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
                     " description and datetime ☺");
+        } catch (Exception e) {
+            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
+        }
+    }
+
+    private static Command parseDeadline(String[] taskFullDesc) {
+        try {
+            String taskDesc = taskFullDesc[1];
+            String[] taskDescBy = taskDesc.split(" /by ");
+            Task task = new Deadline(taskDescBy[0], taskDescBy[1]);
+            return new AddCommand(task);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
+                    " description and deadline ☺");
         } catch (Exception e) {
             return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
         }
@@ -137,9 +137,15 @@ public class Parser {
     private static Command parseTag(String[] taskFullDesc) {
         try {
             String taskDesc = taskFullDesc[1];
-            String[] taskTag = taskDesc.split(" ", 2);
+            //System.out.println(taskFullDesc[2]);
+            String[] taskTag = taskDesc.split(" ");
+            //System.out.println(taskTag[0]);
+            //System.out.println(taskTag[1]);
+            //System.out.println(taskTag[2]);
             int taskId = Integer.parseInt(taskTag[0]);
             String tagDesc = taskTag[1];
+            //System.out.println(taskId);
+            //System.out.println(taskDesc);
             return new TagCommand(taskId, tagDesc);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task id or tag description is missing.");
