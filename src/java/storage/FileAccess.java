@@ -1,19 +1,22 @@
-package src.java.fileAccess;
+package src.java.storage;
 
-import src.java.Message;
+import src.java.ui.Message;
 import src.java.task.TaskList;
+import src.java.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
 public class FileAccess {
-    String filepath;
-    File progressFile;
+    private String filepath;
+    private File progressFile;
+    private Ui ui;
 
     public FileAccess() {
         filepath = "src\\resources\\progress.txt";
         progressFile = new File(filepath);
+        ui = new Message();
     }
 
     public void SaveProgressIntoFile(TaskList myList, String stringToBeWritten) {
@@ -22,9 +25,9 @@ public class FileAccess {
             FileWriter fw = new FileWriter(filepath);
             fw.write(stringToBeWritten);
             fw.close();
-            Message.msgSave();
+            ui.msgSave();
         } catch (Exception e) {
-            Message.msgError(e);
+            ui.msgError(e);
         }
     }
 
@@ -38,7 +41,7 @@ public class FileAccess {
             }
 
         } catch (Exception e) {
-            Message.msgError(e);
+            ui.msgError(e);
         }
 
         return sb.toString();
@@ -54,9 +57,9 @@ public class FileAccess {
             FileWriter fw = new FileWriter(filepath);
             fw.write("helloWold");
             fw.close();
-            Message.msgSave();
+            ui.msgSave();
         } catch (Exception e) {
-            Message.msgError(e);
+            ui.msgError(e);
         }
     }
 }

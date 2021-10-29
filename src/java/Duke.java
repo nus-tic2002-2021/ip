@@ -1,13 +1,15 @@
 package src.java;
 
+import src.java.action.ParserFacade;
+
 public class Duke {
 
     public static void main(String[] args) {
 
-        DukeActionFacade dukeActionFacade = new DukeActionFacade();
+        ParserFacade parserFacade = new ParserFacade();
 
-        dukeActionFacade.StartDuke();
-        dukeActionFacade.RunDuke();
-        dukeActionFacade.EndDuke();
+        parserFacade.StartDuke();
+        parserFacade.RunDuke();
+        parserFacade.EndDuke();
     }
 }

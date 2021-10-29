@@ -1,14 +1,15 @@
-package src.java;
+package src.java.ui;
 
 import src.java.task.TaskList;
 import src.java.task.TaskType;
 
 import java.io.*;
 
-public class Message {
+public class Message implements Ui {
 
     // Starting Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    public static void msgGreet() {
+    @Override
+    public void msgGreet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
@@ -18,7 +19,7 @@ public class Message {
 
     // Assignment Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public static void msgAssignTask(TaskList myList, int taskNumber) {
+    public void msgAssignTask(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -34,7 +35,7 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgAssignTaskDeadline(TaskList myList, int taskNumber) {
+    public void msgAssignTaskDeadline(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -53,7 +54,7 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgAssignTaskEvent(TaskList myList, int taskNumber) {
+    public void msgAssignTaskEvent(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -72,45 +73,45 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgEcho(String s) {
+    public void msgEcho(String s) {
         System.out.println("    Task Added: " + s);
         System.out.println("_________________________________");
     }
 
     // FileAccess Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public static  void msgSave (){
+    public void msgSave() {
         System.out.println("    Progress Saved!");
         System.out.println("_________________________________");
     }
 
-    public static  void msgSLoad (){
+    public void msgSLoad() {
         System.out.println("    Progress loaded!");
         System.out.println("_________________________________");
     }
 
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public static void msgMarkDone(TaskList myList, int taskNumber) {
+    public void msgMarkDone(TaskList myList, int taskNumber) {
         System.out.println("    Naisuuuu! This task is marked as done: ");
-        Message.msgBlankBeforeTaskDetail();
-        Message.msgTaskDetail(myList, taskNumber);
+        msgBlankBeforeTaskDetail();
+        msgTaskDetail(myList, taskNumber);
         System.out.println("_________________________________");
     }
 
-    public static void msgList(TaskList myList) {
+    public void msgList(TaskList myList) {
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             System.out.print("    " + Integer.toString(i + 1) + ".");
-            Message.msgTaskDetail(myList, i);
+            msgTaskDetail(myList, i);
         }
         System.out.println("_________________________________");
     }
 
-    public static void msgBlankBeforeTaskDetail() {
+    public void msgBlankBeforeTaskDetail() {
         System.out.print("      ");
     }
 
-    public static void msgTaskDetail(TaskList myList, int taskNumber) {
+    public void msgTaskDetail(TaskList myList, int taskNumber) {
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
 
@@ -140,54 +141,54 @@ public class Message {
 
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public static void msgError(Exception e) {
+    public void msgError(Exception e) {
         System.out.println("Error Occurs: " + e);
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidInput() {
+    public void msgInvalidInput() {
         System.out.println("    Sorry :(   Invalid Input. Try Again ~ ");
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidInputMissingDescription() {
+    public void msgInvalidInputMissingDescription() {
         System.out.println("    ☹  OOPS!!! The description cannot be empty.");
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidInputMissingDay() {
+    public void msgInvalidInputMissingDay() {
         System.out.println("    ☹  OOPS!!! The day cannot be empty.");
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidInputMissingTime() {
+    public void msgInvalidInputMissingTime() {
         System.out.println("    ☹  OOPS!!! The time cannot be empty.");
         System.out.println("_________________________________");
     }
 
-    public static void msgRemoveItem(TaskList myList, int taskNumber) {
+    public void msgRemoveItem(TaskList myList, int taskNumber) {
 
         System.out.println("    Noted. I've removed this task:");
-        Message.msgBlankBeforeTaskDetail();
-        Message.msgTaskDetail(myList, taskNumber);
+        msgBlankBeforeTaskDetail();
+        msgTaskDetail(myList, taskNumber);
         System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
-    public static void msgWrongTaskNumber() {
+    public void msgWrongTaskNumber() {
         System.out.println("    ☹  OOPS!!! The task number is invalid.");
         System.out.println("_________________________________");
     }
 
     // Ending Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public static void msgBye() throws IOException {
+    public void msgBye() throws IOException {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("_________________________________");
-        Message.msgBuddahProtectMe();
+        msgBuddahProtectMe();
     }
 
-    public static void msgBuddahProtectMe() throws IOException {
+    public void msgBuddahProtectMe() throws IOException {
         String everything = "";
 
         // ... \Duke\src\main\resources\buddha.txt

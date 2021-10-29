@@ -1,26 +1,26 @@
 package src.java.action;
 
-import src.java.DukeActionFacade;
-import src.java.Message;
-import src.java.fileAccess.FileAccess;
+import src.java.ui.Message;
+import src.java.storage.FileAccess;
 import src.java.task.TaskList;
 import src.java.task.TaskType;
-
-import java.io.FileWriter;
+import src.java.ui.Ui;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class DukeObject{
+public class Parser {
 
-    FileAccess fileAccess;
+    private FileAccess fileAccess;
+    private Ui ui;
 
-    public DukeObject (FileAccess fileAccess){
+    public Parser(FileAccess fileAccess){
         this.fileAccess = fileAccess;
+        ui = new Message();
     }
 
     // Start Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     public void ShowGreetMessage(){
-        Message.msgGreet();
+        ui.msgGreet();
     }
 
     // Run Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -67,12 +67,12 @@ public class DukeObject{
             } else if (line.substring(0, 8).equals("deadline")) {
                 AddTaskDeadline(myList, line);
             } else {
-                Message.msgInvalidInput();
+                ui.msgInvalidInput();
             }
             return true;
         } catch (Exception e) {
-            Message.msgInvalidInput();
-            Message.msgError(e);
+            ui.msgInvalidInput();
+            ui.msgError(e);
             return true;
         }
     }
@@ -81,30 +81,30 @@ public class DukeObject{
 
     public void ShowByeMessage(){
         try {
-            Message.msgBye();
+            ui.msgBye();
         } catch (IOException error) {
-            Message.msgError(error);
+            ui.msgError(error);
         }
     }
 
     // ReadUserCommand Support Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     private void ShowFullList(TaskList myList) {
-        Message.msgList(myList);
+        ui.msgList(myList);
     }
 
     private void MarkTaskDone(TaskList myList, String line) {
         int taskNumber = Integer.parseInt(line.substring(5));
         myList.setTaskDone(taskNumber - 1);
-        Message.msgMarkDone(myList, taskNumber - 1);
+        ui.msgMarkDone(myList, taskNumber - 1);
     }
 
     private void AddTaskToDo(TaskList myList, String line) {
         if (line.length() <= 5) {
-            Message.msgInvalidInputMissingDescription();
+            ui.msgInvalidInputMissingDescription();
         } else {
             myList.addItemToDos(line.substring(5));
-            Message.msgAssignTask(myList, myList.getNumOfItem() - 1);
+            ui.msgAssignTask(myList, myList.getNumOfItem() - 1);
         }
     }
 
@@ -115,9 +115,9 @@ public class DukeObject{
 
     private void AddTaskEvent(TaskList myList, String line) {
         if (line.length() <= 6) {
-            Message.msgInvalidInputMissingDescription();
+            ui.msgInvalidInputMissingDescription();
         } else if (!line.contains("/at")) {
-            Message.msgInvalidInputMissingDay();
+            ui.msgInvalidInputMissingDay();
         } else {
 
             try {
@@ -127,9 +127,9 @@ public class DukeObject{
                 String time = line.substring(line.indexOf("/") + 8);
 
                 myList.addItemEvent(taskDetail, after_at); // temporary for Duke Level 4
-                Message.msgAssignTaskEvent(myList, myList.getNumOfItem() - 1);
+                ui.msgAssignTaskEvent(myList, myList.getNumOfItem() - 1);
             } catch (Exception e) {
-                Message.msgInvalidInput();
+                ui.msgInvalidInput();
             }
         }
     }
@@ -137,18 +137,18 @@ public class DukeObject{
     private void RemoveTask(TaskList myList, String line) {
         try {
             int taskNumber = Integer.parseInt(line.substring(7));
-            Message.msgRemoveItem(myList, taskNumber - 1);
+            ui.msgRemoveItem(myList, taskNumber - 1);
             myList.removeItem(taskNumber - 1);
         } catch (Exception e) {
-            Message.msgWrongTaskNumber();
+            ui.msgWrongTaskNumber();
         }
     }
 
     private void AddTaskDeadline(TaskList myList, String line) {
         if (line.length() <= 9) {
-            Message.msgInvalidInputMissingDescription();
+            ui.msgInvalidInputMissingDescription();
         } else if (!line.contains("/by")) {
-            Message.msgInvalidInputMissingDay();
+            ui.msgInvalidInputMissingDay();
         } else {
             try {
                 String taskDetail = line.substring(9, line.indexOf("/"));
@@ -156,10 +156,10 @@ public class DukeObject{
                 String day = dayWithBy.substring(3);
 
                 myList.addItemDeadline(taskDetail, day); // temporary for Duke Level 4
-                Message.msgAssignTaskDeadline(myList, myList.getNumOfItem() - 1);
+                ui.msgAssignTaskDeadline(myList, myList.getNumOfItem() - 1);
 
             } catch (Exception e) {
-                Message.msgInvalidInput();
+                ui.msgInvalidInput();
             }
         }
     }
