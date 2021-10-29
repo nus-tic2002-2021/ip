@@ -7,13 +7,47 @@ import src.java.task.TaskList;
 import src.java.task.TaskType;
 
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
-public class DukeAction extends DukeActionFacade {
+public class DukeObject{
 
-    public static boolean ReadUserCommand(TaskList myList, String line) {
+    FileAccess fileAccess;
+
+    public DukeObject (FileAccess fileAccess){
+        this.fileAccess = fileAccess;
+    }
+
+    // Start Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public void ShowGreetMessage(){
+        Message.msgGreet();
+    }
+
+    // Run Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public void OnCreateDuke(){
+        boolean isDukeRunning = true;
+        String line;
+        Scanner in = new Scanner(System.in);
+        TaskList myList = new TaskList();
+        while (isDukeRunning) {
+            line = in.nextLine();
+            isDukeRunning = ReadUserCommand(myList,line);
+        }
+        in.close();
+    }
+
+    public boolean ReadUserCommand(TaskList myList, String line) {
         try {
+            // Guard Condition
             if (line.equals("bye")) {
                 return false;
+            }
+
+            // for testing new function
+            if (line.equals("tf")) {
+                System.out.println("XXXXX Test Function XXXXX");
+                fileAccess.DeleteProgressFile();
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
             }
 
             if (line.equals("list")) {
@@ -24,6 +58,8 @@ public class DukeAction extends DukeActionFacade {
                 AddTaskToDo(myList, line);
             } else if (line.substring(0, 4).equals("save")) {
                 SaveTask(myList);
+            } else if (line.substring(0, 4).equals("load")) {
+                // loadTask(myList);
             } else if (line.substring(0, 5).equals("event")) {
                 AddTaskEvent(myList, line);
             } else if (line.substring(0, 6).equals("delete")) {
@@ -41,18 +77,29 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
-    private static void ShowFullList(TaskList myList) {
+    // End Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public void ShowByeMessage(){
+        try {
+            Message.msgBye();
+        } catch (IOException error) {
+            Message.msgError(error);
+        }
+    }
+
+    // ReadUserCommand Support Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    private void ShowFullList(TaskList myList) {
         Message.msgList(myList);
     }
 
-
-    private static void MarkTaskDone(TaskList myList, String line) {
+    private void MarkTaskDone(TaskList myList, String line) {
         int taskNumber = Integer.parseInt(line.substring(5));
         myList.setTaskDone(taskNumber - 1);
         Message.msgMarkDone(myList, taskNumber - 1);
     }
 
-    private static void AddTaskToDo(TaskList myList, String line) {
+    private void AddTaskToDo(TaskList myList, String line) {
         if (line.length() <= 5) {
             Message.msgInvalidInputMissingDescription();
         } else {
@@ -61,12 +108,12 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
-    private static void SaveTask(TaskList myList) {
+    private void SaveTask(TaskList myList) {
         String listOfTaskString = ReadTaskConvertToString(myList);
-        FileAccess.SaveProgressIntoFile(myList, listOfTaskString);
+        fileAccess.SaveProgressIntoFile(myList, listOfTaskString);
     }
 
-    private static void AddTaskEvent(TaskList myList, String line) {
+    private void AddTaskEvent(TaskList myList, String line) {
         if (line.length() <= 6) {
             Message.msgInvalidInputMissingDescription();
         } else if (!line.contains("/at")) {
@@ -87,7 +134,7 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
-    private static void RemoveTask(TaskList myList, String line) {
+    private void RemoveTask(TaskList myList, String line) {
         try {
             int taskNumber = Integer.parseInt(line.substring(7));
             Message.msgRemoveItem(myList, taskNumber - 1);
@@ -97,7 +144,7 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
-    private static void AddTaskDeadline(TaskList myList, String line) {
+    private void AddTaskDeadline(TaskList myList, String line) {
         if (line.length() <= 9) {
             Message.msgInvalidInputMissingDescription();
         } else if (!line.contains("/by")) {
@@ -117,7 +164,9 @@ public class DukeAction extends DukeActionFacade {
         }
     }
 
-    protected static String ReadTaskConvertToString(TaskList myList) {
+    // Other Support Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    private String ReadTaskConvertToString(TaskList myList) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             String taskDetail = myList.getTaskDetail(i);
@@ -127,7 +176,7 @@ public class DukeAction extends DukeActionFacade {
 
             sb.append(taskType).append("|");
             sb.append(isDoneString).append("|");
-            sb.append(taskDetail).append("\n");
+            sb.append(taskDetail).append("|\n");
         }
         return sb.toString();
     }

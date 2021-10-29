@@ -1,2 +1,2 @@
-T|1|borrow book
-T|1|borrow book
+T|1|borrow book|
+D|1|return book |

@@ -4,8 +4,10 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        DukeActionFacade.StartDuke();
-        DukeActionFacade.RunDuke();
-        DukeActionFacade.EndDuke();
+        DukeActionFacade dukeActionFacade = new DukeActionFacade();
+
+        dukeActionFacade.StartDuke();
+        dukeActionFacade.RunDuke();
+        dukeActionFacade.EndDuke();
     }
 }
