@@ -2,93 +2,128 @@ public class Parser {
 
     static void parseInput(String input) {
         if (input.trim().equals("list")) {
-            Duke.printTaskList();
+            TaskList.printTaskList();
         } else if (input.startsWith("todo ")) {
-            Duke.AddTodo(input);
+            AddTodo(input);
         } else if (input.startsWith("deadline ")) {
-            Duke.AddDeadline(input);
+            AddDeadline(input);
         } else if (input.startsWith("event ")) {
-            Duke.AddEvent(input);
+            AddEvent(input);
         } else if (input.startsWith("done ")) {
-            Duke.MarkDone(input);
+            MarkDone(input);
         } else if (input.startsWith("delete ")) {
-            Duke.DeleteTask(input);
+            DeleteTask(input);
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    public static boolean CheckValidTodo(String input) throws DukeException {
-        if (input.length() < 5) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        } else if (input.substring(4).trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            return true;
+    public static void AddTodo(String input) {
+        try {
+            if (InputChecker.CheckValidTodo(input)) {
+                String newTask = input.substring(4).trim();
+                Todo newTodo = new Todo(newTask);
+                TaskList.addTaskToList(newTodo);
+                Ui.PrintTaskAdded(newTodo);
+                Ui.PrintTaskCount();
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
         }
     }
 
-    public static boolean CheckValidDeadline(String input) throws DukeException {
-        if (input.contains("/by")) {
-            String[] parts = input.substring(8).split("/by");
-            if (parts.length != 2) {
-                throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
-            } else if (parts[0].trim().equals("")) {
-                throw new DukeException("☹ OOPS!!! The task description of a deadline cannot be empty.");
-            } else if (parts[1].trim().equals("")) {
-                throw new DukeException("☹ OOPS!!! The due date/time of a deadline cannot be empty.");
-            } else {
-                return true;
+    public static void AddDeadline(String input) {
+        try {
+            if (InputChecker.CheckValidDeadline(input)) {
+                String[] parts = input.substring(8).split("/by");
+                Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+                TaskList.addTaskToList(newDeadline);
+                Ui.PrintTaskAdded(newDeadline);
+                Ui.PrintTaskCount();
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static void AddEvent(String input) {
+        try {
+            if (InputChecker.CheckValidEvent(input)) {
+                String[] parts = input.substring(5).split("/at");
+                Event newEvent = new Event(parts[0].trim(), parts[1].trim());
+                TaskList.addTaskToList(newEvent);
+                Ui.PrintTaskAdded(newEvent);
+                Ui.PrintTaskCount();
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static void MarkDone(String input) {
+        try {
+            if (InputChecker.CheckValidDone(input)) {
+                TaskList.markTaskAtIndex(input);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static void DeleteTask(String input) {
+        try {
+            if (InputChecker.CheckValidDelete(input)) {
+                TaskList.DeleteIndex(input);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static Task ParseStorageLine(String FileLine) throws DukeException {
+        String[] parts = FileLine.split("\\|");
+        if (parts[0].trim().equals("T")) {
+            if(FileLineChecker.CheckTodoLine(parts)) {
+                Todo newTodo = getTodoFromLine(parts);
+                return newTodo;
+            }
+        } else if (parts[0].trim().equals("D")) {
+            if(FileLineChecker.CheckDeadlineLine(parts)) {
+                Deadline newDeadline = getDeadlineFromLine(parts);
+                return newDeadline;
+            }
+        } else if (parts[0].trim().equals("E")) {
+            if (FileLineChecker.CheckEventLine(parts)) {
+                Event newEvent = getEventFromLine(parts);
+                return newEvent;
             }
         } else {
-            throw new DukeException("☹ OOPS!!! Invalid syntax for adding deadline.");
+            System.out.println("Line is invalid");
         }
+        throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
     }
 
-    public static boolean CheckValidEvent(String input) throws DukeException {
-        if (input.contains("/at")) {
-            String[] parts = input.substring(5).split("/at");
-            if (parts.length != 2) {
-                throw new DukeException("☹ OOPS!!! Invalid syntax for adding event.");
-            } else if (parts[0].trim().equals("")) {
-                throw new DukeException("☹ OOPS!!! The task description of an event cannot be empty.");
-            } else if (parts[1].trim().equals("")) {
-                throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
-            } else {
-                return true;
-            }
-        } else {
-            throw new DukeException("☹ OOPS!!! Invalid syntax for adding event.");
+    public static Todo getTodoFromLine(String[] parts) {
+        Todo newTodo = new Todo(parts[2].trim());
+        if (parts[1].trim().equals("1")) {
+            TaskList.MarkTask(newTodo);
         }
+        return newTodo;
     }
 
-    public static boolean CheckValidDone(String input) throws DukeException {
-        if (input.length() < 5) {
-            throw new DukeException("☹ OOPS!!! The index of the task to be marked as done is missing.");
-        } else {
-            try {
-                int index = Integer.parseInt(input.substring(4).trim()) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! " +
-                        "The index of the task to mark as done has to be an integer!");
-            }
-            return true;
+    public static Deadline getDeadlineFromLine(String[] parts) {
+        Deadline newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
+        if (parts[1].trim().equals("1")) {
+            TaskList.MarkTask(newDeadline);
         }
+        return newDeadline;
     }
 
-    public static boolean CheckValidDelete(String input) throws DukeException {
-        if (input.length() < 7) {
-            throw new DukeException("☹ OOPS!!! The index of the task to delete is missing.");
-        } else {
-            try {
-                int test = Integer.parseInt(input.substring(6).trim()) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! " +
-                        "The index of the task to delete has to be an integer!");
-            }
-            return true;
+    public static Event getEventFromLine(String[] parts) {
+        Event newEvent = new Event(parts[2].trim(), parts[3].trim());
+        if (parts[1].trim().equals("1")) {
+            TaskList.MarkTask(newEvent);
         }
+        return newEvent;
     }
-
-
 }
