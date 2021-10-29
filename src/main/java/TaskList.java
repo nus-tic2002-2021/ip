@@ -18,16 +18,6 @@ public class TaskList {
         }
     }
 
-    public static void MarkDone(String input) {
-        try {
-            if (Parser.CheckValidDone(input)) {
-                markTaskAtIndex(input);
-            }
-        } catch (DukeException e) {
-            e.printErrMsg();
-        }
-    }
-
     public static void markTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
