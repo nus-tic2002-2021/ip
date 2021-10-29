@@ -17,7 +17,7 @@
         <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
         <outputDirectory>${basedir}/target/classes</outputDirectory>
         <testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
-        <finalName>Duke</finalName>
+        <finalName>NoelLim</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
