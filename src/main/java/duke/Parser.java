@@ -33,6 +33,8 @@ public class Parser {
                 return new ModifyCommand(action, inputArray[1]);
             case "list":
                 return new ListCommand();
+            case "find":
+                return new SearchCommand(inputArray[1]);
             default: throw new UnrecognizedException();
         }
     }

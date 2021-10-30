@@ -2,8 +2,6 @@ package task;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import duke.Duke;
 import error.*;
 import java.time.LocalDateTime;
 
@@ -176,6 +174,21 @@ public class List {
             int count = 1;
             for(Task task : taskArrayList){
                 System.out.println("\t" + (count) + "." + task );
+                count++;
+            }
+        }
+    }
+    /**
+     *
+     *  Prints out all the task that contains the search keyword(non-case sensitive).
+     *
+     * @param search the keyword to search for in description
+     */
+    public void printSearchList(String search) {
+        int count = 1;
+        for(Task task : taskArrayList) {
+            if(task.getDescription().toLowerCase().contains(search.toLowerCase())){
+                System.out.println("\t" + (count) + "." + task);
                 count++;
             }
         }
