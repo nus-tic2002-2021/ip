@@ -1,13 +1,12 @@
-import java.util.Locale;
 import java.util.Scanner;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.time.LocalDate;
+
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -84,7 +83,7 @@ public class Duke {
                         if (by.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
                         }
-                        list.add(new Deadline(by[0], by[1]));
+                        list.add(new Deadline(by[0], LocalDate.parse(by[1])));
                         Task.getTotalTasks();
                         createFile("deadline", "");
 
@@ -97,7 +96,7 @@ public class Duke {
                         if (at.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
                         }
-                        list.add(new Event(at[0], at[1]));
+                        list.add(new Event(at[0], LocalDate.parse(at[1])));
                         Task.getTotalTasks();
 
                         break;
@@ -114,8 +113,12 @@ public class Duke {
         public static void createFile(String command,String task) throws IOException{
             String filePath = "duke.txt";
             File f = new File(filePath);
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(command+" || "+task);
+            FileWriter fw = new FileWriter(filePath,true);
+            BufferedWriter br = new BufferedWriter(fw);
+            br.write(command+" || "+task);
+            br.newLine();
+            br.close();
+
             fw.close();
             try {
                 boolean result = f.createNewFile();
