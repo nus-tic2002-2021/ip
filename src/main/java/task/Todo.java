@@ -30,7 +30,7 @@ public class Todo extends Task{
     }
 
     public String getDescription(){
-        return getDescription();
+        return description;
     }
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription();

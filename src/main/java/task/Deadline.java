@@ -1,19 +1,20 @@
 package task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
 public class Deadline extends Task{
-    private final String DATE_FORMAT = "MMM d yyyy";
-    protected LocalDate by;
+    private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
+    private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
+    protected LocalDateTime by;
 
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         setBy(by);
     }
 
-    public Deadline(String description, LocalDate by, Boolean isDone) {
+    public Deadline(String description, LocalDateTime by, Boolean isDone) {
         super(description);
         setBy(by);
         this.isDone = isDone;
@@ -33,7 +34,7 @@ public class Deadline extends Task{
         }
 
     }
-    public void setBy(LocalDate by)
+    public void setBy(LocalDateTime by)
     {
         this.by = by;
     }
@@ -45,13 +46,13 @@ public class Deadline extends Task{
         return description;
     }
     public String getByFormat(){
-        return by.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return by.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDate getBy() {
+    public LocalDateTime getBy() {
         return by;
     }
     public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getBy();
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getBy().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));;
         return s;
     }
 

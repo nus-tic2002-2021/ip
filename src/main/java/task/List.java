@@ -1,10 +1,11 @@
 package task;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.Duke;
 import error.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 
@@ -12,6 +13,8 @@ public class List {
     private static ArrayList<Task> taskArrayList;
     private static ArrayList<String> taskSave;
     public static Task recentDelete;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd HHmm");
     /**
      *
      *  Create new a new empty List
@@ -43,9 +46,9 @@ public class List {
             if(taskDone.equals("1")){
                 isDone = true;
             }
-            LocalDate date;
+            LocalDateTime date;
             try {
-                date = LocalDate.parse(taskArr[3]);
+                date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
             } catch (Exception e) {
                 throw new FileException();
             }
@@ -88,7 +91,7 @@ public class List {
      */
     public void addDeadline(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /by ");
-        LocalDate date;
+        LocalDateTime date;
         if(input.length < 2){
             throw new DukeException("DEADLINE_DESCRIPTION_ERROR");
         }
@@ -96,7 +99,7 @@ public class List {
             throw new DukeException("DEADLINE_LENGTH_ERROR");
         }
         try {
-            date = LocalDate.parse(input[1]);
+            date = LocalDateTime.parse(input[1],DATE_TIME_FORMATTER);
         } catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
         }
@@ -113,7 +116,7 @@ public class List {
      */
     public void addEvent(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /at ");
-        LocalDate date;
+        LocalDateTime date;
         if(input.length < 2){
             throw new DukeException("EVENT_DESCRIPTION_ERROR");
         }
@@ -121,7 +124,7 @@ public class List {
             throw new DukeException("EVENT_LENGTH_ERROR");
         }
         try {
-            date = LocalDate.parse(input[1]);
+            date = LocalDateTime.parse(input[1],DATE_TIME_FORMATTER);
         } catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
         }

@@ -1,18 +1,19 @@
 package task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate eventTime;
+    protected LocalDateTime eventTime;
 
-    private final String DATE_FORMAT = "MMM d yyyy";
-    public Event(String description, LocalDate eventTime) {
+    private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
+    private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
+    public Event(String description, LocalDateTime eventTime) {
         super(description);
         setEvent(eventTime);
     }
 
-    public Event(String description, LocalDate eventTime, Boolean isDone) {
+    public Event(String description, LocalDateTime eventTime, Boolean isDone) {
         super(description);
         setEvent(eventTime);
         this.isDone = isDone;
@@ -32,7 +33,7 @@ public class Event extends Task {
         }
 
     }
-    public void setEvent(LocalDate eventTime)
+    public void setEvent(LocalDateTime eventTime)
     {
         this.eventTime = eventTime;
     }
@@ -44,13 +45,13 @@ public class Event extends Task {
         return description;
     }
     public String getEventTimeFormat(){
-        return eventTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return eventTime.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDate getEventTime() {
+    public LocalDateTime getEventTime() {
         return eventTime;
     }
     public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getEventTime();
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getEventTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
         return s;
     }
     @Override
