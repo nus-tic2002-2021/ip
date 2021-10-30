@@ -5,7 +5,9 @@ import src.java.storage.FileAccess;
 import src.java.task.TaskList;
 import src.java.task.TaskType;
 import src.java.ui.Ui;
+
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Parser {
@@ -13,25 +15,25 @@ public class Parser {
     private FileAccess fileAccess;
     private Ui ui;
 
-    public Parser(FileAccess fileAccess){
+    public Parser(FileAccess fileAccess) {
         this.fileAccess = fileAccess;
         ui = new Message();
     }
 
     // Start Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    public void ShowGreetMessage(){
+    public void ShowGreetMessage() {
         ui.msgGreet();
     }
 
     // Run Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    public void OnCreateDuke(){
+    public void OnCreateDuke() {
         boolean isDukeRunning = true;
         String line;
         Scanner in = new Scanner(System.in);
         TaskList myList = new TaskList();
         while (isDukeRunning) {
             line = in.nextLine();
-            isDukeRunning = ReadUserCommand(myList,line);
+            isDukeRunning = ReadUserCommand(myList, line);
         }
         in.close();
     }
@@ -79,7 +81,7 @@ public class Parser {
 
     // End Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public void ShowByeMessage(){
+    public void ShowByeMessage() {
         try {
             ui.msgBye();
         } catch (IOException error) {
@@ -145,24 +147,33 @@ public class Parser {
     }
 
     private void AddTaskDeadline(TaskList myList, String line) {
+
         if (line.length() <= 9) {
             ui.msgInvalidInputMissingDescription();
-        } else if (!line.contains("/by")) {
+        }
+
+        if (!line.contains("/by")) {
             ui.msgInvalidInputMissingDay();
-        } else {
-            try {
-                String taskDetail = line.substring(9, line.indexOf("/"));
-                String dayWithBy = line.substring(line.indexOf("/") + 1, line.length());
-                String day = dayWithBy.substring(3);
+        }
 
-                myList.addItemDeadline(taskDetail, day); // temporary for Duke Level 4
+        try {
+            String taskDetail = line.substring(9, line.indexOf("/"));
+            String dayWithBy = line.substring(line.indexOf("/") + 1, line.length());
+            String day = dayWithBy.substring(3);
+
+            LocalDate taskDate = ParseDateTime.toDate(day);
+
+            if (taskDate == null){
+                ui.msgInvalidInputWrongDateFormat();
+            } else {
+                myList.addItemDeadline(taskDetail, taskDate);
                 ui.msgAssignTaskDeadline(myList, myList.getNumOfItem() - 1);
-
-            } catch (Exception e) {
-                ui.msgInvalidInput();
             }
+        } catch (Exception e) {
+            ui.msgInvalidInputWrongDateFormat();
         }
     }
+
 
     // Other Support Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

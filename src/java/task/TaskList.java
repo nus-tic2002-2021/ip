@@ -1,5 +1,7 @@
 package src.java.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.*;
 import java.sql.Time;
@@ -18,12 +20,16 @@ public class TaskList {
         list.add(new TaskToDos(taskDetail));
     }
 
-    public void addItemDeadline(String taskDetail, Date date, Time time) {
-        list.add(new TaskDeadline(taskDetail, date, time));
-    }
-
     public void addItemDeadline(String taskDetail, String dateString) { // temporary constructor for Duke Level 4
         list.add(new TaskDeadline(taskDetail, dateString));
+    }
+
+    public void addItemDeadline(String taskDetail, LocalDate taskDate){
+        list.add(new TaskDeadline(taskDetail, taskDate));
+    }
+
+    public void addItemDeadline(String taskDetail, LocalDate taskDate, LocalTime taskTime){
+        list.add(new TaskDeadline(taskDetail, taskDate, taskTime));
     }
 
     public void addItemEvent(String taskDetail, Date date, Time startTime, Time endTime) {
@@ -54,9 +60,14 @@ public class TaskList {
         return task.getDoneStatus();
     }
 
-    public String getTaskDeadlineDateString(int index) { // temporary method for Duke Level 4
+    public String getTaskDeadline_DateString(int index) { // temporary method for Duke Level 4
         TaskDeadline task = (TaskDeadline) list.get(index);
         return task.getDateString();
+    }
+
+    public String getTaskDeadLine_TaskDate_InString(int index){
+        TaskDeadline task = (TaskDeadline) list.get(index);
+        return task.getLocalDate_toString();
     }
 
     public String getTaskEventDateTimeString(int index) { // temporary method for Duke Level 4

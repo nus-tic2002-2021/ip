@@ -13,4 +13,5 @@ list
 deadline do homework 
 deadline
 list
-bye
+deadline return book /by 2016-12-21
+event project meeting /at 2-12-2019 1800

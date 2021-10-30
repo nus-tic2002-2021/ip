@@ -45,7 +45,7 @@ public class Message implements Ui {
 
         String taskDetail = myList.getTaskDetail(taskNumber);
 
-        String dateString = myList.getTaskDeadlineDateString(taskNumber);
+        String dateString = myList.getTaskDeadLine_TaskDate_InString(taskNumber);
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println(
@@ -127,7 +127,7 @@ public class Message implements Ui {
                 System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
                 break;
             case DEADLINE:
-                dateTimeString = myList.getTaskDeadlineDateString(taskNumber);
+                dateTimeString = myList.getTaskDeadLine_TaskDate_InString(taskNumber);
                 System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: "
                         + dateTimeString + ")");
                 break;
@@ -177,6 +177,11 @@ public class Message implements Ui {
 
     public void msgWrongTaskNumber() {
         System.out.println("    ☹  OOPS!!! The task number is invalid.");
+        System.out.println("_________________________________");
+    }
+
+    public void msgInvalidInputWrongDateFormat(){
+        System.out.println("    ☹  OOPS!!! Please follow this format: yyyy-mm-dd.");
         System.out.println("_________________________________");
     }
 

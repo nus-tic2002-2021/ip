@@ -26,6 +26,7 @@ public interface Ui {
     public void msgInvalidInputMissingDescription();
     public void msgInvalidInputMissingDay();
     public void msgInvalidInputMissingTime();
+    public void msgInvalidInputWrongDateFormat();
     public void msgRemoveItem(TaskList myList, int taskNumber);
     public void msgWrongTaskNumber();
     public void msgBye() throws IOException;
