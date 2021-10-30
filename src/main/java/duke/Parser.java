@@ -3,6 +3,15 @@ import command.*;
 import error.*;
 
 public class Parser {
+    /**
+     *
+     * Parser to read user input
+     *
+     * @param input users input message
+     * @throws UnrecognizedException if action is not a recognized command
+     * @throws DukeException if format has a "|" which will conflict with save format
+     * @return type of command
+     */
     public Command parse(String input) throws UnrecognizedException, DukeException {
         if (input.contains("|")){
             throw new DukeException("INPUT_FORMAT_ERROR");

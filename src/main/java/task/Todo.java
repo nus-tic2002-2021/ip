@@ -14,15 +14,15 @@ public class Todo extends Task{
     public void setDone(){
         this.isDone = true;
         System.out.println("\tNice! I've marked this task as done:\n" +
-                            "\t  [T][X] " + description);
+                            "\t  [T][X] " + getDescription());
     }
 
     public void print(){
         if (isDone) {
-            System.out.println("\t  [T][X] " + description);
+            System.out.println("\t  [T][X] " + getDescription());
         }
         else {
-            System.out.println("\t  [T][ ] " + description);
+            System.out.println("\t  [T][ ] " + getDescription());
         }
     }
     public String getTask(){
@@ -30,7 +30,7 @@ public class Todo extends Task{
     }
 
     public String getDescription(){
-        return description;
+        return getDescription();
     }
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription();
@@ -43,6 +43,6 @@ public class Todo extends Task{
         if (isDone){
             box = "[T][X] ";
         }
-        return (box + description);
+        return (box + getDescription());
     }
 }

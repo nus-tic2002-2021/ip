@@ -1,5 +1,1 @@
-T | 0 | world
-T | 1 | HELLO
-T | 0 | WORLD
-D | 0 | HELLO | WORLD
-E | 1 | HELLo | WORLD
+D | 0 | leave | 2021-05-01

@@ -10,6 +10,7 @@ public class UI {
     private final String DEADLINE_LENGTH_ERROR = "Deadline command has too many /by.";
     private final String EVENT_DESCRIPTION_ERROR = "Event command is missing a description and/or time.";
     private final String EVENT_LENGTH_ERROR = "Event command has too many /at.";
+    private final String INVALID_DATE_FORMAT = "Incorrect Date formatting.";
 
     public void printIntro(){
         printLine();
@@ -67,6 +68,9 @@ public class UI {
                 break;
             case "EVENT_LENGTH_ERROR":
                 System.out.println(EVENT_LENGTH_ERROR);
+                break;
+            case "INVALID_DATE_FORMAT":
+                System.out.println(INVALID_DATE_FORMAT);
                 break;
             default:
                 System.out.println("Unrecognized error");

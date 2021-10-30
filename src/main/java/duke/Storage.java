@@ -15,6 +15,11 @@ public class Storage {
         loadFile = new ArrayList<>();
     }
 
+    /**
+     *
+     * Creates a new file with parent directory if it does not exist
+     *
+     */
     public void newFile(){
         try {
             File f = new File(filePath);
@@ -28,6 +33,13 @@ public class Storage {
             System.err.println(e);
         }
     }
+
+    /**
+     *
+     * Creates a new file with parent directory if it does not exist
+     *
+     * @param saveFileList an array of strings to save into the txt file in path.
+     */
     public void saveFile(ArrayList<String> saveFileList){
         try {
             writeToFile(saveFileList);
@@ -35,6 +47,13 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+
+    /**
+     *
+     * Create a new
+     *
+     * @return loaded file
+     */
     public ArrayList<String> load(){
         try {
             readFile(filePath);
