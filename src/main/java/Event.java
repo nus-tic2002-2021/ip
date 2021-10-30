@@ -1,7 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+ */
 public class Event extends Task{
 
     protected LocalDate at;

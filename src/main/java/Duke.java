@@ -7,6 +7,10 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.time.LocalDate;
 
+/**
+ * The project aims to build a product named Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * The name Duke was chosen as a placeholder name, in honor of Duke, the Java Mascot.
+ */
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -16,6 +20,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I'm Duke" + "\n" + logo + "\n" + "How can I help you today?");
+
+        /**
+         * Create a arraylist to store tasks
+         */
         List<Task> list = new ArrayList<>();
         boolean isTrue = true;
 
@@ -55,8 +63,14 @@ public class Duke {
                         System.out.println("\t\t" + list.get(Integer.parseInt(input[1]) - 1));
                         break;
                     case "delete":
+                        /**
+                         * Add support for deleting tasks from the list.
+                         */
                         int deletedTaskNumber = Integer.parseInt(input[1]);
                         if (deletedTaskNumber > list.size()) {
+                            /**
+                             * Teach Duke to deal with errors such as incorrect inputs entered by the user.
+                             */
                             throw new DukeException("☹ OOPS!!! There is no such task.");
                         }
                         Task deletedTask = list.get(deletedTaskNumber - 1);
@@ -111,6 +125,10 @@ public class Duke {
         }
     }
         public static void createFile(String command,String task) throws IOException{
+            /**
+             * Save the tasks in the hard disk automatically whenever the task list changes.
+             * Load the data from the hard disk when Duke starts up.
+             */
             String filePath = "duke.txt";
             File f = new File(filePath);
             FileWriter fw = new FileWriter(filePath,true);

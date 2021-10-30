@@ -11,7 +11,6 @@ public class Task {
 
     public String getStatusIcon() {
 
-       //isDone = true;
         return (isDone ? "\u2713" : "\u2718");
 
     }
@@ -38,6 +37,7 @@ public class Task {
     }
     @Override
     public String toString() {
+
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 }
