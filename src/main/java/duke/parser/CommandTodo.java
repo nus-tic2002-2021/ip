@@ -44,8 +44,10 @@ public class CommandTodo extends CommandBase {
             } else{
                 task = new ToDos(super.detail);
             }
-            taskList.addTask(task);
-            success = true;
+            if(taskList.addTask(task)){
+                success = true;
+                assert taskList.getListSize()>0:"There should at least have 1 task";
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownSyntaxException(super.keyword);
         }

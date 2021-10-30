@@ -34,6 +34,7 @@ public class StorageFixedDurationReference {
      */
     public FixedDurationTaskList load() throws DukeException {
         FixedDurationTaskList unscheduledRecords = new FixedDurationTaskList();
+        assert !file.exists():"The file should exist by now";
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;

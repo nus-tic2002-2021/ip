@@ -57,9 +57,12 @@ public class TaskList {
      *
      * @param task - the full task information.
      */
-    public void addTask(Task task){
-        this.taskList.add(task);
-        this.listSize++;
+    public boolean addTask(Task task){
+        if(this.taskList.add(task)){
+            this.listSize++;
+            return true;
+        }
+        return false;
     }
 
     /**

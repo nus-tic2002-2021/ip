@@ -50,8 +50,10 @@ public class CommandEvent extends CommandBase {
             String from = timeRange.split("-", 2)[0];
             String to = timeRange.split("-", 2)[1];
             Task task = new Events(description, date, timeParse(get24HrFormat(from)),timeParse(get24HrFormat(to)));
-            taskList.addTask(task);
-            success = true;
+            if(taskList.addTask(task)){
+                success = true;
+                assert taskList.getListSize()>0:"There should at least have 1 task";
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new TimeManagementException();
         }

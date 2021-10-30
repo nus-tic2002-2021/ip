@@ -46,6 +46,7 @@ public class StorageTaskList {
      */
     public TaskList load() throws DukeException {
         TaskList taskList = new TaskList();
+        assert !file.exists():"The file should exist by now";
         if (file.exists()) {
             returnMessage.loadingFileFeedback();
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {

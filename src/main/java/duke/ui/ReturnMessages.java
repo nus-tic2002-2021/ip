@@ -127,12 +127,14 @@ public class ReturnMessages {
      * @param list full task list.
      */
     public void taskFoundFeedback(String key, ArrayList<Task> list){
+        assert !list.isEmpty():"Should be caught by emptyTaskListException";
+
         separator();
         int numbering = 1;
         System.out.println("     Here are the matching tasks in your list:");
         for(Task t : list){
             if(t.getTaskInfo().contains(key)){
-                System.out.println("    "+numbering+"."+t.toString());
+                System.out.println("    "+numbering+"."+t);
             }
             numbering++;
         }

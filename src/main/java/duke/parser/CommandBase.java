@@ -81,6 +81,7 @@ public class CommandBase {
      */
     public  void reply(TaskList taskList) throws EmptyTaskListException, UnknownSyntaxException, TaskNotFoundException {
         if(fullCommand.contains("done")){
+            assert fullCommand.contains("done"):"It should have confirmed a done command by this stage";
             try {
                 String[] doneCommand = fullCommand.split(" ");
                 taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).setDone();
@@ -93,6 +94,7 @@ public class CommandBase {
             }
         }
         returnMessage.taskAddFeedback();
+        assert taskList.getListSize()>0:"There should at least have 1 task";
         try {
             System.out.println("     " + taskList.getLastTask().toString());
             System.out.println("     Now you have " + taskList.getListSize() + " tasks in the list.");
