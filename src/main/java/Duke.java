@@ -22,7 +22,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke" + "\n" + logo + "\n" + "How can I help you today?");
 
         /**
-         * Create a arraylist to store tasks
+         * Create an arraylist to store tasks
          */
         List<Task> list = new ArrayList<>();
         boolean isTrue = true;
@@ -30,7 +30,6 @@ public class Duke {
         while (isTrue) {
             Scanner sc = new Scanner(System.in);
             String[] input = sc.nextLine().split(" ", 2);
-            Task newTask;
             String [] s = new String[2];
             try {
                 switch (input[0]) {
@@ -84,7 +83,7 @@ public class Duke {
                         if (input.length < 2) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        String[] task = input[1].split("/");
+
                         list.add(new Todo(input[1]));
                         Task.getTotalTasks();
                         createFile("todo", s[1]);
