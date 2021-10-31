@@ -79,6 +79,8 @@ public class Storage {
      * @param taskStr Task in string format.
      */
     private Task convertToTask(String taskStr){
+        assert taskStr != null: "taskStr must be valid";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
         String[] args = taskStr.split(" \\| ");
 
@@ -93,11 +95,14 @@ public class Storage {
             break;
         }
         case "D":
+            assert args[3] != null: "deadline value cannot be null";
             LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
             task = new DeadlineTask(description, deadline);
             break;
 
         case "E":
+            assert args[3] != null: "start datetime value cannot be null";
+            assert args[4] != null: "start datetime value cannot be null";
             LocalDateTime start = LocalDateTime.parse(args[3], formatter);
             LocalDateTime end = LocalDateTime.parse(args[4], formatter);
             task = new EventTask(description, start, end);

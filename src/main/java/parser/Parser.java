@@ -22,6 +22,8 @@ public class Parser {
      * @param fullCommand Input command string.
      */
     public static Command parse(String fullCommand) {
+        assert fullCommand != null : "Command be null";
+
         // split the fullCommand and get the command keyword
         String[] args = fullCommand.split(" ", 2);
         String keyword = args[0].toUpperCase();
@@ -31,7 +33,7 @@ public class Parser {
             commandEnum = CommandEnum.valueOf(keyword);
         } catch (IllegalArgumentException e) {
             //Use ui to display error later
-            return new InvalidCommand("Command <" + keyword.toLowerCase() + "> not found :(");
+            return new InvalidCommand("Command <" + keyword.toLowerCase() + "> not found.");
         }
 
         switch(commandEnum){
