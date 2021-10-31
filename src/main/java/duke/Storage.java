@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.*;
+
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +29,15 @@ public class Storage {
         }
     }
     public TaskList read() {
-        
+        TaskList taskList = null;
+        try {
+            fileLocation();
+            List<String> tasks = Files.readAllLines(filePath, Charset.defaultCharset());
+            taskList = this.TaskListDecoder(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return taskList;
     }
 
     public List<String> TaskListEncoder (TaskList taskList) {
@@ -39,13 +52,13 @@ public class Storage {
         for (String s : TaskEncoder) {
             switch(s.charAt(0)) {
                 case ('T'):
-                    TaskDecoder.add(Todo.taskDecode(s));
+                    TaskDecoder.add(Todo.decode(s));
                     break;
                 case ('D'):
-                    TaskDecoder.add(Deadlines.taskDecode(s));
+                    TaskDecoder.add(Deadlines.decode(s));
                     break;
                 case ('E'):
-                    TaskDecoder.add(Event.taskDecode(s));
+                    TaskDecoder.add(Event.decode(s));
                     break;
                 default:
                     break;
@@ -56,4 +69,4 @@ public class Storage {
 
 }
 
-}
+

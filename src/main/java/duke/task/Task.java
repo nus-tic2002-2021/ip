@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
 
     public Task(String description, boolean isDone) {
@@ -30,6 +32,5 @@ public abstract class Task {
     public abstract Task complete();
 
     public abstract String taskEncode();
-    public abstract String taskdecode();
 
 }

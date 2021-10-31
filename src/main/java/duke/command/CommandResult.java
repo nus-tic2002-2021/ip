@@ -1,8 +1,12 @@
+package duke.command;
+
+import duke.task.TaskList;
+
 public class CommandResult {
     String respondToUser;
     TaskList taskList;
 
-    CommandResult(String respondToUser){
+    public CommandResult(String respondToUser){
         this.respondToUser = respondToUser;
     }
 

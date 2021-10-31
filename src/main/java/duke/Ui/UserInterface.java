@@ -1,3 +1,7 @@
+package duke.Ui;
+
+import duke.command.CommandResult;
+
 import java.util.Scanner;
 
 public class UserInterface {

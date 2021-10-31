@@ -1,7 +1,10 @@
+package duke.command;
 
+import duke.task.Task;
+import duke.task.TaskList;
 
 public abstract class Command {
-    TaskList taskList;
+    public TaskList taskList;
 
     public abstract CommandResult execute();
 
