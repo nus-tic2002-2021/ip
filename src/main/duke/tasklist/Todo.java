@@ -16,7 +16,7 @@ public class Todo extends Task{
     }
 
     public String printList (){
-        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription();
+            return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription();
     }
 
 }

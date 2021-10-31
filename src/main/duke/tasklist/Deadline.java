@@ -1,3 +1,5 @@
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 public class Deadline extends Task{
@@ -9,7 +11,7 @@ public class Deadline extends Task{
     @Override
     public String getDescription() {return description.substring(9,description.indexOf('/'));}
 
-    public  String getDatetime() throws DukeException{
+    public  String getDatetime() throws DukeException {
         return description.substring(description.indexOf('/')+3);
     }
 

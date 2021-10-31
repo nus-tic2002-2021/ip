@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static int task_count =0;
     protected String type;
     protected String datetime;
 
@@ -13,7 +12,7 @@ public class Task {
     }
 
     //description.Getter
-    public  String getDescription() {return description;}
+    public String getDescription() {return description;}
 
     //isDone.Setter
     public void setDone() {isDone = true;}
@@ -30,36 +29,23 @@ public class Task {
     }
 
     public static void tasks (String text, ArrayList<Task> tasks){
-        String[] command = text.split(" ");
+        String[] command = Parser.commandToArray(text);
         int taskNumber;
         switch (command[0]) {
             case "event":
-                if (command.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. Please re-enter:");
-                } else if (!text.contains("/at")) {
-                    throw new DukeException("☹ OOPS!!! The date of a event cannot be empty. Please re-enter:");
-                }
+                Ui.validateEventCommand(command);
                 tasks.add(new Event(text));
                 Event.print(tasks);
-                task_count++;
                 break;
             case "todo":
-                if (command.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. Please re-enter:");
-                }
+                Ui.validateTodoCommand(command);
                 tasks.add(new Todo(text));
                 Todo.print(tasks);
-                task_count++;
                 break;
             case "deadline":
-                if (command.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. Please re-enter:");
-                } else if (!text.contains("/by")) {
-                    throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty. Please re-enter:");
-                }
+                Ui.validateDeadlineCommand(command);
                 tasks.add(new Deadline(text));
                 Deadline.print(tasks);
-                task_count++;
                 break;
             case "list":
                 if (tasks.size() == 0) {
@@ -68,7 +54,7 @@ public class Task {
                     break;
                 }
                 System.out.println("Here are the tasks in your list:");
-                for (int i=0; i < task_count; i++) {
+                for (int i=0; i < tasks.size(); i++) {
                     System.out.println("\t"+ (i+1) + "." + tasks.get(i).printList());
                 }
                 System.out.println("=======================================================");
@@ -84,7 +70,7 @@ public class Task {
                 tasks.get(taskNumber).setDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("\t[" + tasks.get(taskNumber).getType() + "] "+ "[" +tasks.get(taskNumber).getStatusIcon() + "] " + tasks.get(taskNumber).getDescription());
-                System.out.println("You have total " + (task_count) +" tasks in the list.");
+                System.out.println("You have total " + (tasks.size()) +" tasks in the list.");
                 System.out.println("=======================================================");
                 break;
             case "delete":
@@ -98,8 +84,7 @@ public class Task {
                 System.out.println("Noted. I've removed this task: ");
                 System.out.println("\t[" + tasks.get(taskNumber).getType() + "] "+ "[" + tasks.get(taskNumber).getStatusIcon() + "] " + tasks.get(taskNumber).getDescription());
                 tasks.remove(taskNumber);
-                task_count--;
-                System.out.println("Now you have " + (task_count) +" tasks in the list.");
+                System.out.println("Now you have " + (tasks.size()) +" tasks in the list.");
                 System.out.println("=======================================================");
                 break;
             default:
