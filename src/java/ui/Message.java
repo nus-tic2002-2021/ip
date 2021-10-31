@@ -2,8 +2,15 @@ package src.java.ui;
 
 import src.java.task.TaskList;
 import src.java.task.TaskType;
-
 import java.io.*;
+
+/**
+ * Handle all the message methods
+ *
+ * @author  Kang Teng
+ * @version 8.0
+ * @since   2021-09-01
+ */
 
 public class Message implements Ui {
 

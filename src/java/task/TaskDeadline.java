@@ -1,9 +1,15 @@
 package src.java.task;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+
+/**
+ * Create an instance of deadline class
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class TaskDeadline extends Task {
     private LocalDate taskDate;
@@ -24,31 +30,66 @@ public class TaskDeadline extends Task {
         this.taskTime = localTime;
     }
 
-    public LocalDate getLocalDate(){
+    /**
+     * Return LocalDate of a task
+     *
+     * @return LocalDate that represents the taskDate
+     */
+    public LocalDate getLocalDate() {
         return taskDate;
     }
 
-    public String getLocalDate_toString(){
+    /**
+     * Return LocalDate of a task in String
+     *
+     * @return String that represents the taskDate
+     */
+    public String getLocalDate_toString() {
         return String.valueOf(taskDate);
     }
 
-    public String getLocalDate_Day_toString(){
+    /**
+     * Return day from LocalDate of a task in String
+     *
+     * @return String that represents the day of taskDate
+     */
+    public String getLocalDate_Day_toString() {
         return String.valueOf(taskDate.getDayOfMonth());
     }
 
-    public String getLocalDate_Month_toString(){
+    /**
+     * Return month from LocalDate of a task in String
+     *
+     * @return String that represents the month of taskDate
+     */
+    public String getLocalDate_Month_toString() {
         return String.valueOf(taskDate.getMonth());
     }
 
-    public String getLocalDate_Year_toString(){
+    /**
+     * Return year from LocalDate of a task in String
+     *
+     * @return String that represents the year of taskDate
+     */
+    public String getLocalDate_Year_toString() {
         return String.valueOf(taskDate.getYear());
     }
 
-    public LocalTime getLocalTime(){
-        return  taskTime;
+    /**
+     * Return LocalTime of a task
+     *
+     * @return LocalTime that represents the taskTime
+     */
+    public LocalTime getLocalTime() {
+        return taskTime;
     }
 
-    public String getLocalTime_toString(){
+    /**
+     * Return LocalTime of a task in String
+     *
+     * @return String that represents the taskTime
+     */
+    public String getLocalTime_toString() {
         return String.valueOf(taskTime);
     }
 }

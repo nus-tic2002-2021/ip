@@ -1,8 +1,15 @@
 package src.java.ui;
 
 import src.java.task.TaskList;
-
 import java.io.IOException;
+
+/**
+ * Interface class for User Interface
+ *
+ * @author  Kang Teng
+ * @version 8.0
+ * @since   2021-09-01
+ */
 
 public interface Ui {
 

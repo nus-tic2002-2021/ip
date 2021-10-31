@@ -8,6 +8,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+/**
+ * Handles file handling related functions
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
+
 public class FileAccess {
     private String filepath;
     private File progressFile;
@@ -19,6 +27,12 @@ public class FileAccess {
         ui = new Message();
     }
 
+    /**
+     * Save progress of the current task
+     *
+     * @param myList            TaskList that needs to be output
+     * @param stringToBeWritten String that needs to be outputed
+     */
     public void SaveProgressIntoFile(TaskList myList, String stringToBeWritten) {
 
         try {
@@ -31,6 +45,11 @@ public class FileAccess {
         }
     }
 
+    /**
+     * Load existing progress of the task
+     *
+     * @return String that represents a list of task details
+     */
     public String LoadProgressFromFile() {
         StringBuilder sb = new StringBuilder();
 
@@ -47,10 +66,18 @@ public class FileAccess {
         return sb.toString();
     }
 
+    /**
+     * Delete an existing progress file
+     * <p>
+     * todo Method to be completed
+     */
     public void DeleteProgressFile() {
 
     }
 
+    /**
+     * Example of Save file
+     */
     public void SaveFileExample() {
         String filepath = "src\\resources\\myText.txt";
         try {
