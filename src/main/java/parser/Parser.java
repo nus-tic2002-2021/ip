@@ -22,6 +22,8 @@ public class Parser {
      * @param fullCommand Input command string.
      */
     public static Command parse(String fullCommand) {
+        assert fullCommand != null : "Command be null";
+
         // split the fullCommand and get the command keyword
         String[] args = fullCommand.split(" ", 2);
         String keyword = args[0].toUpperCase();
@@ -31,12 +33,14 @@ public class Parser {
             commandEnum = CommandEnum.valueOf(keyword);
         } catch (IllegalArgumentException e) {
             //Use ui to display error later
-            return new InvalidCommand("Command <" + keyword.toLowerCase() + "> not found :(");
+            return new InvalidCommand("Command <" + keyword.toLowerCase() + "> not found.");
         }
 
         switch(commandEnum){
         case LIST:
             return doList();
+        case HELP:
+            return doHelp();
         case TODO:
             return doAddTodo(args);
         case DEADLINE:
@@ -60,6 +64,10 @@ public class Parser {
 
     private static Command doList(){
         return new ListCommand();
+    }
+
+    private static Command doHelp(){
+        return new HelpCommand();
     }
 
     private static Command doAddTodo (String[] args){

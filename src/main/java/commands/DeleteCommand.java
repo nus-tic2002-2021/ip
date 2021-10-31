@@ -3,6 +3,7 @@ package commands;
 import exceptions.DukeException;
 import storage.Storage;
 import tasks.TaskList;
+import ui.Messages;
 import ui.Ui;
 import java.io.IOException;
 
@@ -18,11 +19,13 @@ public class DeleteCommand extends Command{
         this.taskId = taskId;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         String deletedTask = taskList.deleteTask(taskId);
         storage.saveTasks(taskList.getTasks());
         ui.showDeleted();
         ui.printTask(deletedTask);
         ui.printTaskCount(taskList.getListSize());
+
+        return Messages.DELETED_MSG + Messages.getTaskMsg(deletedTask);
     }
 }

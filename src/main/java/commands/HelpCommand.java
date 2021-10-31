@@ -9,11 +9,10 @@ import ui.Ui;
  * <code>ListCommand</code> is used to list (print out) all the tasks in the TaskList.
  * Extends the <code>Command</code> class.
  */
-public class ListCommand extends Command{
+public class HelpCommand extends Command{
 
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showListed();
-        ui.printAllTasks(taskList.getTasks());
-        return Messages.LISTED_MSG + Messages.getAllTasksMsg(taskList.getTasks());
+        ui.showHelp();
+        return Messages.HELP_MSG;
     }
 }
