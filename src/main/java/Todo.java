@@ -8,7 +8,7 @@ public class Todo extends Task{
 
     public static void print(Task[] tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("    [" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription());
+        System.out.println("\t[" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription());
         System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
         System.out.println("=======================================================");
     }

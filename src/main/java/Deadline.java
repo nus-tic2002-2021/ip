@@ -7,13 +7,13 @@ public class Deadline extends Task{
     @Override
     public String getDescription() {return description.substring(9,description.indexOf('/'));}
 
-    public  String getDatetime(){
+    public  String getDatetime() throws DukeException{
         return description.substring(description.indexOf('/')+3);
     }
 
     public static void print(Task[] tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("    [" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription() + "(by:" + tasks[task_count].getDatetime() + ")");
+        System.out.println("\t[" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription() + "(by:" + tasks[task_count].getDatetime() + ")");
         System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
         System.out.println("=======================================================");
     }
