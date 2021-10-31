@@ -1,4 +1,4 @@
-//import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Task {
     protected String description;
@@ -29,8 +29,9 @@ public class Task {
         return datetime;
     }
 
-    public static void tasks (String text, Task[] tasks){
-        String[] command = text.split(" ", 2);
+    public static void tasks (String text, ArrayList<Task> tasks){
+        String[] command = text.split(" ");
+        int taskNumber;
         switch (command[0]) {
             case "event":
                 if (command.length < 2) {
@@ -38,7 +39,7 @@ public class Task {
                 } else if (!text.contains("/at")) {
                     throw new DukeException("☹ OOPS!!! The date of a event cannot be empty. Please re-enter:");
                 }
-                tasks[task_count] = new Event(text);
+                tasks.add(new Event(text));
                 Event.print(tasks);
                 task_count++;
                 break;
@@ -46,7 +47,7 @@ public class Task {
                 if (command.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. Please re-enter:");
                 }
-                tasks[task_count] = new Todo(text);
+                tasks.add(new Todo(text));
                 Todo.print(tasks);
                 task_count++;
                 break;
@@ -56,40 +57,54 @@ public class Task {
                 } else if (!text.contains("/by")) {
                     throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty. Please re-enter:");
                 }
-                tasks[task_count] = new Deadline(text);
+                tasks.add(new Deadline(text));
                 Deadline.print(tasks);
                 task_count++;
                 break;
             case "list":
-                if (task_count ==0) {
-                    System.out.println("\tList is empty.");
+                if (tasks.size() == 0) {
+                    System.out.println("\tList is empty. Please add new task.");
                     System.out.println("=======================================================");
                     break;
                 }
                 System.out.println("Here are the tasks in your list:");
                 for (int i=0; i < task_count; i++) {
-                    System.out.println("\t"+ (i+1) + "." + tasks[i].printList());
+                    System.out.println("\t"+ (i+1) + "." + tasks.get(i).printList());
                 }
                 System.out.println("=======================================================");
                 break;
             case "done":
-                int whichTask = Integer.parseInt(command[1]);
-                if (whichTask > task_count) {
+                if (command.length < 2) {
+                    throw new DukeException("☹ Please state task number.");
+                }
+                taskNumber  = Integer.parseInt(command[1]) - 1;
+                if (taskNumber >= tasks.size()) {
                     throw new DukeException("☹ There is no such task.");
                 }
-                String[] word = text.split(" ");
-                int i = Integer.parseInt(word[1]) - 1;
-                tasks[i].setDone();
+                tasks.get(taskNumber).setDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("\t[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+                System.out.println("\t[" + tasks.get(taskNumber).getType() + "] "+ "[" +tasks.get(taskNumber).getStatusIcon() + "] " + tasks.get(taskNumber).getDescription());
+                System.out.println("You have total " + (task_count) +" tasks in the list.");
+                System.out.println("=======================================================");
+                break;
+            case "delete":
+                if (command.length < 2) {
+                    throw new DukeException("☹ Please state task number.");
+                }
+                taskNumber  = Integer.parseInt(command[1]) -1;
+                if (taskNumber >= tasks.size()) {
+                    throw new DukeException("☹ There is no such task.");
+                }
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println("\t[" + tasks.get(taskNumber).getType() + "] "+ "[" + tasks.get(taskNumber).getStatusIcon() + "] " + tasks.get(taskNumber).getDescription());
+                tasks.remove(taskNumber);
+                task_count--;
+                System.out.println("Now you have " + (task_count) +" tasks in the list.");
                 System.out.println("=======================================================");
                 break;
             default:
                 throw new DukeException("\t☹ Sorry! I don't know what that means :-(\n\tPlease re-enter:");
         }
-
-        //return an array of first n elements
-        //return Arrays.copyOf(tasks, task_count);
     }
 
     public String printList (){return "";}

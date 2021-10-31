@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Todo extends Task{
     public Todo(String description){
         super(description);
@@ -6,9 +8,9 @@ public class Todo extends Task{
 
     public String getDescription() {return description.substring(5);}
 
-    public static void print(Task[] tasks){
+    public static void print(ArrayList<Task> tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription());
+        System.out.println("\t[" + tasks.get(task_count).getType() +"]" + "[" + tasks.get(task_count).getStatusIcon() +"] " + tasks.get(task_count).getDescription());
         System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
         System.out.println("=======================================================");
     }

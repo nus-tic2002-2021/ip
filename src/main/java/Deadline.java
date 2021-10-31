@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Deadline extends Task{
     public Deadline(String description){
         super(description);
@@ -11,9 +13,9 @@ public class Deadline extends Task{
         return description.substring(description.indexOf('/')+3);
     }
 
-    public static void print(Task[] tasks){
+    public static void print(ArrayList<Task> tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + tasks[task_count].getType() +"]" + "[" + tasks[task_count].getStatusIcon() +"] " + tasks[task_count].getDescription() + "(by:" + tasks[task_count].getDatetime() + ")");
+        System.out.println("\t[" + tasks.get(task_count).getType() +"]" + "[" + tasks.get(task_count).getStatusIcon() +"] " + tasks.get(task_count).getDescription() + "(by:" + tasks.get(task_count).getDatetime() + ")");
         System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
         System.out.println("=======================================================");
     }
