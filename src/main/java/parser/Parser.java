@@ -126,7 +126,7 @@ public class Parser {
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand("Task cannot be added. \n" +
-                    "Event time or description is missing");
+                    "Event time or description is missing.");
         } catch (DateTimeParseException e) {
             return new InvalidCommand("Task cannot be added. \n" +
                     "Please enter event datetime in the format of 'yyyy-MM-dd HHmm to yyyy-MM-dd HHmm'");

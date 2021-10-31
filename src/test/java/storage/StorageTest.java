@@ -23,8 +23,7 @@ public class StorageTest {
         try {
             ArrayList<Task> tasks = s.loadTasks();
         } catch (FileNotFoundException e) {
-            //to change this
-            assertEquals(e.getMessage(), e.getMessage());
+            assertEquals(new FileNotFoundException().getMessage(), e.getMessage());
         }
     }
 
@@ -35,8 +34,7 @@ public class StorageTest {
             ArrayList<Task> tasks = new ArrayList<>();
             s.saveTasks(tasks);
         } catch (IOException e) {
-            //to change this
-            assertEquals(e.getMessage(), e.getMessage());
+            assertEquals(new IOException().getMessage(), e.getMessage());
         }
     }
 }

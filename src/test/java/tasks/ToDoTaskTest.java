@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToDoTaskTest {
     @Test
-    public void constructor_withDescription_success(){
+    public void constructor_withDescription_success() {
         ToDoTask t = new ToDoTask("do something");
         assertEquals("do something", t.description);
     }

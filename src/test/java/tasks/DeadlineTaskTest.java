@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTaskTest {
     @Test
-    public void constructor_withDescriptionAndDate_success(){
+    public void constructor_withDescriptionAndDate_success() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DeadlineTask t = new DeadlineTask("do something", LocalDateTime.parse("2021-10-17 1200", formatter));
         assertEquals("do something", t.description);

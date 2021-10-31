@@ -11,72 +11,87 @@ import java.util.ArrayList;
  */
 public class Scheduler {
 
-    private final ArrayList<String> descriptions;
-    private final ArrayList<LocalDateTime> starts;
-    private final ArrayList<LocalDateTime> ends;
+    private final ArrayList<DeadlineTask> deadlines;
+    private final ArrayList<EventTask> events;
 
     public Scheduler(){
-        descriptions = new ArrayList<>();
-        starts = new ArrayList<>();
-        ends = new ArrayList<>();
+        deadlines = new ArrayList<>();
+        events = new ArrayList<>();
+    }
+
+    /**
+     * Returns after adding new deadline.
+     * The core scheduling function.
+     *
+     * @param deadlineTask New deadline.
+     */
+    public void scheduleDeadline(DeadlineTask deadlineTask) {
+        LocalDateTime deadline = deadlineTask.deadline;
+        boolean scheduleIsEmpty = deadlines.size() == 0;
+        if (scheduleIsEmpty) {
+            deadlines.add(deadlineTask);
+            return;
+        }
+        int index = searchForNewDeadlineSlot(deadline);
+        deadlines.add(index, deadlineTask);
+        return;
     }
 
     /**
      * Returns true if the event is scheduled, false if the event cannot be added.
      * The core scheduling function.
      *
-     * @param description Brief description of the new event.
-     * @param newStart Start DateTime of the new event.
-     * @param newEnd End DateTime of the new event.
+     * @param event New event.
      */
-    public boolean schedule(String description, LocalDateTime newStart, LocalDateTime newEnd) {
+    public boolean scheduleEvent(EventTask event) {
+        LocalDateTime start = event.start;
+        LocalDateTime end = event.end;
+
         // start time is later than end time
-        if (newEnd.isBefore(newStart)) {
+        if (start.isAfter(end)) {
             return false;
         }
 
         // no event in the schedule
-        boolean scheduleIsEmpty = starts.size() == 0;
+        boolean scheduleIsEmpty = events.size() == 0;
         if (scheduleIsEmpty) {
-            descriptions.add(description);
-            starts.add(newStart);
-            ends.add(newEnd);
+            events.add(event);
             return true;
         }
 
-        boolean startLate = newStart.isAfter(starts.get(starts.size()-1)) || newStart.isEqual(starts.get(starts.size()-1));
-        boolean startAfterLastEvent = newStart.isAfter(ends.get(ends.size()-1)) || newStart.isEqual(ends.get(ends.size()-1));
-        boolean startEarly = newStart.isBefore(starts.get(0)) || newStart.isEqual(starts.get(0));
-        boolean endBeforeFirstEvent = newEnd.isBefore(starts.get(0)) || newEnd.equals(starts.get(0));
+        boolean startLate = start.isAfter(events.get(events.size()-1).start) ||
+                start.isEqual(events.get(events.size()-1).start);
+        boolean startAfterLastEvent = start.isAfter(events.get(events.size()-1).end) ||
+                start.isEqual(events.get(events.size()-1).end) ;
+        boolean startEarly = start.isBefore(events.get(0).start) ||
+                start.isEqual(events.get(0).start);
+        boolean endBeforeFirstEvent = end.isBefore(events.get(0).start) ||
+                end.isEqual(events.get(0).start);
+
         if (startLate) {
             if (startAfterLastEvent) {
-                descriptions.add(description);
-                starts.add(newStart);
-                ends.add(newEnd);
+                events.add(event);
                 return true;
             }
         } else if (startEarly) {
             if (endBeforeFirstEvent){
-                descriptions.add(0,description);
-                starts.add(0,newStart);
-                ends.add(0, newEnd);
+                events.add(0,event);
                 return true;
             }
         } else { //start somewhere in the middle
-            int index = searchForNewSlot(newStart);
+            int index = searchForNewEventSlot(start);
             if (index == -1) { //clashed
                 return false;
             }
-            boolean startNotClash = newStart.isAfter(ends.get(index - 1)) || newStart.isEqual(ends.get(index - 1));
-            boolean endNotClash = newEnd.isBefore(starts.get(index)) || newEnd.isBefore(starts.get(index));
+            boolean startNotClash = start.isAfter(events.get(index - 1).end)
+                    || start.isEqual(events.get(index - 1).end) ;
+            boolean endNotClash = end.isBefore(events.get(index).start) ||
+                    end.isEqual(events.get(index).start);
             if (startNotClash && endNotClash) {
-                descriptions.add(index, description);
-                starts.add(index, newStart);
-                ends.add(index, newEnd);
+                events.add(index, event);
                 return true;
             }
         }
-
         return false;
     }
 
@@ -86,15 +101,38 @@ public class Scheduler {
      *
      * @param start Start DateTime of the new event.
      */
-    private int searchForNewSlot(LocalDateTime start){
+    private int searchForNewEventSlot(LocalDateTime start){
         int left = 0;
-        int right = starts.size() - 1;
+        int right = events.size() - 1;
 
         while (left < right){
             int mid = (left + right) / 2;
-            if (starts.get(mid).equals(start)) {
+            if ((events.get(mid).start).equals(start)) {
                 return -1;
-            } else if (starts.get(mid).isAfter(start)) {
+            } else if ((events.get(mid).start).isAfter(start)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return right;
+    }
+
+    /**
+     * Returns index+1 if there is same deadline timing, else returns the index of the desired slot.
+     * The helper function to binary search for slot based on event start time.
+     *
+     * @param deadline Start DateTime of the new event.
+     */
+    private int searchForNewDeadlineSlot(LocalDateTime deadline){
+        int left = 0;
+        int right = deadlines.size() - 1;
+
+        while (left < right){
+            int mid = (left + right) / 2;
+            if ((deadlines.get(mid).deadline).equals(deadline)) {
+                return mid+1;
+            } else if ((deadlines.get(mid).deadline).isAfter(deadline)) {
                 right = mid;
             } else {
                 left = mid + 1;
@@ -110,28 +148,58 @@ public class Scheduler {
      */
     public void loadSchedule(ArrayList<Task> tasks){
         for (Task task: tasks) {
-            if (task.getClass().equals(EventTask.class)) {
+            boolean isDeadline = task.getClass().equals(DeadlineTask.class);
+            boolean isEvent = task.getClass().equals(EventTask.class);
+
+            if (isEvent) {
                 EventTask event = (EventTask) task;
-                schedule(event.description, event.start, event.end);
+                scheduleEvent(event);
+            }
+            if (isDeadline) {
+                DeadlineTask deadline = (DeadlineTask) task;
+                scheduleDeadline(deadline);
             }
         }
     }
 
     /**
-     * Returns -1 if the slot is not found, else return the index of the slot.
+     * Returns -1 if the event is not found, else return the index of the event.
      * Another helper function to binary search for slot based on event start time.
      *
-     * @param start Start DateTime of the new event.
+     * @param event Event to look up for.
      */
-    private int retrieveSlot(LocalDateTime start){
+    private int retrieveEventSlot(EventTask event){
         int left = 0;
-        int right = starts.size() - 1;
+        int right = events.size() - 1;
 
         while (left <= right){
             int mid = (left + right) / 2;
-            if (starts.get(mid).equals(start)) {
+            if (events.get(mid).equals(event)) {
                 return mid;
-            } else if (starts.get(mid).isAfter(start)) {
+            } else if ((events.get(mid).start).isAfter(event.start)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns -1 if the deadline is not found, else return the index of the deadline.
+     * Another helper function to binary search for slot based on event start time.
+     *
+     * @param deadline Deadline to look up for.
+     */
+    private int retrieveDeadlineSlot(DeadlineTask deadline){
+        int left = 0;
+        int right = deadlines.size() - 1;
+
+        while (left <= right){
+            int mid = (left + right) / 2;
+            if (deadlines.get(mid).equals(deadline)) {
+                return mid;
+            } else if ((deadlines.get(mid).deadline).isAfter(deadline.deadline)) {
                 right = mid - 1;
             } else {
                 left = mid + 1;
@@ -143,32 +211,42 @@ public class Scheduler {
     /**
      * Removes a particular event from the schedule (clear the slot).
      *
-     * @param start Start DateTime of the new event.
+     * @param event Event to be removed.
      */
-    public void freeUpSlot(LocalDateTime start){
-        int index = retrieveSlot(start);
-        descriptions.remove(index);
-        starts.remove(index);
-        ends.remove(index);
+    public void freeUpEventSlot(EventTask event){
+        int index = retrieveEventSlot(event);
+        assert index != -1: "The event must be in the schedule";
+        events.remove(index);
     }
 
     /**
-     * Returns the list of events scheduled on the input date.
+     * Removes a particular deadline from the schedule (clear the slot).
+     *
+     * @param deadline Deadline to be removed.
+     */
+    public void freeUpDeadlineSlot(DeadlineTask deadline){
+        int index = retrieveDeadlineSlot(deadline);
+        assert index != -1: "The deadline must be in the schedule";
+        deadlines.remove(index);
+    }
+
+    /**
+     * Returns the list of events and deadlines scheduled on the input date.
      *
      * @param date Date of schedule.
      */
-    public ArrayList<EventTask> getSchedule(LocalDate date) {
-        ArrayList<EventTask> events = new ArrayList<>();
-        for (int i = 0; i < starts.size(); i++) {
-            if(starts.get(i).toLocalDate().equals(date)){
-                String description = descriptions.get(i);
-                LocalDateTime start = starts.get(i);
-                LocalDateTime end = ends.get(i);
-                EventTask event = new EventTask(description, start, end);
-
-                events.add(event);
+    public ArrayList<Task> getSchedule(LocalDate date) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (int i = 0; i < deadlines.size(); i++) {
+            if((deadlines.get(i).deadline).toLocalDate().equals(date)){
+                tasks.add(deadlines.get(i));
             }
         }
-        return events;
+        for (int i = 0; i < events.size(); i++) {
+            if((events.get(i).start).toLocalDate().equals(date)){
+                tasks.add(events.get(i));
+            }
+        }
+        return tasks;
     }
 }

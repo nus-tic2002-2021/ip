@@ -1,5 +1,6 @@
 package storage;
 
+import exceptions.DukeException;
 import tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.*;
 
@@ -78,7 +80,7 @@ public class Storage {
      *
      * @param taskStr Task in string format.
      */
-    private Task convertToTask(String taskStr){
+    private Task convertToTask(String taskStr) throws DukeException {
         assert taskStr != null: "taskStr must be valid";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
@@ -96,16 +98,24 @@ public class Storage {
         }
         case "D":
             assert args[3] != null: "deadline value cannot be null";
-            LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
-            task = new DeadlineTask(description, deadline);
+            try {
+                LocalDateTime deadline = LocalDateTime.parse(args[3], formatter);
+                task = new DeadlineTask(description, deadline);
+            } catch (DateTimeParseException e){
+                throw new DukeException("One or more Task(s) cannot be loaded due to invalid format.");
+            }
             break;
 
         case "E":
             assert args[3] != null: "start datetime value cannot be null";
             assert args[4] != null: "start datetime value cannot be null";
-            LocalDateTime start = LocalDateTime.parse(args[3], formatter);
-            LocalDateTime end = LocalDateTime.parse(args[4], formatter);
-            task = new EventTask(description, start, end);
+            try {
+                LocalDateTime start = LocalDateTime.parse(args[3], formatter);
+                LocalDateTime end = LocalDateTime.parse(args[4], formatter);
+                task = new EventTask(description, start, end);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("One or more Task(s) cannot be loaded due to invalid format.");
+            }
             break;
         }
         if (status.equals("1")) { task.markAsDone(); }

@@ -5,20 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void constructor_withDescription_success(){
+    public void constructor_withDescription_success() {
         Task t = new Task("do something");
         assertEquals("do something", t.description);
         assertEquals(false, t.isDone);
     }
 
     @Test
-    public void getDescription_withValidTask_success(){
+    public void getDescription_withValidTask_success() {
         Task t = new Task("read a book");
         assertEquals("read a book", t.getDescription());
     }
 
     @Test
-    public void getStatusIcon_withValidTask_success(){
+    public void getStatusIcon_withValidTask_success() {
         Task t = new Task("read a book");
         assertEquals(" ", t.getStatusIcon());
 
@@ -30,18 +30,15 @@ public class TaskTest {
     public void isDone_withValidTask_success() {
         Task t = new Task("revise TIC2002");
         assertEquals(false, t.isDone());
-
-        t.markAsDone();
-        assertEquals(true, t.isDone());
     }
 
     @Test
     public void markAsDone_withValidTask_success() {
         Task t = new Task("revise TIC2002");
-        assertEquals(false, t.isDone);
+        assertEquals(false, t.isDone());
 
         t.markAsDone();
-        assertEquals(true, t.isDone);
+        assertEquals(true, t.isDone());
     }
 
     @Test

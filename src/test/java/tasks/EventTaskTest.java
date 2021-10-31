@@ -11,7 +11,7 @@ public class EventTaskTest {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     @Test
-    public void constructor_withDescriptionAndDate_success(){
+    public void constructor_withDescriptionAndDate_success() {
         EventTask t = new EventTask("do something", LocalDateTime.parse("2021-10-18 1200", formatter),
                 LocalDateTime.parse("2021-10-18 1300", formatter));
         assertEquals("do something", t.description);
