@@ -73,7 +73,7 @@ public class Parser {
             Task task = new Todo(taskDesc);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added.\nPlease provide its description ☺");
+            return new InvalidCommand("Oops! Todo task cannot be added.\nPlease provide its description ☺");
         }
     }
 
@@ -84,10 +84,10 @@ public class Parser {
             Task task = new Event(taskDescAt[0], taskDescAt[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
-                    " description and datetime ☺");
+            return new InvalidCommand("Oops! Event task cannot be added.\nPlease provide " +
+                    "the task description and datetime ☺");
         } catch (Exception e) {
-            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
+            return new InvalidCommand("Oops! Event task cannot be added.\n"+e.getMessage()+".");
         }
     }
 
@@ -98,10 +98,10 @@ public class Parser {
             Task task = new Deadline(taskDescBy[0], taskDescBy[1]);
             return new AddCommand(task);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Oops! Task cannot be added. Please check your syntax and\nprovide the correct" +
-                    " description and deadline ☺");
+            return new InvalidCommand("Oops! Deadline task cannot be added.\nPlease provide " +
+                    "the task description and deadline ☺");
         } catch (Exception e) {
-            return new InvalidCommand("Oops! Task cannot be added.\n"+e.getMessage()+".");
+            return new InvalidCommand("Oops! Deadline task cannot be added.\n"+e.getMessage()+".");
         }
     }
 
@@ -111,7 +111,9 @@ public class Parser {
             int taskId = Integer.parseInt(taskDesc);
             return new DoneCommand(taskId);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Task id is missing.");
+            return new InvalidCommand("Oops! Which task do you want to mark as done? Please provide the task id ☺");
+        } catch (Exception e) {
+            return new InvalidCommand("Oops! You have provided multiple task ids. Please provide only one ☺");
         }
     }
 
@@ -121,7 +123,9 @@ public class Parser {
             int taskId = Integer.parseInt(taskDesc);
             return new DeleteCommand(taskId);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Task id is missing.");
+            return new InvalidCommand("Oops! Which task do you want to delete? Please provide the task id ☺");
+        } catch (Exception e) {
+            return new InvalidCommand("Oops! You have provided multiple task ids. Please provide only one ☺");
         }
     }
 
@@ -130,25 +134,20 @@ public class Parser {
             String taskDesc = taskFullDesc[1];
             return new FindCommand(taskDesc);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Task description is missing.");
+            return new InvalidCommand("Oops! Which task do you want to find? Please provide at least one keyword ☺");
         }
     }
 
     private static Command parseTag(String[] taskFullDesc) {
         try {
             String taskDesc = taskFullDesc[1];
-            //System.out.println(taskFullDesc[2]);
-            String[] taskTag = taskDesc.split(" ");
-            //System.out.println(taskTag[0]);
-            //System.out.println(taskTag[1]);
-            //System.out.println(taskTag[2]);
+            String[] taskTag = taskDesc.split(" ", 2);
             int taskId = Integer.parseInt(taskTag[0]);
             String tagDesc = taskTag[1];
-            //System.out.println(taskId);
-            //System.out.println(taskDesc);
             return new TagCommand(taskId, tagDesc);
         } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand("Task id or tag description is missing.");
+            return new InvalidCommand("Oops! Which task do you want to tag?\nPlease provide the task id and " +
+                    "tag description ☺");
         }
     }
 

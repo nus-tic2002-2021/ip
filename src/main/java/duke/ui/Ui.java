@@ -22,7 +22,7 @@ public class Ui {
 
     /** Prints command header. */
     public void showCommandHeader() {
-        System.out.print("\n\n\ncmd: ");
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncmd: ");
     }
 
     /** Prints welcome message. */
@@ -36,13 +36,13 @@ public class Ui {
                         "|____/ \\__,_|_|\\_\\___|\n" +
                         "\nCOMMAND LIST:\n" +
                         "1. list\n" +
-                        "2. todo {task description}\n" +
-                        "3. event {task description} /at {yyyy-mm-dd hh:mm}\n" +
-                        "4. deadline {task description} /by {yyyy-mm-dd hh:mm}\n" +
-                        "5. done {task id}\n" +
-                        "6. delete {task id}\n" +
-                        "7. find {keyword}\n" +
-                        "8. tag {task id} {tag description}\n" +
+                        "2. todo <task description>\n" +
+                        "3. event <task description> /at <yyyy-mm-dd hh:mm>\n" +
+                        "4. deadline <task description> /by <yyyy-mm-dd hh:mm>\n" +
+                        "5. done <task id>\n" +
+                        "6. delete <task id>\n" +
+                        "7. find <keyword>\n" +
+                        "8. tag <task id> <tag description>\n" +
                         "9. bye");
     }
 
@@ -54,7 +54,7 @@ public class Ui {
 
     /** Prints exception message - file not found. */
     public void showFileNotFound() {
-        System.out.println("\nNote: No task list found. I will create one for you!");
+        System.out.println("\nNOTE: No task list found. I will create one for you!");
     }
 
     /**
@@ -78,7 +78,7 @@ public class Ui {
      * @param size The size of task list.
      */
     public void printAddedTask(String task, int size) {
-        System.out.println("Got it! I've added this task.\n" + task + "\nNow you have " + size + " in the list.");
+        System.out.println("Got it! I've added this task.\n " + task + "\nNow you have " + size + " in the list.");
     }
 
     /**
@@ -87,7 +87,7 @@ public class Ui {
      * @param task The completed task.
      */
     public void printCompletedTask(String task) {
-        System.out.println("Nice! I've marked this task as done.\n" + task);
+        System.out.println("Nice! I've marked this task as done.\n " + task);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Ui {
      * @param size The size of task list.
      */
     public void printDeletedTask(String task, int size) {
-        System.out.println("Noted! I've removed this task.\n" + task + "\nNow you have " + size + " in the list.");
+        System.out.println("Noted! I've removed this task.\n " + task + "\nNow you have " + size + " in the list.");
     }
 
     /**
@@ -158,7 +158,7 @@ public class Ui {
      * @param task The tagged task.
      */
     public void printTaggedTask(String task) {
-        System.out.println("Nice! I've tagged this task.\n" + task);
+        System.out.println("Nice! I've tagged this task.\n " + task);
     }
 
     /**
@@ -167,7 +167,7 @@ public class Ui {
      * @param task The un-tagged task.
      */
     public void printUnTaggedTask(String task) {
-        System.out.println("Nice! I've un-tagged this task.\n" + task);
+        System.out.println("Nice! I've un-tagged this task.\n " + task);
     }
 
 }
