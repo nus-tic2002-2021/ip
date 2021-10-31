@@ -1,8 +1,12 @@
-package duke.Ui;
+package duke.ui;
 
 import java.util.Arrays;
+import java.util.Scanner;
+
+import duke.exception.*;
 
 public class Ui {
+
     public static void Welcome (){
         System.out.println("        _..._\n" +
                 "      .'     '.      _\n" +
@@ -58,7 +62,7 @@ public class Ui {
             "         ( 8)  ( _.aP\" _a   \\( \\   *\n" +
             "       +  )/    (8P   (88    )  )\n" +
             "          (a:f   \"     `\"       `\n" +
-            "Bye, i will miss you.\n");
+            "\nBye, i will miss you.");
         System.out.println("=========================TERMINATED===========================");
     }
 

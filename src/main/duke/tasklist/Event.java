@@ -1,4 +1,7 @@
+package duke.tasklist;
+
 import java.util.ArrayList;
+
 
 public class Event extends Task{
     public Event(String description){
@@ -9,14 +12,14 @@ public class Event extends Task{
     @Override
     public String getDescription() {return description.substring(6,description.indexOf('/'));}
 
-    public String getDatetime() throws DukeException {
+    public String getDatetime() {
         return description.substring(description.indexOf('/')+3);
     }
 
     public static void print(ArrayList<Task> tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + tasks.get(task_count).getType() +"]" + "[" + tasks.get(task_count).getStatusIcon() +"] " +""+tasks.get(task_count).getDescription() + "(at:" + tasks.get(task_count).getDatetime() + ")");
-        System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
+        System.out.println("\t[" + tasks.get(tasks.size()-1).getType() +"]" + "[" + tasks.get(tasks.size()-1).getStatusIcon() +"] " +""+tasks.get(tasks.size()-1).getDescription() + "(at:" + tasks.get(tasks.size()-1).getDatetime() + ")");
+        System.out.println("Now you have " + tasks.size() +" tasks in the list.");
         System.out.println("=======================================================");
     }
 

@@ -1,3 +1,5 @@
+package duke.parser;
+
 public class Parser {
 
     public static String[] commandToArray(String text){

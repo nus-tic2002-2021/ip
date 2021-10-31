@@ -1,8 +1,11 @@
+package duke.tasklist;
+
 import duke.exception.DukeException;
+import duke.tasklist.Task;
 
 import java.util.ArrayList;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     public Deadline(String description){
         super(description);
         this.type = "D";
@@ -17,8 +20,8 @@ public class Deadline extends Task{
 
     public static void print(ArrayList<Task> tasks){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + tasks.get(task_count).getType() +"]" + "[" + tasks.get(task_count).getStatusIcon() +"] " + tasks.get(task_count).getDescription() + "(by:" + tasks.get(task_count).getDatetime() + ")");
-        System.out.println("Now you have " + (task_count+1) +" tasks in the list.");
+        System.out.println("\t[" + tasks.get(tasks.size()-1).getType() +"]" + "[" + tasks.get(tasks.size()-1).getStatusIcon() +"] " + tasks.get(tasks.size()-1).getDescription() + "(by:" + tasks.get(tasks.size()-1).getDatetime() + ")");
+        System.out.println("Now you have " + (tasks.size()) +" tasks in the list.");
         System.out.println("=======================================================");
     }
 

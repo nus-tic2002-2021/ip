@@ -1,4 +1,10 @@
+package duke.tasklist;
+
 import java.util.ArrayList;
+
+import duke.parser.*;
+import duke.ui.*;
+import duke.exception.*;
 
 public class Task {
     protected String description;

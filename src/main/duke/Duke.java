@@ -3,6 +3,10 @@ package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import duke.ui.*;
+import duke.tasklist.*;
+import duke.exception.*;
+
 public class Duke {
     private Ui ui;
 
