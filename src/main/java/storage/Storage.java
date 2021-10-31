@@ -12,7 +12,7 @@ import java.time.format.FormatStyle;
 import java.util.*;
 
 /**
- * A <code>Storage</code> object deals with loading tasks from the file and saving tasks in the file
+ * A <code>Storage</code> object deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private final String filePath;
@@ -27,7 +27,7 @@ public class Storage {
     }
 
     /**
-     * Read tasks stored in specific file and load them into a <code>TaskList</code>.
+     * Reads tasks stored in specific file and load them into a <code>TaskList</code>.
      * Returns an ArrayList of <code>Task</code> objects.
      * The filepath has to be specified when constructing the <code>Storage</code> object.
      *
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     /**
-     * Initialise/ create directory and file at specific filepath for storing tasks.
+     * Creates directory and file at specific filepath for storing tasks.
      * The filepath has to be specified when constructing the <code>Storage</code> object.
      *
      * @throws IOException If the creation of file or directory is unsuccessful.
@@ -113,7 +113,7 @@ public class Storage {
     }
 
     /**
-     * Save the list of tasks into specific file.
+     * Saves the list of tasks into specific file.
      * The filepath has to be specified when constructing the <code>Storage</code> object.
      *
      * @param tasks ArrayList of <code>Task</code> objects to be saved.

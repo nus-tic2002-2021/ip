@@ -6,7 +6,7 @@ import ui.Messages;
 import ui.Ui;
 
 /**
- * <code>ListCommand</code> is used to list (print out) all the tasks in the TaskList.
+ * <code>HelpCommand</code> is used to list all command types and their formats.
  * Extends the <code>Command</code> class.
  */
 public class HelpCommand extends Command{

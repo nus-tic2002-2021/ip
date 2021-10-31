@@ -17,7 +17,7 @@ public abstract class Command {
     public Command(){}
 
     /**
-     * This method is used to execute a command.
+     * Executes a command and returns the success message.
      * Needs to be implemented in other command classes (abstract).
      *
      * @param taskList TaskList object where all available tasks are stored.
@@ -30,9 +30,9 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
-     * Set program exit flag.
+     * Sets program exit flag.
      *
-     * @param exit Exit flag (true or false)
+     * @param exit Exit flag (true or false).
      */
     public void setExit(boolean exit){
         isExit = exit;

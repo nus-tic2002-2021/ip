@@ -58,13 +58,13 @@ public class Duke {
         }
     }
 
+    /** Returns Duke response message for display on GUI. */
     public String reply(String input) {
         try {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
             return c.execute(taskList, ui, storage);
         } catch (DukeException | IOException e) {
-            // ui.showError(e.getMessage());
             return e.getMessage();
         }
     }

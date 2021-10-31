@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
+/**
+ * Class for declaring messages to display on Duke GUI.
+ */
 public final class Messages {
 
     public static final String WELCOME_MSG = "Hello, I'm Duke!\n" + "What can I do for you?\n" +

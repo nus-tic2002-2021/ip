@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Get task by id and delete the task.
+     * Gets task by id and delete the task.
      * Returns the deleted task in String format.
      *
      * @param taskId ID of the task to be deleted.
@@ -76,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new task into the TaskList.
+     * Adds a new task into the TaskList.
      *
      * @param task Task to be added.
      */
@@ -94,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * Search whether a task with input keyword exists in the TaskList.
+     * Searches whether a task with input keyword exists in the TaskList.
      *
      * @param keyword Search keyword.
      */

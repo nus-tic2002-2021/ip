@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- *  A <code>Parser</code> object deals with making sense of the user command
+ *  A <code>Parser</code> object deals with making sense of the user command.
  */
 public class Parser {
     /**

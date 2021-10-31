@@ -7,6 +7,10 @@ import ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * <code>ViewCommand</code> is used to list all the tasks scheduled on the input date.
+ * Extends the <code>Command</code> class.
+ */
 public class ViewCommand extends Command{
 
     LocalDate date;

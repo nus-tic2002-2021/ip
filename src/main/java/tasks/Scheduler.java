@@ -22,8 +22,8 @@ public class Scheduler {
     }
 
     /**
+     * Returns true if the event is scheduled, false if the event cannot be added.
      * The core scheduling function.
-     * Return true if the event is scheduled, false if the event cannot be added.
      *
      * @param description Brief description of the new event.
      * @param newStart Start DateTime of the new event.
@@ -81,8 +81,8 @@ public class Scheduler {
     }
 
     /**
+     * Returns -1 if there is time clashes, else returns the index of the slot.
      * The helper function to binary search for slot based on event start time.
-     * Return -1 if there is time clashes, else return the index of the slot.
      *
      * @param start Start DateTime of the new event.
      */
@@ -104,7 +104,7 @@ public class Scheduler {
     }
 
     /**
-     * Load schedule of existing events.
+     * Loads schedule of existing events.
      *
      * @param tasks List of tasks loaded from existing tasks file.
      */
@@ -118,8 +118,8 @@ public class Scheduler {
     }
 
     /**
+     * Returns -1 if the slot is not found, else return the index of the slot.
      * Another helper function to binary search for slot based on event start time.
-     * Return -1 if the slot is not found, else return the index of the slot.
      *
      * @param start Start DateTime of the new event.
      */
@@ -141,7 +141,7 @@ public class Scheduler {
     }
 
     /**
-     * Remove a particular event from the schedule (clear the slot).
+     * Removes a particular event from the schedule (clear the slot).
      *
      * @param start Start DateTime of the new event.
      */
@@ -153,7 +153,7 @@ public class Scheduler {
     }
 
     /**
-     * Retrieve and return the list of events scheduled on the input date.
+     * Returns the list of events scheduled on the input date.
      *
      * @param date Date of schedule.
      */

@@ -9,6 +9,10 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * <code>FindCommand</code> is used to search for tasks which description contains the input keyword.
+ * Extends the <code>Command</code> class.
+ */
 public class FindCommand extends Command{
 
     String keyword;
