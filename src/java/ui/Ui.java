@@ -12,8 +12,11 @@ public interface Ui {
 
     public void msgGreet();
     public void msgAssignTask(TaskList myList, int taskNumber);
-    public void msgAssignTaskDeadline(TaskList myList, int taskNumber);
-    public void msgAssignTaskEvent(TaskList myList, int taskNumber);
+    public void msgAssignTaskDeadline_TaskDate(TaskList myList, int taskNumber);
+    public void msgAssignTaskDeadline_TaskDate_TaskTime(TaskList myList, int taskNumber);
+    public void msgAssignTaskEvent_TaskDate(TaskList myList, int taskNumber);
+    public void msgAssignTaskEvent_TaskDate_TaskTimeStart(TaskList myList, int taskNumber);
+    public void msgAssignTaskEvent_TaskDate_TaskTimeStart_TaskTimeEnd(TaskList myList, int taskNumber);
     public void msgEcho(String s);
     public void msgSave();
     public void msgSLoad();
@@ -26,7 +29,9 @@ public interface Ui {
     public void msgInvalidInputMissingDescription();
     public void msgInvalidInputMissingDay();
     public void msgInvalidInputMissingTime();
-    public void msgInvalidInputWrongDateFormat();
+    public void msgInvalidInputWrongDateTimeFormat();
+    public void msgInvalidInputWrongDateTimeStartEndFormat();
+    public void msgInvalidInputTimeStartLaterThanTimeEnd();
     public void msgRemoveItem(TaskList myList, int taskNumber);
     public void msgWrongTaskNumber();
     public void msgBye() throws IOException;

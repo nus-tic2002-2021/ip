@@ -20,24 +20,24 @@ public class TaskList {
         list.add(new TaskToDos(taskDetail));
     }
 
-    public void addItemDeadline(String taskDetail, String dateString) { // temporary constructor for Duke Level 4
-        list.add(new TaskDeadline(taskDetail, dateString));
-    }
-
-    public void addItemDeadline(String taskDetail, LocalDate taskDate){
+    public void addItemDeadline(String taskDetail, LocalDate taskDate) {
         list.add(new TaskDeadline(taskDetail, taskDate));
     }
 
-    public void addItemDeadline(String taskDetail, LocalDate taskDate, LocalTime taskTime){
+    public void addItemDeadline(String taskDetail, LocalDate taskDate, LocalTime taskTime) {
         list.add(new TaskDeadline(taskDetail, taskDate, taskTime));
     }
 
-    public void addItemEvent(String taskDetail, Date date, Time startTime, Time endTime) {
-        list.add(new TaskEvent(taskDetail, date, startTime, endTime));
+    public void addItemEvent(String taskDetail, LocalDate taskDate) {
+        list.add(new TaskEvent(taskDetail, taskDate));
     }
 
-    public void addItemEvent(String taskDetail, String daytime) { // temporary constructor for Duke Level 4
-        list.add(new TaskEvent(taskDetail, daytime));
+    public void addItemEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart) {
+        list.add(new TaskEvent(taskDetail, taskDate, taskTimeStart));
+    }
+
+    public void addItemEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart, LocalTime taskTimeEnd) {
+        list.add(new TaskEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd));
     }
 
     public void removeItem(int index) {
@@ -60,19 +60,59 @@ public class TaskList {
         return task.getDoneStatus();
     }
 
-    public String getTaskDeadline_DateString(int index) { // temporary method for Duke Level 4
-        TaskDeadline task = (TaskDeadline) list.get(index);
-        return task.getDateString();
+    public String getTaskEvent_TaskDate_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalDate_toString();
     }
 
-    public String getTaskDeadLine_TaskDate_InString(int index){
+    public String getTaskEvent_TaskDate_Year_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalDate_Year_toString();
+    }
+
+    public String getTaskEvent_TaskDate_Month_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalDate_Month_toString();
+    }
+
+    public String getTaskEvent_TaskDate_Day_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalDate_Day_toString();
+    }
+
+    public String getTaskEvent_TaskTimeStart_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalTimeStart_toString();
+    }
+
+    public String getTaskEvent_TaskTimeEnd_InString(int index) {
+        TaskEvent task = (TaskEvent) list.get(index);
+        return task.getLocalTimeEnd_toString();
+    }
+
+    public String getTaskDeadLine_TaskDate_InString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
         return task.getLocalDate_toString();
     }
 
-    public String getTaskEventDateTimeString(int index) { // temporary method for Duke Level 4
-        TaskEvent task = (TaskEvent) list.get(index);
-        return task.getDayTime();
+    public String getTaskDeadLine_TaskDate_Year_InString(int index) {
+        TaskDeadline task = (TaskDeadline) list.get(index);
+        return task.getLocalDate_Year_toString();
+    }
+
+    public String getTaskDeadLine_TaskDate_Month_InString(int index) {
+        TaskDeadline task = (TaskDeadline) list.get(index);
+        return task.getLocalDate_Month_toString();
+    }
+
+    public String getTaskDeadLine_TaskDate_Day_InString(int index) {
+        TaskDeadline task = (TaskDeadline) list.get(index);
+        return task.getLocalDate_Day_toString();
+    }
+
+    public String getTaskDeadLine_TaskTime_InString(int index) {
+        TaskDeadline task = (TaskDeadline) list.get(index);
+        return task.getLocalTime_toString();
     }
 
     public int getNumOfItem() {

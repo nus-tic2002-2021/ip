@@ -1,37 +1,73 @@
 package src.java.task;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class TaskEvent extends Task {
-    private Date date;
-    private Time startTime;
-    private Time endTime;
-    private String dateTime; // temporary attribute for Duke Level 4
 
-    public TaskEvent(String taskDetail) {
+    private LocalDate taskDate;
+    private LocalTime taskTimeStart;
+    private LocalTime taskTimeEnd;
+
+    public TaskEvent(String taskDetail, LocalDate taskDate) {
         super(taskDetail);
         this.isDone = false;
         this.taskType = TaskType.EVENT;
+        this.taskDate = taskDate;
     }
 
-    public TaskEvent(String taskDetail, Date date, Time startTime, Time endTime) {
+    public TaskEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart) {
         super(taskDetail);
         this.isDone = false;
         this.taskType = TaskType.EVENT;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.taskDate = taskDate;
+        this.taskTimeStart = taskTimeStart;
     }
 
-    public TaskEvent(String taskDetail, String dayTime) { // temporary constructor for Duke Level 4
+    public TaskEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart, LocalTime taskTimeEnd) {
         super(taskDetail);
         this.isDone = false;
         this.taskType = TaskType.EVENT;
-        this.dateTime = dayTime;
+        this.taskDate = taskDate;
+        this.taskTimeStart = taskTimeStart;
+        this.taskTimeEnd = taskTimeEnd;
     }
 
-    public String getDayTime() { // temporary constructor for Duke Level 4
-        return dateTime;
+    public LocalDate getLocalDate() {
+        return taskDate;
+    }
+
+    public String getLocalDate_toString() {
+        return String.valueOf(taskDate);
+    }
+
+    public String getLocalDate_Day_toString() {
+        return String.valueOf(taskDate.getDayOfMonth());
+    }
+
+    public String getLocalDate_Month_toString() {
+        return String.valueOf(taskDate.getMonth());
+    }
+
+    public String getLocalDate_Year_toString() {
+        return String.valueOf(taskDate.getYear());
+    }
+
+    public LocalTime getLocalTimeStart() {
+        return taskTimeStart;
+    }
+
+    public LocalTime getLocalTimeEnd() {
+        return taskTimeEnd;
+    }
+
+    public String getLocalTimeStart_toString() {
+        return String.valueOf(taskTimeStart);
+    }
+
+    public String getLocalTimeEnd_toString() {
+        return String.valueOf(taskTimeEnd);
     }
 }

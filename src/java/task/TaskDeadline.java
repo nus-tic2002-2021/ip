@@ -8,20 +8,6 @@ import java.util.Date;
 public class TaskDeadline extends Task {
     private LocalDate taskDate;
     private LocalTime taskTime;
-    private String dateString; // temporary attribute for Duke Level 4
-
-    public TaskDeadline(String taskDetail) {
-        super(taskDetail);
-        this.isDone = false;
-        this.taskType = TaskType.DEADLINE;
-    }
-
-    public TaskDeadline(String taskDetail, String dateString) { // temporary constructor for Duke Level 4
-        super(taskDetail);
-        this.isDone = false;
-        this.taskType = TaskType.DEADLINE;
-        this.dateString = dateString;
-    }
 
     public TaskDeadline(String taskDetail, LocalDate taskDate) {
         super(taskDetail);
@@ -36,10 +22,6 @@ public class TaskDeadline extends Task {
         this.taskType = TaskType.DEADLINE;
         this.taskDate = taskDate;
         this.taskTime = localTime;
-    }
-
-    public String getDateString() { // temporary constructor for Duke Level 4
-        return dateString;
     }
 
     public LocalDate getLocalDate(){
@@ -64,5 +46,9 @@ public class TaskDeadline extends Task {
 
     public LocalTime getLocalTime(){
         return  taskTime;
+    }
+
+    public String getLocalTime_toString(){
+        return String.valueOf(taskTime);
     }
 }

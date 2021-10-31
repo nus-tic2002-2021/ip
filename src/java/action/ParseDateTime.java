@@ -4,6 +4,7 @@ import src.java.ui.Message;
 import src.java.ui.Ui;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -15,13 +16,8 @@ public class ParseDateTime {
 
     private static Ui ui = new Message();
 
-    public static LocalDate toDate(String taskDate) {
+    public static LocalDate toDate(String date) {
 
-        LocalDate myDate = formatDate(taskDate);
-        return myDate;
-    }
-
-    public static LocalDate formatDate(String taskDate) {
         LocalDate formattedDate;
         DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
@@ -48,11 +44,47 @@ public class ParseDateTime {
         DateTimeFormatter formatter = builder.toFormatter(Locale.ENGLISH);
 
         try {
-            formattedDate = LocalDate.parse(taskDate, formatter);
+            formattedDate = LocalDate.parse(date, formatter);
             return formattedDate;
         } catch (DateTimeParseException e) {
             throw e;
         }
+    }
+
+    public static LocalTime toTime(String time){
+        LocalTime localTime = LocalTime.parse(time);
+        return localTime;
+    }
+
+    public static String[] splitDateAndTime(String dateAndTime) {
+        return dateAndTime.split(" ");
+    }
+
+    public static int isDateAndTime(String dateAndTime) {
+        String[] split = dateAndTime.split(" ");
+        if (split.length == 1) {
+            return 1;
+        } else if (split.length == 2){
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
+    public static String ExtractDateFromSplitDateAndTime(String[] split) {
+        return split[0];
+    }
+
+    public static String ExtracTimeFromSplitDateAndTime(String[] split) {
+        return split[1];
+    }
+
+    public static String ExtracTimeStartFromSplitDateAndTime(String[] split) {
+        return split[1];
+    }
+
+    public static String ExtracTimeEndFromSplitDateAndTime(String[] split) {
+        return split[2];
     }
 
     public static void formatDateExample() {

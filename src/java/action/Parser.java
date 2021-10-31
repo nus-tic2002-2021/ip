@@ -8,6 +8,7 @@ import src.java.ui.Ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Parser {
@@ -65,7 +66,7 @@ public class Parser {
             } else if (line.substring(0, 5).equals("event")) {
                 AddTaskEvent(myList, line);
             } else if (line.substring(0, 6).equals("delete")) {
-                RemoveTask(myList, line);
+                DeleteTask(myList, line);
             } else if (line.substring(0, 8).equals("deadline")) {
                 AddTaskDeadline(myList, line);
             } else {
@@ -116,27 +117,104 @@ public class Parser {
     }
 
     private void AddTaskEvent(TaskList myList, String line) {
+
         if (line.length() <= 6) {
             ui.msgInvalidInputMissingDescription();
-        } else if (!line.contains("/at")) {
-            ui.msgInvalidInputMissingDay();
-        } else {
-
-            try {
-                String taskDetail = line.substring(6, line.indexOf("/"));
-                String after_at = line.substring(line.indexOf("/") + 4);
-                String day = after_at.substring(0, after_at.indexOf(" "));
-                String time = line.substring(line.indexOf("/") + 8);
-
-                myList.addItemEvent(taskDetail, after_at); // temporary for Duke Level 4
-                ui.msgAssignTaskEvent(myList, myList.getNumOfItem() - 1);
-            } catch (Exception e) {
-                ui.msgInvalidInput();
-            }
+            return;
         }
+
+        if (!line.contains("/at")) {
+            ui.msgInvalidInputMissingDay();
+            return;
+        }
+
+        try {
+            String taskDetail = line.substring(6, line.indexOf("/"));
+            String dateAndTime = line.substring(line.indexOf("/") + 4);
+            String date;
+            String timeStart;
+            String timeEnd;
+
+            String[] split = ParseDateTime.splitDateAndTime(dateAndTime);
+            date = ParseDateTime.ExtractDateFromSplitDateAndTime(split);
+
+            if (ParseDateTime.isDateAndTime(dateAndTime) == 1) {
+                AddTaskEvent_LocalDate(myList, taskDetail, date);
+            } else if (ParseDateTime.isDateAndTime(dateAndTime) == 2) {
+                timeStart = ParseDateTime.ExtracTimeStartFromSplitDateAndTime(split);
+                AddTaskEvent_LocalDate_LocalTime(myList, taskDetail, date, timeStart);
+            } else {
+                timeStart = ParseDateTime.ExtracTimeStartFromSplitDateAndTime(split);
+                timeEnd = ParseDateTime.ExtracTimeEndFromSplitDateAndTime(split);
+                AddTaskEvent_LocalDate_LocalTime(myList, taskDetail, date, timeStart, timeEnd);
+            }
+
+        } catch (Exception e) {
+            ui.msgInvalidInputWrongDateTimeStartEndFormat();
+        }
+
     }
 
-    private void RemoveTask(TaskList myList, String line) {
+    private void AddTaskEvent_LocalDate(TaskList myList, String taskDetail, String date) {
+        LocalDate taskDate = ParseDateTime.toDate(date);
+
+        if (taskDate == null) {
+            ui.msgInvalidInputWrongDateTimeFormat();
+            return;
+        }
+
+        myList.addItemEvent(taskDetail, taskDate);
+        ui.msgAssignTaskEvent_TaskDate(myList, myList.getNumOfItem() - 1);
+    }
+
+    private void AddTaskEvent_LocalDate_LocalTime(TaskList myList, String taskDetail,
+                                                  String date, String timeStart) {
+
+        LocalDate taskDate = ParseDateTime.toDate(date);
+        LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
+
+        if (taskDate == null) {
+            ui.msgInvalidInputMissingDay();
+            return;
+        }
+
+        if (taskTimeStart == null) {
+            ui.msgInvalidInputWrongDateTimeFormat();
+            return;
+        }
+
+        myList.addItemEvent(taskDetail, taskDate, taskTimeStart);
+        ui.msgAssignTaskEvent_TaskDate_TaskTimeStart(myList, myList.getNumOfItem() - 1);
+
+    }
+
+    private void AddTaskEvent_LocalDate_LocalTime(TaskList myList, String taskDetail,
+                                                  String date, String timeStart, String timeEnd) {
+
+        LocalDate taskDate = ParseDateTime.toDate(date);
+        LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
+        LocalTime taskTimeEnd = ParseDateTime.toTime(timeEnd);
+
+        if (taskDate == null) {
+            ui.msgInvalidInputMissingDay();
+            return;
+        }
+
+        if (taskTimeStart == null || taskTimeEnd == null) {
+            ui.msgInvalidInputWrongDateTimeFormat();
+            return;
+        }
+
+        if (taskTimeStart.isAfter(taskTimeEnd)) {
+            ui.msgInvalidInputTimeStartLaterThanTimeEnd();
+            return;
+        }
+
+        myList.addItemEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd);
+        ui.msgAssignTaskEvent_TaskDate_TaskTimeStart_TaskTimeEnd(myList, myList.getNumOfItem() - 1);
+    }
+
+    private void DeleteTask(TaskList myList, String line) {
         try {
             int taskNumber = Integer.parseInt(line.substring(7));
             ui.msgRemoveItem(myList, taskNumber - 1);
@@ -150,28 +228,67 @@ public class Parser {
 
         if (line.length() <= 9) {
             ui.msgInvalidInputMissingDescription();
+            return;
         }
 
         if (!line.contains("/by")) {
             ui.msgInvalidInputMissingDay();
+            return;
         }
 
         try {
             String taskDetail = line.substring(9, line.indexOf("/"));
-            String dayWithBy = line.substring(line.indexOf("/") + 1, line.length());
-            String day = dayWithBy.substring(3);
+            String dateAndTime = line.substring(line.indexOf("/") + 4);
+            String date;
+            String time;
 
-            LocalDate taskDate = ParseDateTime.toDate(day);
+            String[] split = ParseDateTime.splitDateAndTime(dateAndTime);
+            date = ParseDateTime.ExtractDateFromSplitDateAndTime(split);
 
-            if (taskDate == null){
-                ui.msgInvalidInputWrongDateFormat();
+            if (ParseDateTime.isDateAndTime(dateAndTime) == 1) {
+                AddTaskDeadline_LocalDate(myList, taskDetail, date);
+            } else if (ParseDateTime.isDateAndTime(dateAndTime) == 2) {
+                time = ParseDateTime.ExtracTimeFromSplitDateAndTime(split);
+                AddTaskDeadline_LocalDate_LocalTime(myList, taskDetail, date, time);
             } else {
-                myList.addItemDeadline(taskDetail, taskDate);
-                ui.msgAssignTaskDeadline(myList, myList.getNumOfItem() - 1);
+                ui.msgInvalidInputWrongDateTimeFormat();
             }
+
         } catch (Exception e) {
-            ui.msgInvalidInputWrongDateFormat();
+            ui.msgInvalidInputWrongDateTimeFormat();
         }
+    }
+
+    private void AddTaskDeadline_LocalDate(TaskList myList, String taskDetail, String date) {
+        LocalDate taskDate = ParseDateTime.toDate(date);
+
+        if (taskDate == null) {
+            ui.msgInvalidInputWrongDateTimeFormat();
+            return;
+        }
+
+        myList.addItemDeadline(taskDetail, taskDate);
+        ui.msgAssignTaskDeadline_TaskDate(myList, myList.getNumOfItem() - 1);
+    }
+
+    private void AddTaskDeadline_LocalDate_LocalTime(TaskList myList, String taskDetail,
+                                                     String date, String time) {
+
+        LocalDate taskDate = ParseDateTime.toDate(date);
+        LocalTime taskTime = ParseDateTime.toTime(time);
+
+        if (taskDate == null) {
+            ui.msgInvalidInputMissingDay();
+            return;
+        }
+
+        if (taskTime == null) {
+            ui.msgInvalidInputWrongDateTimeFormat();
+            return;
+        }
+
+        myList.addItemDeadline(taskDetail, taskDate, taskTime);
+        ui.msgAssignTaskDeadline_TaskDate_TaskTime(myList, myList.getNumOfItem() - 1);
     }
 
 
@@ -191,6 +308,8 @@ public class Parser {
         }
         return sb.toString();
     }
+
+
 }
 
 
