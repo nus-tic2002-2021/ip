@@ -108,12 +108,12 @@ public class Ui {
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
 
-        String output2 = "";
+        String output = "";
 
         switch(rt) {
         case EXIT_LOOP:
             this.setIsLoop(false);
-            output2 = (this.getExitLoopMessage());
+            output = (this.getExitLoopMessage());
             break;
         case TASK_LIST_ALL:
         case TASK_LIST_FIND:
@@ -134,11 +134,11 @@ public class Ui {
         case ERROR_INVALID_READ_FILE_PATH:
         case FILE_SAVED:
         case FILE_READ:
-            output2 = c.getResponse();
+            output = c.getResponse();
             break;
         default:
             throw new Exception("Unhandled response type [" + rt + "].");
         }
-        this.getPrintStream().print(output2);
+        this.getPrintStream().print(output);
     }
 }
