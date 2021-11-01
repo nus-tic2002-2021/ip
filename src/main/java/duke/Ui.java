@@ -124,64 +124,53 @@ public class Ui {
 
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
+
+        String output2 = "";
         if (rt == ResponseType.EXIT_LOOP) {
             this.setIsLoop(false);
             this.printExitLoop();
         } else if (rt == ResponseType.TASK_LIST_ALL) {
-            this.getPrintStream().print(c.getResponse());
+            output2 = c.getResponse();
         } else if (rt == ResponseType.TASK_LIST_FIND) {
-            this.getPrintStream().print(c.getResponse());
+            output2 = c.getResponse();
         } else if (rt == ResponseType.TASK_PROJECTION) {
-            this.getPrintStream().print(c.getResponse());
+            output2 = c.getResponse();
         } else if (rt == ResponseType.TASK_STATS_ALL) {
-            this.getPrintStream().print(c.getResponse());
+            output2 = c.getResponse();
         } else if (rt == ResponseType.TASK_UPDATE_COMPLETE) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_UPDATE_INCOMPLETE) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_NOT_FOUND) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_DELETE_TASK) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_CREATE_TODO) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.TASK_CREATE_EVENT) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.SCAN_DUPLICATE_DESCRIPTION) {
-            this.getPrintStream().print(c.getResponse());
+            output2 = (c.getResponse());
         } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_SYNTAX) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
-            String output = this.getResponseTaskRequestInvalidParameters(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = this.getResponseTaskRequestInvalidParameters(c.getResponse());
         } else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH) {
-            String output = addLine(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = addLine(c.getResponse());
         } else if (rt == ResponseType.FILE_SAVED) {
-            String output = this.getResponseTaskFileSaved(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = this.getResponseTaskFileSaved(c.getResponse());
         } else if (rt == ResponseType.FILE_READ) {
-            String output = this.getReadSuccess(c.getResponse());
-            this.getPrintStream().print(output);
+            output2 = this.getReadSuccess(c.getResponse());
         } else {
             throw new Exception("Unhandled response type [" + rt + "].");
         }
+        this.getPrintStream().print(output2);
     }
 
 }
