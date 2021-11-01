@@ -1,6 +1,6 @@
 package duke.dukeutility;
 
-public class helper {
+public class Helper {
 
     /**
      * Helper to combine array of strings.
