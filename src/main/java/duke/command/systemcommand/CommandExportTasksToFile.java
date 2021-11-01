@@ -30,6 +30,6 @@ public class CommandExportTasksToFile extends Command {
         }
     }
     public String getResponse() {
-        return this.getArgs().get(1);
+        return "Saved task to file: " + this.getArgs().get(1) + System.lineSeparator();
     }
 }

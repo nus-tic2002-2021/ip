@@ -22,7 +22,7 @@ public class CommandAddNewEvent extends Command {
     public String getResponse() {
         String id = this.getArgs().get(1);
         String desc = this.getArgs().get(2);
-        return "Added Event [id #" + id + "]: " + desc;
+        return "Added Event [id #" + id + "]: " + desc + System.lineSeparator();
     }
 
 }

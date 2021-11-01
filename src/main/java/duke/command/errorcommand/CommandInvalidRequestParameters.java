@@ -11,6 +11,6 @@ public class CommandInvalidRequestParameters extends Command {
 
 
     public String getResponse() {
-        return this.getArgs().get(1);
+        return "Invalid parameters: " + this.getArgs().get(1) + System.lineSeparator();
     }
 }

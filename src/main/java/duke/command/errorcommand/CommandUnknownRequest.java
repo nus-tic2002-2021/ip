@@ -11,6 +11,6 @@ public class CommandUnknownRequest extends Command {
     }
 
     public String getResponse() {
-        return "Unknown command. . .";
+        return "Unknown command. . ." + System.lineSeparator();
     }
 }

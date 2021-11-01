@@ -20,6 +20,6 @@ public class CommandReadTasks extends CommandJsonResponse {
     }
 
     public String getResponse() {
-        return this.getArgs().get(0);
+        return "Success reading file " + this.getArgs().get(0) + System.lineSeparator();
     }
 }

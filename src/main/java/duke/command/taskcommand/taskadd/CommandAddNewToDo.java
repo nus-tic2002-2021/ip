@@ -29,6 +29,6 @@ public class CommandAddNewToDo extends Command {
         String id = this.getArgs().get(1);
         String desc = this.getArgs().get(2);
 
-        return "Added To Do [id #" + id + "]: " + desc;
+        return "Added To Do [id #" + id + "]: " + desc + System.lineSeparator();
     }
 }

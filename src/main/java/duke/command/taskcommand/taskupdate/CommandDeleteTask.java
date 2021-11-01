@@ -19,6 +19,6 @@ public class CommandDeleteTask extends Command {
     }
 
     public String getResponse() {
-        return "Task Deleted: #" + this.getArgs().get(1);
+        return "Task Deleted: #" + this.getArgs().get(1) + System.lineSeparator();
     }
 }

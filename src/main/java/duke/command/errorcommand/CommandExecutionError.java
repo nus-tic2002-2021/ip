@@ -11,6 +11,6 @@ public class CommandExecutionError extends Command {
     }
 
     public String getResponse(){
-        return this.getArgs().get(1);
+        return this.getArgs().get(1) + System.lineSeparator();
     }
 }

@@ -12,6 +12,6 @@ public class CommandReadFileError extends CommandJsonResponse {
 
     @Override
     public String getResponse() {
-        return "Read path not found/invalid. ";
+        return "Read path not found/invalid. " + System.lineSeparator();
     }
 }

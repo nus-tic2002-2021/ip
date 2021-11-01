@@ -24,10 +24,6 @@ public class Ui {
         this.setPrintStream(ps);
     }
 
-    private static String addLine(String text) {
-        return text + System.lineSeparator();
-    }
-
     private PrintStream getPrintStream() {
         return this.out;
     }
@@ -65,8 +61,8 @@ public class Ui {
         this.getPrintStream().print("How can i help you? (See docs for usage)\n");
     }
 
-    public void printExitLoop() {
-        this.getPrintStream().print("ok bye" + System.lineSeparator());
+    public String getExitLoopMessage() {
+        return "ok bye" + System.lineSeparator();
     }
 
     /**
@@ -80,11 +76,6 @@ public class Ui {
         } else {
             this.getPrintStream().print("Attempting to import tasks from " + path + "." + System.lineSeparator());
         }
-    }
-
-
-    public String getReadSuccess(String pathString) {
-        return ("Success reading file " + pathString + System.lineSeparator());
     }
 
     public void printTerminateMessage() {
@@ -114,63 +105,40 @@ public class Ui {
         } while (this.isLoop());
     }
 
-    private String getResponseTaskRequestInvalidParameters(String text) {
-        return addLine("Invalid parameters: " + text);
-    }
-
-    private String getResponseTaskFileSaved(String pathString) {
-        return addLine("Saved task to file: " + pathString);
-    }
-
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
 
         String output2 = "";
-        if (rt == ResponseType.EXIT_LOOP) {
+
+        switch(rt) {
+        case EXIT_LOOP:
             this.setIsLoop(false);
-            this.printExitLoop();
-        } else if (rt == ResponseType.TASK_LIST_ALL) {
+            output2 = (this.getExitLoopMessage());
+            break;
+        case TASK_LIST_ALL:
+        case TASK_LIST_FIND:
+        case TASK_PROJECTION:
+        case TASK_STATS_ALL:
+        case SCAN_DUPLICATE_DESCRIPTION:
+        case TASK_UPDATE_COMPLETE:
+        case TASK_UPDATE_INCOMPLETE:
+        case TASK_NOT_FOUND:
+        case TASK_DELETE_TASK:
+        case TASK_CREATE_TODO:
+        case TASK_CREATE_DEADLINE:
+        case TASK_CREATE_EVENT:
+        case ERROR_COMMAND_EXECUTION:
+        case ERROR_REQUEST_UNKNOWN:
+        case ERROR_REQUEST_INVALID_SYNTAX:
+        case ERROR_REQUEST_INVALID_PARAMETERS:
+        case ERROR_INVALID_READ_FILE_PATH:
+        case FILE_SAVED:
+        case FILE_READ:
             output2 = c.getResponse();
-        } else if (rt == ResponseType.TASK_LIST_FIND) {
-            output2 = c.getResponse();
-        } else if (rt == ResponseType.TASK_PROJECTION) {
-            output2 = c.getResponse();
-        } else if (rt == ResponseType.TASK_STATS_ALL) {
-            output2 = c.getResponse();
-        } else if (rt == ResponseType.TASK_UPDATE_COMPLETE) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_UPDATE_INCOMPLETE) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_NOT_FOUND) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_DELETE_TASK) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_CREATE_TODO) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_CREATE_DEADLINE) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.TASK_CREATE_EVENT) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.SCAN_DUPLICATE_DESCRIPTION) {
-            output2 = (c.getResponse());
-        } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.ERROR_REQUEST_INVALID_SYNTAX) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.ERROR_REQUEST_INVALID_PARAMETERS) {
-            output2 = this.getResponseTaskRequestInvalidParameters(c.getResponse());
-        } else if (rt == ResponseType.ERROR_INVALID_READ_FILE_PATH) {
-            output2 = addLine(c.getResponse());
-        } else if (rt == ResponseType.FILE_SAVED) {
-            output2 = this.getResponseTaskFileSaved(c.getResponse());
-        } else if (rt == ResponseType.FILE_READ) {
-            output2 = this.getReadSuccess(c.getResponse());
-        } else {
+            break;
+        default:
             throw new Exception("Unhandled response type [" + rt + "].");
         }
         this.getPrintStream().print(output2);
     }
-
 }

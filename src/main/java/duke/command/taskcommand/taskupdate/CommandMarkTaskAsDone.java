@@ -18,6 +18,6 @@ public class CommandMarkTaskAsDone extends Command {
     }
 
     public String getResponse() {
-        return String.join(" ", this.getArgs());
+        return String.join(" ", this.getArgs()) + System.lineSeparator();
     }
 }

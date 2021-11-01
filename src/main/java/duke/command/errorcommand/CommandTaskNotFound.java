@@ -11,7 +11,7 @@ public class CommandTaskNotFound extends Command {
     }
 
     public String getResponse() {
-        return "Task Not Found: " + this.getArgs().get(1);
+        return "Task Not Found: " + this.getArgs().get(1) + System.lineSeparator();
     }
 }
 
