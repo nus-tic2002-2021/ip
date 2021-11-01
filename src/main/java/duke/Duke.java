@@ -61,7 +61,6 @@ public class Duke {
     public static void main(String[] args) {
         File filepath = new File("./data");
         filepath.mkdir();
-        //new Duke("src/main/java/duke/data/tasklist.csv").run();
         new Duke(filepath+"/tasklist.csv").run();
     }
 

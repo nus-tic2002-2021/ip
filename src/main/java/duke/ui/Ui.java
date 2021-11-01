@@ -125,18 +125,18 @@ public class Ui {
      */
     public void printMatchingTasks(ArrayList<Task> taskList, String keyword) {
 
-        boolean taskFound = false;
+        boolean isTaskFound = false;
         int i = 0;
 
         for (i = i; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                taskFound = true;
+                isTaskFound = true;
                 break;
             }
         }
 
-        if ( taskFound ) {
+        if ( isTaskFound ) {
             System.out.println("Here are the matching tasks in your list!");
             for ( i = i ; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
