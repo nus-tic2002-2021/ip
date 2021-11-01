@@ -196,7 +196,7 @@ public class Ui {
             this.getPrintStream().print(
                 "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_COMMAND_EXECUTION) {
-            this.printResponseTemplate(c.getArgs().get(2));
+            this.printResponseTemplate(c.getArgs().get(1));
         } else if (rt == ResponseType.ERROR_REQUEST_UNKNOWN) {
             this.printResponseUnknownRequest();
         } else if (rt == ResponseType.ERROR_REQUEST_INVALID_SYNTAX) {
