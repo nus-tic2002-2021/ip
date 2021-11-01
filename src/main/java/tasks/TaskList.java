@@ -35,7 +35,7 @@ public class TaskList {
     public int getListSize() { return taskList.size(); }
 
     /**
-     * Get task by id and set the status of the task to "done".
+     * Gets task by id and sets the status of the task to "done".
      * Returns the completed task in String format.
      *
      * @param taskId ID of the completed task.
@@ -54,7 +54,7 @@ public class TaskList {
     }
 
     /**
-     * Gets task by id and delete the task.
+     * Gets task by id and deletes the task.
      * Returns the deleted task in String format.
      *
      * @param taskId ID of the task to be deleted.

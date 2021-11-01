@@ -1,6 +1,5 @@
 package tasks;
 
-import com.sun.javafx.event.EventHandlerManager;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ public class SchedulerTest {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     @Test
-    public void schedule_validInputs_success() {
+    public void scheduleEvent_validInputs_success() {
         Scheduler scheduler = new Scheduler();
         EventTask eventTask = new EventTask("event A", LocalDateTime.parse("2021-10-18 1200", formatter),
                 LocalDateTime.parse("2021-10-18 1300", formatter));
@@ -21,7 +20,7 @@ public class SchedulerTest {
     }
 
     @Test
-    public void freeUpSlot_validSlot_success() {
+    public void freeUpEventSlot_validSlot_success() {
 
     }
 

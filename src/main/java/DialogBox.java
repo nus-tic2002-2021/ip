@@ -32,7 +32,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        //dialog.setPadding(new Insets(10,10,10,10));
 
         displayPicture.setImage(img);
         Circle clip = new Circle(25, 25, 25);

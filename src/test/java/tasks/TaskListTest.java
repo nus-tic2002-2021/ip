@@ -50,6 +50,7 @@ public class TaskListTest {
     public void deleteTask_validTaskId_success() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("random task"));
+        assertEquals(1, taskList.getListSize());
         taskList.deleteTask(1);
         assertEquals(0, taskList.getListSize());
     }
