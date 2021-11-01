@@ -1,7 +1,12 @@
 package Duke.Models;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Deadline extends Task {
     protected String by;
+    protected LocalDate date;
+    protected LocalTime time;
 
     public Deadline(String newTask, String datetime) {
         super(newTask);
