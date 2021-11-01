@@ -14,6 +14,17 @@ public class Event extends Task {
         at = datetime;
     }
 
+    public Event(String newTask, LocalDate newDate) {
+        super(newTask);
+        date = newDate;
+    }
+
+    public Event(String newTask, LocalDate newDate, LocalTime newTime) {
+        super(newTask);
+        date = newDate;
+        time = newTime;
+    }
+
     public String getAdditionalInfo() {
         return at;
     }

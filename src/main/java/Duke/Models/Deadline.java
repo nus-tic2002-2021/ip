@@ -13,6 +13,17 @@ public class Deadline extends Task {
         by = datetime;
     }
 
+    public Deadline(String newTask, LocalDate newDate) {
+        super(newTask);
+        date = newDate;
+    }
+
+    public Deadline(String newTask, LocalDate newDate, LocalTime newTime) {
+        super(newTask);
+        date = newDate;
+        time = newTime;
+    }
+
     public String getAdditionalInfo() {
         return by;
     }
