@@ -1,15 +1,12 @@
-package src.java.action;
-
-import src.java.ui.Message;
-import src.java.ui.Ui;
+package java.action;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
+import java.ui.Message;
+import java.ui.Ui;
 import java.util.Locale;
 
 /**
@@ -118,7 +115,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String Date
      */
-    public static String ExtractDateFromSplitDateAndTime(String[] split) {
+    public static String toExtractDateFromSplitDateAndTime(String[] split) {
         return split[0];
     }
 
@@ -128,7 +125,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String Time
      */
-    public static String ExtracTimeFromSplitDateAndTime(String[] split) {
+    public static String toExtracTimeFromSplitDateAndTime(String[] split) {
         return split[1];
     }
 
@@ -138,7 +135,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String TimeStart
      */
-    public static String ExtracTimeStartFromSplitDateAndTime(String[] split) {
+    public static String toExtracTimeStartFromSplitDateAndTime(String[] split) {
         return split[1];
     }
 
@@ -148,46 +145,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String TimeEnd
      */
-    public static String ExtracTimeEndFromSplitDateAndTime(String[] split) {
+    public static String toExtracTimeEndFromSplitDateAndTime(String[] split) {
         return split[2];
-    }
-
-    /**
-     * Example of formatDateExample
-     * Reference from:
-     * https://coderanch.com/t/677142/java/DateTimeParseException-Text-parsed-unparsed-text
-     */
-    public static void formatDateExample() {
-
-        String d2arr[] = {
-                "2016-12-21",
-                "1/17/2016",
-                "1/3/2016",
-                "11/23/2016",
-                "OCT 20 2016",
-                "Oct 22 2016",
-                "Oct 23", // default year is 2016
-                "OCT 24",  // default year is 2016
-        };
-
-        DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder()
-                .parseCaseInsensitive().parseLenient()
-                .parseDefaulting(ChronoField.YEAR_OF_ERA, 2016L)
-                .appendPattern("[yyyy-MM-dd]")
-                .appendPattern("[M/dd/yyyy]")
-                .appendPattern("[M/d/yyyy]")
-                .appendPattern("[MM/dd/yyyy]")
-                .appendPattern("[MMM dd yyyy]");
-
-        DateTimeFormatter formatter2 = builder.toFormatter(Locale.ENGLISH);
-        for (String d2 : d2arr) {
-            try {
-                LocalDate date = LocalDate.parse(d2, formatter2);
-                System.out.printf("%s%n", date);
-            } catch (DateTimeParseException e) {
-                System.out.printf("%s is not parsable! %n", d2);
-                throw e;
-            }
-        }
     }
 }

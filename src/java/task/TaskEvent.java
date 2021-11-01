@@ -1,4 +1,4 @@
-package src.java.task;
+package java.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +17,9 @@ public class TaskEvent extends Task {
     private LocalTime taskTimeStart;
     private LocalTime taskTimeEnd;
 
+    /**
+     * Constructor
+     */
     public TaskEvent(String taskDetail, LocalDate taskDate) {
         super(taskDetail);
         this.isDone = false;
@@ -24,6 +27,9 @@ public class TaskEvent extends Task {
         this.taskDate = taskDate;
     }
 
+    /**
+     * Constructor
+     */
     public TaskEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart) {
         super(taskDetail);
         this.isDone = false;
@@ -32,6 +38,9 @@ public class TaskEvent extends Task {
         this.taskTimeStart = taskTimeStart;
     }
 
+    /**
+     * Constructor
+     */
     public TaskEvent(String taskDetail, LocalDate taskDate, LocalTime taskTimeStart, LocalTime taskTimeEnd) {
         super(taskDetail);
         this.isDone = false;
@@ -64,7 +73,7 @@ public class TaskEvent extends Task {
      *
      * @return String that represents the day of taskDate
      */
-    public String getLocalDate_Day_toString() {
+    public String getLocalDateDayToString() {
         return String.valueOf(taskDate.getDayOfMonth());
     }
 
@@ -73,7 +82,7 @@ public class TaskEvent extends Task {
      *
      * @return String that represents the month of taskDate
      */
-    public String getLocalDate_Month_toString() {
+    public String getLocalDateMonthToString() {
         return String.valueOf(taskDate.getMonth());
     }
 
@@ -82,7 +91,7 @@ public class TaskEvent extends Task {
      *
      * @return String that represents the year of taskDate
      */
-    public String getLocalDate_Year_toString() {
+    public String getLocalDateYearToString() {
         return String.valueOf(taskDate.getYear());
     }
 
@@ -122,3 +131,6 @@ public class TaskEvent extends Task {
         return String.valueOf(taskTimeEnd);
     }
 }
+
+
+

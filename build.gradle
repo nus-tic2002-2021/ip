@@ -5,8 +5,19 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+group 'com.kangteng.duke'
+version '1.0'
+
 repositories {
     mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
 }
 
 dependencies {
@@ -16,20 +27,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-        showStandardStreams = false
-    }
-}
-
-application {
-    mainClassName = "seedu.duke.Duke"
 }
 
 shadowJar {
@@ -37,10 +34,12 @@ shadowJar {
     archiveClassifier = null
 }
 
+run{
+    standardInput = System.in
+}
+
 checkstyle {
     toolVersion = '8.29'
 }
 
-run{
-    standardInput = System.in
-}
+mainClassName = 'src.java.Duke'

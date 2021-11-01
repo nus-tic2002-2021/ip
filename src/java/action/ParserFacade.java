@@ -1,6 +1,6 @@
-package src.java.action;
+package java.action;
 
-import src.java.storage.FileAccess;
+import java.storage.FileAccess;
 
 /**
  * Create an instance of Duke Program
@@ -14,6 +14,9 @@ public class ParserFacade {
     private FileAccess fileAccess;
     private Parser parser;
 
+    /**
+     * Constructor
+     */
     public ParserFacade() {
         fileAccess = new FileAccess();
         parser = new Parser(fileAccess);
@@ -22,23 +25,23 @@ public class ParserFacade {
     /**
      * Initialize the Duke Program.
      */
-    public void StartDuke() {
-        parser.ShowGreetMessage();
+    public void startDuke() {
+        parser.showGreetMessage();
     }
 
 
     /**
      * Run the Duke Program
      */
-    public void RunDuke() {
-        parser.OnCreateDuke();
+    public void runDuke() {
+        parser.onCreateDuke();
     }
 
     /**
      * End the Duke Program
      */
-    public void EndDuke() {
-        parser.ShowByeMessage();
+    public void endDuke() {
+        parser.showByeMessage();
     }
 
     /**

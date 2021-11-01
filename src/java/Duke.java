@@ -1,6 +1,6 @@
-package src.java;
+package java;
 
-import src.java.action.ParserFacade;
+import java.action.ParserFacade;
 
 /**
  * Begin the program here.
@@ -11,12 +11,15 @@ import src.java.action.ParserFacade;
  */
 public class Duke {
 
+    /**
+     * Starting point of the program
+     */
     public static void main(String[] args) {
 
         ParserFacade parserFacade = new ParserFacade();
 
-        parserFacade.StartDuke();
-        parserFacade.RunDuke();
-        parserFacade.EndDuke();
+        parserFacade.startDuke();
+        parserFacade.runDuke();
+        parserFacade.endDuke();
     }
 }

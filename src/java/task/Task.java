@@ -1,4 +1,4 @@
-package src.java.task;
+package java.task;
 
 /**
  * Abstract class for Task

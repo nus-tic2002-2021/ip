@@ -1,4 +1,4 @@
-package src.java.task;
+package java.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,11 +10,13 @@ import java.time.LocalTime;
  * @version 8.0
  * @since 2021-09-01
  */
-
 public class TaskDeadline extends Task {
     private LocalDate taskDate;
     private LocalTime taskTime;
 
+    /**
+     * Constructor
+     */
     public TaskDeadline(String taskDetail, LocalDate taskDate) {
         super(taskDetail);
         this.isDone = false;
@@ -22,6 +24,9 @@ public class TaskDeadline extends Task {
         this.taskDate = taskDate;
     }
 
+    /**
+     * Constructor
+     */
     public TaskDeadline(String taskDetail, LocalDate taskDate, LocalTime localTime) {
         super(taskDetail);
         this.isDone = false;
@@ -44,7 +49,7 @@ public class TaskDeadline extends Task {
      *
      * @return String that represents the taskDate
      */
-    public String getLocalDate_toString() {
+    public String getLocalDateToString() {
         return String.valueOf(taskDate);
     }
 
@@ -53,7 +58,7 @@ public class TaskDeadline extends Task {
      *
      * @return String that represents the day of taskDate
      */
-    public String getLocalDate_Day_toString() {
+    public String getLocalDateDayToString() {
         return String.valueOf(taskDate.getDayOfMonth());
     }
 
@@ -62,7 +67,7 @@ public class TaskDeadline extends Task {
      *
      * @return String that represents the month of taskDate
      */
-    public String getLocalDate_Month_toString() {
+    public String getLocalDateMonthToString() {
         return String.valueOf(taskDate.getMonth());
     }
 
@@ -71,7 +76,7 @@ public class TaskDeadline extends Task {
      *
      * @return String that represents the year of taskDate
      */
-    public String getLocalDate_Year_toString() {
+    public String getLocalDateYearToString() {
         return String.valueOf(taskDate.getYear());
     }
 

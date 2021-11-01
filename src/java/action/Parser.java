@@ -1,14 +1,13 @@
-package src.java.action;
-
-import src.java.ui.Message;
-import src.java.storage.FileAccess;
-import src.java.task.TaskList;
-import src.java.task.TaskType;
-import src.java.ui.Ui;
+package java.action;
 
 import java.io.IOException;
+import java.storage.FileAccess;
+import java.task.TaskList;
+import java.task.TaskType;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.ui.Message;
+import java.ui.Ui;
 import java.util.Scanner;
 
 /**
@@ -25,6 +24,9 @@ public class Parser {
     private FileAccess fileAccess;
     private Ui ui;
 
+    /**
+     * Constructor
+     */
     public Parser(FileAccess fileAccess) {
         this.fileAccess = fileAccess;
         ui = new Message();
@@ -35,7 +37,7 @@ public class Parser {
     /**
      * Show the opening Greet Message in System.out.println
      */
-    public void ShowGreetMessage() {
+    public void showGreetMessage() {
         ui.msgGreet();
     }
 
@@ -55,14 +57,14 @@ public class Parser {
      * - delete
      * - deadline
      */
-    public void OnCreateDuke() {
+    public void onCreateDuke() {
         boolean isDukeRunning = true;
         String line;
         Scanner in = new Scanner(System.in);
         TaskList myList = new TaskList();
         while (isDukeRunning) {
             line = in.nextLine();
-            isDukeRunning = ReadUserCommand(myList, line);
+            isDukeRunning = toReadUserCommand(myList, line);
         }
         in.close();
     }
@@ -74,7 +76,7 @@ public class Parser {
      * @param line   String that the user type
      * @return boolean Return false if user type Bye, else return true
      */
-    public boolean ReadUserCommand(TaskList myList, String line) {
+    public boolean toReadUserCommand(TaskList myList, String line) {
         try {
             // Guard Condition
             if (line.equals("bye")) {
@@ -84,26 +86,26 @@ public class Parser {
             // for testing new function
             if (line.equals("tf")) {
                 System.out.println("XXXXX Test Function XXXXX");
-                fileAccess.DeleteProgressFile();
+                fileAccess.deleteProgressFile();
                 System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
             }
 
             if (line.equals("list")) {
-                ShowFullList(myList);
+                showFullList(myList);
             } else if (line.substring(0, 4).equals("done")) {
-                MarkTaskDone(myList, line);
+                toMarkTaskDone(myList, line);
             } else if (line.substring(0, 4).equals("todo")) {
-                AddTaskToDo(myList, line);
+                toAddTaskToDo(myList, line);
             } else if (line.substring(0, 4).equals("save")) {
-                SaveTask(myList);
+                toSaveTask(myList);
             } else if (line.substring(0, 4).equals("load")) {
                 // loadTask(myList);
             } else if (line.substring(0, 5).equals("event")) {
-                AddTaskEvent(myList, line);
+                toAddTaskEvent(myList, line);
             } else if (line.substring(0, 6).equals("delete")) {
-                DeleteTask(myList, line);
+                toDeleteTask(myList, line);
             } else if (line.substring(0, 8).equals("deadline")) {
-                AddTaskDeadline(myList, line);
+                toAddTaskDeadline(myList, line);
             } else {
                 ui.msgInvalidInput();
             }
@@ -122,7 +124,7 @@ public class Parser {
      * <p>
      * called when Duke program ends
      */
-    public void ShowByeMessage() {
+    public void showByeMessage() {
         try {
             ui.msgBye();
         } catch (IOException error) {
@@ -137,7 +139,7 @@ public class Parser {
      *
      * @param myList TaskList that contains the list of task
      */
-    private void ShowFullList(TaskList myList) {
+    private void showFullList(TaskList myList) {
         ui.msgList(myList);
     }
 
@@ -147,7 +149,7 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      * @param line   String that the user type
      */
-    private void MarkTaskDone(TaskList myList, String line) {
+    private void toMarkTaskDone(TaskList myList, String line) {
         int taskNumber = Integer.parseInt(line.substring(5));
         myList.setTaskDone(taskNumber - 1);
         ui.msgMarkDone(myList, taskNumber - 1);
@@ -159,7 +161,7 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      * @param line   String that the user type
      */
-    private void AddTaskToDo(TaskList myList, String line) {
+    private void toAddTaskToDo(TaskList myList, String line) {
         if (line.length() <= 5) {
             ui.msgInvalidInputMissingDescription();
         } else {
@@ -173,9 +175,9 @@ public class Parser {
      *
      * @param myList TaskList that contains the list of task
      */
-    private void SaveTask(TaskList myList) {
-        String listOfTaskString = ReadTaskConvertToString(myList);
-        fileAccess.SaveProgressIntoFile(myList, listOfTaskString);
+    private void toSaveTask(TaskList myList) {
+        String listOfTaskString = toReadTaskConvertToString(myList);
+        fileAccess.saveProgressIntoFile(myList, listOfTaskString);
     }
 
     /**
@@ -187,7 +189,7 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      * @param line   String that the user type
      */
-    private void AddTaskEvent(TaskList myList, String line) {
+    private void toAddTaskEvent(TaskList myList, String line) {
 
         if (line.length() <= 6) {
             ui.msgInvalidInputMissingDescription();
@@ -207,17 +209,17 @@ public class Parser {
             String timeEnd;
 
             String[] split = ParseDateTime.splitDateAndTime(dateAndTime);
-            date = ParseDateTime.ExtractDateFromSplitDateAndTime(split);
+            date = ParseDateTime.toExtractDateFromSplitDateAndTime(split);
 
             if (ParseDateTime.isDateAndTime(dateAndTime) == 1) {
-                AddTaskEvent_LocalDate(myList, taskDetail, date);
+                toAddTaskEvent_localDate(myList, taskDetail, date);
             } else if (ParseDateTime.isDateAndTime(dateAndTime) == 2) {
-                timeStart = ParseDateTime.ExtracTimeStartFromSplitDateAndTime(split);
-                AddTaskEvent_LocalDate_LocalTime(myList, taskDetail, date, timeStart);
+                timeStart = ParseDateTime.toExtracTimeStartFromSplitDateAndTime(split);
+                toAddTaskEvent_localDate_localTime(myList, taskDetail, date, timeStart);
             } else {
-                timeStart = ParseDateTime.ExtracTimeStartFromSplitDateAndTime(split);
-                timeEnd = ParseDateTime.ExtracTimeEndFromSplitDateAndTime(split);
-                AddTaskEvent_LocalDate_LocalTime(myList, taskDetail, date, timeStart, timeEnd);
+                timeStart = ParseDateTime.toExtracTimeStartFromSplitDateAndTime(split);
+                timeEnd = ParseDateTime.toExtracTimeEndFromSplitDateAndTime(split);
+                toAddTaskEvent_localDate_localTime(myList, taskDetail, date, timeStart, timeEnd);
             }
 
         } catch (Exception e) {
@@ -233,7 +235,7 @@ public class Parser {
      * @param taskDetail String that represents the task detail
      * @param date       String that represents the date of the event
      */
-    private void AddTaskEvent_LocalDate(TaskList myList, String taskDetail, String date) {
+    private void toAddTaskEvent_localDate(TaskList myList, String taskDetail, String date) {
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
@@ -242,7 +244,7 @@ public class Parser {
         }
 
         myList.addItemEvent(taskDetail, taskDate);
-        ui.msgAssignTaskEvent_TaskDate(myList, myList.getNumOfItem() - 1);
+        ui.msgAssignTaskEventTaskDate(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -253,8 +255,8 @@ public class Parser {
      * @param date       String that represents the date of the event
      * @param timeStart  String that represents the start time of the event
      */
-    private void AddTaskEvent_LocalDate_LocalTime(TaskList myList, String taskDetail,
-                                                  String date, String timeStart) {
+    private void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
+                                                    String date, String timeStart) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -270,7 +272,7 @@ public class Parser {
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart);
-        ui.msgAssignTaskEvent_TaskDate_TaskTimeStart(myList, myList.getNumOfItem() - 1);
+        ui.msgAssignTaskEventTaskDateTaskTimeStart(myList, myList.getNumOfItem() - 1);
 
     }
 
@@ -283,8 +285,8 @@ public class Parser {
      * @param timeStart  String that represents the start time of the event
      * @param timeEnd    String that represents the end time of the event
      */
-    private void AddTaskEvent_LocalDate_LocalTime(TaskList myList, String taskDetail,
-                                                  String date, String timeStart, String timeEnd) {
+    private void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
+                                                    String date, String timeStart, String timeEnd) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -306,7 +308,7 @@ public class Parser {
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd);
-        ui.msgAssignTaskEvent_TaskDate_TaskTimeStart_TaskTimeEnd(myList, myList.getNumOfItem() - 1);
+        ui.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -315,7 +317,7 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      * @param line   String that represents the user input
      */
-    private void DeleteTask(TaskList myList, String line) {
+    private void toDeleteTask(TaskList myList, String line) {
         try {
             int taskNumber = Integer.parseInt(line.substring(7));
             ui.msgRemoveItem(myList, taskNumber - 1);
@@ -334,7 +336,7 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      * @param line   String that represents the user input
      */
-    private void AddTaskDeadline(TaskList myList, String line) {
+    private void toAddTaskDeadline(TaskList myList, String line) {
 
         if (line.length() <= 9) {
             ui.msgInvalidInputMissingDescription();
@@ -353,13 +355,13 @@ public class Parser {
             String time;
 
             String[] split = ParseDateTime.splitDateAndTime(dateAndTime);
-            date = ParseDateTime.ExtractDateFromSplitDateAndTime(split);
+            date = ParseDateTime.toExtractDateFromSplitDateAndTime(split);
 
             if (ParseDateTime.isDateAndTime(dateAndTime) == 1) {
-                AddTaskDeadline_LocalDate(myList, taskDetail, date);
+                toAddTaskDeadline_localDate(myList, taskDetail, date);
             } else if (ParseDateTime.isDateAndTime(dateAndTime) == 2) {
-                time = ParseDateTime.ExtracTimeFromSplitDateAndTime(split);
-                AddTaskDeadline_LocalDate_LocalTime(myList, taskDetail, date, time);
+                time = ParseDateTime.toExtracTimeFromSplitDateAndTime(split);
+                toAddTaskDeadline_localDate_localTime(myList, taskDetail, date, time);
             } else {
                 ui.msgInvalidInputWrongDateTimeFormat();
             }
@@ -376,7 +378,7 @@ public class Parser {
      * @param taskDetail String that represents the task detail
      * @param date       String that represents the date of the deadline
      */
-    private void AddTaskDeadline_LocalDate(TaskList myList, String taskDetail, String date) {
+    private void toAddTaskDeadline_localDate(TaskList myList, String taskDetail, String date) {
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
@@ -385,7 +387,7 @@ public class Parser {
         }
 
         myList.addItemDeadline(taskDetail, taskDate);
-        ui.msgAssignTaskDeadline_TaskDate(myList, myList.getNumOfItem() - 1);
+        ui.msgAssignTaskDeadlineTaskDate(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -396,8 +398,8 @@ public class Parser {
      * @param date       String that represents the date of the deadline
      * @param time       String that represents the time of the deadline
      */
-    private void AddTaskDeadline_LocalDate_LocalTime(TaskList myList, String taskDetail,
-                                                     String date, String time) {
+    private void toAddTaskDeadline_localDate_localTime(TaskList myList, String taskDetail,
+                                                       String date, String time) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTime = ParseDateTime.toTime(time);
@@ -413,7 +415,7 @@ public class Parser {
         }
 
         myList.addItemDeadline(taskDetail, taskDate, taskTime);
-        ui.msgAssignTaskDeadline_TaskDate_TaskTime(myList, myList.getNumOfItem() - 1);
+        ui.msgAssignTaskDeadlineTaskDateTaskTime(myList, myList.getNumOfItem() - 1);
     }
 
 
@@ -424,7 +426,7 @@ public class Parser {
      *
      * @param myList TaskList that contains the list of task
      */
-    private String ReadTaskConvertToString(TaskList myList) {
+    private String toReadTaskConvertToString(TaskList myList) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             String taskDetail = myList.getTaskDetail(i);

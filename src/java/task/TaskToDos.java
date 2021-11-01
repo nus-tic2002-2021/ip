@@ -1,4 +1,4 @@
-package src.java.task;
+package java.task;
 
 /**
  * Create an instance of todo class
@@ -10,6 +10,9 @@ package src.java.task;
 
 public class TaskToDos extends Task {
 
+    /**
+     * Constructor
+     */
     public TaskToDos(String taskDetail) {
         super(taskDetail);
         this.isDone = false;

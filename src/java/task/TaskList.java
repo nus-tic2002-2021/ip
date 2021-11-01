@@ -1,9 +1,9 @@
-package src.java.task;
+package java.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 
 /**
  * Create an instance of list of task
@@ -137,7 +137,7 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the task date
      */
-    public String getTaskEvent_TaskDate_InString(int index) {
+    public String getTaskEventTaskDateInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
         return task.getLocalDate_toString();
     }
@@ -148,9 +148,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the year from taskDate
      */
-    public String getTaskEvent_TaskDate_Year_InString(int index) {
+    public String getTaskEventTaskDateYearInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
-        return task.getLocalDate_Year_toString();
+        return task.getLocalDateYearToString();
     }
 
     /**
@@ -159,9 +159,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the month from taskDate
      */
-    public String getTaskEvent_TaskDate_Month_InString(int index) {
+    public String getTaskEventTaskDateMonthInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
-        return task.getLocalDate_Month_toString();
+        return task.getLocalDateMonthToString();
     }
 
     /**
@@ -170,9 +170,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the day from taskDate
      */
-    public String getTaskEvent_TaskDate_Day_InString(int index) {
+    public String getTaskEventTaskDateDayInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
-        return task.getLocalDate_Day_toString();
+        return task.getLocalDateDayToString();
     }
 
     /**
@@ -181,7 +181,7 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the start time from TaskTime
      */
-    public String getTaskEvent_TaskTimeStart_InString(int index) {
+    public String getTaskEventTaskTimeStartInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
         return task.getLocalTimeStart_toString();
     }
@@ -192,7 +192,7 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the end time from TaskTime
      */
-    public String getTaskEvent_TaskTimeEnd_InString(int index) {
+    public String getTaskEventTaskTimeEndInString(int index) {
         TaskEvent task = (TaskEvent) list.get(index);
         return task.getLocalTimeEnd_toString();
     }
@@ -203,9 +203,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the task date
      */
-    public String getTaskDeadLine_TaskDate_InString(int index) {
+    public String getTaskDeadLineTaskDateInString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
-        return task.getLocalDate_toString();
+        return task.getLocalDateToString();
     }
 
     /**
@@ -214,9 +214,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the year from TaskDate
      */
-    public String getTaskDeadLine_TaskDate_Year_InString(int index) {
+    public String getTaskDeadLineTaskDateYearInString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
-        return task.getLocalDate_Year_toString();
+        return task.getLocalDateYearToString();
     }
 
     /**
@@ -225,9 +225,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the month from TaskDate
      */
-    public String getTaskDeadLine_TaskDate_Month_InString(int index) {
+    public String getTaskDeadLineTaskDateMonthInString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
-        return task.getLocalDate_Month_toString();
+        return task.getLocalDateMonthToString();
     }
 
     /**
@@ -236,9 +236,9 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the day from TaskDate
      */
-    public String getTaskDeadLine_TaskDate_Day_InString(int index) {
+    public String getTaskDeadLineTaskDateDayInString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
-        return task.getLocalDate_Day_toString();
+        return task.getLocalDateDayToString();
     }
 
     /**
@@ -247,7 +247,7 @@ public class TaskList {
      * @param index Int that represents the index in a task list
      * @return String that represents the TaskTime
      */
-    public String getTaskDeadLine_TaskTime_InString(int index) {
+    public String getTaskDeadLineTaskTimeInString(int index) {
         TaskDeadline task = (TaskDeadline) list.get(index);
         return task.getLocalTime_toString();
     }
@@ -278,7 +278,6 @@ public class TaskList {
      * Return TaskType from a task of tasklist
      *
      * @param index Int that represents the index in a task list
-     * @return TaskType that represents the type of task
      */
     public void setTaskDone(int index) {
         Task task = list.get(index);

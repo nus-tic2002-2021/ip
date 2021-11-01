@@ -1,11 +1,10 @@
-package src.java.storage;
-
-import src.java.ui.Message;
-import src.java.task.TaskList;
-import src.java.ui.Ui;
+package java.storage;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.task.TaskList;
+import java.ui.Message;
+import java.ui.Ui;
 import java.util.Scanner;
 
 /**
@@ -21,6 +20,9 @@ public class FileAccess {
     private File progressFile;
     private Ui ui;
 
+    /**
+     * Constructor
+     */
     public FileAccess() {
         filepath = "src\\resources\\progress.txt";
         progressFile = new File(filepath);
@@ -33,7 +35,7 @@ public class FileAccess {
      * @param myList            TaskList that needs to be output
      * @param stringToBeWritten String that needs to be outputed
      */
-    public void SaveProgressIntoFile(TaskList myList, String stringToBeWritten) {
+    public void saveProgressIntoFile(TaskList myList, String stringToBeWritten) {
 
         try {
             FileWriter fw = new FileWriter(filepath);
@@ -50,7 +52,7 @@ public class FileAccess {
      *
      * @return String that represents a list of task details
      */
-    public String LoadProgressFromFile() {
+    public String loadProgressFromFile() {
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -71,14 +73,14 @@ public class FileAccess {
      * <p>
      * todo Method to be completed
      */
-    public void DeleteProgressFile() {
+    public void deleteProgressFile() {
 
     }
 
     /**
      * Example of Save file
      */
-    public void SaveFileExample() {
+    public void saveFileExample() {
         String filepath = "src\\resources\\myText.txt";
         try {
             FileWriter fw = new FileWriter(filepath);
