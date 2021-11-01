@@ -15,7 +15,7 @@ import duke.dukeutility.enums.ResponseType;
 public class Ui {
     private final UiCommandFactory uiCommandFactory = new UiCommandFactory();
     private PrintStream out;
-    private Boolean loop = true;
+    private Boolean isLoop = true;
 
     private Ui() {
     }
@@ -34,11 +34,11 @@ public class Ui {
     }
 
     private Boolean isLoop() {
-        return this.loop;
+        return this.isLoop;
     }
 
-    private void setLoop(Boolean p) {
-        this.loop = p;
+    private void setIsLoop(Boolean p) {
+        this.isLoop = p;
     }
 
     private UiCommandFactory getUiCommandFactory() {
@@ -163,7 +163,7 @@ public class Ui {
     protected void displayCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
         if (rt == ResponseType.EXIT_LOOP) {
-            this.setLoop(false);
+            this.setIsLoop(false);
             this.printExitLoop();
         } else if (rt == ResponseType.ECHO) {
             this.printEchoMessage(c.getArgs().get(1));
