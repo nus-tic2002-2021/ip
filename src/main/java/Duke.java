@@ -1,10 +1,16 @@
+import java.io.FileWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
-    private static ArrayList<Task> taskListing = new ArrayList<Task>();
+    private static ArrayList<Task> taskListing = new ArrayList<>();
     private static int count = 0;
-    private static String lineBreak = "---------------------------------------------------------";
+    private final static String lineBreak = "---------------------------------------------------------";
     public static void main(String[] args) {
         String logo = "  _       _ _      _ _______________________________________ \n"
                     + " | |  _  | | |    | |  __  |        |  __  |  __  |___   ___|\n"
@@ -27,7 +33,10 @@ public class Duke {
                 break;
             }else if(line.equalsIgnoreCase("list")){
                 printList();
-            }else{
+            }else if(line.equalsIgnoreCase("save")){
+                saveTask() ;
+            }
+            else{
                 try{
                     addDeleteMarkTask(line);
                 }catch (ToDosBodyException e){
@@ -128,6 +137,43 @@ public class Duke {
             printThis(taskListing.get(taskListing.size()-1).toString(), 0);
             printThis("Now you have "+ taskListing.size()+ " tasks in the list." , 2);
         }
+    }
+
+    public static void saveTask(){
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = Paths.get(home, "data","duke.txt");
+
+        // check the file here
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        if (!directoryExists){
+            try{
+                printThis("File path exist : " + path,3);
+                Files.createDirectory(Paths.get(home,"data"));
+                Files.createFile(path);
+            }catch (IOException e)
+            {
+                // save task
+                printThis("Caught error",3);
+                e.printStackTrace();    //prints exception if any
+            }
+        }
+
+        // start saving task
+        String content = "";
+        for (Task tk : taskListing)
+            content += tk.toStringSaveTask("|") + System.lineSeparator();
+
+        try{
+            writeToFile(path+"",content);
+        }catch(IOException e){
+
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
     }
 
     public static void removeTask(int num) {

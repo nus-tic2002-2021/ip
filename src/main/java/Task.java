@@ -19,6 +19,9 @@ public class Task {
         return (this.done ? "X" : " "); // mark done task with X
     }
 
+    public String getStatusNum(){
+        return (this.done? "1" : "0");
+    }
     public String getItem() {
         return this.item;
     }
@@ -31,5 +34,9 @@ public class Task {
     public String toString() {
         return '['+ getStatusIcon() + "] " +
                  item ;
+    }
+
+    public String toStringSaveTask(String separator){
+        return getStatusNum() + separator + getItem();
     }
 }
