@@ -2,6 +2,7 @@ package Duke.Models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected String at;
@@ -38,7 +39,17 @@ public class Event extends Task {
     }
 
     public String getTaskInfo() {
-        return super.getTaskInfo() + " (at: " + at + ")";
+        String info = super.getTaskInfo() + " (at: ";
+        if (date == null) {
+            info = info + at;
+        } else {
+            info = info + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            if (time != null) {
+                info = info + " " + time;
+            }
+        }
+        info = info + ")";
+        return info;
     }
 
     @Override

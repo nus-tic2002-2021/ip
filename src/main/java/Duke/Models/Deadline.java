@@ -2,6 +2,7 @@ package Duke.Models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected String by;
@@ -37,7 +38,17 @@ public class Deadline extends Task {
     }
 
     public String getTaskInfo() {
-        return super.getTaskInfo() + " (by: " + by + ")";
+        String info = super.getTaskInfo() + " (by: ";
+        if (date == null) {
+            info = info + by;
+        } else {
+            info = info + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")).toString();
+            if (time != null) {
+                info = info + " " + time.toString();
+            }
+        }
+        info = info + ")";
+        return info;
     }
 
     @Override
