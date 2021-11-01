@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,8 +13,7 @@ public class Duke {
             System.out.println("Todo list is empty. Try adding something by typing todo.");
         }
         for (int i=1; i<storedTask.size()+1; i++){
-            System.out.format("%d: " + "[" + storedTask.get(i-1).getStatusIcon() +  "] " +
-                    storedTask.get(i-1).getDescription() + "\n" , i);
+            System.out.format("%d: " + "[" + storedTask.get(i-1).getType() + "]" + storedTask.get(i-1).toString() + "\n" , i);
         }
     }
 
@@ -41,28 +41,47 @@ public class Duke {
             case "hi":
                 System.out.println("Hello");
                 break;
-            case "list":
-                getList();
-                break;
             default:
                 break;
+        }
+    }
+
+    public static String getCommand(String line){
+        int count = 0;
+        String[] command = new String[10];
+        String[] line2 = line.split(" ");
+        String[] keywords = {"todo", "deadline", "event", "done", "list"};
+        for(String i : line2 ){
+            if(Arrays.asList(keywords).contains(i)){
+                command[count] = i;
+                count++;
+            }
+        }
+        if(count > 1){
+            System.out.println("whoa! One at a time :) Did you mean to run " + "'" + command[0] + "'" + "?" );
+            return "unknown";
+        }else if (count == 1){
+            return command[0];
+        } else {
+            return "no command";
         }
     }
 
     public static void main(String[] args) {
         String line;
         String todo;
+        String command;
         System.out.println("Hello! I'm Duke\nWhat can I do for you today?");
         do {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
+            command = getCommand(line);
+            System.out.println("the command is: " + command);
             Inspect userText = new Inspect(line);
-            // Closing app takes precedence #1
             if(userText.bye()) {
               line = "bye";
             }
-            // Add task 2nd priority
-            if (userText.addTask()) {
+            if (command.equals("todo")) {
                 System.out.println("Sure, what would you like add");
                 Scanner scanner = new Scanner(System.in);
                 todo = scanner.nextLine();
@@ -70,11 +89,39 @@ public class Duke {
                 storedTask.add(record);
                 System.out.println("added");
             }
-            // Check if user says completed
-            if (userText.doneTask()){
+            if (command.equals("done")){
                 String taskName = line.replace("done", "").strip();
                 taskName = taskName.replace("completed", "").strip();
                 updateTaskStatus(taskName);
+            }
+            if (command.equals("deadline")){
+                int byIndex = line.lastIndexOf("by");
+                int commandIndex = line.indexOf("deadline");
+                int flag = 0;
+                if(byIndex < 0 || commandIndex < 0){
+                    flag = 1;
+                }
+                if(flag == 0) {
+                    String byDate = line.substring(byIndex + 2);
+                    String description = line.substring(commandIndex + 8, byIndex);
+                    if (byDate.strip().length() == 0 || description.strip().length() == 0) {
+                        System.out.println("Please indicate description and deadline");
+                        } else {
+                            Task deadline = new Deadline(description.strip(), byDate.strip());
+                            storedTask.add(deadline);
+                            System.out.println("added");
+                        }
+                } else {
+                    System.out.println("Please indicate description and deadline");
+                }
+            }
+            if (command.equals("event")){
+                Task deadline = new Deadline("return book", "Monday");
+                storedTask.add(deadline);
+                System.out.println("added");
+            }
+            if(command.equals("list")){
+                getList();
             }
 
             response(line);
