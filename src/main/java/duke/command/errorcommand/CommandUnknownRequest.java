@@ -9,4 +9,8 @@ public class CommandUnknownRequest extends Command {
     public CommandUnknownRequest(String text) {
         super(ResponseType.ERROR_REQUEST_UNKNOWN, List.of("?", text));
     }
+
+    public String getResponse() {
+        return "Unknown command. . .";
+    }
 }

@@ -19,4 +19,8 @@ public class CommandImportDeadline extends Command {
         super(ResponseType.TASK_IMPORT_DEADLINE,
             List.of("create", deadline.getTaskDescription(), taskMgr.importDeadline(deadline).getTaskDescription()));
     }
+
+    public String getResponse() {
+        return null;
+    }
 }

@@ -19,4 +19,8 @@ public class CommandImportToDo extends Command {
         super(ResponseType.TASK_IMPORT_TODO,
             List.of("create", toDo.getTaskDescription(), taskMgr.importToDo(toDo).getTaskDescription()));
     }
+
+    public String getResponse() {
+        return null;
+    }
 }

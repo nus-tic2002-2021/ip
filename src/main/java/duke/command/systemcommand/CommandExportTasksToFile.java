@@ -29,4 +29,7 @@ public class CommandExportTasksToFile extends Command {
             this.setResponseType(ResponseType.ERROR_SAVE_FAILURE);
         }
     }
+    public String getResponse() {
+        return this.getArgs().get(1);
+    }
 }

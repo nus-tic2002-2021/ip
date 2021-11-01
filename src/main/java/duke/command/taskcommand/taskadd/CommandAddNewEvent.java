@@ -2,7 +2,6 @@ package duke.command.taskcommand.taskadd;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
@@ -16,7 +15,14 @@ public class CommandAddNewEvent extends Command {
 
         Event ev = tm.addNewEvent(desc, from, to);
 
-        this.setArgs(List.of("create", ev.getTaskDescription(), ev.getTaskId().toString()));
+        this.setArgs(List.of("create", ev.getTaskId().toString(), ev.getTaskDescription()));
         this.setResponseType(ResponseType.TASK_CREATE_EVENT);
     }
+
+    public String getResponse() {
+        String id = this.getArgs().get(1);
+        String desc = this.getArgs().get(2);
+        return "Added Event [id #" + id + "]: " + desc;
+    }
+
 }

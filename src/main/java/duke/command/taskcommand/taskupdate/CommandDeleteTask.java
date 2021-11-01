@@ -1,7 +1,6 @@
 package duke.command.taskcommand.taskupdate;
 
 import java.util.List;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
@@ -17,5 +16,9 @@ public class CommandDeleteTask extends Command {
     public CommandDeleteTask(TaskManager taskMgr, Integer id) {
         super(ResponseType.TASK_DELETE_TASK,
             List.of("delete", id.toString(), taskMgr.deleteTaskByTaskId(id).toString()));
+    }
+
+    public String getResponse() {
+        return "Task Deleted: #" + this.getArgs().get(1);
     }
 }

@@ -2,7 +2,6 @@ package duke.command.taskcommand.taskadd;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
@@ -21,7 +20,13 @@ public class CommandAddNewDeadline extends Command {
             null);
 
         Deadline deadline = tm.addNewDeadline(desc, dl);
-        this.setArgs(List.of("create", deadline.getTaskDescription(), deadline.getTaskId().toString()));
+        this.setArgs(List.of("create", deadline.getTaskId().toString(), deadline.getTaskDescription()));
         this.setResponseType(ResponseType.TASK_CREATE_DEADLINE);
+    }
+
+    public String getResponse() {
+        String id = this.getArgs().get(1);
+        String desc = this.getArgs().get(2);
+        return "Added Deadline [id #" + id + "]: " + desc;
     }
 }

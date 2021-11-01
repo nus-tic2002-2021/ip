@@ -38,4 +38,6 @@ public abstract class Command {
     protected void setArgs(List<String> inputArgs) {
         this.args = inputArgs;
     }
+
+    public abstract String getResponse();
 }

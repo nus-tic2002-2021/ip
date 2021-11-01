@@ -9,4 +9,9 @@ public class CommandExitLoop extends Command {
     public CommandExitLoop(String invocation) {
         super(ResponseType.EXIT_LOOP, List.of(invocation));
     }
+
+    @Override
+    public String getResponse() {
+        return null;
+    }
 }
