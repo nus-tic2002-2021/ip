@@ -60,8 +60,7 @@ public class Parser {
     public static void AddEvent(String input) {
         try {
             if (InputChecker.CheckValidEvent(input)) {
-                String[] parts = input.substring(5).split("/at");
-                Event newEvent = new Event(parts[0].trim(), parts[1].trim());
+                Event newEvent = buildEvent(input);
                 TaskList.addTaskToList(newEvent);
                 Ui.PrintTaskAdded(newEvent);
                 Ui.PrintTaskCount();
