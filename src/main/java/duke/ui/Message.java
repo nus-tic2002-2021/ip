@@ -1,12 +1,12 @@
-package java.ui;
+package duke.ui;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.task.TaskList;
-import java.task.TaskType;
+import duke.task.TaskList;
+import duke.task.TaskType;
 
 /**
  * Handle all the message methods

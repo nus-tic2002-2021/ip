@@ -1,6 +1,6 @@
-package java;
+package duke;
 
-import java.action.ParserFacade;
+import duke.action.ParserFacade;
 
 /**
  * Begin the program here.
@@ -9,7 +9,7 @@ import java.action.ParserFacade;
  * @version 8.0
  * @since 2021-09-01
  */
-public class Duke {
+public class DukeTest {
 
     /**
      * Starting point of the program

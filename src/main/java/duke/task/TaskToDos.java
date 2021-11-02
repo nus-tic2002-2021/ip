@@ -1,4 +1,4 @@
-package java.task;
+package duke.task;
 
 /**
  * Create an instance of todo class

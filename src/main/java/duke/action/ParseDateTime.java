@@ -1,12 +1,12 @@
-package java.action;
+package duke.action;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.ui.Message;
-import java.ui.Ui;
+import duke.ui.Message;
+import duke.ui.Ui;
 import java.util.Locale;
 
 /**

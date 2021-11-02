@@ -12,13 +12,7 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
+mainClassName = 'duke.Duke'
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
@@ -42,4 +36,4 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-mainClassName = 'src.java.Duke'
+

@@ -1,13 +1,15 @@
-package java.action;
+package duke.action;
+
+import duke.task.TaskType;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 import java.io.IOException;
-import java.storage.FileAccess;
-import java.task.TaskList;
-import java.task.TaskType;
+import duke.storage.FileAccess;
+import duke.task.TaskList;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.ui.Message;
-import java.ui.Ui;
 import java.util.Scanner;
 
 /**

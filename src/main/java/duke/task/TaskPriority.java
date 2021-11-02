@@ -1,4 +1,4 @@
-package java.task;
+package duke.task;
 
 public enum TaskPriority {
     HIGH, MEDIUM, LOW;

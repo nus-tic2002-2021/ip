@@ -1,6 +1,6 @@
-package java.action;
+package duke.action;
 
-import java.storage.FileAccess;
+import duke.storage.FileAccess;
 
 /**
  * Create an instance of Duke Program

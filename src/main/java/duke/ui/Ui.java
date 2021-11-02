@@ -1,7 +1,7 @@
-package java.ui;
+package duke.ui;
 
 import java.io.IOException;
-import java.task.TaskList;
+import duke.task.TaskList;
 
 /**
  * Interface class for User Interface

@@ -1,10 +1,11 @@
-package java.storage;
+package duke.storage;
+
+import duke.task.TaskList;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.task.TaskList;
-import java.ui.Message;
-import java.ui.Ui;
 import java.util.Scanner;
 
 /**

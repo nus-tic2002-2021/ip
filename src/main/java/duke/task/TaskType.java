@@ -1,4 +1,4 @@
-package java.task;
+package duke.task;
 
 /**
  * Define task type
