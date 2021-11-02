@@ -19,12 +19,16 @@ public class Duke {
 
     public static void delete(int index){
         ArrayList<Task> temp = new ArrayList<Task>();
-        for(int i=0; i<storedTask.size(); i++){
-            if(i != index){
-                temp.add(storedTask.get(i));
+        if( storedTask.size() < 1){
+            System.out.println("nothing to delete");
+        } else {
+            for (int i = 0; i < storedTask.size(); i++) {
+                if (i != index) {
+                    temp.add(storedTask.get(i));
+                }
             }
+            storedTask = temp;
         }
-        storedTask = temp;
     }
 
     public static void updateTaskStatus(String line){
