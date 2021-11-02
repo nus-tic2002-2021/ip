@@ -47,8 +47,7 @@ public class Parser {
     public static void AddDeadline(String input) {
         try {
             if (InputChecker.CheckValidDeadline(input)) {
-                String[] parts = input.substring(8).split("/by");
-                Deadline newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+                Deadline newDeadline = buildDeadline(input);
                 TaskList.addTaskToList(newDeadline);
                 Ui.PrintTaskAdded(newDeadline);
                 Ui.PrintTaskCount();
