@@ -27,13 +27,9 @@ public class Deadline extends Task {
 }
 
 // edit the todo to be "todo borrow book"
-// user call "deadline return book by sunday" separate by the  by keyword
 // user call "event project meeting at Mon 2-4pm
-//     Got it. I've added this task:
-//       [D][ ] return book (by: Sunday)
 //     Now you have 6 tasks in the list.
 // probably can do a enum for the days
-
 //     Got it. I've added this task:
 //       [E][ ] project meeting (at: Mon 2-4pm)
 //     Now you have 7 tasks in the list.

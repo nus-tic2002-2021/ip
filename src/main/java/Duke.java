@@ -98,7 +98,7 @@ public class Duke {
                 int byIndex = line.lastIndexOf("by");
                 int commandIndex = line.indexOf("deadline");
                 int flag = 0;
-                if(byIndex < 0 || commandIndex < 0){
+                if((byIndex < 0 || commandIndex < 0) || (byIndex < commandIndex)){
                     flag = 1;
                 }
                 if(flag == 0) {
@@ -112,13 +112,31 @@ public class Duke {
                             System.out.println("added");
                         }
                 } else {
-                    System.out.println("Please indicate description and deadline");
+                    System.out.println("Whoops, I didn't quite get that. If you meant to add a new deadline, please follow this format: \n" +
+                            "deadline 'your description' by 'day'");
                 }
             }
             if (command.equals("event")){
-                Task deadline = new Deadline("return book", "Monday");
-                storedTask.add(deadline);
-                System.out.println("added");
+                int atIndex = line.lastIndexOf("at");
+                int commandIndex = line.indexOf("event");
+                int flag = 0;
+                if((atIndex < 0 || commandIndex < 0) || (atIndex < commandIndex)){
+                    flag = 1;
+                }
+                if(flag == 0) {
+                    String byDate = line.substring(atIndex + 2);
+                    String description = line.substring(commandIndex + 5, atIndex);
+                    if (byDate.strip().length() == 0 || description.strip().length() == 0) {
+                        System.out.println("Please indicate description and event timeline");
+                    } else {
+                        Task event = new Event(description.strip(), byDate.strip());
+                        storedTask.add(event);
+                        System.out.println("added");
+                    }
+                } else {
+                    System.out.println("Whoops, I didn't quite get that. If you meant to add a new event, please follow this format: \n" +
+                            "event 'your description' by 'day'");
+                }
             }
             if(command.equals("list")){
                 getList();
