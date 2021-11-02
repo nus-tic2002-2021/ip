@@ -6,6 +6,10 @@ import Duke.Checker.InputChecker;
 import Duke.TaskList;
 import Duke.Ui.Ui;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     public static void parseInput(String input) {
@@ -120,7 +124,29 @@ public class Parser {
     }
 
     public static Deadline getDeadlineFromLine(String[] parts) {
-        Deadline newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
+        String[] datetime = parts[3].trim().split(" ");
+        Deadline newDeadline;
+        if (datetime.length > 2 ) {
+            newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
+        } else {
+            LocalDate newDate = null;
+            LocalTime newTime = null;
+            try {
+                newDate = LocalDate.parse(datetime[0]);
+                newTime = LocalTime.parse(datetime[1]);
+            } catch (DateTimeParseException e) {
+                e.getMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.getMessage();
+            }
+            if (newDate != null && newTime != null) {
+                newDeadline = new Deadline(parts[2].trim(), newDate, newTime);
+            } else if (newDate != null) {
+                newDeadline = new Deadline(parts[2].trim(), newDate);
+            } else {
+                newDeadline = new Deadline(parts[2].trim(), parts[3].trim());
+            }
+        }
         if (parts[1].trim().equals("1")) {
             TaskList.MarkTask(newDeadline);
         }
