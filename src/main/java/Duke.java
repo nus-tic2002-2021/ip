@@ -12,9 +12,19 @@ public class Duke {
         if( storedTask.size() < 1){
             System.out.println("Todo list is empty. Try adding something by typing todo.");
         }
-        for (int i=1; i<storedTask.size()+1; i++){
+        for (int i=1; i<=storedTask.size(); i++){
             System.out.format("%d: " + "[" + storedTask.get(i-1).getType() + "]" + storedTask.get(i-1).toString() + "\n" , i);
         }
+    }
+
+    public static void delete(int index){
+        ArrayList<Task> temp = new ArrayList<Task>();
+        for(int i=0; i<storedTask.size(); i++){
+            if(i != index){
+                temp.add(storedTask.get(i));
+            }
+        }
+        storedTask = temp;
     }
 
     public static void updateTaskStatus(String line){
@@ -50,7 +60,7 @@ public class Duke {
         int count = 0;
         String[] command = new String[10];
         String[] line2 = line.split(" ");
-        String[] keywords = {"todo", "deadline", "event", "done", "list"};
+        String[] keywords = {"todo", "deadline", "event", "done", "list", "delete"};
         for(String i : line2 ){
             if(Arrays.asList(keywords).contains(i)){
                 command[count] = i;
@@ -142,6 +152,10 @@ public class Duke {
             }
             if(command.equals("list")){
                 getList();
+            }
+            if(command.equals("delete")){
+                int index = Integer.parseInt(line.split(" ")[1].strip());
+                delete(index-1);
             }
 
             response(line);
