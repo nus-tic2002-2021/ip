@@ -128,10 +128,34 @@ public class Parser {
     }
 
     public static Event getEventFromLine(String[] parts) {
-        Event newEvent = new Event(parts[2].trim(), parts[3].trim());
+        String[] datetime = parts[3].trim().split(" ");
+        Event newEvent;
+        if (datetime.length > 2 ) {
+            newEvent = new Event(parts[2].trim(), parts[3].trim());
+        } else {
+            LocalDate newDate = null;
+            LocalTime newTime = null;
+            try {
+                newDate = LocalDate.parse(datetime[0]);
+                newTime = LocalTime.parse(datetime[1]);
+            } catch (DateTimeParseException e) {
+                e.getMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.getMessage();
+            }
+            if (newDate != null && newTime != null) {
+                newEvent = new Event(parts[2].trim(), newDate, newTime);
+            } else if (newDate != null) {
+                newEvent = new Event(parts[2].trim(), newDate);
+            } else {
+                newEvent = new Event(parts[2].trim(), parts[3].trim());
+            }
+        }
         if (parts[1].trim().equals("1")) {
             TaskList.MarkTask(newEvent);
         }
         return newEvent;
     }
+
 }
+
