@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import Exception.DukeInvalidCommandException;
 import Exception.DukeTaskNotFoundException;
+import Storage.Storage;
+import Task.DateTime;
+import Task.TaskList;
+import Task.Type;
+import Ui.Ui;
 
 public class Duke {
     static String command;
@@ -9,29 +14,69 @@ public class Duke {
     static DateTime dateTime;
     static Type type;
     static Boolean checkCommand;
+    private Ui ui;
+    private Storage storage;
 
-    public static void initProgram() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public Duke() {
+        ui = new Ui();
+        ui.showWelcome();
+        storage = new Storage();
+
+        String line = "";
+        Scanner in = new Scanner(System.in).useDelimiter("\\n");
+        TaskList tl = new TaskList();
+        Boolean isAddTask = true;
+
+        while (true) {
+            line = in.next();
+
+            if(line.equals("bye")) {
+                ui.showGoodbye();
+            } else if (line.equals("list")) {
+                tl.printTaskList();
+                isAddTask = false;
+            } else if (line.equals("save")) {
+                tl.saveTaskList();
+                isAddTask = false;
+            } else if (line.equals("load")) {
+                tl.loadTaskList();
+                isAddTask = false;
+            }else if (line.contains("done")) {
+                //System.out.println(line);
+                isAddTask = false;
+                try {
+                    int index = Integer.parseInt(line.split(" ")[1]);
+                    tl.setDone(index);
+                } catch (DukeTaskNotFoundException ex) {
+                    ui.showException(ex.toString());
+                }
+
+            } else if (line.contains("delete")) {
+                isAddTask = false;
+                try {
+                    int index = Integer.parseInt(line.split(" ")[1]);
+                    tl.deleteTask(index);
+                } catch (DukeTaskNotFoundException ex) {
+                    ui.showException(ex.toString());
+                }
+
+            }
+
+            if(isAddTask) {
+                try {
+                    parseAddTask(line);
+                    if(checkCommand) {
+                        tl.addTask(task,type, dateTime);
+                    }
+                } catch (DukeInvalidCommandException ex) {
+                    ui.showException(ex.toString());
+                }
+
+            }
+            isAddTask = true;
+        }
 
     }
-
-    public static void terminateProgram() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.exit(0) ;
-    }
-
-    public static void exceptionCommand() {
-        System.out.println("unexpected command");
-        //System.exit(0) ;
-    }
-
 
     public static void parseAddTask (String input) throws DukeInvalidCommandException {
         String temp = "";
@@ -63,7 +108,7 @@ public class Duke {
 
         task = temp.split(" /")[0];
 
-        //System.out.println("Task :" + task);
+        //System.out.println("Task.Task :" + task);
         try {
             condition = temp.split(" /")[1];
             parseCondition(condition);
@@ -82,62 +127,8 @@ public class Duke {
 
     public static void main(String[] args) throws DukeTaskNotFoundException {
 
-        initProgram();
+        new Duke();
 
-        String line = "";
-        Scanner in = new Scanner(System.in).useDelimiter("\\n");
-        TaskList tl = new TaskList();
-        Boolean isAddTask = true;
-
-        while (true) {
-            line = in.next();
-
-            if(line.equals("bye")) {
-                terminateProgram();
-            } else if (line.equals("list")) {
-                tl.printTaskList();
-                isAddTask = false;
-            } else if (line.equals("save")) {
-                tl.saveTaskList();
-                isAddTask = false;
-            } else if (line.equals("load")) {
-                tl.loadTaskList();
-                isAddTask = false;
-            }else if (line.contains("done")) {
-                //System.out.println(line);
-                isAddTask = false;
-                try {
-                    int index = Integer.parseInt(line.split(" ")[1]);
-                    tl.setDone(index);
-                } catch (DukeTaskNotFoundException ex) {
-                    System.out.println(ex);
-                }
-
-            } else if (line.contains("delete")) {
-                isAddTask = false;
-                try {
-                    int index = Integer.parseInt(line.split(" ")[1]);
-                    tl.deleteTask(index);
-                } catch (DukeTaskNotFoundException ex) {
-                    System.out.println(ex);
-                }
-
-            }
-
-            if(isAddTask) {
-                try {
-                    parseAddTask(line);
-                    if(checkCommand) {
-                        tl.addTask(task,type, dateTime);
-                    }
-                } catch (DukeInvalidCommandException ex) {
-                    System.out.println(ex);
-                }
-
-                //System.out.println(line);
-            }
-            isAddTask = true;
-        }
 
     }
 }

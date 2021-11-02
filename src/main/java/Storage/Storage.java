@@ -1,3 +1,5 @@
+package Storage;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -6,7 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class DukeFile {
+public class Storage {
+
+    public Storage() {
+
+    }
 
     public void writeSaveFile(String stringToSave) {
         String directoryName = "data";

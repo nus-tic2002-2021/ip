@@ -1,3 +1,8 @@
+package Task;
+
+import static Task.Type.*;
+import static Task.Type.todo;
+
 public class Task {
     protected String description;
     protected boolean isDone;

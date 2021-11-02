@@ -1,4 +1,7 @@
+package Task;
+
 import Exception.DukeTaskNotFoundException;
+import Storage.Storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +25,11 @@ public class TaskList extends Task{
             temp += tempTask.taskType + delimiter + tempTask.isDone + delimiter + tempTask.description + delimiter + tempTask.dateTime.getCondition() + delimiter + tempTask.dateTime.getTime() + "\r\n";
         }
 
-        new DukeFile().writeSaveFile(temp);
+        new Storage().writeSaveFile(temp);
     }
 
     public void loadTaskList() {
-        List<String> stringList = new DukeFile().readSaveFile();
+        List<String> stringList = new Storage().readSaveFile();
 
         for(String task:stringList) {
             String[] taskSplit = task.split("\\|");
@@ -77,7 +80,7 @@ public class TaskList extends Task{
             }
         }
 
-        System.out.println("Task Loaded. I've added this task: ");
+        System.out.println("Task.Task Loaded. I've added this task: ");
         System.out.println(getTaskDetails(taskList.size() - 1));
         System.out.println("Now you have " + taskList.size() +" tasks in the list.");
     }
@@ -114,4 +117,5 @@ public class TaskList extends Task{
         Task temp = taskList.get(index);
         return "[" + temp.getTaskType() + "][" + temp.getStatusIcon() + "] " + temp.getDescription() + " " + temp.getDateTime();
     }
+
 }
