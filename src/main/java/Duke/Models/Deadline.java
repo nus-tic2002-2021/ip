@@ -64,4 +64,8 @@ public class Deadline extends Task {
     public String getTaskType() {
         return "D";
     }
+
+    public void printDate() {
+        System.out.println(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+    }
 }

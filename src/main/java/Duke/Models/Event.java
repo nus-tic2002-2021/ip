@@ -65,4 +65,8 @@ public class Event extends Task {
     public String getTaskType() {
         return "E";
     }
+
+    public void printDate() {
+        System.out.println(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+    }
 }
