@@ -209,5 +209,47 @@ public class Parser {
         return taskTime;
     }
 
+    public static boolean checkDateInput(String[] details) {
+        if (details.length != 3) {
+            return false;
+        }
+        try {
+            int day = Integer.parseInt(details[0].trim());
+            int month = Integer.parseInt(details[1].trim());
+            int year = Integer.parseInt(details[2].trim());
+            if (day > 31 || day < 1) {
+                return false;
+            } else if (month > 12 || month < 1) {
+                return false;
+            } else if (year < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static LocalDate buildTaskDate(String[] details) {
+        String day = details[0].trim();
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        String month = details[1].trim();
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+        String year = details[2].trim();
+        if (year.length() < 4) {
+            for (int i = year.length(); i < 4; i ++) {
+                year = "0" + year;
+            }
+        }
+        String newDateFormat = year + "-" + month + "-" + day;
+        LocalDate taskDate = LocalDate.parse(newDateFormat);
+        return taskDate;
+    }
+
 }
 
