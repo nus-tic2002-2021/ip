@@ -15,6 +15,7 @@ public abstract class Task {
     protected String taskDetail;
     protected boolean isDone;
     protected TaskType taskType;
+    protected TaskPriority taskPriority;
 
     public Task(String taskDetail) {
         this.taskDetail = taskDetail;

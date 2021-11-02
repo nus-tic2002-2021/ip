@@ -92,6 +92,8 @@ public class Parser {
 
             if (line.equals("list")) {
                 showFullList(myList);
+            } else if (line.substring(0, 3).equals("set")) {
+                toModifyTask(myList, line);
             } else if (line.substring(0, 4).equals("done")) {
                 toMarkTaskDone(myList, line);
             } else if (line.substring(0, 4).equals("todo")) {
@@ -141,6 +143,19 @@ public class Parser {
      */
     private void showFullList(TaskList myList) {
         ui.msgList(myList);
+    }
+
+    /**
+     * Show a list of Modify Function
+     *
+     * @param myList TaskList that contains the list of task
+     * @param line   String that the user type
+     */
+    private void toModifyTask(TaskList myList, String line) {
+        ui.msgAskUserSetTaskPriority();
+        Scanner in = new Scanner(System.in);
+        String taskNumber = in.nextLine();
+
     }
 
     /**

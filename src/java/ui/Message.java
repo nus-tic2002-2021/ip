@@ -200,6 +200,15 @@ public class Message implements Ui {
         System.out.println("_________________________________");
     }
 
+    // Set Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    /**
+     * Display message to ask user which task they want to set priority
+     */
+    public void msgAskUserSetTaskPriority() {
+        System.out.println("    Which task do you want to set priority?");
+    }
+
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**

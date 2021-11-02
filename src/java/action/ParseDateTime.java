@@ -90,7 +90,7 @@ public class ParseDateTime {
 
     /**
      * Check if the string contains date and time
-     *
+     * <p>
      * return 1 if the string contains only string representation of a Date
      * return 2 if the string contains string representation of a Date and a Time
      * return 3 if the string contains string representation of a Date and 2 Time

@@ -26,6 +26,7 @@ public interface Ui {
     void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(TaskList myList, int taskNumber);
     void msgSave();
     void msgSLoad();
+    void msgAskUserSetTaskPriority();
     void msgMarkDone(TaskList myList, int taskNumber);
     void msgList(TaskList myList);
     void msgBlankBeforeTaskDetail();
