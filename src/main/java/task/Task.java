@@ -26,6 +26,7 @@ abstract class Task {
     public abstract String getTask();
     public abstract String getDescription();
     public abstract String getSave();
+    public abstract String getDate();
 
     public String getDone(){
         if (isDone){

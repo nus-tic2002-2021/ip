@@ -57,7 +57,7 @@ public class Duke {
             } catch (UnrecognizedException e){
                 System.out.println("\tUnrecognized Command");
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("\tInvalid task entry");
+                System.out.println("\tPlease enter description after command");
             } catch (DukeException e){
                 ui.showError(e.getMessage());
             }

@@ -32,6 +32,9 @@ public class Todo extends Task{
     public String getDescription(){
         return description;
     }
+    public String getDate(){
+        return null;
+    }
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription();
         return s;

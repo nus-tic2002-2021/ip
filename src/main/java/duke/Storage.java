@@ -28,8 +28,7 @@ public class Storage {
                 System.out.println("File created");
             else
                 System.out.println("Loading existing file");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e);
         }
     }

@@ -35,6 +35,8 @@ public class Parser {
                 return new ListCommand();
             case "find":
                 return new SearchCommand(inputArray[1]);
+            case "view":
+                return new ViewCommand(inputArray[1]);
             default: throw new UnrecognizedException();
         }
     }

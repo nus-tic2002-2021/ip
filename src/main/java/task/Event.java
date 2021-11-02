@@ -27,8 +27,7 @@ public class Event extends Task {
     public void print(){
         if (isDone) {
             System.out.println("\t  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
-        }
-        else {
+        } else {
             System.out.println("\t  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         }
 
@@ -50,8 +49,11 @@ public class Event extends Task {
     public LocalDateTime getEventTime() {
         return eventTime;
     }
+    public String getDate() {
+        return getEventTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
+    }
     public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getEventTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getDate();
         return s;
     }
     @Override

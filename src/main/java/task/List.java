@@ -13,6 +13,8 @@ public class List {
     public static Task recentDelete;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd");
     /**
      *
      *  Create new a new empty List
@@ -37,6 +39,7 @@ public class List {
         for(String task : loadFile){
             taskArr = task.split(" \\| ");
             String taskType, taskDone, taskDescription;
+            LocalDateTime date;
             Boolean isDone = false;
             taskType = taskArr[0];
             taskDone = taskArr[1];
@@ -44,22 +47,28 @@ public class List {
             if(taskDone.equals("1")){
                 isDone = true;
             }
-            LocalDateTime date;
-            try {
-                date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
-            } catch (Exception e) {
-                throw new FileException();
-            }
             switch (taskType){
                 case "T":
                     taskArrayList.add(new Todo(taskDescription,isDone));
                     break;
                 case "D":
-                    taskArrayList.add(new Deadline(taskDescription,date,isDone));
+                    try {
+                        date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
+                        taskArrayList.add(new Deadline(taskDescription,date,isDone));
+                    } catch (Exception e) {
+                        throw new FileException();
+                    }
                     break;
+
                 case "E":
-                    taskArrayList.add(new Event(taskDescription,date,isDone));
+                    try {
+                        date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
+                        taskArrayList.add(new Event(taskDescription,date,isDone));
+                    } catch (Exception e) {
+                        throw new FileException();
+                    }
                     break;
+
             }
         }
 
@@ -192,6 +201,26 @@ public class List {
                 count++;
             }
         }
+        if (count == 1){
+            System.out.println("\tNothing found");
+        }
+    }
+
+    public void printSchedule(String searchDate) {
+        int count = 1;
+        for(Task task : taskArrayList) {
+            try{
+                if(task.getDate().equals(searchDate)){
+                    System.out.println("\t" + (count) + "." + task);
+                    count++;
+                }
+            } catch (Exception e) {
+                continue; //todo does not have date.
+            }
+        }
+        if (count == 1){
+            System.out.println("\tNothing found");
+        }
     }
 
     public void saveList() {
@@ -233,7 +262,6 @@ public class List {
      */
     public void addTask(String action,String inputMsg) throws DukeException {
         switch (action) {
-            /*add to array */
             case "todo":
                 addTodo(inputMsg);
                 break;
@@ -245,6 +273,13 @@ public class List {
                 break;
         }
     }
+
+    public LocalDateTime formatDateTime(String date){
+        LocalDateTime formatDate;
+        formatDate = LocalDateTime.parse(date,DATE_FORMATTER);
+        return null;
+    }
+
 
 }
 

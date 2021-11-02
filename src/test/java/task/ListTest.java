@@ -25,4 +25,12 @@ public class ListTest {
         assertEquals("deadline", testList.get(1).getDescription());
         assertEquals("event",testList.get(2).getDescription());
     }
+
+    public void setDoneTest(){
+
+        Task t = new Todo("HELLO");
+        assertEquals(0,t.getDone());
+        t.setDone();
+        assertEquals(1,t.getDone());
+    }
 }
