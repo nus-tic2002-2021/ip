@@ -23,5 +23,4 @@ public class DeleteCommand extends Command{
             ui.printInvalidEntry();
         }
     }
-
 }

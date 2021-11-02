@@ -7,6 +7,7 @@ public class Event extends Task {
     protected LocalDateTime eventTime;
 
     private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
+    private final String DATE_FORMAT = "yyyy-MM-dd";
     private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
     public Event(String description, LocalDateTime eventTime) {
         super(description);
@@ -46,14 +47,15 @@ public class Event extends Task {
     public String getEventTimeFormat(){
         return eventTime.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDateTime getEventTime() {
+    public LocalDateTime getDateTime() {
         return eventTime;
     }
     public String getDate() {
-        return getEventTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
+        return eventTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
     public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getDate();
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
+                getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
         return s;
     }
     @Override

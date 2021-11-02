@@ -1,5 +1,6 @@
 package task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 abstract class Task {
@@ -26,7 +27,12 @@ abstract class Task {
     public abstract String getTask();
     public abstract String getDescription();
     public abstract String getSave();
-    public abstract String getDate();
+    public String getDate(){
+        return null;
+    }
+    public LocalDateTime getDateTime(){
+        return null;
+    }
 
     public String getDone(){
         if (isDone){

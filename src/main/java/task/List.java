@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import error.*;
 import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 
 
 public class List {
@@ -102,7 +102,7 @@ public class List {
         if(input.length < 2){
             throw new DukeException("DEADLINE_DESCRIPTION_ERROR");
         }
-        if(input.length > 2){
+        else if(input.length > 2){
             throw new DukeException("DEADLINE_LENGTH_ERROR");
         }
         try {
@@ -116,7 +116,8 @@ public class List {
 
     /**
      *
-     *  Adds new event task to taskList as a DEADLINE object
+     *  Adds new event task to taskList as a EVENT object
+     *  Does not allow multiple events to have the same Date and Time
      *
      * @param inputMsg description and /at to be added
      * @throws DukeException if inputMsg does not contain /at or more than 1 /at
@@ -124,6 +125,7 @@ public class List {
     public void addEvent(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /at ");
         LocalDateTime date;
+        Boolean clash = false;
         if(input.length < 2){
             throw new DukeException("EVENT_DESCRIPTION_ERROR");
         }
@@ -135,13 +137,23 @@ public class List {
         } catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
         }
-        taskArrayList.add(new Event(input[0],date));
-        printAdd();
+        for(Task task : taskArrayList) {
+            if(task.getDateTime() != null){
+                if (task.getDateTime().equals(date) && task.getDone() == "0"){
+                    printClash(task);
+                    clash = true;
+                }
+            }
+        }
+        if(!clash){
+            taskArrayList.add(new Event(input[0],date));
+            printAdd();
+        }
     }
 
     /**
      *
-     *  Modify the task to be completed.
+     *  Modify the task to be set as done.
      *
      * @param taskNumber number to determine which task to modify
      * @throws NotFoundException if the taskNumber is not within array size
@@ -206,20 +218,23 @@ public class List {
         }
     }
 
-    public void printSchedule(String searchDate) {
+    public void printSchedule(String searchDate) throws DukeException{
         int count = 1;
-        for(Task task : taskArrayList) {
-            try{
-                if(task.getDate().equals(searchDate)){
-                    System.out.println("\t" + (count) + "." + task);
-                    count++;
+        try{
+            LocalDate date = LocalDate.parse(searchDate,DATE_FORMATTER);
+            for(Task task : taskArrayList) {
+                if(task.getDateTime() != null){ //excludes to do that does not have date.
+                    if(task.getDateTime().toLocalDate().equals(date)){
+                        System.out.println("\t" + (count) + "." + task);
+                        count++;
+                    }
                 }
-            } catch (Exception e) {
-                continue; //todo does not have date.
             }
-        }
-        if (count == 1){
-            System.out.println("\tNothing found");
+            if (count == 1){
+                System.out.println("\tNothing found");
+            }
+        } catch (Exception e) {
+            throw new DukeException("INVALID_DATE_FORMAT");
         }
     }
 
@@ -241,6 +256,12 @@ public class List {
         System.out.println("\tGot it. Item successfully added to the list: ");
         taskArrayList.get(taskArrayList.size() - 1).print();
         System.out.println("\tNow you have " + (taskArrayList.size()) +" task(s) in the list");
+    }
+
+    public void printClash(Task clashTask){
+        System.out.println("\tEvent clashes with an existing deadline/event that is not completed");
+        clashTask.print();
+        System.out.println("\tSet existing task as done or delete task to add event with clashing time.");
     }
     /**
      *

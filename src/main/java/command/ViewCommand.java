@@ -3,6 +3,7 @@ package command;
 import duke.Duke;
 import duke.Storage;
 import duke.UI;
+import error.DukeException;
 import task.List;
 
 public class ViewCommand extends Command {
@@ -16,9 +17,8 @@ public class ViewCommand extends Command {
     public void execute(List tasks, Storage storage, UI ui){
         try{
             tasks.printSchedule(searchValue);
-        } catch (Exception e){
-
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
         }
-
     }
 }

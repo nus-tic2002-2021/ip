@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
     private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
-    private final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
+    private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
     private final String DATE_FORMAT = "yyyy-MM-dd";
     protected LocalDateTime by;
 
@@ -48,17 +48,15 @@ public class Deadline extends Task{
     public String getByFormat(){
         return by.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDateTime getBy() {
+    public LocalDateTime getDateTime() {
         return by;
     }
-    public String getDateTime(){
-        return getBy().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-    }
     public String getDate(){
-        return getBy().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return by.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
     public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " + getDateTime();
+        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
+                getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
         return s;
     }
 
