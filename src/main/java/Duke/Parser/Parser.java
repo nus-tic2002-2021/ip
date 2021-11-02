@@ -274,7 +274,28 @@ public class Parser {
         return newDeadline;
     }
 
-    
+    public static Event buildEvent(String input) {
+        String[] parts = input.substring(5).split("/at");
+        String[] datetime = parts[1].trim().split(" ");
+        Event newEvent = null;
+        if (datetime.length > 2) {
+            newEvent = new Event(parts[0].trim(), parts[1].trim());
+        } else {
+            String[] dateDetails = datetime[0].split("/");
+            if (checkDateInput(dateDetails)) {
+                LocalDate taskDate = buildTaskDate(dateDetails);
+                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
+                    LocalTime taskTime = buildTaskTime(datetime[1]);
+                    newEvent = new Event(parts[0].trim(), taskDate, taskTime);
+                } else {
+                    newEvent = new Event(parts[0].trim(), taskDate);
+                }
+            } else {
+                newEvent = new Event(parts[0].trim(), parts[1].trim());
+            }
+        }
+        return newEvent;
+    }
 
 }
 
