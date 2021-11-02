@@ -124,17 +124,19 @@ public class Duke {
                     flag = 1;
                 }
                 if(flag == 0) {
-                    String byDate = line.substring(atIndex + 2);
+                    String at = line.substring(atIndex + 2);
                     String description = line.substring(commandIndex + 5, atIndex);
-                    if (byDate.strip().length() == 0 || description.strip().length() == 0) {
+                    // current time only takes next word after day. will need to fine tune for more regex.
+                    String time = at.strip().split(" ").length > 1 ? at.strip().split(" ")[1] : "";
+                    if (at.strip().length() == 0 || description.strip().length() == 0) {
                         System.out.println("Please indicate description and event timeline");
                     } else {
-                        Task event = new Event(description.strip(), byDate.strip());
+                        Task event = new Event(description.strip(), at.strip().split(" ")[0], time);
                         storedTask.add(event);
                         System.out.println("added");
                     }
                 } else {
-                    System.out.println("Whoops, I didn't quite get that. If you meant to add a new event, please follow this format: \n" +
+                    System.out.println("Whoops, I didn't quite get that. If you  meant to add a new event, please follow this format: \n" +
                             "event 'your description' by 'day'");
                 }
             }
