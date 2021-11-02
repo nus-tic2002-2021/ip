@@ -251,5 +251,30 @@ public class Parser {
         return taskDate;
     }
 
+    public static Deadline buildDeadline(String input) {
+        String[] parts = input.substring(8).split("/by");
+        String[] datetime = parts[1].trim().split(" ");
+        Deadline newDeadline = null;
+        if (datetime.length > 2) {
+            newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+        } else {
+            String[] dateDetails = datetime[0].split("/");
+            if (checkDateInput(dateDetails)) {
+                LocalDate taskDate = buildTaskDate(dateDetails);
+                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
+                    LocalTime taskTime = buildTaskTime(datetime[1]);
+                    newDeadline = new Deadline(parts[0].trim(), taskDate, taskTime);
+                } else {
+                    newDeadline = new Deadline(parts[0].trim(), taskDate);
+                }
+            } else {
+                newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+            }
+        }
+        return newDeadline;
+    }
+
+    
+
 }
 
