@@ -110,7 +110,7 @@ public class Parser {
         } else {
             System.out.println("Line is invalid");
         }
-        throw new DukeException("A line from storage file is invalid and will not be added to Duke.Duke.");
+        throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
     }
 
     public static Todo getTodoFromLine(String[] parts) {
