@@ -76,7 +76,8 @@ public class Duke {
 
     public static void parseCondition(String input) {
         String temp[] = input.split(" ");
-        dateTime = new DateTime(temp[0], temp[1]);
+        String time = input.substring(input.indexOf(" ") + 1);
+        dateTime = new DateTime(temp[0], time);
     }
 
     public static void main(String[] args) throws DukeTaskNotFoundException {
@@ -97,9 +98,12 @@ public class Duke {
                 tl.printTaskList();
                 isAddTask = false;
             } else if (line.equals("save")) {
-                new DukeFile().writeSaveFile();
+                tl.saveTaskList();
                 isAddTask = false;
-            } else if (line.contains("done")) {
+            } else if (line.equals("load")) {
+                tl.loadTaskList();
+                isAddTask = false;
+            }else if (line.contains("done")) {
                 //System.out.println(line);
                 isAddTask = false;
                 try {

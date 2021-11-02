@@ -1,14 +1,16 @@
-import java.io.BufferedWriter;
-import java.io.File;  // Import the File class
-import java.io.FileWriter;
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class DukeFile {
 
-    public void writeSaveFile() {
+    public void writeSaveFile(String stringToSave) {
         String directoryName = "data";
         String fileName = "save.txt";
-        String value = "this is testing";
 
         File directory = new File(directoryName);
         if (!directory.exists()){
@@ -22,7 +24,7 @@ public class DukeFile {
         try{
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(value);
+            bw.write(stringToSave);
             bw.close();
         }
         catch (IOException e){
@@ -31,8 +33,28 @@ public class DukeFile {
         }
     }
 
-    public void readSaveFile() {
+    public List<String> readSaveFile() {
 
+        List<String> content = new ArrayList<String>();
+
+        String directoryName = "data";
+        String fileName = "save.txt";
+
+        File directory = new File(directoryName);
+        File file = new File(directoryName + "/" + fileName);
+
+        if (!directory.exists() || !file.exists()){
+            System.out.println("file not found");
+            return null;
+        } else {
+            try{
+                content = Files.readAllLines(Paths.get(directoryName + "/" + fileName));
+            } catch (Exception ex) {
+
+            }
+        }
+
+        return content;
     }
 
 }
