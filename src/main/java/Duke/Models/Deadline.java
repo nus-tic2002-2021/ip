@@ -26,7 +26,16 @@ public class Deadline extends Task {
     }
 
     public String getAdditionalInfo() {
-        return by;
+        String info;
+        if (date == null) {
+            info = by;
+        } else {
+            info = date.toString();
+            if (time != null) {
+                info = info + " " + time;
+            }
+        }
+        return info;
     }
 
     public String getCompletedSymbol() {
@@ -42,9 +51,9 @@ public class Deadline extends Task {
         if (date == null) {
             info = info + by;
         } else {
-            info = info + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")).toString();
+            info = info + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             if (time != null) {
-                info = info + " " + time.toString();
+                info = info + " " + time;
             }
         }
         info = info + ")";

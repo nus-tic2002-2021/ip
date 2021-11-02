@@ -27,7 +27,16 @@ public class Event extends Task {
     }
 
     public String getAdditionalInfo() {
-        return at;
+        String info;
+        if (date == null) {
+            info = at;
+        } else {
+            info = date.toString();
+            if (time != null) {
+                info = info + " " + time;
+            }
+        }
+        return info;
     }
 
     public String getCompletedSymbol() {
