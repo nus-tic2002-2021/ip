@@ -183,5 +183,31 @@ public class Parser {
         return newEvent;
     }
 
+    public static boolean checkTimeInput(String timeInput) {
+        if (timeInput.equals("")) {
+            return false;
+        }
+        try {
+            int time = Integer.parseInt(timeInput);
+            int hour = time/100;
+            int mins = time%100;
+            if (hour < 24 && hour > -1 && mins < 60 && mins > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static LocalTime buildTaskTime(String timeInput) {
+        int time = Integer.parseInt(timeInput);
+        int hour = time/100;
+        int mins = time%100;
+        LocalTime taskTime = LocalTime.of(hour, mins);
+        return taskTime;
+    }
+
 }
 
