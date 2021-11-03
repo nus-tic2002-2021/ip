@@ -1,7 +1,6 @@
 package duke.task.model;
 
 import static duke.dukeutility.parser.DateParser.prettifyLocalDateTime;
-
 import java.time.LocalDateTime;
 
 public final class Deadline extends Task {
@@ -9,6 +8,7 @@ public final class Deadline extends Task {
 
     /**
      * A deadline
+     *
      * @param taskDescription
      * @param deadline
      * @param taskId

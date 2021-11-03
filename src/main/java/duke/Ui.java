@@ -110,7 +110,7 @@ public class Ui {
 
         String output = "";
 
-        switch(rt) {
+        switch (rt) {
         case EXIT_LOOP:
             this.setIsLoop(false);
             output = (this.getExitLoopMessage());

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import duke.dukeexception.DukeParseDateTimeException;
 
 public class DateParser {
@@ -30,14 +29,12 @@ public class DateParser {
             try {
                 ldt = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern(pattern));
             } catch (Exception e) {
-                ;
             }
         }
 
         try {
             ldt = parseStringAsLocalDate(dateTimeString).atTime(0, 0);
         } catch (Exception e) {
-            ;
         }
         if (ldt == null) {
             throw new DukeParseDateTimeException(

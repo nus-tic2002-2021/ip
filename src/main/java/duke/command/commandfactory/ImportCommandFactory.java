@@ -1,7 +1,6 @@
 package duke.command.commandfactory;
 
 import com.google.gson.JsonObject;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.command.errorcommand.CommandExecutionError;

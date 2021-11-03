@@ -3,11 +3,9 @@ package duke.command.systemcommand;
 import java.io.FileWriter;
 import java.nio.file.Path;
 import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonWriter;
-
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 
@@ -29,6 +27,7 @@ public class CommandExportTasksToFile extends Command {
             this.setResponseType(ResponseType.ERROR_SAVE_FAILURE);
         }
     }
+
     public String getResponse() {
         return "Saved task to file: " + this.getArgs().get(1) + System.lineSeparator();
     }

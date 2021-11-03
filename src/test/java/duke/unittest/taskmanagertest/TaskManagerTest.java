@@ -1,11 +1,8 @@
 package duke.unittest.taskmanagertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
-
 import duke.TaskManager;
 import duke.task.model.Event;
 import duke.testhelper.TestStream;
@@ -28,6 +25,7 @@ public class TaskManagerTest extends TestStream {
         assertEquals(desc0, tm.getTaskById(0).getTaskDescription());
         assertEquals(desc1, tm.getTaskById(1).getTaskDescription());
     }
+
     /**
      * Add events to a task manager.
      */
@@ -50,6 +48,7 @@ public class TaskManagerTest extends TestStream {
         assertEquals(from1, ((Event) tm.getTaskById(1)).getFrom());
         assertEquals(to1, ((Event) tm.getTaskById(1)).getTo());
     }
+
     /**
      * Add find tasks in a task manager.
      */

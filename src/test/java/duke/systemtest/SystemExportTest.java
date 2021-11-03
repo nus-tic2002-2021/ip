@@ -38,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -47,11 +46,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
-
 import com.google.gson.JsonArray;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -233,7 +229,8 @@ public class SystemExportTest extends TestStream {
         MockTask[] selectedMockTasks = new MockTask[] {
             new MockEvent(eventDesc, 2, true, parseStringAsLocalDateTime(eventFrom),
                 parseStringAsLocalDateTime(eventTo))};
-        String out11 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword));
+        String out11 =
+            (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword));
 
         String in8 = generateTextCommandExit();
         String out12 = (getExpectedOutputExitInputLoop());

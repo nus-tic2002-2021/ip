@@ -22,9 +22,7 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -196,7 +194,7 @@ public class TestIoAddTasks extends TestStream {
         String out1 = getExpectedOutputImportAttempt(frm.getImportPath());
         String out2 = getExpectedOutputReadPathNotFound();
         String out3 = getExpectedOutputBeginInputLoop();
-        String out4 = getExpectedOutputAddedDeadline(taskDesc0,0);
+        String out4 = getExpectedOutputAddedDeadline(taskDesc0, 0);
         String out5 = getExpectedOutputList(getExpectedTaskList(mockDeadlines));
         String out6 = getExpectedOutputExitInputLoop();
         String out7 = getExpectedOutputTerminate();

@@ -21,9 +21,7 @@ import static duke.testhelper.help.codeundertest.TextCommandUnderTest.generateTe
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksImportTestPathString;
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
@@ -70,7 +68,6 @@ public class TestIoToggleDoneStatus extends TestStream {
         String out3 = getExpectedOutputBeginInputLoop();
 
 
-
         String storeCommand = generateTextCommandLineAddToDo(taskDesc0);
         String out4 = getExpectedOutputAddedToDo(taskDesc0, 0);
 
@@ -93,9 +90,11 @@ public class TestIoToggleDoneStatus extends TestStream {
         String out9 = getExpectedOutputTerminate();
 
 
-        System.setIn(buildCommandInputStream(storeCommand, setCompleteCommand, setIncompleteCommand, listCommand, exitCommand));
+        System.setIn(
+            buildCommandInputStream(storeCommand, setCompleteCommand, setIncompleteCommand, listCommand, exitCommand));
 
-        String expectedOutputResponse = buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8, out9);
+        String expectedOutputResponse =
+            buildExpectedResponse(out0, out1, out2, out3, out4, out5, out6, out7, out8, out9);
 
         // Act
         Main.run(this.getPrintStream(), tm, frm);

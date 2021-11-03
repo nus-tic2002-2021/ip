@@ -2,16 +2,13 @@ package duke;
 
 import static duke.dukeutility.parser.PathParser.stringToPath;
 import static duke.dukeutility.validator.TextCommandValidator.isParentDirectoryValid;
-
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
-
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;

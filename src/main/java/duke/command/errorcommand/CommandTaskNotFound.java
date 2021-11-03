@@ -1,7 +1,6 @@
 package duke.command.errorcommand;
 
 import java.util.List;
-
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 

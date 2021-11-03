@@ -13,7 +13,6 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SCAN_D
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_STATISTICS_ALL;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -28,6 +27,7 @@ public class TextCommandValidator {
     public static Boolean isRequestList(String text) {
         return text.equals(PROMPT_LIST);
     }
+
     public static Boolean isRequestStatisticsAll(String text) {
         return text.equals(PROMPT_STATISTICS_ALL);
     }
@@ -35,9 +35,11 @@ public class TextCommandValidator {
     public static Boolean isRequestMarkTaskAsDone(String text) {
         return text.startsWith(PROMPT_UPDATE_DONE);
     }
+
     public static Boolean isRequestMarkTaskAsIncomplete(String text) {
         return text.startsWith(PROMPT_UPDATE_NOT_DONE);
     }
+
     public static Boolean isRequestScanDuplicates(String text) {
         return text.equals(PROMPT_SCAN_DUPLICATE_DESCRIPTION);
     }
@@ -61,6 +63,7 @@ public class TextCommandValidator {
     public static Boolean isRequestFind(String text) {
         return text.startsWith(PROMPT_FIND_BY_KEYWORD_DESCRIPTION);
     }
+
     public static Boolean isRequestProjection(String text) {
         return text.startsWith(PROMPT_PROJECTION);
     }

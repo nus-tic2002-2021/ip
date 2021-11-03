@@ -52,9 +52,11 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSetIncomplete(Integer taskId) {
         return PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE + taskId + System.lineSeparator();
     }
+
     public static String generateTextCommandScanDuplicateDescription() {
         return PROMPT_UNDER_TEST_SCAN_DUPLICATE_DESCRIPTION + System.lineSeparator();
     }
+
     public static String generateTextCommandLineAddToDo(String description) {
         return PROMPT_UNDER_TEST_ADD_TO_DO + description + System.lineSeparator();
     }
