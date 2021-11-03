@@ -1,0 +1,4 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('/images/notebackground.jpg');
+	-fx-background-size: cover;
+}

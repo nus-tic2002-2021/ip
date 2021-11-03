@@ -1,0 +1,6 @@
+[T][-] game
+[D][-] project submission (by: 11/02/2021 2359)
+[E][-] department retreat (at: 11/12/2021 1800-1900)
+[T][+] sleep
+[D][-] wash dishes (by: 20/02/2022 1900)
+[E][+] dnd (at: 24/11/2017 1900-2000)
