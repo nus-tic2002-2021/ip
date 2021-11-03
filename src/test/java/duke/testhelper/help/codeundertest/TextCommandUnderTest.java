@@ -3,7 +3,7 @@ package duke.testhelper.help.codeundertest;
 public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
-    public static final String PROMPT_UNDER_TEST_STATS_ALL = "stats all";
+    public static final String PROMPT_UNDER_TEST_STATS_ALL = "stats:all";
     public static final String PROMPT_UNDER_TEST_SCAN_DUPLICATE_DESCRIPTION = "scan:duplicates";
     public static final String PROMPT_UNDER_TEST_PROJECTION = "projection ";
 
