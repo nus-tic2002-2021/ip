@@ -1,7 +1,11 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Todo extends Task {
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public boolean isDone;
 
-    public Todo(String desc, Integer id) {
+    public Todo(String desc, int id) {
         super(desc, id);
         isDone = false;
     }

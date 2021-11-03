@@ -1,12 +1,17 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class Duke {
-    // TODO: Change these to enums
+    // TODO: Change these to enums or configurations
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
@@ -19,7 +24,7 @@ public class Duke {
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
-    private final static String FILEPATH_TASK = "";
+    private final static String FILEPATH_TASK = "~/go/src/github.com/metildachee/duke/duke.txt";
 
     public static void list(ArrayList<Task> list) throws Exception {
         list.forEach(l -> System.out.println(l.toString()));
@@ -63,15 +68,28 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // TODO: Abstract out to a logger class
+        Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        logger.setLevel(Level.FINEST);
+        FileHandler fileTxt = new FileHandler("Logging.txt");
+
+        SimpleFormatter formatterTxt = new SimpleFormatter();
+        fileTxt.setFormatter(formatterTxt);
+        logger.addHandler(fileTxt);
+
+        // Program starts
         System.out.println(STMT_START);
         Scanner in = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        try {
-            list = new TaskFile(FILEPATH_TASK).load();
-        } catch (Exception e) {
-            System.out.println("got error loading file" + e);
-        }
+
+        //
+        TaskManager manager = new TaskManager();
+        list = new TaskFile(FILEPATH_TASK).load(manager);
+
+        // counter
+        Global global = new Global();
+
         String input = in.nextLine();
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
         String instruction = tokens.get(0);
@@ -101,10 +119,10 @@ public class Duke {
                 }
             } else {
                 try {
-                    Task task = new Task();
-                    task.createTask(taskInfo, instruction);
-                    list.add(task);
+                    Task t = manager.createTask(taskInfo, instruction);
+                    list.add(t);
                 } catch (Exception e) {
+                    System.out.println("got exception, error: " + e);
                     printErrorMessage(Message.ERROR_UNRECOGNISED);
                 }
             }
@@ -124,6 +142,8 @@ public class Duke {
             System.out.println("task info:" + taskInfo);
             id = list.size();
         }
+
+        new TaskFile(FILEPATH_TASK).save(list);
         System.out.println(STMT_END);
     }
 }
