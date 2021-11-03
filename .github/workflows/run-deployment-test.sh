@@ -19,6 +19,7 @@ sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
 echo "M2_HOME=/usr/share/apache-maven-3.6.3" | sudo tee -a /etc/environment
 
 # source code test
+mvn clean
 mvn install
 mvn compile
 mvn test
