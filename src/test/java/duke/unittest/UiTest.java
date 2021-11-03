@@ -122,7 +122,7 @@ public class UiTest extends TestStream {
         String out0 = getExpectedOutputBeginInputLoop();
 
         String in0 = TextCommandUnderTest.generateTextCommandScanDuplicateDescription();
-        String dupes = "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": [0 (E), 1 (T), 2 (D)]" +
+        String dupes = "Duplicates               \"[Description]\":[...(id,type)] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": [0 (E), 1 (T), 2 (D)]" +
             System.lineSeparator() + "\"" + "task1" + "\"" + ": [3 (E), 4 (T), 5 (D)]";
         String out1 = getExpectedOutputTemplate(dupes);
         String in1 = TextCommandUnderTest.generateTextCommandExit();

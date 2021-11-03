@@ -13,6 +13,6 @@ public class CommandScanDuplicateDescriptions extends Command {
     }
 
     public String getResponse() {
-        return "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + this.getArgs().get(1);
+        return "Duplicates               \"[Description]\":[...(id,type)] " + System.lineSeparator() + this.getArgs().get(1);
     }
 }
