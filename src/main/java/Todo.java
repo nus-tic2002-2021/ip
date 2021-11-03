@@ -1,4 +1,4 @@
-public class   Todo extends Task {
+public class Todo extends Task {
     public boolean isDone;
 
     public Todo(String desc, Integer id) {
@@ -18,5 +18,15 @@ public class   Todo extends Task {
     public String toString() {
         String status = isDone ? "X" : " ";
         return id + ". [T][" + status + "] " + super.toString();
+    }
+
+    @Override
+    public String toTask() {
+        return super.toTask() + "," + (isDone ? 1 : 0);
+    }
+
+    @Override
+    public String getType() {
+        return "todo";
     }
 }

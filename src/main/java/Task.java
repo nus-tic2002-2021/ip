@@ -14,6 +14,10 @@ public class Task {
 
     }
 
+    public String toTask() {
+        return getType() + "," + getDescription();
+    }
+
     public Task(String description, Integer id) {
         System.out.println("set task: " + description + id);
         this.id = id;
@@ -34,6 +38,10 @@ public class Task {
 
     public String toString() {
         return description;
+    }
+
+    public String getType() {
+        return "task";
     }
 
     public void createTask(String taskInfo, String instruction) {

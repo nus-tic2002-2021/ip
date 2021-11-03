@@ -19,4 +19,9 @@ public class Deadline extends Todo {
         String status = isDone ? "X" : " ";
         return id + ". [D][" + status + "] " + super.getDescription() + " (by: " + by + ")";
     }
+
+    @Override
+    public String getType() {
+        return "deadline";
+    }
 }

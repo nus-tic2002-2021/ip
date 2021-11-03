@@ -1,18 +1,13 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class TaskFile extends FileAccessor {
     public TaskFile(String path) {
         super(path);
-    }
-
-    public void add(Task t) throws Exception {
-
-    }
-
-    public void delete(Task t) throws Exception {
-
     }
 
     public ArrayList<Task> load() throws Exception {
@@ -25,6 +20,29 @@ public class TaskFile extends FileAccessor {
             id++;
         }
         return list;
+    }
+
+    public String parseTaskToLine(Task e) throws Exception {
+        if (e == null) {
+            throw new Exception("task to parse is empty");
+        }
+        Todo t = (Todo) e;
+        return t.toTask();
+    }
+
+    public void save(ArrayList<Task> tasks) throws Exception {
+        FileWriter fw = new FileWriter(path);
+        tasks.forEach(t -> {
+            try {
+                String task = parseTaskToLine(t);
+                fw.write(task);
+                System.out.println("task written properly" + task);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        fw.close();
+        System.out.println("file has been saved properly");
     }
 
     //deadline,party to be at 26/20/2021,0
@@ -43,13 +61,5 @@ public class TaskFile extends FileAccessor {
         return task;
     }
 
-    public String parseTaskToLine(Task e) throws Exception {
-        if (e == null) {
-            throw new Exception("task to parse is empty");
-        }
 
-        Todo todo = (Todo) e;
-        // fix parsing
-        return "fix me";
-    }
 }
