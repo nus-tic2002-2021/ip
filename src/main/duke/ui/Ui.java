@@ -1,12 +1,22 @@
 package duke.ui;
 
+import duke.exception.DukeException;
+import duke.tasklist.Task;
+import duke.tasklist.TaskList;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
-import duke.exception.*;
-
 public class Ui {
 
+    private static final String SEPARATOR =
+            "________________________________________________________________________________";
+
+    private final Scanner in = new Scanner(System.in);
+
+    public String userInput(){
+        return in.nextLine();
+    }
     public static void Welcome (){
         System.out.println("        _..._\n" +
                 "      .'     '.      _\n" +
@@ -25,7 +35,8 @@ public class Ui {
                 "         \\   `\\  \\" + "\t\tAye there. I'm DUKE.\n" +
                 "          `-._/._/" + "\t\tHow can i help you?");
         System.out.println("___^/\\___^--____/\\____O______________/\\/\\---/\\___________---______________ \n" +
-                "   /\\^   ^  ^    ^                  ^^ ^  '\\ ^          ^       ---         \n");
+                "   /\\^   ^  ^    ^                  ^^ ^  '\\ ^          ^       ---         ");
+        System.out.println(SEPARATOR);
     }
 
     public static void goodBye (){
@@ -63,12 +74,10 @@ public class Ui {
             "       +  )/    (8P   (88    )  )\n" +
             "          (a:f   \"     `\"       `\n" +
             "\nBye, i will miss you.");
-        System.out.println("=========================TERMINATED===========================");
     }
 
-    public static void errorMessage (DukeException e) {
+    public  void errorMessage (DukeException e) {
         System.err.println("\t" + e);
-        System.out.println("=======================================================");
     }
 
     public static void validateEventCommand(String[] command) {
@@ -93,4 +102,69 @@ public class Ui {
         }
     }
 
+    public void Separator() {System.out.println(SEPARATOR);}
+
+    public void printAdd(Task task){
+        task.printTask();
+    }
+
+    public void printDeadline(TaskList taskList){
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(by:" + taskList.get(taskList.size()-1).getDatetime() + ")");
+        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public void printEvent(TaskList taskList){
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(at:" + taskList.get(taskList.size()-1).getDatetime() + ")");
+        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public void printTodo(TaskList taskList){
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription());
+        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public void printTaskList(TaskList taskList){
+        if (taskList.size() == 0) {
+            System.out.println("\tList is empty. Please add new task.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println("\t" + (i + 1) + "." + taskList.get(i).printTask());
+            }
+        }
+    }
+
+
+    public static void validateDoneCommand(String[] command, TaskList taskList){
+        if (command.length < 2) {
+            throw new DukeException("☹ Please state task number.");
+        }
+        int taskNumber  = Integer.parseInt(command[1]) - 1;
+        if (taskNumber >= taskList.size()) {
+            throw new DukeException("☹ There is no such task.");
+        }
+
+    }
+
+    public static void printDone(String[] command, TaskList taskList){
+        int taskNumber  = Integer.parseInt(command[1]) - 1;
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t[" + taskList.get(taskNumber).getType() + "]"+ "[X] " + taskList.get(taskNumber).getDescription());
+    }
+
+    public static void printDelete(String[] command, TaskList taskList){
+        int taskNumber  = Integer.parseInt(command[1]) - 1;
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("\t[" + taskList.get(taskNumber).getType() + "]"+ "[" + taskList.get(taskNumber).getStatusIcon() + "] " + taskList.get(taskNumber).getDescription());
+    }
+
+    public void printTaskCount(TaskList taskList){
+        System.out.println("You have total " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public void showExit() {
+    }
 }

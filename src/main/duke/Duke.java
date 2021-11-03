@@ -1,39 +1,55 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
 import duke.ui.*;
 import duke.tasklist.*;
 import duke.exception.*;
+import duke.parser.*;
+import duke.storage.*;
+import duke.command.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
+
+    private TaskList taskList;
+    private Storage storage;
     private Ui ui;
 
-    public static void main(String[] args) {
-        String text;
-        Scanner in = new Scanner(System.in);
+    public Duke(String filePath) {
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.errorMessage(e);
+            taskList = new TaskList();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void run() {
+        taskList = new TaskList();
         Ui.Welcome();
-
-        //takes in user input
-        text = in.nextLine();
-
-        //use while loop to program running
-        while(!text.equalsIgnoreCase("bye")){
-            //print the current list by calling printList method, if user inputs "list"
+        boolean isExit = false;
+        while(!isExit){
             try {
-                Task.tasks(text, tasks);
-            } catch (DukeException e){
-                Ui.errorMessage(e);
+                String userInput = ui.userInput();
+                ui.Separator();
+                Command c = Parser.parse(userInput, taskList);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException | IOException e){
+                ui.errorMessage((DukeException) e);
             } finally {
-                text = in.nextLine();
+                ui.Separator();
             }
         }
+    }
 
-        Ui.goodBye();
-        System.exit(0);
+    public static void main(String[] args){
+        new Duke("data/tasks.txt").run();
     }
 }
