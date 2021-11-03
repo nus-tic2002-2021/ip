@@ -1,7 +1,7 @@
 public class Event extends Todo {
     String at;
 
-    public Event(String description, String start, Integer id) {
+    public Event(String description, String start, int id) {
         super(description, id);
         at = start;
     }
@@ -18,5 +18,10 @@ public class Event extends Todo {
     public String toString() {
         String status = isDone ? "X" : " ";
         return id + ". [E][" + status + "] " + super.getDescription() + " (at: " + at + ")";
+    }
+
+    @Override
+    public String getType() {
+        return "event";
     }
 }

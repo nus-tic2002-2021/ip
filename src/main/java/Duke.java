@@ -1,17 +1,20 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class Duke {
-    // TODO: Change these to enums
+    // TODO: Change these to enums or configurations
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
-    private final static String DETECT_ADD_TODO = "todo";
-    private final static String DETECT_ADD_EVENT = "event";
-    private final static String DETECT_ADD_DEADLINE = "deadline";
     private final static String DETECT_DELETE = "delete";
 
     private final static String STMT_END = "Bye. Hope to see you again soon!";
@@ -21,13 +24,10 @@ public class Duke {
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
+    private final static String FILEPATH_TASK = "~/go/src/github.com/metildachee/duke/duke.txt";
+
     public static void list(ArrayList<Task> list) throws Exception {
         list.forEach(l -> System.out.println(l.toString()));
-    }
-
-    public static void add(ArrayList<Task> list, Task todo) {
-        list.add(todo);
-        System.out.println("added: " + todo.toString());
     }
 
     public static void markDone(ArrayList<Task> list, Integer taskId) {
@@ -68,10 +68,28 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // TODO: Abstract out to a logger class
+        Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        logger.setLevel(Level.FINEST);
+        FileHandler fileTxt = new FileHandler("Logging.txt");
+
+        SimpleFormatter formatterTxt = new SimpleFormatter();
+        fileTxt.setFormatter(formatterTxt);
+        logger.addHandler(fileTxt);
+
+        // Program starts
         System.out.println(STMT_START);
         Scanner in = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+
+        //
+        TaskManager manager = new TaskManager();
+        list = new TaskFile(FILEPATH_TASK).load(manager);
+
+        // counter
+        Global global = new Global();
+
         String input = in.nextLine();
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
         String instruction = tokens.get(0);
@@ -99,26 +117,12 @@ public class Duke {
                 } catch (Exception e) {
                     printErrorMessage(Message.UNKNOWN_OBJECT);
                 }
-
             } else {
-                Task task = null;
-                switch (instruction) {
-                    case DETECT_ADD_TODO:
-                        task = new Todo(taskInfo, id);
-                        break;
-                    case DETECT_ADD_EVENT:
-                        ArrayList<String> addInfo = new ArrayList(Arrays.asList(taskInfo.split("/at")));
-                        task = new Event(addInfo.get(0), addInfo.get(1), id);
-                        break;
-                    case DETECT_ADD_DEADLINE:
-                        ArrayList<String> deadlineInfo = new ArrayList(Arrays.asList(taskInfo.split("/by")));
-                        task = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), id);
-                        break;
-                }
-
                 try {
-                    add(list, task);
+                    Task t = manager.createTask(taskInfo, instruction);
+                    list.add(t);
                 } catch (Exception e) {
+                    System.out.println("got exception, error: " + e);
                     printErrorMessage(Message.ERROR_UNRECOGNISED);
                 }
             }
@@ -138,6 +142,8 @@ public class Duke {
             System.out.println("task info:" + taskInfo);
             id = list.size();
         }
+
+        new TaskFile(FILEPATH_TASK).save(list);
         System.out.println(STMT_END);
     }
 }

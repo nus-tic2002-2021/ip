@@ -1,7 +1,7 @@
 public class Deadline extends Todo {
     String by;
 
-    public Deadline(String description, String due, Integer id) {
+    public Deadline(String description, String due, int id) {
         super(description, id);
         by = due;
     }
@@ -18,5 +18,10 @@ public class Deadline extends Todo {
     public String toString() {
         String status = isDone ? "X" : " ";
         return id + ". [D][" + status + "] " + super.getDescription() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String getType() {
+        return "deadline";
     }
 }
