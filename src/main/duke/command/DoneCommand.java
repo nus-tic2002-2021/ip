@@ -17,6 +17,7 @@ public class DoneCommand extends Command{
         int taskNumber = Integer.parseInt(command[1]) - 1;
         taskList.get(taskNumber).setDone();
         ui.printTaskCount(taskList);
+        storage.saveTask(taskList);
     }
 
 }

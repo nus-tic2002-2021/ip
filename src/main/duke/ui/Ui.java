@@ -76,7 +76,7 @@ public class Ui {
             "\nBye, i will miss you.");
     }
 
-    public  void errorMessage (DukeException e) {
+    public  void errorMessage (Exception e) {
         System.err.println("\t" + e);
     }
 
@@ -162,7 +162,7 @@ public class Ui {
     }
 
     public void printTaskCount(TaskList taskList){
-        System.out.println("You have total " + (taskList.size()) +" tasks in the list.");
+        System.out.println("\tYou have total " + (taskList.size()) +" tasks in the list.");
     }
 
     public void showExit() {

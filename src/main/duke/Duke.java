@@ -17,7 +17,6 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -31,7 +30,6 @@ public class Duke {
     }
 
     public void run() {
-        taskList = new TaskList();
         Ui.Welcome();
         boolean isExit = false;
         while(!isExit){
@@ -42,7 +40,7 @@ public class Duke {
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e){
-                ui.errorMessage((DukeException) e);
+                ui.errorMessage(e);
             } finally {
                 ui.Separator();
             }
@@ -50,6 +48,6 @@ public class Duke {
     }
 
     public static void main(String[] args){
-        new Duke("data/tasks.txt").run();
+        new Duke("src/data/tasks.txt").run();
     }
 }

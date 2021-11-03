@@ -5,6 +5,8 @@ import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 public class AddCommand extends Command{
     Task task;
 
@@ -12,10 +14,11 @@ public class AddCommand extends Command{
         this.task = task;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(task);
         ui.printAdd(task);
         String taskType = task.getType();
+        storage.saveTask(taskList);
         switch (taskType){
             case "T":
                 ui.printTodo(taskList);

@@ -17,7 +17,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void store(TaskList taskList) throws IOException {
+    public void saveTask(TaskList taskList) throws IOException {
         File file = new File(filePath);
         File dir = file.getParentFile();
         if(!file.exists()){
@@ -28,38 +28,32 @@ public class Storage {
         }
         FileWriter fw = new FileWriter(file);
         for(int i = 0; i < taskList.size(); i++){
-            fw.write(taskList.get(i).printTask());
+            fw.write(taskList.get(i).printTask()+ System.getProperty("line.separator"));
         }
         fw.close();
     }
 
 
-    /**
-     * load task list from selected file
-     * @return
-     * @throws FileNotFoundException
-     */
     public ArrayList<Task> load() throws FileNotFoundException {
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         while(sc.hasNext()){
             String text = sc.nextLine();
-            String[] keyword = text.split(" \\| ");
-            //boolean isDone = keyword[1].equals("1") ? true : false;
+            String keyword = Character.toString(text.charAt(1));
             Task task;
-            if(keyword[0].equals("T")){
+            if(keyword.equals("T")){
                 task = new Todo(text);
             }
-            else if(keyword[0].equals("D")){
+            else if(keyword.equals("D")){
                 task = new Deadline(text);
             }
             else{
                 task = new Event(text);
             }
-            tasks.add(task);
+            taskList.add(task);
         }
-        return tasks;
+        return taskList;
     }
 
 }
