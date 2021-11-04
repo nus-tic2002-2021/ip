@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskManagerTest {
@@ -63,5 +65,42 @@ public class TaskManagerTest {
         System.out.println(e.toString());
         assertEquals(e.getDescription(), eventDesc);
         Assertions.assertEquals(e.getDate().toString(), eventDate);
+    }
+
+    @Test
+    public void findTest() {
+        // Event 1
+        String eventType = "deadline";
+        String eventDesc = "submit report";
+        String eventEndTime = "21:00";
+        String eventDate = "2019-12-01";
+        String eventInfo = eventDesc + "/by" + eventDate + " " + eventEndTime;
+
+        TaskManager tm = new TaskManager();
+        Task t = tm.createTask(eventInfo, eventType);
+        assertEquals(t.getType(), eventType);
+        Deadline e = (Deadline) t;
+        System.out.println(e.toString());
+        assertEquals(e.getDescription(), eventDesc);
+        Assertions.assertEquals(e.getDate().toString(), eventDate);
+
+        // Event 2
+        eventType = "event";
+        eventDesc = "project meeting";
+        String eventStartTime = "18:00";
+        eventEndTime = "21:00";
+        eventDate = "2019-12-01";
+        eventInfo = eventDesc + "/at" + eventDate + " " + eventStartTime + "-" + eventEndTime;
+
+        t = tm.createTask(eventInfo, eventType);
+        assertEquals(t.getType(), eventType);
+        Event event = (Event) t;
+        System.out.println(event.toString());
+        assertEquals(event.getDescription(), eventDesc);
+        Assertions.assertEquals(event.getDate().toString(), eventDate);
+
+        ArrayList<Task> tasks = tm.find("project");
+        assertEquals(tasks.toArray().length, 1, "too many returns");
+        assertEquals(tasks.get(0).getId(), 1, "did not get expected id");
     }
 }
