@@ -1,8 +1,0 @@
-Nov 03, 2021 7:50:42 PM Task <init>
-INFO: set task, details: 0 description: wash clothes
-Nov 03, 2021 7:50:42 PM TaskFile load
-INFO: added task successfully to list0. [T][ ] wash clothes
-Nov 03, 2021 7:50:49 PM Task <init>
-INFO: set task, details: 1 description: 
-Nov 03, 2021 7:50:54 PM Task <init>
-INFO: set task, details: 2 description: wash clothes
