@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskManagerTest {
 
     @Test
-    public void createTodo() {
+    public void createTodoTest() {
         String eventType = "todo";
         String eventInfo = "read books";
 
         TaskManager tm = new TaskManager();
         Task t = tm.createTask(eventInfo, eventType);
         Todo e = (Todo) t;
+        System.out.println(e.toString());
         assertEquals(e.getType(), eventType);
         assertEquals(e.getDescription(), eventInfo);
     }
@@ -27,6 +28,7 @@ public class TaskManagerTest {
         Task t = tm.createTask(eventInfo, eventType);
         assertEquals(t.getType(), eventType);
         Event e = (Event) t;
+        System.out.println(e.toString());
         assertEquals(e.getDescription(), eventDesc);
         assertEquals(e.getAt(), eventTime);
     }
