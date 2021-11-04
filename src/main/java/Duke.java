@@ -18,15 +18,11 @@ public class Duke {
     private final static String DETECT_DONE = "done";
     private final static String DETECT_DELETE = "delete";
     private final static String DETECT_FIND = "find";
-
+    private final static String DETECT_VIEW = "view";
     private final static String STMT_END = "Bye. Hope to see you again soon!";
     private final static String STMT_START = "Hello! I'm Duke\nWhat can I do for you?";
-
-
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
-
     private final static String FILEPATH_TASK = "~/go/src/github.com/metildachee/duke/duke.txt";
-
 
     public static void printErrorMessage(Message m) {
         switch (m) {
@@ -46,7 +42,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        // TODO: Abstract out to a logger class
+        // Init logger
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.FINEST);
         FileHandler fileTxt = new FileHandler("duke_info.logs");
@@ -55,17 +51,17 @@ public class Duke {
         fileTxt.setFormatter(formatterTxt);
         logger.addHandler(fileTxt);
 
-        // Program starts
-        System.out.println(STMT_START);
-        Scanner in = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
-
         // Init task manager
+        ArrayList<Task> list = new ArrayList<>();
         TaskManager manager = new TaskManager();
         list = new TaskFile(FILEPATH_TASK).load(manager);
 
-        // counter
-        Global global = new Global();
+        // Init parser
+        Parser parser = new Parser();
+
+        // Program starts
+        System.out.println(STMT_START);
+        Scanner in = new Scanner(System.in);
 
         String input = in.nextLine();
         ArrayList<String> tokens = new ArrayList(Arrays.asList(input.split(" ")));
@@ -97,8 +93,9 @@ public class Duke {
             } else if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_FIND) && tokens.size() >= 1) {
                 ArrayList<Task> li = manager.find(tokens.get(1));
                 manager.list(li);
+            } else if (instruction.toLowerCase(Locale.ROOT).equals(DETECT_VIEW) && tokens.size() >= 1) {
+                manager.viewTasksOn(parser.stringToDate(tokens.get(1)));
             } else {
-
                 manager.addTask(manager.createTask(taskInfo, instruction));
             }
 

@@ -1,6 +1,6 @@
-todo,wash clothes,0
-todo,deadline,0
-todo,read books,0
-task,
-todo,read more books,0
-todo,read more books,0
+deadline,submit report ,0
+deadline,submit report ,0
+deadline,submit ,0
+deadline,submit ,0
+event,project metting ,0
+event,project metting ,0

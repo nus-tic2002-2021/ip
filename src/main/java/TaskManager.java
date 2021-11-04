@@ -1,7 +1,10 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 public class TaskManager {
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
@@ -84,4 +87,25 @@ public class TaskManager {
         }
     }
 
+    public ArrayList<Task> viewTasksOn(LocalDate date) {
+        logger.info("viewTasksOn date: " + date + ", current task list: " + tasks);
+        ArrayList<Task> results = new ArrayList<>();
+        if (date == null) {
+            logger.info("viewTasksOn got null date");
+            return results;
+        }
+        tasks.forEach(t -> {
+            try {
+                Deadline e = (Deadline) t;
+                logger.finest("looking at task: " + t + " date for this task " + e.getDate());
+                if (e.getDate().equals(date)) {
+                    logger.finest("added successfully to results " + e);
+                    results.add(e);
+                }
+            } catch (ClassCastException e) {
+                logger.info("casting to deadline class got error, item could be todo type, error: " + e.getMessage() + " object: " + t);
+            }
+        });
+        return results;
+    }
 }

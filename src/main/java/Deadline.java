@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 public class Deadline extends Todo {
     LocalDate date;
     long endTime;
+    Parser parser = new Parser();
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -49,7 +50,7 @@ public class Deadline extends Todo {
         if (Objects.equals(date, "")) {
             return;
         }
-        LocalDate parsedDate = handlerParseStringToDate(date);
+        LocalDate parsedDate = parser.stringToDate(date);
         if (parsedDate == null) {
             logger.info("parsing date got null");
         } else {
@@ -80,15 +81,5 @@ public class Deadline extends Todo {
     @Override
     public String getType() {
         return "deadline";
-    }
-
-    public LocalDate handlerParseStringToDate(String date) {
-        LocalDate parsedDate = null;
-        try {
-            parsedDate = LocalDate.parse(date);
-        } catch (DateTimeParseException e) {
-            logger.info("parse date time got error" + e.getMessage());
-        }
-        return parsedDate;
     }
 }
