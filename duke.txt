@@ -1,1 +1,3 @@
 todo,wash clothes,0
+todo,deadline,0
+todo,read books,0
