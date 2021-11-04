@@ -22,14 +22,3 @@ public class TaskManager {
         return new Task(taskInfo, global.getId());
     }
 }
-
-
-//    testLogging {
-//        events "passed", "skipped", "failed"
-//
-//        showExceptions true
-//        exceptionFormat "full"
-//        showCauses true
-//        showStackTraces true
-//        showStandardStreams = false
-//    }
