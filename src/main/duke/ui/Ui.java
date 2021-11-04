@@ -76,8 +76,8 @@ public class Ui {
             "\nBye, i will miss you.");
     }
 
-    public  void errorMessage (Exception e) {
-        System.err.println("\t" + e);
+    public  void errorMessage (String massage) {
+        System.out.println(massage);
     }
 
     public static void validateEventCommand(String[] command) {

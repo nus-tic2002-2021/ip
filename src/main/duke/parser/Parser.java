@@ -9,7 +9,7 @@ public class Parser {
 
 
     public static String[] commandToArray(String text){
-        return text.split(" ");
+        return text.split(" ",2);
     }
 
     public static Command parse(String text, TaskList taskList) throws IllegalArgumentException{
@@ -23,7 +23,7 @@ public class Parser {
         try {
             commandCollections = CommandCollections.valueOf(keyword);
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand("☹ The command in not valid! Please re-enter:");
+            return new InvalidCommand("☹ The command <"+ command[0] +"> is not valid! Please re-enter:");
         }
 
         switch (commandCollections) {
@@ -50,7 +50,7 @@ public class Parser {
             case BYE:
                 return new ByeCommand();
             default:
-                return new InvalidCommand("☹ The command in not valid! Please re-enter:");
+                return new InvalidCommand("☹ Sorry, I don't know what it means :-(");
         }
 
     }

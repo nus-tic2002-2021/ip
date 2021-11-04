@@ -22,7 +22,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.errorMessage(e);
+            ui.errorMessage(e.getMessage());
             taskList = new TaskList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class Duke {
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e){
-                ui.errorMessage(e);
+                ui.errorMessage(e.getMessage());
             } finally {
                 ui.Separator();
             }
