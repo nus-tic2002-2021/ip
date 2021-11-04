@@ -76,8 +76,12 @@ public class Ui {
             "\nBye, i will miss you.");
     }
 
-    public  void errorMessage (String massage) {
+    public void errorMessage (String massage) {
         System.out.println(massage);
+    }
+
+    public void exceptionMessage (Exception e) {
+        System.err.println(e);
     }
 
     public static void validateEventCommand(String[] command) {
@@ -126,7 +130,7 @@ public class Ui {
         System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
     }
 
-    public void printTaskList(TaskList taskList){
+    public void printTaskList(TaskList taskList) throws NullPointerException{
         if (taskList.size() == 0) {
             System.out.println("\tList is empty. Please add new task.");
         } else {

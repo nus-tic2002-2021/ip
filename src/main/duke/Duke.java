@@ -22,10 +22,10 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.errorMessage(e.getMessage());
-            taskList = new TaskList();
+            ui.exceptionMessage(e);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            ui.exceptionMessage(e);
+            taskList = new TaskList();
         }
     }
 
