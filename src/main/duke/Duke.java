@@ -40,7 +40,7 @@ public class Duke {
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e){
-                ui.errorMessage(e.getMessage());
+                ui.errorMessage(e);
             } finally {
                 ui.Separator();
             }

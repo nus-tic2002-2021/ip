@@ -76,18 +76,18 @@ public class Ui {
             "\nBye, i will miss you.");
     }
 
-    public void errorMessage (String massage) {
-        System.out.println(massage);
+    public void errorMessage (Exception e) {
+        System.out.println(e.getMessage());
     }
 
     public void exceptionMessage (Exception e) {
-        System.err.println(e);
+        System.err.println(e.getMessage());
     }
 
     public static void validateEventCommand(String[] command) {
         if (command.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. Please re-enter:");
-        } else if (!Arrays.asList(command).contains("/at")) {
+        } else if (!command[1].contains("/at")) {
             throw new DukeException("☹ OOPS!!! The date of a event cannot be empty. Please re-enter:");
         }
     }
@@ -95,7 +95,7 @@ public class Ui {
     public static void validateDeadlineCommand(String[] command) {
         if (command.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. Please re-enter:");
-        } else if (!Arrays.asList(command).contains("/by")) {
+        } else if (!command[1].contains("/by")) {
             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty. Please re-enter:");
         }
     }
