@@ -1,21 +1,31 @@
 package duke.tasklist;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+/**
+ * Deadline class is the deadline type of task which are date sensitive
+ */
 public class Deadline extends Task {
-    public Deadline(String description){
+    protected LocalDateTime dateTime;
+
+    public Deadline(String description, LocalDateTime dateTime){
         super(description);
         this.type = "D";
         this.isDone = false;
+        this.dateTime = dateTime;
     }
 
     @Override
     public String getDescription() {return description.substring(9,description.indexOf('/'));}
 
-    public  String getDatetime() {
-        return description.substring(description.indexOf('/')+3);
+    public  String getDateTimeStr() {
+        return dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
     public String printTask (){
-        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by:" + getDatetime() + ")";
+        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by: " + getDateTimeStr() + ")";
     }
 
 }

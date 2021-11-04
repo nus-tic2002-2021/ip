@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ui {
@@ -114,13 +113,13 @@ public class Ui {
 
     public void printDeadline(TaskList taskList){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(by:" + taskList.get(taskList.size()-1).getDatetime() + ")");
+        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(by:" + taskList.get(taskList.size()-1).getDateTimeStr() + ")");
         System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
     }
 
     public void printEvent(TaskList taskList){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(at:" + taskList.get(taskList.size()-1).getDatetime() + ")");
+        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(at:" + taskList.get(taskList.size()-1).getDateTimeStr() + ")");
         System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
     }
 
@@ -167,6 +166,19 @@ public class Ui {
 
     public void printTaskCount(TaskList taskList){
         System.out.println("\tYou have total " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public static String validateDateTime(){
+        return "Task cannot be added. \n" +
+                "Please enter datetime in the format of 'dd/MM/yyyy HHmm'";
+    }
+
+    public static void validateViewCommand(String[] command){
+        if (command.length < 2) {
+            throw new DukeException("☹ OOPS!!! The date cannot be empty. Please re-enter:");
+        } else if (!command[1].contains("/")) {
+            throw new DukeException("☹ Please enter datetime in the format of 'dd/MM/yyyy'");
+        }
     }
 
 }

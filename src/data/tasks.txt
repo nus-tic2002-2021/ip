@@ -1,4 +1,2 @@
-todo [ ] buy books
-event [ ] project meeting /at Mon 2-4pm
-deadline [ ] return book /by Sunday
-deadline [√] do homework /by no idea :-p
+deadline [ ] return book /by 2 Dec 2019, 18:00
+event [√] meeting /at 2 Dec 2119, 18:00

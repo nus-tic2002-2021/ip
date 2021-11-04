@@ -13,8 +13,8 @@ import java.io.IOException;
 public class Duke {
 
     private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();

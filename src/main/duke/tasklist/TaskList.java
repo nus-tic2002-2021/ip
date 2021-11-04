@@ -1,7 +1,7 @@
 package duke.tasklist;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -38,4 +38,14 @@ public class TaskList {
         return taskList;
     }
 
+    public TaskList getTaskByDate(LocalDate date) {
+        TaskList taskByDate = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            while (taskList.get(i).getType().equals("E") | taskList.get(i).getType().equals("D")) {
+                while (taskList.get(i).getDateTime().toLocalDate().equals(date))
+                    taskByDate.addTask(taskList.get(i));
+            }
+        }
+        return taskByDate;
+    }
 }
