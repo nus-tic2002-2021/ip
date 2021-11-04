@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,8 +30,10 @@ public class TaskManagerTest {
     public void createEventTest() {
         String eventType = "event";
         String eventDesc = "project meeting";
-        String eventTime = "2/12/2019 1800";
-        String eventInfo = eventDesc + "/at" + eventTime;
+        String eventStartTime = "18:00";
+        String eventEndTime = "21:00";
+        String eventDate = "2019-12-01";
+        String eventInfo = eventDesc + "/at" + eventDate + " " + eventStartTime + "-" + eventEndTime;
 
         TaskManager tm = new TaskManager();
         Task t = tm.createTask(eventInfo, eventType);
@@ -38,7 +41,7 @@ public class TaskManagerTest {
         Event e = (Event) t;
         System.out.println(e.toString());
         assertEquals(e.getDescription(), eventDesc);
-        assertEquals(e.getDate(), eventTime);
+        Assertions.assertEquals(e.getDate().toString(), eventDate);
     }
 
     /*
@@ -49,15 +52,16 @@ public class TaskManagerTest {
     public void createDeadlineTest() {
         String eventType = "deadline";
         String eventDesc = "submit report";
-        String eventTime = "2/12/2019 1800";
-        String eventInfo = eventDesc + "/by" + eventTime;
+        String eventEndTime = "21:00";
+        String eventDate = "2019-12-01";
+        String eventInfo = eventDesc + "/by" + eventDate + " " + eventEndTime;
 
         TaskManager tm = new TaskManager();
         Task t = tm.createTask(eventInfo, eventType);
         assertEquals(t.getType(), eventType);
-        Event e = (Event) t;
+        Deadline e = (Deadline) t;
         System.out.println(e.toString());
         assertEquals(e.getDescription(), eventDesc);
-        assertEquals(e.getDate(), eventTime);
+        Assertions.assertEquals(e.getDate().toString(), eventDate);
     }
 }

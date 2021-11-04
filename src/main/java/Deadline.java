@@ -15,10 +15,10 @@ public class Deadline extends Todo {
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public Deadline(String description, String end, int id) {
+    public Deadline(String description, String endDateTime, int id) {
         super(description, id);
 
-        ArrayList<String> tokens = new ArrayList(Arrays.asList(end.split(" ")));
+        ArrayList<String> tokens = new ArrayList(Arrays.asList(endDateTime.split(" ")));
         setDate(tokens.get(0));
         setEndTime(tokens.get(1));
     }
@@ -34,11 +34,18 @@ public class Deadline extends Todo {
         endTime = time;
     }
 
+    public Deadline(String description, String date, String endTime, int id) {
+        super(description, id);
+        setDate(date);
+        setEndTime(endTime);
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
     public void setDate(String date) {
+        logger.info("set date " + date);
         if (Objects.equals(date, "")) {
             return;
         }
@@ -51,11 +58,12 @@ public class Deadline extends Todo {
     }
 
     public void setEndTime(String time) {
+        logger.info("set end_time " + time);
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
             this.endTime = formatter.parse(time).getTime();
         } catch (ParseException p) {
-            logger.info("parsing time got null");
+            logger.info("parsing time got exception" + p.getMessage());
         }
     }
 
