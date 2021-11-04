@@ -25,6 +25,7 @@ public class TaskFile extends FileAccessor {
                 logger.info("added task successfully to list" + t);
                 id++;
             }
+            tm.setTasks(list);
             return list;
         } catch (Exception e) {
             logger.info("got error loading file, error: " + e);
