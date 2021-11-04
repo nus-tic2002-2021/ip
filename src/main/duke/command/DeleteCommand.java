@@ -17,6 +17,6 @@ public class DeleteCommand extends Command{
         int taskNumber = Integer.parseInt(command[1]) - 1;
         taskList.removeTask(taskNumber);
         ui.printTaskCount(taskList);
-        storage.saveTask(taskList);
+        storage.saveTask(taskList.getTasks());
     }
 }

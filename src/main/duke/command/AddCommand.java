@@ -18,7 +18,7 @@ public class AddCommand extends Command{
         taskList.addTask(task);
         ui.printAdd(task);
         String taskType = task.getType();
-        storage.saveTask(taskList);
+        storage.saveTask(taskList.getTasks());
         switch (taskType){
             case "T":
                 ui.printTodo(taskList);

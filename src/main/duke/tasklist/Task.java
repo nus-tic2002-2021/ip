@@ -16,7 +16,7 @@ public class Task {
     public String getDescription() {return description;}
 
     //isDone.Setter
-    public void setDone() {isDone = true;}
+    public void setDone(boolean isDone) {this.isDone = isDone;}
 
     public boolean isDone() { return isDone; }
 

@@ -9,15 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static duke.parser.Parser.commandToArray;
+
 public class Storage {
 
-    public static String filePath;
+    protected String filePath;
 
     public Storage (String filePath){
         this.filePath = filePath;
     }
 
-    public void saveTask(TaskList taskList) throws IOException {
+    public void saveTask(ArrayList <Task> taskList) throws IOException {
         File file = new File(filePath);
         File dir = file.getParentFile();
         if(!file.exists()){
@@ -27,8 +29,25 @@ public class Storage {
             file.createNewFile();
         }
         FileWriter fw = new FileWriter(file);
-        for(int i = 0; i < taskList.size(); i++){
-            fw.write(taskList.get(i).printTask()+ System.getProperty("line.separator"));
+        for(Task task : taskList){
+            String type = task.getType();
+            String toText = null;
+            String isDone = task.isDone() ? "√" : " ";
+            String description = task.getDescription();
+
+            switch (type){
+                case "T":
+                    toText = "todo [" + isDone + "] " + description + System.getProperty("line.separator");
+                    break;
+                case "D":
+                    toText = "deadline [" + isDone + "] " + description +"/by" + task.getDatetime() + System.getProperty("line.separator");
+                    break;
+                case "E":
+                    toText = "event [" + isDone + "] " + description +"/at" + task.getDatetime()+ System.getProperty("line.separator");
+                    break;
+            }
+            assert toText != null;
+            fw.write(toText);
         }
         fw.close();
     }
@@ -40,20 +59,25 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while(sc.hasNext()){
             String text = sc.nextLine();
-            String keyword = Character.toString(text.charAt(1));
+            String parseText = text.replaceAll(" \\[.*?\\] ", " ");
+            boolean isDone = text.contains("√");
+            String[] command = commandToArray(text);
+            String keyword = command[0];
             Task task;
-            if(keyword.equals("T")){
-                task = new Todo(text);
+            if(keyword.equals("todo")){
+                task = new Todo(parseText);
+                task.setDone(isDone);
             }
-            else if(keyword.equals("D")){
-                task = new Deadline(text);
+            else if(keyword.equals("deadline")){
+                task = new Deadline(parseText);
+                task.setDone(isDone);
             }
             else{
-                task = new Event(text);
+                task = new Event(parseText);
+                task.setDone(isDone);
             }
             taskList.add(task);
         }
         return taskList;
     }
-
 }

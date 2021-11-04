@@ -14,7 +14,6 @@ public class Event extends Task{
         return description.substring(description.indexOf('/')+3);
     }
 
-
     @Override
     public String printTask (){
         //print out every element in the array

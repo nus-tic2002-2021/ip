@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String SEPARATOR =
-            "________________________________________________________________________________";
+            "___________________________________________________________________________";
 
     private final Scanner in = new Scanner(System.in);
 
@@ -165,6 +165,4 @@ public class Ui {
         System.out.println("\tYou have total " + (taskList.size()) +" tasks in the list.");
     }
 
-    public void showExit() {
-    }
 }
