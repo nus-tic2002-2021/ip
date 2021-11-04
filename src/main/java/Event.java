@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -41,7 +42,7 @@ public class Event extends Todo {
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        return id + ". [E][" + status + "] " + super.getDescription() + " (at: " + at + ")";
+        return id + ". [E][" + status + "] " + super.getDescription() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
