@@ -72,7 +72,7 @@ public class Duke {
         // TODO: Abstract out to a logger class
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.FINEST);
-        FileHandler fileTxt = new FileHandler("Logging.txt");
+        FileHandler fileTxt = new FileHandler("duke_info.logs");
 
         SimpleFormatter formatterTxt = new SimpleFormatter();
         fileTxt.setFormatter(formatterTxt);
