@@ -41,9 +41,11 @@ public class FileResourceManager {
     private ExportCommandFactory getExportCommandFactory() {
         return this.exportCommandFactory;
     }
+
     private ImportCommandFactory getImportCommandFactory() {
         return this.importCommandFactory;
     }
+
     private String getImportPathString() {
         return this.importPathString;
     }
@@ -51,6 +53,7 @@ public class FileResourceManager {
     private void setImportPathString(String importPathString) {
         this.importPathString = importPathString;
     }
+
     public Path getImportPath() {
         return stringToPath(this.getImportPathString());
     }
@@ -145,7 +148,7 @@ public class FileResourceManager {
     public void etlTasks(TaskManager taskManager, Ui ui) throws Exception {
         Path path = this.getImportPath();
         ui.printInitialLoadTaskAttempt(path);
-        CommandJsonResponse reading = this.getImportCommandFactory().executeExtractTasksFromFile(path);
+        CommandJsonResponse reading = this.executeExtractTasksFromFile();
         ui.printCommandResponse(reading);
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasks(tasksFromFile, taskManager);
