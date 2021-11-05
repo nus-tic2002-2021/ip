@@ -2,21 +2,27 @@ package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 
 public class Event extends Task {
     protected LocalDateTime eventTime;
+    protected LocalTime to;
 
     private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
     private final String DATE_FORMAT = "yyyy-MM-dd";
     private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
-    public Event(String description, LocalDateTime eventTime) {
+    public Event(String description, LocalDateTime eventTime, LocalTime to) {
         super(description);
-        setEvent(eventTime);
+        setEventTime(eventTime);
+        setTo(to);
+        setType();
     }
 
-    public Event(String description, LocalDateTime eventTime, Boolean isDone) {
+    public Event(String description, LocalDateTime eventTime, LocalTime to, Boolean isDone) {
         super(description);
-        setEvent(eventTime);
+        setEventTime(eventTime);
+        setTo(to);
+        setType();
         this.isDone = isDone;
     }
 
@@ -29,13 +35,15 @@ public class Event extends Task {
         if (isDone) {
             System.out.println("\t  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         } else {
-            System.out.println("\t  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
+            System.out.println("\t  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")" );
         }
 
     }
-    public void setEvent(LocalDateTime eventTime)
-    {
+    public void setEventTime(LocalDateTime eventTime){
         this.eventTime = eventTime;
+    }
+    public void setTo(LocalTime to){
+        this.to = to;
     }
 
     public String getTask(){
@@ -47,16 +55,27 @@ public class Event extends Task {
     public String getEventTimeFormat(){
         return eventTime.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDateTime getDateTime() {
+    public LocalDateTime getDateTime(){
         return eventTime;
     }
-    public String getDate() {
-        return eventTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    public LocalTime getTime(){
+        return to;
+    }
+    public String getHours(){
+        String hours = to.getHour() + " Hours ";
+        return hours;
+    }
+    public String getMinutes(){
+        String minutes = to.getMinute() + " Minutes ";
+        return minutes;
     }
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
-                getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
+                getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT)) + " | " + getTime();
         return s;
+    }
+    public void setType(){
+        type = "event";
     }
     @Override
     public String toString() {
@@ -64,6 +83,6 @@ public class Event extends Task {
         if (isDone){
             box = "[E][X] ";
         }
-        return (box + getDescription() + "(at: " + getEventTimeFormat() + ")");
+        return (box + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")");
     }
 }

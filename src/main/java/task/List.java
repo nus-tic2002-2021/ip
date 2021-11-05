@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import error.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class List {
@@ -15,6 +16,7 @@ public class List {
             "yyyy-MM-dd HHmm");
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
     /**
      *
      *  Create new a new empty List
@@ -40,6 +42,7 @@ public class List {
             taskArr = task.split(" \\| ");
             String taskType, taskDone, taskDescription;
             LocalDateTime date;
+            LocalTime time;
             Boolean isDone = false;
             taskType = taskArr[0];
             taskDone = taskArr[1];
@@ -63,7 +66,8 @@ public class List {
                 case "E":
                     try {
                         date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
-                        taskArrayList.add(new Event(taskDescription,date,isDone));
+                        time = LocalTime.parse(taskArr[4],TIME_FORMATTER);
+                        taskArrayList.add(new Event(taskDescription,date, time,isDone));
                     } catch (Exception e) {
                         throw new FileException();
                     }
@@ -124,7 +128,9 @@ public class List {
      */
     public void addEvent(String inputMsg)throws DukeException {
         String [] input = inputMsg.split(" /at ");
+        String [] event;
         LocalDateTime date;
+        LocalTime time;
         Boolean clash = false;
         if(input.length < 2){
             throw new DukeException("EVENT_DESCRIPTION_ERROR");
@@ -132,21 +138,33 @@ public class List {
         if(input.length > 2){
             throw new DukeException("EVENT_LENGTH_ERROR");
         }
+        event = input[1].split(" /for ");
         try {
-            date = LocalDateTime.parse(input[1],DATE_TIME_FORMATTER);
+            date = LocalDateTime.parse(event[0],DATE_TIME_FORMATTER);
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("EVENT_LENGTH_ERROR");
         } catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
         }
+        try {
+            time = LocalTime.parse(event[1],TIME_FORMATTER);
+        } catch (Exception e) {
+            throw new DukeException("INVALID_TIME_FORMAT");
+        }
+        //anomaly checker
+        EventDateTime addEvent = new EventDateTime(date,time);
         for(Task task : taskArrayList) {
-            if(task.getDateTime() != null){
-                if (task.getDateTime().equals(date) && task.getDone() == "0"){
+            if(task.getType() == "event"){
+                EventDateTime existEvent = new EventDateTime(task.getDateTime(),task.getTime());
+                if (addEvent.isAnomaly(existEvent)){
                     printClash(task);
                     clash = true;
+                    continue;
                 }
             }
         }
         if(!clash){
-            taskArrayList.add(new Event(input[0],date));
+            taskArrayList.add(new Event(input[0],date, time));
             printAdd();
         }
     }
@@ -223,7 +241,7 @@ public class List {
         try{
             LocalDate date = LocalDate.parse(searchDate,DATE_FORMATTER);
             for(Task task : taskArrayList) {
-                if(task.getDateTime() != null){ //excludes to do that does not have date.
+                if(task.getDateTime() != null){ //excludes task without date
                     if(task.getDateTime().toLocalDate().equals(date)){
                         System.out.println("\t" + (count) + "." + task);
                         count++;
@@ -259,9 +277,9 @@ public class List {
     }
 
     public void printClash(Task clashTask){
-        System.out.println("\tEvent clashes with an existing deadline/event that is not completed");
+        System.out.println("\tEvent clashes with an existing event.");
         clashTask.print();
-        System.out.println("\tSet existing task as done or delete task to add event with clashing time.");
+        System.out.println("\tDelete existing event or change the timing.");
     }
     /**
      *

@@ -1,16 +1,16 @@
 package task;
 
-import java.time.LocalDateTime;
-
 public class Todo extends Task{
 
     public Todo(String description){
         super(description);
+        setType();
     }
 
     public Todo(String description, Boolean isDone) {
         super(description);
         this.isDone = isDone;
+        setType();
     }
 
     public void setDone(){
@@ -39,7 +39,9 @@ public class Todo extends Task{
         String s = getTask() + " | " +  getDone() + " | " + getDescription();
         return s;
     }
-
+    public void setType(){
+        type = "todo";
+    }
     @Override
     public String toString() {
         String box = "[T][ ] ";

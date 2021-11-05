@@ -13,11 +13,13 @@ public class Deadline extends Task{
     public Deadline(String description, LocalDateTime by) {
         super(description);
         setBy(by);
+        setType();
     }
 
     public Deadline(String description, LocalDateTime by, Boolean isDone) {
         super(description);
         setBy(by);
+        setType();
         this.isDone = isDone;
     }
 
@@ -59,7 +61,9 @@ public class Deadline extends Task{
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
         return s;
     }
-
+    public void setType(){
+        type = "deadline";
+    }
     @Override
     public String toString() {
         String box = "[D][ ] ";

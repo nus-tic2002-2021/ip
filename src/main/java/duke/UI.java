@@ -12,6 +12,8 @@ public class UI {
     private final String EVENT_LENGTH_ERROR = "Event command has too many /at.";
     private final String INVALID_DATE_FORMAT = "Incorrect Date formatting. Only accepts yyyy-MM-dd HHmm format " +
             "\n\te.g. 2021-10-21 1300";
+    private final String INVALID_TIME_FORMAT = "Incorrect Time formatting. Only accepts H:mm format " +
+            "\n\te.g. 1:30";
 
     public void printIntro(){
         printLine();
@@ -23,7 +25,7 @@ public class UI {
     public void printInstruction(){
         System.out.println("\t1.) Enter *todo 'text'*--- to add todo task");    //
         System.out.println("\t2.) Enter *deadline 'text' /by 'DateTime'*to add deadline task");
-        System.out.println("\t3.) Enter *event 'text' /at 'DateTime'* to add event task");
+        System.out.println("\t3.) Enter *event 'text' /at 'DateTime' /for 'Duration'* to add event task");
         System.out.println("\t4.) Enter *list* to show list of tasks.");
         System.out.println("\t5.) Enter *done 'integer'* mark task as done.");
         System.out.println("\t6.) Enter *delete 'integer'* to delete task.");
