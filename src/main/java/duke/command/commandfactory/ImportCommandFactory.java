@@ -22,22 +22,7 @@ import duke.task.model.Task;
 import duke.task.model.ToDo;
 
 public class ImportCommandFactory extends CommandFactory {
-    public Command executeImportJsonTask(JsonObject jsonObj, TaskManager taskManager) {
-        Task task;
-        try {
-            task = jsonTaskToPojo(jsonObj);
-        } catch (Exception e) {
-            return new CommandExecutionError(e, "Error transforming json to java object " + jsonObj.toString());
-        }
-        if (task instanceof Event) {
-            return new CommandImportEvent((Event) task, taskManager);
-        } else if (task instanceof Deadline) {
-            return new CommandImportDeadline((Deadline) task, taskManager);
-        } else if (task instanceof ToDo) {
-            return new CommandImportToDo((ToDo) task, taskManager);
-        }
-        return new CommandUnknownRequest("Unrecognised Task type.");
-    }
+
 
     /**
      * Extract tasks from file.
@@ -54,6 +39,23 @@ public class ImportCommandFactory extends CommandFactory {
             return new CommandReadFileError("Invalid file read path. " + e);
         }
         return new CommandReadTasks(reader, path);
+    }
+
+    public Command executeImportJsonTask(JsonObject jsonObj, TaskManager taskManager) {
+        Task task;
+        try {
+            task = jsonTaskToPojo(jsonObj);
+        } catch (Exception e) {
+            return new CommandExecutionError(e, "Error transforming json to java object " + jsonObj.toString());
+        }
+        if (task instanceof Event) {
+            return new CommandImportEvent((Event) task, taskManager);
+        } else if (task instanceof Deadline) {
+            return new CommandImportDeadline((Deadline) task, taskManager);
+        } else if (task instanceof ToDo) {
+            return new CommandImportToDo((ToDo) task, taskManager);
+        }
+        return new CommandUnknownRequest("Unrecognised Task type.");
     }
 
 }
