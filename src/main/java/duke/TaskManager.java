@@ -150,9 +150,7 @@ public class TaskManager {
 
         return result;
     }
-    public Boolean containsTaskId(Integer taskId) {
-        return this.tasks.containsKey(taskId);
-    }
+
 
     public Task getTaskById(Integer taskId) {
         return this.tasks.getTaskById(taskId);
@@ -191,6 +189,9 @@ public class TaskManager {
         return tasksJson;
     }
 
+    public Boolean containsTaskId(Integer taskId) {
+        return this.tasks.containsKey(taskId);
+    }
 
     /**
      * Converts a JSON formatted task to POJO.
