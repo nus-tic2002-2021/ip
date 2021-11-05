@@ -12,7 +12,6 @@ import com.google.gson.stream.JsonWriter;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
 import duke.command.ExportCommandFactory;
-import duke.command.commandfactory.FileCommandFactory;
 import duke.command.commandfactory.ImportCommandFactory;
 import duke.command.errorcommand.CommandExecutionError;
 
@@ -20,7 +19,6 @@ public class FileResourceManager {
 
     private final ExportCommandFactory exportCommandFactory = new ExportCommandFactory();
     private final ImportCommandFactory importCommandFactory = new ImportCommandFactory();
-    private final FileCommandFactory fileCommandFactory = new FileCommandFactory();
 
     private String exportPathString;
     private String importPathString;
@@ -71,12 +69,9 @@ public class FileResourceManager {
      */
     public CommandJsonResponse executeExtractTasksFromFile() {
         Path path = this.getImportPath();
-        return this.getFileCommandFactory().executeExtractTasksFromFile(path);
+        return this.getImportCommandFactory().executeExtractTasksFromFile(path);
     }
 
-    private FileCommandFactory getFileCommandFactory() {
-        return this.fileCommandFactory;
-    }
 
     public Path getImportPath() {
         return stringToPath(this.getImportPathString());
@@ -157,7 +152,7 @@ public class FileResourceManager {
     public void etlTasksFromJsonFileString(TaskManager taskManager, Ui ui) throws Exception {
         Path path = this.getImportPath();
         ui.printInitialLoadTaskAttempt(path);
-        CommandJsonResponse reading = this.getFileCommandFactory().executeExtractTasksFromFile(path);
+        CommandJsonResponse reading = this.getImportCommandFactory().executeExtractTasksFromFile(path);
         ui.printCommandResponse(reading);
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasksJson(tasksFromFile, taskManager);

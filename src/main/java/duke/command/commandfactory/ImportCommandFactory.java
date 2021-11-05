@@ -1,11 +1,18 @@
 package duke.command.commandfactory;
 
 import static duke.dukeutility.parser.JsonTaskToObjectParser.jsonTaskToPojo;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import com.google.gson.JsonObject;
 import duke.TaskManager;
 import duke.command.Command;
+import duke.command.CommandJsonResponse;
 import duke.command.errorcommand.CommandExecutionError;
+import duke.command.errorcommand.CommandReadFileError;
 import duke.command.errorcommand.CommandUnknownRequest;
+import duke.command.systemcommand.CommandReadTasks;
 import duke.command.taskcommand.taskimport.CommandImportDeadline;
 import duke.command.taskcommand.taskimport.CommandImportEvent;
 import duke.command.taskcommand.taskimport.CommandImportToDo;
@@ -31,4 +38,22 @@ public class ImportCommandFactory extends CommandFactory {
         }
         return new CommandUnknownRequest("Unrecognised Task type.");
     }
+
+    /**
+     * Extract tasks from file.
+     *
+     * @param path file of saved tasks
+     * @return command
+     */
+    public CommandJsonResponse executeExtractTasksFromFile(Path path) {
+        Reader reader;
+        try {
+            reader = Files.newBufferedReader(path,
+                StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return new CommandReadFileError("Invalid file read path. " + e);
+        }
+        return new CommandReadTasks(reader, path);
+    }
+
 }
