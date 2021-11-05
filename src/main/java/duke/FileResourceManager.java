@@ -156,7 +156,7 @@ public class FileResourceManager {
         Path path = this.getImportPath();
         ui.printInitialLoadTaskAttempt(path);
         CommandJsonResponse reading = this.getFileCommandFactory().executeExtractTasksFromFile(path);
-        ui.displayCommandResponse(reading);
+        ui.printCommandResponse(reading);
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasksJson(tasksFromFile, taskManager);
     }

@@ -19,6 +19,7 @@ public class Ui {
 
     private Ui() {
     }
+    // Getters and Setters
 
     public Ui(PrintStream ps) {
         this.setPrintStream(ps);
@@ -44,9 +45,14 @@ public class Ui {
         return this.uiCommandFactory;
     }
 
-    /**
-     * Welcome Message
-     */
+
+
+    // Outputs
+
+    public String getExitLoopMessage() {
+        return "ok bye" + System.lineSeparator();
+    }
+
     public void printEntryMessage() {
         String logo = " _                   _                                _             " + System.lineSeparator()
             + "| |                 | |                              | |                " + System.lineSeparator()
@@ -61,15 +67,7 @@ public class Ui {
         this.getPrintStream().print("How can i help you? (See docs for usage)\n");
     }
 
-    public String getExitLoopMessage() {
-        return "ok bye" + System.lineSeparator();
-    }
 
-    /**
-     * Message: Attempt to load task.
-     *
-     * @param path
-     */
     public void printInitialLoadTaskAttempt(Path path) {
         if (path == null) {
             this.getPrintStream().print("Import path empty. " + System.lineSeparator());
@@ -86,26 +84,7 @@ public class Ui {
         this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
     }
 
-    /**
-     * cli session with request-response cycle
-     *
-     * @param taskManager
-     * @param frm
-     * @throws Exception
-     */
-    public void runTextCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
-        this.printBeginInputLoop();
-        String textCommand;
-        Scanner in = new Scanner(System.in);
-        do {
-            textCommand = in.nextLine();
-            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager, frm);
-            this.displayCommandResponse(command);
-            this.printEndOfResponse();
-        } while (this.isLoop());
-    }
-
-    protected void displayCommandResponse(Command c) throws Exception {
+    protected void printCommandResponse(Command c) throws Exception {
         ResponseType rt = c.getResponseType();
 
         String output = "";
@@ -141,4 +120,25 @@ public class Ui {
         }
         this.getPrintStream().print(output);
     }
+
+    /**
+     * cli session with request-response cycle
+     *
+     * @param taskManager
+     * @param frm
+     * @throws Exception
+     */
+    public void runTextCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
+        this.printBeginInputLoop();
+        String textCommand;
+        Scanner in = new Scanner(System.in);
+        do {
+            textCommand = in.nextLine();
+            Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager, frm);
+            this.printCommandResponse(command);
+            this.printEndOfResponse();
+        } while (this.isLoop());
+    }
+
+
 }
