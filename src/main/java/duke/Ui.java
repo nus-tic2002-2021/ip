@@ -46,12 +46,9 @@ public class Ui {
     }
 
 
-
     // Outputs
 
-    public String getExitLoopMessage() {
-        return "ok bye" + System.lineSeparator();
-    }
+
 
     public void printEntryMessage() {
         String logo = " _                   _                                _             " + System.lineSeparator()
@@ -63,11 +60,6 @@ public class Ui {
         this.getPrintStream().print("Hello from" + System.lineSeparator() + logo);
     }
 
-    public void printBeginInputLoop() {
-        this.getPrintStream().print("How can i help you? (See docs for usage)\n");
-    }
-
-
     public void printInitialLoadTaskAttempt(Path path) {
         if (path == null) {
             this.getPrintStream().print("Import path empty. " + System.lineSeparator());
@@ -76,11 +68,18 @@ public class Ui {
         }
     }
 
+    public void printBeginInputLoop() {
+        this.getPrintStream().print("How can i help you? (See docs for usage)" + System.lineSeparator());
+    }
+    public String getExitLoopMessage() {
+        return "ok bye" + System.lineSeparator();
+    }
+
     public void printTerminateMessage() {
         this.getPrintStream().print("See you again!" + System.lineSeparator());
     }
 
-    public void printEndOfResponse() {
+    private void printEndOfResponse() {
         this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
     }
 
