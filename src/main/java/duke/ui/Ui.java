@@ -88,7 +88,7 @@ public class Ui {
     }
 
     public static void validateEventCommand(String[] command) {
-        if (command.length < 2) {
+        if (command.length < 2 || command[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. Please re-enter:");
         } else if (!command[1].contains("/at")) {
             throw new DukeException("☹ OOPS!!! The date of a event cannot be empty. Please re-enter:");
@@ -96,7 +96,7 @@ public class Ui {
     }
 
     public static void validateDeadlineCommand(String[] command) {
-        if (command.length < 2) {
+        if (command.length < 2 || command[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. Please re-enter:");
         } else if (!command[1].contains("/by")) {
             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty. Please re-enter:");
@@ -104,7 +104,7 @@ public class Ui {
     }
 
     public static void validateTodoCommand(String[] command) {
-        if (command.length < 2) {
+        if (command.length < 2 || command[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. Please re-enter:");
         }
     }
@@ -118,7 +118,7 @@ public class Ui {
 
     public void printTaskList(TaskList taskList) throws NullPointerException{
         if (taskList.size() == 0) {
-            System.out.println("\tList is empty. Please add new task.");
+            System.out.println("List is empty. Please add new task.");
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
@@ -130,7 +130,7 @@ public class Ui {
 
 
     public static void validateDoneCommand(String[] command, TaskList taskList){
-        if (command.length < 2) {
+        if (command.length < 2 || command[1].equals("")) {
             throw new DukeException("☹ Please state task number.");
         }
         int taskNumber  = Integer.parseInt(command[1]) - 1;
@@ -161,7 +161,7 @@ public class Ui {
     }
 
     public void printTaskOfDate(TaskList taskList, LocalDate date){
-        System.out.println("You have total " + (taskList.size()) +" tasks on " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+        System.out.println("You have total " + (taskList.size()) +" tasks on " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))+".");
     }
 
     public static String validateDateTime(){
@@ -174,6 +174,16 @@ public class Ui {
         if (command.length < 2) {
             throw new DukeException("☹ OOPS!!! The date cannot be empty. Please re-enter:");
         }
+    }
+
+    public static void validateSearchCommand(String[] command){
+        if (command.length < 2 || command[1].equals("")) {
+            throw new DukeException("☹ OOPS!!! Please specify keyword:");
+        }
+    }
+
+    public void printTaskByKeyword(TaskList taskList, String keyword){
+        System.out.println("You have total " + (taskList.size()) +" tasks related to <" + keyword +">.");
     }
 
 }

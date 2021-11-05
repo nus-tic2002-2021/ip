@@ -13,5 +13,7 @@ public class Todo extends Task{
             return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription();
     }
 
-
+    public String[] getKeyword (){
+        return description.split(" ");
+    }
 }

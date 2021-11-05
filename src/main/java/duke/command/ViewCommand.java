@@ -14,7 +14,8 @@ public class ViewCommand extends Command {
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTaskList(taskList.getTaskByDate(date, taskList));
-        ui.printTaskOfDate(taskList.getTaskByDate(date, taskList), date);
+        TaskList taskByDate = taskList.getTaskByDate(date, taskList);
+        ui.printTaskList(taskByDate);
+        ui.printTaskOfDate(taskByDate, date);
     }
 }

@@ -46,4 +46,8 @@ public class Task {
 
     public String printTask(){return "";}
 
+    public String[] getKeyword(){
+        return description.split(" ");
+    }
+
 }

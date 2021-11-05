@@ -29,5 +29,8 @@ public class Deadline extends Task {
     public String printTask (){
         return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by: " + getDateTimeStr() + ")";
     }
+    public String[] getKeyword (){
+        return description.split(" ");
+    }
 
 }

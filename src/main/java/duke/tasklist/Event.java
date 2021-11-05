@@ -29,4 +29,8 @@ public class Event extends Task{
         //print out every element in the array
         return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(at: " + getDateTimeStr() + ")";
     }
+
+    public String[] getKeyword (){
+        return description.split(" ");
+    }
 }

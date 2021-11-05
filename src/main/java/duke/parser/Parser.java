@@ -55,12 +55,12 @@ public class Parser {
         assert text != null : "Command be null";
 
         String[] command = commandToArray(text);
-        String keyword = command[0].toUpperCase();
+        String instruction = command[0].toUpperCase();
         LocalDateTime dateTime;
 
         CommandCollections commandCollections;
         try {
-            commandCollections = CommandCollections.valueOf(keyword);
+            commandCollections = CommandCollections.valueOf(instruction);
         } catch (IllegalArgumentException e) {
             return new InvalidCommand("☹ The command <"+ command[0] +"> is not valid! Please re-enter:");
         }
@@ -105,6 +105,10 @@ public class Parser {
                 }catch (DateTimeParseException e) {
                     return new InvalidCommand("☹ Please enter datetime in the format of 'd/M/yyyy'");
                 }
+            case SEARCH:
+                Ui.validateSearchCommand(command);
+                String keyword = command[1];
+                return new SearchCommand(keyword);
             case BYE:
                 return new ByeCommand();
             default:
