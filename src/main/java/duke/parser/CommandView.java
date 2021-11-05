@@ -10,7 +10,7 @@ import duke.ui.UI;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class CommandViewSchedule extends CommandBase{
+public class CommandView extends CommandBase{
 
     static final int  dateLength = 3;
 
@@ -19,7 +19,7 @@ public class CommandViewSchedule extends CommandBase{
      *
      * @param command the full command.
      */
-    public CommandViewSchedule(String command){super(command);}
+    public CommandView(String command){super(command);}
 
 
     /**

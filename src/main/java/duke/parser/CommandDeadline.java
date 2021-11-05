@@ -39,7 +39,7 @@ CommandDeadline extends CommandBase {
      */
     @Override
     public boolean execute(TaskList taskList, UI ui, StorageTaskList storageTaskList) throws TimeManagementException, TimeParseException{
-        boolean success = false;
+        boolean isSuccess = false;
         try {
             if (!CommandEnums.DEADLINE.getName().equals(super.keyword)){
                 throw new UnknownSyntaxException(super.keyword);
@@ -51,7 +51,7 @@ CommandDeadline extends CommandBase {
             //endregion
             Task task = new Deadline(deadlineCommand[0], dateT);
             if(taskList.addTask(task)){
-                success = true;
+                isSuccess = true;
                 assert taskList.getListSize()>0:"There should at least have 1 task";
             }
         } catch (IndexOutOfBoundsException e) {
@@ -60,7 +60,7 @@ CommandDeadline extends CommandBase {
             throw new TimeParseException(e.getMessage());
         }
 
-        if (success) {
+        if (isSuccess) {
             reply(taskList);
         }
 
@@ -76,12 +76,12 @@ CommandDeadline extends CommandBase {
      */
     private LocalDateTime timeParse(String str) throws TimeParseException{
         if (!str.contains("/")){
-            throw new TimeParseException("DateTime Format YYYY/MM/DD");
+            throw new TimeParseException("Date Format YYYY/MM/DD");
         }
         // gen yyyy,mm,dd ssss
         String[] date = str.split("/", 3);
         if (date.length < dateLength){
-            throw new TimeParseException("DateTime Format YYYY/MM/DD");
+            throw new TimeParseException("Date Format YYYY/MM/DD");
         }
 
         // gen time
@@ -109,13 +109,17 @@ CommandDeadline extends CommandBase {
      */
     private int get24HrFormat(String t){
         int timeInterval = 12;
-        int timeVal;
-        if(t.contains("AM")){
-            timeVal = Integer.parseInt(t.replace("AM", "").stripTrailing());
-        } else{
-            timeVal = Integer.parseInt(t.replace("PM", "").stripTrailing());
-            timeVal +=timeInterval;
+        int timeValue;
+        if(t.toUpperCase().contains("AM")){
+            timeValue = Integer.parseInt(t.replace("AM", "").stripTrailing());
+        } else if(t.toUpperCase().contains("PM")){
+            timeValue = Integer.parseInt(t.replace("PM", "").stripTrailing());
+            timeValue += timeInterval;
+        }else{
+            throw new TimeParseException("Time Format 1AM/1PM");
         }
-        return timeVal;
+
+        return timeValue;
     }
+
 }

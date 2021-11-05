@@ -14,9 +14,9 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Beginning function taking in filepath
+     * Initializes entire duke.
      *
-     * @param filePath - filepath to storage
+     * @param filePath - filepath to storage.
      */
     public Duke(String filePath) {
         ui = new UI();

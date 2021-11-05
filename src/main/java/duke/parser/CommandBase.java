@@ -84,13 +84,20 @@ public class CommandBase {
             assert fullCommand.contains("done"):"It should have confirmed a done command by this stage";
             try {
                 String[] doneCommand = fullCommand.split(" ");
-                taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).setDone();
-                returnMessage.taskDoneFeedback();
-                System.out.println("     " + taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).toString());
+                if(Integer.parseInt(doneCommand[1]) - 1 >= taskList.getListSize()){
+                    throw new TaskNotFoundException("you only have "+taskList.getListSize()+" and you entered "+Integer.parseInt(doneCommand[1]));
+                }
+                if(taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).isDone()){
+                    returnMessage.taskAlreadyDoneFeedback();
+                } else{
+                    taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).setDone();
+                    returnMessage.taskDoneFeedback();
+                    System.out.println("     " + taskList.getTask(Integer.parseInt(doneCommand[1]) - 1).toString());
+                }
                 returnMessage.separator();
                 return;
             } catch(NumberFormatException nf){
-                throw new TaskNotFoundException("task not found");
+                throw new TaskNotFoundException("task does not exist");
             }
         }
         returnMessage.taskAddFeedback();

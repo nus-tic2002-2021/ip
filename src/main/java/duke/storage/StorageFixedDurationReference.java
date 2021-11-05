@@ -22,7 +22,6 @@ public class StorageFixedDurationReference {
 
     /** Creates Storage_Unscheduled object. */
     public StorageFixedDurationReference() {
-        //this.fileName = fileName;
         this.file = new File(System.getProperty("user.dir") + "/src/main/java/Duke/storage/fixedDurationTask.txt"); // create a File for the given file path
         this.fileName = file.getName();
     }
@@ -34,7 +33,7 @@ public class StorageFixedDurationReference {
      */
     public FixedDurationTaskList load() throws DukeException {
         FixedDurationTaskList unscheduledRecords = new FixedDurationTaskList();
-        assert !file.exists():"The file should exist by now";
+        assert file.exists():"The file should exist by now";
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;

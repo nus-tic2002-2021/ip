@@ -1,4 +1,4 @@
-package duke.TaskTests;
+package duke.tasktest;
 
 import duke.task.ToDos;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,6 @@ public class ToDosTest {
     public void todo(){
         ToDos toDos = new ToDos("eat");
         assertEquals("[T][ ] eat", toDos.toString());
-        assertEquals("T | 0 | eat", toDos.encodeTask());
+        assertEquals("T | 0 | eat | 0", toDos.encodeTask());
     }
 }

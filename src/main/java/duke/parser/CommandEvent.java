@@ -36,7 +36,7 @@ public class CommandEvent extends CommandBase {
      */
     @Override
     public boolean execute(TaskList taskList, UI ui, StorageTaskList storageTaskList) throws TimeManagementException{
-        boolean success = false;
+        boolean isSuccess = false;
         try {
             if (!CommandEnums.EVENT.getName().equals(super.keyword)){
                 throw new UnknownSyntaxException(super.keyword);
@@ -47,18 +47,19 @@ public class CommandEvent extends CommandBase {
             LocalDate date = dateParse(dateTime);
             String[] dateTimeInformation = dateTime.split(" ", 2);
             String timeRange = dateTimeInformation[1];
+            System.out.println(timeRange);
             String from = timeRange.split("-", 2)[0];
             String to = timeRange.split("-", 2)[1];
             Task task = new Events(description, date, timeParse(get24HrFormat(from)),timeParse(get24HrFormat(to)));
             if(taskList.addTask(task)){
-                success = true;
+                isSuccess = true;
                 assert taskList.getListSize()>0:"There should at least have 1 task";
             }
         } catch (IndexOutOfBoundsException e) {
             throw new TimeManagementException();
         }
 
-        if (success) {
+        if (isSuccess) {
             reply(taskList);
         }
 
@@ -74,12 +75,12 @@ public class CommandEvent extends CommandBase {
      */
     private LocalDate dateParse(String str) throws TimeParseException{
         if (!str.contains("/")){
-            throw new TimeParseException("DateTime Format YYYY/MM/DD");
+            throw new TimeParseException("Date Format YYYY/MM/DD");
         }
         // gen yyyy,mm,dd ssss
         String[] date = str.split("/", 3);
         if (date.length < dateLength){
-            throw new TimeParseException("DateTime Format YYYY/MM/DD");
+            throw new TimeParseException("Date Format YYYY/MM/DD");
         }
 
         // gen time
@@ -106,16 +107,18 @@ public class CommandEvent extends CommandBase {
      * @return integer time such as 1, 22.
      */
     private int get24HrFormat(String t){
-        int timeinterval = 12;
-        int timeVal;
-        if(t.contains("AM")){
-            timeVal = Integer.parseInt(t.replace("AM", "").stripTrailing());
-        } else{
-            timeVal = Integer.parseInt(t.replace("PM", "").stripTrailing());
-            timeVal +=timeinterval;
+        int timeInterval = 12;
+        int timeValue;
+        if(t.toUpperCase().contains("AM")){
+            timeValue = Integer.parseInt(t.replace("AM", "").stripTrailing());
+        } else if(t.toUpperCase().contains("PM")){
+            timeValue = Integer.parseInt(t.replace("PM", "").stripTrailing());
+            timeValue += timeInterval;
+        }else{
+            throw new TimeParseException("Time Format 1AM/1PM");
         }
 
-        return timeVal;
+        return timeValue;
     }
 
     /**

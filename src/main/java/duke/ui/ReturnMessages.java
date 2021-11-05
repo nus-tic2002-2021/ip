@@ -21,6 +21,13 @@ public class ReturnMessages {
         System.out.println("     Nice! I've marked this task as done:");
     }
 
+    /** Feedbacks when a task is already done. */
+    public void taskAlreadyDoneFeedback(){
+        separator();
+        System.out.println("     This task is already done.");
+    }
+
+
     /** Feedbacks when adding a task. */
     public void taskAddFeedback(){
         separator();
@@ -177,7 +184,7 @@ public class ReturnMessages {
      */
     public void exception_feedback_taskNotFound(String message){
         separator();
-        System.out.printf("     OOPS!!! Please key in by Tasks.Task ID instead of [%s]\n", message);
+        System.out.printf("     OOPS!!! Task was not found [%s]\n", message);
         separator();
     }
 

@@ -57,6 +57,10 @@ public class Task {
         return taskType;
     }
 
+    /** Gets the task done condition. */
+    public boolean isDone(){
+        return isDone;
+    }
 
     /** Sets the task to Done. */
     public void setDone(){
@@ -64,7 +68,7 @@ public class Task {
     }
 
     /**
-     * Base Function to print task.
+     * Prints task on its own syntax.
      *
      * @return tasks [] TASK.
      */

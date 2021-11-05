@@ -30,7 +30,7 @@ public class CommandTodo extends CommandBase {
      */
     @Override
     public boolean execute(TaskList taskList, UI ui, StorageTaskList storageTaskList) {
-        boolean success = false;
+        boolean isSuccess = false;
         try {
             if (!CommandEnums.TODO.getName().equals(super.keyword)){
                 throw new UnknownSyntaxException(super.keyword);
@@ -45,14 +45,14 @@ public class CommandTodo extends CommandBase {
                 task = new ToDos(super.detail);
             }
             if(taskList.addTask(task)){
-                success = true;
+                isSuccess = true;
                 assert taskList.getListSize()>0:"There should at least have 1 task";
             }
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownSyntaxException(super.keyword);
         }
 
-        if (success) {
+        if (isSuccess) {
             reply(taskList);
         }
 

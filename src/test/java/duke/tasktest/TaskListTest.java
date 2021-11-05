@@ -1,4 +1,4 @@
-package duke.TaskTests;
+package duke.tasktest;
 
 import duke.task.Deadline;
 import duke.task.Events;

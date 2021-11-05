@@ -1,4 +1,4 @@
-package duke.StorageTests;
+package duke.storagetest;
 
 import duke.storage.StorageTaskList;
 import duke.task.Deadline;
@@ -17,14 +17,16 @@ public class StorageTaskListTest {
     @Test
     public void storage() throws IOException {
         LocalDateTime sample = LocalDateTime.of(2021,12,25,16,0,0);
+        TaskList tasks = new TaskList();
         ToDos toDos = new ToDos("eat");
         Deadline deadline = new Deadline("return book", sample);
         Events event = new Events("Finish Homework",sample.toLocalDate(),sample.toLocalTime(),sample.toLocalTime().plusHours(2));
-        TaskList tasks = new TaskList();
         tasks.addTask(toDos);
+        assert tasks.getListSize()==1:"There should exist  1 task";
         tasks.addTask(deadline);
+        assert tasks.getListSize()==2:"There should exist  2 task";
         tasks.addTask(event);
-
+        assert tasks.getListSize()==3:"There should exist  3 task";
         StorageTaskList store = new StorageTaskList("Testing.txt");
         assertFalse(store.existence());
         store.createFile();
