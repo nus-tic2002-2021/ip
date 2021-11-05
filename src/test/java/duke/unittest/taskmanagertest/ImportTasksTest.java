@@ -43,7 +43,7 @@ public class ImportTasksTest extends TestStream {
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
 
         TaskManager tm2 = new TaskManager();
-        frm.importTasksJson(tasksFromFile, tm2);
+        frm.importTasks(tasksFromFile, tm2);
 
         assertEquals(tm2.getTaskById(0).getTaskDescription(), tm1.getTaskById(0).getTaskDescription());
         assertEquals(tm2.getTaskById(1).getTaskDescription(), tm1.getTaskById(1).getTaskDescription());

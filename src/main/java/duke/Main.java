@@ -26,7 +26,7 @@ public class Main {
     public static void run(PrintStream out, TaskManager taskManager, FileResourceManager frm) throws Exception {
         Ui ui = new Ui(out);
         ui.printEntryMessage();
-        frm.etlTasksFromJsonFileString(taskManager, ui);
+        frm.etlTasks(taskManager, ui);
         ui.runTextCommandLoop(taskManager, frm);
         ui.printTerminateMessage();
     }

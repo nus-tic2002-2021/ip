@@ -123,7 +123,7 @@ public class FileResourceManager {
      * @param tasks       json array of tasks
      * @param taskManager task manager to import to.
      */
-    public void importTasksJson(JsonArray tasks, TaskManager taskManager) {
+    public void importTasks(JsonArray tasks, TaskManager taskManager) {
         if (tasks == null || tasks.isEmpty()) {
             return;
         }
@@ -142,12 +142,12 @@ public class FileResourceManager {
      * @param ui          ui display
      * @throws Exception
      */
-    public void etlTasksFromJsonFileString(TaskManager taskManager, Ui ui) throws Exception {
+    public void etlTasks(TaskManager taskManager, Ui ui) throws Exception {
         Path path = this.getImportPath();
         ui.printInitialLoadTaskAttempt(path);
         CommandJsonResponse reading = this.getImportCommandFactory().executeExtractTasksFromFile(path);
         ui.printCommandResponse(reading);
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
-        this.importTasksJson(tasksFromFile, taskManager);
+        this.importTasks(tasksFromFile, taskManager);
     }
 }
