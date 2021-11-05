@@ -27,7 +27,7 @@ public class Main {
         Ui ui = new Ui(out);
         ui.printEntryMessage();
         frm.etlTasksFromJsonFileString(taskManager, ui);
-        ui.textCommandLoop(taskManager, frm);
+        ui.runTextCommandLoop(taskManager, frm);
         ui.printTerminateMessage();
     }
 

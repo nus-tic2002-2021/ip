@@ -93,7 +93,7 @@ public class Ui {
      * @param frm
      * @throws Exception
      */
-    public void textCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
+    public void runTextCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
         String textCommand;
         Scanner in = new Scanner(System.in);

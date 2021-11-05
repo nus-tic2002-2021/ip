@@ -66,7 +66,7 @@ public class UiTest extends TestStream {
         String out2 = getExpectedOutputExitInputLoop();
 
         System.setIn(buildCommandInputStream(in0, in1));
-        ui.textCommandLoop(tm, null);
+        ui.runTextCommandLoop(tm, null);
 
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
         assertEquals(expectedOutput, this.getOutput());
@@ -96,7 +96,7 @@ public class UiTest extends TestStream {
         String out2 = getExpectedOutputExitInputLoop();
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
-        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        new Ui(this.getPrintStream()).runTextCommandLoop(tm, null);
         assertEquals(expectedOutput, this.getOutput());
     }
 
@@ -132,7 +132,7 @@ public class UiTest extends TestStream {
 
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
-        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        new Ui(this.getPrintStream()).runTextCommandLoop(tm, null);
         assertEquals(expectedOutput, this.getOutput());
     }
 }
