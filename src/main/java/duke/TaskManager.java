@@ -127,6 +127,12 @@ public class TaskManager {
         filtering.sort(TaskComparator::compareTaskDate);
         return filtering;
     }
+
+
+    /**
+     * Sort tasks into map by description. Return entries with more than one tasks.
+     * @return
+     */
     public HashMap<String, ArrayList<Task>> getDuplicateDescriptionsAsArray() {
 
         HashMap<String, ArrayList<Task>> result = new HashMap<>();
