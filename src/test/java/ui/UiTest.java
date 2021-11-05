@@ -27,6 +27,7 @@ public class UiTest {
     @Test
     public void testShowLine(){
         new Ui().showLine();
-        assertEquals("__________________________________________", outContent.toString().trim());
+        assertEquals("____________________________________________________________________________________",
+                outContent.toString().trim());
     }
 }

@@ -45,7 +45,6 @@ public class EventTask extends Task {
      * Returns the event date time (period) of the <code>EventTask</code> object.
      */
     public String getAt() {
-        // todo: reformat display
         return getStart() + " - " + getEnd();
     }
 

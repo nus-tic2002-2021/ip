@@ -18,7 +18,7 @@ public final class Messages {
     public static final String HELP_MSG = "View all existing tasks:     list\n" +
         "Add a new to-do:             todo {taskDescription}\n" +
         "Add a new deadline:          deadline {taskDescription} /by {yyyy-MM-dd HHmm}\n" +
-        "Add a new event:             event {taskDescription} /at {yyyy-MM-dd HHmm} to {yyyy-MM-dd HHmm}\n" +
+        "Add a new event:             event {taskDescription} /at {yyyy-MM-dd HHmm} -to {yyyy-MM-dd HHmm}\n" +
         "Mark a task as completed:    done {taskId}\n" +
         "Delete a task:               delete {taskId}\n" +
         "Fine task by keyword:        find {keyword}\n" +

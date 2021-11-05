@@ -119,7 +119,7 @@ public class Parser {
                         "\nDescription is missing.");
             }
 
-            String[] times = eventInfo[1].split(" to ");
+            String[] times = eventInfo[1].split(" -to ");
             LocalDateTime start = LocalDateTime.parse(times[0], formatter);
             LocalDateTime end = LocalDateTime.parse(times[1], formatter);
             Task task = new EventTask(description, start, end);
@@ -129,7 +129,7 @@ public class Parser {
                     "Event time or description is missing.");
         } catch (DateTimeParseException e) {
             return new InvalidCommand("Task cannot be added. \n" +
-                    "Please enter event datetime in the format of 'yyyy-MM-dd HHmm to yyyy-MM-dd HHmm'");
+                    "Please enter event datetime in the format of 'yyyy-MM-dd HHmm -to yyyy-MM-dd HHmm'");
         }
     }
 

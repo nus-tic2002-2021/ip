@@ -23,24 +23,24 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("__________________________________________");
+        System.out.println("____________________________________________________________________________________");
         System.out.println("Hello, I'm Duke!" );
         System.out.println("What can I do for you?");
         System.out.println("Ps: Type 'help' for more information.");
-        System.out.println("__________________________________________");
+        System.out.println("____________________________________________________________________________________");
     }
 
     /** Prints separator line. */
     public void showLine() {
-        System.out.println("__________________________________________");
+        System.out.println("____________________________________________________________________________________");
     }
 
     /** Prints all command instructions. */
     public void showHelp(){
         System.out.println("View all existing tasks:     list");
-        System.out.println("Add a new to-do:             todo {taskDescription}");
-        System.out.println("Add a new deadline:          deadline {taskDescription} /by {yyyy-MM-dd HHmm}");
-        System.out.println("Add a new event:             event {taskDescription} /at {yyyy-MM-dd HHmm} to {yyyy-MM-dd HHmm}");
+        System.out.println("Add a new to-do:             todo {description}");
+        System.out.println("Add a new deadline:          deadline {description} /by {yyyy-MM-dd HHmm}");
+        System.out.println("Add a new event:             event {description} /at {yyyy-MM-dd HHmm} -to {yyyy-MM-dd HHmm}");
         System.out.println("Mark a task as completed:    done {taskId}");
         System.out.println("Delete a task:               delete {taskId}");
         System.out.println("Fine task by keyword:        find {keyword}");
