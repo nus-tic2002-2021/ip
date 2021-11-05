@@ -61,9 +61,9 @@ public class UiCommandFactory extends CommandFactory {
             } else if (isRequestList(text)) {
                 return new CommandListAll(taskManager);
             } else if (isRequestMarkTaskAsDone(text)) {
-                return this.executeCommandMarkTaskAsDone(text, taskManager);
+                return this.executeCommandMarkTaskComplete(text, taskManager);
             } else if (isRequestMarkTaskAsIncomplete(text)) {
-                return this.executeCommandMarkTaskAsIncomplete(text, taskManager);
+                return this.executeCommandMarkTaskIncomplete(text, taskManager);
             } else if (isRequestAddToDo(text)) {
                 return this.executeCommandAddToDo(text, taskManager);
             } else if (isRequestAddDeadline(text)) {
@@ -159,7 +159,7 @@ public class UiCommandFactory extends CommandFactory {
     }
 
 
-    protected Command executeCommandMarkTaskAsDone(String text, TaskManager taskManager) {
+    protected Command executeCommandMarkTaskComplete(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer taskId;
@@ -179,7 +179,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandMarkTaskAsDone(taskManager, taskId);
     }
 
-    protected Command executeCommandMarkTaskAsIncomplete(String text, TaskManager taskManager) {
+    protected Command executeCommandMarkTaskIncomplete(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer taskId;
