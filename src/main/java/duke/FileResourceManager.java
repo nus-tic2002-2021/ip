@@ -51,18 +51,6 @@ public class FileResourceManager {
     private void setImportPathString(String importPathString) {
         this.importPathString = importPathString;
     }
-
-    /**
-     * Import tasks from this import path.
-     *
-     * @return
-     */
-    public CommandJsonResponse executeExtractTasksFromFile() {
-        Path path = this.getImportPath();
-        return this.getImportCommandFactory().executeExtractTasksFromFile(path);
-    }
-
-
     public Path getImportPath() {
         return stringToPath(this.getImportPathString());
     }
@@ -77,6 +65,16 @@ public class FileResourceManager {
 
     public Path getExportPath() {
         return stringToPath(this.getExportPathString());
+    }
+
+    /**
+     * Import tasks from this import path.
+     *
+     * @return
+     */
+    public CommandJsonResponse executeExtractTasksFromFile() {
+        Path path = this.getImportPath();
+        return this.getImportCommandFactory().executeExtractTasksFromFile(path);
     }
 
     /**
@@ -152,6 +150,4 @@ public class FileResourceManager {
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
         this.importTasksJson(tasksFromFile, taskManager);
     }
-
-
 }
