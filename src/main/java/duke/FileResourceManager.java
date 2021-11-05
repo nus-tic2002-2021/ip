@@ -53,16 +53,6 @@ public class FileResourceManager {
     }
 
     /**
-     * Writes tasks to path.
-     *
-     * @param tasksJson tasks in JSON format
-     * @return
-     */
-    public Command executeExportTasks(JsonArray tasksJson, Path writePath) {
-        return this.getExportCommandFactory().exportTasks(tasksJson, writePath);
-    }
-
-    /**
      * Import tasks from this import path.
      *
      * @return
@@ -96,9 +86,17 @@ public class FileResourceManager {
      * @return
      */
     public Command executeCommandSave(TaskManager taskManager) {
-        JsonWriter jw;
         JsonArray tasksJson = new JsonArray();
         Path exportPath;
+        JsonWriter jw;
+
+        // get the data to write to
+        try {
+            tasksJson = taskManager.getAllAsJson();
+        } catch (Exception e) {
+            return new CommandExecutionError(e, "Obtaining tasks collection from task manager failed " + tasksJson);
+        }
+        // try to get the export path
         try {
             exportPath = this.getExportPath();
             if (exportPath == null) {
@@ -111,17 +109,14 @@ public class FileResourceManager {
         } catch (Exception e) {
             return new CommandExecutionError(e, e.getMessage());
         }
+        // create a Json writer of export path.
         try {
             jw = new JsonWriter(new FileWriter(exportPath.toString(), false));
         } catch (Exception e) {
             return new CommandExecutionError(e, "JsonWriter initialization failed.");
         }
-        try {
-            tasksJson = taskManager.getAllAsJson();
-        } catch (Exception e) {
-            return new CommandExecutionError(e, "Obtaining tasks collection from task manager failed " + tasksJson);
-        }
-        return this.executeExportTasks(tasksJson, exportPath);
+
+        return this.getExportCommandFactory().exportTasks(tasksJson, exportPath, jw);
     }
 
     /**
