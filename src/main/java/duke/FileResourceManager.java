@@ -11,13 +11,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
-import duke.command.commandfactory.ExportCommandFactory;
 import duke.command.commandfactory.ImportCommandFactory;
 import duke.command.errorcommand.CommandExecutionError;
+import duke.command.systemcommand.CommandExportTasksToFile;
 
 public class FileResourceManager {
 
-    private final ExportCommandFactory exportCommandFactory = new ExportCommandFactory();
     private final ImportCommandFactory importCommandFactory = new ImportCommandFactory();
 
     private String exportPathString;
@@ -38,9 +37,6 @@ public class FileResourceManager {
     private FileResourceManager() {
     }
 
-    private ExportCommandFactory getExportCommandFactory() {
-        return this.exportCommandFactory;
-    }
 
     private ImportCommandFactory getImportCommandFactory() {
         return this.importCommandFactory;
@@ -70,15 +66,7 @@ public class FileResourceManager {
         return stringToPath(this.getExportPathString());
     }
 
-    /**
-     * Import tasks from this import path.
-     *
-     * @return
-     */
-    public CommandJsonResponse executeExtractTasksFromFile() {
-        Path path = this.getImportPath();
-        return this.getImportCommandFactory().executeExtractTasksFromFile(path);
-    }
+
 
     /**
      * Save tasks in taskManager to this fileResourceManager's export path.
@@ -116,11 +104,20 @@ public class FileResourceManager {
         } catch (Exception e) {
             return new CommandExecutionError(e, "JsonWriter initialization failed.");
         }
-
-        return this.getExportCommandFactory().exportTasks(tasksJson, exportPath, jw);
+        return new CommandExportTasksToFile(tasksJson, exportPath, jw);
     }
 
-    /**
+    /** Helper class
+     * Import tasks from this import path.
+     *
+     * @return
+     */
+    public CommandJsonResponse executeExtractTasksFromFile() {
+        Path path = this.getImportPath();
+        return this.getImportCommandFactory().executeExtractTasksFromFile(path);
+    }
+
+    /** Helper class
      * Import tasks to task manager
      *
      * @param tasks       json array of tasks
@@ -140,7 +137,7 @@ public class FileResourceManager {
 
     /**
      * Extract from import path, transform to json and load into task manager.
-     *
+     * Display activities to user also.
      * @param taskManager task manager to import to
      * @param ui          ui display
      * @throws Exception
