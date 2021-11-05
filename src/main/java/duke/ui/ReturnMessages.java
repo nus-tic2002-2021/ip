@@ -110,17 +110,9 @@ public class ReturnMessages {
     }
 
     public void taskSchedulingFeedback(LocalDate datePrint, ArrayList<Task> list){
-        ArrayList<Task> printable = new ArrayList<>();
-        for(Task t: list){
-            if(t.getTaskType().equals("event") || t.getTaskType().equals("deadline")){
-                if(t.getDate().equals(datePrint)){
-                    printable.add(t);
-                }
-            }
-        }
         separator();
-        System.out.println("     Here are the tasks in your list scheduled for: " +datePrint.toString());
-        for(Task t : printable){
+        System.out.println("     Here are the tasks in your list scheduled for: " +datePrint.toString() + ", "+datePrint.getDayOfWeek());
+        for(Task t : list){
             System.out.println("    "+t.toString());
         }
         separator();

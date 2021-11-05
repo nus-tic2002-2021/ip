@@ -142,7 +142,14 @@ public class TaskList {
         if(this.listSize == 0){
             throw new EmptyTaskListException("empty task");
         }
-        printer.taskSchedulingFeedback(dateToPrint, taskList);
+        ArrayList<Task> tempTaskList = new ArrayList<>();
+        for(Task t : taskList){
+            if(!t.getTaskType().equals("todo")){
+                tempTaskList.add(t);
+            }
+        }
+        sort(tempTaskList);
+        printer.taskSchedulingFeedback(dateToPrint, tempTaskList);
     }
 
     // Comparison done using compareTo function

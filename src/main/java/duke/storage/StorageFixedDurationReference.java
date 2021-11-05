@@ -22,7 +22,7 @@ public class StorageFixedDurationReference {
 
     /** Creates Storage_Unscheduled object. */
     public StorageFixedDurationReference() {
-        this.file = new File(System.getProperty("user.dir") + "/src/main/java/Duke/storage/fixedDurationTask.txt"); // create a File for the given file path
+        this.file = new File(System.getProperty("user.dir") + "/fixedDurationTask.txt"); // create a File for the given file path
         this.fileName = file.getName();
     }
 

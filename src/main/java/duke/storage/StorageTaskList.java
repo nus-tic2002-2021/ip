@@ -36,7 +36,7 @@ public class StorageTaskList {
      */
     public StorageTaskList(String fileName) {
         this.fileName = fileName;
-        this.file = new File(System.getProperty("user.dir") + "/src/main/java/Duke/storage/"+fileName); // create a File for the given file path
+        this.file = new File(System.getProperty("user.dir") + "/"+fileName); // create a File for the given file path
     }
 
     /**
