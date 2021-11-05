@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import duke.command.Command;
 import duke.command.CommandJsonResponse;
-import duke.command.ExportCommandFactory;
+import duke.command.commandfactory.ExportCommandFactory;
 import duke.command.commandfactory.ImportCommandFactory;
 import duke.command.errorcommand.CommandExecutionError;
 

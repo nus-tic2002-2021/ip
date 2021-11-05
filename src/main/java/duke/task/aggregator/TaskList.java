@@ -14,7 +14,7 @@ public class TaskList {
 
 
     public ConcurrentHashMap<Integer, Task> getContainer() {
-        return this.getContainer();
+        return this.container;
     }
 
 
