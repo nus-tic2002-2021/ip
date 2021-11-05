@@ -71,9 +71,7 @@ public class Ui {
     public void printBeginInputLoop() {
         this.getPrintStream().print("How can i help you? (See docs for usage)" + System.lineSeparator());
     }
-    public String getExitLoopMessage() {
-        return "ok bye" + System.lineSeparator();
-    }
+
 
     public void printTerminateMessage() {
         this.getPrintStream().print("See you again!" + System.lineSeparator());
@@ -81,6 +79,11 @@ public class Ui {
 
     private void printEndOfResponse() {
         this.getPrintStream().print("\t\t\t\t\t\t\t\t -" + System.lineSeparator());
+    }
+
+
+    private String getExitLoopMessage() {
+        return "ok bye" + System.lineSeparator();
     }
 
     protected void printCommandResponse(Command c) throws Exception {
