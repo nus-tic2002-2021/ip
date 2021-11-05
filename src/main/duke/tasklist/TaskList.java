@@ -38,12 +38,13 @@ public class TaskList {
         return taskList;
     }
 
-    public TaskList getTaskByDate(LocalDate date) {
+    public TaskList getTaskByDate(LocalDate date, TaskList taskList) {
         TaskList taskByDate = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            while (taskList.get(i).getType().equals("E") | taskList.get(i).getType().equals("D")) {
-                while (taskList.get(i).getDateTime().toLocalDate().equals(date))
+            if (taskList.get(i).getType().equals("E") | taskList.get(i).getType().equals("D")) {
+                if (taskList.get(i).getDateTime().toLocalDate().equals(date)) {
                     taskByDate.addTask(taskList.get(i));
+                }
             }
         }
         return taskByDate;

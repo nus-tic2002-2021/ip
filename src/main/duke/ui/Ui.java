@@ -1,10 +1,14 @@
 package duke.ui;
 
 import duke.exception.DukeException;
-import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
+
+import static duke.parser.Parser.parseDate;
 
 public class Ui {
 
@@ -107,26 +111,9 @@ public class Ui {
 
     public void Separator() {System.out.println(SEPARATOR);}
 
-    public void printAdd(Task task){
-        task.printTask();
-    }
-
-    public void printDeadline(TaskList taskList){
+    public void printAddCommand(TaskList taskList){
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(by:" + taskList.get(taskList.size()-1).getDateTimeStr() + ")");
-        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
-    }
-
-    public void printEvent(TaskList taskList){
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription() + "(at:" + taskList.get(taskList.size()-1).getDateTimeStr() + ")");
-        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
-    }
-
-    public void printTodo(TaskList taskList){
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + taskList.get(taskList.size()-1).getType() +"]" + "[" + taskList.get(taskList.size()-1).getStatusIcon() +"] " + taskList.get(taskList.size()-1).getDescription());
-        System.out.println("Now you have " + (taskList.size()) +" tasks in the list.");
+        System.out.println("\t"+taskList.get(taskList.size()-1).printTask());
     }
 
     public void printTaskList(TaskList taskList) throws NullPointerException{
@@ -136,6 +123,7 @@ public class Ui {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 System.out.println("\t" + (i + 1) + "." + taskList.get(i).printTask());
+
             }
         }
     }
@@ -155,17 +143,25 @@ public class Ui {
     public static void printDone(String[] command, TaskList taskList){
         int taskNumber  = Integer.parseInt(command[1]) - 1;
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t[" + taskList.get(taskNumber).getType() + "]"+ "[X] " + taskList.get(taskNumber).getDescription());
+        System.out.println("\t"+taskList.get(taskNumber).printTask());
     }
 
     public static void printDelete(String[] command, TaskList taskList){
         int taskNumber  = Integer.parseInt(command[1]) - 1;
         System.out.println("Noted. I've removed this task: ");
-        System.out.println("\t[" + taskList.get(taskNumber).getType() + "]"+ "[" + taskList.get(taskNumber).getStatusIcon() + "] " + taskList.get(taskNumber).getDescription());
+        System.out.println("\t"+taskList.get(taskNumber).printTask());
     }
 
     public void printTaskCount(TaskList taskList){
-        System.out.println("\tYou have total " + (taskList.size()) +" tasks in the list.");
+        System.out.println("Now you have total " + (taskList.size()) +" tasks in the list.");
+    }
+
+    public void printTaskListStr(TaskList taskList) {
+        System.out.println("You have total " + (taskList.size()) + " tasks in the list.");
+    }
+
+    public void printTaskOfDate(TaskList taskList, LocalDate date){
+        System.out.println("You have total " + (taskList.size()) +" tasks on " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
     }
 
     public static String validateDateTime(){
@@ -174,10 +170,9 @@ public class Ui {
     }
 
     public static void validateViewCommand(String[] command){
+        LocalDate dateTime = parseDate(command);
         if (command.length < 2) {
             throw new DukeException("☹ OOPS!!! The date cannot be empty. Please re-enter:");
-        } else if (!command[1].contains("/")) {
-            throw new DukeException("☹ Please enter datetime in the format of 'dd/MM/yyyy'");
         }
     }
 

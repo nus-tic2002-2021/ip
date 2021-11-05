@@ -27,6 +27,6 @@ public class Event extends Task{
     @Override
     public String printTask (){
         //print out every element in the array
-        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by: " + getDateTimeStr() + ")";
+        return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(at: " + getDateTimeStr() + ")";
     }
 }

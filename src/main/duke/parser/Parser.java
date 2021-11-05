@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
@@ -22,15 +23,15 @@ public class Parser {
         return text.split(" ",2);
     }
 
-    public static LocalDateTime parseDate(String[] command){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime date;
-        date = LocalDateTime.parse(command[1], formatter);
+    public static LocalDate parseDate(String[] command) throws DateTimeParseException{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDate date;
+        date = LocalDate.parse(command[1], formatter);
         return date;
     }
 
     public static LocalDateTime parseDateTime(String[] command) throws DateTimeParseException{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         LocalDateTime dateTime;
         dateTime = LocalDateTime.parse(command[1].split(" /by | /at ")[1], formatter);
         return dateTime;
@@ -99,10 +100,10 @@ public class Parser {
             case VIEW:
                 try{
                     Ui.validateViewCommand(command);
-                    dateTime = parseDate(command);
-                    return new ViewCommand(dateTime.toLocalDate());
+                    LocalDate date = parseDate(command);
+                    return new ViewCommand(date);
                 }catch (DateTimeParseException e) {
-                    return new InvalidCommand(Ui.validateDateTime());
+                    return new InvalidCommand("☹ Please enter datetime in the format of 'd/M/yyyy'");
                 }
             case BYE:
                 return new ByeCommand();

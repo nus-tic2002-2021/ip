@@ -24,6 +24,8 @@ public class Deadline extends Task {
         return dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
+    public LocalDateTime getDateTime(){return dateTime;}
+
     public String printTask (){
         return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by: " + getDateTimeStr() + ")";
     }
