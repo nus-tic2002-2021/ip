@@ -160,7 +160,7 @@ public class TaskManager {
         return this.getTaskByIdAndSetDoneStatus(taskId, false);
     }
 
-    public Task deleteTaskByTaskId(Integer taskId) {
+    public Task deleteTaskById(Integer taskId) {
         return this.tasks.removeTaskById(taskId);
     }
 
