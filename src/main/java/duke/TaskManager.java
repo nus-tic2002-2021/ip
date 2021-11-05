@@ -13,6 +13,7 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
+import static duke.dukeutility.validator.StringValidator.isSubstring;
 import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class TaskManager {
 
         keyword = keyword.toLowerCase();
         for (Task t : all) {
-            if (t.descContainsKeyword(keyword)) {
+            if (isSubstring(t.getTaskDescription().toLowerCase(), keyword)) {
                 filtering.add(t);
             }
         }
