@@ -43,7 +43,9 @@ public class FileResourceManager {
     private ExportCommandFactory getExportCommandFactory() {
         return this.exportCommandFactory;
     }
-
+    private ImportCommandFactory getImportCommandFactory() {
+        return this.importCommandFactory;
+    }
     private String getImportPathString() {
         return this.importPathString;
     }
@@ -161,7 +163,5 @@ public class FileResourceManager {
         this.importTasksJson(tasksFromFile, taskManager);
     }
 
-    private ImportCommandFactory getImportCommandFactory() {
-        return this.importCommandFactory;
-    }
+
 }
