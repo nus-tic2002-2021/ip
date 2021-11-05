@@ -2,7 +2,6 @@ package duke.tasklist;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -54,8 +53,11 @@ public class TaskList {
     public TaskList getTaskByKeyword (String keyword, TaskList taskList) {
         TaskList taskByKeyword = new TaskList();
         for (int i = 0; i < taskList.size(); i++){
-            if (Arrays.asList(taskList.get(i).getKeyword()).contains(keyword)){
-                taskByKeyword.addTask(taskList.get(i));
+            String[] keywordInTask = taskList.get(i).getKeyword();
+            for (String s : keywordInTask){
+                if (s.contains(keyword) || keyword.contains(s)) {
+                    taskByKeyword.addTask(taskList.get(i));
+                }
             }
         }
         return taskByKeyword;
