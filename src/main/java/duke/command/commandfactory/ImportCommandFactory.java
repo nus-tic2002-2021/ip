@@ -1,5 +1,6 @@
 package duke.command.commandfactory;
 
+import static duke.dukeutility.parser.JsonTaskToObjectParser.jsonTaskToPojo;
 import com.google.gson.JsonObject;
 import duke.TaskManager;
 import duke.command.Command;
@@ -17,7 +18,7 @@ public class ImportCommandFactory extends CommandFactory {
     private Command executeImportJsonTaskParseStage(JsonObject jsonObj, TaskManager taskManager) {
         Task task;
         try {
-            task = taskManager.jsonTaskToPojo(jsonObj);
+            task = jsonTaskToPojo(jsonObj);
         } catch (Exception e) {
             return new CommandExecutionError(e, "Error transforming json to java object " + jsonObj.toString());
         }

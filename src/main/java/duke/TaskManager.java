@@ -1,25 +1,15 @@
 package duke;
 
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyDeadline;
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyDoneStatus;
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyFrom;
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyTaskDescription;
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyTaskId;
-import static duke.dukeutility.parser.JsonTaskToObjectParser.getJsonPropertyTo;
+
 import static duke.dukeutility.parser.TaskToJsonParser.parseDeadlineAsJson;
 import static duke.dukeutility.parser.TaskToJsonParser.parseEventAsJson;
 import static duke.dukeutility.parser.TaskToJsonParser.parseToDoAsJson;
-import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
-import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
-import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
-import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
 import static duke.dukeutility.validator.StringValidator.isSubstring;
 import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import duke.task.TaskComparator;
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
@@ -30,7 +20,6 @@ import duke.task.model.ToDo;
 public class TaskManager {
     private final TaskList tasks = new TaskList();
     private int serialNo = 0;
-
 
 
     private int rollSerialNo() {
@@ -131,6 +120,7 @@ public class TaskManager {
 
     /**
      * Sort tasks into map by description. Return entries with more than one tasks.
+     *
      * @return
      */
     public HashMap<String, ArrayList<Task>> getDuplicateDescriptionsAsArray() {
@@ -192,38 +182,5 @@ public class TaskManager {
     public Boolean containsTaskId(Integer taskId) {
         return this.tasks.containsKey(taskId);
     }
-
-    /**
-     * Converts a JSON formatted task to POJO.
-     *
-     * @param jsonObj task
-     * @return task object
-     * @throws Exception if not recognised as a task
-     */
-    public final Task jsonTaskToPojo(JsonObject jsonObj) throws Exception {
-        if (!isNotNullJsonPropertyTaskType(jsonObj)) {
-            throw new Exception("No task type");
-        } else if (isJsonTypeToDo(jsonObj)) {
-            Integer taskId = getJsonPropertyTaskId(jsonObj);
-            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
-            Boolean done = getJsonPropertyDoneStatus(jsonObj);
-            return new ToDo(taskDescription, taskId, done);
-        } else if (isJsonTypeDeadline(jsonObj)) {
-            Integer taskId = getJsonPropertyTaskId(jsonObj);
-            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
-            Boolean done = getJsonPropertyDoneStatus(jsonObj);
-            LocalDateTime deadline = getJsonPropertyDeadline(jsonObj);
-            return new Deadline(taskDescription, deadline, taskId, done);
-        } else if (isJsonTypeEvent(jsonObj)) {
-            Integer taskId = getJsonPropertyTaskId(jsonObj);
-            String taskDescription = getJsonPropertyTaskDescription(jsonObj);
-            Boolean done = getJsonPropertyDoneStatus(jsonObj);
-            LocalDateTime from = getJsonPropertyFrom(jsonObj);
-            LocalDateTime to = getJsonPropertyTo(jsonObj);
-            return new Event(taskDescription, from, to, taskId, done);
-        }
-        throw new Exception("Json object not recognised as a task Object");
-    }
-
 
 }
