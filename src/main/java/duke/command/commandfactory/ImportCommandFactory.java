@@ -15,17 +15,13 @@ import duke.task.model.Task;
 import duke.task.model.ToDo;
 
 public class ImportCommandFactory extends CommandFactory {
-    private Command executeImportJsonTaskParseStage(JsonObject jsonObj, TaskManager taskManager) {
+    public Command executeImportJsonTask(JsonObject jsonObj, TaskManager taskManager) {
         Task task;
         try {
             task = jsonTaskToPojo(jsonObj);
         } catch (Exception e) {
             return new CommandExecutionError(e, "Error transforming json to java object " + jsonObj.toString());
         }
-        return this.executeImportTaskImportStage(task, taskManager);
-    }
-
-    private Command executeImportTaskImportStage(Task task, TaskManager taskManager) {
         if (task instanceof Event) {
             return new CommandImportEvent((Event) task, taskManager);
         } else if (task instanceof Deadline) {
@@ -34,9 +30,5 @@ public class ImportCommandFactory extends CommandFactory {
             return new CommandImportToDo((ToDo) task, taskManager);
         }
         return new CommandUnknownRequest("Unrecognised Task type.");
-    }
-
-    public Command executeImportJsonTask(JsonObject jsonObj, TaskManager taskManager) {
-        return this.executeImportJsonTaskParseStage(jsonObj, taskManager);
     }
 }
