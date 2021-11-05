@@ -64,6 +64,6 @@ public class TaskManagerTest extends TestStream {
         tm.addNewEvent("desc0", from0, to0);
         tm.addNewEvent("desc1 " + keyword + " a", from1, to1); // with keyword
 
-        assertEquals(1, tm.getTasksWithWord(keyword).size());
+        assertEquals(1, tm.getTasksWithKeywordInDescription(keyword).size());
     }
 }

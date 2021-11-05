@@ -17,7 +17,7 @@ public class ImportCommandFactory extends CommandFactory {
     private Command executeImportJsonTaskParseStage(JsonObject jsonObj, TaskManager taskManager) {
         Task task;
         try {
-            task = taskManager.objectify(jsonObj);
+            task = taskManager.jsonTaskToPojo(jsonObj);
         } catch (Exception e) {
             return new CommandExecutionError(e, "Error transforming json to java object " + jsonObj.toString());
         }

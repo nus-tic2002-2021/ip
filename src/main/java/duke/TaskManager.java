@@ -30,23 +30,7 @@ public class TaskManager {
     private final TaskList tasks = new TaskList();
     private int serialNo = 0;
 
-    public HashMap<String, ArrayList<Task>> getDuplicateDescriptionsAsArray() {
 
-        HashMap<String, ArrayList<Task>> result = new HashMap<>();
-        this.tasks.getMap().forEach((thisId, task) -> {
-            String desc = task.getTaskDescription();
-            ArrayList<Task> tasks = result.get(desc);
-            if (tasks == null) {
-                tasks = new ArrayList<>();
-            }
-            tasks.add(task);
-            result.put(desc, tasks);
-        });
-
-        result.entrySet().removeIf(entry -> !(entry.getValue().size() > 1));
-
-        return result;
-    }
 
     private int rollSerialNo() {
         while (this.tasks.containsKey(this.serialNo)) {
@@ -98,6 +82,18 @@ public class TaskManager {
         return event;
     }
 
+
+    /**
+     * add task to collection
+     *
+     * @param toDo
+     * @return
+     */
+    public Task importTask(Task task) {
+        this.tasks.addTask(task);
+        return task;
+    }
+
     public Integer getSize() {
         return this.tasks.getSize();
     }
@@ -106,7 +102,7 @@ public class TaskManager {
         return this.tasks.getAllAsArray();
     }
 
-    public ArrayList<Task> getTasksWithWord(String keyword) {
+    public ArrayList<Task> getTasksWithKeywordInDescription(String keyword) {
         ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
 
@@ -130,7 +126,23 @@ public class TaskManager {
         filtering.sort(TaskComparator::compareTaskDate);
         return filtering;
     }
+    public HashMap<String, ArrayList<Task>> getDuplicateDescriptionsAsArray() {
 
+        HashMap<String, ArrayList<Task>> result = new HashMap<>();
+        this.tasks.getContainer().forEach((thisId, task) -> {
+            String desc = task.getTaskDescription();
+            ArrayList<Task> tasks = result.get(desc);
+            if (tasks == null) {
+                tasks = new ArrayList<>();
+            }
+            tasks.add(task);
+            result.put(desc, tasks);
+        });
+
+        result.entrySet().removeIf(entry -> !(entry.getValue().size() > 1));
+
+        return result;
+    }
     public Boolean containsTaskId(Integer taskId) {
         return this.tasks.containsKey(taskId);
     }
@@ -172,50 +184,15 @@ public class TaskManager {
         return tasksJson;
     }
 
-    /**
-     * add todo to collection
-     *
-     * @param toDo
-     * @return
-     */
-    public ToDo importToDo(ToDo toDo) {
-        this.tasks.addTask(toDo);
-        return toDo;
-    }
 
     /**
-     * add deadline to collection
-     *
-     * @param deadline
-     * @return
-     */
-
-    public Deadline importDeadline(Deadline deadline) {
-        this.tasks.addTask(deadline);
-        return deadline;
-
-    }
-
-    /**
-     * add event to collection
-     *
-     * @param event
-     * @return
-     */
-
-    public Event importEvent(Event event) {
-        this.tasks.addTask(event);
-        return event;
-    }
-
-    /**
-     * Converts a JSON formatted task to java object.
+     * Converts a JSON formatted task to POJO.
      *
      * @param jsonObj task
      * @return task object
      * @throws Exception if not recognised as a task
      */
-    public final Task objectify(JsonObject jsonObj) throws Exception {
+    public final Task jsonTaskToPojo(JsonObject jsonObj) throws Exception {
         if (!isNotNullJsonPropertyTaskType(jsonObj)) {
             throw new Exception("No task type");
         } else if (isJsonTypeToDo(jsonObj)) {
