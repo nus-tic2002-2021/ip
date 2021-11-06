@@ -92,7 +92,6 @@ public class Ui {
 
         switch (rt) {
         case EXIT_LOOP:
-            this.setIsLoop(false);
             output = (this.getExitLoopMessage());
             break;
         case TASK_LIST_ALL:
@@ -139,6 +138,7 @@ public class Ui {
         do {
             textCommand = in.nextLine();
             Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager, frm);
+            this.setIsLoop(!command.getResponseType().equals(ResponseType.EXIT_LOOP));
             this.printCommandResponse(command);
             this.printEndOfResponse();
         } while (this.isLoop());
