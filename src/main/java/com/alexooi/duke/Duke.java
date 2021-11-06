@@ -41,13 +41,13 @@ public class Duke {
         System.out.println(main.prompt.start());
 
         Scanner in = new Scanner(System.in);
-        boolean receiveInput = true;
+        boolean isInputReceived = true;
 
-        while (receiveInput && in.hasNext()) {
+        while (isInputReceived && in.hasNext()) {
             try {
                 Command command = main.parser.readInput(in, commandLoader);
                 if (command.isExit()) {
-                    receiveInput = false;
+                    isInputReceived = false;
                 } else {
                     String output = command.execute(tasks, main.prompt);
                     System.out.println(output);

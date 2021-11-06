@@ -56,12 +56,12 @@ public class TaskList {
     }
 
     private void load(BufferedReader in) {
-        boolean endOfInput = false;
-        while (!endOfInput) {
+        boolean isEndOfInput = false;
+        while (!isEndOfInput) {
             try {
                 String taskStr = in.readLine();
                 if (taskStr == null) {
-                    endOfInput = true;
+                    isEndOfInput = true;
                 } else {
                     taskList.add(TaskFactory.getInstance(taskStr));
                 }
