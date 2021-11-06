@@ -21,5 +21,9 @@ public interface OutputFormat<T> {
 
     String find(Iterable<T> inputs);
 
+    String archive(T printable);
+
+    String archive(Iterable<T> inputs);
+
     String exit();
 }

@@ -15,6 +15,8 @@ public class OutputFormatter implements OutputFormat<Task> {
     private static final String REMOVE = "Noted. I've removed this task:";
     private static final String VIEW_SCHEDULE = "You have the following tasks scheduled on ";
     private static final String FIND = "Here are the matching tasks in your list:";
+    private static final String ARCHIVE_SINGLE = "We successfully archived the following task:";
+    private static final String ARCHIVE_ALL = "We successfully archived all of your tasks!";
 
     @Override
     public String start() {
@@ -75,6 +77,19 @@ public class OutputFormatter implements OutputFormat<Task> {
         output.append(formatLine(FIND));
         output.append(formatList(inputs));
         return formatOutput(output.toString());
+    }
+
+    @Override
+    public String archive(Task printable) {
+        String output = formatLine(ARCHIVE_SINGLE) + formatLine(printable.toStatusString());
+        return formatOutput(output);
+    }
+
+    @Override
+    public String archive(Iterable<Task> inputs) {
+        String output = formatLine(ARCHIVE_ALL) +
+                formatList(inputs);
+        return formatOutput(output);
     }
 
     @Override

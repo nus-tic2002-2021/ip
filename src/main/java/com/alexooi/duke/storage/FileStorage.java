@@ -31,10 +31,11 @@ public class FileStorage implements StorageClient<BufferedReader> {
         return null;
     }
 
-    public void save(String input) {
+    @Override
+    public void save(String input, boolean isAppend) {
         try {
             File file = new File(this.filePath);
-            FileWriter writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file, isAppend);
             BufferedWriter out = new BufferedWriter(writer);
             out.write(input);
             out.close();

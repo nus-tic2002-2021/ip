@@ -10,18 +10,20 @@ import java.util.ArrayList;
 public class TaskList {
     private static TaskList instance;
     private ArrayList<Task> taskList;
-    private StorageClient<BufferedReader> client;
+    private StorageClient<BufferedReader> stateClient;
+    private StorageClient<BufferedReader> archiveClient;
 
-    private TaskList(StorageClient<BufferedReader> client) {
+    private TaskList(StorageClient<BufferedReader> stateClient, StorageClient<BufferedReader> archiveClient) {
         taskList = new ArrayList<>();
-        this.client = client;
-        BufferedReader input = client.load();
+        this.stateClient = stateClient;
+        this.archiveClient = archiveClient;
+        BufferedReader input = stateClient.load();
         load(input);
     }
 
-    public static TaskList getInstance(StorageClient<BufferedReader> client) {
+    public static TaskList getInstance(StorageClient<BufferedReader> stateClient, StorageClient<BufferedReader> archiveClient) {
         if (instance == null) {
-            instance = new TaskList(client);
+            instance = new TaskList(stateClient, archiveClient);
         }
 
         return instance;
@@ -33,6 +35,10 @@ public class TaskList {
 
     public Task remove(int idx) {
         return taskList.remove(idx);
+    }
+
+    public void removeAll() {
+        taskList.clear();
     }
 
     public ArrayList<Task> get() {
@@ -47,12 +53,27 @@ public class TaskList {
         return taskList.size();
     }
 
+    public void archive(int idx) {
+        String output = taskList.get(idx).toSaveString() + System.lineSeparator();
+        archiveClient.save(output, true);
+    }
+
+    public void archive() {
+        String output = toSaveListString();
+        archiveClient.save(output, true);
+    }
+
     public void save() {
+        String output = toSaveListString();
+        stateClient.save(output, false);
+    }
+
+    private String toSaveListString() {
         String output = taskList.stream().reduce("",
                 (partialOutput, task) -> partialOutput + task.toSaveString() + System.lineSeparator(),
                 String::concat
         );
-        client.save(output);
+        return output;
     }
 
     private void load(BufferedReader in) {
