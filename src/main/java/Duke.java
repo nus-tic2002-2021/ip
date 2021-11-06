@@ -107,6 +107,22 @@ public class Duke {
                         newLine();
                         break;
 
+                    case "delete":
+                        if(line.equals ("delete")) {
+                            System.out.println("Please enter choice for list");
+                            break;
+                        }
+                        try{
+                            int ref = Integer.parseInt(line.split(" ")[1]);
+                            tasks.deleteTask(ref - 1);
+                        } catch (NullPointerException e) {
+                            System.out.println("\tPlease choose from list only");
+                            break;
+                        }
+                        tasks.printCount();
+                        newLine();
+                        break;
+
                     case "help":
                         System.out.println("DUKE helps you organise your tasks efficiently, please enter as follows:" +
                                 "\n\tevent [description] /at [time]\n\t" +
@@ -114,6 +130,7 @@ public class Duke {
                                 "deadline [description] /by [time]\n\t" +
                                 "done [number] - to mark task as completed\n\t" +
                                 "list - to show all tasks\n\t" +
+                                "delete [number] - to delete a task\n\t" +
                                 "bye - to end DUKE");
                         newLine();
                         break;
