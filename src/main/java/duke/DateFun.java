@@ -13,9 +13,9 @@ public class DateFun {
     }
 
     /**
-     * data convert to string
-     * @param date
-     * @return data string
+     * date convert to string
+     * @param date: a LocalDate variable
+     * @return  a string which shows date
      */
     public static String LocalDateToString(LocalDate date){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");

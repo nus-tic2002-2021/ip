@@ -48,7 +48,7 @@ public class Storage {
 
     /**
      * load task list from selected file
-     * @return
+     * @return task List from selected file
      * @throws FileNotFoundException
      */
     public TaskList load() throws FileNotFoundException {

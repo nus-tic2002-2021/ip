@@ -20,6 +20,7 @@ public class Parser {
         String[] reqs = req.trim().split(" ");
         String type = reqs[0];
         String description;
+        assert reqs.length > 1 : "invalid input";
         if(type.equals("todo")){
             if(reqs.length == 1){
                 throw new MissReqException("todo");
@@ -31,6 +32,7 @@ public class Parser {
                 throw new MissReqException("deadline");
             }
             String[] descriptions = req.replaceFirst("deadline", "").trim().split("/by ");
+            assert descriptions.length == 2: "invalid input";
             description = descriptions[0].trim();
             String by = descriptions[1];
             return new Deadline(description, by);
@@ -39,6 +41,7 @@ public class Parser {
                 throw new MissReqException("event");
             }
             String[] descriptions = req.replaceFirst("event", "").trim().split("/at ");
+            assert descriptions.length == 2: "invalid input";
             description = descriptions[0].trim();
             String at = descriptions[1];
             return new Event(description, at);
@@ -49,8 +52,8 @@ public class Parser {
 
     /**
      * Extract command
-     * @param req
-     * @return
+     * @param req the command input of user
+     * @return Variable of Command
      * @throws MissReqException
      * @throws InvalidException
      */
@@ -60,17 +63,21 @@ public class Parser {
             return new ExitCommand(req);
         }
         if(reqs[0].equals("list")) {
+            assert reqs.length == 1: "invalid input";
             return new ListCommand(req);
         }
         if(reqs[0].equals("done")) {
+            assert reqs.length == 2: "invalid input";
             int idx = Integer.parseInt(req.substring(4).trim()) - 1;
             return new DoneCommand(req, idx);
         }
         if(reqs[0].equals("delete")) {
+            assert reqs.length == 2: "invalid input";
             int idx = Integer.parseInt(reqs[1]) - 1;
             return new DeleteCommand(req, idx);
         }
         if(reqs[0].equals("find")){
+            assert reqs.length > 1: "invalid input";
             String search = reqs[1];
             return new FindCommand(req, search);
         }
