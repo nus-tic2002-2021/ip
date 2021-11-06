@@ -50,9 +50,6 @@ import duke.dukeexception.DukeParseDateTimeException;
 
 
 public class UiCommandFactory extends CommandFactory {
-    protected Command executeCommandExitLoop() {
-        return new CommandExitLoop();
-    }
 
     public Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm) {
         assert (text != null);
@@ -90,8 +87,11 @@ public class UiCommandFactory extends CommandFactory {
             return new CommandExecutionError(e, "command execution @ cli");
         }
     }
+    private Command executeCommandExitLoop() {
+        return new CommandExitLoop();
+    }
 
-    protected Command executeCommandAddToDo(String text, TaskManager taskManager) {
+    private Command executeCommandAddToDo(String text, TaskManager taskManager) {
         int minDescLength = 0;
         String taskDescription = text.replaceFirst(PROMPT_ADD_TODO, "");
         if (taskDescription.length() <= minDescLength) {
@@ -100,7 +100,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandAddNewToDo(taskManager, taskDescription);
     }
 
-    protected Command executeCommandAddDeadline(String text, TaskManager taskManager) {
+    private Command executeCommandAddDeadline(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         String taskDescription;
@@ -128,7 +128,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandAddNewDeadline(taskManager, taskDescription, deadline);
     }
 
-    protected Command executeCommandAddEvent(String text, TaskManager taskManager) {
+    private Command executeCommandAddEvent(String text, TaskManager taskManager) {
 
         String argLine;
         String[] argList;
@@ -160,7 +160,7 @@ public class UiCommandFactory extends CommandFactory {
     }
 
 
-    protected Command executeCommandMarkTaskComplete(String text, TaskManager taskManager) {
+    private Command executeCommandMarkTaskComplete(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer taskId;
@@ -180,7 +180,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandMarkTaskAsDone(taskManager, taskId);
     }
 
-    protected Command executeCommandMarkTaskIncomplete(String text, TaskManager taskManager) {
+    private Command executeCommandMarkTaskIncomplete(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer taskId;
@@ -200,7 +200,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandMarkTaskAsIncomplete(taskManager, taskId);
     }
 
-    protected Command executeCommandDeleteTask(String text, TaskManager taskManager) {
+    private Command executeCommandDeleteTask(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer taskId;
@@ -220,7 +220,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandDeleteTask(taskManager, taskId);
     }
 
-    protected Command executeCommandFindByKeywordInDescription(String text, TaskManager taskManager) {
+    private Command executeCommandFindByKeywordInDescription(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         String keyword;
@@ -237,7 +237,7 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandListTasksWithKeyword(taskManager, keyword);
     }
 
-    protected Command executeCommandProjection(String text, TaskManager taskManager) {
+    private Command executeCommandProjection(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer period;
