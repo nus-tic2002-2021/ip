@@ -17,7 +17,10 @@ import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
 
+
+
 public class TaskManager {
+    // tasks is a "controlled" component. It is a storage for defined properties, i.e tasks ids are set by TaskManager.
     private final TaskList tasks = new TaskList();
     private int serialNo = 0;
 

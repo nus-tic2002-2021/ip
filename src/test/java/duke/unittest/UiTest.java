@@ -27,12 +27,11 @@ public class UiTest extends TestStream {
     @Test
     public void project_withinNextDays_filteredAndSorted() throws Exception {
         int period = 30;
-        // create some tasks in taskmanager, filter range in next 30 days
+        // create some tasks spanning across different days in task manager, expect filter range in period of days.
 
         Ui ui = new Ui(this.getPrintStream());
         TaskManager tm = new TaskManager();
 
-        LocalDate today = LocalDate.now();
         // Add tasks to task manager and mock expected tasks
 
         // task 0
@@ -65,6 +64,7 @@ public class UiTest extends TestStream {
         String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
 
+        // set commands to input stream
         System.setIn(buildCommandInputStream(in0, in1));
         ui.runTextCommandLoop(tm, null);
 

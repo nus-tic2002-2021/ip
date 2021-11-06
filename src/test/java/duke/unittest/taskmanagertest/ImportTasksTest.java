@@ -15,11 +15,14 @@ import duke.testhelper.TestStream;
 public class ImportTasksTest extends TestStream {
 
     /**
-     * save tasks from task manager 1 to a file, extract from file and load (import) to task manager 2.
+     * Save tasks from task manager 1 to a file, extract tasks from file and load (import) into task manager 2.
      * The tasks in each manager should be the same.
+     * That is, exported data and imported data should be idempotent.
      */
     @Test
     public void addToDos_exportExtractLoad() {
+
+        // add new tasks to task manager 1
         TaskManager tm1 = new TaskManager();
 
         String desc0 = "desc0";
@@ -39,12 +42,13 @@ public class ImportTasksTest extends TestStream {
         // extract
         CommandJsonResponse reading = frm.executeExtractTasksFromFile();
         assertEquals(ResponseType.FILE_READ, reading.getResponseType());
-        // load
+        // load / import
         JsonArray tasksFromFile = (JsonArray) reading.getJsonArg();
 
         TaskManager tm2 = new TaskManager();
         frm.importTasks(tasksFromFile, tm2);
 
+        // compares tasks
         assertEquals(tm2.getTaskById(0).getTaskDescription(), tm1.getTaskById(0).getTaskDescription());
         assertEquals(tm2.getTaskById(1).getTaskDescription(), tm1.getTaskById(1).getTaskDescription());
     }
