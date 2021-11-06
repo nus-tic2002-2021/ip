@@ -26,7 +26,7 @@ public class ExportTasksTest extends TestStream {
         assertEquals(desc1, tm.getTaskById(1).getTaskDescription());
 
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(), null);
-        Command c = frm.executeCommandSave(tm);
+        Command c = frm.executeSave(tm);
         assertEquals(ResponseType.FILE_SAVED, c.getResponseType());
     }
 

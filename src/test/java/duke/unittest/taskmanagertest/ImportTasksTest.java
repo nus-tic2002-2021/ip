@@ -37,7 +37,7 @@ public class ImportTasksTest extends TestStream {
         FileResourceManager frm = new FileResourceManager(exportPathString, importPathString);
 
         // export
-        Command c = frm.executeCommandSave(tm1);
+        Command c = frm.executeSave(tm1);
         assertEquals(ResponseType.FILE_SAVED, c.getResponseType());
         // extract
         CommandJsonResponse reading = frm.executeExtractTasksFromFile();

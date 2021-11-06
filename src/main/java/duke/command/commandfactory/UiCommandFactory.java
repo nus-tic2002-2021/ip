@@ -6,7 +6,6 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_DE
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_EVENT;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
-import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
@@ -71,7 +70,7 @@ public class UiCommandFactory extends CommandFactory {
             } else if (isRequestDeleteTask(text)) {
                 return this.executeCommandDeleteTask(text, taskManager);
             } else if (isRequestSave(text)) {
-                return frm.executeCommandSave(taskManager);
+                return frm.executeSave(taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
             } else if (isRequestProjection(text)) {

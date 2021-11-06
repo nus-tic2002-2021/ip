@@ -74,7 +74,7 @@ public class FileResourceManager {
      * @param taskManager task manager
      * @return
      */
-    public Command executeCommandSave(TaskManager taskManager) {
+    public Command executeSave(TaskManager taskManager) {
         JsonArray tasksJson = new JsonArray();
         Path exportPath;
         JsonWriter jw;
