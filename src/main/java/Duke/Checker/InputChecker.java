@@ -1,8 +1,19 @@
 package Duke.Checker;
 import Duke.DukeException;
 
+/**
+ * Checks whether the input by the Duke user
+ * contains valid task information.
+ */
 public class InputChecker {
 
+    /**
+     * Check whether input contains all the parts of a "to do" object.
+     * Returns true if it contains all the respective parts.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean CheckValidTodo(String input) throws DukeException {
         if (input.length() < 5) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -13,6 +24,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains all that parts of a "deadline" object.
+     * Returns true if it contains all the respective parts.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean CheckValidDeadline(String input) throws DukeException {
         if (input.contains("/by")) {
             String[] parts = input.substring(8).split("/by");
@@ -30,6 +48,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains all that parts of a "event" object.
+     * Returns true if it contains all the respective parts.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean CheckValidEvent(String input) throws DukeException {
         if (input.contains("/at")) {
             String[] parts = input.substring(5).split("/at");
@@ -47,6 +72,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains the enough and correct information
+     * to mark a task as done.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean CheckValidDone(String input) throws DukeException {
         if (input.length() < 5) {
             throw new DukeException("☹ OOPS!!! The index of the task to be marked as done is missing.");
@@ -61,6 +93,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains the enough and correct information
+     * to delete a task.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean CheckValidDelete(String input) throws DukeException {
         if (input.length() < 7) {
             throw new DukeException("☹ OOPS!!! The index of the task to delete is missing.");
