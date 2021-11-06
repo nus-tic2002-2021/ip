@@ -28,7 +28,7 @@ Clone the repo
 
 # Command List
 
-`$ *`   - unknown command
+`[*]`   - unknown command
 
 `todo [description]` add ToDo \
 `deadline [description] /by [date:dateOption]` add Deadline \
