@@ -5,17 +5,34 @@ import Duke.Ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list that contains the task inputted by using Duke.
+ *
+ */
 public class TaskList {
     static ArrayList<Task> DukeList = new ArrayList<>();
 
+    /**
+     * Returns the number of tasks inside the task list.
+     * @return int of the size of task list.
+     */
     public static int size() {
         return DukeList.size();
     }
 
+    /**
+     * Takes in a new Task
+     * and adds it to the task list.
+     * @param newEntry
+     */
     public static void addTaskToList(Task newEntry) {
         DukeList.add(newEntry);
     }
 
+    /**
+     * Takes in a index and removes the task at the index from the task list.
+     * @param index
+     */
     public static void RemoveTask(int index) {
         DukeList.remove(index);
     }
@@ -27,6 +44,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Takes in a valid "done" input and gets the index.
+     * If index is valid, marks the task at that index of the list as completed.
+     *
+     * @param input
+     * @throws DukeException
+     */
     public static void markTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
@@ -39,10 +63,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark the task given as a parameter as completed.
+     * @param inputTask
+     */
     public static void MarkTask(Task inputTask) {
         inputTask.markCompleted();
     }
 
+    /**
+     * Takes in a valid "delete" input and gets the index.
+     * If index is valid, the task at that index of the list is deleted from the list.
+     *
+     * @param input
+     * @throws DukeException
+     */
     public static void DeleteIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
