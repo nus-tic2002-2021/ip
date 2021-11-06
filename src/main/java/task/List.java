@@ -165,7 +165,7 @@ public class List {
         }
         if(!clash){
             taskArrayList.add(new Event(input[0],date, time));
-            printAdd();
+            printAdd(); s
         }
     }
 
