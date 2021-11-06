@@ -124,12 +124,14 @@ public class Ui {
     /**
      * cli session with request-response cycle.
      *
-     * Text commands are separated by line breaks. Parsing is delegated to @see UiCommandFactory#executeTextCommand.
-     * After execution, command response will be displayed base on the type of the command.
+     * Text commands are separated by line breaks. Parsing and execution is delegated to
+     * After execution, command response will be displayed based on the type of the command.
+     * It is recommended highly to pass in non-null arguments in production environment.
      *
-     * @param taskManager
-     * @param frm
+     * @param taskManager is required if commands wants to manipulate a task collection.
+     * @param frm         is required if commands execute file operations.
      * @throws Exception
+     * @see UiCommandFactory#executeTextCommand()
      */
     public void runTextCommandLoop(TaskManager taskManager, FileResourceManager frm) throws Exception {
         this.printBeginInputLoop();
