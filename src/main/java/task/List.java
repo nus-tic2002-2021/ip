@@ -159,7 +159,7 @@ public class List {
                 if (addEvent.isAnomaly(existEvent)){
                     printClash(task);
                     clash = true;
-                    continue;
+                    break;
                 }
             }
         }
