@@ -1,6 +1,6 @@
 package duke.dukeutility.prettify;
 
-import static duke.dukeutility.helper.buildString;
+import static duke.dukeutility.Helper.buildString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

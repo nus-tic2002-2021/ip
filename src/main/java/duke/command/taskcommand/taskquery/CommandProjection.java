@@ -11,4 +11,9 @@ public class CommandProjection extends Command {
         super(ResponseType.TASK_PROJECTION,
             List.of("list", prettifyTasks(taskMgr.getTasksForNextDays(period)), period.toString()));
     }
+
+    public String getResponse() {
+        return "Tasks for the next " + this.getArgs().get(2) + " days: " + System.lineSeparator() +
+            this.getArgs().get(1);
+    }
 }

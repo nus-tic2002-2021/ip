@@ -3,9 +3,7 @@ package duke.unittest.tasktest.aggregator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
-
 import duke.task.aggregator.TaskList;
 import duke.task.model.ToDo;
 import duke.testhelper.TestStream;

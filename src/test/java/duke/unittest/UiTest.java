@@ -27,12 +27,11 @@ public class UiTest extends TestStream {
     @Test
     public void project_withinNextDays_filteredAndSorted() throws Exception {
         int period = 30;
-        // create some tasks in taskmanager, filter range in next 30 days
+        // create some tasks spanning across different days in task manager, expect filter range in period of days.
 
         Ui ui = new Ui(this.getPrintStream());
         TaskManager tm = new TaskManager();
 
-        LocalDate today = LocalDate.now();
         // Add tasks to task manager and mock expected tasks
 
         // task 0
@@ -65,8 +64,9 @@ public class UiTest extends TestStream {
         String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
 
+        // set commands to input stream
         System.setIn(buildCommandInputStream(in0, in1));
-        ui.textCommandLoop(tm, null);
+        ui.runTextCommandLoop(tm, null);
 
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
         assertEquals(expectedOutput, this.getOutput());
@@ -96,7 +96,7 @@ public class UiTest extends TestStream {
         String out2 = getExpectedOutputExitInputLoop();
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
-        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        new Ui(this.getPrintStream()).runTextCommandLoop(tm, null);
         assertEquals(expectedOutput, this.getOutput());
     }
 
@@ -122,15 +122,17 @@ public class UiTest extends TestStream {
         String out0 = getExpectedOutputBeginInputLoop();
 
         String in0 = TextCommandUnderTest.generateTextCommandScanDuplicateDescription();
-        String dupes = "Duplicates               \"[Description]\":[...ids] " + System.lineSeparator() + "\"" + "task0" + "\"" + ": [0 (E), 1 (T), 2 (D)]" +
-            System.lineSeparator() + "\"" + "task1" + "\"" + ": [3 (E), 4 (T), 5 (D)]";
+        String dupes =
+            "Duplicates               \"[Description]\":[...(id,type)] " + System.lineSeparator() + "\"" + "task0" +
+                "\"" + ": [0 (E), 1 (T), 2 (D)]" +
+                System.lineSeparator() + "\"" + "task1" + "\"" + ": [3 (E), 4 (T), 5 (D)]";
         String out1 = getExpectedOutputTemplate(dupes);
         String in1 = TextCommandUnderTest.generateTextCommandExit();
         String out2 = getExpectedOutputExitInputLoop();
 
         System.setIn(buildCommandInputStream(in0, in1));
         String expectedOutput = buildExpectedResponse(out0, out1, out2);
-        new Ui(this.getPrintStream()).textCommandLoop(tm, null);
+        new Ui(this.getPrintStream()).runTextCommandLoop(tm, null);
         assertEquals(expectedOutput, this.getOutput());
     }
 }

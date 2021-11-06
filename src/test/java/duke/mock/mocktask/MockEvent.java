@@ -2,7 +2,6 @@ package duke.mock.mocktask;
 
 
 import java.time.LocalDateTime;
-
 import duke.testhelper.help.codeundertest.ParserUnderTest;
 
 public class MockEvent extends MockTask {
@@ -11,11 +10,12 @@ public class MockEvent extends MockTask {
 
     /**
      * Mock event
+     *
      * @param desc desc
-     * @param id id
+     * @param id   id
      * @param done done
      * @param from from
-     * @param to to
+     * @param to   to
      */
     public MockEvent(String desc, Integer id, Boolean done, LocalDateTime from, LocalDateTime to) {
         super(desc, id, done);

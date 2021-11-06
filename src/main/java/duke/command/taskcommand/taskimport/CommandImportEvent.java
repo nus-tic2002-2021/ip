@@ -1,7 +1,6 @@
 package duke.command.taskcommand.taskimport;
 
 import java.util.List;
-
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
@@ -17,6 +16,10 @@ public class CommandImportEvent extends Command {
      */
     public CommandImportEvent(Event event, TaskManager taskMgr) {
         super(ResponseType.TASK_IMPORT_EVENT,
-            List.of("create", event.getTaskDescription(), taskMgr.importEvent(event).getTaskDescription()));
+            List.of("create", event.getTaskDescription(), taskMgr.importTask(event).getTaskDescription()));
+    }
+
+    public String getResponse() {
+        return null;
     }
 }

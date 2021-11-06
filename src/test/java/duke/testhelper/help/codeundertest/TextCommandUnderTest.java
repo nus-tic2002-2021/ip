@@ -3,7 +3,7 @@ package duke.testhelper.help.codeundertest;
 public class TextCommandUnderTest {
     public static final String PROMPT_UNDER_TEST_EXIT_LOOP = "bye";
     public static final String PROMPT_UNDER_TEST_LIST = "list";
-    public static final String PROMPT_UNDER_TEST_STATS_ALL = "stats all";
+    public static final String PROMPT_UNDER_TEST_STATS_ALL = "stats:all";
     public static final String PROMPT_UNDER_TEST_SCAN_DUPLICATE_DESCRIPTION = "scan:duplicates";
     public static final String PROMPT_UNDER_TEST_PROJECTION = "projection ";
 
@@ -52,9 +52,11 @@ public class TextCommandUnderTest {
     public static String generateTextCommandSetIncomplete(Integer taskId) {
         return PROMPT_UNDER_TEST_MARK_AS_INCOMPLETE + taskId + System.lineSeparator();
     }
+
     public static String generateTextCommandScanDuplicateDescription() {
         return PROMPT_UNDER_TEST_SCAN_DUPLICATE_DESCRIPTION + System.lineSeparator();
     }
+
     public static String generateTextCommandLineAddToDo(String description) {
         return PROMPT_UNDER_TEST_ADD_TO_DO + description + System.lineSeparator();
     }

@@ -38,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -47,15 +46,12 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
-
 import com.google.gson.JsonArray;
-
 import duke.FileResourceManager;
 import duke.Main;
 import duke.TaskManager;
-import duke.command.commandfactory.FileCommandFactory;
+import duke.command.commandfactory.ImportCommandFactory;
 import duke.mock.mocktask.MockDeadline;
 import duke.mock.mocktask.MockEvent;
 import duke.mock.mocktask.MockTask;
@@ -133,10 +129,12 @@ public class SystemExportTest extends TestStream {
         }
         assertEquals(30, tm2.getSize());
         try {
-            JsonArray export1 = new FileCommandFactory().executeExtractTasksFromFile(frm1.getExportPath()).getJsonArg()
-                .getAsJsonArray();
-            JsonArray export2 = new FileCommandFactory().executeExtractTasksFromFile(frm2.getExportPath()).getJsonArg()
-                .getAsJsonArray();
+            JsonArray export1 =
+                new ImportCommandFactory().executeExtractTasksFromFile(frm1.getExportPath()).getJsonArg()
+                    .getAsJsonArray();
+            JsonArray export2 =
+                new ImportCommandFactory().executeExtractTasksFromFile(frm2.getExportPath()).getJsonArg()
+                    .getAsJsonArray();
             assertNotNull(export1);
             assertNotNull(export2);
             assertEquals(30, export1.size());
@@ -233,7 +231,8 @@ public class SystemExportTest extends TestStream {
         MockTask[] selectedMockTasks = new MockTask[] {
             new MockEvent(eventDesc, 2, true, parseStringAsLocalDateTime(eventFrom),
                 parseStringAsLocalDateTime(eventTo))};
-        String out11 = (getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword));
+        String out11 =
+            getExpectedOutputListTasksWithKeywordDescription(getExpectedTaskList(selectedMockTasks), keyword);
 
         String in8 = generateTextCommandExit();
         String out12 = (getExpectedOutputExitInputLoop());

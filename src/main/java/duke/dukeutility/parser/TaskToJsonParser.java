@@ -8,9 +8,7 @@ import static duke.dukeutility.definition.TaskField.TASK_FIELD_TASK_ID;
 import static duke.dukeutility.definition.TaskField.TASK_FIELD_TO;
 import static duke.dukeutility.definition.TaskField.TASK_FIELD_TYPE;
 import static duke.dukeutility.parser.DateParser.parseLocalDateTimeAsString;
-
 import com.google.gson.JsonObject;
-
 import duke.dukeutility.enums.JsonTaskType;
 import duke.task.model.Deadline;
 import duke.task.model.Event;
@@ -24,6 +22,7 @@ public class TaskToJsonParser extends Parser {
 
     /**
      * Format event as JSON
+     *
      * @param event
      * @return event as JSON
      */
@@ -41,6 +40,7 @@ public class TaskToJsonParser extends Parser {
 
     /**
      * Format deadline as JSON
+     *
      * @param deadline
      * @return deadline as JSON
      */
@@ -53,8 +53,10 @@ public class TaskToJsonParser extends Parser {
         obj.addProperty(TASK_FIELD_DEADLINE, parseLocalDateTimeAsString(deadline.getDeadline()));
         return obj;
     }
+
     /**
      * Format toDo as JSON
+     *
      * @param toDo
      * @return toDo as JSON
      */

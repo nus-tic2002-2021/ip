@@ -17,7 +17,7 @@ public class DukeIo {
 
     }
 
-    public static String getDefaultTasksExportPathString () {
+    public static String getDefaultTasksExportPathString() {
         if (DukeIo.pathStringDefaultTasksExportJsonPath == null) {
             DukeIo.pathStringDefaultTasksExportJsonPath = RESOURCE_PATH + File.separator + "tasks.json";
         }

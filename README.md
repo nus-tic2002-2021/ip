@@ -4,6 +4,6 @@
 
 ```act``` test \
 ```mvn package``` package \
-```./target/Duke.jar``` generated jar \
-```java -jar ./target/Duke.jar``` run package
+```./NoelLim/Duke.jar``` generated jar \
+```java -jar ./NoelLim/Duke.jar``` run package
 

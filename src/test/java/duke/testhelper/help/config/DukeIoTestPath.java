@@ -5,7 +5,7 @@ import java.io.File;
 
 public class DukeIoTestPath {
 
-    private static String resourceTestFolder =
+    private static final String resourceTestFolder =
         String.join(File.separator, new String[] {System.getProperty("user.home"), "duke", "test"});
 
     private static String testPathStringDefaultTasksExportJsonPath = null;

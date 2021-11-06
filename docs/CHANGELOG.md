@@ -156,7 +156,7 @@ No feature changes (error handling)
 `list` list tasks \
 `find [string_in_description]` query tasks with string in description \
 
-`stats all` summary of tasks \
+`stats:all` summary of tasks \
 
 `projection [days]` projection for next days \
 

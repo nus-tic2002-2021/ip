@@ -2,9 +2,7 @@ package duke.unittest.taskmanagertest;
 
 import static duke.testhelper.help.config.DukeIoTestPath.getDefaultTasksTestExportPathString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
@@ -28,7 +26,7 @@ public class ExportTasksTest extends TestStream {
         assertEquals(desc1, tm.getTaskById(1).getTaskDescription());
 
         FileResourceManager frm = new FileResourceManager(getDefaultTasksTestExportPathString(), null);
-        Command c = frm.executeCommandSave(tm);
+        Command c = frm.executeSave(tm);
         assertEquals(ResponseType.FILE_SAVED, c.getResponseType());
     }
 

@@ -19,6 +19,7 @@ sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
 echo "M2_HOME=/usr/share/apache-maven-3.6.3" | sudo tee -a /etc/environment
 
 # source code test
+mvn clean
 mvn install
 mvn compile
 mvn test
@@ -26,7 +27,7 @@ mvn test
 # package into jar
 mvn package
 # test jar output
-java -jar target/Duke.jar < ./src/test/resources/linux-test/input.txt > ./src/test/resources/linux-test/actual.txt
+java -jar NoelLim/Duke.jar < ./src/test/resources/linux-test/input.txt > ./src/test/resources/linux-test/actual.txt
 
 cmp --print-chars ./src/test/resources/linux-test/actual.txt ./src/test/resources/linux-test/expected.txt
 if [ $? -eq 0 ]
