@@ -49,7 +49,6 @@ public class Ui {
     // Outputs
 
 
-
     public void printEntryMessage() {
         String logo = " _                   _                                _             " + System.lineSeparator()
             + "| |                 | |                              | |                " + System.lineSeparator()
@@ -124,7 +123,10 @@ public class Ui {
     }
 
     /**
-     * cli session with request-response cycle
+     * cli session with request-response cycle.
+     *
+     * Text commands are separated by line breaks. Parsing is delegated to @see UiCommandFactory#executeTextCommand.
+     * After execution, command response will be displayed base on the type of the command.
      *
      * @param taskManager
      * @param frm
