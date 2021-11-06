@@ -11,9 +11,9 @@ public class UI {
     private final String EVENT_DESCRIPTION_ERROR = "Event command is missing a description and/or time.";
     private final String EVENT_LENGTH_ERROR = "Event command has too many /at.";
     private final String INVALID_DATE_FORMAT = "Incorrect Date formatting. Only accepts yyyy-MM-dd HHmm format " +
-            "\n\te.g. 2021-10-21 1300";
+            "\ne.g. 2021-10-21 1300";
     private final String INVALID_TIME_FORMAT = "Incorrect Time formatting. Only accepts H:mm format " +
-            "\n\te.g. 1:30";
+            "\ne.g. 1:30";
 
     public void printIntro(){
         printLine();
@@ -38,14 +38,14 @@ public class UI {
         return in.nextLine();
     }
     public void printExit(){
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\tUpdating files.");
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Updating files.");
     }
     public void printNotFound(){
-        System.out.println("\tTask cannot be found.");
+        System.out.println("Task cannot be found.");
     }
     public void printInvalidEntry(){
-        System.out.println("\tInvalid task number entry.");
+        System.out.println("Invalid task number entry.");
     }
 
 
@@ -54,7 +54,7 @@ public class UI {
     }
 
     public void showError(String errorMessage){
-        System.out.print("\tError occurred: ");
+        System.out.print("Error occurred: ");
         switch(errorMessage){
             case "INPUT_FORMAT_ERROR":
                 System.out.println(INPUT_FORMAT_ERROR);

@@ -28,6 +28,10 @@ public class Deadline extends Task{
         System.out.println("\tNice! I've marked this task as done:\n" +
                 "\t  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
     }
+    public void setType(){
+        type = "deadline";
+    }
+
     public void print(){
         if (isDone) {
             System.out.println("\t  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
@@ -61,9 +65,7 @@ public class Deadline extends Task{
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));
         return s;
     }
-    public void setType(){
-        type = "deadline";
-    }
+
     @Override
     public String toString() {
         String box = "[D][ ] ";

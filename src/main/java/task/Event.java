@@ -45,6 +45,9 @@ public class Event extends Task {
     public void setTo(LocalTime to){
         this.to = to;
     }
+    public void setType(){
+        type = "event";
+    }
 
     public String getTask(){
         return "E";
@@ -74,9 +77,7 @@ public class Event extends Task {
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT)) + " | " + getTime();
         return s;
     }
-    public void setType(){
-        type = "event";
-    }
+
     @Override
     public String toString() {
         String box = "[E][ ] ";

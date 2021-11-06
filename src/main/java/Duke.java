@@ -5,6 +5,10 @@ import task.List;
 import command.*;
 import error.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 
 
@@ -14,6 +18,7 @@ public class Duke{
     private Parser Parser;
     private List tasks;
     private Storage storage;
+    private boolean isExit = false;
     private static String Path = "data/tasks.txt";;
 
     /**
@@ -50,7 +55,7 @@ public class Duke{
      */
     public void run(){
         ui.printIntro();
-        boolean isExit = false;
+
         while (!isExit){
             try{
                 String fullCommand = ui.readCommand();
@@ -71,15 +76,35 @@ public class Duke{
         }
 
     }
+
+    //javaFX
     public String getResponse(String input) {
-        if(input.equals("hello")){
-            return "hello";
+        try {
+            Command c = Parser.parse(input);
+            ByteArrayOutputStream outputMsg = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputMsg));
+            c.execute(tasks, storage, ui);
+            if (c.isExit()){
+                isExit = true;
+            }
+            return outputMsg.toString();
+
+        } catch (UnrecognizedException e){
+            return ("Unrecognized Command");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ("Please enter description after command");
+        } catch (DukeException e){
+            return(e.getMessage());
         }
-        else return "1";
     }
+    public Boolean getIsExit() {
+        return isExit;
+    }
+
+    /*
     public static void main(String[] args) {
         new Duke(Path).run();
     }
-
+    */
 
 }

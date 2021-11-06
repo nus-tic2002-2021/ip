@@ -19,6 +19,10 @@ public class Todo extends Task{
                             "\t  [T][X] " + getDescription());
     }
 
+    public void setType(){
+        type = "todo";
+    }
+
     public void print(){
         if (isDone) {
             System.out.println("\t  [T][X] " + getDescription());
@@ -39,9 +43,7 @@ public class Todo extends Task{
         String s = getTask() + " | " +  getDone() + " | " + getDescription();
         return s;
     }
-    public void setType(){
-        type = "todo";
-    }
+
     @Override
     public String toString() {
         String box = "[T][ ] ";

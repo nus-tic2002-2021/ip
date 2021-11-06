@@ -139,16 +139,19 @@ public class List {
             throw new DukeException("EVENT_LENGTH_ERROR");
         }
         event = input[1].split(" /for ");
+        if(event.length > 2){
+            throw new DukeException("EVENT_LENGTH_ERROR");
+        }
         try {
             date = LocalDateTime.parse(event[0],DATE_TIME_FORMATTER);
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new DukeException("EVENT_LENGTH_ERROR");
-        } catch (Exception e) {
+        }  catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
         }
         try {
             time = LocalTime.parse(event[1],TIME_FORMATTER);
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("EVENT_LENGTH_ERROR");
+        }catch (Exception e) {
             throw new DukeException("INVALID_TIME_FORMAT");
         }
         //anomaly checker
@@ -292,6 +295,9 @@ public class List {
         System.out.println("\tNow you have " + (taskArrayList.size()) +" task(s) in the list");
     }
 
+    public int getArraySize(){
+        return taskArrayList.size();
+    }
     /**
      *
      *  task function to determine the type of task to add
@@ -313,11 +319,7 @@ public class List {
         }
     }
 
-    public LocalDateTime formatDateTime(String date){
-        LocalDateTime formatDate;
-        formatDate = LocalDateTime.parse(date,DATE_FORMATTER);
-        return null;
-    }
+
 
 
 }

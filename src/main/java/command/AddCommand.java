@@ -5,7 +5,7 @@ import ui.UI;
 import task.List;
 import error.*;
 
-public class AddCommand extends Command{
+public class AddCommand extends  Command{
     protected String add;
     public AddCommand(String action, String add){
         setAction(action);
