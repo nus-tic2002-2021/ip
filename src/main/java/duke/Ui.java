@@ -126,7 +126,7 @@ public class Ui {
      * cli session with request-response cycle.
      *
      * Text commands are separated by line breaks. Parsing and execution is delegated to
-     * After execution, command response will be displayed based on the type of the command.
+     * After execution, command response will be displayed based on the type of the command returned.
      * It is recommended highly to pass in non-null arguments in production environment.
      *
      * @param taskManager is required if commands wants to manipulate a task collection.
