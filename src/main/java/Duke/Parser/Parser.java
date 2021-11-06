@@ -10,8 +10,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser that make sense of inputs and retrieved lines.
+ */
 public class Parser {
 
+    /**
+     * Reads the input
+     * create a task object based on the input
+     * and adds it into the task list of Duke.
+     * @param input
+     */
     public static void parseInput(String input) {
         if (input.trim().equals("list")) {
             TaskList.printTaskList();
@@ -30,6 +39,12 @@ public class Parser {
         }
     }
 
+    /**
+     * If input contains valid information for a "To do" object,
+     * method creates the "to do" Object from the input
+     * and adds it to duke task list
+     * @param input
+     */
     public static void AddTodo(String input) {
         try {
             if (InputChecker.CheckValidTodo(input)) {
@@ -44,6 +59,12 @@ public class Parser {
         }
     }
 
+    /**
+     * If input contains valid information for a "deadline" object,
+     * method creates the "deadline" Object from the input
+     * and adds it to duke task list
+     * @param input
+     */
     public static void AddDeadline(String input) {
         try {
             if (InputChecker.CheckValidDeadline(input)) {
@@ -57,6 +78,12 @@ public class Parser {
         }
     }
 
+    /**
+     * If input contains valid information for an "event" object,
+     * method creates the "event" Object from the input
+     * and adds it to duke task list
+     * @param input
+     */
     public static void AddEvent(String input) {
         try {
             if (InputChecker.CheckValidEvent(input)) {
@@ -70,6 +97,11 @@ public class Parser {
         }
     }
 
+    /**
+     * If input contain valid information to identify a task in the list,
+     * mark said task object as completed.
+     * @param input
+     */
     public static void MarkDone(String input) {
         try {
             if (InputChecker.CheckValidDone(input)) {
@@ -80,6 +112,11 @@ public class Parser {
         }
     }
 
+    /**
+     * If input contain valid information to identify a task in the list,
+     * delete said task object.
+     * @param input
+     */
     public static void DeleteTask(String input) {
         try {
             if (InputChecker.CheckValidDelete(input)) {
@@ -90,6 +127,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes and parse a line from the storage file,
+     * uses the information from the line to create
+     * and return the respective task object based on the line.
+     * @param FileLine
+     * @return Task object created from file line.
+     * @throws DukeException
+     */
     public static Task ParseStorageLine(String FileLine) throws DukeException {
         String[] parts = FileLine.split("\\|");
         if (parts[0].trim().equals("T")) {
@@ -113,6 +158,12 @@ public class Parser {
         throw new DukeException("A line from storage file is invalid and will not be added to Duke.");
     }
 
+    /**
+     * Takes in the parsed parts of a line from the storage file
+     * and return a new "To do" object created from the parts.
+     * @param parts
+     * @return "To do" object created from information parsed from a file line.
+     */
     public static Todo getTodoFromLine(String[] parts) {
         Todo newTodo = new Todo(parts[2].trim());
         if (parts[1].trim().equals("1")) {
@@ -121,6 +172,13 @@ public class Parser {
         return newTodo;
     }
 
+    /**
+     * Takes in the parsed parts of a line from the storage file,
+     * checks whether it has a date and time and creates and returns
+     * a new "Deadline" object using the correct constructor based on the checks.
+     * @param parts
+     * @return Deadline object created from information parsed from a file line.
+     */
     public static Deadline getDeadlineFromLine(String[] parts) {
         String[] datetime = parts[3].trim().split(" ");
         Deadline newDeadline;
@@ -151,6 +209,13 @@ public class Parser {
         return newDeadline;
     }
 
+    /**
+     * Takes in the parsed parts of a line from the storage file,
+     * checks whether it has a date and time and creates and returns
+     * a new "Event" object using the correct constructor based on the checks.
+     * @param parts
+     * @return an Event object created from information parsed from a file line.
+     */
     public static Event getEventFromLine(String[] parts) {
         String[] datetime = parts[3].trim().split(" ");
         Event newEvent;
@@ -181,6 +246,12 @@ public class Parser {
         return newEvent;
     }
 
+    /**
+     * Takes in a string and checks whether it is in an input representing time.
+     * If it is in valid format, return true.
+     * @param timeInput
+     * @return boolean on whether input is represented in a valid time format.
+     */
     public static boolean checkTimeInput(String timeInput) {
         if (timeInput.equals("")) {
             return false;
@@ -199,6 +270,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes and parse a string representing time
+     * and return a new LocalTime object
+     * created from the parsed parts of the string.
+     * @param timeInput
+     * @return LocalTime object created from a valid time format input.
+     */
     public static LocalTime buildTaskTime(String timeInput) {
         int time = Integer.parseInt(timeInput);
         int hour = time/100;
@@ -207,6 +285,13 @@ public class Parser {
         return taskTime;
     }
 
+    /**
+     * Takes in a string array and checks whether it contains valid strings
+     * that represent date, month and year.
+     * If valid, the method returns true.
+     * @param details
+     * @return boolean whether input contains the correct details to represent date.
+     */
     public static boolean checkDateInput(String[] details) {
         if (details.length != 3) {
             return false;
@@ -229,6 +314,12 @@ public class Parser {
         }
     }
 
+    /** Takes a string array with details on a specific date
+     * and return a LocalDate object
+     * created using the details.
+     * @param details
+     * @return LocalDate object created from the parts of a valid date format input.
+     */
     public static LocalDate buildTaskDate(String[] details) {
         String day = details[0].trim();
         if (day.length() == 1) {
@@ -249,6 +340,13 @@ public class Parser {
         return taskDate;
     }
 
+    /**
+     * Takes in a valid input with information on a deadline,
+     * parse the parts of the input
+     * and returns a new Deadline object created using the relevant constructor.
+     * @param input
+     * @return Deadline object created from a valid input with deadline information.
+     */
     public static Deadline buildDeadline(String input) {
         String[] parts = input.substring(8).split("/by");
         String[] datetime = parts[1].trim().split(" ");
@@ -272,6 +370,13 @@ public class Parser {
         return newDeadline;
     }
 
+    /**
+     * Takes in a valid input with information on an event,
+     * parse the parts of the input
+     * and returns a new Event object created using the relevant constructor.
+     * @param input
+     * @return a Event object created from a valid input with event information.
+     */
     public static Event buildEvent(String input) {
         String[] parts = input.substring(5).split("/at");
         String[] datetime = parts[1].trim().split(" ");
