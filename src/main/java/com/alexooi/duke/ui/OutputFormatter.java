@@ -14,6 +14,7 @@ public class OutputFormatter implements OutputFormat<Task> {
     private static final String ADD = "added: ";
     private static final String REMOVE = "Noted. I've removed this task:";
     private static final String VIEW_SCHEDULE = "You have the following tasks scheduled on ";
+    private static final String FIND = "Here are the matching tasks in your list:";
 
     @Override
     public String start() {
@@ -56,22 +57,23 @@ public class OutputFormatter implements OutputFormat<Task> {
     @Override
     public String list(Iterable<Task> inputs) {
         StringBuilder output = new StringBuilder();
-        int count = 1;
-        for (Task input : inputs) {
-            String taskStr = input.toStatusString();
-            output.append(formatLine(count + ". " + taskStr));
-            count++;
-        }
+        output.append(formatList(inputs));
         return formatOutput(output.toString());
     }
 
     @Override
     public String viewSchedule(Iterable<Task> inputs, LocalDate date) {
         StringBuilder output = new StringBuilder();
-        output.append(formatLine(VIEW_SCHEDULE + date.toString() + System.lineSeparator()));
-        for (Task input : inputs) {
-            output.append(formatLine(input.toStatusString()));
-        }
+        output.append(formatLine(VIEW_SCHEDULE + date.toString()));
+        output.append(formatList(inputs));
+        return formatOutput(output.toString());
+    }
+
+    @Override
+    public String find(Iterable<Task> inputs) {
+        StringBuilder output = new StringBuilder();
+        output.append(formatLine(FIND));
+        output.append(formatList(inputs));
         return formatOutput(output.toString());
     }
 
@@ -92,5 +94,15 @@ public class OutputFormatter implements OutputFormat<Task> {
 
     private String formatOutput(String output) {
         return formatLine(HORIZONTAL_LINE) + output + PADDING + HORIZONTAL_LINE;
+    }
+
+    private String formatList(Iterable<Task> inputs) {
+        StringBuilder output = new StringBuilder();
+        int count = 1;
+        for (Task input : inputs) {
+            output.append(formatLine(count + ". " + input.toStatusString()));
+            count++;
+        }
+        return output.toString();
     }
 }

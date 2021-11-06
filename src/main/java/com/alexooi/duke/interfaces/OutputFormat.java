@@ -19,5 +19,7 @@ public interface OutputFormat<T> {
 
     String viewSchedule(Iterable<T> inputs, LocalDate date);
 
+    String find(Iterable<T> inputs);
+
     String exit();
 }

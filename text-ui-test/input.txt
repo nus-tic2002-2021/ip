@@ -5,5 +5,6 @@ event meet friend /at 2021-09-15
 done 2
 list
 view 2021-09-20
+find book
 delete 2
 list
