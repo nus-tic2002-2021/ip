@@ -8,6 +8,8 @@ public class InvalidCommandFormatException extends Throwable {
             "Event should be in the format: event <description> /at <date>.";
     public static final String ERROR_TODO =
             "Todo should be in the format: todo <description>.";
+    public static final String ERROR_VIEW_SCHEDULE =
+            "View schedule should be in the format: view schedule /for <date>.";
 
     private String errorMessage;
 

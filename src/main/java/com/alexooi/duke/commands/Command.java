@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.exceptions.InvalidCommandException;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
@@ -43,7 +44,7 @@ public abstract class Command {
 
     public abstract Pattern getRegexPattern();
 
-    public abstract Command build();
+    public abstract Command build() throws InvalidCommandFormatException;
 
     public boolean isExit() {
         return false;

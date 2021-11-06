@@ -1,5 +1,7 @@
 package com.alexooi.duke.interfaces;
 
+import java.time.LocalDate;
+
 public interface OutputFormat<T> {
     String start();
 
@@ -14,6 +16,8 @@ public interface OutputFormat<T> {
     String error(String errorMessage);
 
     String list(Iterable<T> inputs);
+
+    String viewSchedule(Iterable<T> inputs, LocalDate date);
 
     String exit();
 }

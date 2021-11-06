@@ -2,6 +2,7 @@ package com.alexooi.duke.ui;
 
 import com.alexooi.duke.commands.Command;
 import com.alexooi.duke.exceptions.InvalidCommandException;
+import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 import java.util.ServiceLoader;
@@ -13,7 +14,7 @@ class CommandLineParserTest {
     private final ServiceLoader<Command> commandLoader = ServiceLoader.load(Command.class);
 
     @Test
-    void readInput_CommandTodoSuccess() throws InvalidCommandException {
+    void readInput_CommandTodoSuccess() throws InvalidCommandException, InvalidCommandFormatException {
         String input = "todo read book";
         Scanner sc = new Scanner(input).useDelimiter("\n");
         Command cmd = COMMAND_LINE_PARSER.readInput(sc, commandLoader);
@@ -29,7 +30,7 @@ class CommandLineParserTest {
     }
 
     @Test
-    void readInput_CommandDeadlineSuccess() throws InvalidCommandException {
+    void readInput_CommandDeadlineSuccess() throws InvalidCommandException, InvalidCommandFormatException {
         String input = "deadline return book /by 2021-09-15";
         Scanner sc = new Scanner(input).useDelimiter("\n");
         Command cmd = COMMAND_LINE_PARSER.readInput(sc, commandLoader);
@@ -45,7 +46,7 @@ class CommandLineParserTest {
     }
 
     @Test
-    void readInput_CommandEventSuccess() throws InvalidCommandException {
+    void readInput_CommandEventSuccess() throws InvalidCommandException, InvalidCommandFormatException {
         String input = "event meet friend /at 2021-09-15";
         Scanner sc = new Scanner(input).useDelimiter("\n");
         Command cmd = COMMAND_LINE_PARSER.readInput(sc, commandLoader);

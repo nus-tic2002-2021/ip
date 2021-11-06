@@ -16,7 +16,8 @@ public class InputDateParser implements DateParser {
             DateTimeFormatter.ISO_DATE_TIME
     };
 
-    boolean isDate(String input, DateTimeFormatter acceptedFormats) {
+    @Override
+    public boolean isDate(String input, DateTimeFormatter acceptedFormats) {
         try {
             LocalDate.parse(input, acceptedFormats);
         } catch (DateTimeParseException dtpe) {
@@ -25,7 +26,8 @@ public class InputDateParser implements DateParser {
         return true;
     }
 
-    boolean isDateTime(String input, DateTimeFormatter acceptedFormats) {
+    @Override
+    public boolean isDateTime(String input, DateTimeFormatter acceptedFormats) {
         try {
             LocalDateTime.parse(input, acceptedFormats);
         } catch (DateTimeParseException dtpe) {

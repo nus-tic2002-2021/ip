@@ -2,6 +2,7 @@ package com.alexooi.duke.ui;
 
 import com.alexooi.duke.commands.Command;
 import com.alexooi.duke.exceptions.InvalidCommandException;
+import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.IOParser;
 
 import java.util.*;
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class CommandLineParser implements IOParser<Command, Scanner> {
     public Command readInput(Scanner sc, Iterable<Command> commands)
-            throws InvalidCommandException {
+            throws InvalidCommandException, InvalidCommandFormatException {
         String input = sc.nextLine();
 
         for (Command cmd : commands) {
