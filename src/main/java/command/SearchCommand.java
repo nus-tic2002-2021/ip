@@ -1,7 +1,7 @@
 package command;
 
-import duke.Storage;
-import duke.UI;
+import storage.Storage;
+import ui.UI;
 import task.List;
 
 public class SearchCommand extends Command {

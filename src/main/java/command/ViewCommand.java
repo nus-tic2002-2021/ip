@@ -1,8 +1,7 @@
 package command;
 
-import duke.Duke;
-import duke.Storage;
-import duke.UI;
+import storage.Storage;
+import ui.UI;
 import error.DukeException;
 import task.List;
 
