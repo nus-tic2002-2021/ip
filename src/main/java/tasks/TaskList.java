@@ -4,8 +4,6 @@ import exceptions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.concurrent.atomic.DoubleAdder;
 
 /**
  * A <code>TaskList</code> object stores all available tasks (to-dos, deadlines, events).
