@@ -11,23 +11,22 @@ For production you will need JDK 11 support and maven for build. Source code is 
 
 Clone the repo
 
-# Test
+## Test
 
-## With Local Github Action
+### With Local Github Action
 ```act``` test
 
-## With Maven
+### With Maven
 
 ```mvn test```
 
-## Build
+### Build
 
 ```mvn package``` package \
 ```./NoelLim/Duke.jar``` generated jar \
 ```java -jar ./NoelLim/Duke.jar``` run package
 
-
-#Command List
+# Command List
 
 `$ *`   - unknown command
 
