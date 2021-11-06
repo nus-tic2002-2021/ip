@@ -37,6 +37,9 @@ public class TaskList {
         DukeList.remove(index);
     }
 
+    /**
+     * Prints all the task in the task list with their information.
+     */
     public static void printTaskList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < DukeList.size(); i++) {
