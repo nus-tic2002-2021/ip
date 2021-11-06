@@ -15,11 +15,12 @@ public class Ui {
     private static final String SEPARATOR =
             "___________________________________________________________________________";
 
-    private final Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public String userInput(){
         return in.nextLine();
     }
+
     public static void Welcome (){
         System.out.println("        _..._\n" +
                 "      .'     '.      _\n" +
@@ -39,7 +40,24 @@ public class Ui {
                 "          `-._/._/" + "\t\tHow can i help you?");
         System.out.println("___^/\\___^--____/\\____O______________/\\/\\---/\\___________---______________ \n" +
                 "   /\\^   ^  ^    ^                  ^^ ^  '\\ ^          ^       ---         ");
+        howToUse();
         System.out.println(SEPARATOR);
+    }
+
+    public static void howToUse(){
+        System.out.println("How to interact with Duke:\n");
+        System.out.println("\tFunction:                    Command:");
+        System.out.println("\tView all existing tasks:     list");
+        System.out.println("\tAdd a new to-do:             todo {description}");
+        System.out.println("\tAdd a new deadline:          deadline {description} /by {d/M/yyyy HHmm}");
+        System.out.println("\tAdd a new event:             event {description} /at {d/M/yyyy HHmm}");
+        System.out.println("\tMark a task as completed:    done {taskId}");
+        System.out.println("\tDelete a task:               delete {taskId}");
+        System.out.println("\tSearch task by keyword:      search {keyword}");
+        System.out.println("\tCheck schedule of a date:    view {yyyy-MM-dd}");
+        System.out.println("\tShow help message:           help");
+        System.out.println("\tDelete all tasks:            reset");
+        System.out.println("\tExit the program:            bye");
     }
 
     public static void goodBye (){
@@ -140,16 +158,14 @@ public class Ui {
 
     }
 
-    public static void printDone(String[] command, TaskList taskList){
-        int taskNumber  = Integer.parseInt(command[1]) - 1;
+    public void printDone(int i, TaskList taskList){
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t"+taskList.get(taskNumber).printTask());
+        System.out.println("\t"+taskList.get(i).printTask());
     }
 
-    public static void printDelete(String[] command, TaskList taskList){
-        int taskNumber  = Integer.parseInt(command[1]) - 1;
+    public void printDelete(int i, TaskList taskList){
         System.out.println("Noted. I've removed this task: ");
-        System.out.println("\t"+taskList.get(taskNumber).printTask());
+        System.out.println("\t"+taskList.get(i).printTask());
     }
 
     public void printTaskCount(TaskList taskList){
@@ -185,5 +201,20 @@ public class Ui {
     public void printTaskByKeyword(TaskList taskList, String keyword){
         System.out.println("You have total " + (taskList.size()) +" tasks related to <" + keyword +">.");
     }
+
+    public void reset(){
+        System.out.println("Your task list has been reset. Please add new task.");
+    }
+
+    public static boolean validateResetCommand(){
+        boolean b = false;
+        System.out.println("Heads up! You are about to reset your task list. Type \"confirm\" to continue.");
+        String confirm = in.nextLine();
+        if (confirm.equalsIgnoreCase("confirm")){
+            b = true;
+        }
+        return b;
+    }
+
 
 }

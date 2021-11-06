@@ -15,6 +15,7 @@ public class DeleteCommand extends Command{
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         int taskNumber = Integer.parseInt(command[1]) - 1;
+        ui.printDelete(taskNumber,taskList);
         taskList.removeTask(taskNumber);
         ui.printTaskCount(taskList);
         storage.saveTask(taskList.getTasks());

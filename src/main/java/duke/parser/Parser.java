@@ -90,13 +90,10 @@ public class Parser {
                 return new ListCommand();
             case DONE:
                 Ui.validateDoneCommand(command, taskList);
-                Ui.printDone(command, taskList);
                 return new DoneCommand(command);
             case DELETE:
                 Ui.validateDoneCommand(command, taskList);
-                Command delete = new DeleteCommand(command);
-                Ui.printDelete(command, taskList);
-                return delete;
+                return new DeleteCommand(command);
             case VIEW:
                 try{
                     Ui.validateViewCommand(command);
@@ -109,6 +106,14 @@ public class Parser {
                 Ui.validateSearchCommand(command);
                 String keyword = command[1];
                 return new SearchCommand(keyword);
+            case HELP:
+                return new HelpCommand();
+            case RESET:
+                if(Ui.validateResetCommand()){
+                    return new ResetCommand();
+                } else {
+                    return new InvalidCommand("No worries, your task list remain unchanged.");
+                }
             case BYE:
                 return new ByeCommand();
             default:

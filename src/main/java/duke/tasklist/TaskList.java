@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     public void reset() {
-        taskList = new ArrayList<>();
+        taskList.clear();
     }
 
     public int size() {

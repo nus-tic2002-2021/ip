@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * The <code>viewCommand</code> class
+ */
 public class ViewCommand extends Command {
     LocalDate date;
 
