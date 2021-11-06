@@ -9,8 +9,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class contains the methods related to the storage file.
+ */
 public class Storage {
 
+    /**
+     * Creates a new file and directory.
+     * @return the new File object.
+     * @throws DukeException
+     */
     public static File CreateStorageFile() throws DukeException {
         File newFile = new File("data\\Duke.Storage.txt");
         try {
@@ -23,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Opens and returns storage file.
+     * If a storage file does not exist, create one and return that.
+     * @return an opened File object.
+     * @throws DukeException
+     */
     public static File OpenStorageFile() throws DukeException {
         File newFile = new File("data\\storage.txt");
         if (!newFile.exists()) {
@@ -35,6 +49,11 @@ public class Storage {
         return newFile;
     }
 
+    /**
+     * Takes a file and parse the contents into task objects
+     * The parsed task objects will then be added to Duke's task list.
+     * @param storageFile
+     */
     public static void ReadFileToArray(File storageFile) {
         try {
             Scanner s = new Scanner(storageFile);
@@ -47,10 +66,15 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File cannot be opened, " +
-                    "Duke.Duke will not have any prior stored task information");
+                    "Duke will not have any prior stored task information");
         }
     }
 
+    /**
+     * Retrieves information of all the tasks inside Duke task list
+     * and converts each into a string to store inside storage file.
+     * @param FileWrite
+     */
     public static void writeListToFile(File FileWrite) {
         try {
             FileWriter fw = new FileWriter(FileWrite, false);
@@ -74,6 +98,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes in a task object using it to build
+     * and return a string with the format of lines in storage file.
+     * @param targetTask
+     * @return a String with task information in storage line format.
+     */
     public static String buildStorageLine(Task targetTask) {
         String divider = " | ";
         String initial = targetTask.getTaskType();
