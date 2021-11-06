@@ -51,7 +51,7 @@ import duke.dukeexception.DukeParseDateTimeException;
 
 public class UiCommandFactory extends CommandFactory {
     protected Command executeCommandExitLoop() {
-        return new CommandExitLoop(PROMPT_EXIT_LOOP);
+        return new CommandExitLoop();
     }
 
     public Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm) {
