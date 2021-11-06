@@ -55,6 +55,7 @@ public class UiCommandFactory extends CommandFactory {
     }
 
     public Command executeTextCommand(String text, TaskManager taskManager, FileResourceManager frm) {
+        assert (text != null);
         try {
             if (isRequestExitLoop(text)) {
                 return this.executeCommandExitLoop();

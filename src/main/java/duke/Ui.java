@@ -86,6 +86,7 @@ public class Ui {
     }
 
     protected void printCommandResponse(Command c) throws Exception {
+        assert (c != null);
         ResponseType rt = c.getResponseType();
 
         String output = "";
@@ -140,6 +141,7 @@ public class Ui {
         do {
             textCommand = in.nextLine();
             Command command = this.getUiCommandFactory().executeTextCommand(textCommand, taskManager, frm);
+            assert (command != null);
             this.setIsLoop(!command.getResponseType().equals(ResponseType.EXIT_LOOP));
             this.printCommandResponse(command);
             this.printEndOfResponse();
