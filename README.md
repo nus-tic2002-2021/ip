@@ -43,7 +43,7 @@ Clone the repo
 `undone [id]` set task as not done
 
 `list` list tasks \
-`find [string_in_description]` query tasks with string in description
+`find [keyword]` query tasks with keyword in description
 
 `stats:all` summary of tasks
 
