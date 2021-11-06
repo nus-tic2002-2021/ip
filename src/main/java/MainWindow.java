@@ -27,6 +27,21 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private String welcome = ("Hi, I'm Duke "
+            +"How to interact with me: \n"
+            +"\tCommand:            Function:" + System.lineSeparator()
+            +"\tlist                 View all existing tasks"+ System.lineSeparator()
+            +"\ttodo                 Add a new to-do"+ System.lineSeparator()
+            +"\tdeadline            Add a new deadline"+ System.lineSeparator()
+            +"\tevent               Add a new event"+ System.lineSeparator()
+            +"\tdone                Mark a task as completed [√]"+ System.lineSeparator()
+            +"\tdelete             Delete a task"+ System.lineSeparator()
+            +"\tsearch              Search tasks by keyword"+ System.lineSeparator()
+            +"\tview                Check schedule of a date"+ System.lineSeparator()
+            +"\thelp                Show help message"+ System.lineSeparator()
+            +"\treset               Delete all tasks"+ System.lineSeparator()
+            +"\tbye                 Exit the program");
+
     /**
      * Controller for MainWindow. Provides the layout for the other controls.
      */
@@ -34,8 +49,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         VBox.setVgrow(scrollPane, javafx.scene.layout.Priority.ALWAYS);
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Duke. "
-                + "How may I help you?", dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome, dukeImage));
     }
 
     public void setDuke(Duke d) {

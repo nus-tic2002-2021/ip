@@ -43,56 +43,23 @@ public class Ui {
     }
 
     public static void howToUse(){
-        System.out.println("How to interact with Duke:\n");
-        System.out.println("\tFunction:                          Command:");
-        System.out.println("\tView all existing tasks:           list");
-        System.out.println("\tAdd a new to-do:                   todo {description}");
-        System.out.println("\tAdd a new deadline:                deadline {description} /by {d/M/yyyy HHmm}");
-        System.out.println("\tAdd a new event:                   event {description} /at {d/M/yyyy HHmm}");
-        System.out.println("\tMark a task as completed [√]:      done {taskId}");
-        System.out.println("\tDelete a task:                     delete {taskId}");
-        System.out.println("\tSearch tasks by keyword:           search {keyword}");
-        System.out.println("\tCheck schedule of a date:          view {yyyy-MM-dd}");
-        System.out.println("\tShow help message:                 help");
-        System.out.println("\tDelete all tasks:                  reset");
-        System.out.println("\tExit the program:                  bye");
+        System.out.println("How to interact with me: \n");
+        System.out.println("Command:        Function:");
+        System.out.println("list            View all existing tasks");
+        System.out.println("todo            Add a new to-do");
+        System.out.println("deadline        Add a new deadline");
+        System.out.println("event           Add a new event");
+        System.out.println("done            Mark a task as completed [√]");
+        System.out.println("delete          Delete a task");
+        System.out.println("search          Search tasks by keyword");
+        System.out.println("view            Check schedule of a date");
+        System.out.println("help            Show help message");
+        System.out.println("reset           Delete all tasks");
+        System.out.println("bye             Exit the program");
     }
 
     public static void goodBye (){
-        System.out.println("                                                   ,:\n" +
-            "                                                 ,' |\n" +
-            "                                                /   :\n" +
-            "                                             --'   /\n" +
-            "                                             \\/ />/\n" +
-            "                                             / /_\\\n" +
-            "                                          __/   /\n" +
-            "                                          )'-. /\n" +
-            "                                          ./  :\\\n" +
-            "                                           /.' '\n" +
-            "                                         '/'\n" +
-            "                                         +\n" +
-            "                                        '\n" +
-            "                                      `.\n" +
-            "                                  .-\"-\n" +
-            "                                 (    |\n" +
-            "                              . .-'  '.\n" +
-            "                             ( (.   )8:\n" +
-            "                         .'    / (_  )\n" +
-            "                          _. :(.   )8P  `\n" +
-            "                      .  (  `-' (  `.   .\n" +
-            "                       .  :  (   .a8a)\n" +
-            "                      /_`( \"a `a. )\"'\n" +
-            "                  (  (/  .  ' )=='\n" +
-            "                 (   (    )  .8\"   +\n" +
-            "                   (`'8a.( _(   (\n" +
-            "                ..-. `8P    ) `  )  +\n" +
-            "              -'   (      -ab:  )\n" +
-            "            '    _  `    (8P\"Ya\n" +
-            "          _(    (    )b  -`.  ) +\n" +
-            "         ( 8)  ( _.aP\" _a   \\( \\   *\n" +
-            "       +  )/    (8P   (88    )  )\n" +
-            "          (a:f   \"     `\"       `\n" +
-            "\nBye, i will go back to space.");
+        System.out.println("Bye. Hope to see you again soon.");
     }
 
     public void errorMessage (Exception e) {
@@ -105,23 +72,23 @@ public class Ui {
 
     public static void validateEventCommand(String[] command) {
         if (command.length < 2 || command[1].equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The description of a event cannot be empty. Please re-enter:");
         } else if (!command[1].contains("/at")) {
-            throw new DukeException("☹ OOPS!!! The date of a event cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The date of a event cannot be empty. Please re-enter:");
         }
     }
 
     public static void validateDeadlineCommand(String[] command) {
         if (command.length < 2 || command[1].equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The description of a deadline cannot be empty. Please re-enter:");
         } else if (!command[1].contains("/by")) {
-            throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The date of a deadline cannot be empty. Please re-enter:");
         }
     }
 
     public static void validateTodoCommand(String[] command) {
         if (command.length < 2 || command[1].equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The description of a todo cannot be empty. Please re-enter:");
         }
     }
 
@@ -185,7 +152,7 @@ public class Ui {
 
     public static void validateViewCommand(String[] command){
         if (command.length < 2) {
-            throw new DukeException("☹ OOPS!!! The date cannot be empty. Please re-enter:");
+            throw new DukeException("OOPS! The date cannot be empty. Please re-enter:");
         }
     }
 

@@ -2,3 +2,11 @@
     -fx-background-image: url('backgroud.jpeg');
 	-fx-background-size: cover;
 }
+
+.button {
+    -fx-background-color: #4169E1;
+}
+
+.button:hover {
+    -fx-background-color: #0F52BA;
+}

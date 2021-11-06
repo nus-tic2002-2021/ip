@@ -6,13 +6,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="Infinity" maxWidth="Infinity" prefWidth="400.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="Infinity" maxWidth="Infinity" prefWidth="800.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="230.0">
+    <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="750.0">
       <font>
-        <Font size="14.0" />
+        <Font size="21.0" />
       </font></Label>
-    <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
     <HBox.margin>
       <Insets bottom="0.0" left="15.0" right="5.0" top="0.0" />
     </HBox.margin>

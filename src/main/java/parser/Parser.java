@@ -69,7 +69,7 @@ public class Parser {
         try {
             commandCollections = CommandCollections.valueOf(instruction);
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand("☹ The command <"+ command[0] +"> is not valid! Please re-enter:");
+            return new InvalidCommand("Sorry. I can't understand ["+ command[0] +"] yet. Please try again or type [help].");
         }
 
 
@@ -107,7 +107,7 @@ public class Parser {
                     LocalDate date = parseDate(command);
                     return new ViewCommand(date);
                 }catch (DateTimeParseException e) {
-                    return new InvalidCommand("☹ Please enter datetime in the format of 'd/M/yyyy'");
+                    return new InvalidCommand("Please enter datetime in the format of 'd/M/yyyy'");
                 }
             case SEARCH:
                 Ui.validateSearchCommand(command);
@@ -124,7 +124,7 @@ public class Parser {
             case BYE:
                 return new ByeCommand();
             default:
-                return new InvalidCommand("☹ Sorry, I don't know what it means :-(");
+                return new InvalidCommand("");
         }
 
     }
