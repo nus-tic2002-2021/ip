@@ -104,7 +104,7 @@ public class UiTest extends TestStream {
      * Check and show task ids of duplicates.
      */
     @Test
-    public void scan_checkDuplicateDesciption() throws Exception {
+    public void scan_checkDuplicateDescription() throws Exception {
         TaskManager tm = new TaskManager();
         LocalDateTime date = LocalDateTime.now();
 
