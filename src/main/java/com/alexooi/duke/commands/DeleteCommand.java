@@ -33,6 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, OutputFormat<Task> prompt) throws InvalidCommandFormatException {
         int idx = Integer.parseInt(getArgs()) - 1;
+        if (idx > tasks.size() - 1) {
+            throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_NO_SUCH_INDEX);
+        }
         Task removedTask = tasks.remove(idx);
         return prompt.remove(removedTask, tasks.size());
     }

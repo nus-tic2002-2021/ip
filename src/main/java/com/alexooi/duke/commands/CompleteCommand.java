@@ -33,6 +33,9 @@ public class CompleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, OutputFormat<Task> prompt) throws InvalidCommandFormatException {
         int idx = Integer.parseInt(getArgs()) - 1;
+        if (idx > tasks.size() - 1) {
+            throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_NO_SUCH_INDEX);
+        }
         Task doneTask = tasks.getTask(idx);
         doneTask.setDone(!doneTask.getDone());
         return prompt.done(doneTask, doneTask.getDone());
