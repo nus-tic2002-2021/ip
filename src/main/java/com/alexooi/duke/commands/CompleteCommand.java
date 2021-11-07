@@ -35,6 +35,6 @@ public class CompleteCommand extends Command {
         int idx = Integer.parseInt(getArgs()) - 1;
         Task doneTask = tasks.getTask(idx);
         doneTask.setDone(!doneTask.getDone());
-        return prompt.done(doneTask);
+        return prompt.done(doneTask, doneTask.getDone());
     }
 }

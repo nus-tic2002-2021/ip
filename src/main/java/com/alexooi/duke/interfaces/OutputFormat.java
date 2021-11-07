@@ -7,7 +7,7 @@ public interface OutputFormat<T> {
 
     String add(T printable, int length);
 
-    String done(T printable);
+    String done(T printable, boolean isDone);
 
     String remove(T printable, int length);
 

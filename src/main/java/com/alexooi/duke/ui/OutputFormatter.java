@@ -16,6 +16,7 @@ public class OutputFormatter implements OutputFormat<Task> {
     private static final String COMMAND_LIST = "The following commands are available:";
     private static final String END = "Bye. Hope to see you again soon!";
     private static final String DONE = "Nice! I've marked this task as done:";
+    private static final String UNDO = "Okay, I've unmarked this task:";
     private static final String ADD = "added: ";
     private static final String REMOVE = "Noted. I've removed this task:";
     private static final String VIEW_SCHEDULE = "You have the following tasks scheduled on ";
@@ -51,8 +52,13 @@ public class OutputFormatter implements OutputFormat<Task> {
      * @return          formatted string containing the output to print
      */
     @Override
-    public String done(Task printable) {
-        String output = formatLine(DONE);
+    public String done(Task printable, boolean isDone) {
+        String output = "";
+        if (isDone) {
+            output += formatLine(DONE);
+        } else {
+            output += formatLine(UNDO);
+        }
         output += formatLine("   " + printable.toStatusString());
         return formatOutput(output);
     }
