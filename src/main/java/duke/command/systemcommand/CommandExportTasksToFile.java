@@ -2,12 +2,15 @@ package duke.command.systemcommand;
 
 import static duke.dukeutility.enums.ResponseType.FILE_SAVED;
 import static duke.dukeutility.enums.ResponseType.FILE_SAVED_IO_ERROR;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonWriter;
+
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 

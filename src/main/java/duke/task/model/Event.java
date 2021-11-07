@@ -1,6 +1,7 @@
 package duke.task.model;
 
 import static duke.dukeutility.parser.DateParser.prettifyLocalDateTime;
+
 import java.time.LocalDateTime;
 
 public final class Event extends Task {

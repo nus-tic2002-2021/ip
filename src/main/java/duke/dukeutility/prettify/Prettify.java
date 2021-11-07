@@ -1,9 +1,11 @@
 package duke.dukeutility.prettify;
 
 import static duke.dukeutility.Helper.buildString;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
 import duke.TaskManager;
 import duke.task.model.Deadline;
 import duke.task.model.Event;

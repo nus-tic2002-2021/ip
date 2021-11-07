@@ -11,8 +11,11 @@ import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeDeadline;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeEvent;
 import static duke.dukeutility.validator.JsonObjectValidator.isJsonTypeToDo;
 import static duke.dukeutility.validator.JsonObjectValidator.isNotNullJsonPropertyTaskType;
+
 import java.time.LocalDateTime;
+
 import com.google.gson.JsonObject;
+
 import duke.task.model.Deadline;
 import duke.task.model.Event;
 import duke.task.model.Task;
@@ -29,7 +32,7 @@ public class JsonTaskToObjectParser extends Parser {
      * @return task object
      * @throws Exception if not recognised as a task
      */
-    public static final Task jsonTaskToPojo(JsonObject jsonObj) throws Exception {
+    public static Task jsonTaskToPojo(JsonObject jsonObj) throws Exception {
         if (!isNotNullJsonPropertyTaskType(jsonObj)) {
             throw new Exception("No task type");
         } else if (isJsonTypeToDo(jsonObj)) {

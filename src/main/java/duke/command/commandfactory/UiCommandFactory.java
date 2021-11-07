@@ -28,7 +28,9 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestScanDuplicates;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSee;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestStatisticsAll;
+
 import java.time.LocalDateTime;
+
 import duke.FileResourceManager;
 import duke.TaskManager;
 import duke.command.Command;
@@ -271,7 +273,7 @@ public class UiCommandFactory extends CommandFactory {
     private Command executeCommandProjectionAll(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
-        Integer period;
+        int period;
         try {
             argLine = text.replaceFirst(PROMPT_PROJECTION_ALL, "");
             argList = argLine.split(" ");
@@ -284,10 +286,11 @@ public class UiCommandFactory extends CommandFactory {
         }
         return new CommandProjectionAll(taskManager, period);
     }
+
     private Command executeCommandProjectionNotDone(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
-        Integer period;
+        int period;
         try {
             argLine = text.replaceFirst(PROMPT_PROJECTION_NOT_DONE, "");
             argList = argLine.split(" ");

@@ -6,11 +6,13 @@ import static duke.dukeutility.parser.TaskToJsonParser.parseEventAsJson;
 import static duke.dukeutility.parser.TaskToJsonParser.parseToDoAsJson;
 import static duke.dukeutility.validator.StringValidator.isSubstring;
 import static duke.task.TaskComparator.isTaskWithinNextDays;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
+
 import com.google.gson.JsonArray;
+
 import duke.task.TaskComparator;
 import duke.task.aggregator.TaskList;
 import duke.task.model.Deadline;
@@ -99,7 +101,6 @@ public class TaskManager {
     }
 
 
-
     public ArrayList<Task> getTasksWithId(Integer id) {
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(this.tasks.getTaskById(id));
@@ -119,7 +120,8 @@ public class TaskManager {
     }
 
     public ArrayList<Task> getTasksFiltered(TaskFilter cb) {
-        assert(cb != null);
+        // filter must have a predicate.
+        assert (cb != null);
         ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
         for (Task t : all) {
@@ -130,7 +132,6 @@ public class TaskManager {
         filtering.sort(TaskComparator::compareTaskDate);
         return filtering;
     }
-
 
 
     /**

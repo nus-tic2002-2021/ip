@@ -8,9 +8,11 @@ import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutp
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputStatsAll;
 import static duke.testhelper.help.codeundertest.OutputUnderTest.getExpectedOutputTemplate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
+
 import duke.TaskManager;
 import duke.Ui;
 import duke.mock.mocktask.MockDeadline;
@@ -79,9 +81,9 @@ public class UiTest extends TestStream {
     public void stats_showSummaryAll() throws Exception {
 
         TaskManager tm = new TaskManager();
-        Integer expectedCountToDo = 0;
-        Integer expectedCountDeadline = 0;
-        Integer expectedCountEvent = 0;
+        int expectedCountToDo = 0;
+        int expectedCountDeadline = 0;
+        int expectedCountEvent = 0;
         LocalDateTime date = LocalDateTime.now();
         ToDo task0 = tm.addNewToDo("todo done" + expectedCountToDo++);
         task0.setDoneStatus(true);

@@ -1,7 +1,9 @@
 package duke.command.taskcommand.taskquery;
 
 import static duke.dukeutility.prettify.Prettify.getStatisticsAll;
+
 import java.util.List;
+
 import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;

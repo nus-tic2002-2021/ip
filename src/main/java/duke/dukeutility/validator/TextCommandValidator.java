@@ -15,6 +15,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SCAN_D
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_STATISTICS_ALL;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -69,6 +70,7 @@ public class TextCommandValidator {
     public static Boolean isRequestProjectionAll(String text) {
         return text.startsWith(PROMPT_PROJECTION_ALL);
     }
+
     public static Boolean isRequestProjectionNotDone(String text) {
         return text.startsWith(PROMPT_PROJECTION_NOT_DONE);
     }
