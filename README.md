@@ -9,7 +9,7 @@ For production you will need JDK 11 support and maven for build. Source code is 
 
 # Run
 
-Clone the repo
+Clone the repo.
 
 ## Test
 
@@ -22,9 +22,11 @@ Clone the repo
 
 ### Build
 
+In root of repository,
+
 ```mvn package``` package \
-```./NoelLim/Duke.jar``` generated jar \
-```java -jar ./NoelLim/Duke.jar``` run package
+```./NoelLim/Duke.jar``` generated jar is single executable fatty \
+```java -jar ./NoelLim/Duke.jar``` run jar
 
 # Command List
 
