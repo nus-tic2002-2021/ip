@@ -9,6 +9,7 @@ import static duke.task.TaskComparator.isTaskWithinNextDays;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import com.google.gson.JsonArray;
 import duke.task.TaskComparator;
 import duke.task.aggregator.TaskList;
@@ -17,7 +18,7 @@ import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
 
-interface taskCustomFilter {
+interface TaskFilter {
     Boolean filter(Task t);
 }
 
@@ -97,40 +98,32 @@ public class TaskManager {
         return this.tasks.getAllAsArray();
     }
 
-    public ArrayList<Task> getTasksWithKeywordInDescription(String keyword) {
-        ArrayList<Task> all = this.tasks.getAllAsArray();
-        ArrayList<Task> filtering = new ArrayList<>();
 
-        keyword = keyword.toLowerCase();
-        for (Task t : all) {
-            if (isSubstring(t.getTaskDescription().toLowerCase(), keyword)) {
-                filtering.add(t);
-            }
-        }
-        return filtering;
-    }
 
     public ArrayList<Task> getTasksWithId(Integer id) {
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(this.tasks.getTaskById(id));
-
         return taskList;
     }
 
     public ArrayList<Task> getTasksForNextDaysAll(Integer period) {
-        return this.getTasksForNextDays(period, (t) -> true);
+        return this.getTasksFiltered((t) -> isTaskWithinNextDays(t, period));
     }
 
     public ArrayList<Task> getTasksForNextDaysNotDone(Integer period) {
-        return this.getTasksForNextDays(period, (t) -> !t.isDone());
+        return this.getTasksFiltered((t) -> isTaskWithinNextDays(t, period) && !t.isDone());
     }
 
-    public ArrayList<Task> getTasksForNextDays(Integer period, taskCustomFilter cb) {
+    public ArrayList<Task> getTasksWithKeywordInDescription(String keyword) {
+        return this.getTasksFiltered((t) -> isSubstring(t.getTaskDescription().toLowerCase(), keyword.toLowerCase()));
+    }
+
+    public ArrayList<Task> getTasksFiltered(TaskFilter cb) {
         assert(cb != null);
         ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
         for (Task t : all) {
-            if (isTaskWithinNextDays(t, period) && cb.filter(t)) {
+            if (cb.filter(t)) {
                 filtering.add(t);
             }
         }
