@@ -40,7 +40,7 @@ public class TaskList {
 
     public boolean contains(Task t){return taskList.contains(t);}
 
-    public TaskList getTaskByDate(LocalDate date, TaskList taskList) {
+    public TaskList getTaskByDate(LocalDate date, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByDate = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getType().equals("E") | taskList.get(i).getType().equals("D")) {
@@ -52,7 +52,7 @@ public class TaskList {
         return taskByDate;
     }
 
-    public TaskList getTaskByKeyword (String keyword, TaskList taskList) {
+    public TaskList getTaskByKeyword (String keyword, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByKeyword = new TaskList();
         for (int i = 0; i < taskList.size(); i++){
             String[] keywordInTask = taskList.get(i).getKeyword();

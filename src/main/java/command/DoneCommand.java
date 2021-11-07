@@ -14,11 +14,15 @@ public class DoneCommand extends Command{
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        int taskNumber = Integer.parseInt(command[1]) - 1;
-        taskList.get(taskNumber).setDone(true);
-        ui.printDone(taskNumber, taskList);
-        ui.printTaskCount(taskList);
-        storage.saveTask(taskList.getTasks());
+        try {
+            int taskNumber = Integer.parseInt(command[1]) - 1;
+            taskList.get(taskNumber).setDone(true);
+            ui.printDone(taskNumber, taskList);
+            ui.printTaskCount(taskList);
+            storage.writeToFile(taskList.getTasks());
+        } catch (IndexOutOfBoundsException e) {
+
+        }
     }
 
 }

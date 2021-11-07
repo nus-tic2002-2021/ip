@@ -16,6 +16,11 @@ import java.util.Scanner;
 
 import static parser.Parser.commandToArray;
 
+
+/**
+ * The storage class handles the read and write function
+ *  read and write tasks list to and from the task.txt file
+ */
 public class Storage {
 
     protected String filePath;
@@ -24,7 +29,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void saveTask(ArrayList <Task> taskList) throws IOException {
+    /**
+     * The method writes any changes to the task list to the tasks.txt file
+     * @param taskList is the task list
+     * @throws IOException when file or directory is not found
+     */
+    public void writeToFile(ArrayList <Task> taskList) throws IOException {
         File file = new File(filePath);
         File dir = file.getParentFile();
         if(!file.exists()){
@@ -58,7 +68,11 @@ public class Storage {
     }
 
 
-    public ArrayList<Task> load() throws FileNotFoundException {
+    /**
+     * The method reads the task list from the tasks.txt file
+     * @throws FileNotFoundException when file or directory is not found
+     */
+    public ArrayList<Task> readFromFile() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
         Scanner sc = new Scanner(file);

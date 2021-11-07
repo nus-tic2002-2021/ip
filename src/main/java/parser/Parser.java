@@ -11,7 +11,7 @@ import java.time.format.FormatStyle;
 
 
 /**
- * A <code>Parser</code> object deals with making sense of the user command.
+ * The <code>Parser</code> class contains methods to parse the user command into required actions.
  */
 public class Parser {
     /**
@@ -25,10 +25,10 @@ public class Parser {
     }
 
     /**
-     *
-     * @param command
-     * @return
-     * @throws DateTimeParseException
+     *The parseDate method returns LocalDate object from user input
+     * @param command is the user input
+     * @return LocalDate object date
+     * @throws DateTimeParseException when input is not of pattern specified
      */
     public static LocalDate parseDate(String[] command) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -37,6 +37,12 @@ public class Parser {
         return date;
     }
 
+    /**
+     *The parseDateTime method returns LocalDateTime object from user input
+     * @param command is the user input
+     * @return LocalDateTime object dateTime
+     * @throws DateTimeParseException when input is not of pattern specified
+     */
     public static LocalDateTime parseDateTime(String[] command) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         LocalDateTime dateTime;
@@ -44,6 +50,13 @@ public class Parser {
         return dateTime;
     }
 
+    /**
+     *Since the user input and tasks.txt file are of different pattern.
+     * The parseDateTime method returns LocalDateTime object from tasks.txt
+     * @param command is a line in tasks.txt
+     * @return LocalDateTime object dateTime
+     * @throws DateTimeParseException when input is not of pattern specified
+     */
     public static LocalDateTime parseDateTimeFromFile(String[] command) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
         LocalDateTime dateTimeFromFile;

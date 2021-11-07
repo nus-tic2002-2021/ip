@@ -7,6 +7,10 @@ import ui.Ui;
 
 import java.io.*;
 
+/**
+ * The duke class is the main class of the program
+ *  duke object
+ */
 public class Duke {
 
     private TaskList taskList;
@@ -18,7 +22,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             ui.exceptionMessage(e);
         } catch (FileNotFoundException e) {
@@ -31,7 +35,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             ui.exceptionMessage(e);
         } catch (FileNotFoundException e) {

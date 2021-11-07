@@ -114,13 +114,12 @@ public class Ui {
 
     public static void validateDoneCommand(String[] command, TaskList taskList){
         if (command.length < 2 || command[1].equals("")) {
-            throw new DukeException("☹ Please state task number.");
+            throw new DukeException("Please state task number.");
         }
         int taskNumber  = Integer.parseInt(command[1]) - 1;
-        if (taskNumber >= taskList.size()) {
-            throw new DukeException("☹ There is no such task.");
+        if (taskNumber >= taskList.size() || taskNumber < 0 ) {
+            throw new DukeException("The task number is not valid.");
         }
-
     }
 
     public void printDone(int i, TaskList taskList){
@@ -166,7 +165,7 @@ public class Ui {
         System.out.println("You have total " + (taskList.size()) +" tasks related to <" + keyword +">.");
     }
 
-    public void reset(){
+    public void printReset(){
         System.out.println("Your task list has been reset. Please add new task.");
     }
 
@@ -178,5 +177,9 @@ public class Ui {
             b = true;
         }
         return b;
+    }
+
+    public void outOfIndex(){
+        System.out.println("");
     }
 }

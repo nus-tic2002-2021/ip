@@ -18,6 +18,6 @@ public class DeleteCommand extends Command{
         ui.printDelete(taskNumber,taskList);
         taskList.removeTask(taskNumber);
         ui.printTaskCount(taskList);
-        storage.saveTask(taskList.getTasks());
+        storage.writeToFile(taskList.getTasks());
     }
 }
