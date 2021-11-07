@@ -6,7 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
+<?import java.net.URL?>
 <fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="Infinity" maxWidth="Infinity" prefWidth="800.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@DialogBox.css" />
+  </stylesheets>
   <children>
     <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="750.0">
       <font>

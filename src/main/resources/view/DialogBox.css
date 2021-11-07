@@ -1,0 +1,8 @@
+.label {
+    -fx-text-fill: white;
+    -fx-background-color: #0080ff;
+    -fx-background-radius: 10px;
+    -fx-border-width: 10px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #0080ff;
+}

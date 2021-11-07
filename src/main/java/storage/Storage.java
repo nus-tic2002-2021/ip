@@ -29,6 +29,8 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public String getFilePath(){return filePath;}
+
     /**
      * The method writes any changes to the task list to the tasks.txt file
      * @param taskList is the task list

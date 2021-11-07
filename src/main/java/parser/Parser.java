@@ -129,11 +129,7 @@ public class Parser {
             case HELP:
                 return new HelpCommand();
             case RESET:
-                if(Ui.validateResetCommand()){
-                    return new ResetCommand();
-                } else {
-                    return new InvalidCommand("No worries, your task list remain unchanged.");
-                }
+                return new ResetCommand();
             case BYE:
                 return new ByeCommand();
             default:

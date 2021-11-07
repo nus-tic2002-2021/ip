@@ -23,9 +23,13 @@ public class ResetCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        taskList.reset();
-        ui.printReset();
-        ui.printTaskCount(taskList);
-        storage.writeToFile(taskList.getTasks());
+        if (ui.validateResetCommand()) {
+            taskList.reset();
+            ui.printReset();
+            ui.printTaskCount(taskList);
+            storage.writeToFile(taskList.getTasks());
+        } else {
+            ui.printNotReset();
+        }
     }
 }

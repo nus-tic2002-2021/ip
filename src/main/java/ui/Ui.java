@@ -122,7 +122,6 @@ public class Ui {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 System.out.println("\t" + (i + 1) + "." + taskList.get(i).printTask());
-
             }
         }
     }
@@ -185,7 +184,9 @@ public class Ui {
         System.out.println("Your task list has been reset. Please add new task.");
     }
 
-    public static boolean validateResetCommand(){
+    public void printNotReset(){System.out.println("No worries, your task list remain unchanged.");}
+
+    public boolean validateResetCommand(){
         boolean b = false;
         System.out.println("Heads up! You are about to reset your task list. Type \"confirm\" to continue.");
         String confirm = in.nextLine();
