@@ -17,6 +17,7 @@ public class TaskList {
     private final StorageClient<BufferedReader> archiveClient;
 
     private TaskList(StorageClient<BufferedReader> stateClient, StorageClient<BufferedReader> archiveClient) {
+        assert stateClient != null && archiveClient != null;
         taskList = new ArrayList<>();
         this.stateClient = stateClient;
         this.archiveClient = archiveClient;
@@ -93,6 +94,7 @@ public class TaskList {
      */
     public void archive(int idx) {
         String output = taskList.get(idx).toSaveString() + System.lineSeparator();
+        assert archiveClient != null;
         archiveClient.save(output, true);
     }
 
@@ -101,6 +103,7 @@ public class TaskList {
      */
     public void archive() {
         String output = toSaveListString();
+        assert archiveClient != null;
         archiveClient.save(output, true);
     }
 
@@ -109,6 +112,7 @@ public class TaskList {
      */
     public void save() {
         String output = toSaveListString();
+        assert stateClient != null;
         stateClient.save(output, false);
     }
 

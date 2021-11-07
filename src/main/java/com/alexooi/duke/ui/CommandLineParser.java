@@ -21,6 +21,7 @@ public class CommandLineParser implements IOParser<Command, Scanner> {
      */
     public Command readInput(Scanner sc, Iterable<Command> commands)
             throws InvalidCommandException, InvalidCommandFormatException {
+        assert sc != null;
         String input = sc.nextLine();
 
         for (Command cmd : commands) {
