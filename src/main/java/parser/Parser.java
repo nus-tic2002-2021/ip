@@ -1,44 +1,59 @@
 package parser;
 
-import command.*;
-import error.*;
+import command.CommandType;
+import command.Command;
+import command.AddCommand;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.ListCommand;
+import command.ModifyCommand;
+import command.SearchCommand;
+import command.ViewCommand;
+import error.DukeException;
+import error.UnrecognizedException;
+
 
 public class Parser {
     /**
-     *
      * Parser to read user input
      *
      * @param input users input message
-     * @throws UnrecognizedException if action is not a recognized command
-     * @throws DukeException if format has a "|" which will conflict with save format
      * @return type of command
+     * @throws UnrecognizedException if action is not a recognized command
+     * @throws DukeException         if format has a "|" which will conflict with save format
      */
     public Command parse(String input) throws UnrecognizedException, DukeException {
-        if (input.contains("|")){
+        if (input.contains("|")) {
             throw new DukeException("INPUT_FORMAT_ERROR");
         }
         String action;
         String[] inputArray;
         inputArray = input.split(" ", 2);
         action = inputArray[0].toLowerCase();
-        switch(action){
-            case "bye":
-                return new ExitCommand();
-            case "todo":
-            case "deadline":
-            case "event":
-                return new AddCommand(action, inputArray[1]);
-            case "delete":
-                return new DeleteCommand(action, inputArray[1]);
-            case "done":
-                return new ModifyCommand(action, inputArray[1]);
-            case "list":
-                return new ListCommand();
-            case "find":
-                return new SearchCommand(inputArray[1]);
-            case "view":
-                return new ViewCommand(inputArray[1]);
-            default: throw new UnrecognizedException();
+        CommandType commandType = CommandType.getCommandType(action);
+        switch (commandType) {
+        case BYE:
+            return new ExitCommand();
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            return new AddCommand(action, inputArray[1]);
+        case DELETE:
+            return new DeleteCommand(action, inputArray[1]);
+        case DONE:
+            return new ModifyCommand(action, inputArray[1]);
+        case LIST:
+            return new ListCommand();
+        case FIND:
+            return new SearchCommand(inputArray[1]);
+        case VIEW:
+            return new ViewCommand(inputArray[1]);
+        case HELP:
+            return new HelpCommand();
+        default:
+            assert false:commandType;
+            throw new UnrecognizedException();
         }
     }
 }

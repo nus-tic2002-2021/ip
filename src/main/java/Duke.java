@@ -2,13 +2,15 @@ import parser.Parser;
 import storage.Storage;
 import ui.UI;
 import task.List;
-import command.*;
-import error.*;
+import command.Command;
+
+import error.DukeException;
+import error.FileException;
+import error.UnrecognizedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+
 
 
 
@@ -40,7 +42,7 @@ public class Duke{
             tasks = new List(storage.load());
             System.out.println("File loaded successfully.");
         } catch (FileException e) {
-            System.out.println("\tFile format is corrupted. Creating new file.");
+            System.out.println("File format is corrupted. Creating new file.");
             tasks = new List();
         } catch (Exception e){
             System.out.println("Error reading file or does not exist. Creating new file.");
@@ -48,41 +50,14 @@ public class Duke{
         }
     }
 
-    /**
-     *
-     *  Executes the program until isExit is true
-     *
-     */
-    public void run(){
-        ui.printIntro();
 
-        while (!isExit){
-            try{
-                String fullCommand = ui.readCommand();
-                ui.printLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks,storage,ui);
-                isExit = c.isExit();
-            } catch (UnrecognizedException e){
-                System.out.println("\tUnrecognized Command");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("\tPlease enter description after command");
-            } catch (DukeException e){
-                ui.showError(e.getMessage());
-            }
-            finally {
-                ui.printLine();
-            }
-        }
-
-    }
 
     //javaFX
     public String getResponse(String input) {
+        ByteArrayOutputStream outputMsg = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputMsg));
         try {
             Command c = Parser.parse(input);
-            ByteArrayOutputStream outputMsg = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outputMsg));
             c.execute(tasks, storage, ui);
             if (c.isExit()){
                 isExit = true;
@@ -94,17 +69,48 @@ public class Duke{
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Please enter description after command");
         } catch (DukeException e){
-            return(e.getMessage());
+            ui.showError(e.getMessage());
+            return outputMsg.toString();
         }
     }
     public Boolean getIsExit() {
         return isExit;
     }
 
-    /*
+    /* Unused after JavaFX implementation
     public static void main(String[] args) {
         new Duke(Path).run();
     }
     */
+    /**
+     *
+     *  Executes the program until isExit is true
+     *
+     */
+    /* Unused after JavaFX implementation
+    public void run(){
+        ui.printIntro();
 
+        while (!isExit){
+            try{
+                String fullCommand = ui.readCommand();
+                ui.printLine();
+                assert fullCommand.length() > 0;
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks,storage,ui);
+                isExit = c.isExit();
+            } catch (UnrecognizedException e){
+                System.out.println("Unrecognized Command");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter description after command");
+            } catch (DukeException e){
+                ui.showError(e.getMessage());
+            }
+            finally {
+                ui.printLine();
+            }
+        }
+
+    }
+     */
 }
