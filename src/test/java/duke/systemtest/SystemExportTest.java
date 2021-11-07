@@ -67,7 +67,7 @@ public class SystemExportTest extends TestStream {
      */
     @Test
     public void idempotentExport() {
-        String thisTestSign = "saveEventsToJsonTestFile";
+        String thisTestSign = "saveTasksToJsonTestFile";
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"));
         String export1PathString = getResourceTestFolder() + "-added" + thisTestSign + date + ".json";
         String export2PathString = getResourceTestFolder() + "-load" + thisTestSign + date + ".json";
