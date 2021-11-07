@@ -1,11 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class FileAccessor {
+public class StorageDAO {
     File file;
     String path;
 
-    public FileAccessor(String path) {
+    public StorageDAO(String path) {
         this.path = "duke.txt";
     }
 

@@ -1,15 +1,13 @@
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-public class TaskFile extends FileAccessor {
+public class StorageDTO extends StorageDAO {
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public TaskFile(String path) {
+    public StorageDTO(String path) {
         super(path);
     }
 

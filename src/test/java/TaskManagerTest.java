@@ -99,7 +99,7 @@ public class TaskManagerTest {
         assertEquals(event.getDescription(), eventDesc);
         Assertions.assertEquals(event.getDate().toString(), eventDate);
 
-        ArrayList<Task> tasks = tm.find("project");
+        ArrayList<Task> tasks = tm.findTask("project");
         assertEquals(tasks.toArray().length, 1, "too many returns");
         assertEquals(tasks.get(0).getId(), 1, "did not get expected id");
     }
@@ -141,7 +141,7 @@ public class TaskManagerTest {
         Assertions.assertEquals(event.getDate().toString(), eventDate);
 
         // View
-        ArrayList<Task> tasks = tm.viewTasksOn(p.stringToDate(eventDate));
+        ArrayList<Task> tasks = tm.viewTaskOn(p.stringToDate(eventDate));
         assertEquals(2, tasks.toArray().length, "too many returns");
         expected.forEach(expect -> {
             Task actual = tasks.stream().filter(task -> Objects.equals(task.getId(), expect.getId())).findFirst().orElse(null);

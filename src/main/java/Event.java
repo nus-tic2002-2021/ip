@@ -1,19 +1,15 @@
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class Event extends Deadline {
     long startTime;
 
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = new Logger();
 
     public Event(String description, String date, int id) {
         super(description,

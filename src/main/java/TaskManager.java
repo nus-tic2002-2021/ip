@@ -13,10 +13,9 @@ public class TaskManager {
     private final static String STMT_DELETE = "Noted. I've removed this task: ";
 
     private ArrayList<Task> tasks = new ArrayList<>();
-
     Global global = new Global();
 
-    public ArrayList<Task> find(String keyword) {
+    public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         tasks.stream().filter(t -> t.getDescription().contains(keyword)).forEach(results::add);
         return results;
@@ -50,14 +49,14 @@ public class TaskManager {
         return new Task(taskInfo, global.getId());
     }
 
-    public void list() {
+    public void listTasks() {
         if (tasks.toArray().length == 0) {
             return;
         }
         tasks.forEach(l -> System.out.println(l.toString()));
     }
 
-    public void list(ArrayList<Task> l) {
+    public void listTasks(ArrayList<Task> l) {
         if (tasks.toArray().length == 0) {
             return;
         }
@@ -68,7 +67,7 @@ public class TaskManager {
         tasks.add(t);
     }
 
-    public void markDone(Integer taskId) {
+    public void markTaskDone(Integer taskId) {
         tasks.stream().filter(t -> t.getId().equals(taskId)).forEach(t -> {
             System.out.println(STMT_DONE);
             Todo task = (Todo) t;
@@ -76,7 +75,7 @@ public class TaskManager {
         });
     }
 
-    public void markDelete(ArrayList<Task> list, Integer taskId) throws Exception {
+    public void deleteTask(ArrayList<Task> list, Integer taskId) throws Exception {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId() != null && list.get(i).getId().equals(taskId)) {
                 System.out.println(STMT_DELETE);
@@ -87,7 +86,7 @@ public class TaskManager {
         }
     }
 
-    public ArrayList<Task> viewTasksOn(LocalDate date) {
+    public ArrayList<Task> viewTaskOn(LocalDate date) {
         logger.info("viewTasksOn date: " + date + ", current task list: " + tasks);
         ArrayList<Task> results = new ArrayList<>();
         if (date == null) {
