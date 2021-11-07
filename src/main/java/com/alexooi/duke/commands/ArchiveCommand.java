@@ -30,8 +30,8 @@ public class ArchiveCommand extends Command {
             tasks.removeAll();
         } else {
             int idx = Integer.parseUnsignedInt(getArgs()) - 1;
-            if (idx > tasks.size() + 1) {
-                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_ARCHIVE_NO_SUCH_TASK);
+            if (idx >= tasks.size()) {
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_NO_SUCH_INDEX);
             }
             tasks.archive(idx);
             Task archived = tasks.remove(idx);

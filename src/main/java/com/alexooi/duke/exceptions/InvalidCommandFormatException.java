@@ -10,8 +10,6 @@ public class InvalidCommandFormatException extends Throwable {
             "Todo should be in the format: todo <description>.";
     public static final String ERROR_VIEW_SCHEDULE =
             "View schedule should be in the format: view <date>.";
-    public static final String ERROR_ARCHIVE_NO_SUCH_TASK =
-            "The task number to archive is not valid. Archive should be in the format: archive <all|num> where num is a valid index";
     public static final String ERROR_NO_SUCH_INDEX =
             "The task number is not valid. Please use the corresponding task number when listing the tasks";
 
