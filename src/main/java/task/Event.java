@@ -35,7 +35,7 @@ public class Event extends Task {
         if (isDone) {
             System.out.println("  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         } else {
-            System.out.println("  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")" );
+            System.out.println("  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + ")" );
         }
 
     }
@@ -46,7 +46,7 @@ public class Event extends Task {
         this.to = to;
     }
     public void setType(){
-        type = "event";
+        type = Action.EVENT;
     }
 
     public String getTask(){

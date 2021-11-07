@@ -6,7 +6,7 @@ import java.time.LocalTime;
 abstract class Task {
     protected String description;
     protected Boolean isDone;
-    protected String type;
+    protected Action type;
 
     public Task(String description) {
         setDescription(description);
@@ -35,7 +35,7 @@ abstract class Task {
     public LocalTime getTime(){
         return null;
     }
-    public String getType(){
+    public Action getType(){
         return type;
     }
 

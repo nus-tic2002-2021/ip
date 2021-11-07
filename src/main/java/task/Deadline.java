@@ -29,7 +29,7 @@ public class Deadline extends Task{
                 "  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
     }
     public void setType(){
-        type = "deadline";
+        type = Action.DEADLINE;
     }
 
     public void print(){

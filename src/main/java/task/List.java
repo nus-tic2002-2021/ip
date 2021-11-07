@@ -3,6 +3,7 @@ package task;
 import error.DukeException;
 import error.FileException;
 import error.NotFoundException;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -19,19 +20,17 @@ public class List {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
+
     /**
-     *
-     *  Create new a new empty List
-     *
+     * Create new a new empty List
      */
-    public List(){
+    public List() {
         taskArrayList = new ArrayList<>();
         taskSave = new ArrayList<>();
     }
 
     /**
-     *
-     *  Create new a new loaded List
+     * Create new a new loaded List
      *
      * @param loadFile loaded txt file
      */
@@ -40,7 +39,7 @@ public class List {
         taskSave = new ArrayList<>();
         String[] taskArr;
         loadFile.listIterator();
-        for(String task : loadFile){
+        for (String task : loadFile) {
             taskArr = task.split(" \\| ");
             String taskType, taskDone, taskDescription;
             LocalDateTime date;
@@ -49,31 +48,31 @@ public class List {
             taskType = taskArr[0];
             taskDone = taskArr[1];
             taskDescription = taskArr[2];
-            if(taskDone.equals("1")){
+            if (taskDone.equals("1")) {
                 isDone = true;
             }
-            switch (taskType){
-                case "T":
-                    taskArrayList.add(new Todo(taskDescription,isDone));
-                    break;
-                case "D":
-                    try {
-                        date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
-                        taskArrayList.add(new Deadline(taskDescription,date,isDone));
-                    } catch (Exception e) {
-                        throw new FileException();
-                    }
-                    break;
+            switch (taskType) {
+            case "T":
+                taskArrayList.add(new Todo(taskDescription, isDone));
+                break;
+            case "D":
+                try {
+                    date = LocalDateTime.parse(taskArr[3], DATE_TIME_FORMATTER);
+                    taskArrayList.add(new Deadline(taskDescription, date, isDone));
+                } catch (Exception e) {
+                    throw new FileException();
+                }
+                break;
 
-                case "E":
-                    try {
-                        date = LocalDateTime.parse(taskArr[3],DATE_TIME_FORMATTER);
-                        time = LocalTime.parse(taskArr[4],TIME_FORMATTER);
-                        taskArrayList.add(new Event(taskDescription,date, time,isDone));
-                    } catch (Exception e) {
-                        throw new FileException();
-                    }
-                    break;
+            case "E":
+                try {
+                    date = LocalDateTime.parse(taskArr[3], DATE_TIME_FORMATTER);
+                    time = LocalTime.parse(taskArr[4], TIME_FORMATTER);
+                    taskArrayList.add(new Event(taskDescription, date, time, isDone));
+                } catch (Exception e) {
+                    throw new FileException();
+                }
+                break;
 
             }
         }
@@ -81,14 +80,13 @@ public class List {
     }
 
     /**
-     *
-     *  Adds new to do task to taskList as a TODO object
+     * Adds new to do task to taskList as a TODO object
      *
      * @param inputMsg description to be added
      * @throws DukeException if inputMsg is empty
      */
-    public void addTodo(String inputMsg)throws DukeException {
-        if(inputMsg.isEmpty()){
+    public void addTodo(String inputMsg) throws DukeException {
+        if (inputMsg.isEmpty()) {
             throw new DukeException("TODO_DESCRIPTION_ERROR");
         }
         taskArrayList.add(new Todo(inputMsg));
@@ -96,108 +94,106 @@ public class List {
     }
 
     /**
-     *
-     *  Adds new deadline task to taskList as a DEADLINE object
+     * Adds new deadline task to taskList as a DEADLINE object
      *
      * @param inputMsg description and /by to be added
      * @throws DukeException if inputMsg is does not contain /by or more than 1 /at OR date is not valid
      */
-    public void addDeadline(String inputMsg)throws DukeException {
-        String [] input = inputMsg.split(" /by ");
+    public void addDeadline(String inputMsg) throws DukeException {
+        String[] input = inputMsg.split(" /by ");
         LocalDateTime date;
-        if(input.length < 2){
+        if (input.length < 2) {
             throw new DukeException("DEADLINE_DESCRIPTION_ERROR");
-        }
-        else if(input.length > 2){
+        } else if (input.length > 2) {
             throw new DukeException("DEADLINE_LENGTH_ERROR");
         }
         try {
-            date = LocalDateTime.parse(input[1],DATE_TIME_FORMATTER);
+            date = LocalDateTime.parse(input[1], DATE_TIME_FORMATTER);
         } catch (Exception e) {
             throw new DukeException("INVALID_DATETIME_FORMAT");
         }
-        taskArrayList.add(new Deadline(input[0],date));
+        taskArrayList.add(new Deadline(input[0], date));
         printAdd();
     }
 
     /**
-     *
-     *  Adds new event task to taskList as a EVENT object
-     *  Does not allow multiple events to have the same Date and Time
+     * Adds new event task to taskList as a EVENT object
+     * Does not allow multiple events to have the same Date and Time
      *
      * @param inputMsg description and /at to be added
      * @throws DukeException if inputMsg does not contain /at or more than 1 /at
      */
-    public void addEvent(String inputMsg)throws DukeException {
-        String [] input = inputMsg.split(" /at ");
-        String [] event;
+    public void addEvent(String inputMsg) throws DukeException {
+        String[] input = inputMsg.split(" /at ");
+        String[] event;
         LocalDateTime date;
         LocalTime time;
         Boolean clash = false;
-        if(input.length < 2){
+        assert input.length == 2;
+        if (input.length < 2) {
             throw new DukeException("EVENT_DESCRIPTION_ERROR");
         }
-        if(input.length > 2){
+        if (input.length > 2) {
             throw new DukeException("EVENT_LENGTH_ERROR");
         }
         event = input[1].split(" /for ");
-        if(event.length > 2){
+        if (event.length > 2) {
             throw new DukeException("EVENT_LENGTH_ERROR");
         }
         try {
-            date = LocalDateTime.parse(event[0],DATE_TIME_FORMATTER);
-        }  catch (Exception e) {
+            date = LocalDateTime.parse(event[0], DATE_TIME_FORMATTER);
+        } catch (Exception e) {
             throw new DukeException("INVALID_DATETIME_FORMAT");
         }
         try {
-            time = LocalTime.parse(event[1],TIME_FORMATTER);
-        } catch (ArrayIndexOutOfBoundsException e){
+            time = LocalTime.parse(event[1], TIME_FORMATTER);
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("EVENT_LENGTH_ERROR");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new DukeException("INVALID_TIME_FORMAT");
         }
         //anomaly checker
-        EventDateTime addEvent = new EventDateTime(date,time);
-        for(Task task : taskArrayList) {
-            if(task.getType() == "event"){
-                EventDateTime existEvent = new EventDateTime(task.getDateTime(),task.getTime());
-                if (addEvent.isAnomaly(existEvent)){
+        EventDateTime addEvent = new EventDateTime(date, time);
+        for (Task task : taskArrayList) {
+            if (task.getType().equals(Action.EVENT)) {
+                EventDateTime existEvent = new EventDateTime(task.getDateTime(), task.getTime());
+                if (addEvent.isAnomaly(existEvent)) {
                     printClash(task);
                     clash = true;
                     break;
                 }
             }
         }
-        if(!clash){
-            taskArrayList.add(new Event(input[0],date, time));
+        if (!clash) {
+            taskArrayList.add(new Event(input[0], date, time));
             printAdd();
         }
     }
 
     /**
-     *
-     *  Modify the task to be set as done.
+     * Modify the task to be set as done.
      *
      * @param taskNumber number to determine which task to modify
      * @throws NotFoundException if the taskNumber is not within array size
      */
-    public void taskDone(String taskNumber)throws NotFoundException {
+    public void taskDone(String taskNumber) throws NotFoundException {
         Integer inputNumber = Integer.parseInt(taskNumber);
-        if (taskArrayList.size() < inputNumber){
+        assert inputNumber > 0;
+        if (taskArrayList.size() < inputNumber) {
             throw new NotFoundException();
         }
         taskArrayList.get(inputNumber - 1).setDone();
     }
+
     /**
-     *
-     *  Deletes the task.
+     * Deletes the task.
      *
      * @param taskNumber number to determine which task to delete
      * @throws NotFoundException if the taskNumber is not within array size
      */
-    public void taskDelete(String taskNumber)throws NotFoundException {
+    public void taskDelete(String taskNumber) throws NotFoundException {
         Integer inputNumber = Integer.parseInt(taskNumber);
-        if (taskArrayList.size() < inputNumber){
+        if (taskArrayList.size() < inputNumber) {
             throw new NotFoundException();
         }
         recentDelete = taskArrayList.get(inputNumber - 1);
@@ -206,54 +202,51 @@ public class List {
     }
 
     /**
-     *
-     *  Prints out all the task.
-     *
+     * Prints out all the task.
      */
     public void printList() {
-        if(taskArrayList.size() == 0){ //0 items in list
+        if (taskArrayList.size() == 0) { //0 items in list
             System.out.println("List is empty!"); //throw empty list
-        }
-        else{
+        } else {
             int count = 1;
-            for(Task task : taskArrayList){
-                System.out.println("" + (count) + "." + task );
+            for (Task task : taskArrayList) {
+                System.out.println("" + (count) + "." + task);
                 count++;
             }
         }
     }
+
     /**
-     *
-     *  Prints out all the task that contains the search keyword(non-case sensitive).
+     * Prints out all the task that contains the search keyword(non-case sensitive).
      *
      * @param search the keyword to search for in description
      */
     public void printSearchList(String search) {
         int count = 1;
-        for(Task task : taskArrayList) {
-            if(task.getDescription().toLowerCase().contains(search.toLowerCase())){
+        for (Task task : taskArrayList) {
+            if (task.getDescription().toLowerCase().contains(search.toLowerCase())) {
                 System.out.println("" + (count) + "." + task);
                 count++;
             }
         }
-        if (count == 1){
+        if (count == 1) {
             System.out.println("Nothing found");
         }
     }
 
-    public void printSchedule(String searchDate) throws DukeException{
+    public void printSchedule(String searchDate) throws DukeException {
         int count = 1;
-        try{
-            LocalDate date = LocalDate.parse(searchDate,DATE_FORMATTER);
-            for(Task task : taskArrayList) {
-                if(task.getDateTime() != null){ //excludes task without date
-                    if(task.getDateTime().toLocalDate().equals(date)){
+        try {
+            LocalDate date = LocalDate.parse(searchDate, DATE_FORMATTER);
+            for (Task task : taskArrayList) {
+                if (task.getDateTime() != null) { //excludes task without date
+                    if (task.getDateTime().toLocalDate().equals(date)) {
                         System.out.println("" + (count) + "." + task);
                         count++;
                     }
                 }
             }
-            if (count == 1){
+            if (count == 1) {
                 System.out.println("Nothing found");
             }
         } catch (Exception e) {
@@ -262,71 +255,65 @@ public class List {
     }
 
     public void saveList() {
-        for(Task task : taskArrayList){
+        for (Task task : taskArrayList) {
             taskSave.add(task.getSave());
         }
     }
-    public ArrayList<String> getSave(){
+
+    public ArrayList<String> getSave() {
         return taskSave;
     }
 
     /**
-     *
-     *  Print out the most recent task added.
-     *
+     * Print out the most recent task added.
      */
     public void printAdd() {
         System.out.println("Got it. Item successfully added to the list: ");
         taskArrayList.get(taskArrayList.size() - 1).print();
-        System.out.println("Now you have " + (taskArrayList.size()) +" task(s) in the list");
+        System.out.println("Now you have " + (taskArrayList.size()) + " task(s) in the list");
     }
 
-    public void printClash(Task clashTask){
+    public void printClash(Task clashTask) {
         System.out.println("Event clashes with an existing event.");
         clashTask.print();
         System.out.println("Delete existing event or change the timing.");
     }
+
     /**
-     *
-     *  Print out the most recent task deleted.
-     *
+     * Print out the most recent task deleted.
      */
     public void printDelete() {
         System.out.println("Noted. I have removed the task: ");
         recentDelete.print();
-        System.out.println("Now you have " + (taskArrayList.size()) +" task(s) in the list");
+        System.out.println("Now you have " + (taskArrayList.size()) + " task(s) in the list");
     }
 
-    public int getArraySize(){
+    public int getArraySize() {
         return taskArrayList.size();
     }
+
     /**
+     * task function to determine the type of task to add
      *
-     *  task function to determine the type of task to add
-     *
-     * @param action the type of task to be added
+     * @param action   the type of task to be added
      * @param inputMsg the message be added in taskArrayList
      */
-    public void addTask(String action,String inputMsg) throws DukeException {
+    public void addTask(String action, String inputMsg) throws DukeException {
         Action a = Action.getAction(action);
-        try{
-            switch (a) {
-            case TODO:
-                addTodo(inputMsg);
-                break;
-            case DEADLINE:
-                addDeadline(inputMsg);
-                break;
-            case EVENT:
-                addEvent(inputMsg);
-                break;
-            default:
-                assert false : a;
-            }
-        } catch (Exception e){
-            throw new DukeException("");
+        switch (a) {
+        case TODO:
+            addTodo(inputMsg);
+            break;
+        case DEADLINE:
+            addDeadline(inputMsg);
+            break;
+        case EVENT:
+            addEvent(inputMsg);
+            break;
+        default:
+            assert false : a;
         }
-
     }
+
 }
 

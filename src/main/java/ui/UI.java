@@ -22,7 +22,8 @@ public class UI {
         printLine();
         System.out.println("Hello!");
         printInstruction();
-        System.out.println("Welcome to Toh Shao Wei TIC2002 Project. Please enter your instruction.");
+        System.out.println("Welcome to Toh Shao Wei TIC2002 Project. Please enter your instruction. " +
+                "\nEnter help to see the list of instructions.");
         printLine();
     }
 

@@ -20,7 +20,7 @@ public class Todo extends Task{
     }
 
     public void setType(){
-        type = "todo";
+        type = Action.TODO;
     }
 
     public void print(){
