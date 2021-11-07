@@ -23,6 +23,7 @@ public enum ResponseType {
     TASK_DELETE_TASK,
     TASK_LIST_ALL,
     TASK_LIST_FIND,
+    TASK_LIST_ONE,
     TASK_STATS_ALL,
     TASK_PROJECTION,
     TASK_IMPORT_TODO,

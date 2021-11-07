@@ -107,6 +107,12 @@ public class TaskManager {
         }
         return filtering;
     }
+    public ArrayList<Task> getTasksWithId(Integer id) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        taskList.add(this.tasks.getTaskById(id));
+
+        return taskList;
+    }
 
     public ArrayList<Task> getTasksForNextDays(Integer period) {
         ArrayList<Task> all = this.tasks.getAllAsArray();

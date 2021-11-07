@@ -44,6 +44,8 @@ In root of repository,
 `done [id]` set task as done \
 `undone [id]` set task as not done
 
+`see [id]` see task
+
 `list` list tasks \
 `find [keyword]` query tasks with keyword in description
 

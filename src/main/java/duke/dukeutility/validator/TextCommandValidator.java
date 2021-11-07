@@ -7,6 +7,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_EXIT_LOOP;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST_ONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SCAN_DUPLICATE_DESCRIPTION;
@@ -74,5 +75,9 @@ public class TextCommandValidator {
 
     public static Boolean isRequestSave(String text) {
         return text.equals(PROMPT_SAVE);
+    }
+
+    public static Boolean isRequestSee(String text){
+        return text.startsWith(PROMPT_LIST_ONE);
     }
 }

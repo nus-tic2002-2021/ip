@@ -7,6 +7,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_EV
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_TODO;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST_ONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
@@ -23,6 +24,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskA
 import static duke.dukeutility.validator.TextCommandValidator.isRequestProjection;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestScanDuplicates;
+import static duke.dukeutility.validator.TextCommandValidator.isRequestSee;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestStatisticsAll;
 import java.time.LocalDateTime;
 import duke.FileResourceManager;
@@ -38,6 +40,7 @@ import duke.command.taskcommand.taskadd.CommandAddNewDeadline;
 import duke.command.taskcommand.taskadd.CommandAddNewEvent;
 import duke.command.taskcommand.taskadd.CommandAddNewToDo;
 import duke.command.taskcommand.taskquery.CommandListAll;
+import duke.command.taskcommand.taskquery.CommandListOne;
 import duke.command.taskcommand.taskquery.CommandListTasksWithKeyword;
 import duke.command.taskcommand.taskquery.CommandProjection;
 import duke.command.taskcommand.taskquery.CommandScanDuplicateDescriptions;
@@ -71,6 +74,8 @@ public class UiCommandFactory extends CommandFactory {
                 return this.executeCommandDeleteTask(text, taskManager);
             } else if (isRequestSave(text)) {
                 return frm.executeSave(taskManager);
+            } else if (isRequestSee(text)) {
+                return this.executeSeeTask(text, taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
             } else if (isRequestProjection(text)) {
@@ -199,6 +204,26 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandMarkTaskAsIncomplete(taskManager, taskId);
     }
 
+    private Command executeSeeTask(String text, TaskManager taskManager) {
+        String argLine;
+        String[] argList;
+        Integer taskId;
+        try {
+            argLine = text.replaceFirst(PROMPT_LIST_ONE, "");
+            argList = argLine.split(" ");
+            if (argList.length != 1) {
+                return new CommandInvalidTextCommandSyntax("Invalid syntax.");
+            }
+            taskId = Integer.parseInt(argList[0]);
+            if (!taskManager.containsTaskId(taskId)) {
+                return new CommandTaskNotFound(argList[0]);
+            }
+        } catch (Exception e) {
+            return new CommandInvalidRequestParameters(e.toString());
+        }
+        return new CommandListOne(taskManager, taskId);
+    }
+
     private Command executeCommandDeleteTask(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
@@ -218,6 +243,7 @@ public class UiCommandFactory extends CommandFactory {
         }
         return new CommandDeleteTask(taskManager, taskId);
     }
+
 
     private Command executeCommandFindByKeywordInDescription(String text, TaskManager taskManager) {
         String argLine;

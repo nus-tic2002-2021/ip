@@ -97,6 +97,7 @@ public class Ui {
             break;
         case TASK_LIST_ALL:
         case TASK_LIST_FIND:
+        case TASK_LIST_ONE:
         case TASK_PROJECTION:
         case TASK_STATS_ALL:
         case SCAN_DUPLICATE_DESCRIPTION:
