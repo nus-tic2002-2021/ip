@@ -13,6 +13,7 @@ public class TaskManager {
     private final static String STMT_DELETE = "Noted. I've removed this task: ";
 
     private ArrayList<Task> tasks = new ArrayList<>();
+    private StorageDTO storageDTO;
     Global global = new Global();
 
     public ArrayList<Task> findTask(String keyword) {
@@ -75,12 +76,12 @@ public class TaskManager {
         });
     }
 
-    public void deleteTask(ArrayList<Task> list, Integer taskId) throws Exception {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() != null && list.get(i).getId().equals(taskId)) {
+    public void deleteTask(Integer taskId) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getId() != null && tasks.get(i).getId().equals(taskId)) {
                 System.out.println(STMT_DELETE);
-                System.out.println(list.get(i).toString());
-                list.remove(list.get(i));
+                System.out.println(tasks.get(i).toString());
+                tasks.remove(tasks.get(i));
                 return;
             }
         }
@@ -106,5 +107,9 @@ public class TaskManager {
             }
         });
         return results;
+    }
+
+    public Integer getNextId() {
+        return tasks.size();
     }
 }

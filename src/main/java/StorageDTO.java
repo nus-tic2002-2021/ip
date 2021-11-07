@@ -11,7 +11,7 @@ public class StorageDTO extends StorageDAO {
         super(path);
     }
 
-    public ArrayList<Task> load(TaskManager tm) {
+    public ArrayList<Task> loadInto(TaskManager tm) {
         try {
             init();
             ArrayList<Task> list = new ArrayList<Task>();
