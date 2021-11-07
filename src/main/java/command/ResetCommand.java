@@ -14,6 +14,13 @@ import java.io.IOException;
  */
 public class ResetCommand extends Command{
 
+    /**
+     * The execute method perform deleting all tasks in the list
+     * @param taskList is the task list
+     * @param ui to print out message on screen
+     * @param storage to write change to task.txt
+     * @throws IOException when file not found
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         taskList.reset();

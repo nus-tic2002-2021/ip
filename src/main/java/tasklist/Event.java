@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * An Event object holds event type of task which contains LocalDateTime variable
+ *
+ */
 public class Event extends Task{
 
     protected LocalDateTime dateTime;

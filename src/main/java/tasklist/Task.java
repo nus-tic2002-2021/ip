@@ -12,7 +12,7 @@ public class Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Default task
+     * Default task constructor
      * @param description parses from user input
      */
     public Task(String description) {
@@ -20,10 +20,6 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * Returns description of the task
-     * @return task description in String
-     */
     public String getDescription() {return description;}
 
     //isDone.Setter

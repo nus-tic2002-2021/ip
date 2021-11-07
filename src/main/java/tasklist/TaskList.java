@@ -3,6 +3,9 @@ package tasklist;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * An TaskList object holds an arraylist of tasks
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -40,6 +43,13 @@ public class TaskList {
 
     public boolean contains(Task t){return taskList.contains(t);}
 
+    /**
+     * The method searches task in the tasklist of the date given
+     * @param date user specified date parameter
+     * @param taskList is the task list
+     * @return another list of task of the date given
+     * @throws IndexOutOfBoundsException when the index is out of bounds
+     */
     public TaskList getTaskByDate(LocalDate date, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByDate = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
@@ -52,6 +62,13 @@ public class TaskList {
         return taskByDate;
     }
 
+    /**
+     * The method searches task in the tasklist of the keyword given
+     * @param keyword user specified keyword parameter
+     * @param taskList is the task list
+     * @return another list of task of the keyword given
+     * @throws IndexOutOfBoundsException when the index is out of bounds
+     */
     public TaskList getTaskByKeyword (String keyword, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByKeyword = new TaskList();
         for (int i = 0; i < taskList.size(); i++){

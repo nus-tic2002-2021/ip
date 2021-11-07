@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * Deadline class is the deadline type of task which contains LocalDateTime variable
+ * An Deadline object holds deadline type of task which contains LocalDateTime variable
  *
  */
 public class Deadline extends Task {

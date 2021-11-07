@@ -1,5 +1,9 @@
 package tasklist;
 
+/**
+ * An Todo object holds todo type of task which does not contains date and time.
+ *
+ */
 public class Todo extends Task{
     public Todo(String description){
         super(description);

@@ -9,7 +9,6 @@ import java.io.*;
 
 /**
  * The duke class is the main class of the program
- *  duke object
  */
 public class Duke {
 
@@ -62,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The method is used to capture the ui messages and show on the GUI
+     * @param input is the user input from GUI
+     * @return string of ui messages
+     */
     public String dukeReply(String input) {
         try {
             Command c = Parser.parse(input, taskList);

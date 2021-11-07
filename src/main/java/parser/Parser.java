@@ -72,7 +72,7 @@ public class Parser {
      * @throws IllegalArgumentException when user command is not included in the CommandCollection Enum Class
      */
     public static Command parse(String text, TaskList taskList) throws IllegalArgumentException{
-        assert text != null : "Command be null";
+        assert text != null : "Command cannot be null";
 
         String[] command = commandToArray(text);
         String instruction = command[0].toUpperCase();

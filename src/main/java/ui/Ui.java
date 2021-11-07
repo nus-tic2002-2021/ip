@@ -8,17 +8,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Scanner;
 
+/**
+ * Ui Class contains all the interacting messages to be displayed on screen
+ *
+ */
 public class Ui {
 
-    private static final String SEPARATOR =
-            "___________________________________________________________________________";
+    private static final String SEPARATOR = "___________________________________________________________________________";
 
     private static final Scanner in = new Scanner(System.in);
 
+    /**
+     * The method reads the user input and convert to string
+     * @return String user input
+     */
     public String userInput(){
         return in.nextLine();
     }
 
+    /**
+     * Welcome message template on start up
+     */
     public static void Welcome (){
         System.out.println("        _..._\n" +
                 "      .'     '.      _\n" +
@@ -42,6 +52,9 @@ public class Ui {
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Help message template
+     */
     public static void howToUse(){
         System.out.println("How to interact with me: \n");
         System.out.println("Command:        Function:");
@@ -58,6 +71,9 @@ public class Ui {
         System.out.println("bye             Exit the program");
     }
 
+    /**
+     * End message template
+     */
     public static void goodBye (){
         System.out.println("Bye. Hope to see you again soon.");
     }

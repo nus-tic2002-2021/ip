@@ -1,7 +1,7 @@
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * A launcher object to launch the GUI.
  */
 public class Launcher {
 

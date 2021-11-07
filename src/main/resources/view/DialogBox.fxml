@@ -11,7 +11,8 @@
     <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="750.0">
       <font>
         <Font size="21.0" />
-      </font></Label>
+      </font>
+    </Label>
     <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
     <HBox.margin>
       <Insets bottom="0.0" left="15.0" right="5.0" top="0.0" />
