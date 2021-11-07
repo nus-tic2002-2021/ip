@@ -103,7 +103,7 @@ public class Parser {
     }
 
     public String getFirstToken() {
-        if (tokens.size() >= 1) {
+        if (tokens.size() > 1) {
             return tokens.get(1);
         }
 
