@@ -6,13 +6,10 @@ import com.alexooi.duke.interfaces.DateParser;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    private String timingStr;
     private LocalDateTime timing;
-    private DateParser dateParser;
 
-    public Event(String description, String timing, DateParser parser) {
+    public Event(String description, LocalDateTime timing) {
         super(TaskType.EVENT, description);
-        this.dateParser = parser;
         this.setTiming(timing);
     }
 
@@ -20,10 +17,8 @@ public class Event extends Task {
         return timing;
     }
 
-    public void setTiming(String timing) {
-        LocalDateTime dateTime = dateParser.parseInput(timing);
-        this.timingStr = timing;
-        this.timing = dateTime;
+    public void setTiming(LocalDateTime timing) {
+        this.timing = timing;
     }
 
     @Override

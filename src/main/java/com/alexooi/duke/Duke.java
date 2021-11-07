@@ -1,6 +1,7 @@
 package com.alexooi.duke;
 
 import com.alexooi.duke.commands.Command;
+import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.storage.FileStorage;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
@@ -30,6 +31,10 @@ public class Duke {
         }
 
         return instance;
+    }
+
+    public OutputFormat<Task> getPrompt() {
+        return this.prompt;
     }
 
     public static void main(String[] args) {

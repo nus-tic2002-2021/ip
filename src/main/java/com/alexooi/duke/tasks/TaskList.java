@@ -1,5 +1,7 @@
 package com.alexooi.duke.tasks;
 
+import com.alexooi.duke.Duke;
+import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.interfaces.StorageClient;
 
@@ -125,6 +127,7 @@ public class TaskList {
 
     private void load(BufferedReader in) {
         boolean isEndOfInput = false;
+        Duke main = Duke.getInstance();
         while (!isEndOfInput) {
             try {
                 String taskStr = in.readLine();
@@ -133,11 +136,12 @@ public class TaskList {
                 } else {
                     taskList.add(TaskFactory.getInstance(taskStr));
                 }
-            } catch (IOException e) {
-                System.out.println("Unable to read file!");
+            } catch (IOException ioe) {
+                System.out.println(main.getPrompt().error(ioe.getMessage()));
             } catch (InvalidFileFormatException iffe) {
-                System.out.println("Invalid File Format detected!");
+                System.out.println(main.getPrompt().error(iffe.getErrorHeader(), iffe.getMessage()));
             }
+
         }
     }
 }

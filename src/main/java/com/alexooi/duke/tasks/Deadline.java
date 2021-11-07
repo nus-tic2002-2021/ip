@@ -6,13 +6,10 @@ import com.alexooi.duke.interfaces.DateParser;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private String dueDateStr;
     private LocalDateTime dueDate;
-    private DateParser dateParser;
 
-    public Deadline(String description, String dueDate, DateParser parser) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(TaskType.DEADLINE, description);
-        this.dateParser = parser;
         this.setDueDate(dueDate);
     }
 
@@ -20,10 +17,8 @@ public class Deadline extends Task {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
-        LocalDateTime dateTime = dateParser.parseInput(dueDate);
-        this.dueDateStr = dueDate;
-        this.dueDate = dateTime;
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
     }
 
     @Override

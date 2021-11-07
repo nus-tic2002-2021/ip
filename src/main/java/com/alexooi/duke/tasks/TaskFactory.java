@@ -7,6 +7,7 @@ import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.interfaces.DateParser;
 import com.alexooi.duke.utility.InputDateParser;
 
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +35,11 @@ public class TaskFactory {
             if (deadlineMatch.matches()) {
                 String description = deadlineMatch.group(KEY_DESCRIPTION);
                 String dueDate = deadlineMatch.group(KEY_DATE);
-                return new Deadline(description, dueDate, dateParser);
+                LocalDateTime dueBy = dateParser.parseInput(dueDate);
+                if (dueBy == null) {
+                    throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
+                }
+                return new Deadline(description, dueBy);
             } else {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
             }
@@ -43,7 +48,11 @@ public class TaskFactory {
             if (eventMatch.matches()) {
                 String description = eventMatch.group(KEY_DESCRIPTION);
                 String timing = eventMatch.group(KEY_DATE);
-                return new Event(description, timing, dateParser);
+                LocalDateTime eventTime = dateParser.parseInput(timing);
+                if (eventTime == null) {
+                    throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
+                }
+                return new Event(description, eventTime);
             } else {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_EVENT);
             }
@@ -75,11 +84,19 @@ public class TaskFactory {
         if (keyword.equalsIgnoreCase(TaskType.DEADLINE.toString())) {
             String description = line[2];
             String dueDate = line[3];
-            currentTask = new Deadline(description, dueDate, dateParser);
+            LocalDateTime dueBy = dateParser.parseInput(dueDate);
+            if (dueBy == null) {
+                throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
+            }
+            currentTask = new Deadline(description, dueBy);
         } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
             String description = line[2];
             String timing = line[3];
-            currentTask = new Event(description, timing, dateParser);
+            LocalDateTime eventTime = dateParser.parseInput(timing);
+            if (eventTime == null) {
+                throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
+            }
+            currentTask = new Event(description, eventTime);
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
             currentTask = new Todo(line[2]);
         } else {

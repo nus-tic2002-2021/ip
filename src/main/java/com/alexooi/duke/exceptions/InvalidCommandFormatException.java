@@ -3,9 +3,9 @@ package com.alexooi.duke.exceptions;
 public class InvalidCommandFormatException extends Throwable {
     private static final String ERROR_PREFIX = "Invalid Command Format:";
     public static final String ERROR_DEADLINE =
-            "Deadline should be in the format: deadline <description> /by <date>.";
+            "Deadline should be in the format: deadline <description> /by <date> where <date> is in the format of yyyy-mm-dd.";
     public static final String ERROR_EVENT =
-            "Event should be in the format: event <description> /at <date>.";
+            "Event should be in the format: event <description> /at <date> where <date> is in the format of yyyy-mm-dd.";
     public static final String ERROR_TODO =
             "Todo should be in the format: todo <description>.";
     public static final String ERROR_VIEW_SCHEDULE =
