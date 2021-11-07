@@ -20,6 +20,7 @@ public class Duke {
         // Program starts
         ui.start();
         ui.getInput();
+        ui.parseInput();
         ui.processInput();
         while (!ui.isExit()) {
             ui.getInput();

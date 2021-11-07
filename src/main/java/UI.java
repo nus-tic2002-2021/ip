@@ -60,7 +60,7 @@ public class UI {
         String taskInfo = parser.getTaskInfo();
         String firstToken = parser.getFirstToken();
 
-        if (parser.isExit(instruction)) {
+        if (parser.isExit()) {
             isExit = true;
             return;
         }
