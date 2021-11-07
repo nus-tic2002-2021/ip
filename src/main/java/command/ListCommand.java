@@ -8,7 +8,8 @@ public class ListCommand extends Command {
     public ListCommand() {
 
     }
-    public void execute(List tasks, Storage storage, UI ui){
+
+    public void execute(List tasks, Storage storage, UI ui) {
         tasks.printList();
     }
 }

@@ -15,9 +15,9 @@ public class DeadlineTest {
      *  Test for deadline constructor
      */
     public void deadlineConstructor() {
-        Deadline test = new Deadline("test description", LocalDateTime.of(2021,12,10,13,10));
+        Deadline test = new Deadline("test description", LocalDateTime.of(2021, 12, 10, 13, 10));
         assertEquals("test description", test.getDescription());
-        assertEquals(LocalDateTime.of(2021,12,10,13,10),test.getDateTime());
+        assertEquals(LocalDateTime.of(2021, 12, 10, 13, 10), test.getDateTime());
     }
 
 }

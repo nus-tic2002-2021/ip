@@ -6,7 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,7 +30,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String intro = "Hello. Welcome to Toh Shao Wei TIC2002 Project. Please enter your instruction."  +
+        String intro = "Hello. Welcome to Toh Shao Wei TIC2002 Project. Please enter your instruction." +
                 "\nEnter help to see the list of instructions.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(intro, dukeImage));
@@ -52,7 +54,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if(duke.getIsExit()){
+        if (duke.getIsExit()) {
             Platform.exit();
         }
     }

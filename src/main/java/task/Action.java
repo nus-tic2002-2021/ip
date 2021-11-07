@@ -10,7 +10,8 @@ public enum Action {
     Action(String addType) {
         setAddType(addType);
     }
-    public void setAddType(String addType){
+
+    public void setAddType(String addType) {
         this.addType = addType;
     }
 

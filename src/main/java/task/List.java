@@ -81,9 +81,10 @@ public class List {
 
     /**
      * Adds new to do task to taskList as a TODO object
-     *The inputMsg contains the instruction all input is part of the description
-     *"description"
+     * The inputMsg contains the instruction all input is part of the description
+     * "description"
      * On successful adding of task, it prints the task added
+     *
      * @param inputMsg description to be added
      * @throws DukeException if inputMsg is empty
      */
@@ -100,6 +101,7 @@ public class List {
      * The inputMsg contains the instruction where only the format
      * "description" /by "DateTime" is accepted
      * On successful adding of task, it prints the task added.
+     *
      * @param inputMsg description and /by to be added
      * @throws DukeException if inputMsg is does not contain /by or more than 1 /at OR date is not valid
      */
@@ -126,6 +128,7 @@ public class List {
      * "description" /by "DateTime" /for "Time" is accepted
      * It checks if there is any existing task with clashing timings and
      * on successful adding of task, it prints the task added.
+     *
      * @param inputMsg description and /at to be added
      * @throws DukeException if inputMsg does not contain /at or more than 1 /at
      */
@@ -244,6 +247,7 @@ public class List {
             System.out.println("Nothing found");
         }
     }
+
     /**
      * Prints out all the task that contains the search keyword(non-case sensitive)
      * excluding those without a valid DateTime.
@@ -288,6 +292,7 @@ public class List {
         taskArrayList.get(taskArrayList.size() - 1).print();
         System.out.println("Now you have " + (taskArrayList.size()) + " task(s) in the list");
     }
+
     /**
      * Print out the task that clash with the event trying to be added.
      */

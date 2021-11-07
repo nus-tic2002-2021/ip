@@ -11,14 +11,16 @@ public class Event extends Task {
     private final String PRINT_FORMAT = "MMM d yyyy HH:mm a";
     private final String DATE_FORMAT = "yyyy-MM-dd";
     private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
+
     /**
      * Constructor for a new event created by user command
      * sets the description, eventTime and to of the task to be
      * description, eventTime and to argument respectively
      * and isDone is always false for newly added task.
+     *
      * @param description description of the task
-     * @param eventTime start time of event
-     * @param to how long the event will be
+     * @param eventTime   start time of event
+     * @param to          how long the event will be
      */
     public Event(String description, LocalDateTime eventTime, LocalTime to) {
         super(description);
@@ -26,15 +28,17 @@ public class Event extends Task {
         setTo(to);
         setType();
     }
+
     /**
      * Constructor for a new task created by loading file
      * sets the description, eventTime and to of the task to be
      * description, eventTime and to argument respectively
      * isDone argument determines whether task isDone is true or false.
+     *
      * @param description description of the task
-     * @param eventTime start time of event
-     * @param to how long the event will be
-     * @param isDone is program set as done
+     * @param eventTime   start time of event
+     * @param to          how long the event will be
+     * @param isDone      is program set as done
      */
     public Event(String description, LocalDateTime eventTime, LocalTime to, Boolean isDone) {
         super(description);
@@ -44,59 +48,71 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done:\n" +
                 "  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
     }
-    public void print(){
+
+    public void print() {
         if (isDone) {
             System.out.println("  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         } else {
-            System.out.println("  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + ")" );
+            System.out.println("  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         }
 
     }
-    public void setEventTime(LocalDateTime eventTime){
+
+    public void setEventTime(LocalDateTime eventTime) {
         this.eventTime = eventTime;
     }
-    public void setTo(LocalTime to){
+
+    public void setTo(LocalTime to) {
         this.to = to;
     }
-    public void setType(){
+
+    public void setType() {
         type = Action.EVENT;
     }
 
-    public String getTask(){
+    public String getTask() {
         return "E";
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return description;
     }
-    public String getEventTimeFormat(){
+
+    public String getEventTimeFormat() {
         return eventTime.format(DateTimeFormatter.ofPattern(PRINT_FORMAT));
     }
-    public LocalDateTime getDateTime(){
+
+    public LocalDateTime getDateTime() {
         return eventTime;
     }
-    public LocalTime getTime(){
+
+    public LocalTime getTime() {
         return to;
     }
-    public String getHours(){
+
+    public String getHours() {
         String hours = to.getHour() + " Hours ";
         return hours;
     }
-    public String getMinutes(){
+
+    public String getMinutes() {
         String minutes = to.getMinute() + " Minutes ";
         return minutes;
     }
+
     /**
      * Returns the format of the task to be saved.
      * gets task, isDone and description separated by ' | '
+     *
      * @return the file format
      */
-    public String getSave(){
-        String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
+    public String getSave() {
+        String s = getTask() + " | " + getDone() + " | " + getDescription() + " | " +
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT)) + " | " + getTime();
         return s;
     }
@@ -104,7 +120,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String box = "[E][ ] ";
-        if (isDone){
+        if (isDone) {
             box = "[E][X] ";
         }
         return (box + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")");

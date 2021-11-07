@@ -18,17 +18,17 @@ public enum CommandType {
 
     private String commandType;
 
-    CommandType(String commandType){
+    CommandType(String commandType) {
         this.commandType = commandType;
     }
 
-    public String getCommandType(){
+    public String getCommandType() {
         return commandType;
     }
 
-    public static CommandType getCommandType(String inputAction) throws DukeException{
+    public static CommandType getCommandType(String inputAction) throws DukeException {
         for (CommandType command : CommandType.values()) {
-            if (command.getCommandType().equals(inputAction)){
+            if (command.getCommandType().equals(inputAction)) {
                 return command;
             }
         }

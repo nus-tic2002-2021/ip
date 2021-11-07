@@ -12,44 +12,40 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 
-
-
-public class Duke{
+public class Duke {
 
     private UI ui;
     private Parser Parser;
     private List tasks;
     private Storage storage;
     private boolean isExit = false;
-    private static String Path = "data/tasks.txt";;
+    private static String Path = "data/tasks.txt";
+    ;
 
     /**
-     *
-     *  Constructor for new Duke object using filePath given in main.
-     *  Creates a new ui.UI, parser.Parser and storage.Storage object.
-     *  Try to load a new List object from path.
-     *  If path does not exist, create a new empty List object
+     * Constructor for new Duke object using filePath given in main.
+     * Creates a new ui.UI, parser.Parser and storage.Storage object.
+     * Try to load a new List object from path.
+     * If path does not exist, create a new empty List object
      *
      * @param filePath Path of file to be executed
-     *
      */
 
-    public Duke (String filePath) {
+    public Duke(String filePath) {
         ui = new UI();
         Parser = new Parser();
         storage = new Storage(filePath);
-        try{
+        try {
             tasks = new List(storage.load());
             System.out.println("File loaded successfully.");
         } catch (FileException e) {
             System.out.println("File format is corrupted. Creating new file.");
             tasks = new List();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error reading file or does not exist. Creating new file.");
             tasks = new List();
         }
     }
-
 
 
     //javaFX
@@ -60,16 +56,16 @@ public class Duke{
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, storage, ui);
-            if (c.isExit()){
+            if (c.isExit()) {
                 isExit = true;
             }
             return outputMsg.toString();
 
-        } catch (UnrecognizedException e){
+        } catch (UnrecognizedException e) {
             return ("Unrecognized Command");
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Please enter description after command");
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
             return outputMsg.toString();
         }

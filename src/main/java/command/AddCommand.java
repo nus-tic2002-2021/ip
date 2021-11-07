@@ -6,12 +6,14 @@ import ui.UI;
 import task.List;
 import error.*;
 
-public class AddCommand extends  Command{
+public class AddCommand extends Command {
     protected String add;
-    public AddCommand(CommandType action, String add){
+
+    public AddCommand(CommandType action, String add) {
         setAction(action);
         setAdd(add);
     }
+
     public void setAdd(String add) {
         this.add = add;
     }
@@ -23,7 +25,9 @@ public class AddCommand extends  Command{
             ui.showError(e.getMessage());
         }
 
-    }    public void addTask(CommandType action, String inputMsg, List tasks) throws DukeException {
+    }
+
+    public void addTask(CommandType action, String inputMsg, List tasks) throws DukeException {
         switch (action) {
         case TODO:
             tasks.addTodo(inputMsg);

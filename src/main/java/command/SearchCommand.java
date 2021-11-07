@@ -7,14 +7,17 @@ import task.List;
 
 public class SearchCommand extends Command {
     protected String searchValue;
+
     public SearchCommand(CommandType action, String searchValue) {
         setAction(action);
         setSearchValue(searchValue);
     }
+
     public void setSearchValue(String searchValue) {
         this.searchValue = searchValue;
     }
-    public void execute(List tasks, Storage storage, UI ui){
+
+    public void execute(List tasks, Storage storage, UI ui) {
         try {
             switch (action) {
             case FIND:

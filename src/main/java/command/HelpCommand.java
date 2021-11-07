@@ -8,7 +8,8 @@ public class HelpCommand extends Command {
     public HelpCommand() {
 
     }
-    public void execute(List tasks, Storage storage, UI ui){
+
+    public void execute(List tasks, Storage storage, UI ui) {
         ui.printInstruction();
     }
 }

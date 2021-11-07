@@ -12,18 +12,21 @@ abstract class Task {
      * Constructor for a new task created by user command
      * sets the description of the task to be description argument and isDone is always
      * false for newly added task.
+     *
      * @param description description of the task
      */
     public Task(String description) {
         setDescription(description);
         isDone = false;
     }
+
     /**
      * Constructor for a new task created by loading file
      * sets the description of the task to be description argument.
      * isDone argument determines whether task isDone is true or false.
+     *
      * @param description description of the task
-     * @param isDone is program set as done
+     * @param isDone      is program set as done
      */
     public Task(String description, Boolean isDone) {
         setDescription(description);
@@ -36,26 +39,33 @@ abstract class Task {
 
 
     public abstract void setDone();
+
     public abstract void print();
+
     public abstract void setType();
+
     public abstract String getTask();
+
     public abstract String getDescription();
+
     public abstract String getSave();
-    public LocalDateTime getDateTime(){
+
+    public LocalDateTime getDateTime() {
         return null;
     }
-    public LocalTime getTime(){
+
+    public LocalTime getTime() {
         return null;
     }
-    public Action getType(){
+
+    public Action getType() {
         return type;
     }
 
-    public String getDone(){
-        if (isDone){
+    public String getDone() {
+        if (isDone) {
             return "1";
-        }
-        else{
+        } else {
             return "0";
         }
     }
