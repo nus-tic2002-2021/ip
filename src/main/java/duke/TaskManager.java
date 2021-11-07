@@ -121,6 +121,10 @@ public class TaskManager {
         return this.getTasksForNextDays(period, (t) -> true);
     }
 
+    public ArrayList<Task> getTasksForNextDaysNotDone(Integer period) {
+        return this.getTasksForNextDays(period, (t) -> !t.isDone());
+    }
+
     public ArrayList<Task> getTasksForNextDays(Integer period, taskCustomFilter cb) {
         assert(cb != null);
         ArrayList<Task> all = this.tasks.getAllAsArray();

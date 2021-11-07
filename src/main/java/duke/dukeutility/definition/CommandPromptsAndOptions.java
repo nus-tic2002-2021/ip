@@ -13,6 +13,7 @@ public class CommandPromptsAndOptions {
     public static final String PROMPT_STATISTICS_ALL = "stats:all";
     public static final String PROMPT_LIST_ONE = "see ";
     public static final String PROMPT_PROJECTION_ALL = "projection ";
+    public static final String PROMPT_PROJECTION_NOT_DONE = "projection:yet ";
     public static final String PROMPT_UPDATE_DONE = "done ";
     public static final String PROMPT_UPDATE_NOT_DONE = "undone ";
 

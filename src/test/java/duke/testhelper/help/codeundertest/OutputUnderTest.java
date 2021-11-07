@@ -78,7 +78,7 @@ public class OutputUnderTest {
     }
 
     public static String getExpectedOutputListTasksWithinPeriod(String list, Integer period) {
-        String info = "Tasks for the next " + period + " days: ";
+        String info = "All tasks for the next " + period + " days: ";
         return info + System.lineSeparator() + list + RESPONSE_TERMINATOR_UNDER_TEST;
     }
 

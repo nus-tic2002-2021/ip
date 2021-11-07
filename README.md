@@ -52,6 +52,7 @@ In root of repository,
 `stats:all` summary of tasks
 
 `projection [days]` projection for next days
+`projection:yet [days]` projection for next days (only show incomplete tasks)
 
 `scan:duplicates` check for tasks with same description
 

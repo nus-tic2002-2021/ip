@@ -13,7 +13,7 @@ public class CommandProjectionAll extends Command {
     }
 
     public String getResponse() {
-        return "Tasks for the next " + this.getArgs().get(2) + " days: " + System.lineSeparator() +
+        return "All tasks for the next " + this.getArgs().get(2) + " days: " + System.lineSeparator() +
             this.getArgs().get(1);
     }
 }

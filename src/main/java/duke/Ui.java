@@ -99,6 +99,7 @@ public class Ui {
         case TASK_LIST_FIND:
         case TASK_LIST_ONE:
         case TASK_PROJECTION_ALL:
+        case TASK_PROJECTION_NOT_DONE:
         case TASK_STATS_ALL:
         case SCAN_DUPLICATE_DESCRIPTION:
         case TASK_UPDATE_COMPLETE:
