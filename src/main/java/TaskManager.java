@@ -51,10 +51,7 @@ public class TaskManager {
     }
 
     public void listTasks() {
-        if (tasks.toArray().length == 0) {
-            return;
-        }
-        tasks.forEach(l -> System.out.println(l.toString()));
+        listTasks(tasks);
     }
 
     public void listTasks(ArrayList<Task> l) {

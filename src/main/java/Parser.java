@@ -79,32 +79,37 @@ public class Parser {
     }
 
     public Boolean isList() {
-        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_LIST);
+        return isList(instruction);
     }
 
     public Boolean isList(String i) {
+        logger.info("instruction: listing task");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_LIST);
     }
 
     public Boolean isDone() {
-        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_LIST) && tokens.size() >= 2;
+        return isDone(instruction);
     }
 
     public Boolean isDone(String i) {
+        logger.info("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DONE) && tokens.size() >= 2;
     }
 
     public Boolean isDelete() {
-        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2;
+        return isDelete(instruction);
     }
 
     public Boolean isDelete(String i) {
+        logger.info("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2;
     }
 
     public String getFirstToken() {
         if (tokens.size() > 1) {
-            return tokens.get(1);
+            String firstToken = tokens.get(1);
+            logger.info("instruction: get first token" + firstToken);
+            return firstToken;
         }
 
         return null;

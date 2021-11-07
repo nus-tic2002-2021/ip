@@ -1,6 +1,2 @@
-deadline,submit report ,0
-deadline,submit report ,0
-deadline,submit ,0
-deadline,submit ,0
-event,project metting ,0
-event,project metting ,0
+todo,read books,1
+todo,read books,1
