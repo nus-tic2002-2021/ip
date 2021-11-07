@@ -27,7 +27,7 @@ public class OutputUnderTest {
     }
 
     public static String getExpectedOutputBeginInputLoop() {
-        return "How can i help you? (See docs for usage)" + System.lineSeparator();
+        return "How can i help you? (See README.md for usage)" + System.lineSeparator();
     }
 
     public static String getExpectedOutputImportAttempt(Path path) {

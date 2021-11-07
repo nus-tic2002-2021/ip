@@ -68,7 +68,7 @@ public class Ui {
     }
 
     public void printBeginInputLoop() {
-        this.getPrintStream().print("How can i help you? (See docs for usage)" + System.lineSeparator());
+        this.getPrintStream().print("How can i help you? (See README.md for usage)" + System.lineSeparator());
     }
 
 
