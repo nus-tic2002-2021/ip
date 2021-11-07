@@ -19,6 +19,12 @@ public class TaskFactory {
             "^(?<" + KEY_DESCRIPTION + ">.+) /at (?<" + KEY_DATE + ">.+)$";
     private static final DateParser dateParser = new InputDateParser();
 
+    /**
+     * This function takes in a command and
+     * @param cmd   The command containing the keyword (Task name) and arguments (Date if applicable)
+     * @return      Deadline, Event or Todo task
+     * @throws InvalidCommandFormatException    If the date does is not parsable for Deadline and Event, this exception is thrown
+     */
     public static Task getInstance(Command cmd) throws InvalidCommandFormatException {
         String keyword = cmd.getKeyword();
         String args = cmd.getArgs();
@@ -52,8 +58,16 @@ public class TaskFactory {
                 "Cannot find the appropriate task to create.");
     }
 
+    /**
+     * This function parses an input string that is formatted in the save file format and returns the respective Task
+     * @param s     The input string to parse into a task
+     * @return      The Deadline, Event or To do Task
+     * @throws InvalidFileFormatException   This exception gets thrown if the line being parsed does not match any Task.
+     *                                          It should not occur unless the file has been modified externally.
+     */
     public static Task getInstance(String s) throws InvalidFileFormatException {
         String[] line = s.split("\\|");
+        assert line.length > 2;
         boolean doneState = line[1].equalsIgnoreCase("t");
         Task currentTask;
 

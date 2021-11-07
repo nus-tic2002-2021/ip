@@ -10,6 +10,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommandLineParser implements IOParser<Command, Scanner> {
+    /**
+     * This function reads the user input and matches it against a list of commands.
+     * It parses the keyword and arguments of the command and returns the command found for execution.
+     * @param sc        Scanner object to read in input
+     * @param commands  A list of commands implemented to match against the input
+     * @return          The command that was detected
+     * @throws InvalidCommandException          Reaches this exception if no command is found matching the input
+     * @throws InvalidCommandFormatException    Reaches this exception if a command is found the but the input is invalid
+     */
     public Command readInput(Scanner sc, Iterable<Command> commands)
             throws InvalidCommandException, InvalidCommandFormatException {
         String input = sc.nextLine();

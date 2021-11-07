@@ -4,6 +4,9 @@ import com.alexooi.duke.interfaces.StorageClient;
 
 import java.io.*;
 
+/**
+ * The concrete implementation of the StorageClient for storing in files.
+ */
 public class FileStorage implements StorageClient<BufferedReader> {
     String filePath;
 
@@ -11,6 +14,10 @@ public class FileStorage implements StorageClient<BufferedReader> {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the specific file at the file path and returns a reader for use by the parser
+     * @return  A buffered reader that can be used to scan the file.
+     */
     public BufferedReader load() {
         try {
             File file = new File(this.filePath);
@@ -26,11 +33,16 @@ public class FileStorage implements StorageClient<BufferedReader> {
         } catch (FileNotFoundException fnfe) {
             System.out.println("File Not Found Exception: Shouldn't have hit this!");
         } catch (IOException ioe) {
-            System.out.println("IOException: Had an issue creating state file");
+            System.out.println("IOException: Had an issue creating file");
         }
         return null;
     }
 
+    /**
+     * Save the input into the file at the file path.
+     * @param input     The string to write into the file
+     * @param isAppend  Whether to append to the file or overwrite the file
+     */
     @Override
     public void save(String input, boolean isAppend) {
         try {

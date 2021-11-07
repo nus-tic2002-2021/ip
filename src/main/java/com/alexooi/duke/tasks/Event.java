@@ -10,11 +10,6 @@ public class Event extends Task {
     private LocalDateTime timing;
     private DateParser dateParser;
 
-    public Event(String description, String timing) {
-        super(TaskType.EVENT, description);
-        this.setTiming(timing);
-    }
-
     public Event(String description, String timing, DateParser parser) {
         super(TaskType.EVENT, description);
         this.dateParser = parser;

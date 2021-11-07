@@ -10,11 +10,6 @@ public class Deadline extends Task {
     private LocalDateTime dueDate;
     private DateParser dateParser;
 
-    public Deadline(String description, String dueDate) {
-        super(TaskType.DEADLINE, description);
-        this.setDueDate(dueDate);
-    }
-
     public Deadline(String description, String dueDate, DateParser parser) {
         super(TaskType.DEADLINE, description);
         this.dateParser = parser;

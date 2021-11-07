@@ -13,8 +13,6 @@ public class InvalidCommandFormatException extends Throwable {
     public static final String ERROR_ARCHIVE_NO_SUCH_TASK =
             "The task number to archive is not valid. Archive should be in the format: archive <all|num> where num is a valid index";
 
-    private String errorMessage;
-
     public InvalidCommandFormatException(String errorMessage) {
         super(errorMessage);
     }
