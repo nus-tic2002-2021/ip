@@ -71,8 +71,13 @@ public class TaskList {
      */
     public TaskList getTaskByKeyword (String keyword, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByKeyword = new TaskList();
+        String[] keywordInTask;
         for (int i = 0; i < taskList.size(); i++){
-            String[] keywordInTask = taskList.get(i).getKeyword()[0].split(" ");
+            if (taskList.get(i).getType().equals("D") || taskList.get(i).getType().equals("E")) {
+                keywordInTask = taskList.get(i).getKeyword()[0].split(" ");
+            } else {
+                keywordInTask = taskList.get(i).getKeyword();
+            }
             for (String s : keywordInTask){
                 if (s.contains(keyword) || keyword.contains(s)) {
                     if (!taskByKeyword.contains(taskList.get(i))){

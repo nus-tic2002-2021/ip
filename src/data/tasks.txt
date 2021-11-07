@@ -5,3 +5,5 @@ event [ ] test 456 /at 2 Feb 2007, 19:00
 event [ ] test902 /at 2 Feb 2020, 20:00
 deadline [√] test21 /by 3 Mar 2029, 20:00
 event [√] look at you /at 2 Feb 2020, 22:22
+todo [ ] buy books
+todo [ ] return books
