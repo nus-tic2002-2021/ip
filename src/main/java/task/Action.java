@@ -19,13 +19,4 @@ public enum Action {
         return addType;
     }
 
-    public static Action getAction(String inputAction) {
-        for (Action action : Action.values()) {
-            if (action.getAddType().equals(inputAction)) {
-                return action;
-            }
-        }
-        assert false;
-        return null;
-    }
 }
