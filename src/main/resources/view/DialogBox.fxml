@@ -12,7 +12,7 @@
     <URL value="@DialogBox.css" />
   </stylesheets>
   <children>
-    <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="750.0">
+    <Label fx:id="dialog" text="Label" wrapText="true" maxHeight="Infinity" maxWidth="550.0">
       <font>
         <Font size="21.0" />
       </font>
