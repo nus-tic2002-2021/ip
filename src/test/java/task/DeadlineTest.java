@@ -31,7 +31,7 @@ public class DeadlineTest {
         } catch (DukeException e){
             error = e.getMessage();
         }
-        assertEquals("INVALID_DATE_FORMAT", error);
+        assertEquals("INVALID_DATETIME_FORMAT", error);
         try{
             taskTest.addTask("deadline","Borrow book /by" );
         } catch (DukeException e){

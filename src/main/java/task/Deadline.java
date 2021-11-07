@@ -57,9 +57,6 @@ public class Deadline extends Task{
     public LocalDateTime getDateTime() {
         return by;
     }
-    public String getDate(){
-        return by.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));

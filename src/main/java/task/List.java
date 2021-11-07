@@ -114,7 +114,7 @@ public class List {
         try {
             date = LocalDateTime.parse(input[1],DATE_TIME_FORMATTER);
         } catch (Exception e) {
-            throw new DukeException("INVALID_DATE_FORMAT");
+            throw new DukeException("INVALID_DATETIME_FORMAT");
         }
         taskArrayList.add(new Deadline(input[0],date));
         printAdd();
@@ -147,7 +147,7 @@ public class List {
         try {
             date = LocalDateTime.parse(event[0],DATE_TIME_FORMATTER);
         }  catch (Exception e) {
-            throw new DukeException("INVALID_DATE_FORMAT");
+            throw new DukeException("INVALID_DATETIME_FORMAT");
         }
         try {
             time = LocalTime.parse(event[1],TIME_FORMATTER);
@@ -324,7 +324,7 @@ public class List {
                 assert false : a;
             }
         } catch (Exception e){
-            throw new DukeException("INVALID_DATE_FORMAT");
+            throw new DukeException("");
         }
 
     }

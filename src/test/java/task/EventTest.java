@@ -35,7 +35,7 @@ public class EventTest {
         } catch (DukeException e){
             error = e.getMessage();
         }
-        assertEquals("INVALID_DATE_FORMAT", error);
+        assertEquals("INVALID_DATETIME_FORMAT", error);
 
         try{
             taskTest.addTask("event","Concert /at" );

@@ -10,8 +10,10 @@ public class UI {
     private final String DEADLINE_LENGTH_ERROR = "Deadline command has too many /by.";
     private final String EVENT_DESCRIPTION_ERROR = "Event command is missing a description and/or time.";
     private final String EVENT_LENGTH_ERROR = "Event command has too many /at.";
-    private final String INVALID_DATE_FORMAT = "Incorrect Date formatting. Only accepts yyyy-MM-dd HHmm format " +
+    private final String INVALID_DATETIME_FORMAT = "Incorrect Date formatting. Only accepts yyyy-MM-dd HHmm format " +
             "\ne.g. 2021-10-21 1300";
+    private final String INVALID_DATE_FORMAT = "Incorrect Date formatting. Only accepts yyyy-MM-dd HHmm format " +
+            "\ne.g. 2021-10-21";
     private final String INVALID_TIME_FORMAT = "Incorrect Time formatting. Only accepts H:mm format " +
             "\ne.g. 1:30";
     private final String INVALID_ACTION = "Action not recognized. Please try again";
@@ -87,6 +89,9 @@ public class UI {
             break;
         case "EVENT_LENGTH_ERROR":
             System.out.println(EVENT_LENGTH_ERROR);
+            break;
+        case "INVALID_DATETIME_FORMAT":
+            System.out.println(INVALID_DATETIME_FORMAT);
             break;
         case "INVALID_DATE_FORMAT":
             System.out.println(INVALID_DATE_FORMAT);
