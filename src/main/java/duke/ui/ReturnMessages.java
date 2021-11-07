@@ -1,13 +1,11 @@
 package duke.ui;
 
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+
 
 /** Handles message output. */
 public class ReturnMessages {
@@ -127,17 +125,24 @@ public class ReturnMessages {
      */
     public void taskFoundFeedback(String key, ArrayList<Task> list){
         assert !list.isEmpty():"Should be caught by emptyTaskListException";
-
-        separator();
-        int numbering = 1;
-        System.out.println("     Here are the matching tasks in your list:");
+        ArrayList<Task> tempList = new ArrayList<>();
         for(Task t : list){
             if(t.getTaskInfo().contains(key)){
-                System.out.println("    "+numbering+"."+t);
+                tempList.add(t);
             }
-            numbering++;
         }
-        separator();
+        if(tempList.isEmpty()){
+            throw new TaskNotFoundException("No task found with keyword ["+key+"].");
+        }else{
+            separator();
+            int numbering = 1;
+            System.out.println("     Here are the matching tasks in your list:");
+            for(Task t : tempList){
+                System.out.println("    "+numbering+"."+t);
+                numbering++;
+            }
+            separator();
+        }
     }
 
     /**

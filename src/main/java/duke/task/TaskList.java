@@ -140,11 +140,11 @@ public class TaskList {
      */
     public void printAsSchedule(LocalDate dateToPrint) throws EmptyTaskListException{
         if(this.listSize == 0){
-            throw new EmptyTaskListException("empty task");
+            throw new EmptyTaskListException("There's nothing in task list yet.");
         }
         ArrayList<Task> tempTaskList = new ArrayList<>();
         for(Task t : taskList){
-            if(!t.getTaskType().equals("todo")){
+            if(!t.getTaskType().equals("todo") && t.getDate().equals(dateToPrint)){
                 tempTaskList.add(t);
             }
         }

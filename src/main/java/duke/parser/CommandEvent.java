@@ -3,19 +3,19 @@ package duke.parser;
 import duke.exception.TimeManagementException;
 import duke.exception.TimeParseException;
 import duke.exception.UnknownSyntaxException;
+import duke.parser.timeHelper.DateTimeParse;
 import duke.storage.StorageTaskList;
 import duke.task.Events;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.UI;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class CommandEvent extends CommandBase {
 
-    static final int  dateLength = 3;
+    DateTimeParse timeHelp = new DateTimeParse();
+
     /**
      * Creates event Command Constructor
      *
@@ -44,13 +44,12 @@ public class CommandEvent extends CommandBase {
             String[] dt = super.detail.split("/at", 2);
             String description = dt[0];
             String dateTime = dt[1].substring(1);
-            LocalDate date = dateParse(dateTime);
+            LocalDate date = timeHelp.dateParse(dateTime);
             String[] dateTimeInformation = dateTime.split(" ", 2);
             String timeRange = dateTimeInformation[1];
-            System.out.println(timeRange);
             String from = timeRange.split("-", 2)[0];
             String to = timeRange.split("-", 2)[1];
-            Task task = new Events(description, date, timeParse(get24HrFormat(from)),timeParse(get24HrFormat(to)));
+            Task task = new Events(description, date, timeHelp.timeParse(timeHelp.get24HrFormat(from)),timeHelp.timeParse(timeHelp.get24HrFormat(to)));
             if(taskList.addTask(task)){
                 isSuccess = true;
                 assert taskList.getListSize()>0:"There should at least have 1 task";
@@ -66,68 +65,8 @@ public class CommandEvent extends CommandBase {
         return false;
     }
 
-    /**
-     * Returns parsed time in format  {DD-MM-YYYY}.
-     *
-     * @param str - the string of datetime.
-     * @return - Date in its correct format.
-     * @throws TimeParseException thrown when time format is wrong
-     */
-    private LocalDate dateParse(String str) throws TimeParseException{
-        if (!str.contains("/")){
-            throw new TimeParseException("Date Format YYYY/MM/DD");
-        }
-        // gen yyyy,mm,dd ssss
-        String[] date = str.split("/", 3);
-        if (date.length < dateLength){
-            throw new TimeParseException("Date Format YYYY/MM/DD");
-        }
-
-        // gen time
-        String[] time = date[2].split(" ", 2);
-        int year = Integer.parseInt(date[0]);
-        int month = Integer.parseInt(date[1]);
-        int dayOfMth = Integer.parseInt(time[0]);
-
-        LocalDate localDate;
-        try {
-            localDate = LocalDate.of(year,month,dayOfMth);
-        } catch (DateTimeException e) {
-            throw new TimeParseException(e.getMessage());
-        }
-
-        return localDate;
-    }
 
 
-    /**
-     * Transforms time to 24hour format.
-     *
-     * @param t string such as [1AM] [10PM].
-     * @return integer time such as 1, 22.
-     */
-    private int get24HrFormat(String t){
-        int timeInterval = 12;
-        int timeValue;
-        if(t.toUpperCase().contains("AM")){
-            timeValue = Integer.parseInt(t.replace("AM", "").stripTrailing());
-        } else if(t.toUpperCase().contains("PM")){
-            timeValue = Integer.parseInt(t.replace("PM", "").stripTrailing());
-            timeValue += timeInterval;
-        }else{
-            throw new TimeParseException("Time Format 1AM/1PM");
-        }
 
-        return timeValue;
-    }
 
-    /**
-     * Returns time in LocalTime format.
-     *
-     * @param t the integer time [1] [22]
-     * @return time in LocalTime [01:00:00] [22:00:00]
-     */
-    private LocalTime timeParse(int t){
-        return LocalTime.of(t,0,0);
-    }
 }
