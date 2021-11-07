@@ -5,12 +5,12 @@ import ui.UI;
 import task.List;
 
 public abstract class Command {
-    protected String action;
+    protected CommandType action;
     public Command(){
 
     }
 
-    public void setAction(String action) {
+    public void setAction(CommandType action) {
         this.action = action;
     }
     public boolean isExit(){

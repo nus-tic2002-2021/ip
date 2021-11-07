@@ -321,22 +321,7 @@ public class List {
      * @param action   the type of task to be added
      * @param inputMsg the message be added in taskArrayList
      */
-    public void addTask(String action, String inputMsg) throws DukeException {
-        Action a = Action.getAction(action);
-        switch (a) {
-        case TODO:
-            addTodo(inputMsg);
-            break;
-        case DEADLINE:
-            addDeadline(inputMsg);
-            break;
-        case EVENT:
-            addEvent(inputMsg);
-            break;
-        default:
-            assert false : a;
-        }
-    }
+
 
 }
 

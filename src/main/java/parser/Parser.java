@@ -3,13 +3,11 @@ package parser;
 import command.CommandType;
 import command.Command;
 import command.AddCommand;
-import command.DeleteCommand;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.ListCommand;
 import command.ModifyCommand;
 import command.SearchCommand;
-import command.ViewCommand;
 import error.DukeException;
 import error.UnrecognizedException;
 
@@ -38,17 +36,15 @@ public class Parser {
         case TODO:
         case DEADLINE:
         case EVENT:
-            return new AddCommand(action, inputArray[1]);
+            return new AddCommand(commandType, inputArray[1]);
         case DELETE:
-            return new DeleteCommand(action, inputArray[1]);
         case DONE:
-            return new ModifyCommand(action, inputArray[1]);
+            return new ModifyCommand(commandType, inputArray[1]);
         case LIST:
             return new ListCommand();
         case FIND:
-            return new SearchCommand(inputArray[1]);
         case VIEW:
-            return new ViewCommand(inputArray[1]);
+            return new SearchCommand(commandType, inputArray[1]);
         case HELP:
             return new HelpCommand();
         default:
