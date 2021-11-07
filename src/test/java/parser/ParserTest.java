@@ -85,13 +85,13 @@ public class ParserTest {
 
     @Test
     public void parse_validAddEventCommand_success() {
-        Command cmd = Parser.parse("event do something /at 2021-10-18 1300 to 2021-10-18 1400");
+        Command cmd = Parser.parse("event do something /at 2021-10-18 1300 -to 2021-10-18 1400");
         assertEquals(AddCommand.class, cmd.getClass());
     }
 
     @Test
     public void parse_addEventNullDescription_returnInvalidCmd() {
-        Command cmd = Parser.parse("event /at 2021-10-18 1300 to 2021-10-18 1400");
+        Command cmd = Parser.parse("event /at 2021-10-18 1300 -to 2021-10-18 1400");
         assertEquals(InvalidCommand.class, cmd.getClass());
         try {
             cmd.execute(taskList, ui, storage);
@@ -105,7 +105,7 @@ public class ParserTest {
 
     @Test
     public void parse_addEventWhitespaceDescription_returnInvalidCmd() {
-        Command cmd = Parser.parse("event     /at 2021-10-18 1300 to 2021-10-18 1400");
+        Command cmd = Parser.parse("event     /at 2021-10-18 1300 -to 2021-10-18 1400");
         assertEquals(InvalidCommand.class, cmd.getClass());
         try {
             cmd.execute(taskList, ui, storage);
@@ -119,13 +119,13 @@ public class ParserTest {
 
     @Test
     public void parse_addEventWrongFormat_returnInvalidCmd() {
-        Command cmd = Parser.parse("event do something /at 2021-10-18 to 2021-10-18 1400");
+        Command cmd = Parser.parse("event do something /at 2021-10-18 -to 2021-10-18 1400");
         assertEquals(InvalidCommand.class, cmd.getClass());
         try {
             cmd.execute(taskList, ui, storage);
         } catch (DukeException e) {
             assertEquals("Task cannot be added. \n" + "Please enter event datetime in the format of " +
-                    "'yyyy-MM-dd HHmm to yyyy-MM-dd HHmm'", e.getMessage());
+                    "'yyyy-MM-dd HHmm -to yyyy-MM-dd HHmm'", e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
