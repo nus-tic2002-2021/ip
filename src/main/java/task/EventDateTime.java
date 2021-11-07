@@ -26,15 +26,22 @@ public class EventDateTime {
     public LocalDateTime getEndTime(){
         return endTime;
     }
-
+    /**
+     * Compares the event to be added with existing event to find any anomaly
+     * where startTime of event to be added is between the existing event start and end time
+     * Or endTime of event to be added is between the existing event start and end time.
+     *
+     * @param exist Date and time of existing task
+     * @return true if anomaly detected else returns false
+     */
     public Boolean isAnomaly( EventDateTime exist){
-        if(getStartTime().isAfter(exist.getStartTime()) && getEndTime().isBefore(exist.getEndTime())){
-            return true;
-        }
-        else if (getStartTime().isBefore(exist.getStartTime()) && getEndTime().isAfter(exist.getStartTime())){
+        if(getStartTime().isAfter(exist.getStartTime()) && getStartTime().isBefore(exist.getEndTime())){
             return true;
         }
         else if (getEndTime().isAfter(exist.getStartTime()) && getEndTime().isBefore(exist.getEndTime())){
+            return true;
+        }
+        else if (getStartTime().isBefore(exist.getStartTime()) && getEndTime().isAfter(exist.getStartTime())){
             return true;
         }
         else if (getStartTime().isEqual(exist.getStartTime()) || getEndTime().isEqual(exist.getEndTime())){

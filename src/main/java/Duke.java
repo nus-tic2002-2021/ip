@@ -25,7 +25,7 @@ public class Duke{
 
     /**
      *
-     *  Constructor for new Du ke object using filePath given in main.
+     *  Constructor for new Duke object using filePath given in main.
      *  Creates a new ui.UI, parser.Parser and storage.Storage object.
      *  Try to load a new List object from path.
      *  If path does not exist, create a new empty List object
@@ -54,6 +54,7 @@ public class Duke{
 
     //javaFX
     public String getResponse(String input) {
+        assert input.length() > 0;
         ByteArrayOutputStream outputMsg = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputMsg));
         try {
@@ -73,6 +74,7 @@ public class Duke{
             return outputMsg.toString();
         }
     }
+
     public Boolean getIsExit() {
         return isExit;
     }

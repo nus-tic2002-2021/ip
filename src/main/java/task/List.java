@@ -81,7 +81,9 @@ public class List {
 
     /**
      * Adds new to do task to taskList as a TODO object
-     *
+     *The inputMsg contains the instruction all input is part of the description
+     *"description"
+     * On successful adding of task, it prints the task added
      * @param inputMsg description to be added
      * @throws DukeException if inputMsg is empty
      */
@@ -94,8 +96,10 @@ public class List {
     }
 
     /**
-     * Adds new deadline task to taskList as a DEADLINE object
-     *
+     * Adds new deadline task to taskList as a DEADLINE object.
+     * The inputMsg contains the instruction where only the format
+     * "description" /by "DateTime" is accepted
+     * On successful adding of task, it prints the task added.
      * @param inputMsg description and /by to be added
      * @throws DukeException if inputMsg is does not contain /by or more than 1 /at OR date is not valid
      */
@@ -118,8 +122,10 @@ public class List {
 
     /**
      * Adds new event task to taskList as a EVENT object
-     * Does not allow multiple events to have the same Date and Time
-     *
+     * The inputMsg contains the instruction where only the format
+     * "description" /by "DateTime" /for "Time" is accepted
+     * It checks if there is any existing task with clashing timings and
+     * on successful adding of task, it prints the task added.
      * @param inputMsg description and /at to be added
      * @throws DukeException if inputMsg does not contain /at or more than 1 /at
      */
@@ -172,6 +178,8 @@ public class List {
 
     /**
      * Modify the task to be set as done.
+     * taskNumber is parsed into an integer and modifies the task in the array
+     * of parsed integer to be set as done.
      *
      * @param taskNumber number to determine which task to modify
      * @throws NotFoundException if the taskNumber is not within array size
@@ -187,6 +195,9 @@ public class List {
 
     /**
      * Deletes the task.
+     * taskNumber is parsed into an integer and gets the task in the array
+     * of parsed integer to be deleted and stores it first.
+     * Upon successful deletion, the deleted task in printed.
      *
      * @param taskNumber number to determine which task to delete
      * @throws NotFoundException if the taskNumber is not within array size
@@ -202,7 +213,7 @@ public class List {
     }
 
     /**
-     * Prints out all the task.
+     * Prints out all the task in the taskArrayList.
      */
     public void printList() {
         if (taskArrayList.size() == 0) { //0 items in list
@@ -233,7 +244,12 @@ public class List {
             System.out.println("Nothing found");
         }
     }
-
+    /**
+     * Prints out all the task that contains the search keyword(non-case sensitive)
+     * excluding those without a valid DateTime.
+     *
+     * @param searchDate the keyword to search for in date
+     */
     public void printSchedule(String searchDate) throws DukeException {
         int count = 1;
         try {
@@ -272,7 +288,9 @@ public class List {
         taskArrayList.get(taskArrayList.size() - 1).print();
         System.out.println("Now you have " + (taskArrayList.size()) + " task(s) in the list");
     }
-
+    /**
+     * Print out the task that clash with the event trying to be added.
+     */
     public void printClash(Task clashTask) {
         System.out.println("Event clashes with an existing event.");
         clashTask.print();
@@ -293,7 +311,12 @@ public class List {
     }
 
     /**
-     * task function to determine the type of task to add
+     * task function to determine the type of task to add.
+     * Action is an enumeration of TODO, DEADLINE and EVENT,
+     * where the String action only allows todo, deadline and event.
+     * Converts action into an Enumeration and determine the type of task to
+     * be added. inputMsg determines what is the full command description sent
+     * when adding task.
      *
      * @param action   the type of task to be added
      * @param inputMsg the message be added in taskArrayList

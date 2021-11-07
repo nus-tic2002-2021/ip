@@ -9,13 +9,26 @@ public class Deadline extends Task{
     private final String SAVE_FORMAT = "yyyy-MM-dd HHmm";
     private final String DATE_FORMAT = "yyyy-MM-dd";
     protected LocalDateTime by;
-
+    /**
+     * Constructor for a new deadline created by user command
+     * sets the description and by of the task to be description and by argument respectively
+     * and isDone is always false for newly added task.
+     * @param description description of the task
+     * @param by date of task to be completed by
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         setBy(by);
         setType();
     }
-
+    /**
+     * Constructor for a new task created by loading file
+     * sets the description and by of the task to be description and by argument respectively.
+     * isDone argument determines whether task isDone is true or false.
+     * @param description description of the task
+     * @param by date of task to be completed by
+     * @param isDone is program set as done
+     */
     public Deadline(String description, LocalDateTime by, Boolean isDone) {
         super(description);
         setBy(by);
@@ -57,6 +70,11 @@ public class Deadline extends Task{
     public LocalDateTime getDateTime() {
         return by;
     }
+    /**
+     * Returns the format of the task to be saved.
+     * gets task, isDone and description separated by ' | '
+     * @return the file format
+     */
     public String getSave(){
         String s = getTask() + " | " +  getDone() + " | " + getDescription() + " | " +
                 getDateTime().format(DateTimeFormatter.ofPattern(SAVE_FORMAT));

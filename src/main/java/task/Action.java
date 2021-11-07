@@ -1,7 +1,6 @@
 package task;
 
 public enum Action {
-
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event");

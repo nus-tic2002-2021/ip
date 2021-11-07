@@ -8,11 +8,23 @@ abstract class Task {
     protected Boolean isDone;
     protected Action type;
 
+    /**
+     * Constructor for a new task created by user command
+     * sets the description of the task to be description argument and isDone is always
+     * false for newly added task.
+     * @param description description of the task
+     */
     public Task(String description) {
         setDescription(description);
         isDone = false;
     }
-
+    /**
+     * Constructor for a new task created by loading file
+     * sets the description of the task to be description argument.
+     * isDone argument determines whether task isDone is true or false.
+     * @param description description of the task
+     * @param isDone is program set as done
+     */
     public Task(String description, Boolean isDone) {
         setDescription(description);
         this.isDone = isDone;
