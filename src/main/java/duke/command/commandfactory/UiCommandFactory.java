@@ -91,6 +91,7 @@ public class UiCommandFactory extends CommandFactory {
             return new CommandExecutionError(e, "command execution @ cli");
         }
     }
+
     private Command executeCommandExitLoop() {
         return new CommandExitLoop();
     }

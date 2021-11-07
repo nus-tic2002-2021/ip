@@ -67,7 +67,6 @@ public class FileResourceManager {
     }
 
 
-
     /**
      * Save tasks in taskManager to this fileResourceManager's export path.
      *
@@ -107,7 +106,8 @@ public class FileResourceManager {
         return new CommandExportTasksToFile(tasksJson, exportPath, jw);
     }
 
-    /** Helper class
+    /**
+     * Helper class
      * Import tasks from this import path.
      *
      * @return
@@ -117,7 +117,8 @@ public class FileResourceManager {
         return this.getImportCommandFactory().executeExtractTasksFromFile(path);
     }
 
-    /** Helper class
+    /**
+     * Helper class
      * Import tasks to task manager
      *
      * @param tasks       json array of tasks
@@ -138,6 +139,7 @@ public class FileResourceManager {
     /**
      * Extract from import path, transform to json and load into task manager.
      * Display activities to user also.
+     *
      * @param taskManager task manager to import to
      * @param ui          ui display
      * @throws Exception

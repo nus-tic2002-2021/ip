@@ -28,7 +28,6 @@ public class CommandExportTasksToFile extends Command {
         } catch (IOException err) {
             this.setResponseType(FILE_SAVED_IO_ERROR);
 
-            ;
         }
 
 

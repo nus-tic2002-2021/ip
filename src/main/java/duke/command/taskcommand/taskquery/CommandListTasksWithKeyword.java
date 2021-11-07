@@ -8,7 +8,8 @@ import duke.dukeutility.enums.ResponseType;
 
 public class CommandListTasksWithKeyword extends Command {
     public CommandListTasksWithKeyword(TaskManager taskMgr, String keyword) {
-        super(ResponseType.TASK_LIST_FIND, List.of("list", prettifyTasks(taskMgr.getTasksWithKeywordInDescription(keyword)), keyword));
+        super(ResponseType.TASK_LIST_FIND,
+            List.of("list", prettifyTasks(taskMgr.getTasksWithKeywordInDescription(keyword)), keyword));
     }
 
     public String getResponse() {

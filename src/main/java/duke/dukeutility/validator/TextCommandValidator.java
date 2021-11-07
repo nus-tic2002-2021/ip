@@ -77,7 +77,7 @@ public class TextCommandValidator {
         return text.equals(PROMPT_SAVE);
     }
 
-    public static Boolean isRequestSee(String text){
+    public static Boolean isRequestSee(String text) {
         return text.startsWith(PROMPT_LIST_ONE);
     }
 }

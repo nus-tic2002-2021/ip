@@ -18,7 +18,6 @@ import duke.task.model.Task;
 import duke.task.model.ToDo;
 
 
-
 public class TaskManager {
     // tasks is a "controlled" component. It is a storage for defined properties, i.e tasks ids are set by TaskManager.
     private final TaskList tasks = new TaskList();
@@ -107,6 +106,7 @@ public class TaskManager {
         }
         return filtering;
     }
+
     public ArrayList<Task> getTasksWithId(Integer id) {
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(this.tasks.getTaskById(id));
