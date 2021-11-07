@@ -1,8 +1,10 @@
 package task;
 
+import error.DukeException;
+import error.FileException;
+import error.NotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import error.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,7 +35,7 @@ public class List {
      *
      * @param loadFile loaded txt file
      */
-    public List(ArrayList<String> loadFile) throws FileException{
+    public List(ArrayList<String> loadFile) throws FileException {
         taskArrayList = new ArrayList<>();
         taskSave = new ArrayList<>();
         String[] taskArr;
@@ -210,12 +212,12 @@ public class List {
      */
     public void printList() {
         if(taskArrayList.size() == 0){ //0 items in list
-            System.out.println("\tList is empty!"); //throw empty list
+            System.out.println("List is empty!"); //throw empty list
         }
         else{
             int count = 1;
             for(Task task : taskArrayList){
-                System.out.println("\t" + (count) + "." + task );
+                System.out.println("" + (count) + "." + task );
                 count++;
             }
         }
@@ -230,12 +232,12 @@ public class List {
         int count = 1;
         for(Task task : taskArrayList) {
             if(task.getDescription().toLowerCase().contains(search.toLowerCase())){
-                System.out.println("\t" + (count) + "." + task);
+                System.out.println("" + (count) + "." + task);
                 count++;
             }
         }
         if (count == 1){
-            System.out.println("\tNothing found");
+            System.out.println("Nothing found");
         }
     }
 
@@ -246,13 +248,13 @@ public class List {
             for(Task task : taskArrayList) {
                 if(task.getDateTime() != null){ //excludes task without date
                     if(task.getDateTime().toLocalDate().equals(date)){
-                        System.out.println("\t" + (count) + "." + task);
+                        System.out.println("" + (count) + "." + task);
                         count++;
                     }
                 }
             }
             if (count == 1){
-                System.out.println("\tNothing found");
+                System.out.println("Nothing found");
             }
         } catch (Exception e) {
             throw new DukeException("INVALID_DATE_FORMAT");
@@ -274,15 +276,15 @@ public class List {
      *
      */
     public void printAdd() {
-        System.out.println("\tGot it. Item successfully added to the list: ");
+        System.out.println("Got it. Item successfully added to the list: ");
         taskArrayList.get(taskArrayList.size() - 1).print();
-        System.out.println("\tNow you have " + (taskArrayList.size()) +" task(s) in the list");
+        System.out.println("Now you have " + (taskArrayList.size()) +" task(s) in the list");
     }
 
     public void printClash(Task clashTask){
-        System.out.println("\tEvent clashes with an existing event.");
+        System.out.println("Event clashes with an existing event.");
         clashTask.print();
-        System.out.println("\tDelete existing event or change the timing.");
+        System.out.println("Delete existing event or change the timing.");
     }
     /**
      *
@@ -290,9 +292,9 @@ public class List {
      *
      */
     public void printDelete() {
-        System.out.println("\tNoted. I have removed the task: ");
+        System.out.println("Noted. I have removed the task: ");
         recentDelete.print();
-        System.out.println("\tNow you have " + (taskArrayList.size()) +" task(s) in the list");
+        System.out.println("Now you have " + (taskArrayList.size()) +" task(s) in the list");
     }
 
     public int getArraySize(){
@@ -306,21 +308,25 @@ public class List {
      * @param inputMsg the message be added in taskArrayList
      */
     public void addTask(String action,String inputMsg) throws DukeException {
-        switch (action) {
-            case "todo":
+        Action a = Action.getAction(action);
+        try{
+            switch (a) {
+            case TODO:
                 addTodo(inputMsg);
                 break;
-            case "deadline":
+            case DEADLINE:
                 addDeadline(inputMsg);
                 break;
-            case "event":
+            case EVENT:
                 addEvent(inputMsg);
                 break;
+            default:
+                assert false : a;
+            }
+        } catch (Exception e){
+            throw new DukeException("INVALID_DATE_FORMAT");
         }
+
     }
-
-
-
-
 }
 

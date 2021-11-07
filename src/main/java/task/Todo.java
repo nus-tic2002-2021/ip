@@ -15,8 +15,8 @@ public class Todo extends Task{
 
     public void setDone(){
         this.isDone = true;
-        System.out.println("\tNice! I've marked this task as done:\n" +
-                            "\t  [T][X] " + getDescription());
+        System.out.println("Nice! I've marked this task as done:\n" +
+                            "  [T][X] " + getDescription());
     }
 
     public void setType(){
@@ -25,10 +25,10 @@ public class Todo extends Task{
 
     public void print(){
         if (isDone) {
-            System.out.println("\t  [T][X] " + getDescription());
+            System.out.println("  [T][X] " + getDescription());
         }
         else {
-            System.out.println("\t  [T][ ] " + getDescription());
+            System.out.println("  [T][ ] " + getDescription());
         }
     }
     public String getTask(){

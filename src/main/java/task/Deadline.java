@@ -25,8 +25,8 @@ public class Deadline extends Task{
 
     public void setDone(){
         this.isDone = true;
-        System.out.println("\tNice! I've marked this task as done:\n" +
-                "\t  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
+        System.out.println("Nice! I've marked this task as done:\n" +
+                "  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
     }
     public void setType(){
         type = "deadline";
@@ -34,9 +34,9 @@ public class Deadline extends Task{
 
     public void print(){
         if (isDone) {
-            System.out.println("\t  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
+            System.out.println("  [D][X] " + getDescription() + "(by: " + getByFormat() + ")");
         } else {
-            System.out.println("\t  [D][ ] " + getDescription() + "(by: " + getByFormat() + ")");
+            System.out.println("  [D][ ] " + getDescription() + "(by: " + getByFormat() + ")");
         }
 
     }

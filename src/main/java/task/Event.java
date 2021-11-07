@@ -28,14 +28,14 @@ public class Event extends Task {
 
     public void setDone(){
         this.isDone = true;
-        System.out.println("\tNice! I've marked this task as done:\n" +
-                "\t  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
+        System.out.println("Nice! I've marked this task as done:\n" +
+                "  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
     }
     public void print(){
         if (isDone) {
-            System.out.println("\t  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
+            System.out.println("  [E][X] " + getDescription() + "(at: " + getEventTimeFormat() + ")");
         } else {
-            System.out.println("\t  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")" );
+            System.out.println("  [E][ ] " + getDescription() + "(at: " + getEventTimeFormat() + " for " + getHours() + getMinutes() + ")" );
         }
 
     }
