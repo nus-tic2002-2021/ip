@@ -146,7 +146,7 @@ public class Ui {
 
     public static String validateDateTime(){
         return "Task cannot be added. \n" +
-                "Please enter datetime in the format of 'dd/MM/yyyy HHmm'";
+                "Please enter datetime in the format of 'd/M/yyyy HHmm'";
     }
 
     public static void validateViewCommand(String[] command){
@@ -157,7 +157,7 @@ public class Ui {
 
     public static void validateSearchCommand(String[] command){
         if (command.length < 2 || command[1].equals("")) {
-            throw new DukeException("☹ OOPS!!! Please specify keyword:");
+            throw new DukeException("OOPS! Please specify keyword:");
         }
     }
 
@@ -177,9 +177,5 @@ public class Ui {
             b = true;
         }
         return b;
-    }
-
-    public void outOfIndex(){
-        System.out.println("");
     }
 }

@@ -31,6 +31,6 @@ public class Event extends Task{
     }
 
     public String[] getKeyword (){
-        return description.split(" ");
+        return description.split("/at");
     }
 }

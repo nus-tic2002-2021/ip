@@ -5,7 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * Deadline class is the deadline type of task which are date sensitive
+ * Deadline class is the deadline type of task which contains LocalDateTime variable
+ *
  */
 public class Deadline extends Task {
     protected LocalDateTime dateTime;
@@ -30,7 +31,7 @@ public class Deadline extends Task {
         return "[" + getType() +"]" + "[" + getStatusIcon() +"] " + getDescription() + "(by: " + getDateTimeStr() + ")";
     }
     public String[] getKeyword (){
-        return description.split(" ");
+        return description.split("/by");
     }
 
 }
