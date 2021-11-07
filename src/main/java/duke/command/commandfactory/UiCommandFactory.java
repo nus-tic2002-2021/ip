@@ -8,7 +8,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_ADD_TO
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_DELETE_TASK;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST_ONE;
-import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION_ALL;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_DONE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_UPDATE_NOT_DONE;
 import static duke.dukeutility.parser.DateParser.parseStringAsLocalDateTime;
@@ -21,7 +21,7 @@ import static duke.dukeutility.validator.TextCommandValidator.isRequestFind;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestList;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsDone;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestMarkTaskAsIncomplete;
-import static duke.dukeutility.validator.TextCommandValidator.isRequestProjection;
+import static duke.dukeutility.validator.TextCommandValidator.isRequestProjectionAll;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSave;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestScanDuplicates;
 import static duke.dukeutility.validator.TextCommandValidator.isRequestSee;
@@ -42,7 +42,7 @@ import duke.command.taskcommand.taskadd.CommandAddNewToDo;
 import duke.command.taskcommand.taskquery.CommandListAll;
 import duke.command.taskcommand.taskquery.CommandListOne;
 import duke.command.taskcommand.taskquery.CommandListTasksWithKeyword;
-import duke.command.taskcommand.taskquery.CommandProjection;
+import duke.command.taskcommand.taskquery.CommandProjectionAll;
 import duke.command.taskcommand.taskquery.CommandScanDuplicateDescriptions;
 import duke.command.taskcommand.taskquery.CommandStatsAll;
 import duke.command.taskcommand.taskupdate.CommandDeleteTask;
@@ -78,8 +78,8 @@ public class UiCommandFactory extends CommandFactory {
                 return this.executeSeeTask(text, taskManager);
             } else if (isRequestFind(text)) {
                 return this.executeCommandFindByKeywordInDescription(text, taskManager);
-            } else if (isRequestProjection(text)) {
-                return this.executeCommandProjection(text, taskManager);
+            } else if (isRequestProjectionAll(text)) {
+                return this.executeCommandProjectionAll(text, taskManager);
             } else if (isRequestStatisticsAll(text)) {
                 return new CommandStatsAll(taskManager);
             } else if (isRequestScanDuplicates(text)) {
@@ -263,20 +263,20 @@ public class UiCommandFactory extends CommandFactory {
         return new CommandListTasksWithKeyword(taskManager, keyword);
     }
 
-    private Command executeCommandProjection(String text, TaskManager taskManager) {
+    private Command executeCommandProjectionAll(String text, TaskManager taskManager) {
         String argLine;
         String[] argList;
         Integer period;
         try {
-            argLine = text.replaceFirst(PROMPT_PROJECTION, "");
+            argLine = text.replaceFirst(PROMPT_PROJECTION_ALL, "");
             argList = argLine.split(" ");
             if (argList.length != 1) {
-                return new CommandInvalidTextCommandSyntax("Invalid syntax. Keyword should not have spacing.");
+                return new CommandInvalidTextCommandSyntax("Invalid syntax.");
             }
             period = Integer.parseInt(argList[0]);
         } catch (Exception e) {
             return new CommandInvalidRequestParameters(e.toString());
         }
-        return new CommandProjection(taskManager, period);
+        return new CommandProjectionAll(taskManager, period);
     }
 }

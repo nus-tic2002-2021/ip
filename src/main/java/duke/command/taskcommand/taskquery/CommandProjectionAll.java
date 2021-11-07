@@ -6,10 +6,10 @@ import duke.TaskManager;
 import duke.command.Command;
 import duke.dukeutility.enums.ResponseType;
 
-public class CommandProjection extends Command {
-    public CommandProjection(TaskManager taskMgr, Integer period) {
-        super(ResponseType.TASK_PROJECTION,
-            List.of("list", prettifyTasks(taskMgr.getTasksForNextDays(period)), period.toString()));
+public class CommandProjectionAll extends Command {
+    public CommandProjectionAll(TaskManager taskMgr, Integer period) {
+        super(ResponseType.TASK_PROJECTION_ALL,
+            List.of("list", prettifyTasks(taskMgr.getTasksForNextDaysAll(period)), period.toString()));
     }
 
     public String getResponse() {

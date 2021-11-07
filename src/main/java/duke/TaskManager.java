@@ -17,6 +17,9 @@ import duke.task.model.Event;
 import duke.task.model.Task;
 import duke.task.model.ToDo;
 
+interface taskCustomFilter {
+    Boolean filter(Task t);
+}
 
 public class TaskManager {
     // tasks is a "controlled" component. It is a storage for defined properties, i.e tasks ids are set by TaskManager.
@@ -114,17 +117,23 @@ public class TaskManager {
         return taskList;
     }
 
-    public ArrayList<Task> getTasksForNextDays(Integer period) {
+    public ArrayList<Task> getTasksForNextDaysAll(Integer period) {
+        return this.getTasksForNextDays(period, (t) -> true);
+    }
+
+    public ArrayList<Task> getTasksForNextDays(Integer period, taskCustomFilter cb) {
+        assert(cb != null);
         ArrayList<Task> all = this.tasks.getAllAsArray();
         ArrayList<Task> filtering = new ArrayList<>();
         for (Task t : all) {
-            if (isTaskWithinNextDays(t, period)) {
+            if (isTaskWithinNextDays(t, period) && cb.filter(t)) {
                 filtering.add(t);
             }
         }
         filtering.sort(TaskComparator::compareTaskDate);
         return filtering;
     }
+
 
 
     /**

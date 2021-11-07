@@ -8,7 +8,7 @@ import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_EXIT_L
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_FIND_BY_KEYWORD_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_LIST_ONE;
-import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION;
+import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_PROJECTION_ALL;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SAVE;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_SCAN_DUPLICATE_DESCRIPTION;
 import static duke.dukeutility.definition.CommandPromptsAndOptions.PROMPT_STATISTICS_ALL;
@@ -65,8 +65,8 @@ public class TextCommandValidator {
         return text.startsWith(PROMPT_FIND_BY_KEYWORD_DESCRIPTION);
     }
 
-    public static Boolean isRequestProjection(String text) {
-        return text.startsWith(PROMPT_PROJECTION);
+    public static Boolean isRequestProjectionAll(String text) {
+        return text.startsWith(PROMPT_PROJECTION_ALL);
     }
 
     public static Boolean isParentDirectoryValid(Path p) {
