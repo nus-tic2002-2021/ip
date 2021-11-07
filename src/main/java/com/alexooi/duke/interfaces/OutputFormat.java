@@ -25,5 +25,7 @@ public interface OutputFormat<T> {
 
     String archive(Iterable<T> inputs);
 
+    String help(Iterable<String> inputs);
+
     String exit();
 }

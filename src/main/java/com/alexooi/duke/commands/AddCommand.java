@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.enums.CommandType;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskFactory;
 import com.alexooi.duke.tasks.TaskList;
@@ -13,10 +14,12 @@ public class AddCommand extends Command {
 
     public AddCommand() {
         super();
+        setCommandType(CommandType.ADD);
     }
 
     public AddCommand(String keyword, String args) {
         super(keyword, args);
+        setCommandType(CommandType.ADD);
     }
 
     @Override

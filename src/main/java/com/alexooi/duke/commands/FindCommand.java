@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.enums.CommandType;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.OutputFormat;
 import com.alexooi.duke.tasks.Task;
@@ -14,11 +15,12 @@ public class FindCommand extends Command {
     private final String REGEX_PATTERN = "^(\\bfind\\b) (.*)$";
 
     public FindCommand() {
-
+        setCommandType(CommandType.FIND);
     }
 
     public FindCommand(String keyword, String args) {
         super(keyword, args);
+        setCommandType(CommandType.FIND);
     }
 
     @Override

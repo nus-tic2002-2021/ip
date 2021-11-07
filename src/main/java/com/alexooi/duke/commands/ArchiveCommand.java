@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.enums.CommandType;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.OutputFormat;
 import com.alexooi.duke.tasks.Task;
@@ -12,11 +13,12 @@ public class ArchiveCommand extends Command {
     private final String ARGS_ALL = "all";
 
     public ArchiveCommand() {
-
+        setCommandType(CommandType.ARCHIVE);
     }
 
     public ArchiveCommand(String keyword, String args) {
         super(keyword, args);
+        setCommandType(CommandType.ARCHIVE);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.enums.CommandType;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
@@ -11,10 +12,12 @@ public class CompleteCommand extends Command {
     private final String REGEX_PATTERN = "^\\b(done)\\b (.+)$";
 
     public CompleteCommand() {
+        setCommandType(CommandType.COMPLETE);
     }
 
     public CompleteCommand(String keyword, String args) {
         super(keyword, args);
+        setCommandType(CommandType.COMPLETE);
     }
 
     @Override

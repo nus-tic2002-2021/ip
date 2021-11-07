@@ -1,6 +1,22 @@
     _________________________________________
-    Hello! I'm Duke
+    Hello! I'm Tassie, your virtual assistant.
     What can I do for you?
+
+    Note: Enter help to see a list of commands.
+    _________________________________________
+    _________________________________________
+    The following commands are available:
+    todo <description>
+    deadline <description> /by <date>
+    event <description> /at <date> : <date> must be in yyyy-mm-dd or yyyy-mm-ddThh:mm format.
+    done <num> : <num> must be a number that currently exists in the list.
+    remove <num> : <num> must be a number that currently exists in the list.
+    bye
+    list
+    view <date> : <date> must be in yyyy-mm-dd.
+    find <description>
+    archive <num>/all : <num> must be a number that currently exists in the list.
+    help
     _________________________________________
     _________________________________________
     added: read book

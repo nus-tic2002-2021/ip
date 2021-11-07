@@ -12,7 +12,8 @@ import java.time.LocalDate;
 public class OutputFormatter implements OutputFormat<Task> {
     private static final String PADDING = "    ";
     private static final String HORIZONTAL_LINE = "_________________________________________";
-    private static final String START = "Hello! I'm Duke\n    What can I do for you?";
+    private static final String START = "Hello! I'm Tassie, your virtual assistant.\n    What can I do for you?\n\n    Note: Enter help to see a list of commands.";
+    private static final String COMMAND_LIST = "The following commands are available:";
     private static final String END = "Bye. Hope to see you again soon!";
     private static final String DONE = "Nice! I've marked this task as done:";
     private static final String ADD = "added: ";
@@ -148,6 +149,16 @@ public class OutputFormatter implements OutputFormat<Task> {
         String output = formatLine(ARCHIVE_ALL) +
                 formatList(inputs);
         return formatOutput(output);
+    }
+
+    @Override
+    public String help(Iterable<String> inputs) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(formatLine(COMMAND_LIST));
+        for (String input : inputs) {
+            builder.append(formatLine(input));
+        }
+        return formatOutput(builder.toString());
     }
 
     /**

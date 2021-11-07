@@ -1,5 +1,6 @@
 package com.alexooi.duke.commands;
 
+import com.alexooi.duke.enums.CommandType;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.DateParser;
 import com.alexooi.duke.interfaces.OutputFormat;
@@ -21,11 +22,13 @@ public class ViewScheduleCommand extends Command {
     DateParser parser;
 
     public ViewScheduleCommand() {
+        setCommandType(CommandType.VIEW_SCHEDULE);
         this.parser = new InputDateParser();
     }
 
     public ViewScheduleCommand(String keyword, String args) {
         super(keyword, args);
+        setCommandType(CommandType.VIEW_SCHEDULE);
         this.parser = new InputDateParser();
     }
 
