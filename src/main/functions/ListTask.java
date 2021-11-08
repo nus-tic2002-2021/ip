@@ -145,6 +145,8 @@ public class ListTask
                 }catch (ArrayIndexOutOfBoundsException a){
                     System.out.println(BUFF_PLUS_HORRIZONTALLINE + NEWLINE_BUFFER + a.getMessage() + NEWLINE_BUFFER
                             + Message.getArrayindexoutofbound() + NEWLINE + BUFF_PLUS_HORRIZONTALLINE);
+                }catch (DateTimeException e){
+                    System.out.println(BUFF_PLUS_HORRIZONTALLINE + NEWLINE_BUFFER+e.getMessage() + Message.getDateTimeFormatError() + NEWLINE + BUFF_PLUS_HORRIZONTALLINE);
                 }
                 break;
             case BYE:
