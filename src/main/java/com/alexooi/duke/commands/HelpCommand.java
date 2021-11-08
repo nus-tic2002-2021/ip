@@ -1,7 +1,6 @@
 package com.alexooi.duke.commands;
 
 import com.alexooi.duke.enums.CommandType;
-import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.OutputFormat;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
@@ -23,7 +22,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, OutputFormat<Task> prompt) throws InvalidCommandFormatException {
+    public String execute(TaskList tasks, OutputFormat<Task> prompt) {
         ServiceLoader<Command> commandLoader = ServiceLoader.load(Command.class);
         ArrayList<String> promptInput = new ArrayList<>();
         for (Command cmd : commandLoader) {
@@ -40,7 +39,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public Command build() throws InvalidCommandFormatException {
+    public Command build() {
         return new HelpCommand(getKeyword());
     }
 }

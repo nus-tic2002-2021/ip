@@ -3,9 +3,10 @@ package com.alexooi.duke.tasks;
 import com.alexooi.duke.enums.TaskType;
 import com.alexooi.duke.commands.Command;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
+import com.alexooi.duke.exceptions.InvalidDateFormatException;
 import com.alexooi.duke.exceptions.InvalidFileFormatException;
-import com.alexooi.duke.interfaces.DateParser;
-import com.alexooi.duke.utility.InputDateParser;
+import com.alexooi.duke.interfaces.Parser;
+import com.alexooi.duke.utility.DateParser;
 
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
@@ -18,10 +19,18 @@ public class TaskFactory {
             "^(?<" + KEY_DESCRIPTION + ">.+) /by (?<" + KEY_DATE + ">.+)$";
     private static final String EVENT_PATTERN =
             "^(?<" + KEY_DESCRIPTION + ">.+) /at (?<" + KEY_DATE + ">.+)$";
-    private static final DateParser dateParser = new InputDateParser();
+    private static final Parser<String, LocalDateTime> dateParser = new DateParser();
+
+    private static LocalDateTime handleDateInput(String input) throws InvalidDateFormatException {
+        try {
+            return dateParser.parseInput(input);
+        } catch (Exception e) {
+            throw new InvalidDateFormatException();
+        }
+    }
 
     /**
-     * This function takes in a command and
+     * This function takes in a command and outputs the corresponding task based on the command shown.
      * @param cmd   The command containing the keyword (Task name) and arguments (Date if applicable)
      * @return      Deadline, Event or Todo task
      * @throws InvalidCommandFormatException    If the date does is not parsable for Deadline and Event, this exception is thrown
@@ -32,36 +41,35 @@ public class TaskFactory {
         if (keyword.equalsIgnoreCase(TaskType.DEADLINE.toString())) {
             Matcher deadlineMatch =
                     Pattern.compile(DEADLINE_PATTERN, Pattern.CASE_INSENSITIVE).matcher(args);
-            if (deadlineMatch.matches()) {
-                String description = deadlineMatch.group(KEY_DESCRIPTION);
-                String dueDate = deadlineMatch.group(KEY_DATE);
-                LocalDateTime dueBy = dateParser.parseInput(dueDate);
-                if (dueBy == null) {
-                    throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
-                }
+            if (!deadlineMatch.matches()) {
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
+            }
+            String description = deadlineMatch.group(KEY_DESCRIPTION);
+            String dueDate = deadlineMatch.group(KEY_DATE);
+            try {
+                LocalDateTime dueBy = handleDateInput(dueDate);
                 return new Deadline(description, dueBy);
-            } else {
+            } catch (InvalidDateFormatException idfe) {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
             }
         } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
             Matcher eventMatch = Pattern.compile(EVENT_PATTERN, Pattern.CASE_INSENSITIVE).matcher(args);
-            if (eventMatch.matches()) {
-                String description = eventMatch.group(KEY_DESCRIPTION);
-                String timing = eventMatch.group(KEY_DATE);
-                LocalDateTime eventTime = dateParser.parseInput(timing);
-                if (eventTime == null) {
-                    throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
-                }
-                return new Event(description, eventTime);
-            } else {
+            if (!eventMatch.matches()) {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_EVENT);
             }
+            String description = eventMatch.group(KEY_DESCRIPTION);
+            String timing = eventMatch.group(KEY_DATE);
+            try {
+                LocalDateTime eventTime = handleDateInput(timing);
+                return new Event(description, eventTime);
+            } catch (InvalidDateFormatException idfe) {
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
+            }
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
-            if (args.length() > 0) {
-                return new Todo(args);
-            } else {
+            if (args.length() <= 0) {
                 throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_TODO);
             }
+            return new Todo(args);
         }
         throw new InvalidCommandFormatException(
                 "Cannot find the appropriate task to create.");
@@ -84,19 +92,22 @@ public class TaskFactory {
         if (keyword.equalsIgnoreCase(TaskType.DEADLINE.toString())) {
             String description = line[2];
             String dueDate = line[3];
-            LocalDateTime dueBy = dateParser.parseInput(dueDate);
-            if (dueBy == null) {
+            try {
+                LocalDateTime dueBy = handleDateInput(dueDate);
+                return new Deadline(description, dueBy);
+            } catch (InvalidDateFormatException idfe) {
                 throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
             }
-            currentTask = new Deadline(description, dueBy);
         } else if (keyword.equalsIgnoreCase(TaskType.EVENT.toString())) {
             String description = line[2];
             String timing = line[3];
-            LocalDateTime eventTime = dateParser.parseInput(timing);
-            if (eventTime == null) {
+
+            try {
+                LocalDateTime eventTime = handleDateInput(timing);
+                return new Event(description, eventTime);
+            } catch (InvalidDateFormatException idfe) {
                 throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
             }
-            currentTask = new Event(description, eventTime);
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
             currentTask = new Todo(line[2]);
         } else {

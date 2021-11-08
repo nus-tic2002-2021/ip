@@ -3,8 +3,7 @@ package com.alexooi.duke.enums;
 public enum TaskType {
     TODO("todo"),
     EVENT("event"),
-    DEADLINE("deadline"),
-    TASK("task");
+    DEADLINE("deadline");
 
     private String type;
 

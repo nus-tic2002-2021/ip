@@ -4,7 +4,7 @@ import com.alexooi.duke.enums.TaskType;
 
 public abstract class Task {
     private String description;
-    private Boolean isDone;
+    private boolean isDone;
     private TaskType type;
 
     public Task() {
@@ -25,12 +25,12 @@ public abstract class Task {
         this.description = description;
     }
 
-    public Boolean getDone() {
+    public boolean getDone() {
         return isDone;
     }
 
-    public void setDone(Boolean done) {
-        isDone = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public TaskType getType() {

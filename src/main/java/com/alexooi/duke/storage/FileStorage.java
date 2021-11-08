@@ -8,7 +8,7 @@ import java.io.*;
  * The concrete implementation of the StorageClient for storing in files.
  */
 public class FileStorage implements StorageClient<BufferedReader> {
-    String filePath;
+    final String filePath;
 
     public FileStorage(String filePath) {
         this.filePath = filePath;

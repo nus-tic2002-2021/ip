@@ -1,6 +1,7 @@
 package com.alexooi.duke.utility;
 
-import com.alexooi.duke.interfaces.DateParser;
+import com.alexooi.duke.exceptions.InvalidDateFormatException;
+import com.alexooi.duke.interfaces.Parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,11 +9,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
-public class InputDateParser implements DateParser {
-    private final DateTimeFormatter[] ACCEPTED_DATE_FORMATS = {
+public class DateParser implements Parser<String, LocalDateTime> {
+    private static final DateTimeFormatter[] ALLOWED_DATE_FORMATS = {
             DateTimeFormatter.ISO_DATE
     };
-    private final DateTimeFormatter[] ACCEPTED_DATE_TIME_FORMATS = {
+    private static final DateTimeFormatter[] ALLOWED_DATE_TIME_FORMATS = {
             DateTimeFormatter.ISO_DATE_TIME
     };
 
@@ -22,7 +23,6 @@ public class InputDateParser implements DateParser {
      * @param acceptedFormats   Can be a DateTimeFormatter or a list of accepted formats built using DateTimeFormatterBuilder
      * @return                  True if the string is an accepted date format, false if not
      */
-    @Override
     public boolean isDate(String input, DateTimeFormatter acceptedFormats) {
         try {
             LocalDate.parse(input, acceptedFormats);
@@ -38,7 +38,6 @@ public class InputDateParser implements DateParser {
      * @param acceptedFormats   Can be a DateTimeFormatter or a list of accepted formats built using DateTimeFormatterBuilder
      * @return                  True if the string is an accepted Date and Time format, false if not
      */
-    @Override
     public boolean isDateTime(String input, DateTimeFormatter acceptedFormats) {
         try {
             LocalDateTime.parse(input, acceptedFormats);
@@ -63,14 +62,33 @@ public class InputDateParser implements DateParser {
      *                  otherwise time defaults to start of day 00:00. If the string cannot be parsed, then returns null
      */
     @Override
-    public LocalDateTime parseInput(String input) {
-        DateTimeFormatter dateTimeFormats = formatBuilder(ACCEPTED_DATE_TIME_FORMATS);
-        DateTimeFormatter dateFormats = formatBuilder(ACCEPTED_DATE_FORMATS);
-        if (isDateTime(input, dateTimeFormats)) {
-            return LocalDateTime.parse(input, dateTimeFormats);
-        } else if (isDate(input, dateFormats)) {
-            return LocalDate.parse(input, dateFormats).atStartOfDay();
+    public LocalDateTime parseInput(String input) throws Exception {
+        DateTimeFormatter allowedDateTimeFormats = formatBuilder(ALLOWED_DATE_TIME_FORMATS);
+        DateTimeFormatter allowedDateFormats = formatBuilder(ALLOWED_DATE_FORMATS);
+        if (isDateTime(input, allowedDateTimeFormats)) {
+            return LocalDateTime.parse(input, allowedDateTimeFormats);
+        } else if (isDate(input, allowedDateFormats)) {
+            return LocalDate.parse(input, allowedDateFormats).atStartOfDay();
+        } else {
+            throw new InvalidDateFormatException();
         }
-        return null;
+    }
+
+    /**
+     * This function validates if a particular date is valid for the allowed date and date time formats.
+     * @param input String to validate
+     * @return      True if valid, else false
+     */
+    @Override
+    public boolean isValidInput(String input) {
+        DateTimeFormatter allowedDateTimeFormats = formatBuilder(ALLOWED_DATE_TIME_FORMATS);
+        DateTimeFormatter allowedDateFormats = formatBuilder(ALLOWED_DATE_FORMATS);
+        boolean isValid = false;
+        if (isDateTime(input, allowedDateTimeFormats)) {
+            isValid = true;
+        } else if (isDate(input, allowedDateFormats)) {
+            isValid = true;
+        }
+        return isValid;
     }
 }

@@ -43,6 +43,14 @@ public abstract class Command {
         this.args = args;
     }
 
+    public CommandType getCommandType() {
+        return commandType;
+    }
+
+    public void setCommandType(CommandType commandType) {
+        this.commandType = commandType;
+    }
+
     public Iterable<String> getCommandFormat() {
         ArrayList<String> commandFormat = new ArrayList<>();
         commandFormat.add(getCommandType().getFormat());
@@ -60,13 +68,5 @@ public abstract class Command {
 
     public boolean isExit() {
         return false;
-    };
-
-    public CommandType getCommandType() {
-        return commandType;
-    }
-
-    public void setCommandType(CommandType commandType) {
-        this.commandType = commandType;
     }
 }

@@ -1,6 +1,6 @@
 package com.alexooi.duke.exceptions;
 
-public class InvalidCommandFormatException extends Throwable {
+public class InvalidCommandFormatException extends Exception {
     private static final String ERROR_PREFIX = "Invalid Command Format:";
     public static final String ERROR_DEADLINE =
             "Deadline should be in the format: deadline <description> /by <date> where <date> is in the format of yyyy-mm-dd.";

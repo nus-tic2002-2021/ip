@@ -1,7 +1,6 @@
 package com.alexooi.duke;
 
 import com.alexooi.duke.commands.Command;
-import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.storage.FileStorage;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
@@ -9,18 +8,17 @@ import com.alexooi.duke.ui.CommandLineParser;
 import com.alexooi.duke.ui.OutputFormatter;
 import com.alexooi.duke.exceptions.InvalidCommandException;
 import com.alexooi.duke.exceptions.InvalidCommandFormatException;
-import com.alexooi.duke.interfaces.IOParser;
+import com.alexooi.duke.interfaces.Parser;
 import com.alexooi.duke.interfaces.OutputFormat;
 
 import java.util.Scanner;
-import java.util.ServiceLoader;
 
 public class Duke {
     private static Duke instance;
     private final OutputFormat<Task> prompt;
-    private final IOParser<Command, Scanner> parser;
+    private final Parser<String, Command> parser;
 
-    private Duke(OutputFormat<Task> prompt, IOParser<Command, Scanner> parser) {
+    private Duke(OutputFormat<Task> prompt, Parser<String, Command> parser) {
         this.prompt = prompt;
         this.parser = parser;
     }
@@ -43,7 +41,6 @@ public class Duke {
         FileStorage archive = new FileStorage("archive.txt");
 
         TaskList tasks = TaskList.getInstance(state, archive);
-        ServiceLoader<Command> commandLoader = ServiceLoader.load(Command.class);
         System.out.println(main.prompt.start());
 
         Scanner in = new Scanner(System.in);
@@ -51,7 +48,8 @@ public class Duke {
 
         while (isReceivingInput && in.hasNext()) {
             try {
-                Command command = main.parser.readInput(in, commandLoader);
+                String input = in.nextLine();
+                Command command = main.parser.parseInput(input);
                 if (command.isExit()) {
                     isReceivingInput = false;
                 } else {

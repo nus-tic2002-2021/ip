@@ -46,7 +46,7 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
-    public Command build() throws InvalidCommandFormatException {
+    public Command build() {
         return new ArchiveCommand(getKeyword(), getArgs());
     }
 }
