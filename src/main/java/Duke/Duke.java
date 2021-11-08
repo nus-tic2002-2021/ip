@@ -17,12 +17,21 @@ public class Duke {
     static Scanner in = new Scanner(System.in);
 
     /**
+     * Scans and returns user input as String.
+     * @return
+     */
+    public static String getInput() {
+        String input = in.nextLine();
+        return input;
+    }
+
+    /**
      * Continuously read input from the user of Duke
      * and parse the different inputs.
      */
     public static void ExtendTaskList() {
         while (true) {
-            String input = in.nextLine();
+            String input = getInput();
             System.out.println(Ui.line);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
