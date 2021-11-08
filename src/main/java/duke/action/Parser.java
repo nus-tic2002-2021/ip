@@ -170,13 +170,13 @@ public class Parser {
         String userInputNewPriorityNumber = "";
 
         Scanner in = new Scanner(System.in);
-        ;
 
         while (isTaskNumberValid == false) {
             uiMessage.msgAskUserSetTaskPriority();
             userInputTaskNumber = in.nextLine();
             isTaskNumberValid = hasValidTaskNumber(myList, userInputTaskNumber);
         }
+
         int taskNumber = Integer.parseInt(userInputTaskNumber);
         uiMessage.msgDashLines();
 
@@ -185,6 +185,7 @@ public class Parser {
             userInputNewPriorityNumber = in.nextLine();
             isPriorityNumberValid = hasValidPriorityNumber(userInputNewPriorityNumber);
         }
+
         int newPriorityInteger = Integer.parseInt(userInputNewPriorityNumber);
 
         TaskPriority taskPriority = TaskPriority.convertIntToPriority(newPriorityInteger);
