@@ -17,8 +17,12 @@ public abstract class Task {
     protected TaskType taskType;
     protected TaskPriority taskPriority;
 
+    /**
+     * Create an abstract Task object
+     */
     public Task(String taskDetail) {
         this.taskDetail = taskDetail;
+        this.taskPriority = TaskPriority.LOW;
     }
 
     // Getter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -50,6 +54,16 @@ public abstract class Task {
         return taskType;
     }
 
+
+    /**
+     * Return the TaskPriority
+     *
+     * @return TaskPriority that represents the priority of task
+     */
+    public TaskPriority getTaskPriority() {
+        return taskPriority;
+    }
+
     // Setter <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
@@ -78,4 +92,7 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    public void setPriority(TaskPriority taskPriority) {
+        this.taskPriority = taskPriority;
+    }
 }

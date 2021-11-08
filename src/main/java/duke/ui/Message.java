@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 import duke.task.TaskList;
+import duke.task.TaskPriority;
 import duke.task.TaskType;
 
 /**
@@ -209,6 +211,25 @@ public class Message implements Ui {
         System.out.println("    Which task do you want to set priority?");
     }
 
+    /**
+     * Display message to ask user what is the new priority
+     */
+    public void msgAskUserWhatPriority() {
+        System.out.println("    What is it's priority? choose 1 to 3");
+        System.out.println("    1: Very urgent >>> 3: Chin Cai not that urgent");
+    }
+
+    /**
+     * Display message to tell user that the new priority for a task is set successfully
+     */
+    public void msgSetPriority(TaskList myList, int taskNumber) {
+        System.out.println("    Done! The new task priority is set");
+        TaskPriority taskPriority = myList.getTaskPriority(taskNumber);
+        String taskPriorityInString = TaskPriority.convertPriorityToString(taskPriority);
+        System.out.println("    Priority of Task #" + taskNumber + 1 + " has been set to " + taskPriorityInString);
+        System.out.println("_________________________________");
+    }
+
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
@@ -242,6 +263,13 @@ public class Message implements Ui {
      */
     public void msgBlankBeforeTaskDetail() {
         System.out.print("      ");
+    }
+
+    /**
+     * Display dash lines separator
+     */
+    public void msgDashLines() {
+        System.out.println("_________________________________");
     }
 
     /**
@@ -312,6 +340,18 @@ public class Message implements Ui {
         }
     }
 
+    /**
+     * Display message when a task is removed
+     */
+    public void msgRemoveItem(TaskList myList, int taskNumber) {
+
+        System.out.println("    Noted. I've removed this task:");
+        msgBlankBeforeTaskDetail();
+        msgTaskDetail(myList, taskNumber);
+        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("_________________________________");
+    }
+
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
@@ -360,23 +400,20 @@ public class Message implements Ui {
     }
 
     /**
-     * Display message when a task is removed
+     * Display message that remind user about invalid input
+     * The task number is not found
      */
-    public void msgRemoveItem(TaskList myList, int taskNumber) {
-
-        System.out.println("    Noted. I've removed this task:");
-        msgBlankBeforeTaskDetail();
-        msgTaskDetail(myList, taskNumber);
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+    public void msgInvalidTaskNumber() {
+        System.out.println("    ☹  OOPS!!! The task number is invalid.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message that remind user about invalid input
-     * The task number is not found
+     * The priority is invalid
      */
-    public void msgWrongTaskNumber() {
-        System.out.println("    ☹  OOPS!!! The task number is invalid.");
+    public void msgInvalidPriority() {
+        System.out.println("    ☹  OOPS!!! The priority is invalid. Choose 1, 2 or 3");
         System.out.println("_________________________________");
     }
 

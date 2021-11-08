@@ -1,12 +1,12 @@
 package duke.storage;
 
-import duke.task.TaskList;
-import duke.ui.Message;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
+
+import duke.task.TaskList;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 /**
  * Handles file handling related functions

@@ -5,9 +5,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 import duke.ui.Message;
 import duke.ui.Ui;
-import java.util.Locale;
 
 /**
  * Handle date and time related functions

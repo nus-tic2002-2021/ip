@@ -1,16 +1,16 @@
 package duke.action;
 
-import duke.task.TaskType;
-import duke.ui.Message;
-import duke.ui.Ui;
-
 import java.io.IOException;
-import duke.storage.FileAccess;
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
+
+import duke.storage.FileAccess;
+import duke.task.TaskList;
+import duke.task.TaskPriority;
+import duke.task.TaskType;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 /**
  * Main logic of the Duke Program
@@ -24,14 +24,14 @@ import java.util.Scanner;
 public class Parser {
 
     private FileAccess fileAccess;
-    private Ui ui;
+    private Ui uiMessage;
 
     /**
      * Constructor
      */
     public Parser(FileAccess fileAccess) {
         this.fileAccess = fileAccess;
-        ui = new Message();
+        uiMessage = new Message();
     }
 
     // Start Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -40,7 +40,7 @@ public class Parser {
      * Show the opening Greet Message in System.out.println
      */
     public void showGreetMessage() {
-        ui.msgGreet();
+        uiMessage.msgGreet();
     }
 
     // Run Duke <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -95,7 +95,7 @@ public class Parser {
             if (line.equals("list")) {
                 showFullList(myList);
             } else if (line.substring(0, 3).equals("set")) {
-                toModifyTask(myList, line);
+                toSetPriorityTask(myList, line);
             } else if (line.substring(0, 4).equals("done")) {
                 toMarkTaskDone(myList, line);
             } else if (line.substring(0, 4).equals("todo")) {
@@ -111,12 +111,12 @@ public class Parser {
             } else if (line.substring(0, 8).equals("deadline")) {
                 toAddTaskDeadline(myList, line);
             } else {
-                ui.msgInvalidInput();
+                uiMessage.msgInvalidInput();
             }
             return true;
         } catch (Exception e) {
-            ui.msgInvalidInput();
-            ui.msgError(e);
+            uiMessage.msgInvalidInput();
+            uiMessage.msgError(e);
             return true;
         }
     }
@@ -130,9 +130,9 @@ public class Parser {
      */
     public void showByeMessage() {
         try {
-            ui.msgBye();
+            uiMessage.msgBye();
         } catch (IOException error) {
-            ui.msgError(error);
+            uiMessage.msgError(error);
         }
     }
 
@@ -144,20 +144,60 @@ public class Parser {
      * @param myList TaskList that contains the list of task
      */
     private void showFullList(TaskList myList) {
-        ui.msgList(myList);
+        uiMessage.msgList(myList);
     }
 
     /**
-     * Show a list of Modify Function
+     * Ask user which task to set priority and change the priority accordingly
+     * -- Ask user which task to be changed
+     * -- Ask user what is the new priority
+     * -- Update the task with new priority
      *
      * @param myList TaskList that contains the list of task
      * @param line   String that the user type
      */
-    private void toModifyTask(TaskList myList, String line) {
-        ui.msgAskUserSetTaskPriority();
-        Scanner in = new Scanner(System.in);
-        String taskNumber = in.nextLine();
+    private void toSetPriorityTask(TaskList myList, String line) {
 
+        boolean validTaskNumber = false;
+        String userInputTaskNumber = "";
+
+        boolean validPriorityNumber = false;
+        String userInputNewPriorityNumber = "";
+
+        Scanner in = new Scanner(System.in);;
+
+        while (validTaskNumber == false){
+            uiMessage.msgAskUserSetTaskPriority();
+            userInputTaskNumber = in.nextLine();
+            validTaskNumber = ifValidTaskNumber(myList, userInputTaskNumber);
+        }
+        int taskNumber = Integer.parseInt(userInputTaskNumber);
+        uiMessage.msgDashLines();
+
+        while (validPriorityNumber == false){
+            uiMessage.msgAskUserWhatPriority();
+            userInputNewPriorityNumber = in.nextLine();
+            validPriorityNumber = ifValidPriorityNumber (userInputNewPriorityNumber);
+        }
+        int newPriorityInteger = Integer.parseInt(userInputNewPriorityNumber);
+
+        TaskPriority taskPriority = TaskPriority.convertIntToPriority(newPriorityInteger);
+        toUpdatePriority(myList, taskNumber - 1, taskPriority);
+    }
+
+    /**
+     * Ask user which task to set priority and change the priority accordingly
+     * -- Ask user which task to be changed
+     * -- Ask user what is the new priority
+     * -- Update the task with new priority
+     *
+     * @param myList       TaskList that contains the list of task
+     * @param taskNumber   int that indicates the task number
+     * @param taskPriority TaskPriority(new one) that want to be set
+     */
+    private void toUpdatePriority(TaskList myList, int taskNumber, TaskPriority taskPriority) {
+        myList.setTaskPriority(taskNumber, taskPriority);
+        uiMessage.msgSetPriority(myList, taskNumber); //
     }
 
     /**
@@ -169,7 +209,7 @@ public class Parser {
     private void toMarkTaskDone(TaskList myList, String line) {
         int taskNumber = Integer.parseInt(line.substring(5));
         myList.setTaskDone(taskNumber - 1);
-        ui.msgMarkDone(myList, taskNumber - 1);
+        uiMessage.msgMarkDone(myList, taskNumber - 1);
     }
 
     /**
@@ -180,10 +220,10 @@ public class Parser {
      */
     private void toAddTaskToDo(TaskList myList, String line) {
         if (line.length() <= 5) {
-            ui.msgInvalidInputMissingDescription();
+            uiMessage.msgInvalidInputMissingDescription();
         } else {
             myList.addItemToDos(line.substring(5));
-            ui.msgAssignTask(myList, myList.getNumOfItem() - 1);
+            uiMessage.msgAssignTask(myList, myList.getNumOfItem() - 1);
         }
     }
 
@@ -209,12 +249,12 @@ public class Parser {
     private void toAddTaskEvent(TaskList myList, String line) {
 
         if (line.length() <= 6) {
-            ui.msgInvalidInputMissingDescription();
+            uiMessage.msgInvalidInputMissingDescription();
             return;
         }
 
         if (!line.contains("/at")) {
-            ui.msgInvalidInputMissingDay();
+            uiMessage.msgInvalidInputMissingDay();
             return;
         }
 
@@ -240,7 +280,7 @@ public class Parser {
             }
 
         } catch (Exception e) {
-            ui.msgInvalidInputWrongDateTimeStartEndFormat();
+            uiMessage.msgInvalidInputWrongDateTimeStartEndFormat();
         }
 
     }
@@ -256,12 +296,12 @@ public class Parser {
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
             return;
         }
 
         myList.addItemEvent(taskDetail, taskDate);
-        ui.msgAssignTaskEventTaskDate(myList, myList.getNumOfItem() - 1);
+        uiMessage.msgAssignTaskEventTaskDate(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -279,17 +319,17 @@ public class Parser {
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
 
         if (taskDate == null) {
-            ui.msgInvalidInputMissingDay();
+            uiMessage.msgInvalidInputMissingDay();
             return;
         }
 
         if (taskTimeStart == null) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
             return;
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart);
-        ui.msgAssignTaskEventTaskDateTaskTimeStart(myList, myList.getNumOfItem() - 1);
+        uiMessage.msgAssignTaskEventTaskDateTaskTimeStart(myList, myList.getNumOfItem() - 1);
 
     }
 
@@ -310,22 +350,22 @@ public class Parser {
         LocalTime taskTimeEnd = ParseDateTime.toTime(timeEnd);
 
         if (taskDate == null) {
-            ui.msgInvalidInputMissingDay();
+            uiMessage.msgInvalidInputMissingDay();
             return;
         }
 
         if (taskTimeStart == null || taskTimeEnd == null) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
             return;
         }
 
         if (taskTimeStart.isAfter(taskTimeEnd)) {
-            ui.msgInvalidInputTimeStartLaterThanTimeEnd();
+            uiMessage.msgInvalidInputTimeStartLaterThanTimeEnd();
             return;
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd);
-        ui.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(myList, myList.getNumOfItem() - 1);
+        uiMessage.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -337,10 +377,10 @@ public class Parser {
     private void toDeleteTask(TaskList myList, String line) {
         try {
             int taskNumber = Integer.parseInt(line.substring(7));
-            ui.msgRemoveItem(myList, taskNumber - 1);
+            uiMessage.msgRemoveItem(myList, taskNumber - 1);
             myList.removeItem(taskNumber - 1);
         } catch (Exception e) {
-            ui.msgWrongTaskNumber();
+            uiMessage.msgInvalidTaskNumber();
         }
     }
 
@@ -356,12 +396,12 @@ public class Parser {
     private void toAddTaskDeadline(TaskList myList, String line) {
 
         if (line.length() <= 9) {
-            ui.msgInvalidInputMissingDescription();
+            uiMessage.msgInvalidInputMissingDescription();
             return;
         }
 
         if (!line.contains("/by")) {
-            ui.msgInvalidInputMissingDay();
+            uiMessage.msgInvalidInputMissingDay();
             return;
         }
 
@@ -380,11 +420,11 @@ public class Parser {
                 time = ParseDateTime.toExtracTimeFromSplitDateAndTime(split);
                 toAddTaskDeadline_localDate_localTime(myList, taskDetail, date, time);
             } else {
-                ui.msgInvalidInputWrongDateTimeFormat();
+                uiMessage.msgInvalidInputWrongDateTimeFormat();
             }
 
         } catch (Exception e) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
         }
     }
 
@@ -399,12 +439,12 @@ public class Parser {
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
             return;
         }
 
         myList.addItemDeadline(taskDetail, taskDate);
-        ui.msgAssignTaskDeadlineTaskDate(myList, myList.getNumOfItem() - 1);
+        uiMessage.msgAssignTaskDeadlineTaskDate(myList, myList.getNumOfItem() - 1);
     }
 
     /**
@@ -422,17 +462,17 @@ public class Parser {
         LocalTime taskTime = ParseDateTime.toTime(time);
 
         if (taskDate == null) {
-            ui.msgInvalidInputMissingDay();
+            uiMessage.msgInvalidInputMissingDay();
             return;
         }
 
         if (taskTime == null) {
-            ui.msgInvalidInputWrongDateTimeFormat();
+            uiMessage.msgInvalidInputWrongDateTimeFormat();
             return;
         }
 
         myList.addItemDeadline(taskDetail, taskDate, taskTime);
-        ui.msgAssignTaskDeadlineTaskDateTaskTime(myList, myList.getNumOfItem() - 1);
+        uiMessage.msgAssignTaskDeadlineTaskDateTaskTime(myList, myList.getNumOfItem() - 1);
     }
 
 
@@ -458,7 +498,38 @@ public class Parser {
         return sb.toString();
     }
 
+    /**
+     * Check the validity of task number in String
+     *
+     * @param myList TaskList that contains the list of task
+     * @param userInputString String
+     * @return boolean True if userInput is a valid task number; False otherwise
+     */
+    private boolean ifValidTaskNumber(TaskList myList, String userInputString){
 
+        try {
+            int userInputInt = Integer.parseInt(userInputString);
+            int numOfItem = myList.getNumOfItem();
+            if (userInputInt <= numOfItem){
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        uiMessage.msgInvalidTaskNumber();
+        return false;
+    }
+
+    private boolean ifValidPriorityNumber(String userInputNewPriorityString){
+        try{
+            TaskPriority taskPriority = TaskPriority.convertStringToPriority(userInputNewPriorityString);
+            if (taskPriority == TaskPriority.HIGH || taskPriority == TaskPriority.MEDIUM || taskPriority == TaskPriority.LOW){
+                return true;
+            }
+        } catch (Exception e){
+        }
+        uiMessage.msgInvalidPriority();
+        return false;
+    }
 }
 
 

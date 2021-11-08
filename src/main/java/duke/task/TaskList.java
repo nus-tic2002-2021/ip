@@ -121,6 +121,17 @@ public class TaskList {
     }
 
     /**
+     * Return a task priority from a task of tasklist
+     *
+     * @param index Int that represents the index in a task list
+     * @return TaskPriority that represents the task priority
+     */
+    public TaskPriority getTaskPriority(int index) {
+        Task task = list.get(index);
+        return task.getTaskPriority();
+    }
+
+    /**
      * Return a boolean done status from a task of tasklist
      *
      * @param index Int that represents the index in a task list
@@ -282,5 +293,16 @@ public class TaskList {
     public void setTaskDone(int index) {
         Task task = list.get(index);
         task.setTaskCompleted();
+    }
+
+    /**
+     * Update the priority of a task in tasklist
+     *
+     * @param index        Int that represents the index in a task list
+     * @param taskPriority TaskPriority(new) that will replace the TaskPriority(current)
+     */
+    public void setTaskPriority(int index, TaskPriority taskPriority) {
+        Task task = list.get(index);
+        task.setPriority(taskPriority);
     }
 }
