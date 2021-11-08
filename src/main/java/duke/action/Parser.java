@@ -3,7 +3,10 @@ package duke.action;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import duke.storage.FileAccess;
 import duke.task.TaskList;
@@ -66,7 +69,7 @@ public class Parser {
         TaskList myList = new TaskList();
         while (isDukeRunning) {
             line = in.nextLine();
-            isDukeRunning = toReadUserCommand(myList, line);
+            isDukeRunning = shouldReadUserCommand(myList, line);
         }
         in.close();
     }
@@ -78,7 +81,7 @@ public class Parser {
      * @param line   String that the user type
      * @return boolean Return false if user type Bye, else return true
      */
-    public boolean toReadUserCommand(TaskList myList, String line) {
+    public boolean shouldReadUserCommand(TaskList myList, String line) {
         try {
             // Guard Condition
             if (line.equals("bye")) {
@@ -94,21 +97,23 @@ public class Parser {
 
             if (line.equals("list")) {
                 showFullList(myList);
-            } else if (line.substring(0, 3).equals("set")) {
+            } else if (line.startsWith("set")) {
                 toSetPriorityTask(myList, line);
-            } else if (line.substring(0, 4).equals("done")) {
+            } else if (line.startsWith("done")) {
                 toMarkTaskDone(myList, line);
-            } else if (line.substring(0, 4).equals("todo")) {
+            } else if (line.startsWith("todo")) {
                 toAddTaskToDo(myList, line);
-            } else if (line.substring(0, 4).equals("save")) {
+            } else if (line.startsWith("save")) {
                 toSaveTask(myList);
-            } else if (line.substring(0, 4).equals("load")) {
+            } else if (line.startsWith("load")) {
                 // loadTask(myList);
-            } else if (line.substring(0, 5).equals("event")) {
+            } else if (line.startsWith("find")) {
+                toFindTask(myList, line);
+            } else if (line.startsWith("event")) {
                 toAddTaskEvent(myList, line);
-            } else if (line.substring(0, 6).equals("delete")) {
+            } else if (line.startsWith("delete")) {
                 toDeleteTask(myList, line);
-            } else if (line.substring(0, 8).equals("deadline")) {
+            } else if (line.startsWith("deadline")) {
                 toAddTaskDeadline(myList, line);
             } else {
                 uiMessage.msgInvalidInput();
@@ -158,26 +163,27 @@ public class Parser {
      */
     private void toSetPriorityTask(TaskList myList, String line) {
 
-        boolean validTaskNumber = false;
+        boolean isTaskNumberValid = false;
         String userInputTaskNumber = "";
 
-        boolean validPriorityNumber = false;
+        boolean isPriorityNumberValid = false;
         String userInputNewPriorityNumber = "";
 
-        Scanner in = new Scanner(System.in);;
+        Scanner in = new Scanner(System.in);
+        ;
 
-        while (validTaskNumber == false){
+        while (isTaskNumberValid == false) {
             uiMessage.msgAskUserSetTaskPriority();
             userInputTaskNumber = in.nextLine();
-            validTaskNumber = ifValidTaskNumber(myList, userInputTaskNumber);
+            isTaskNumberValid = hasValidTaskNumber(myList, userInputTaskNumber);
         }
         int taskNumber = Integer.parseInt(userInputTaskNumber);
         uiMessage.msgDashLines();
 
-        while (validPriorityNumber == false){
+        while (isPriorityNumberValid == false) {
             uiMessage.msgAskUserWhatPriority();
             userInputNewPriorityNumber = in.nextLine();
-            validPriorityNumber = ifValidPriorityNumber (userInputNewPriorityNumber);
+            isPriorityNumberValid = hasValidPriorityNumber(userInputNewPriorityNumber);
         }
         int newPriorityInteger = Integer.parseInt(userInputNewPriorityNumber);
 
@@ -235,6 +241,34 @@ public class Parser {
     private void toSaveTask(TaskList myList) {
         String listOfTaskString = toReadTaskConvertToString(myList);
         fileAccess.saveProgressIntoFile(myList, listOfTaskString);
+    }
+
+    /**
+     * Find the Task requested
+     *
+     * @param myList TaskList that contains the list of task
+     */
+    private void toFindTask(TaskList myList, String line) {
+        if (line.length() <= 5) {
+            uiMessage.msgInvalidFindTerm();
+            return;
+        }
+
+        String searchTerm = line.substring(5);
+        ArrayList<Integer> taskNumberContainingSearchTerm = new ArrayList<>();
+        for (int i = 0; i < myList.getNumOfItem(); i++) {
+            String taskDetail = myList.getTaskDetail(i);
+            if (hasStringContain(taskDetail, searchTerm)) {
+                taskNumberContainingSearchTerm.add(i);
+            }
+        }
+
+        if (taskNumberContainingSearchTerm.isEmpty()) {
+            uiMessage.msgInvalidFindTerm();
+            return;
+        }
+
+        uiMessage.msgTaskFound(myList, taskNumberContainingSearchTerm);
     }
 
     /**
@@ -501,34 +535,49 @@ public class Parser {
     /**
      * Check the validity of task number in String
      *
-     * @param myList TaskList that contains the list of task
+     * @param myList          TaskList that contains the list of task
      * @param userInputString String
      * @return boolean True if userInput is a valid task number; False otherwise
      */
-    private boolean ifValidTaskNumber(TaskList myList, String userInputString){
+    private boolean hasValidTaskNumber(TaskList myList, String userInputString) {
 
         try {
             int userInputInt = Integer.parseInt(userInputString);
             int numOfItem = myList.getNumOfItem();
-            if (userInputInt <= numOfItem){
+            if (userInputInt <= numOfItem) {
                 return true;
             }
         } catch (Exception e) {
+            uiMessage.msgInvalidTaskNumber();
+            return false;
         }
         uiMessage.msgInvalidTaskNumber();
         return false;
     }
 
-    private boolean ifValidPriorityNumber(String userInputNewPriorityString){
-        try{
-            TaskPriority taskPriority = TaskPriority.convertStringToPriority(userInputNewPriorityString);
-            if (taskPriority == TaskPriority.HIGH || taskPriority == TaskPriority.MEDIUM || taskPriority == TaskPriority.LOW){
+    private boolean hasValidPriorityNumber(String userInputPriorityS) {
+        try {
+            TaskPriority taskPriority = TaskPriority.convertStringToPriority(userInputPriorityS);
+            if (taskPriority == TaskPriority.HIGH) {
+                return true;
+            } else if (taskPriority == TaskPriority.MEDIUM) {
+                return true;
+            } else if (taskPriority == TaskPriority.LOW) {
                 return true;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
+            uiMessage.msgInvalidPriority();
+            return false;
         }
         uiMessage.msgInvalidPriority();
         return false;
+    }
+
+    private boolean hasStringContain(String sourceString, String searchString) {
+        String pattern = "\\b" + searchString + "\\b";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(sourceString);
+        return m.find();
     }
 }
 

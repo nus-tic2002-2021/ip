@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.task.TaskList;
 import duke.task.TaskPriority;
@@ -230,6 +231,31 @@ public class Message implements Ui {
         System.out.println("_________________________________");
     }
 
+    // Find Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    /**
+     * Display message to tell user that the term that the user try to find is not found
+     */
+    public void msgInvalidFindTerm() {
+        System.out.println("    Sorry :(   Cannot find what you are looking for ~ ");
+        System.out.println("_________________________________");
+    }
+
+    /**
+     * Display message to show a list of task found based on the term
+     */
+    public void msgTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
+        System.out.println("    Here are the matching tasks in your list:");
+        int index = 1;
+        for (int i = 0; i < taskNumberContainingSearchTerm.size(); i++) {
+            int taskNumber = taskNumberContainingSearchTerm.get(i);
+            msgBlankBeforeTaskDetail();
+            System.out.print(index + ".");
+            msgTaskDetail(myList, taskNumber);
+            index++;
+        }
+    }
+
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
@@ -262,7 +288,7 @@ public class Message implements Ui {
      * Display blanks
      */
     public void msgBlankBeforeTaskDetail() {
-        System.out.print("      ");
+        System.out.print("    ");
     }
 
     /**

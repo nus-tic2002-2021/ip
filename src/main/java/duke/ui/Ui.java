@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.task.TaskList;
 
@@ -41,6 +42,10 @@ public interface Ui {
     void msgAskUserWhatPriority();
 
     void msgSetPriority(TaskList myList, int taskNumber);
+
+    void msgInvalidFindTerm();
+
+    void msgTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm);
 
     void msgMarkDone(TaskList myList, int taskNumber);
 
