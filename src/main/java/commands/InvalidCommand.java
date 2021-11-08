@@ -5,8 +5,6 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.Optional;
-
 /**
  * <code>InvalidCommand</code> is used to capture invalid input command that cannot be executed.
  * Extends the <code>Command</code> class.

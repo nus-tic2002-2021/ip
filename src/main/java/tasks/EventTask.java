@@ -1,6 +1,5 @@
 package tasks;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -35,7 +34,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Returns the event start date time of the <code>EventTask</code> object.
+     * Returns the event end date time of the <code>EventTask</code> object.
      */
     public String getEnd() {
         return end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
