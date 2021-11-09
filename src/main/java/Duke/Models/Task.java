@@ -1,6 +1,7 @@
 package Duke.Models;
 
 import Duke.DukeException;
+import Duke.PriorityLevel;
 
 /**
  * Represents a Task with information regarding the
@@ -10,6 +11,7 @@ public class Task {
 
     protected String Description;
     protected boolean Completed;
+    protected PriorityLevel Priority;
 
     /**
      * Task constructor method that takes in a string as description
@@ -19,6 +21,7 @@ public class Task {
     public Task(String newTask) {
         this.Description = newTask;
         this.Completed = false;
+        this.Priority = PriorityLevel.NIL;
     }
 
     /**
@@ -99,5 +102,35 @@ public class Task {
      */
     public String getTaskType() {
         return "";
+    }
+
+    /**
+     * Sets the priority level of the task
+     * based on the parameter passed.
+     * @param level
+     */
+    public void setPriority(String level) {
+        try {
+            this.Priority = PriorityLevel.valueOf(level.trim());
+        } catch (IllegalArgumentException e) {
+            switch (level.trim()) {
+                case "3":
+                    this.Priority = PriorityLevel.HIGH;
+                    break;
+                case "2":
+                    this.Priority = PriorityLevel.MEDIUM;
+                    break;
+                case "1":
+                    this.Priority = PriorityLevel.LOW;
+                    break;
+                default:
+                    this.Priority = PriorityLevel.NIL;
+            }
+        }
+    }
+    
+    public PriorityLevel getPriority() {
+        return Priority;
+
     }
 }
