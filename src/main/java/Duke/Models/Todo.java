@@ -35,4 +35,11 @@ public class Todo extends Task {
     public String getTaskType() {
         return "T";
     }
+
+    @Override
+    public String getTaskInfo() {
+        String info = super.getTaskInfo();
+        info = info + " - with " + Priority + " priority";
+        return info;
+    }
 }

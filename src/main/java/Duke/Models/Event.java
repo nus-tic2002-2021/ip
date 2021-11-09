@@ -98,6 +98,7 @@ public class Event extends Task {
             }
         }
         info = info + ")";
+        info = info + " - with " + Priority + " priority";
         return info;
     }
 
