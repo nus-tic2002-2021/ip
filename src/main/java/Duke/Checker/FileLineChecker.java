@@ -14,7 +14,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean CheckTodoLine(String[] parts) {
-        if (parts.length != 3) {
+        if (parts.length != 4) {
             return false;
         } else if (parts[2].trim().equals("")) {
             return false;
@@ -31,7 +31,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean CheckDeadlineLine(String[] parts) {
-        if (parts.length != 4) {
+        if (parts.length != 5) {
             return false;
         } else if (parts[2].trim().equals("") || parts[3].trim().equals("")) {
             return false;
@@ -48,7 +48,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean CheckEventLine(String[] parts) {
-        if (parts.length != 4) {
+        if (parts.length != 5) {
             return false;
         } else if (parts[2].trim().equals("") || parts[3].trim().equals("")) {
             return false;
