@@ -26,10 +26,33 @@ public class Deadline extends Task {
     }
 }
 
+
+
+//Create
+//------------------------------------
 // edit the todo to be "todo borrow book"
-// user call "event project meeting at Mon 2-4pm
-//     Now you have 6 tasks in the list.
+//
 // probably can do a enum for the days
 //     Got it. I've added this task:
 //       [E][ ] project meeting (at: Mon 2-4pm)
 //     Now you have 7 tasks in the list.
+
+// Delete
+//-------------------------------------
+// allow to delete by description regex
+
+// Read
+// ------------------------------------
+// allow to save into txt file harddisk (LV7)
+// allow regex to search for current tasks
+
+// Error handle
+//-------------------------------------
+// todo
+// i see you want to make a todo, please add description
+
+
+
+// file reading
+// should read and pump the data into the site, welcome the user back
+// if no user, prompt for user

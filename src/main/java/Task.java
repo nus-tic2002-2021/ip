@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    };
+
     public String getDescription() { return this.description; }
 
     public String getType() { return this.type; }

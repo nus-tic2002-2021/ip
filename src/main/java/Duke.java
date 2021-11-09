@@ -1,11 +1,19 @@
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Duke {
+
     public static ArrayList<Task> storedTask = new ArrayList<Task>();
 
     public static void getList(){
@@ -50,7 +58,15 @@ public class Duke {
     public static void response(String sentence){
         switch (sentence) {
             case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
+                try{
+                    FileWriter writer = new FileWriter("data/duke.txt");
+                    BufferedWriter buffer = new BufferedWriter(writer);
+                    buffer.write("");
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                saveCurrentTasks();
+                System.out.println("Bye. Your session has been saved. Hope to see you again soon!");
                 break;
             case "hi":
                 System.out.println("Hello");
@@ -81,10 +97,80 @@ public class Duke {
         }
     }
 
+    public static void generateTasks(String[] line){
+        switch(line[0]){
+            case "T":
+                Task task = new Task(line[2]);
+                if(line[1].equals("1")){
+                    task.markDone();
+                }
+                storedTask.add(task);
+                break;
+            case "D":
+                Task deadline = new Deadline(line[2], line[3]);
+                if(line[1].equals("1")){
+                    deadline.markDone();
+                }
+                storedTask.add(deadline);
+                break;
+            case "E":
+                Task event = new Event(line[2], line[3], line[4]);
+                if(line[1].equals("1")){
+                    event.markDone();
+                }
+                storedTask.add(event);
+                break;
+            default: break;
+        }
+    }
+
+    public static void saveCurrentTasks() {
+        try{
+            FileWriter writer = new FileWriter("data/duke.txt", true);
+            BufferedWriter buffer = new BufferedWriter(writer);
+            for (int i = 0; i < storedTask.size(); i++) {
+                buffer.write(storedTask.get(i).getType() + "|");
+                buffer.write((storedTask.get(i).getStatusIcon().equals("X") ? "1" : "0") + "|");
+                buffer.write(storedTask.get(i).getDescription());
+                if(storedTask.get(i).getType().equals("D")){
+                    Deadline deadline =(Deadline) storedTask.get(i);
+                    buffer.write("|" + deadline.getBy());
+                }
+                if(storedTask.get(i).getType().equals("E")){
+                    Event event = (Event) storedTask.get(i);
+                    buffer.write("|" + event.getAt() + "|");
+                    buffer.write(event.getTime() + "|");
+                }
+                buffer.newLine();
+            }
+            buffer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         String line;
         String todo;
         String command;
+
+
+        try {
+            FileReader reader = new FileReader("data/duke.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String line2;
+            String[] strarray;
+            while ((line2 = bufferedReader.readLine()) != null) {
+                strarray = line2.split(Pattern.quote("|"));
+                generateTasks(strarray);
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println("Hello! I'm Duke\nWhat can I do for you today?");
         do {
             Scanner in = new Scanner(System.in);
