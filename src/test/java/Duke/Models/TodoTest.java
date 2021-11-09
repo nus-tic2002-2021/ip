@@ -28,11 +28,32 @@ public class TodoTest {
     }
 
     @Test
+    public void setPriorityTest() {
+        Test1.setPriority("2");
+        Test2.setPriority("random");
+        Test3.setPriority("HIGH");
+        assertEquals("MEDIUM", Test1.getPriority().toString());
+        assertEquals("NIL", Test2.getPriority().toString());
+        assertEquals("HIGH", Test3.getPriority().toString());
+    }
+
+    @Test
     public void getTaskInfoTest() {
-        assertEquals("[T][ ] Task 1", Test1.getTaskInfo());
-        assertEquals("[T][ ] Task 2", Test2.getTaskInfo());
-        assertEquals("[T][ ] Task 3", Test3.getTaskInfo());
+        assertEquals("[T][ ] Task 1 " +
+                "- with NIL priority", Test1.getTaskInfo());
+        Test1.setPriority("HIGH");
+        Test2.setPriority("0");
+        Test3.setPriority("LOW");
+        assertEquals("[T][ ] Task 1 " +
+                "- with HIGH priority", Test1.getTaskInfo());
+        assertEquals("[T][ ] Task 2 " +
+                "- with NIL priority", Test2.getTaskInfo());
+        assertEquals("[T][ ] Task 3 " +
+                "- with LOW priority", Test3.getTaskInfo());
+
         Test3.markCompleted();
-        assertEquals("[T][X] Task 3", Test3.getTaskInfo());
+        Test3.setPriority("");
+        assertEquals("[T][X] Task 3 " +
+                "- with NIL priority", Test3.getTaskInfo());
     }
 }

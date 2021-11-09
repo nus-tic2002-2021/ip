@@ -72,6 +72,14 @@ public class TaskTest {
     }
 
     @Test
+    public void setPriorityTest() {
+        Test1.setPriority("1");
+        Test2.setPriority("123");
+        assertEquals("LOW", Test1.getPriority().toString());
+        assertEquals("NIL", Test2.getPriority().toString());
+    }
+
+    @Test
     public void getTaskInfoTest() {
         assertEquals("[ ] Task 1", Test1.getTaskInfo());
         assertEquals("[ ] Task 2", Test2.getTaskInfo());

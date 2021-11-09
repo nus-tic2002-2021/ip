@@ -50,12 +50,31 @@ public class EventTest {
     }
 
     @Test
+    public void setPriorityTest() {
+        Test1.setPriority("3");
+        Test2.setPriority("1");
+        Test3.setPriority("MEDIUM");
+        assertEquals("HIGH", Test1.getPriority().toString());
+        assertEquals("LOW", Test2.getPriority().toString());
+        assertEquals("MEDIUM", Test3.getPriority().toString());
+    }
+
+    @Test
     public void getTaskInfoTest() {
-        assertEquals("[E][ ] Task 1 (at: School)", Test1.getTaskInfo());
-        assertEquals("[E][ ] Task 2 (at: Jun 15 2020)", Test2.getTaskInfo());
-        assertEquals("[E][ ] Task 3 (at: Nov 14 2021 23:59)", Test3.getTaskInfo());
+        assertEquals("[E][ ] Task 1 (at: School) " +
+                "- with NIL priority", Test1.getTaskInfo());
+        Test1.setPriority("2");
+        Test2.setPriority("testing");
+        Test3.setPriority("HIGH");
+        assertEquals("[E][ ] Task 1 (at: School) " +
+                "- with MEDIUM priority", Test1.getTaskInfo());
+        assertEquals("[E][ ] Task 2 (at: Jun 15 2020) " +
+                "- with NIL priority", Test2.getTaskInfo());
+        assertEquals("[E][ ] Task 3 (at: Nov 14 2021 23:59) " +
+                "- with HIGH priority", Test3.getTaskInfo());
         Test1.markCompleted();
-        assertEquals("[E][X] Task 1 (at: School)", Test1.getTaskInfo());
+        assertEquals("[E][X] Task 1 (at: School) " +
+                "- with MEDIUM priority", Test1.getTaskInfo());
     }
 }
 
