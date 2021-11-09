@@ -5,6 +5,7 @@ import Duke.Checker.FileLineChecker;
 import Duke.Checker.InputChecker;
 import Duke.TaskList;
 import Duke.Ui.Ui;
+import Duke.Duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -183,6 +184,7 @@ public class Parser {
         if (parts[1].trim().equals("1")) {
             TaskList.MarkTask(newTodo);
         }
+        newTodo.setPriority(parts[3]);
         return newTodo;
     }
 
@@ -220,6 +222,7 @@ public class Parser {
         if (parts[1].trim().equals("1")) {
             TaskList.MarkTask(newDeadline);
         }
+        newDeadline.setPriority(parts[4]);
         return newDeadline;
     }
 
@@ -257,6 +260,7 @@ public class Parser {
         if (parts[1].trim().equals("1")) {
             TaskList.MarkTask(newEvent);
         }
+        newEvent.setPriority(parts[4]);
         return newEvent;
     }
 
