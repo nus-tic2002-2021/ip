@@ -98,6 +98,17 @@ public class Parser {
     }
 
     /**
+     * Takes in a task object and request priority level of task from user.
+     * Set the priority level of the task object based on the input from user.
+     * @param newTask
+     */
+    public static void addPriorityToTask(Task newTask) {
+        Ui.requestPriorityLevel();
+        String level = Duke.getInput();
+        newTask.setPriority(level);
+    }
+
+    /**
      * If input contain valid information to identify a task in the list,
      * mark said task object as completed.
      * @param input
