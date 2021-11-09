@@ -92,4 +92,21 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! The index number of the task to delete is invalid!");
         }
     }
+
+    public static void printTaskWithDesc(String desc) {
+        int count = 0;
+        for (int i = 0; i < TaskList.size(); i++) {
+            Task currentTask = DukeList.get(i);
+            if (currentTask.getDescription().contains(desc)) {
+                if (count == 0) {
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                count++;
+                System.out.println(count + ". " + currentTask.getTaskInfo());
+            }
+        }
+        if (count == 0) {
+            System.out.println("There are no matching tasks in your list.");
+        }
+    }
 }
