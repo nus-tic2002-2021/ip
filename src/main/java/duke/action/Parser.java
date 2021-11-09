@@ -11,9 +11,7 @@ public class Parser {
     public String processUserCommand(String userInput){
         if (userInput.equals("bye")) {
             return "bye";
-        }
-
-        if (userInput.equals("list")) {
+        } else if (userInput.equals("list")) {
             return "list";
         } else if (userInput.startsWith("set")) {
             return "set";

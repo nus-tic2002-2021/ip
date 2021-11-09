@@ -38,7 +38,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTask(TaskList myList, int taskNumber) {
+    public static void msgAssignTask(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -60,7 +60,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTaskDeadlineTaskDate(TaskList myList, int taskNumber) {
+    public static void msgAssignTaskDeadlineTaskDate(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -85,7 +85,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTaskDeadlineTaskDateTaskTime(TaskList myList, int taskNumber) {
+    public static void msgAssignTaskDeadlineTaskDateTaskTime(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -112,7 +112,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTaskEventTaskDate(TaskList myList, int taskNumber) {
+    public static void msgAssignTaskEventTaskDate(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -137,7 +137,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTaskEventTaskDateTaskTimeStart(TaskList myList, int taskNumber) {
+    public static void msgAssignTaskEventTaskDateTaskTimeStart(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -163,7 +163,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(TaskList myList, int taskNumber) {
+    public static void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(TaskList myList, int taskNumber) {
 
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
@@ -189,7 +189,7 @@ public class Message {
     /**
      * Display message when task is saved
      */
-    public void msgSave() {
+    public static void msgSave() {
         System.out.println("    Progress Saved!");
         System.out.println("_________________________________");
     }
@@ -197,7 +197,7 @@ public class Message {
     /**
      * Display message when task is loaded
      */
-    public void msgSLoad() {
+    public static void msgSLoad() {
         System.out.println("    Progress loaded!");
         System.out.println("_________________________________");
     }
@@ -207,14 +207,14 @@ public class Message {
     /**
      * Display message to ask user which task they want to set priority
      */
-    public void msgAskUserSetTaskPriority() {
+    public static void msgAskUserSetTaskPriority() {
         System.out.println("    Which task do you want to set priority?");
     }
 
     /**
      * Display message to ask user what is the new priority
      */
-    public void msgAskUserWhatPriority() {
+    public static void msgAskUserWhatPriority() {
         System.out.println("    What is it's priority? choose 1 to 3");
         System.out.println("    1: Very urgent >>> 3: Chin Cai not that urgent");
     }
@@ -222,7 +222,7 @@ public class Message {
     /**
      * Display message to tell user that the new priority for a task is set successfully
      */
-    public void msgSetPriority(TaskList myList, int taskNumber) {
+    public static void msgSetPriority(TaskList myList, int taskNumber) {
         System.out.println("    Done! The new task priority is set");
         TaskPriority taskPriority = myList.getTaskPriority(taskNumber);
         String taskPriorityInString = TaskPriority.convertPriorityToString(taskPriority);
@@ -235,7 +235,7 @@ public class Message {
     /**
      * Display message to tell user that the term that the user try to find is not found
      */
-    public void msgInvalidFindTerm() {
+    public static void msgInvalidFindTerm() {
         System.out.println("    Sorry :(   Cannot find what you are looking for ~ ");
         System.out.println("_________________________________");
     }
@@ -243,7 +243,7 @@ public class Message {
     /**
      * Display message to show a list of task found based on the term
      */
-    public void msgTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
+    public static void msgTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
         System.out.println("    Here are the matching tasks in your list:");
         int index = 1;
         for (int i = 0; i < taskNumberContainingSearchTerm.size(); i++) {
@@ -263,7 +263,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgMarkDone(TaskList myList, int taskNumber) {
+    public static void msgMarkDone(TaskList myList, int taskNumber) {
         System.out.println("    Naisuuuu! This task is marked as done: ");
         msgBlankBeforeTaskDetail();
         msgTaskDetail(myList, taskNumber);
@@ -275,7 +275,7 @@ public class Message {
      *
      * @param myList TaskList that contains the list of task
      */
-    public void msgList(TaskList myList) {
+    public static void msgList(TaskList myList) {
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             System.out.print("    " + Integer.toString(i + 1) + ".");
             msgTaskDetail(myList, i);
@@ -286,14 +286,14 @@ public class Message {
     /**
      * Display blanks
      */
-    public void msgBlankBeforeTaskDetail() {
+    public static void msgBlankBeforeTaskDetail() {
         System.out.print("    ");
     }
 
     /**
      * Display dash lines separator
      */
-    public void msgDashLines() {
+    public static void msgDashLines() {
         System.out.println("_________________________________");
     }
 
@@ -303,7 +303,7 @@ public class Message {
      * @param myList     TaskList that contains the list of task
      * @param taskNumber Int that represents the task number
      */
-    public void msgTaskDetail(TaskList myList, int taskNumber) {
+    public static void msgTaskDetail(TaskList myList, int taskNumber) {
         TaskType taskType = myList.getTaskType(taskNumber);
         String taskTypeInString = TaskType.taskTypeToString(taskType);
 
@@ -368,7 +368,7 @@ public class Message {
     /**
      * Display message when a task is removed
      */
-    public void msgRemoveItem(TaskList myList, int taskNumber) {
+    public static void msgRemoveItem(TaskList myList, int taskNumber) {
 
         System.out.println("    Noted. I've removed this task:");
         msgBlankBeforeTaskDetail();
@@ -392,7 +392,7 @@ public class Message {
     /**
      * Display message that remind user about invalid input
      */
-    public void msgInvalidInput() {
+    public static void msgInvalidInput() {
         System.out.println("    Sorry :(   Invalid Input. Try Again ~ ");
         System.out.println("_________________________________");
     }
@@ -401,7 +401,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Description of the task is missing
      */
-    public void msgInvalidInputMissingDescription() {
+    public static void msgInvalidInputMissingDescription() {
         System.out.println("    ☹  OOPS!!! The description cannot be empty.");
         System.out.println("_________________________________");
     }
@@ -410,7 +410,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Date of the task is missing
      */
-    public void msgInvalidInputMissingDay() {
+    public static void msgInvalidInputMissingDay() {
         System.out.println("    ☹  OOPS!!! The day cannot be empty.");
         System.out.println("_________________________________");
     }
@@ -419,7 +419,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Time of the task is missing
      */
-    public void msgInvalidInputMissingTime() {
+    public static void msgInvalidInputMissingTime() {
         System.out.println("    ☹  OOPS!!! The time cannot be empty.");
         System.out.println("_________________________________");
     }
@@ -428,7 +428,7 @@ public class Message {
      * Display message that remind user about invalid input
      * The task number is not found
      */
-    public void msgInvalidTaskNumber() {
+    public static void msgInvalidTaskNumber() {
         System.out.println("    ☹  OOPS!!! The task number is invalid.");
         System.out.println("_________________________________");
     }
@@ -437,7 +437,7 @@ public class Message {
      * Display message that remind user about invalid input
      * The priority is invalid
      */
-    public void msgInvalidPriority() {
+    public static void msgInvalidPriority() {
         System.out.println("    ☹  OOPS!!! The priority is invalid. Choose 1, 2 or 3");
         System.out.println("_________________________________");
     }
@@ -446,7 +446,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Format of the date is unaccepted
      */
-    public void msgInvalidInputWrongDateTimeFormat() {
+    public static void msgInvalidInputWrongDateTimeFormat() {
         System.out.println("    ☹  OOPS!!! Please follow this format:");
         System.out.println("    /by yyyy-mm-dd hh:mm");
         System.out.println("_________________________________");
@@ -456,7 +456,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Format of the date and time is unaccepted
      */
-    public void msgInvalidInputWrongDateTimeStartEndFormat() {
+    public static void msgInvalidInputWrongDateTimeStartEndFormat() {
         System.out.println("    ☹  OOPS!!! Please follow this format:");
         System.out.println("    /at yyyy-mm-dd hh:mm hh:mm:");
         System.out.println("_________________________________");
@@ -466,7 +466,7 @@ public class Message {
      * Display message that remind user about invalid input
      * Start time should be before End time
      */
-    public void msgInvalidInputTimeStartLaterThanTimeEnd() {
+    public static void msgInvalidInputTimeStartLaterThanTimeEnd() {
         System.out.println("    ☹  OOPS!!! Event start time cannot be later than end time!");
         System.out.println("_________________________________");
     }
@@ -485,7 +485,7 @@ public class Message {
     /**
      * Display Buddah.txt
      */
-    private void msgBuddhaProtectMe() throws IOException {
+    private static void msgBuddhaProtectMe() throws IOException {
         String everything = "";
 
         // ... \Duke\src\main\resources\buddha.txt

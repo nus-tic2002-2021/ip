@@ -1,3 +1,8 @@
+T|0|borrow book|
+T|1|borrow book|
+T|0|borrow book|
+T|0|borrow book|
+E|1|project meeting |
 E|0|project meeting |
-E|0|project meeting |
-E|0|project meeting |
+D|0|return book |
+D|0|return book |

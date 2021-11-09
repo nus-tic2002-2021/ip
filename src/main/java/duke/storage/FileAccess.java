@@ -23,11 +23,11 @@ public class FileAccess {
 
     /**
      * Constructor
+     * @param filepath
      */
-    public FileAccess() {
-        filepath = "src\\resources\\progress.txt";
-        progressFile = new File(filepath);
-        ui = new Message();
+    public FileAccess(String filepath) {
+        this.filepath = filepath;
+        progressFile = new File(this.filepath);
     }
 
     /**
@@ -42,9 +42,9 @@ public class FileAccess {
             FileWriter fw = new FileWriter(filepath);
             fw.write(stringToBeWritten);
             fw.close();
-            ui.msgSave();
+            Message.msgSave();
         } catch (Exception e) {
-            ui.msgError(e);
+            Message.msgError(e);
         }
     }
 
@@ -63,7 +63,7 @@ public class FileAccess {
             }
 
         } catch (Exception e) {
-            ui.msgError(e);
+            Message.msgError(e);
         }
 
         return sb.toString();
@@ -87,9 +87,9 @@ public class FileAccess {
             FileWriter fw = new FileWriter(filepath);
             fw.write("helloWold");
             fw.close();
-            ui.msgSave();
+            Message.msgSave();
         } catch (Exception e) {
-            ui.msgError(e);
+            Message.msgError(e);
         }
     }
 }

@@ -1,58 +1,80 @@
 package duke;
 
 import duke.action.Parser;
+import duke.command.Command;
+import duke.storage.FileAccess;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Scanner;
+
 public class RunDuke {
 
-    private static Parser parser = new Parser();
+    private static TaskList myList;
+    private static Ui ui;
+    private static FileAccess fileAccess;
+    private static Parser parser;
+    private static Command cmd;
+    private static Scanner in;
 
-    public static void run(TaskList myList, Ui ui) {
+
+    public RunDuke(TaskList myList, Ui ui, FileAccess fileAccess) {
+        this.myList = myList;
+        this.ui = ui;
+        this.fileAccess = fileAccess;
+        parser = new Parser();
+        cmd = new Command(parser);
+        in = new Scanner(System.in);
+    }
+
+    public void run() {
 
         boolean isDukeRunning = true;
 
         while (isDukeRunning) {
-            String userInput = ui.requestUserInput();
-            String command = parser.processUserCommand(userInput);
-            processCommand(command);
+            String userInput = ui.requestUserInput(in);
+            String userCommand = parser.processUserCommand(userInput);
+            isDukeRunning = canProcessCommand(userCommand, userInput);
         }
-
     }
 
-    private void processCommand(String command) {
-        switch (command) {
+    private static boolean canProcessCommand(String userCommand, String userInput) {
+        switch (userCommand) {
+        case "bye":
+            return  false;
         case "list":
-            showFullList(myList);
-            break;
+            cmd.showFullList(myList);
+            return true;
         case "set":
-            toSetPriorityTask(myList, line);
-            break;
-            case ""
+            cmd.setPriorityTask(myList);
+            return true;
+        case "done":
+            cmd.markTaskDone(myList, userInput);
+            return true;
         case "todo":
-            run();
-            break;
+            cmd.addTaskToDo(myList, userInput);
+            return true;
         case "save":
-            run();
-            break;
+            cmd.saveTask(myList, fileAccess);
+            return true;
         case "load":
-            run();
-            break;
+            // loadTask(myList); todo
+            return true;
         case "find":
-            run();
-            break;
+            cmd.findTask(myList, userInput);
+            return true;
         case "event":
-            run();
-            break;
+            cmd.addTaskEvent(myList, userInput);
+            return true;
         case "delete":
-            run();
-            break;
+            cmd.deleteTask(myList, userInput);
+            return true;
         case "deadline":
-            run();
-            break;
-        default
-            run();
-            break;
+            cmd.addTaskDeadline(myList, userInput);
+            return true;
+        default:
+            cmd.showInvalidCommand(); // todo
+            return true;
         }
     }
 

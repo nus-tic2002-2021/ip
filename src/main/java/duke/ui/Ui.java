@@ -17,14 +17,16 @@ public class Ui {
 
     }
 
-    public String requestUserInput(){
+    public String requestUserInput(Scanner in){
 
-        String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        in.close();
-        return  line;
+        String userInput = "";
 
+        try {
+            System.out.print(">> ");
+            userInput = in.nextLine();
+        } catch (Exception e) {
+            Message.msgError(e);
+        }
+        return userInput;
     }
-
 }

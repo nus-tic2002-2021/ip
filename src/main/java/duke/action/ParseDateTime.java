@@ -7,9 +7,6 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
-import duke.ui.Message;
-import duke.ui.Ui;
-
 /**
  * Handle date and time related functions
  * <p>
@@ -22,8 +19,6 @@ import duke.ui.Ui;
  */
 
 public class ParseDateTime {
-
-    private static Ui ui = new Message();
 
     /**
      * Convert date from String to LocalDate
@@ -126,7 +121,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String Time
      */
-    public static String toExtracTimeFromSplitDateAndTime(String[] split) {
+    public static String toExtractTimeFromSplitDateAndTime(String[] split) {
         return split[1];
     }
 
@@ -136,7 +131,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String TimeStart
      */
-    public static String toExtracTimeStartFromSplitDateAndTime(String[] split) {
+    public static String toExtractTimeStartFromSplitDateAndTime(String[] split) {
         return split[1];
     }
 
@@ -146,7 +141,7 @@ public class ParseDateTime {
      * @param split string array of date and time
      * @return String TimeEnd
      */
-    public static String toExtracTimeEndFromSplitDateAndTime(String[] split) {
+    public static String toExtractTimeEndFromSplitDateAndTime(String[] split) {
         return split[2];
     }
 }

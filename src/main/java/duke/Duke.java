@@ -1,9 +1,7 @@
 package duke;
 
-import duke.action.ParserFacade;
 import duke.storage.FileAccess;
 import duke.task.TaskList;
-import duke.ui.Message;
 import duke.ui.Ui;
 
 /**
@@ -22,12 +20,17 @@ public class Duke {
     public Duke(String filepath){
         ui = new Ui();
         fileAccess = new FileAccess(filepath);
+        myList = new TaskList();
         // todo try load task here
     }
 
     public void initialize(){
         StartDuke.run();
-        RunDuke.run(myList, ui);
+        new RunDuke(myList, ui, fileAccess).run();
+
+    }
+
+    public void end(){
         EndDuke.run();
     }
 
@@ -37,5 +40,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("src\\resources\\progress.txt");
         duke.initialize();
+        duke.end();
     }
 }
