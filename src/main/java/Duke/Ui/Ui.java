@@ -42,7 +42,15 @@ public class Ui {
      * @param newTask
      */
     public static void PrintTaskAdded(Task newTask) {
+        System.out.println(line);
         System.out.println("Got it. I've added this task:\n"
                 + newTask.getTaskInfo());
+    }
+
+    public static void requestPriorityLevel() {
+        System.out.println("What is the priority level of this task?" +
+                "\n(enter 1 - LOW priority, 2 - MEDIUM priority, 3 - HIGH priority." +
+                "\nOther inputs will assume task has NIL priority level.)");
+        System.out.println(line);
     }
 }
