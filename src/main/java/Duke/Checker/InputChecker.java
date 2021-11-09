@@ -113,4 +113,12 @@ public class InputChecker {
             return true;
         }
     }
+
+    public static boolean checkValidFind(String[] parts) throws DukeException {
+        if (parts.length != 2) {
+            throw new DukeException("☹ OOPS!!! The keyword to find is missing.");
+        } else {
+            return true;
+        }
+    }
 }
