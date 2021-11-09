@@ -117,6 +117,9 @@ public class Storage {
 
         if (initial.equals("D") || initial.equals("E"))
         newLine = newLine + divider + targetTask.getAdditionalInfo();
+
+        newLine = newLine + divider + targetTask.getPriority();
+
         return newLine;
     }
 }
