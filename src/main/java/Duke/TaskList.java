@@ -97,7 +97,7 @@ public class TaskList {
         int count = 0;
         for (int i = 0; i < TaskList.size(); i++) {
             Task currentTask = DukeList.get(i);
-            if (currentTask.getDescription().contains(desc)) {
+            if (currentTask.getDescription().toLowerCase().contains(desc.toLowerCase())) {
                 if (count == 0) {
                     System.out.println("Here are the matching tasks in your list:");
                 }
