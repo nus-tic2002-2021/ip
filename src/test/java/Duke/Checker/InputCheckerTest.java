@@ -31,4 +31,12 @@ public class InputCheckerTest {
         assertThrows(DukeException.class, () -> CheckValidEvent("event birthday /at"));
         assertThrows(DukeException.class, () -> CheckValidEvent("event /at home"));
     }
+
+    @Test
+    public void checkValidFindTest() throws DukeException {
+        assertEquals(true, checkValidFind(new String[]{"find","task"}));
+        assertThrows(DukeException.class, () -> checkValidFind(new String[]{"find"}));
+        assertThrows(DukeException.class, () -> checkValidFind(new String[]{}));
+
+    }
 }
