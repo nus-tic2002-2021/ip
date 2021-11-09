@@ -24,7 +24,7 @@ import duke.ui.Ui;
  * @since 2021-09-01
  */
 
-public class Parser {
+public class ParserOld {
 
     private FileAccess fileAccess;
     private Ui uiMessage;
@@ -32,7 +32,7 @@ public class Parser {
     /**
      * Constructor
      */
-    public Parser(FileAccess fileAccess) {
+    public ParserOld(FileAccess fileAccess) {
         this.fileAccess = fileAccess;
         uiMessage = new Message();
     }

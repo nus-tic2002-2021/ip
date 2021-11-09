@@ -1,6 +1,10 @@
 package duke;
 
 import duke.action.ParserFacade;
+import duke.storage.FileAccess;
+import duke.task.TaskList;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 /**
  * Begin the program here.
@@ -11,15 +15,27 @@ import duke.action.ParserFacade;
  */
 public class Duke {
 
+    private FileAccess fileAccess;
+    private TaskList myList;
+    private Ui ui;
+
+    public Duke(String filepath){
+        ui = new Ui();
+        fileAccess = new FileAccess(filepath);
+        // todo try load task here
+    }
+
+    public void initialize(){
+        StartDuke.run();
+        RunDuke.run(myList, ui);
+        EndDuke.run();
+    }
+
     /**
      * Starting point of the program
      */
     public static void main(String[] args) {
-
-        ParserFacade parserFacade = new ParserFacade();
-
-        parserFacade.startDuke();
-        parserFacade.runDuke();
-        parserFacade.endDuke();
+        Duke duke = new Duke("src\\resources\\progress.txt");
+        duke.initialize();
     }
 }

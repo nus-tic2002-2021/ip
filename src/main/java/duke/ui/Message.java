@@ -19,11 +19,10 @@ import duke.task.TaskType;
  * @since 2021-09-01
  */
 
-public class Message implements Ui {
+public class Message {
 
     // Starting Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    @Override
-    public void msgGreet() {
+    public static void msgGreet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
@@ -385,7 +384,7 @@ public class Message implements Ui {
      *
      * @param e Exception error
      */
-    public void msgError(Exception e) {
+    public static void msgError(Exception e) {
         System.out.println("Error Occurs: " + e);
         System.out.println("_________________________________");
     }
@@ -477,7 +476,7 @@ public class Message implements Ui {
     /**
      * Display message before the end of program
      */
-    public void msgBye() throws IOException {
+    public static void msgBye() throws IOException {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("_________________________________");
         msgBuddhaProtectMe();
@@ -486,7 +485,7 @@ public class Message implements Ui {
     /**
      * Display Buddah.txt
      */
-    public void msgBuddhaProtectMe() throws IOException {
+    private void msgBuddhaProtectMe() throws IOException {
         String everything = "";
 
         // ... \Duke\src\main\resources\buddha.txt

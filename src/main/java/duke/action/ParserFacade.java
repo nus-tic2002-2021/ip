@@ -12,21 +12,21 @@ import duke.storage.FileAccess;
 public class ParserFacade {
 
     private FileAccess fileAccess;
-    private Parser parser;
+    private ParserOld parserOld;
 
     /**
      * Constructor
      */
     public ParserFacade() {
         fileAccess = new FileAccess();
-        parser = new Parser(fileAccess);
+        parserOld = new ParserOld(fileAccess);
     }
 
     /**
      * Initialize the Duke Program.
      */
     public void startDuke() {
-        parser.showGreetMessage();
+        parserOld.showGreetMessage();
     }
 
 
@@ -34,14 +34,14 @@ public class ParserFacade {
      * Run the Duke Program
      */
     public void runDuke() {
-        parser.onCreateDuke();
+        parserOld.onCreateDuke();
     }
 
     /**
      * End the Duke Program
      */
     public void endDuke() {
-        parser.showByeMessage();
+        parserOld.showByeMessage();
     }
 
     /**
@@ -58,7 +58,7 @@ public class ParserFacade {
      *
      * @return Parser
      */
-    public Parser getDukeObject() {
-        return parser;
+    public ParserOld getDukeObject() {
+        return parserOld;
     }
 }
