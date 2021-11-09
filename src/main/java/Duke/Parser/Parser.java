@@ -35,6 +35,8 @@ public class Parser {
             MarkDone(input);
         } else if (input.startsWith("delete ")) {
             DeleteTask(input);
+        } else if (input.startsWith("find ")) {
+            findTask(input);
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
