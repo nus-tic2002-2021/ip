@@ -51,6 +51,7 @@ public class Parser {
                 String newTask = input.substring(4).trim();
                 Todo newTodo = new Todo(newTask);
                 TaskList.addTaskToList(newTodo);
+                addPriorityToTask(newTodo);
                 Ui.PrintTaskAdded(newTodo);
                 Ui.PrintTaskCount();
             }
@@ -70,6 +71,7 @@ public class Parser {
             if (InputChecker.CheckValidDeadline(input)) {
                 Deadline newDeadline = buildDeadline(input);
                 TaskList.addTaskToList(newDeadline);
+                addPriorityToTask(newDeadline);
                 Ui.PrintTaskAdded(newDeadline);
                 Ui.PrintTaskCount();
             }
@@ -89,6 +91,7 @@ public class Parser {
             if (InputChecker.CheckValidEvent(input)) {
                 Event newEvent = buildEvent(input);
                 TaskList.addTaskToList(newEvent);
+                addPriorityToTask(newEvent);
                 Ui.PrintTaskAdded(newEvent);
                 Ui.PrintTaskCount();
             }
