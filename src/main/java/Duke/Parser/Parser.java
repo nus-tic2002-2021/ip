@@ -418,5 +418,16 @@ public class Parser {
         return newEvent;
     }
 
+    public static void findTask(String input) {
+        String[] parts = input.split(" ");
+        try {
+            if (InputChecker.checkValidFind(parts)) {
+                TaskList.printTaskWithDesc(parts[1]);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
 }
 
