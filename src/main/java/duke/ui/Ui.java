@@ -17,13 +17,13 @@ public class Ui {
 
     }
 
-    public String requestUserInput(Scanner in){
+    public String requestUserInput(Scanner scanner){
 
         String userInput = "";
 
         try {
-            System.out.print(">> ");
-            userInput = in.nextLine();
+            Message.msgArrowHead();
+            userInput = scanner.nextLine();
         } catch (Exception e) {
             Message.msgError(e);
         }

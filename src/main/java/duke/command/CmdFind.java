@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.ui.Message;
+import duke.ui.MsgTaskDetail;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -29,7 +30,8 @@ public class CmdFind {
             return;
         }
 
-        Message.msgTaskFound(myList, taskNumberContainingSearchTerm);
+        Message.msgTaskFoundOpeningMsg();
+        showTaskFound(myList, taskNumberContainingSearchTerm);
     }
 
     private static boolean hasStringContain(String sourceString, String searchString) {
@@ -37,5 +39,19 @@ public class CmdFind {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(sourceString);
         return m.find();
+    }
+
+    /**
+     * Display message to show a list of task found based on the term
+     */
+    private static void showTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
+        int index = 1;
+        for (int i = 0; i < taskNumberContainingSearchTerm.size(); i++) {
+            int taskNumber = taskNumberContainingSearchTerm.get(i);
+            Message.msgBlankBeforeTaskDetail();
+            Message.msgShowBracketWithIndex(index);
+            new MsgTaskDetail(myList, taskNumber).showTaskDetail();
+            index++;
+        }
     }
 }

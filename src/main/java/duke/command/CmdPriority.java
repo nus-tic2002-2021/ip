@@ -16,20 +16,17 @@ public class CmdPriority {
      *
      * @param myList TaskList that contains the list of task
      */
-    public static void run(TaskList myList) {
+    public static void run(TaskList myList, Scanner scanner) {
         boolean isTaskNumberValid = false;
         String userInputTaskNumber = "";
 
         boolean isPriorityNumberValid = false;
         String userInputNewPriorityNumber = "";
 
-        // todo this one go back to ui
-
-        Scanner in = new Scanner(System.in);
-
         while (isTaskNumberValid == false) {
             Message.msgAskUserSetTaskPriority();
-            userInputTaskNumber = in.nextLine();
+            Message.msgArrowHead();
+            userInputTaskNumber = scanner.nextLine();
             isTaskNumberValid = hasValidTaskNumber(myList, userInputTaskNumber);
         }
 
@@ -38,7 +35,7 @@ public class CmdPriority {
 
         while (isPriorityNumberValid == false) {
             Message.msgAskUserWhatPriority();
-            userInputNewPriorityNumber = in.nextLine();
+            userInputNewPriorityNumber = scanner.nextLine();
             isPriorityNumberValid = hasValidPriorityNumber(userInputNewPriorityNumber);
         }
 
@@ -96,11 +93,17 @@ public class CmdPriority {
      * -- Update the task with new priority
      *
      * @param myList       TaskList that contains the list of task
-     * @param taskNumber   int that indicates the task number
+     * @param taskIndex   int that indicates the task number
      * @param taskPriority TaskPriority(new one) that want to be set
      */
-    private static void toUpdatePriority(TaskList myList, int taskNumber, TaskPriority taskPriority) {
-        myList.setTaskPriority(taskNumber, taskPriority);
-        Message.msgSetPriority(myList, taskNumber); //
+    private static void toUpdatePriority(TaskList myList, int taskIndex, TaskPriority taskPriority) {
+        myList.setTaskPriority(taskIndex, taskPriority);
+        String taskPriorityInString = getTaskPriority_InString(myList, taskIndex);
+        Message.msgSetPriority(taskIndex + 1, taskPriorityInString);
+    }
+
+    private static String getTaskPriority_InString(TaskList myList, int taskIndex){
+        TaskPriority taskPriority = myList.getTaskPriority(taskIndex);
+        return TaskPriority.convertPriorityToString(taskPriority);
     }
 }

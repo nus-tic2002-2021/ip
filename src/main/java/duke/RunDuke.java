@@ -15,7 +15,7 @@ public class RunDuke {
     private static FileAccess fileAccess;
     private static Parser parser;
     private static Command cmd;
-    private static Scanner in;
+    private static Scanner scanner;
 
 
     public RunDuke(TaskList myList, Ui ui, FileAccess fileAccess) {
@@ -24,7 +24,7 @@ public class RunDuke {
         this.fileAccess = fileAccess;
         parser = new Parser();
         cmd = new Command(parser);
-        in = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     public void run() {
@@ -32,8 +32,9 @@ public class RunDuke {
         boolean isDukeRunning = true;
 
         while (isDukeRunning) {
-            String userInput = ui.requestUserInput(in);
+            String userInput = ui.requestUserInput(scanner);
             String userCommand = parser.processUserCommand(userInput);
+            System.out.println(userCommand);
             isDukeRunning = canProcessCommand(userCommand, userInput);
         }
     }
@@ -46,7 +47,7 @@ public class RunDuke {
             cmd.showFullList(myList);
             return true;
         case "set":
-            cmd.setPriorityTask(myList);
+            cmd.setPriorityTask(myList, scanner);
             return true;
         case "done":
             cmd.markTaskDone(myList, userInput);

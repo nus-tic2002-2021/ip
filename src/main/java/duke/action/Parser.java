@@ -1,39 +1,57 @@
 package duke.action;
 
-import duke.ui.Message;
-
 public class Parser {
 
-    public Parser (){
+    public Parser() {
 
     }
 
-    public String processUserCommand(String userInput){
+    public String processUserCommand(String userInput) {
+
         if (userInput.equals("bye")) {
             return "bye";
-        } else if (userInput.equals("list")) {
+        }
+
+        if (userInput.equals("list")) {
             return "list";
-        } else if (userInput.startsWith("set")) {
+        }
+
+        if (userInput.equals("set")){
             return "set";
-        } else if (userInput.startsWith("done")) {
+        }
+
+        String userInputStartWith = getFirstWord(userInput);
+
+        switch (userInputStartWith) {
+        case "done":
             return "done";
-        } else if (userInput.startsWith("todo")) {
+        case "todo":
             return "todo";
-        } else if (userInput.startsWith("save")) {
+        case "save":
             return "save";
-        } else if (userInput.startsWith("load")) {
+        case "load":
             return "load";
-        } else if (userInput.startsWith("find")) {
+        case "find":
             return "find";
-        } else if (userInput.startsWith("event")) {
+        case "event":
             return "event";
-        } else if (userInput.startsWith("delete")) {
+        case "delete":
             return "delete";
-        } else if (userInput.startsWith("deadline")) {
+        case "deadline":
             return "deadline";
-        } else {
+        default:
             return "invalid";
         }
     }
 
+    private String getFirstWord(String firstWord) {
+
+        int index = firstWord.indexOf(' ');
+
+        if (index > -1) {
+            return firstWord.substring(0, index).trim();
+        } else {
+            return "invalid";
+        }
+    }
 }

@@ -8,6 +8,7 @@ import duke.task.TaskType;
 import duke.ui.Message;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,16 +37,17 @@ public class Command {
      * -- Ask user what is the new priority
      * -- Update the task with new priority
      *
-     * @param myList TaskList that contains the list of task
+     * @param myList  TaskList that contains the list of task
+     * @param scanner Scanner for user input
      */
-    public void setPriorityTask(TaskList myList) {
-        CmdPriority.run(myList);
+    public void setPriorityTask(TaskList myList, Scanner scanner) {
+        CmdPriority.run(myList, scanner);
     }
 
     /**
      * Mark a task as done
      *
-     * @param myList TaskList that contains the list of task
+     * @param myList    TaskList that contains the list of task
      * @param userInput String that the user type
      */
     public void markTaskDone(TaskList myList, String userInput) {
@@ -55,7 +57,7 @@ public class Command {
     /**
      * Add a task of ToDo type into the list of task
      *
-     * @param myList TaskList that contains the list of task
+     * @param myList    TaskList that contains the list of task
      * @param userInput String that the user type
      */
     public void addTaskToDo(TaskList myList, String userInput) {
@@ -77,7 +79,7 @@ public class Command {
      * @param myList TaskList that contains the list of task
      */
     public void findTask(TaskList myList, String userInput) {
-        CmdFind.run(myList,userInput);
+        CmdFind.run(myList, userInput);
     }
 
     /**
@@ -86,8 +88,8 @@ public class Command {
      * Identify the task date and time that the user input
      * Calls for respective AddTaskEvent_XXX to create a task object in TaskList afterwards
      *
-     * @param myList TaskList that contains the list of task
-     * @param userInput   String that the user type
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String that the user type
      */
     public void addTaskEvent(TaskList myList, String userInput) {
         CmdAddTask.addTaskEvent(myList, userInput);
@@ -96,11 +98,11 @@ public class Command {
     /**
      * Delete a task from the user task
      *
-     * @param myList TaskList that contains the list of task
-     * @param userInput   String that represents the user input
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String that represents the user input
      */
     public void deleteTask(TaskList myList, String userInput) {
-        CmdDelete.run(myList,userInput);
+        CmdDelete.run(myList, userInput);
     }
 
     /**
@@ -109,14 +111,14 @@ public class Command {
      * Identify the task date and time that the user input
      * Calls for respective AddTaskEvent_XXX to create a task object in TaskList afterwards
      *
-     * @param myList TaskList that contains the list of task
-     * @param userInput   String that represents the user input
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String that represents the user input
      */
     public void addTaskDeadline(TaskList myList, String userInput) {
-        CmdAddTask.addTaskDeadline(myList,userInput);
+        CmdAddTask.addTaskDeadline(myList, userInput);
     }
 
-    public void showInvalidCommand(){
+    public void showInvalidCommand() {
         Message.msgInvalidInput();
     }
 }

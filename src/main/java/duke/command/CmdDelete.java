@@ -7,9 +7,10 @@ public class CmdDelete {
 
     public static void run(TaskList myList, String userInput) {
         try {
-            int taskNumber = Integer.parseInt(userInput.substring(7));
-            Message.msgRemoveItem(myList, taskNumber - 1);
-            myList.removeItem(taskNumber - 1);
+            int taskIndex = Integer.parseInt(userInput.substring(7)) - 1;
+            int numOfTaskAfterDelete = myList.getNumOfItem() - 1;
+            Message.msgRemoveItem(myList, taskIndex, numOfTaskAfterDelete);
+            myList.removeItem(taskIndex);
         } catch (Exception e) {
             Message.msgInvalidTaskNumber();
         }

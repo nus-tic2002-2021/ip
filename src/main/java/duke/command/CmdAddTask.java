@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.action.ParseDateTime;
 import duke.task.TaskList;
+import duke.task.TaskType;
 import duke.ui.Message;
 
 import java.time.LocalDate;
@@ -9,16 +10,25 @@ import java.time.LocalTime;
 
 public class CmdAddTask {
 
-    public static void addTaskToDo(TaskList myList, String userInput){
+    public static void addTaskToDo(TaskList myList, String userInput) {
+
         if (userInput.length() <= 5) {
             Message.msgInvalidInputMissingDescription();
-        } else {
-            myList.addItemToDos(userInput.substring(5));
-            Message.msgAssignTask(myList, myList.getNumOfItem() - 1);
+            return;
         }
+
+        myList.addItemToDos(userInput.substring(5));
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String taskDetail = getTaskDetail(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+
+        Message.msgAssignTaskToDo(taskTypeInString, isDoneInString, taskDetail, numOfItem);
     }
 
-    public static void addTaskEvent(TaskList myList, String userInput){
+    public static void addTaskEvent(TaskList myList, String userInput) {
         if (userInput.length() <= 6) {
             Message.msgInvalidInputMissingDescription();
             return;
@@ -55,7 +65,7 @@ public class CmdAddTask {
         }
     }
 
-    public static void addTaskDeadline(TaskList myList, String userInput){
+    public static void addTaskDeadline(TaskList myList, String userInput) {
         if (userInput.length() <= 9) {
             Message.msgInvalidInputMissingDescription();
             return;
@@ -105,7 +115,15 @@ public class CmdAddTask {
         }
 
         myList.addItemEvent(taskDetail, taskDate);
-        Message.msgAssignTaskEventTaskDate(myList, myList.getNumOfItem() - 1);
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+
+        Message.msgAssignTaskEventTaskDate(taskTypeInString, isDoneInString,
+                taskDetail, dateInString, numOfItem);
     }
 
     /**
@@ -117,7 +135,7 @@ public class CmdAddTask {
      * @param timeStart  String that represents the start time of the event
      */
     private static void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
-                                                    String date, String timeStart) {
+                                                           String date, String timeStart) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -133,7 +151,16 @@ public class CmdAddTask {
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart);
-        Message.msgAssignTaskEventTaskDateTaskTimeStart(myList, myList.getNumOfItem() - 1);
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+        String getTimeStartInString = getTaskEvent_TimeStart_InString(myList, lastTaskIndex);
+
+        Message.msgAssignTaskEventTaskDateTaskTimeStart(taskTypeInString, isDoneInString,
+                taskDetail, dateInString, getTimeStartInString, numOfItem);
     }
 
     /**
@@ -146,7 +173,7 @@ public class CmdAddTask {
      * @param timeEnd    String that represents the end time of the event
      */
     private static void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
-                                                    String date, String timeStart, String timeEnd) {
+                                                           String date, String timeStart, String timeEnd) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -168,7 +195,17 @@ public class CmdAddTask {
         }
 
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd);
-        Message.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(myList, myList.getNumOfItem() - 1);
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
+        String getTimeStartInString = getTaskEvent_TimeStart_InString(myList, lastTaskIndex);
+        String getTimeEndInString = getTaskEvent_TimeEnd_InString(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+
+        Message.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(taskTypeInString, isDoneInString,
+                taskDetail, dateInString, getTimeStartInString, getTimeEndInString, numOfItem);
     }
 
     /**
@@ -187,7 +224,14 @@ public class CmdAddTask {
         }
 
         myList.addItemDeadline(taskDetail, taskDate);
-        Message.msgAssignTaskDeadlineTaskDate(myList, myList.getNumOfItem() - 1);
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String dateInString = getTaskDeadline_Date_InString(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+
+        Message.msgAssignTaskDeadlineTaskDate(taskTypeInString, isDoneInString, taskDetail, dateInString, numOfItem);
     }
 
     /**
@@ -199,7 +243,7 @@ public class CmdAddTask {
      * @param time       String that represents the time of the deadline
      */
     private static void toAddTaskDeadline_localDate_localTime(TaskList myList, String taskDetail,
-                                                       String date, String time) {
+                                                              String date, String time) {
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTime = ParseDateTime.toTime(time);
@@ -215,6 +259,48 @@ public class CmdAddTask {
         }
 
         myList.addItemDeadline(taskDetail, taskDate, taskTime);
-        Message.msgAssignTaskDeadlineTaskDateTaskTime(myList, myList.getNumOfItem() - 1);
+
+        int lastTaskIndex = myList.getNumOfItem() - 1;
+        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
+        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String dateInString = getTaskDeadline_Date_InString(myList, lastTaskIndex);
+        String timeInString = getTaskDeadline_Time_InString(myList, lastTaskIndex);
+        int numOfItem = lastTaskIndex + 1;
+
+        Message.msgAssignTaskDeadlineTaskDateTaskTime(taskTypeInString, isDoneInString, taskDetail, dateInString, timeInString, numOfItem);
+    }
+
+    private static String getTaskType_InString(TaskList myList, int taskIndex) {
+        TaskType taskType = myList.getTaskType(taskIndex);
+        return TaskType.taskTypeToString(taskType);
+    }
+
+    private static String getIsDone_InString(TaskList myList, int taskIndex) {
+        boolean isDone = myList.getTaskDoneStatus(taskIndex);
+        return (isDone ? "X" : " ");
+    }
+
+    private static String getTaskDetail(TaskList myList, int taskIndex) {
+        return myList.getTaskDetail(taskIndex);
+    }
+
+    private static String getTaskEvent_Date_InString(TaskList myList, int taskIndex) {
+        return myList.getTaskEventTaskDateInString(taskIndex);
+    }
+
+    private static String getTaskEvent_TimeStart_InString(TaskList myList, int taskIndex){
+        return myList.getTaskEventTaskTimeStartInString(taskIndex);
+    }
+
+    private static String getTaskEvent_TimeEnd_InString (TaskList myList, int taskIndex){
+        return myList.getTaskEventTaskTimeEndInString(taskIndex);
+    }
+
+    private static String getTaskDeadline_Date_InString(TaskList myList, int taskIndex){
+        return myList.getTaskDeadLineTaskDateInString(taskIndex);
+    }
+
+    private static String getTaskDeadline_Time_InString(TaskList myList, int taskIndex){
+        return myList.getTaskDeadLineTaskTimeInString(taskIndex);
     }
 }

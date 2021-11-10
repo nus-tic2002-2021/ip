@@ -5,11 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import duke.task.TaskList;
-import duke.task.TaskPriority;
-import duke.task.TaskType;
 
 /**
  * Handle all the message methods
@@ -35,152 +32,119 @@ public class Message {
     /**
      * Display message when a task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString String that describes the task type
+     * @param isDoneInString   String that describes the isDone status
+     * @param taskDetail       String that describes the task detail
+     * @param numOfItem        Int that describes the number of items in taskList
      */
-    public static void msgAssignTask(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
+    public static void msgAssignTaskToDo(String taskTypeInString, String isDoneInString, String taskDetail, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message when a deadline task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString String that describes the task type
+     * @param isDoneInString   String that describes the isDone status
+     * @param taskDetail       String that describes the task detail
+     * @param dateInString     String that describes the task date
+     * @param numOfItem        Int that describes the number of items in taskList
      */
-    public static void msgAssignTaskDeadlineTaskDate(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateString = myList.getTaskDeadLineTaskDateInString(taskNumber);
+    public static void msgAssignTaskDeadlineTaskDate(String taskTypeInString, String isDoneInString,
+                                                     String taskDetail, String dateInString, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println(
-                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: " + dateString + ")");
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: " + dateInString + ")");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message when a deadline task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString String that describes the task type
+     * @param isDoneInString   String that describes the isDone status
+     * @param taskDetail       String that describes the task detail
+     * @param dateInString     String that describes the task date
+     * @param timeInString     String that describes the task time
+     * @param numOfItem        Int that describes the number of items in taskList
      */
-    public static void msgAssignTaskDeadlineTaskDateTaskTime(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateString = myList.getTaskDeadLineTaskDateInString(taskNumber);
-        String timeString = myList.getTaskDeadLineTaskTimeInString(taskNumber);
+    public static void msgAssignTaskDeadlineTaskDateTaskTime(String taskTypeInString, String isDoneInString,
+                                                             String taskDetail, String dateInString,
+                                                             String timeInString, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println(
                 "      [" + taskTypeInString + "][" + isDoneInString + "] "
-                        + taskDetail + "(by: " + dateString + " " + timeString + ")");
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+                        + taskDetail + "(by: " + dateInString + " " + timeInString + ")");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message when an event task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString String that describes task type
+     * @param isDoneInString   String that describes is done status
+     * @param taskDetail       String that describes task detail
+     * @param dateInString     String that describes task date
+     * @param numOfItem        Int that describes the number of tasks
      */
-    public static void msgAssignTaskEventTaskDate(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateString = myList.getTaskEventTaskDateInString(taskNumber);
+    public static void msgAssignTaskEventTaskDate(String taskTypeInString, String isDoneInString,
+                                                  String taskDetail, String dateInString, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println(
-                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(at: " + dateString + ")");
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(at: " + dateInString + ")");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message when an event task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString  String that describes task type
+     * @param isDoneInString    String that describes is done status
+     * @param taskDetail        String that describes task detail
+     * @param dateInString      String that describes task date
+     * @param timeStartInString String that describes the start time
+     * @param numOfItem         Int that describes the number of tasks
      */
-    public static void msgAssignTaskEventTaskDateTaskTimeStart(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateString = myList.getTaskEventTaskDateInString(taskNumber);
-        String timeStartString = myList.getTaskEventTaskTimeStartInString(taskNumber);
+    public static void msgAssignTaskEventTaskDateTaskTimeStart(String taskTypeInString, String isDoneInString, String taskDetail,
+                                                               String dateInString, String timeStartInString, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-        System.out.println("      (at: " + dateString + ", from: " + timeStartString + ")");
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("      (at: " + dateInString + ", from: " + timeStartInString + ")");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message when an event task is assigned
      *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
+     * @param taskTypeInString  String that describes task type
+     * @param isDoneInString    String that describes is done status
+     * @param taskDetail        String that describes task detail
+     * @param dateInString      String that describes task date
+     * @param timeStartInString String that describes the start time
+     * @param timeEndInString   String that describes the end time
+     * @param numOfItem         Int that describes the number of tasks
      */
-    public static void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(TaskList myList, int taskNumber) {
-
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateString = myList.getTaskEventTaskDateInString(taskNumber);
-        String timeStartString = myList.getTaskEventTaskTimeStartInString(taskNumber);
-        String timeEndString = myList.getTaskEventTaskTimeEndInString(taskNumber);
+    public static void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(String taskTypeInString, String isDoneInString,
+                                                                          String taskDetail, String dateInString,
+                                                                          String timeStartInString, String timeEndInString,
+                                                                          int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-        System.out.println("      (at: " + dateString + ", from: " + timeStartString + " to " + timeEndString + ")");
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        System.out.println("      (at: " + dateInString + ", from: " + timeStartInString + " to " + timeEndInString + ")");
+        System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
@@ -221,12 +185,13 @@ public class Message {
 
     /**
      * Display message to tell user that the new priority for a task is set successfully
+     *
+     * @param taskNumber           Int that describes the task number in the TaskList
+     * @param taskPriorityInString String that describes the priority of the task
      */
-    public static void msgSetPriority(TaskList myList, int taskNumber) {
+    public static void msgSetPriority(int taskNumber, String taskPriorityInString) {
         System.out.println("    Done! The new task priority is set");
-        TaskPriority taskPriority = myList.getTaskPriority(taskNumber);
-        String taskPriorityInString = TaskPriority.convertPriorityToString(taskPriority);
-        System.out.println("    Priority of Task #" + taskNumber + 1 + " has been set to " + taskPriorityInString);
+        System.out.println("    Priority of Task #" + taskNumber + " has been set to " + taskPriorityInString);
         System.out.println("_________________________________");
     }
 
@@ -241,18 +206,10 @@ public class Message {
     }
 
     /**
-     * Display message to show a list of task found based on the term
+     * Display message to show the opening message of "find"
      */
-    public static void msgTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
+    public static void msgTaskFoundOpeningMsg() {
         System.out.println("    Here are the matching tasks in your list:");
-        int index = 1;
-        for (int i = 0; i < taskNumberContainingSearchTerm.size(); i++) {
-            int taskNumber = taskNumberContainingSearchTerm.get(i);
-            msgBlankBeforeTaskDetail();
-            System.out.print(index + ".");
-            msgTaskDetail(myList, taskNumber);
-            index++;
-        }
     }
 
     // Other Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -266,21 +223,23 @@ public class Message {
     public static void msgMarkDone(TaskList myList, int taskNumber) {
         System.out.println("    Naisuuuu! This task is marked as done: ");
         msgBlankBeforeTaskDetail();
-        msgTaskDetail(myList, taskNumber);
+        new MsgTaskDetail(myList, taskNumber).showTaskDetail();
         System.out.println("_________________________________");
     }
 
     /**
-     * Display message to show the full list of task
+     * Display [x] where x is the int parameter
+     * <p>
+     * Used in CmdList function to show the following:
+     * 1.
+     * 2.
+     * 3.
+     * etc.
      *
-     * @param myList TaskList that contains the list of task
+     * @param index Int that will be put inside the bracket
      */
-    public static void msgList(TaskList myList) {
-        for (int i = 0; i < myList.getNumOfItem(); i++) {
-            System.out.print("    " + Integer.toString(i + 1) + ".");
-            msgTaskDetail(myList, i);
-        }
-        System.out.println("_________________________________");
+    public static void msgShowBracketWithIndex(int index) {
+        System.out.print("    " + index + ".");
     }
 
     /**
@@ -297,86 +256,61 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    /**
-     * Display detail of a task
-     *
-     * @param myList     TaskList that contains the list of task
-     * @param taskNumber Int that represents the task number
-     */
-    public static void msgTaskDetail(TaskList myList, int taskNumber) {
-        TaskType taskType = myList.getTaskType(taskNumber);
-        String taskTypeInString = TaskType.taskTypeToString(taskType);
-
-        boolean isDone = myList.getTaskDoneStatus(taskNumber);
-        String isDoneInString = (isDone ? "X" : " ");
-
-        String taskDetail = myList.getTaskDetail(taskNumber);
-
-        String dateTimeString = "";
-        String year = "";
-        String month = "";
-        String day = "";
-        String time = "";
-        String timeStart = "";
-        String timeEnd = "";
-
-        switch (taskType) {
-        case TODOS:
-            System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-            break;
-        case DEADLINE:
-            // dateTimeString = myList.getTaskDeadLine_TaskDate_InString(taskNumber);
-            year = myList.getTaskDeadLineTaskDateYearInString(taskNumber);
-            month = myList.getTaskDeadLineTaskDateMonthInString(taskNumber);
-            day = myList.getTaskDeadLineTaskDateDayInString(taskNumber);
-            time = myList.getTaskDeadLineTaskTimeInString(taskNumber);
-
-            if (time.equals("null")) {
-                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail
-                        + "(by: " + year + " " + month + " " + day + ")");
-            } else {
-                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail
-                        + "(by: " + year + " " + month + " " + day + " " + time + ")");
-            }
-            break;
-        case EVENT:
-            // dateTimeString = myList.getTaskDeadLine_TaskDate_InString(taskNumber);
-            year = myList.getTaskEventTaskDateYearInString(taskNumber);
-            month = myList.getTaskEventTaskDateMonthInString(taskNumber);
-            day = myList.getTaskEventTaskDateDayInString(taskNumber);
-            timeStart = myList.getTaskEventTaskTimeStartInString(taskNumber);
-            timeEnd = myList.getTaskEventTaskTimeEndInString(taskNumber);
-
-            if (timeStart.equals("null") && timeEnd.equals("null")) {
-                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail
-                        + "(at: " + year + " " + month + " " + day + ")");
-            } else if (timeEnd.equals("null")) {
-                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-                System.out.print("             (at " + year + " " + month + " " + day);
-                System.out.println(" ; from: " + timeStart + ")");
-            } else {
-                System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-                System.out.print("             (at " + year + " " + month + " " + day);
-                System.out.println(" ; from: " + timeStart + " to " + timeEnd + ")");
-            }
-            break;
-        default:
-            break;
-        }
+    public static void msgTaskTodo(String taskTypeInString, String isDoneInString,
+                                   String taskDetail, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
     }
+
+    public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
+                                    String year, String month, String day, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("             (at " + year + " " + month + " " + day + ")");
+    }
+
+    public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
+                                    String year, String month, String day, String timeStart, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.print("             (at " + year + " " + month + " " + day);
+        System.out.println(" ; from: " + timeStart + ")");
+    }
+
+    public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
+                                    String year, String month, String day, String timeStart,
+                                    String timeEnd, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.print("             (at " + year + " " + month + " " + day);
+        System.out.println(" ; from: " + timeStart + " to " + timeEnd + ")");
+    }
+
+    public static void msgTaskDeadline(String taskTypeInString, String isDoneInString, String taskDetail,
+                                       String year, String month, String day, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("             by: " + year + " " + month + " " + day + ")");
+    }
+
+    public static void msgTaskDeadline(String taskTypeInString, String isDoneInString, String taskDetail,
+                                       String year, String month, String day,
+                                       String timeStart, String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("             by: " + year + " " + month + " " + day + " " + timeStart + ")");
+    }
+
 
     /**
      * Display message when a task is removed
      */
-    public static void msgRemoveItem(TaskList myList, int taskNumber) {
+    public static void msgRemoveItem(TaskList myList, int taskNumber, int numOfTaskAfterDelete) {
 
         System.out.println("    Noted. I've removed this task:");
         msgBlankBeforeTaskDetail();
-        msgTaskDetail(myList, taskNumber);
-        System.out.println("    Now you have " + myList.getNumOfItem() + " tasks in the list.");
+        new MsgTaskDetail(myList, taskNumber).showTaskDetail();
+        System.out.println("    Now you have " + numOfTaskAfterDelete + " tasks in the list.");
         System.out.println("_________________________________");
     }
 
+    public static void msgArrowHead(){
+        System.out.print(">> ");
+    }
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
@@ -506,8 +440,6 @@ public class Message {
 
         try {
             FileReader fr = new FileReader(filePath);
-            // FileReader fr = new FileReader("\\My Files\\School
-            // Documents\\Repository\\Duke\\src\\main\\resources\\buddha.txt");
             BufferedReader br = new BufferedReader(fr);
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
