@@ -40,7 +40,7 @@ public class Duke {
                 System.out.println(Ui.LINE);
                 break;
             } else {
-                Parser.parseInput(input);
+                InputParser.parseInput(input);
             }
             System.out.println(Ui.LINE + "\n");
         }
