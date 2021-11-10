@@ -1,7 +1,6 @@
 package Duke.Models;
 
-import Duke.DukeException;
-import Duke.PriorityLevel;
+import Duke.DukeLogic.DukeException;
 
 /**
  * Represents a Task with information regarding the

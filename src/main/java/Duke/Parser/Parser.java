@@ -1,10 +1,10 @@
 package Duke.Parser;
-import Duke.DukeException;
+import Duke.DukeLogic.DukeException;
 import Duke.Models.*;
 import Duke.Checker.FileLineChecker;
 import Duke.Checker.InputChecker;
-import Duke.TaskList;
-import Duke.Ui.Ui;
+import Duke.DukeLogic.TaskList;
+import Duke.DukeLogic.Ui;
 import Duke.Duke;
 
 import java.time.LocalDate;
