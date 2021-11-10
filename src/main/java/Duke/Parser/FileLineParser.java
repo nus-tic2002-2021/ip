@@ -23,20 +23,20 @@ public class FileLineParser {
      * @return Task object created from file line.
      * @throws DukeException
      */
-    public static Task ParseStorageLine(String FileLine) throws DukeException {
+    public static Task parseLineFromFile(String FileLine) throws DukeException {
         String[] parts = FileLine.split("\\|");
         if (parts[0].trim().equals("T")) {
-            if(FileLineChecker.checkTodoLine(parts)) {
+            if(FileLineChecker.isValidTodoLine(parts)) {
                 Todo newTodo = getTodoFromLine(parts);
                 return newTodo;
             }
         } else if (parts[0].trim().equals("D")) {
-            if(FileLineChecker.checkDeadlineLine(parts)) {
+            if(FileLineChecker.isValidDeadlineLine(parts)) {
                 Deadline newDeadline = getDeadlineFromLine(parts);
                 return newDeadline;
             }
         } else if (parts[0].trim().equals("E")) {
-            if (FileLineChecker.checkEventLine(parts)) {
+            if (FileLineChecker.isValidEventLine(parts)) {
                 Event newEvent = getEventFromLine(parts);
                 return newEvent;
             }
