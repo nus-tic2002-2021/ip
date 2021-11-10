@@ -9,7 +9,11 @@ import java.util.ArrayList;
  *
  */
 public class TaskList {
-    static ArrayList<Task> DukeList = new ArrayList<>();
+    protected static ArrayList<Task> DukeList = new ArrayList<>();
+
+    public static ArrayList<Task> getDukeList() {
+        return DukeList;
+    }
 
     /**
      * Returns the number of tasks inside the task list.
@@ -80,7 +84,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    public static void deleteIndex(String input) throws DukeException {
+    public static void deleteTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
             String DeletedInfo = DukeList.get(index).getTaskInfo();
