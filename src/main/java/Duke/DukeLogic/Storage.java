@@ -59,7 +59,7 @@ public class Storage {
             Scanner s = new Scanner(storageFile);
             while (s.hasNext()) {
                 try {
-                    Task taskFromLine = FileLineParser.ParseStorageLine(s.nextLine());
+                    Task taskFromLine = FileLineParser.parseLineFromFile(s.nextLine());
                     TaskList.addTaskToList(taskFromLine);
                 } catch (DukeException e) {
                     e.printErrMsg();
@@ -79,7 +79,7 @@ public class Storage {
     public static void writeListToFile(File FileWrite) {
         try {
             FileWriter fw = new FileWriter(FileWrite, false);
-            ArrayList<Task> list = TaskList.DukeList;
+            ArrayList<Task> list = TaskList.getDukeList();
             for (int i = 0; i < list.size(); i++) {
                 Task taskAtIndex = list.get(i);
                 String taskType = taskAtIndex.getTaskType();
