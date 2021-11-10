@@ -31,18 +31,18 @@ public class Duke {
      * Continuously read input from the user of Duke
      * and parse the different inputs.
      */
-    public static void ExtendTaskList() {
+    public static void useDuke() {
         while (true) {
             String input = getInput();
-            System.out.println(Ui.line);
+            System.out.println(Ui.LINE);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(Ui.line);
+                System.out.println(Ui.LINE);
                 break;
             } else {
                 Parser.parseInput(input);
             }
-            System.out.println(Ui.line + "\n");
+            System.out.println(Ui.LINE + "\n");
         }
     }
 
@@ -51,15 +51,15 @@ public class Duke {
      * and updating the duke list using th information from the file.
      * Then print the duke start up message and a greeting from the program.
      */
-    public static void RunDuke() {
+    public static void runDuke() {
         try {
-            File StorageFile = Storage.OpenStorageFile();
-            Storage.ReadFileToArray(StorageFile);
+            File StorageFile = Storage.openStorageFile();
+            Storage.readFileToArray(StorageFile);
         } catch (DukeException e) {
             e.printErrMsg();
         }
-        Ui.StartDuke();
-        Ui.Greet();
+        Ui.startDuke();
+        Ui.greet();
     }
 
     /**
@@ -68,10 +68,10 @@ public class Duke {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        RunDuke();
-        ExtendTaskList();
+        runDuke();
+        useDuke();
         try {
-            Storage.writeListToFile(Storage.OpenStorageFile());
+            Storage.writeListToFile(Storage.openStorageFile());
         } catch (DukeException e) {
             System.out.println("Failed to write to file");
         }
