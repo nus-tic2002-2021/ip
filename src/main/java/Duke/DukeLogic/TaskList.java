@@ -1,7 +1,6 @@
-package Duke;
+package Duke.DukeLogic;
 
 import Duke.Models.*;
-import Duke.Ui.Ui;
 
 import java.util.ArrayList;
 

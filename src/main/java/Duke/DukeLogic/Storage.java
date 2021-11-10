@@ -1,4 +1,4 @@
-package Duke;
+package Duke.DukeLogic;
 
 import Duke.Parser.Parser;
 import Duke.Models.*;

@@ -1,4 +1,4 @@
-package Duke;
+package Duke.DukeLogic;
 
 /**
  * An exception class that represents the errors that are thrown when using duke.

@@ -1,5 +1,5 @@
 package Duke.Checker;
-import Duke.DukeException;
+import Duke.DukeLogic.DukeException;
 
 /**
  * Checks whether the input by the Duke user

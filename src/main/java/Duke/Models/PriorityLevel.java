@@ -1,4 +1,4 @@
-package Duke;
+package Duke.Models;
 
 /**
  * Represents the priority levels of tasks.
