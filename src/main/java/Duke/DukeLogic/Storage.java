@@ -1,6 +1,6 @@
 package Duke.DukeLogic;
 
-import Duke.Parser.Parser;
+import Duke.Parser.FileLineParser;
 import Duke.Models.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,7 +59,7 @@ public class Storage {
             Scanner s = new Scanner(storageFile);
             while (s.hasNext()) {
                 try {
-                    Task taskFromLine = Parser.ParseStorageLine(s.nextLine());
+                    Task taskFromLine = FileLineParser.ParseStorageLine(s.nextLine());
                     TaskList.addTaskToList(taskFromLine);
                 } catch (DukeException e) {
                     e.printErrMsg();
