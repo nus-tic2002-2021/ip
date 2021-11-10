@@ -50,13 +50,13 @@ public class Parser {
      */
     public static void AddTodo(String input) {
         try {
-            if (InputChecker.CheckValidTodo(input)) {
+            if (InputChecker.checkValidTodo(input)) {
                 String newTask = input.substring(4).trim();
                 Todo newTodo = new Todo(newTask);
                 TaskList.addTaskToList(newTodo);
                 addPriorityToTask(newTodo);
-                Ui.PrintTaskAdded(newTodo);
-                Ui.PrintTaskCount();
+                Ui.printTaskAdded(newTodo);
+                Ui.printTaskCount();
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -71,12 +71,12 @@ public class Parser {
      */
     public static void AddDeadline(String input) {
         try {
-            if (InputChecker.CheckValidDeadline(input)) {
+            if (InputChecker.checkValidDeadline(input)) {
                 Deadline newDeadline = buildDeadline(input);
                 TaskList.addTaskToList(newDeadline);
                 addPriorityToTask(newDeadline);
-                Ui.PrintTaskAdded(newDeadline);
-                Ui.PrintTaskCount();
+                Ui.printTaskAdded(newDeadline);
+                Ui.printTaskCount();
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -91,12 +91,12 @@ public class Parser {
      */
     public static void AddEvent(String input) {
         try {
-            if (InputChecker.CheckValidEvent(input)) {
+            if (InputChecker.checkValidEvent(input)) {
                 Event newEvent = buildEvent(input);
                 TaskList.addTaskToList(newEvent);
                 addPriorityToTask(newEvent);
-                Ui.PrintTaskAdded(newEvent);
-                Ui.PrintTaskCount();
+                Ui.printTaskAdded(newEvent);
+                Ui.printTaskCount();
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -121,7 +121,7 @@ public class Parser {
      */
     public static void MarkDone(String input) {
         try {
-            if (InputChecker.CheckValidDone(input)) {
+            if (InputChecker.checkValidDone(input)) {
                 TaskList.markTaskAtIndex(input);
             }
         } catch (DukeException e) {
@@ -136,8 +136,8 @@ public class Parser {
      */
     public static void DeleteTask(String input) {
         try {
-            if (InputChecker.CheckValidDelete(input)) {
-                TaskList.DeleteIndex(input);
+            if (InputChecker.checkValidDelete(input)) {
+                TaskList.deleteIndex(input);
             }
         } catch (DukeException e) {
             e.printErrMsg();
@@ -155,17 +155,17 @@ public class Parser {
     public static Task ParseStorageLine(String FileLine) throws DukeException {
         String[] parts = FileLine.split("\\|");
         if (parts[0].trim().equals("T")) {
-            if(FileLineChecker.CheckTodoLine(parts)) {
+            if(FileLineChecker.checkTodoLine(parts)) {
                 Todo newTodo = getTodoFromLine(parts);
                 return newTodo;
             }
         } else if (parts[0].trim().equals("D")) {
-            if(FileLineChecker.CheckDeadlineLine(parts)) {
+            if(FileLineChecker.checkDeadlineLine(parts)) {
                 Deadline newDeadline = getDeadlineFromLine(parts);
                 return newDeadline;
             }
         } else if (parts[0].trim().equals("E")) {
-            if (FileLineChecker.CheckEventLine(parts)) {
+            if (FileLineChecker.checkEventLine(parts)) {
                 Event newEvent = getEventFromLine(parts);
                 return newEvent;
             }
@@ -184,7 +184,7 @@ public class Parser {
     public static Todo getTodoFromLine(String[] parts) {
         Todo newTodo = new Todo(parts[2].trim());
         if (parts[1].trim().equals("1")) {
-            TaskList.MarkTask(newTodo);
+            TaskList.markTask(newTodo);
         }
         newTodo.setPriority(parts[3]);
         return newTodo;
@@ -222,7 +222,7 @@ public class Parser {
             }
         }
         if (parts[1].trim().equals("1")) {
-            TaskList.MarkTask(newDeadline);
+            TaskList.markTask(newDeadline);
         }
         newDeadline.setPriority(parts[4]);
         return newDeadline;
@@ -260,7 +260,7 @@ public class Parser {
             }
         }
         if (parts[1].trim().equals("1")) {
-            TaskList.MarkTask(newEvent);
+            TaskList.markTask(newEvent);
         }
         newEvent.setPriority(parts[4]);
         return newEvent;
