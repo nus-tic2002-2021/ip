@@ -1,17 +1,14 @@
 package Duke.Parser;
 
 import Duke.Checker.InputChecker;
-
 import Duke.Models.Deadline;
 import Duke.Models.Event;
 import Duke.Models.Task;
 import Duke.Models.Todo;
-
 import Duke.DukeLogic.DukeException;
 import Duke.DukeLogic.TaskList;
 import Duke.DukeLogic.Ui;
 import Duke.Duke;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -30,17 +27,17 @@ public class InputParser {
         if (input.trim().equals("list")) {
             TaskList.printTaskList();
         } else if (input.startsWith("todo ")) {
-            AddTodo(input);
+            parseTodoInput(input);
         } else if (input.startsWith("deadline ")) {
-            AddDeadline(input);
+            parseDeadlineInput(input);
         } else if (input.startsWith("event ")) {
-            AddEvent(input);
+            parseEventInput(input);
         } else if (input.startsWith("done ")) {
-            MarkDone(input);
+            parseDoneInput(input);
         } else if (input.startsWith("delete ")) {
-            DeleteTask(input);
+            parseDeleteInput(input);
         } else if (input.startsWith("find ")) {
-            findTask(input);
+            parseFindInput(input);
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -52,9 +49,9 @@ public class InputParser {
      * and adds it to duke task list
      * @param input
      */
-    public static void AddTodo(String input) {
+    public static void parseTodoInput(String input) {
         try {
-            if (InputChecker.checkValidTodo(input)) {
+            if (InputChecker.isValidTodoInput(input)) {
                 String newTask = input.substring(4).trim();
                 Todo newTodo = new Todo(newTask);
                 TaskList.addTaskToList(newTodo);
@@ -73,9 +70,9 @@ public class InputParser {
      * and adds it to duke task list
      * @param input
      */
-    public static void AddDeadline(String input) {
+    public static void parseDeadlineInput(String input) {
         try {
-            if (InputChecker.checkValidDeadline(input)) {
+            if (InputChecker.isValidDeadlineInput(input)) {
                 Deadline newDeadline = buildDeadline(input);
                 TaskList.addTaskToList(newDeadline);
                 addPriorityToTask(newDeadline);
@@ -88,14 +85,44 @@ public class InputParser {
     }
 
     /**
+     * Takes in a valid input with information on a deadline,
+     * parse the parts of the input
+     * and returns a new Deadline object created using the relevant constructor.
+     * @param input
+     * @return Deadline object created from a valid input with deadline information.
+     */
+    public static Deadline buildDeadline(String input) {
+        String[] parts = input.substring(8).split("/by");
+        String[] datetime = parts[1].trim().split(" ");
+        Deadline newDeadline;
+        if (datetime.length > 2) {
+            newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+        } else {
+            String[] dateDetails = datetime[0].split("/");
+            if (checkDateInput(dateDetails)) {
+                LocalDate taskDate = buildTaskDate(dateDetails);
+                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
+                    LocalTime taskTime = buildTaskTime(datetime[1]);
+                    newDeadline = new Deadline(parts[0].trim(), taskDate, taskTime);
+                } else {
+                    newDeadline = new Deadline(parts[0].trim(), taskDate);
+                }
+            } else {
+                newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
+            }
+        }
+        return newDeadline;
+    }
+
+    /**
      * If input contains valid information for an "event" object,
      * method creates the "event" Object from the input
      * and adds it to duke task list
      * @param input
      */
-    public static void AddEvent(String input) {
+    public static void parseEventInput(String input) {
         try {
-            if (InputChecker.checkValidEvent(input)) {
+            if (InputChecker.isValidEventInput(input)) {
                 Event newEvent = buildEvent(input);
                 TaskList.addTaskToList(newEvent);
                 addPriorityToTask(newEvent);
@@ -108,46 +135,34 @@ public class InputParser {
     }
 
     /**
-     * Takes in a task object and request priority level of task from user.
-     * Set the priority level of the task object based on the input from user.
-     * @param newTask
-     */
-    public static void addPriorityToTask(Task newTask) {
-        Ui.requestPriorityLevel();
-        String level = Duke.getInput();
-        newTask.setPriority(level);
-    }
-
-    /**
-     * If input contain valid information to identify a task in the list,
-     * mark said task object as completed.
+     * Takes in a valid input with information on an event,
+     * parse the parts of the input
+     * and returns a new Event object created using the relevant constructor.
      * @param input
+     * @return a Event object created from a valid input with event information.
      */
-    public static void MarkDone(String input) {
-        try {
-            if (InputChecker.checkValidDone(input)) {
-                TaskList.markTaskAtIndex(input);
+    public static Event buildEvent(String input) {
+        String[] parts = input.substring(5).split("/at");
+        String[] datetime = parts[1].trim().split(" ");
+        Event newEvent;
+        if (datetime.length > 2) {
+            newEvent = new Event(parts[0].trim(), parts[1].trim());
+        } else {
+            String[] dateDetails = datetime[0].split("/");
+            if (checkDateInput(dateDetails)) {
+                LocalDate taskDate = buildTaskDate(dateDetails);
+                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
+                    LocalTime taskTime = buildTaskTime(datetime[1]);
+                    newEvent = new Event(parts[0].trim(), taskDate, taskTime);
+                } else {
+                    newEvent = new Event(parts[0].trim(), taskDate);
+                }
+            } else {
+                newEvent = new Event(parts[0].trim(), parts[1].trim());
             }
-        } catch (DukeException e) {
-            e.printErrMsg();
         }
+        return newEvent;
     }
-
-    /**
-     * If input contain valid information to identify a task in the list,
-     * delete said task object.
-     * @param input
-     */
-    public static void DeleteTask(String input) {
-        try {
-            if (InputChecker.checkValidDelete(input)) {
-                TaskList.deleteIndex(input);
-            }
-        } catch (DukeException e) {
-            e.printErrMsg();
-        }
-    }
-
     /**
      * Takes in a string and checks whether it is in an input representing time.
      * If it is in valid format, return true.
@@ -243,69 +258,50 @@ public class InputParser {
     }
 
     /**
-     * Takes in a valid input with information on a deadline,
-     * parse the parts of the input
-     * and returns a new Deadline object created using the relevant constructor.
-     * @param input
-     * @return Deadline object created from a valid input with deadline information.
+     * Takes in a task object and request priority level of task from user.
+     * Set the priority level of the task object based on the input from user.
+     * @param newTask
      */
-    public static Deadline buildDeadline(String input) {
-        String[] parts = input.substring(8).split("/by");
-        String[] datetime = parts[1].trim().split(" ");
-        Deadline newDeadline = null;
-        if (datetime.length > 2) {
-            newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
-        } else {
-            String[] dateDetails = datetime[0].split("/");
-            if (checkDateInput(dateDetails)) {
-                LocalDate taskDate = buildTaskDate(dateDetails);
-                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
-                    LocalTime taskTime = buildTaskTime(datetime[1]);
-                    newDeadline = new Deadline(parts[0].trim(), taskDate, taskTime);
-                } else {
-                    newDeadline = new Deadline(parts[0].trim(), taskDate);
-                }
-            } else {
-                newDeadline = new Deadline(parts[0].trim(), parts[1].trim());
-            }
-        }
-        return newDeadline;
+    public static void addPriorityToTask(Task newTask) {
+        Ui.requestPriorityLevel();
+        String level = Duke.getInput();
+        newTask.setPriority(level);
     }
 
     /**
-     * Takes in a valid input with information on an event,
-     * parse the parts of the input
-     * and returns a new Event object created using the relevant constructor.
+     * If input contain valid information to identify a task in the list,
+     * mark said task object as completed.
      * @param input
-     * @return a Event object created from a valid input with event information.
      */
-    public static Event buildEvent(String input) {
-        String[] parts = input.substring(5).split("/at");
-        String[] datetime = parts[1].trim().split(" ");
-        Event newEvent = null;
-        if (datetime.length > 2) {
-            newEvent = new Event(parts[0].trim(), parts[1].trim());
-        } else {
-            String[] dateDetails = datetime[0].split("/");
-            if (checkDateInput(dateDetails)) {
-                LocalDate taskDate = buildTaskDate(dateDetails);
-                if (datetime.length == 2 && checkTimeInput(datetime[1])) {
-                    LocalTime taskTime = buildTaskTime(datetime[1]);
-                    newEvent = new Event(parts[0].trim(), taskDate, taskTime);
-                } else {
-                    newEvent = new Event(parts[0].trim(), taskDate);
-                }
-            } else {
-                newEvent = new Event(parts[0].trim(), parts[1].trim());
+    public static void parseDoneInput(String input) {
+        try {
+            if (InputChecker.isValidDoneInput(input)) {
+                TaskList.markTaskAtIndex(input);
             }
+        } catch (DukeException e) {
+            e.printErrMsg();
         }
-        return newEvent;
     }
 
-    public static void findTask(String input) {
+    /**
+     * If input contain valid information to identify a task in the list,
+     * delete said task object.
+     * @param input
+     */
+    public static void parseDeleteInput(String input) {
+        try {
+            if (InputChecker.isValidDeleteInput(input)) {
+                TaskList.deleteTaskAtIndex(input);
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static void parseFindInput(String input) {
         String[] parts = input.split(" ");
         try {
-            if (InputChecker.checkValidFind(parts)) {
+            if (InputChecker.isValidFindInput(parts)) {
                 TaskList.printTaskWithDesc(parts[1]);
             }
         } catch (DukeException e) {
