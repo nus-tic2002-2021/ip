@@ -39,6 +39,25 @@ public class Duke {
         }
     }
 
+    public static void find(String searchFor){
+        ArrayList<Task> results = new ArrayList<Task>();
+        for(int i=0; i<storedTask.size(); i++){
+            Pattern pattern = Pattern.compile(searchFor, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(storedTask.get(i).getDescription());
+            if(matcher.find()){
+                results.add(storedTask.get(i));
+            }
+        }
+        if( results.size() < 1){
+            System.out.println("No matching tasks found.");
+        } else{
+            System.out.println("We have found the following...");
+            for (int i=1; i<=results.size(); i++) {
+                System.out.format("%d: " + "[" + results.get(i - 1).getType() + "]" + results.get(i - 1).toString() + "\n", i);
+            }
+        }
+    }
+
     public static void updateTaskStatus(String line){
         boolean matched = false;
         for (int i=0; i<storedTask.size(); i++) {
@@ -80,7 +99,7 @@ public class Duke {
         int count = 0;
         String[] command = new String[10];
         String[] line2 = line.split(" ");
-        String[] keywords = {"todo", "deadline", "event", "done", "list", "delete"};
+        String[] keywords = {"todo", "deadline", "event", "done", "list", "delete", "find"};
         for(String i : line2 ){
             if(Arrays.asList(keywords).contains(i)){
                 command[count] = i;
@@ -244,8 +263,14 @@ public class Duke {
                 getList();
             }
             if(command.equals("delete")){
+                //only works for index, need to add for name
                 int index = Integer.parseInt(line.split(" ")[1].strip());
                 delete(index-1);
+            }
+            if(command.equals("find")){
+                int commandIndex = line.indexOf("find");
+                String searchParams = line.substring(commandIndex+5);
+                find(searchParams);
             }
 
             response(line);
