@@ -19,15 +19,15 @@ public class Storage {
      * @return the new File object.
      * @throws DukeException
      */
-    public static File CreateStorageFile() throws DukeException {
-        File newFile = new File("data\\Duke.Storage.txt");
+    public static File createStorageFile() throws DukeException {
+        File newFile = new File("data\\Duke.DukeLogic.Storage.txt");
         try {
             newFile.getParentFile().mkdirs();
             newFile.createNewFile();
-            System.out.println("New Duke.Storage.txt file created.");
+            System.out.println("New Duke.DukeLogic.Storage.txt file created.");
             return newFile;
         } catch (IOException err) {
-            throw new DukeException("Failed to create new Duke.Storage.txt file.");
+            throw new DukeException("Failed to create new Duke.DukeLogic.Storage.txt file.");
         }
     }
 
@@ -37,11 +37,11 @@ public class Storage {
      * @return an opened File object.
      * @throws DukeException
      */
-    public static File OpenStorageFile() throws DukeException {
+    public static File openStorageFile() throws DukeException {
         File newFile = new File("data\\storage.txt");
         if (!newFile.exists()) {
             try {
-                newFile = CreateStorageFile();
+                newFile = createStorageFile();
             } catch (DukeException e) {
                 throw new DukeException("Duke.Duke will run without any prior stored task information");
             }
@@ -54,12 +54,13 @@ public class Storage {
      * The parsed task objects will then be added to Duke's task list.
      * @param storageFile
      */
-    public static void ReadFileToArray(File storageFile) {
+    public static void readFileToArray(File storageFile) {
         try {
             Scanner s = new Scanner(storageFile);
             while (s.hasNext()) {
                 try {
-                    TaskList.addTaskToList(Parser.ParseStorageLine(s.nextLine()));
+                    Task taskFromLine = Parser.ParseStorageLine(s.nextLine());
+                    TaskList.addTaskToList(taskFromLine);
                 } catch (DukeException e) {
                     e.printErrMsg();
                 }
@@ -115,8 +116,9 @@ public class Storage {
         }
         newLine = newLine + targetTask.getDescription();
 
-        if (initial.equals("D") || initial.equals("E"))
-        newLine = newLine + divider + targetTask.getAdditionalInfo();
+        if (initial.equals("D") || initial.equals("E")) {
+            newLine = newLine + divider + targetTask.getAdditionalInfo();
+        }
 
         newLine = newLine + divider + targetTask.getPriority();
 
