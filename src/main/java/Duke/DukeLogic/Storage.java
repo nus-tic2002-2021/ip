@@ -82,13 +82,13 @@ public class Storage {
             ArrayList<Task> list = TaskList.DukeList;
             for (int i = 0; i < list.size(); i++) {
                 Task taskAtIndex = list.get(i);
-                String typeCheck = taskAtIndex.getTaskType();
+                String taskType = taskAtIndex.getTaskType();
                 String newLine = "";
-                if (typeCheck.equals("T")) {
+                if (taskType.equals("T")) {
                     newLine = buildStorageLine(taskAtIndex);
-                } else if (typeCheck.equals("D")) {
+                } else if (taskType.equals("D")) {
                     newLine = buildStorageLine(taskAtIndex);
-                } else if (typeCheck.equals("E")) {
+                } else if (taskType.equals("E")) {
                     newLine = buildStorageLine(taskAtIndex);
                 }
                 fw.write(newLine + System.getProperty("line.separator"));
