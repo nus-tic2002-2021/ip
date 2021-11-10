@@ -32,7 +32,7 @@ public class TaskList {
      * Takes in a index and removes the task at the index from the task list.
      * @param index
      */
-    public static void RemoveTask(int index) {
+    public static void removeTask(int index) {
         DukeList.remove(index);
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
     public static void markTaskAtIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(4).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
-            MarkTask(DukeList.get(index));
+            markTask(DukeList.get(index));
             System.out.println("Nice! I've marked this task as done:\n  "
                     + DukeList.get(index).getTaskInfo());
         } else {
@@ -69,7 +69,7 @@ public class TaskList {
      * Mark the task given as a parameter as completed.
      * @param inputTask
      */
-    public static void MarkTask(Task inputTask) {
+    public static void markTask(Task inputTask) {
         inputTask.markCompleted();
     }
 
@@ -80,13 +80,13 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    public static void DeleteIndex(String input) throws DukeException {
+    public static void deleteIndex(String input) throws DukeException {
         int index = Integer.parseInt(input.substring(6).trim()) - 1;
         if (index < DukeList.size() && index > -1) {
             String DeletedInfo = DukeList.get(index).getTaskInfo();
-            RemoveTask(index);
+            removeTask(index);
             System.out.println("Noted! I've removed this task:\n  " + DeletedInfo);
-            Ui.PrintTaskCount();
+            Ui.printTaskCount();
         } else {
             throw new DukeException("☹ OOPS!!! The index number of the task to delete is invalid!");
         }
