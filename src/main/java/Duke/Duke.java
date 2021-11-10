@@ -6,7 +6,6 @@ import Duke.Parser.*;
 import Duke.DukeLogic.Ui;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,6 @@ import java.util.Scanner;
  * and that allows users to do CRUD operations on tasks.
  */
 public class Duke {
-
     static Scanner in = new Scanner(System.in);
 
     /**
@@ -25,25 +23,6 @@ public class Duke {
     public static String getInput() {
         String input = in.nextLine();
         return input;
-    }
-
-    /**
-     * Continuously read input from the user of Duke
-     * and parse the different inputs.
-     */
-    public static void useDuke() {
-        while (true) {
-            String input = getInput();
-            System.out.println(Ui.LINE);
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(Ui.LINE);
-                break;
-            } else {
-                InputParser.parseInput(input);
-            }
-            System.out.println(Ui.LINE + "\n");
-        }
     }
 
     /**
@@ -63,11 +42,33 @@ public class Duke {
     }
 
     /**
+     * Continuously read input from the user of Duke
+     * and parse the different inputs.
+     */
+    public static void useDuke() {
+        while (true) {
+            String input = getInput();
+            System.out.println(Ui.LINE);
+            if (input.equals("bye")) {
+                endDuke();
+                break;
+            } else {
+                InputParser.parseInput(input);
+            }
+            System.out.println(Ui.LINE + "\n");
+        }
+    }
+
+    public static void endDuke() {
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(Ui.LINE);
+    }
+
+    /**
      * Runs the main logic of Duke program.
      * @param args
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         runDuke();
         useDuke();
         try {
