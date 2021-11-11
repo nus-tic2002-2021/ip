@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
 
 
-//Create
+//Create (REWORK)
 //------------------------------------
 // edit the todo to be "todo borrow book"
 //
@@ -37,11 +37,11 @@ public class Deadline extends Task {
 //       [E][ ] project meeting (at: Mon 2-4pm)
 //     Now you have 7 tasks in the list.
 
-// Delete
+// Delete (REWORK)
 //-------------------------------------
 // allow to delete by description regex
 
-// Read
+// Read (DONE)
 // ------------------------------------
 // allow to save into txt file harddisk (LV7)
 // allow regex to search for current tasks
@@ -51,8 +51,6 @@ public class Deadline extends Task {
 // todo
 // i see you want to make a todo, please add description
 
+//Indiv feature - mass ops
 
-
-// file reading
-// should read and pump the data into the site, welcome the user back
-// if no user, prompt for user
+//Indiv feature - welcome name

@@ -11,6 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class Duke {
 
@@ -57,6 +61,7 @@ public class Duke {
             }
         }
     }
+
 
     public static void updateTaskStatus(String line){
         boolean matched = false;
@@ -195,17 +200,24 @@ public class Duke {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
             command = getCommand(line);
-            System.out.println("the command is: " + command);
             Inspect userText = new Inspect(line);
             if(userText.bye()) {
               line = "bye";
             }
             if (command.equals("todo")) {
-                System.out.println("Sure, what would you like add");
-                Scanner scanner = new Scanner(System.in);
-                todo = scanner.nextLine();
-                Task record = new Task(todo);
-                storedTask.add(record);
+                int commandIndex = line.indexOf("todo");
+                if(line.strip().length() == 4){
+                    System.out.println("Sure, what would you like add");
+                    Scanner scanner = new Scanner(System.in);
+                    todo = scanner.nextLine();
+                    Task record = new Task(todo);
+                    storedTask.add(record);
+                } else {
+                    String description = line.substring(commandIndex + 4);
+                    Task record = new Task(description.strip());
+                    storedTask.add(record);
+                }
+
                 System.out.println("added");
             }
             if (command.equals("done")){
