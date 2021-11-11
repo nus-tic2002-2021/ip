@@ -43,7 +43,8 @@ public class Storage {
             try {
                 newFile = createStorageFile();
             } catch (DukeException e) {
-                throw new DukeException("Duke.Duke will run without any prior stored task information");
+                throw new DukeException("Duke.Duke will run without " +
+                        "any prior stored task information");
             }
         }
         return newFile;
