@@ -10,14 +10,14 @@ public class Parser {
 
         if (userInput.equals("bye")) {
             return "bye";
-        }
-
-        if (userInput.equals("list")) {
+        } else if (userInput.equals("list")) {
             return "list";
-        }
-
-        if (userInput.equals("set")){
+        } else if (userInput.equals("set")) {
             return "set";
+        } else if (userInput.equals("info")) {
+            return "info";
+        } else if (userInput.equals("save")) {
+            return "save";
         }
 
         String userInputStartWith = getFirstWord(userInput);
@@ -27,10 +27,6 @@ public class Parser {
             return "done";
         case "todo":
             return "todo";
-        case "save":
-            return "save";
-        case "load":
-            return "load";
         case "find":
             return "find";
         case "event":
@@ -54,4 +50,5 @@ public class Parser {
             return "invalid";
         }
     }
+
 }

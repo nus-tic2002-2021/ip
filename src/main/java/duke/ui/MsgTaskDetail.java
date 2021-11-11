@@ -41,7 +41,7 @@ public class MsgTaskDetail {
             showTaskDeadline(myList, taskIndex);
             break;
         default:
-            // todo
+            break;
         }
     }
 

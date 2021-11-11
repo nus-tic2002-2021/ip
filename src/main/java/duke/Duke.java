@@ -2,9 +2,9 @@ package duke;
 
 import duke.storage.FileAccess;
 import duke.task.TaskList;
+import duke.ui.Message;
 import duke.ui.Ui;
-
-import java.util.Scanner;
+import duke.exception.UnableToLoadProcessException;
 
 /**
  * Begin the program here.
@@ -19,21 +19,27 @@ public class Duke {
     private TaskList myList;
     private Ui ui;
 
+
     public Duke(String filepath){
         ui = new Ui();
         fileAccess = new FileAccess(filepath);
         myList = new TaskList();
-        // todo try load task here
+
+        try {
+            String progress = fileAccess.loadProgressFromFile();
+            new LoadDuke(myList, progress).run();
+        } catch (UnableToLoadProcessException e) {
+            Message.msgUnableToLoadProgress();
+        }
     }
 
     public void initialize(){
         StartDuke.run();
         new RunDuke(myList, ui, fileAccess).run();
-
     }
 
     public void end(){
-        EndDuke.run();
+        new EndDuke(fileAccess).run();
     }
 
     /**

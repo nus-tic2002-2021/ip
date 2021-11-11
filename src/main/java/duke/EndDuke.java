@@ -1,10 +1,16 @@
 package duke;
 
+import duke.storage.FileAccess;
 import duke.ui.Message;
-
-import java.io.IOException;
+import duke.exception.UnableToLoadBuddhaException;
 
 public class EndDuke {
+
+    private static FileAccess fileAccess;
+
+    public EndDuke(FileAccess fileAccess){
+        this.fileAccess = fileAccess;
+    }
 
     public static void run() {
         showByeMessage();
@@ -18,8 +24,10 @@ public class EndDuke {
     public static void showByeMessage() {
         try {
             Message.msgBye();
-        } catch (IOException error) {
-            Message.msgError(error);
+            String buddhaText = fileAccess.readBuddhaText();
+            Message.msgBuddha(buddhaText);
+        } catch (UnableToLoadBuddhaException e) {
+            Message.msgUnableToLoadBuddah();
         }
     }
 }

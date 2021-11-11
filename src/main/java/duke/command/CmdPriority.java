@@ -17,6 +17,12 @@ public class CmdPriority {
      * @param myList TaskList that contains the list of task
      */
     public static void run(TaskList myList, Scanner scanner) {
+
+        if (myList.getNumOfItem() < 1){
+            Message.msgInvalidSetTaskListIsEmpty();
+            return;
+        }
+
         boolean isTaskNumberValid = false;
         String userInputTaskNumber = "";
 

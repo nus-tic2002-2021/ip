@@ -9,6 +9,12 @@ public class CmdDelete {
         try {
             int taskIndex = Integer.parseInt(userInput.substring(7)) - 1;
             int numOfTaskAfterDelete = myList.getNumOfItem() - 1;
+
+            if (taskIndex >= myList.getNumOfItem()){
+                Message.msgInvalidTaskNumber();
+                return;
+            }
+
             Message.msgRemoveItem(myList, taskIndex, numOfTaskAfterDelete);
             myList.removeItem(taskIndex);
         } catch (Exception e) {

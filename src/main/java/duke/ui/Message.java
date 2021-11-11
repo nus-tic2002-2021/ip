@@ -311,7 +311,48 @@ public class Message {
     public static void msgArrowHead(){
         System.out.print(">> ");
     }
+
+    public static void msgShowDukeCommandList(){
+        System.out.println(">> Full List of Duke Command Available:");
+        System.out.println("    1. todo (task description)");
+        System.out.println("        >> add a TODO task");
+        System.out.println("    2. event (task description)");
+        System.out.println("        >> add a EVENT task");
+        System.out.println("    3. event (task description) /at (date)");
+        System.out.println("        >> add a EVENT task");
+        System.out.println("    4. event (task description) /at (date) (time)");
+        System.out.println("        >> add a EVENT task");
+        System.out.println("    5. deadline (task description)");
+        System.out.println("        >> add a DEADLINE task");
+        System.out.println("    6. deadline (task description) /at (date)");
+        System.out.println("        >> add a DEADLINE task");
+        System.out.println("    7. deadline (task description) /at (date) (time start) (time end)");
+        System.out.println("        >> add a DEADLINE task");
+        System.out.println("    8. list");
+        System.out.println("        >> show full list of task");
+        System.out.println("    9. set");
+        System.out.println("        >> change priority of a task");
+        System.out.println("    10. done (task number)");
+        System.out.println("        >> mark a task as completed");
+        System.out.println("    11. find (keyword)");
+        System.out.println("        >> find a task based on keyword");
+        System.out.println("    12. info");
+        System.out.println("        >> display full list of Duke Command");
+        System.out.println("    13. delete (task number)");
+        System.out.println("        >> delete a task");
+        System.out.println("    14. bye");
+        System.out.println("        >> end your friendly Duke chat box");
+    }
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    /**
+     * Display message when a progress file fail to load
+     */
+    public static void msgUnableToLoadProgress() {
+        System.out.println(" >> Fail to load progress. New Task List is created <<");
+        System.out.println("_________________________________");
+    }
+
 
     /**
      * Display message when a task is marked as done
@@ -405,57 +446,30 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    public static void msgInvalidSetTaskListIsEmpty(){
+        System.out.println("    ☹  OOPS!!! The task list is empty.");
+        System.out.println("_________________________________");
+    }
+
+    public static void msgUnableToLoadBuddah(){
+        System.out.println(" >> Buddha Protection is under maintenance <<");
+        System.out.println("_________________________________");
+    }
+
     // Ending Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     /**
      * Display message before the end of program
      */
-    public static void msgBye() throws IOException {
+    public static void msgBye(){
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("_________________________________");
-        msgBuddhaProtectMe();
     }
 
     /**
-     * Display Buddah.txt
+     * Display buddha.txt before the end of program
      */
-    private static void msgBuddhaProtectMe() throws IOException {
-        String everything = "";
-
-        // ... \Duke\src\main\resources\buddha.txt
-        // File.separator == " \ "
-
-        String pathRoot = System.getProperty("user.dir");
-        // pathRoot = D:\My Files\School Documents\Repository\Duke
-
-        String pathRssFolder = "src" + File.separator + "resources";
-        // pathRssFolder = src\main\resources
-
-        String pathFileName = "buddha.txt";
-        // pathFileName = buddha.txt
-
-        String filePath = pathRoot + File.separator + pathRssFolder + File.separator + pathFileName;
-        // filePath = D:\My Files\School
-        // Documents\Repository\Duke\src\main\resources\buddha.txt
-
-        try {
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            everything = sb.toString();
-            br.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("\n >>> Buddah Protection is not in forced <<<\n");
-            System.out.println(e);
-        } finally {
-            System.out.println(everything);
-        }
+    public static void msgBuddha(String buddhaText){
+        System.out.println(buddhaText);
     }
 }

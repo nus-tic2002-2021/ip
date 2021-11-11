@@ -65,7 +65,7 @@ public class ParseDateTime {
     /**
      * Convert time from String to LocalTime
      *
-     * @param time TaskDate of the task
+     * @param time String that describes taskDate of the task
      * @return LocalTime
      * @throws DateTimeParseException If format of the date is not accepted
      */
@@ -91,7 +91,7 @@ public class ParseDateTime {
      * return 2 if the string contains string representation of a Date and a Time
      * return 3 if the string contains string representation of a Date and 2 Time
      *
-     * @param dateAndTime string representation of date and time
+     * @param dateAndTime String representation of date and time
      * @return int 1 or 2 or 3
      */
     public static int isDateAndTime(String dateAndTime) {
@@ -108,7 +108,7 @@ public class ParseDateTime {
     /**
      * Extract string representation of date from string array
      *
-     * @param split string array of date and time
+     * @param split String Array of date and time
      * @return String Date
      */
     public static String toExtractDateFromSplitDateAndTime(String[] split) {
@@ -118,7 +118,7 @@ public class ParseDateTime {
     /**
      * Extract string representation of time from string array
      *
-     * @param split string array of date and time
+     * @param split String Array of date and time
      * @return String Time
      */
     public static String toExtractTimeFromSplitDateAndTime(String[] split) {
@@ -128,7 +128,7 @@ public class ParseDateTime {
     /**
      * Extract string representation of start time from string array
      *
-     * @param split string array of date and time
+     * @param split String Array of date and time
      * @return String TimeStart
      */
     public static String toExtractTimeStartFromSplitDateAndTime(String[] split) {
@@ -138,7 +138,7 @@ public class ParseDateTime {
     /**
      * Extract string representation of end time from string array
      *
-     * @param split string array of date and time
+     * @param split String Array of date and time
      * @return String TimeEnd
      */
     public static String toExtractTimeEndFromSplitDateAndTime(String[] split) {

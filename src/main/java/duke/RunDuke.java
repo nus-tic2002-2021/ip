@@ -34,7 +34,6 @@ public class RunDuke {
         while (isDukeRunning) {
             String userInput = ui.requestUserInput(scanner);
             String userCommand = parser.processUserCommand(userInput);
-            System.out.println(userCommand);
             isDukeRunning = canProcessCommand(userCommand, userInput);
         }
     }
@@ -58,11 +57,11 @@ public class RunDuke {
         case "save":
             cmd.saveTask(myList, fileAccess);
             return true;
-        case "load":
-            // loadTask(myList); todo
-            return true;
         case "find":
             cmd.findTask(myList, userInput);
+            return true;
+        case "info":
+            cmd.showInfo();
             return true;
         case "event":
             cmd.addTaskEvent(myList, userInput);
@@ -74,10 +73,8 @@ public class RunDuke {
             cmd.addTaskDeadline(myList, userInput);
             return true;
         default:
-            cmd.showInvalidCommand(); // todo
+            cmd.showInvalidCommand();
             return true;
         }
     }
-
-
 }

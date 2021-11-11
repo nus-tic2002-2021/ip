@@ -22,6 +22,10 @@ public class Command {
 
     // Basic processCommand Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+    public void showInfo(){
+        Message.msgShowDukeCommandList();
+    }
+
     /**
      * Show full list of tasks
      *
@@ -70,7 +74,7 @@ public class Command {
      * @param myList TaskList that contains the list of task
      */
     public void saveTask(TaskList myList, FileAccess fileAccess) {
-        CmdSave.run(myList, fileAccess);
+        new CmdSave(myList, fileAccess).run();
     }
 
     /**

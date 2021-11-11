@@ -1,12 +1,14 @@
 package duke.storage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.util.Scanner;
-
-import duke.task.TaskList;
 import duke.ui.Message;
 import duke.ui.Ui;
+import duke.exception.UnableToLoadBuddhaException;
+import duke.exception.UnableToLoadProcessException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 /**
  * Handles file handling related functions
@@ -33,10 +35,9 @@ public class FileAccess {
     /**
      * Save progress of the current task
      *
-     * @param myList            TaskList that needs to be output
      * @param stringToBeWritten String that needs to be outputed
      */
-    public void saveProgressIntoFile(TaskList myList, String stringToBeWritten) {
+    public void saveProgressIntoFile(String stringToBeWritten) {
 
         try {
             FileWriter fw = new FileWriter(filepath);
@@ -53,43 +54,69 @@ public class FileAccess {
      *
      * @return String that represents a list of task details
      */
-    public String loadProgressFromFile() {
-        StringBuilder sb = new StringBuilder();
+    public static String loadProgressFromFile() throws UnableToLoadProcessException{
+        String progress = "";
+        String pathRoot = System.getProperty("user.dir");
+        // e.g. pathRoot = D:\My Files\School Documents\Repository\Duke
+
+        String pathRssFolder = "src" + File.separator + "resources";
+        // pathRssFolder = src\resources
+
+        String pathFileName = "progress.txt";
+        // pathFileName = progress.txt
+
+        String filePath = pathRoot + File.separator + pathRssFolder + File.separator + pathFileName;
+        // e.g.
+        // filePath = D:\My Files\School
+        // Documents\Repository\Duke\src\main\resources\progress.txt
 
         try {
-            Scanner scanner = new Scanner(progressFile);
-            while (scanner.hasNext()) {
-                sb.append(scanner.nextLine());
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
             }
-
+            progress = sb.toString();
+            br.close();
         } catch (Exception e) {
-            Message.msgError(e);
+            throw new UnableToLoadProcessException();
         }
-
-        return sb.toString();
+        return progress;
     }
 
     /**
-     * Delete an existing progress file
-     * <p>
-     * todo Method to be completed
+     * Read Buddah.txt
+     *
+     * @return String that contains the content in Buddha.txt
      */
-    public void deleteProgressFile() {
+    public String readBuddhaText() throws UnableToLoadBuddhaException {
+        String buddhaText = "";
+        String pathRoot = System.getProperty("user.dir");
+        String pathRssFolder = "src" + File.separator + "resources";
+        String pathFileName = "buddha.txt";
+        String filePath = pathRoot + File.separator + pathRssFolder + File.separator + pathFileName;
 
-    }
-
-    /**
-     * Example of Save file
-     */
-    public void saveFileExample() {
-        String filepath = "src\\resources\\myText.txt";
         try {
-            FileWriter fw = new FileWriter(filepath);
-            fw.write("helloWold");
-            fw.close();
-            Message.msgSave();
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            buddhaText = sb.toString();
+            br.close();
         } catch (Exception e) {
-            Message.msgError(e);
+            throw new UnableToLoadBuddhaException();
         }
+        return buddhaText;
     }
 }

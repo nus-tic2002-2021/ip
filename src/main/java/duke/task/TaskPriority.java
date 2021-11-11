@@ -110,4 +110,20 @@ public enum TaskPriority {
             return "INVALID";
         }
     }
+
+    /**
+     * Convert TaskPriority to String
+     */
+    public String toStringInNumber(){
+        switch (this) {
+        case LOW:
+            return "3";
+        case MEDIUM:
+            return "2";
+        case HIGH:
+            return "1";
+        default:
+            return "0";
+        }
+    }
 }
