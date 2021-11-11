@@ -1,7 +1,7 @@
 package duke.task;
 
 /** Enumerate for Task */
-public enum Task_Enum {
+public enum TaskEnums {
     TODO,
     DEADLINE,
     EVENT,

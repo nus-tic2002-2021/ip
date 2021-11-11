@@ -1,14 +1,23 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.FixedDurationTaskList;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.ToDos;
+import duke.task.Events;
+import duke.task.Deadline;
 import duke.ui.ReturnMessages;
 
-import java.io.*;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class StorageTaskList {
     protected boolean isExist;
@@ -17,7 +26,6 @@ public class StorageTaskList {
     private static ReturnMessages returnMessage = new ReturnMessages();
     private static StorageFixedDurationReference loadFixedDurationRecord;
     private static FixedDurationTaskList fixedDurationTaskList;
-    Scanner scanner;
 
     /**
      * Checks current file existence status.

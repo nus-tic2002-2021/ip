@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class CommandEvent extends CommandBase {
 
-    DateTimeParse timeHelp = new DateTimeParse();
+    private DateTimeParse timeHelp = new DateTimeParse();
 
     /**
      * Creates event Command Constructor

@@ -45,9 +45,6 @@ public class UI{
         returnMessage.separator();
     }
 
-    public void showError(String message) {
-        System.out.println(message);
-    }
 
     /**
      * Returns the error msg will output by this.

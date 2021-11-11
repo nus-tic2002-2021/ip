@@ -1,31 +1,65 @@
 package duke.tasktest;
 
-import duke.task.Deadline;
-import duke.task.Events;
-import duke.task.TaskList;
-import duke.task.ToDos;
+import duke.task.*;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Order;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TaskListTest {
+    private static TaskList tasks;
+    private static ToDos toDo;
+    private static Events event;
+    private static Deadline deadline;
+    private static LocalDateTime sample = LocalDateTime.of(2021,12,25,16,0,0);
+    @BeforeAll
+    static void init(){
+        tasks = new TaskList();
+    }
+
     @Test
-    public void TaskList(){
-        LocalDateTime sample = LocalDateTime.of(2021,12,25,16,0,0);
-        ToDos toDos = new ToDos("eat");
-        Deadline deadline = new Deadline("return book", sample);
-        Events event = new Events("Finish Homework",sample.toLocalDate(),sample.toLocalTime(),sample.toLocalTime().plusHours(2));
-        TaskList tasks = new TaskList();
-        tasks.addTask(toDos);
-        tasks.addTask(deadline);
-        tasks.addTask(event);
+    @Order(1)
+    void addTodo(){
+        toDo = new ToDos("eat");
+        assertTrue(tasks.addTask(toDo));
+    }
 
+    @Test
+    @Order(2)
+    void addDeadline_deadlineTask_success(){
+        deadline = new Deadline("return book", sample);
+        assertTrue(tasks.addTask(deadline));
+    }
 
+    @Test
+    @Order(3)
+    void addEvent_eventTask_success(){
+        event = new Events("Finish Homework",sample.toLocalDate(),sample.toLocalTime(),sample.toLocalTime().plusHours(2));
+        assertTrue(tasks.addTask(event));
+    }
+    @Test
+    @Order(4)
+    void checkSize_taskListSize_success(){
         assertEquals(3, tasks.getListSize());
+    }
+
+    @Test
+    @Order(5)
+    void getLastTask_retrieveLastTask_success(){
         assertEquals(event,tasks.getLastTask());
-        assertEquals(toDos, tasks.getTask(0));
+    }
+
+    @Test
+    @Order(6)
+    void getTaskByID_retrieveTaskID_success(){
+        assertEquals(toDo, tasks.getTask(0));
     }
 }

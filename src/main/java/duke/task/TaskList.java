@@ -15,9 +15,7 @@ public class TaskList {
 
 
     /** Creates task list. */
-    public TaskList() {
-        taskList = new ArrayList<>();
-    }
+    public TaskList() {taskList = new ArrayList<>();}
 
     /**
      * Creates Task list with tasks within.
@@ -94,7 +92,6 @@ public class TaskList {
     }
 
 
-    public void save(){}
 
     /**
      * Prints the tasks within the task list.
@@ -148,12 +145,12 @@ public class TaskList {
                 tempTaskList.add(t);
             }
         }
-        sort(tempTaskList);
+        sortByTime(tempTaskList);
         printer.taskSchedulingFeedback(dateToPrint, tempTaskList);
     }
 
     // Comparison done using compareTo function
-    public static void sort(ArrayList<Task> list)
+    protected static void sortByTime(ArrayList<Task> list)
     {
         list.sort(Comparator.comparing(Task::getTime));
     }

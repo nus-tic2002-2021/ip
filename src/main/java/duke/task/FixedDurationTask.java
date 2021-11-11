@@ -1,8 +1,8 @@
 package duke.task;
 
 public class FixedDurationTask {
-    protected String description;
-    protected int duration;
+    private String description;
+    private int duration;
 
     /**
      * Creates FixedDuration Task.

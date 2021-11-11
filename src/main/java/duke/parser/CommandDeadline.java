@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class
 CommandDeadline extends CommandBase {
 
-    DateTimeParse timeHelp = new DateTimeParse();
+    private DateTimeParse timeHelp = new DateTimeParse();
 
     /**
      * Creates deadline constructor.
