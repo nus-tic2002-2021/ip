@@ -113,17 +113,17 @@ public class Task {
             this.Priority = PriorityLevel.valueOf(level.trim());
         } catch (IllegalArgumentException e) {
             switch (level.trim()) {
-                case "3":
-                    this.Priority = PriorityLevel.HIGH;
-                    break;
-                case "2":
-                    this.Priority = PriorityLevel.MEDIUM;
-                    break;
-                case "1":
-                    this.Priority = PriorityLevel.LOW;
-                    break;
-                default:
-                    this.Priority = PriorityLevel.NIL;
+            case "3":
+                this.Priority = PriorityLevel.HIGH;
+                break;
+            case "2":
+                this.Priority = PriorityLevel.MEDIUM;
+                break;
+            case "1":
+                this.Priority = PriorityLevel.LOW;
+                break;
+            default:
+                this.Priority = PriorityLevel.NIL;
             }
         }
     }
