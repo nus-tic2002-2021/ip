@@ -11,6 +11,10 @@ import java.util.regex.Pattern;
 public class CmdFind {
 
     public static void run(TaskList myList, String userInput){
+
+        assert myList != null : "mylist should not be empty";
+        assert userInput != null : "userInput should not be empty";
+
         if (userInput.length() <= 5) {
             Message.msgInvalidFindTerm();
             return;
@@ -45,6 +49,10 @@ public class CmdFind {
      * Display message to show a list of task found based on the term
      */
     private static void showTaskFound(TaskList myList, ArrayList<Integer> taskNumberContainingSearchTerm) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskNumberContainingSearchTerm != null : "taskNumberContainingSearchTerm should not be empty";
+
         int index = 1;
         for (int i = 0; i < taskNumberContainingSearchTerm.size(); i++) {
             int taskNumber = taskNumberContainingSearchTerm.get(i);

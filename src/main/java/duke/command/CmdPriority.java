@@ -18,6 +18,9 @@ public class CmdPriority {
      */
     public static void run(TaskList myList, Scanner scanner) {
 
+        assert myList != null : "mylist should not be empty";
+        assert scanner != null : "scanner should not be empty";
+
         if (myList.getNumOfItem() < 1){
             Message.msgInvalidSetTaskListIsEmpty();
             return;
@@ -60,6 +63,9 @@ public class CmdPriority {
      */
     private static boolean hasValidTaskNumber(TaskList myList, String userInputString) {
 
+        assert myList != null : "mylist should not be empty";
+        assert userInputString != null : "userInputString should not be empty";
+
         try {
             int userInputInt = Integer.parseInt(userInputString);
             int numOfItem = myList.getNumOfItem();
@@ -75,6 +81,9 @@ public class CmdPriority {
     }
 
     private static boolean hasValidPriorityNumber(String userInputPriorityS) {
+
+        assert userInputPriorityS != null : "userInputPriorityS should not be empty";
+
         try {
             TaskPriority taskPriority = TaskPriority.convertStringToPriority(userInputPriorityS);
             if (taskPriority == TaskPriority.HIGH) {
@@ -103,12 +112,21 @@ public class CmdPriority {
      * @param taskPriority TaskPriority(new one) that want to be set
      */
     private static void toUpdatePriority(TaskList myList, int taskIndex, TaskPriority taskPriority) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskIndex >= 0 : "taskIndex should be equal or more than 0";
+        assert taskPriority != null : "taskPriority should not be empty";
+
         myList.setTaskPriority(taskIndex, taskPriority);
         String taskPriorityInString = getTaskPriority_InString(myList, taskIndex);
         Message.msgSetPriority(taskIndex + 1, taskPriorityInString);
     }
 
     private static String getTaskPriority_InString(TaskList myList, int taskIndex){
+
+        assert myList != null : "mylist should not be empty";
+        assert taskIndex >= 0 : "taskIndex should be equal or more than 0";
+
         TaskPriority taskPriority = myList.getTaskPriority(taskIndex);
         return TaskPriority.convertPriorityToString(taskPriority);
     }

@@ -1,2 +1,4 @@
-0|T|0|borrow book|3|;
-1|E|0|project meeting|3|2001-01-25|null|null|;
+0|E|1|project meeting|3|2001-01-25|null|null|;
+1|T|0|borrow book|3|;
+2|E|0|project meeting|3|2001-01-25|null|null|;
+3|D|1|return book|3|2010-01-25|null|;

@@ -12,6 +12,9 @@ public class CmdList {
      * @param myList TaskList that contains the list of task
      */
     public static void run(TaskList myList) {
+
+        assert myList != null : "mylist should not be empty";
+
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             Message.msgShowBracketWithIndex(i + 1);
             new MsgTaskDetail(myList, i).showTaskDetail();

@@ -66,6 +66,10 @@ public class CmdSave {
         TaskPriority taskPriority = myList.getTaskPriority(taskIndex);
         taskPriorityInString = taskPriority.toStringInNumber();
 
+        assert taskTypeInString != null : "taskTypeInString should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert taskPriority != null : "taskPriority should not be empty";
+
         sb.append(taskIndex).append("|");
         sb.append(taskTypeInString).append("|");
         sb.append(isDoneInString).append("|");

@@ -12,6 +12,9 @@ public class CmdAddTask {
 
     public static void addTaskToDo(TaskList myList, String userInput) {
 
+        assert myList != null : "mylist should not be empty";
+        assert userInput != null : "userInput should not be empty";
+
         if (userInput.length() <= 5) {
             Message.msgInvalidInputMissingDescription();
             return;
@@ -29,6 +32,10 @@ public class CmdAddTask {
     }
 
     public static void addTaskEvent(TaskList myList, String userInput) {
+
+        assert myList != null : "mylist should not be empty";
+        assert userInput != null : "userInput should not be empty";
+
         if (userInput.length() <= 6) {
             Message.msgInvalidInputMissingDescription();
             return;
@@ -66,6 +73,10 @@ public class CmdAddTask {
     }
 
     public static void addTaskDeadline(TaskList myList, String userInput) {
+
+        assert myList != null : "mylist should not be empty";
+        assert userInput != null : "userInput should not be empty";
+
         if (userInput.length() <= 9) {
             Message.msgInvalidInputMissingDescription();
             return;
@@ -107,6 +118,11 @@ public class CmdAddTask {
      * @param date       String that represents the date of the event
      */
     private static void toAddTaskEvent_localDate(TaskList myList, String taskDetail, String date) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert date != null : "date should not be empty";
+
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
@@ -136,6 +152,11 @@ public class CmdAddTask {
      */
     private static void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
                                                            String date, String timeStart) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert date != null : "date should not be empty";
+        assert timeStart != null : "timeStart should not be empty";
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -174,6 +195,12 @@ public class CmdAddTask {
      */
     private static void toAddTaskEvent_localDate_localTime(TaskList myList, String taskDetail,
                                                            String date, String timeStart, String timeEnd) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert date != null : "date should not be empty";
+        assert timeStart != null : "timeStart should not be empty";
+        assert timeEnd != null : "timeEnd should not be empty";
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
@@ -216,6 +243,11 @@ public class CmdAddTask {
      * @param date       String that represents the date of the deadline
      */
     private static void toAddTaskDeadline_localDate(TaskList myList, String taskDetail, String date) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert date != null : "date should not be empty";
+
         LocalDate taskDate = ParseDateTime.toDate(date);
 
         if (taskDate == null) {
@@ -244,6 +276,11 @@ public class CmdAddTask {
      */
     private static void toAddTaskDeadline_localDate_localTime(TaskList myList, String taskDetail,
                                                               String date, String time) {
+
+        assert myList != null : "mylist should not be empty";
+        assert taskDetail != null : "taskDetail should not be empty";
+        assert date != null : "date should not be empty";
+        assert time != null : "time should not be empty";
 
         LocalDate taskDate = ParseDateTime.toDate(date);
         LocalTime taskTime = ParseDateTime.toTime(time);

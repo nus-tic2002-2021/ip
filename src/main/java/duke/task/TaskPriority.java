@@ -14,7 +14,7 @@ public enum TaskPriority {
         int taskAPriority = convertPriorityToInt(taskA);
         int taskBPriority = convertPriorityToInt(taskB);
 
-        if (taskAPriority > taskBPriority) {
+        if (taskAPriority < taskBPriority) {
             return true;
         }
         return false;

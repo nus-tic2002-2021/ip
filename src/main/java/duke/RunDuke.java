@@ -39,6 +39,10 @@ public class RunDuke {
     }
 
     private static boolean canProcessCommand(String userCommand, String userInput) {
+
+        assert !userCommand.isEmpty() : "userCommand should not be empty";
+        assert !userInput.isEmpty() : "userInput should not be empty";
+
         switch (userCommand) {
         case "bye":
             return  false;

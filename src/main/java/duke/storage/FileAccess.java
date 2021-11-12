@@ -39,6 +39,8 @@ public class FileAccess {
      */
     public void saveProgressIntoFile(String stringToBeWritten) {
 
+        assert !stringToBeWritten.isEmpty() : "stringToBeWritten should not be empty";
+
         try {
             FileWriter fw = new FileWriter(filepath);
             fw.write(stringToBeWritten);

@@ -8,6 +8,8 @@ public class Parser {
 
     public String processUserCommand(String userInput) {
 
+        assert userInput != null : "There should be user input in processUserCommand";
+
         if (userInput.equals("bye")) {
             return "bye";
         } else if (userInput.equals("list")) {
