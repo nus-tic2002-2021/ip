@@ -1,25 +1,14 @@
 package duke;
 
-import duke.action.ParserFacade;
+import org.junit.jupiter.api.Test;
 
-/**
- * Begin the program here.
- *
- * @author Kang Teng
- * @version 8.0
- * @since 2021-09-01
- */
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class DukeTest {
-
-    /**
-     * Starting point of the program
-     */
-    public static void main(String[] args) {
-
-        ParserFacade parserFacade = new ParserFacade();
-
-        parserFacade.startDuke();
-        parserFacade.runDuke();
-        parserFacade.endDuke();
+    @Test
+    public void dummyTest(){
+        assertEquals(2, 2);
     }
+
+    
 }

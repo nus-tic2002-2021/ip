@@ -1,10 +1,2 @@
 0|T|0|borrow book|3|;
-1|E|1|project meeting|3|2001-01-25|null|null|;
-2|E|0|project meeting|3|2002-06-25|18:00|null|;
-3|E|0|project meeting|3|2002-06-25|18:00|19:00|;
-4|D|0|return book|3|2010-01-25|null|;
-5|E|1|project meeting|3|2002-06-25|18:00|null|;
-6|E|0|project meeting|3|2002-06-25|18:00|19:00|;
-7|E|0|project meeting|3|2003-12-25|19:00|19:00|;
-8|D|0|return book|3|2010-01-25|null|;
-9|D|1|return book|3|2011-02-25|06:00|;
+1|E|0|project meeting|3|2001-01-25|null|null|;

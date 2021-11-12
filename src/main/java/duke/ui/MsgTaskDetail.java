@@ -18,7 +18,7 @@ public class MsgTaskDetail {
     private static String timeStart;
     private static String timeEnd;
 
-    public MsgTaskDetail(TaskList myList, int taskIndex){
+    public MsgTaskDetail(TaskList myList, int taskIndex) {
         this.myList = myList;
         this.taskIndex = taskIndex;
         taskTypeInString = getTaskType_InString(myList, taskIndex);
@@ -27,10 +27,10 @@ public class MsgTaskDetail {
         taskPriorityInString = getTaskPriority(myList, taskIndex);
     }
 
-    public static void showTaskDetail(){
+    public static void showTaskDetail() {
         TaskType taskType = myList.getTaskType(taskIndex);
 
-        switch(taskType){
+        switch (taskType) {
         case TODOS:
             showTaskTodo();
             break;
@@ -45,8 +45,8 @@ public class MsgTaskDetail {
         }
     }
 
-    private static void showTaskTodo(){
-        Message.msgTaskTodo(taskTypeInString, isDoneInString,taskDetail, taskPriorityInString);
+    private static void showTaskTodo() {
+        Message.msgTaskTodo(taskTypeInString, isDoneInString, taskDetail, taskPriorityInString);
     }
 
     private static void showTaskEvent(TaskList myList, int taskIndex) {
@@ -68,13 +68,13 @@ public class MsgTaskDetail {
         }
     }
 
-    private static void showTaskDeadline(TaskList myList, int taskIndex){
+    private static void showTaskDeadline(TaskList myList, int taskIndex) {
         year = myList.getTaskDeadLineTaskDateYearInString(taskIndex);
         month = myList.getTaskDeadLineTaskDateMonthInString(taskIndex);
         day = myList.getTaskDeadLineTaskDateDayInString(taskIndex);
         timeStart = myList.getTaskDeadLineTaskTimeInString(taskIndex);
 
-        if (timeStart.equals("null")){
+        if (timeStart.equals("null")) {
             Message.msgTaskDeadline(taskTypeInString, isDoneInString, taskDetail,
                     year, month, day, taskPriorityInString);
         } else {

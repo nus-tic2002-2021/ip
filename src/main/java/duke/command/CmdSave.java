@@ -11,7 +11,6 @@ public class CmdSave {
     private static TaskList myList;
     private static StringBuilder sb;
 
-    private static int taskIndex;
     private static String taskTypeInString;
     private static String isDoneInString;
     private static String taskDetail;
