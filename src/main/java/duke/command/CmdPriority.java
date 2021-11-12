@@ -1,10 +1,18 @@
 package duke.command;
 
+import java.util.Scanner;
+
 import duke.task.TaskList;
 import duke.task.TaskPriority;
 import duke.ui.Message;
 
-import java.util.Scanner;
+/**
+ * Command class that find a task from a tasklist
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class CmdPriority {
 
@@ -21,7 +29,7 @@ public class CmdPriority {
         assert myList != null : "mylist should not be empty";
         assert scanner != null : "scanner should not be empty";
 
-        if (myList.getNumOfItem() < 1){
+        if (myList.getNumOfItem() < 1) {
             Message.msgInvalidSetTaskListIsEmpty();
             return;
         }
@@ -80,6 +88,14 @@ public class CmdPriority {
         return false;
     }
 
+    /**
+     * Check the validity of user input for priority number
+     * <p>
+     * Expected input should be 1 to 3
+     *
+     * @param userInputPriorityS
+     * @return boolean True if userInput is "1" to "3"; False otherwise
+     */
     private static boolean hasValidPriorityNumber(String userInputPriorityS) {
 
         assert userInputPriorityS != null : "userInputPriorityS should not be empty";
@@ -108,7 +124,7 @@ public class CmdPriority {
      * -- Update the task with new priority
      *
      * @param myList       TaskList that contains the list of task
-     * @param taskIndex   int that indicates the task number
+     * @param taskIndex    int that indicates the task number
      * @param taskPriority TaskPriority(new one) that want to be set
      */
     private static void toUpdatePriority(TaskList myList, int taskIndex, TaskPriority taskPriority) {
@@ -118,11 +134,18 @@ public class CmdPriority {
         assert taskPriority != null : "taskPriority should not be empty";
 
         myList.setTaskPriority(taskIndex, taskPriority);
-        String taskPriorityInString = getTaskPriority_InString(myList, taskIndex);
+        String taskPriorityInString = getTaskPriorityInString(myList, taskIndex);
         Message.msgSetPriority(taskIndex + 1, taskPriorityInString);
     }
 
-    private static String getTaskPriority_InString(TaskList myList, int taskIndex){
+    /**
+     * Get priority of the task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task in tasklist
+     * @return String that represents the priority of the task
+     */
+    private static String getTaskPriorityInString(TaskList myList, int taskIndex) {
 
         assert myList != null : "mylist should not be empty";
         assert taskIndex >= 0 : "taskIndex should be equal or more than 0";

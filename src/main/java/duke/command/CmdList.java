@@ -4,6 +4,14 @@ import duke.task.TaskList;
 import duke.ui.Message;
 import duke.ui.MsgTaskDetail;
 
+/**
+ * Command class that list all the task in the tasklist
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
+
 public class CmdList {
 
     /**

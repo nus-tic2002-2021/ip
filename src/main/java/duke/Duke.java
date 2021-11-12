@@ -1,10 +1,10 @@
 package duke;
 
+import duke.exception.UnableToLoadProcessException;
 import duke.storage.FileAccess;
 import duke.task.TaskList;
 import duke.ui.Message;
 import duke.ui.Ui;
-import duke.exception.UnableToLoadProcessException;
 
 /**
  * Begin the program here.
@@ -19,8 +19,13 @@ public class Duke {
     private TaskList myList;
     private Ui ui;
 
-
-    public Duke(String filepath){
+    /**
+     * Constructor
+     * <p>
+     * initialize the ui, fileAccess and taskList
+     * load the progress into taskList
+     */
+    public Duke(String filepath) {
         ui = new Ui();
         fileAccess = new FileAccess(filepath);
         myList = new TaskList();
@@ -33,12 +38,18 @@ public class Duke {
         }
     }
 
-    public void initialize(){
+    /**
+     * Start the Duke program
+     */
+    public void initialize() {
         StartDuke.run();
         new RunDuke(myList, ui, fileAccess).run();
     }
 
-    public void end(){
+    /**
+     * End the Duke program
+     */
+    public void end() {
         new EndDuke(fileAccess).run();
     }
 

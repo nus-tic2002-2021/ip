@@ -92,6 +92,11 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Set thr priority of a task
+     *
+     * @param taskPriority TaskPriority that represent the new priority
+     */
     public void setPriority(TaskPriority taskPriority) {
         this.taskPriority = taskPriority;
     }

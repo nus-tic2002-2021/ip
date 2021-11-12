@@ -1,11 +1,25 @@
 package duke.action;
 
+/**
+ * Make sense of user input and return the user command
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
+
 public class Parser {
 
     public Parser() {
 
     }
 
+    /**
+     * Convert date from String to LocalDate
+     *
+     * @param userInput String
+     * @return String that describe the command specified by user
+     */
     public String processUserCommand(String userInput) {
 
         assert userInput != null : "There should be user input in processUserCommand";
@@ -42,6 +56,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Convert date from String to LocalDate
+     *
+     * @param firstWord String
+     * @return String that represents the first word of a line of string
+     */
     private String getFirstWord(String firstWord) {
 
         int index = firstWord.indexOf(' ');

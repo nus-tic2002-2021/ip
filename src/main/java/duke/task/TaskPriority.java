@@ -22,7 +22,7 @@ public enum TaskPriority {
 
     /**
      * Convert Int value to Priority
-     *
+     * <p>
      * 1 -> HIGH
      * 2 -> MEDIUM
      * 3 -> LOW
@@ -46,7 +46,7 @@ public enum TaskPriority {
 
     /**
      * Convert String value to Priority
-     *
+     * <p>
      * "1" -> HIGH
      * "2" -> MEDIUM
      * "3" -> LOW
@@ -70,7 +70,7 @@ public enum TaskPriority {
 
     /**
      * Convert TaskPriority to Int
-     *
+     * <p>
      * 1 <- HIGH
      * 2 <- MEDIUM
      * 3 <- LOW
@@ -114,7 +114,7 @@ public enum TaskPriority {
     /**
      * Convert TaskPriority to String
      */
-    public String toStringInNumber(){
+    public String toStringInNumber() {
         switch (this) {
         case LOW:
             return "3";

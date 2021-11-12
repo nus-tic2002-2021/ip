@@ -13,11 +13,16 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public Ui(){
+    public Ui() {
 
     }
 
-    public String requestUserInput(Scanner scanner){
+    /**
+     * request user input and read the input string
+     *
+     * @param scanner Scanner that read user input
+     */
+    public String requestUserInput(Scanner scanner) {
 
         String userInput = "";
 

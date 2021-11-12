@@ -1,16 +1,31 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.ui.Message;
-import duke.ui.MsgTaskDetail;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.task.TaskList;
+import duke.ui.Message;
+import duke.ui.MsgTaskDetail;
+
+/**
+ * Command class that find a task from a tasklist
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
+
 public class CmdFind {
 
-    public static void run(TaskList myList, String userInput){
+    /**
+     * Execute the find task command
+     * Find a task based on the keyword input by the user
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String
+     */
+    public static void run(TaskList myList, String userInput) {
 
         assert myList != null : "mylist should not be empty";
         assert userInput != null : "userInput should not be empty";
@@ -38,6 +53,13 @@ public class CmdFind {
         showTaskFound(myList, taskNumberContainingSearchTerm);
     }
 
+    /**
+     * Check if the searchString can be found inside the sourceString
+     *
+     * @param sourceString String that represents the source
+     * @param searchString String that represents the term used to search in the sourceString
+     * @return boolean True if the term is found; false otherwise
+     */
     private static boolean hasStringContain(String sourceString, String searchString) {
         String pattern = "\\b" + searchString + "\\b";
         Pattern p = Pattern.compile(pattern);

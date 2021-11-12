@@ -1,11 +1,5 @@
 package duke.ui;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import duke.task.TaskList;
 
 /**
@@ -19,6 +13,10 @@ import duke.task.TaskList;
 public class Message {
 
     // Starting Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    /**
+     * Display greet message at the start
+     */
     public static void msgGreet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -37,7 +35,8 @@ public class Message {
      * @param taskDetail       String that describes the task detail
      * @param numOfItem        Int that describes the number of items in taskList
      */
-    public static void msgAssignTaskToDo(String taskTypeInString, String isDoneInString, String taskDetail, int numOfItem) {
+    public static void msgAssignTaskToDo(String taskTypeInString, String isDoneInString,
+                                         String taskDetail, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
@@ -59,7 +58,8 @@ public class Message {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println(
-                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(by: " + dateInString + ")");
+                "      [" + taskTypeInString + "][" + isDoneInString + "] "
+                        + taskDetail + "(by: " + dateInString + ")");
         System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
@@ -99,8 +99,9 @@ public class Message {
                                                   String taskDetail, String dateInString, int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
-        System.out.println(
-                "      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + "(at: " + dateInString + ")");
+        System.out.println("      [" + taskTypeInString + "]["
+                + isDoneInString + "] "
+                + taskDetail + "(at: " + dateInString + ")");
         System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
@@ -115,8 +116,12 @@ public class Message {
      * @param timeStartInString String that describes the start time
      * @param numOfItem         Int that describes the number of tasks
      */
-    public static void msgAssignTaskEventTaskDateTaskTimeStart(String taskTypeInString, String isDoneInString, String taskDetail,
-                                                               String dateInString, String timeStartInString, int numOfItem) {
+    public static void msgAssignTaskEventTaskDateTaskTimeStart(String taskTypeInString,
+                                                               String isDoneInString,
+                                                               String taskDetail,
+                                                               String dateInString,
+                                                               String timeStartInString,
+                                                               int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
@@ -136,14 +141,18 @@ public class Message {
      * @param timeEndInString   String that describes the end time
      * @param numOfItem         Int that describes the number of tasks
      */
-    public static void msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(String taskTypeInString, String isDoneInString,
-                                                                          String taskDetail, String dateInString,
-                                                                          String timeStartInString, String timeEndInString,
-                                                                          int numOfItem) {
+    public static void msgAssignEventTaskDateTimeStartEnd(String taskTypeInString,
+                                                       String isDoneInString,
+                                                       String taskDetail,
+                                                       String dateInString,
+                                                       String timeStartInString,
+                                                       String timeEndInString,
+                                                       int numOfItem) {
 
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      [" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail);
-        System.out.println("      (at: " + dateInString + ", from: " + timeStartInString + " to " + timeEndInString + ")");
+        System.out.println("      (at: " + dateInString + ", from: " + timeStartInString
+                + " to " + timeEndInString + ")");
         System.out.println("    Now you have " + numOfItem + " tasks in the list.");
         System.out.println("_________________________________");
     }
@@ -256,42 +265,72 @@ public class Message {
         System.out.println("_________________________________");
     }
 
+    /**
+     * Display TODO task description
+     */
     public static void msgTaskTodo(String taskTypeInString, String isDoneInString,
                                    String taskDetail, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("[" + taskTypeInString + "]["
+                + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
     }
 
+    /**
+     * Display EVENT task description
+     */
     public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
                                     String year, String month, String day, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] "
+                + taskDetail + " [" + taskPriorityInString + "]");
         System.out.println("             (at " + year + " " + month + " " + day + ")");
     }
 
-    public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
-                                    String year, String month, String day, String timeStart, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+    /**
+     * Display EVENT task description
+     */
+    public static void msgTaskEvent(String taskTypeInString,
+                                    String isDoneInString,
+                                    String taskDetail,
+                                    String year,
+                                    String month,
+                                    String day,
+                                    String timeStart,
+                                    String taskPriorityInString) {
+        System.out.println("[" + taskTypeInString + "]["
+                + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
         System.out.print("             (at " + year + " " + month + " " + day);
         System.out.println(" ; from: " + timeStart + ")");
     }
 
+    /**
+     * Display EVENT task description
+     */
     public static void msgTaskEvent(String taskTypeInString, String isDoneInString, String taskDetail,
                                     String year, String month, String day, String timeStart,
                                     String timeEnd, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] "
+                + taskDetail + " [" + taskPriorityInString + "]");
         System.out.print("             (at " + year + " " + month + " " + day);
         System.out.println(" ; from: " + timeStart + " to " + timeEnd + ")");
     }
 
+    /**
+     * Display DEADLINE task description
+     */
     public static void msgTaskDeadline(String taskTypeInString, String isDoneInString, String taskDetail,
                                        String year, String month, String day, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] "
+                + taskDetail + " [" + taskPriorityInString + "]");
         System.out.println("             by: " + year + " " + month + " " + day + ")");
     }
 
+    /**
+     * Display DEADLINE task description
+     */
     public static void msgTaskDeadline(String taskTypeInString, String isDoneInString, String taskDetail,
                                        String year, String month, String day,
                                        String timeStart, String taskPriorityInString) {
-        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] " + taskDetail + " [" + taskPriorityInString + "]");
+        System.out.println("[" + taskTypeInString + "][" + isDoneInString + "] "
+                + taskDetail + " [" + taskPriorityInString + "]");
         System.out.println("             by: " + year + " " + month + " " + day + " " + timeStart + ")");
     }
 
@@ -308,11 +347,17 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgArrowHead(){
+    /**
+     * Display arrow head
+     */
+    public static void msgArrowHead() {
         System.out.print(">> ");
     }
 
-    public static void msgShowDukeCommandList(){
+    /**
+     * Display full list of Duke command
+     */
+    public static void msgShowDukeCommandList() {
         System.out.println(">> Full List of Duke Command Available:");
         System.out.println("    1. todo (task description)");
         System.out.println("        >> add a TODO task");
@@ -446,12 +491,18 @@ public class Message {
         System.out.println("_________________________________");
     }
 
-    public static void msgInvalidSetTaskListIsEmpty(){
+    /**
+     * Display message about task list being empty
+     */
+    public static void msgInvalidSetTaskListIsEmpty() {
         System.out.println("    ☹  OOPS!!! The task list is empty.");
         System.out.println("_________________________________");
     }
 
-    public static void msgUnableToLoadBuddah(){
+    /**
+     * Display message when buddha.txt fails to load
+     */
+    public static void msgUnableToLoadBuddha() {
         System.out.println(" >> Buddha Protection is under maintenance <<");
         System.out.println("_________________________________");
     }
@@ -461,7 +512,7 @@ public class Message {
     /**
      * Display message before the end of program
      */
-    public static void msgBye(){
+    public static void msgBye() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("_________________________________");
     }
@@ -469,7 +520,7 @@ public class Message {
     /**
      * Display buddha.txt before the end of program
      */
-    public static void msgBuddha(String buddhaText){
+    public static void msgBuddha(String buddhaText) {
         System.out.println(buddhaText);
     }
 }

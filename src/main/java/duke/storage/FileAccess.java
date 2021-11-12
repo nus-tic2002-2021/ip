@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.ui.Message;
-import duke.ui.Ui;
-import duke.exception.UnableToLoadBuddhaException;
-import duke.exception.UnableToLoadProcessException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+
+import duke.exception.UnableToLoadBuddhaException;
+import duke.exception.UnableToLoadProcessException;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 /**
  * Handles file handling related functions
@@ -25,6 +25,7 @@ public class FileAccess {
 
     /**
      * Constructor
+     *
      * @param filepath
      */
     public FileAccess(String filepath) {
@@ -56,7 +57,7 @@ public class FileAccess {
      *
      * @return String that represents a list of task details
      */
-    public static String loadProgressFromFile() throws UnableToLoadProcessException{
+    public static String loadProgressFromFile() throws UnableToLoadProcessException {
         String progress = "";
         String pathRoot = System.getProperty("user.dir");
         // e.g. pathRoot = D:\My Files\School Documents\Repository\Duke

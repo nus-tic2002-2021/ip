@@ -1,14 +1,14 @@
 package duke.action;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParseProgressTest {
 
     @Test
-    @Disabled ("Unknown JUnit behaviour")
+    @Disabled("Unknown JUnit behaviour")
     void testSplitStringIntoSentence() {
         String input = "HelloWorld";
         String[] expected = {"HelloWorld"};
@@ -16,7 +16,7 @@ class ParseProgressTest {
     }
 
     @Test
-    @Disabled ("Unknown JUnit behaviour")
+    @Disabled("Unknown JUnit behaviour")
     void splitSentenceByBarSeparator() {
         String input = "HelloWorld";
         String[] expected = {"HelloWorld"};

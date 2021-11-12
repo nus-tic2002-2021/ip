@@ -1,15 +1,31 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.action.ParseDateTime;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.ui.Message;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+/**
+ * Command class that handle adding task
+ * <p>
+ * add 3 types of class: TODO, DEADLINE and EVENT.
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class CmdAddTask {
 
+    /**
+     * Add a task of todo type into TaskList
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String
+     */
     public static void addTaskToDo(TaskList myList, String userInput) {
 
         assert myList != null : "mylist should not be empty";
@@ -23,14 +39,20 @@ public class CmdAddTask {
         myList.addItemToDos(userInput.substring(5));
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
         String taskDetail = getTaskDetail(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
 
         Message.msgAssignTaskToDo(taskTypeInString, isDoneInString, taskDetail, numOfItem);
     }
 
+    /**
+     * Add a task of event type into TaskList
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String
+     */
     public static void addTaskEvent(TaskList myList, String userInput) {
 
         assert myList != null : "mylist should not be empty";
@@ -72,6 +94,12 @@ public class CmdAddTask {
         }
     }
 
+    /**
+     * Add a task of deadline type into TaskList
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String
+     */
     public static void addTaskDeadline(TaskList myList, String userInput) {
 
         assert myList != null : "mylist should not be empty";
@@ -133,9 +161,9 @@ public class CmdAddTask {
         myList.addItemEvent(taskDetail, taskDate);
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
-        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
+        String dateInString = getTaskEventDateInString(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
 
         Message.msgAssignTaskEventTaskDate(taskTypeInString, isDoneInString,
@@ -174,11 +202,11 @@ public class CmdAddTask {
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart);
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
-        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
+        String dateInString = getTaskEventDateInString(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
-        String getTimeStartInString = getTaskEvent_TimeStart_InString(myList, lastTaskIndex);
+        String getTimeStartInString = getTaskEventTimeStartInString(myList, lastTaskIndex);
 
         Message.msgAssignTaskEventTaskDateTaskTimeStart(taskTypeInString, isDoneInString,
                 taskDetail, dateInString, getTimeStartInString, numOfItem);
@@ -224,14 +252,14 @@ public class CmdAddTask {
         myList.addItemEvent(taskDetail, taskDate, taskTimeStart, taskTimeEnd);
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
-        String dateInString = getTaskEvent_Date_InString(myList, lastTaskIndex);
-        String getTimeStartInString = getTaskEvent_TimeStart_InString(myList, lastTaskIndex);
-        String getTimeEndInString = getTaskEvent_TimeEnd_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
+        String dateInString = getTaskEventDateInString(myList, lastTaskIndex);
+        String getTimeStartInString = getTaskEventTimeStartInString(myList, lastTaskIndex);
+        String getTimeEndInString = getTaskEventTimeEndInString(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
 
-        Message.msgAssignTaskEventTaskDateTaskTimeStartTaskTimeEnd(taskTypeInString, isDoneInString,
+        Message.msgAssignEventTaskDateTimeStartEnd(taskTypeInString, isDoneInString,
                 taskDetail, dateInString, getTimeStartInString, getTimeEndInString, numOfItem);
     }
 
@@ -258,9 +286,9 @@ public class CmdAddTask {
         myList.addItemDeadline(taskDetail, taskDate);
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
-        String dateInString = getTaskDeadline_Date_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
+        String dateInString = getTaskDeadlineDateInString(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
 
         Message.msgAssignTaskDeadlineTaskDate(taskTypeInString, isDoneInString, taskDetail, dateInString, numOfItem);
@@ -298,46 +326,103 @@ public class CmdAddTask {
         myList.addItemDeadline(taskDetail, taskDate, taskTime);
 
         int lastTaskIndex = myList.getNumOfItem() - 1;
-        String taskTypeInString = getTaskType_InString(myList, lastTaskIndex);
-        String isDoneInString = getIsDone_InString(myList, lastTaskIndex);
-        String dateInString = getTaskDeadline_Date_InString(myList, lastTaskIndex);
-        String timeInString = getTaskDeadline_Time_InString(myList, lastTaskIndex);
+        String taskTypeInString = getTaskTypeInString(myList, lastTaskIndex);
+        String isDoneInString = getIsDoneInString(myList, lastTaskIndex);
+        String dateInString = getTaskDeadlineDateInString(myList, lastTaskIndex);
+        String timeInString = getTaskDeadlineTimeInString(myList, lastTaskIndex);
         int numOfItem = lastTaskIndex + 1;
 
-        Message.msgAssignTaskDeadlineTaskDateTaskTime(taskTypeInString, isDoneInString, taskDetail, dateInString, timeInString, numOfItem);
+        Message.msgAssignTaskDeadlineTaskDateTaskTime(taskTypeInString,
+                isDoneInString, taskDetail, dateInString, timeInString, numOfItem);
     }
 
-    private static String getTaskType_InString(TaskList myList, int taskIndex) {
+    /**
+     * Get TaskType of a task using myList and its task index.
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of TaskType of a task in tasklist
+     */
+    private static String getTaskTypeInString(TaskList myList, int taskIndex) {
         TaskType taskType = myList.getTaskType(taskIndex);
         return TaskType.taskTypeToString(taskType);
     }
 
-    private static String getIsDone_InString(TaskList myList, int taskIndex) {
+    /**
+     * Get isDone status of a task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of isDone of a task in tasklist
+     */
+    private static String getIsDoneInString(TaskList myList, int taskIndex) {
         boolean isDone = myList.getTaskDoneStatus(taskIndex);
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Get taskDetail of a task
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of taskDetail of a task in tasklist
+     */
     private static String getTaskDetail(TaskList myList, int taskIndex) {
         return myList.getTaskDetail(taskIndex);
     }
 
-    private static String getTaskEvent_Date_InString(TaskList myList, int taskIndex) {
+    /**
+     * Get date of an EVENT task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of date of a task in tasklist
+     */
+    private static String getTaskEventDateInString(TaskList myList, int taskIndex) {
         return myList.getTaskEventTaskDateInString(taskIndex);
     }
 
-    private static String getTaskEvent_TimeStart_InString(TaskList myList, int taskIndex){
+    /**
+     * Get start time of an EVENT task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of start time of a task in tasklist
+     */
+    private static String getTaskEventTimeStartInString(TaskList myList, int taskIndex) {
         return myList.getTaskEventTaskTimeStartInString(taskIndex);
     }
 
-    private static String getTaskEvent_TimeEnd_InString (TaskList myList, int taskIndex){
+    /**
+     * Get end time of an EVENT task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of end time of a task in tasklist
+     */
+    private static String getTaskEventTimeEndInString(TaskList myList, int taskIndex) {
         return myList.getTaskEventTaskTimeEndInString(taskIndex);
     }
 
-    private static String getTaskDeadline_Date_InString(TaskList myList, int taskIndex){
+    /**
+     * Get date of an DEADLINE task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of date of a task in tasklist
+     */
+    private static String getTaskDeadlineDateInString(TaskList myList, int taskIndex) {
         return myList.getTaskDeadLineTaskDateInString(taskIndex);
     }
 
-    private static String getTaskDeadline_Time_InString(TaskList myList, int taskIndex){
+    /**
+     * Get start time of an DEADLINE task in String
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param taskIndex Int that represents the index of the task
+     * @return String representation of start time of a task in tasklist
+     */
+    private static String getTaskDeadlineTimeInString(TaskList myList, int taskIndex) {
         return myList.getTaskDeadLineTaskTimeInString(taskIndex);
     }
 }

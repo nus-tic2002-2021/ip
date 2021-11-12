@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.action.ParseDateTime;
 import duke.action.ParseProgress;
 import duke.exception.UnableToLoadProcessException;
@@ -7,8 +10,13 @@ import duke.task.TaskList;
 import duke.task.TaskPriority;
 import duke.ui.Message;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+/**
+ * Duke class that executes when Duke is loading progress
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class LoadDuke {
 
@@ -16,11 +24,17 @@ public class LoadDuke {
     private String progress;
     private String[] sentences;
 
+    /**
+     * Constructor
+     */
     public LoadDuke(TaskList myList, String progress) {
         this.myList = myList;
         this.progress = progress;
     }
 
+    /**
+     * Execute the load
+     */
     public void run() throws UnableToLoadProcessException {
         try {
             splitStringByTask();
@@ -31,10 +45,18 @@ public class LoadDuke {
         }
     }
 
+    /**
+     * Calls to parser to split progress.txt into sentences
+     * Each sentence represents a task in String
+     */
     private void splitStringByTask() throws Exception {
-        sentences = ParseProgress.splitStringIntoSentence(progress);
+        sentences = ParseProgress.splitProgressIntoSentence(progress);
     }
 
+    /**
+     * Loop through the sentences and read each sentence
+     * Generate task from each sentence
+     */
     private void createTaskFromSentence() throws Exception {
         for (int i = 0; i < sentences.length - 1; i++) {
             String[] phrases = ParseProgress.splitSentenceByBarSeparator(sentences[i]);
@@ -42,6 +64,9 @@ public class LoadDuke {
         }
     }
 
+    /**
+     * Add task into taskList based on each sentence
+     */
     private void addTaskFromPhrases(String[] phrases) throws Exception {
 
         String taskIndexInString = phrases[0];
@@ -75,10 +100,15 @@ public class LoadDuke {
             switch (i) {
             case 5:
                 taskDateInString = phrases[5];
+                break;
             case 6:
                 taskStartTimeInString = phrases[6];
+                break;
             case 7:
                 taskEndTimeInString = phrases[7];
+                break;
+            default:
+                break;
             }
             i++;
         }
@@ -108,6 +138,8 @@ public class LoadDuke {
                 taskTimeStart = ParseDateTime.toTime(taskStartTimeInString);
                 myList.addItemDeadline(taskDetail, taskDate, taskTimeStart);
             }
+            break;
+        default:
             break;
         }
 

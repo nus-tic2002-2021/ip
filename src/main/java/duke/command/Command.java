@@ -1,28 +1,37 @@
 package duke.command;
 
-import duke.action.ParseDateTime;
+import java.util.Scanner;
+
 import duke.action.Parser;
 import duke.storage.FileAccess;
 import duke.task.TaskList;
-import duke.task.TaskType;
 import duke.ui.Message;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+/**
+ * Core Command class
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class Command {
 
-    Parser parser;
+    private static Parser parser;
 
+    /**
+     * Constructor
+     */
     public Command(Parser parser) {
         this.parser = parser;
     }
 
     // Basic processCommand Method <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    public void showInfo(){
+    /**
+     * Show info of all the command Duke can accept
+     */
+    public void showInfo() {
         Message.msgShowDukeCommandList();
     }
 
@@ -122,6 +131,9 @@ public class Command {
         CmdAddTask.addTaskDeadline(myList, userInput);
     }
 
+    /**
+     * Show invalid command
+     */
     public void showInvalidCommand() {
         Message.msgInvalidInput();
     }

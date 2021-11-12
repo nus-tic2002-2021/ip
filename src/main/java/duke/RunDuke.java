@@ -1,12 +1,20 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.action.Parser;
 import duke.command.Command;
 import duke.storage.FileAccess;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
+/**
+ * Duke class that run the main Duke program
+ *
+ * @author Kang Teng
+ * @version 8.0
+ * @since 2021-09-01
+ */
 
 public class RunDuke {
 
@@ -17,7 +25,9 @@ public class RunDuke {
     private static Command cmd;
     private static Scanner scanner;
 
-
+    /**
+     * Constructor
+     */
     public RunDuke(TaskList myList, Ui ui, FileAccess fileAccess) {
         this.myList = myList;
         this.ui = ui;
@@ -27,6 +37,9 @@ public class RunDuke {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Execute the run
+     */
     public void run() {
 
         boolean isDukeRunning = true;
@@ -38,6 +51,13 @@ public class RunDuke {
         }
     }
 
+    /**
+     * Read user command and execute respective methods accordingly
+     *
+     * @param userCommand String that represents the command type by user
+     * @param userInput   String that represents the full user input
+     * @return boolean false if the command is "bye"; true if otherwise
+     */
     private static boolean canProcessCommand(String userCommand, String userInput) {
 
         assert !userCommand.isEmpty() : "userCommand should not be empty";
@@ -45,7 +65,7 @@ public class RunDuke {
 
         switch (userCommand) {
         case "bye":
-            return  false;
+            return false;
         case "list":
             cmd.showFullList(myList);
             return true;
