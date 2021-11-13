@@ -2,7 +2,7 @@ package com.alexooi.duke.enums;
 
 public enum CommandType {
     ADD("todo <description>\n    deadline <description> /by <date>\n    event <description> /at <date>", "<date> must be in yyyy-mm-dd or yyyy-mm-ddThh:mm format."),
-    REMOVE("remove <num>", "<num> must be a number that currently exists in the list."),
+    REMOVE("delete <num>", "<num> must be a number that currently exists in the list."),
     COMPLETE("done <num>", "<num> must be a number that currently exists in the list."),
     ARCHIVE("archive <num>/all", "<num> must be a number that currently exists in the list."),
     VIEW_SCHEDULE("view <date>", "<date> must be in yyyy-mm-dd."),

@@ -44,7 +44,7 @@ public class CommandLineParser implements Parser<String, Command> {
     /**
      * Note: This function is not in use, but has been added here due to the interface.
      * @param input String to validate
-     * @return
+     * @return false always
      */
     @Override
     public boolean isValidInput(String input) {
