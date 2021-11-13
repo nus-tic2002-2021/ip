@@ -36,6 +36,10 @@ public class Todo extends Task {
         return "T";
     }
 
+    /**
+     * Return a string with information of the "to do" task
+     * @return
+     */
     @Override
     public String getTaskInfo() {
         String info = super.getTaskInfo();

@@ -98,7 +98,7 @@ public class DoWithin extends Task {
     }
 
     /**
-     * Return string of start and end date time information.
+     * Return string with information of the "do within" task.
      * Date is given in a new format if "dowithin" has a LocalDate object.
      * @return String with information on the event of the task.
      */

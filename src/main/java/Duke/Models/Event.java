@@ -83,7 +83,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return string of date time information.
+     * Return string with information of the event.
      * Date is given in a new format if event has a LocalDate object.
      * @return String with information on the event of the task.
      */

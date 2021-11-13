@@ -96,6 +96,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints tasks with description matching the input string.
+     * @param desc
+     */
     public static void printTaskWithDesc(String desc) {
         int count = 0;
         for (int i = 0; i < TaskList.size(); i++) {

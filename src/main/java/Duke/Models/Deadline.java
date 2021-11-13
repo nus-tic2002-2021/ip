@@ -83,7 +83,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return string of deadline information.
+     * Return string with information of the deadline.
      * Date is given in a new format if event has a LocalDate object.
      * @return String with information on the deadline of the task.
      */

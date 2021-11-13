@@ -46,10 +46,22 @@ public class Ui {
                 + newTask.getTaskInfo());
     }
 
+    /**
+     * Prints a request for user to choose priority leve
+     * of a newly added task.
+     */
     public static void requestPriorityLevel() {
         System.out.println("What is the priority level of this task?" +
                 "\n(enter 1 - LOW priority, 2 - MEDIUM priority, 3 - HIGH priority." +
                 "\nOther inputs will assume task has NIL priority level.)");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Prints the closing message of Duke.
+     */
+    public static void endDuke() {
+        System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
     }
 }

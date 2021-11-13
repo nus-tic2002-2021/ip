@@ -361,6 +361,11 @@ public class InputParser {
         }
     }
 
+    /**
+     * If input contain a valid keyword to search for task,
+     * print tasks with the keyword in their descriptions.
+     * @param input
+     */
     public static void parseFindInput(String input) {
         String[] parts = input.split(" ");
         try {

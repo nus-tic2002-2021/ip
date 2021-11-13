@@ -49,18 +49,13 @@ public class Duke {
             String input = getInput();
             System.out.println(Ui.LINE);
             if (input.equals("bye")) {
-                endDuke();
+                Ui.endDuke();
                 break;
             } else {
                 InputParser.parseInput(input);
             }
             System.out.println(Ui.LINE + "\n");
         }
-    }
-
-    public static void endDuke() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(Ui.LINE);
     }
 
     /**
