@@ -2,6 +2,7 @@ package dukeMain.tasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ import dukeMain.Parser;
 // e.g., it has operations to add/delete dukeMain.tasks in the list
 public class TaskList {
     public static Ui ui;
+    public static Parser parser;
     private static ArrayList<Task> taskListing = new ArrayList<>();
 
     public TaskList() {
@@ -35,6 +37,8 @@ public class TaskList {
     }
     // Add Task command
     public static void addTask(String command,String[] args,boolean isFile) throws DukeException {
+        LocalDate lDate;
+        String time;
         if(command.equalsIgnoreCase("Todo") || command.equalsIgnoreCase("T"))
         {
             if ((isFile && args.length != 2) || (!isFile && args.length != 1)){
@@ -47,15 +51,20 @@ public class TaskList {
         }
         else if(command.equalsIgnoreCase("Deadline") || command.equalsIgnoreCase("D"))
         {
-            if(args.length == 0)
+            if((!isFile && args.length == 0) || (isFile && args.length == 1))
                 throw new DeadlineBodyException("OOPS!!! The description of a dukeMain.tasks.Deadline cannot be empty");
-            if(args.length == 1)
+            if((!isFile && args.length == 1) || (isFile && args.length == 2))
                 throw new DeadlineByException("OOPS!!! When is the dukeMain.tasks.Deadline ?");
 
-            if (isFile) taskListing.add(new Deadline(Boolean.getBoolean(args[0]), args[1],args[2]));
-            else taskListing.add(new Deadline(args[0],args[1]));
-
-
+            if (isFile) {
+                lDate = parser.parseLDT(args[2]);
+                time = parser.getTime(args[2]);
+                taskListing.add(new Deadline(Boolean.getBoolean(args[0]), args[1],lDate,time));
+            }else{
+                lDate = parser.parseLDT(args[1]);
+                time = parser.getTime(args[1]);
+                taskListing.add(new Deadline(args[0],lDate,time));
+            }
         }
         else if(command.equalsIgnoreCase("Event") || command.equalsIgnoreCase("E"))
         {
@@ -65,8 +74,18 @@ public class TaskList {
             if(args.length == 1)
                 throw new EventAtException("OOPS!!! When is the dukeMain.tasks.Event ?");
 
-            if (isFile) taskListing.add(new Event(Boolean.getBoolean(args[0]), args[1],args[2]));
-            else taskListing.add(new Event(args[0],args[1]));
+            if (isFile) {
+                lDate = parser.parseLDT(args[2]);
+                time = parser.getTime(args[2]);
+                taskListing.add(new Event(Boolean.getBoolean(args[0]), args[1],lDate,time));
+            }else{
+                lDate = parser.parseLDT(args[1]);
+                time = parser.getTime(args[1]);
+                taskListing.add(new Event(args[0],lDate,time));
+            }
+
+//            if (isFile) taskListing.add(new Event(Boolean.getBoolean(args[0]), args[1],args[2]));
+//            else taskListing.add(new Event(args[0],args[1]));
         }
     }
 

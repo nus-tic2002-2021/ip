@@ -9,6 +9,9 @@ import dukeMain.commands.HelpCommand;
 import dukeMain.commands.IncorrectCommand;
 import dukeMain.commands.ListCommand;
 import dukeMain.commands.SaveCommand;
+import dukeMain.common.month.monthEnum;
+
+import java.time.LocalDate;
 
 
 // deals with making sense of the user command
@@ -99,6 +102,54 @@ public class Parser {
         return returnStr;
     }
 
+    public static LocalDate parseLDT(String dateTime){
+        String str[] = dateTime.split("\\W");
+        int beginIndex = 0,day,month,year;
+        LocalDate lDate ;
+
+        // Check for any by or at
+        if (str[beginIndex].toLowerCase().startsWith("at") || str[beginIndex].toLowerCase().startsWith("by")){
+            beginIndex ++;
+        }
+        if(str[beginIndex].isEmpty()){
+            beginIndex++;
+        }
+        // datetime only has Date no time
+        System.out.println(str[beginIndex]);
+        System.out.println(str[beginIndex+1]);
+        System.out.println(str[beginIndex+2]);
+        day = Integer.parseInt(str[beginIndex]);
+        try {
+            month = Integer.parseInt(str[beginIndex+1]);
+        }catch(NumberFormatException e){
+            month = convertMonth(str[beginIndex+1]);
+        }
+        year = Integer.parseInt(str[beginIndex+2]);
+
+        // Add 2000 to make any value such as 21 into 2021
+        if(year < 100) year += 2000;
+
+        lDate = LocalDate.of(year,month,day);
+
+        return lDate;
+    }
+
+    public static int convertMonth(String month){
+        monthEnum mon = monthEnum.valueOf(month.toUpperCase());
+        return mon.getMonthInt();
+    }
+
+    public static String getTime(String dateTime){
+        String[] str = dateTime.split("\\W");
+        String returnStr = "";
+        int index = 3;
+        if(str[0].isEmpty()) index ++;
+        for (int i = index; i < str.length;i++){
+            returnStr += str[i];
+        }
+        System.out.println(returnStr);
+        return returnStr;
+    }
 
 
 }
