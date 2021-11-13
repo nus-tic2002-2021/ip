@@ -72,6 +72,36 @@ public class InputChecker {
         }
     }
 
+    public static boolean isValidDoWithinInput(String input) throws DukeException {
+        if (input.contains("/start")) {
+            String[] parts = input.substring(8).split("/start");
+            String[] startEnd;
+            if (parts[1].contains("/end")) {
+                startEnd = parts[1].split("/end");
+            } else {
+                throw new DukeException("☹ OOPS!!! Invalid syntax for adding dowithin.");
+            }
+            if (parts.length != 2) {
+                throw new DukeException("☹ OOPS!!! Invalid syntax for adding dowithin.");
+            } else if (parts[0].trim().equals("")) {
+                throw new DukeException("☹ OOPS!!! The task description of " +
+                        "an dowithin cannot be empty.");
+            }
+            if (startEnd.length != 2) {
+                throw new DukeException("☹ OOPS!!! Invalid syntax for adding dowithin.");
+            } else if (startEnd[0].trim().equals("")) {
+                throw new DukeException("☹ OOPS!!! The start date/time " +
+                        "of a dowithin cannot be empty.");
+            } else if (startEnd[1].trim().equals("")) {
+                throw new DukeException("☹ OOPS!!! The end date/time " +
+                        "of a dowithin cannot be empty.");
+            }
+            return true;
+        } else {
+            throw new DukeException("☹ OOPS!!! Invalid syntax for adding dowithin.");
+        }
+    }
+
     /**
      * Checks whether input contains the enough and correct information
      * to mark a task as done.
