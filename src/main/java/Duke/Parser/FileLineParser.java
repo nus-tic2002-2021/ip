@@ -138,6 +138,14 @@ public class FileLineParser {
         return newEvent;
     }
 
+    /**
+     * Takes in the parsed parts of a line from the storage file,
+     * checks whether it have start date, start time, end date and end time
+     * and creates and returns
+     * a new "DoWithin" object using the correct constructor based on the checks.
+     * @param parts
+     * @return an DoWithin object created from information parsed from a file line.
+     */
     public static DoWithin getDoWithinFromLine(String[] parts) {
         String[] startDateTime = parts[3].trim().split(" ");
         String[] endDateTime = parts[4].trim().split(" ");

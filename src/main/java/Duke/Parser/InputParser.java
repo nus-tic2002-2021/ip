@@ -138,7 +138,7 @@ public class InputParser {
      * parse the parts of the input
      * and returns a new Event object created using the relevant constructor.
      * @param input
-     * @return a Event object created from a valid input with event information.
+     * @return an Event object created from a valid input with event information.
      */
     public static Event buildEvent(String input) {
         String[] parts = input.substring(5).split("/at");
@@ -163,6 +163,12 @@ public class InputParser {
         return newEvent;
     }
 
+    /**
+     * If input contains valid information for a "dowithin" object,
+     * method creates the "dowithin" Object from the input
+     * and adds it to duke task list
+     * @param input
+     */
     public static void parseDoWithinInput(String input) {
         try {
             if (InputChecker.isValidDoWithinInput(input)) {
@@ -177,6 +183,14 @@ public class InputParser {
         }
     }
 
+    /**
+     * Takes in a valid input with information on
+     * a "dowithin" task that has to be done within a period of time,
+     * parse the parts of the input
+     * and returns a new DoWithin object created using the relevant constructor.
+     * @param input
+     * @return a DoWithin object created from a valid input with dowithin information.
+     */
     public static DoWithin buildDoWithin(String input) {
         String[] parts = input.substring(8).split("/start");
         String[] startEnd = parts[1].split("/end");

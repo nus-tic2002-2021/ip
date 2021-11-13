@@ -12,12 +12,35 @@ public class DoWithin extends Task {
     protected LocalDate endDate;
     protected LocalTime endTime;
 
+    /**
+     * A constructor for dowithin object that takes in three strings
+     * one as the task description
+     * and the other two as the start date/time and end date/time
+     * of the "dowithin" task.
+     * @param newTask
+     * @param newStart
+     * @param newEnd
+     */
     public DoWithin(String newTask, String newStart, String newEnd) {
         super(newTask);
         start = newStart;
         end = newEnd;
     }
 
+    /**
+     * A constructor for dowithin that takes in
+     * three strings, two localtime and two localdate objects
+     * newTask string representing the task description
+     * newStart, newStartDate and newStartTime representing the starting date/time of task
+     * newEnd, newEndDate and newEndTime representing the ending date/time of task
+     * @param newTask
+     * @param newStart
+     * @param newEnd
+     * @param newStartDate
+     * @param newStartTime
+     * @param newEndDate
+     * @param newEndTime
+     */
     public DoWithin (String newTask, String newStart, String newEnd, LocalDate newStartDate,
                      LocalTime newStartTime, LocalDate newEndDate, LocalTime newEndTime) {
         super(newTask.trim());
@@ -35,6 +58,11 @@ public class DoWithin extends Task {
         }
     }
 
+    /**
+     * Get the start date and time
+     * and end date and time of the deadline.
+     * @return
+     */
     public String getAdditionalInfo() {
         String info;
         if (startDate == null) {
@@ -56,6 +84,11 @@ public class DoWithin extends Task {
         return info;
     }
 
+    /**
+     * Gets a string with task type symbol
+     * and a cross symbol to indicate whether a task is complete.
+     * @return String with task type and completed symbol.
+     */
     public String getCompletedSymbol() {
         if (Completed) {
             return "[W][X]";
@@ -64,6 +97,11 @@ public class DoWithin extends Task {
         }
     }
 
+    /**
+     * Return string of start and end date time information.
+     * Date is given in a new format if "dowithin" has a LocalDate object.
+     * @return String with information on the event of the task.
+     */
     public String getTaskInfo() {
         String info = super.getTaskInfo() + " (between: ";
         if (startDate == null) {
@@ -88,6 +126,10 @@ public class DoWithin extends Task {
         return info;
     }
 
+    /**
+     * Returns task type symbol.
+     * @return String with initials of the task type.
+     */
     @Override
     public String getTaskType() {
         return "W";

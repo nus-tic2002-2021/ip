@@ -9,7 +9,7 @@ public class FileLineChecker {
 
     /**
      * Takes a string array and checks whether
-     * it contains parts with information of a "to do" object.
+     * it contains parts with valid information of a "to do" object.
      * @param parts
      * @return boolean
      */
@@ -26,7 +26,7 @@ public class FileLineChecker {
 
     /**
      * Takes a string array and checks whether
-     * it contains parts with information of a "deadline" object.
+     * it contains parts with valid information of a "deadline" object.
      * @param parts
      * @return boolean
      */
@@ -43,7 +43,7 @@ public class FileLineChecker {
 
     /**
      * Takes a string array and checks whether
-     * it contains parts with information of a "event" object.
+     * it contains parts with valid information of an "event" object.
      * @param parts
      * @return boolean
      */
@@ -58,6 +58,12 @@ public class FileLineChecker {
         return true;
     }
 
+    /**
+     * Takes a string array and checks whether
+     * it contains parts with valid information of a "dowithin" object.
+     * @param parts
+     * @return
+     */
     public static boolean isValidDoWithinLine(String[] parts) {
         if (parts.length != 6) {
             return false;

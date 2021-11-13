@@ -49,7 +49,7 @@ public class InputChecker {
     }
 
     /**
-     * Checks whether input contains all that parts of a "event" object.
+     * Checks whether input contains all that parts of an "event" object.
      * Returns true if it contains all the respective parts.
      * @param input
      * @return boolean
@@ -72,6 +72,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains all that parts of a "dowithin" object.
+     * Returns true if it contains all the respective parts.
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean isValidDoWithinInput(String input) throws DukeException {
         if (input.contains("/start")) {
             String[] parts = input.substring(8).split("/start");
@@ -144,6 +151,13 @@ public class InputChecker {
         }
     }
 
+    /**
+     * Checks whether input contains enough and correct information
+     * to find a task with a keyword.
+     * @param parts
+     * @return
+     * @throws DukeException
+     */
     public static boolean isValidFindInput(String[] parts) throws DukeException {
         if (parts.length != 2) {
             throw new DukeException("☹ OOPS!!! The keyword to find is missing.");
