@@ -1,6 +1,7 @@
 package com.alexooi.duke;
 
 import com.alexooi.duke.commands.Command;
+import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.storage.FileStorage;
 import com.alexooi.duke.tasks.Task;
 import com.alexooi.duke.tasks.TaskList;
@@ -11,6 +12,8 @@ import com.alexooi.duke.exceptions.InvalidCommandFormatException;
 import com.alexooi.duke.interfaces.Parser;
 import com.alexooi.duke.interfaces.OutputFormat;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,17 +34,26 @@ public class Duke {
         return instance;
     }
 
-    public OutputFormat<Task> getPrompt() {
-        return this.prompt;
-    }
-
     public static void main(String[] args) {
+        final String STATE_PATH = "state.txt";
+        final String ARCHIVE_PATH = "archive.txt";
+
         Duke main = Duke.getInstance();
-        FileStorage state = new FileStorage("state.txt");
-        FileStorage archive = new FileStorage("archive.txt");
+        FileStorage state = new FileStorage(STATE_PATH);
+        FileStorage archive = new FileStorage(ARCHIVE_PATH);
 
         TaskList tasks = TaskList.getInstance(state, archive);
         System.out.println(main.prompt.start());
+
+        // Load previous task list state
+        BufferedReader stateInput = state.load();
+        try {
+            tasks.load(stateInput);
+        } catch (IOException ioe) {
+            main.prompt.error(ioe.getMessage());
+        } catch (InvalidFileFormatException iffe) {
+            main.prompt.error(iffe.getErrorHeader(), iffe.getMessage());
+        }
 
         Scanner in = new Scanner(System.in);
         boolean isReceivingInput = true;

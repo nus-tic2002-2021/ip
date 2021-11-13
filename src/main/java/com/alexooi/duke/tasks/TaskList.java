@@ -1,6 +1,5 @@
 package com.alexooi.duke.tasks;
 
-import com.alexooi.duke.Duke;
 import com.alexooi.duke.exceptions.InvalidFileFormatException;
 import com.alexooi.duke.interfaces.StorageClient;
 
@@ -22,8 +21,6 @@ public class TaskList {
         taskList = new ArrayList<>();
         this.stateClient = stateClient;
         this.archiveClient = archiveClient;
-        BufferedReader input = stateClient.load();
-        load(input);
     }
 
     /**
@@ -124,23 +121,15 @@ public class TaskList {
         );
     }
 
-    private void load(BufferedReader in) {
+    public void load(BufferedReader in) throws IOException, InvalidFileFormatException {
         boolean isEndOfInput = false;
-        Duke main = Duke.getInstance();
         while (!isEndOfInput) {
-            try {
-                String taskStr = in.readLine();
-                if (taskStr == null) {
-                    isEndOfInput = true;
-                } else {
-                    taskList.add(TaskFactory.getInstance(taskStr));
-                }
-            } catch (IOException ioe) {
-                System.out.println(main.getPrompt().error(ioe.getMessage()));
-            } catch (InvalidFileFormatException iffe) {
-                System.out.println(main.getPrompt().error(iffe.getErrorHeader(), iffe.getMessage()));
+            String taskStr = in.readLine();
+            if (taskStr == null) {
+                isEndOfInput = true;
+            } else {
+                taskList.add(TaskFactory.getInstance(taskStr));
             }
-
         }
     }
 }
