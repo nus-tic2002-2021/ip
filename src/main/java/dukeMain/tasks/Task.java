@@ -1,3 +1,5 @@
+package dukeMain.tasks;
+
 public class Task {
     private String item;
     private boolean done;
@@ -5,6 +7,10 @@ public class Task {
     public Task(String item) {
         this.item = item;
         this.done = false;
+    }
+    public Task(String item,boolean done){
+        this.item = item;
+        this.done = done;
     }
 
     public void setDone() {

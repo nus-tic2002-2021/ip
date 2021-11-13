@@ -1,9 +1,15 @@
+package dukeMain.tasks;
+
 public class Deadline extends Task {
 
     protected String by;
 
     public Deadline(String description, String by) {
         super(description);
+        this.by = by;
+    }
+    public Deadline(boolean done,String description, String by) {
+        super(description,done);
         this.by = by;
     }
 

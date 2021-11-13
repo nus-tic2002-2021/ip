@@ -1,9 +1,15 @@
+package dukeMain.tasks;
+
 public class Event extends Task {
 
     protected String by;
 
     public Event(String description, String by) {
         super(description);
+        this.by = by;
+    }
+    public Event(boolean done, String description, String by) {
+        super(description,done);
         this.by = by;
     }
 
