@@ -57,4 +57,16 @@ public class FileLineChecker {
         }
         return true;
     }
+
+    public static boolean isValidDoWithinLine(String[] parts) {
+        if (parts.length != 6) {
+            return false;
+        } else if (parts[2].trim().equals("") || parts[3].trim().equals("")
+                || parts[4].trim().equals("")) {
+            return false;
+        } else if (!parts[1].trim().equals("1") && !parts[1].trim().equals("0")) {
+            return false;
+        }
+        return true;
+    }
 }
