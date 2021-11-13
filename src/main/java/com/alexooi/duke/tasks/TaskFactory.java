@@ -63,7 +63,7 @@ public class TaskFactory {
                 LocalDateTime eventTime = handleDateInput(timing);
                 return new Event(description, eventTime);
             } catch (InvalidDateFormatException idfe) {
-                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_DEADLINE);
+                throw new InvalidCommandFormatException(InvalidCommandFormatException.ERROR_EVENT);
             }
         } else if (keyword.equalsIgnoreCase(TaskType.TODO.toString())) {
             if (args.length() <= 0) {
