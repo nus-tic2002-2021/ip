@@ -6,6 +6,7 @@ import duke.action.Parser;
 import duke.command.Command;
 import duke.storage.FileAccess;
 import duke.task.TaskList;
+import duke.ui.Message;
 import duke.ui.Ui;
 
 /**
@@ -46,13 +47,23 @@ public class RunDuke {
 
         while (isDukeRunning) {
             String userInput = ui.requestUserInput(scanner);
-            String userCommand = parser.processUserCommand(userInput);
-            isDukeRunning = canProcessCommand(userCommand, userInput);
+            if (userInput.isEmpty()) {
+                Message.msgInvalidInput();
+            } else {
+                String userCommand = parser.processUserCommand(userInput);
+                isDukeRunning = canProcessCommand(userCommand, userInput);
+            }
         }
     }
 
     /**
      * Read user command and execute respective methods accordingly
+     * <p>
+     * Accepted user input: bye, list, set, done, todo, save
+     * Accepted user input: find, info, event, delete, deadline
+     * <p>
+     * method returns true for all commands and non-accepted user input
+     * method return false for bye command.
      *
      * @param userCommand String that represents the command type by user
      * @param userInput   String that represents the full user input
@@ -89,6 +100,9 @@ public class RunDuke {
             return true;
         case "event":
             cmd.addTaskEvent(myList, userInput);
+            return true;
+        case "undone":
+            cmd.markTaskUnDone(myList, userInput);
             return true;
         case "delete":
             cmd.deleteTask(myList, userInput);

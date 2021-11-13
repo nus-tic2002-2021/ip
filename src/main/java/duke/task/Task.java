@@ -84,6 +84,14 @@ public abstract class Task {
     }
 
     /**
+     * Set the task as completed
+     * Change the done status to completed
+     */
+    public void setTaskInCompleted() {
+        isDone = false;
+    }
+
+    /**
      * Modified the type of the task
      *
      * @param taskType String that represent the new task type

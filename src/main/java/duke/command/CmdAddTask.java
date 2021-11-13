@@ -64,7 +64,7 @@ public class CmdAddTask {
         }
 
         if (!userInput.contains("/at")) {
-            Message.msgInvalidInputMissingDay();
+            Message.msgInvalidInputMissingDate();
             return;
         }
 
@@ -111,7 +111,7 @@ public class CmdAddTask {
         }
 
         if (!userInput.contains("/by")) {
-            Message.msgInvalidInputMissingDay();
+            Message.msgInvalidInputMissingDate();
             return;
         }
 
@@ -190,7 +190,7 @@ public class CmdAddTask {
         LocalTime taskTimeStart = ParseDateTime.toTime(timeStart);
 
         if (taskDate == null) {
-            Message.msgInvalidInputMissingDay();
+            Message.msgInvalidInputMissingDate();
             return;
         }
 
@@ -235,7 +235,7 @@ public class CmdAddTask {
         LocalTime taskTimeEnd = ParseDateTime.toTime(timeEnd);
 
         if (taskDate == null) {
-            Message.msgInvalidInputMissingDay();
+            Message.msgInvalidInputMissingDate();
             return;
         }
 
@@ -314,7 +314,7 @@ public class CmdAddTask {
         LocalTime taskTime = ParseDateTime.toTime(time);
 
         if (taskDate == null) {
-            Message.msgInvalidInputMissingDay();
+            Message.msgInvalidInputMissingDate();
             return;
         }
 

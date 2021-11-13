@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class TaskTypeTest {
 
     @Test
-    void testTaskTypeToString_taskType_string() {
+    void testTaskTypeToStringtaskTypeString() {
         List<TaskType> types = List.of(TaskType.TODOS, TaskType.DEADLINE, TaskType.EVENT);
         Assertions.assertAll(() ->
                 assertEquals("T", TaskType.taskTypeToString(types.get(0))), () ->

@@ -22,7 +22,9 @@ public class Parser {
      */
     public String processUserCommand(String userInput) {
 
-        assert userInput != null : "There should be user input in processUserCommand";
+        if (userInput.isEmpty()) {
+            return "invalid";
+        }
 
         if (userInput.equals("bye")) {
             return "bye";
@@ -49,6 +51,8 @@ public class Parser {
             return "event";
         case "delete":
             return "delete";
+        case "undone":
+            return "undone";
         case "deadline":
             return "deadline";
         default:

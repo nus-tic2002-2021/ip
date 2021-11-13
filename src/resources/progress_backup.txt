@@ -1,0 +1,5 @@
+0|E|0|project meeting|1|2001-01-25|null|null|;
+1|E|0|project meeting|3|2002-06-25|18:00|null|;
+2|E|0|project meeting|3|2002-06-25|18:00|19:00|;
+3|D|0|return book|3|2010-01-25|null|;
+4|D|0|return book|3|2011-02-25|06:00|;

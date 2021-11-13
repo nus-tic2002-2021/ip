@@ -21,7 +21,10 @@ public class Message {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println(">>> Copyright (c) Teng Kang Teng (A0211547L NUS) <<<");
+        System.out.println(">>> Version 0.2 <<<\n");
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
+        System.out.println("Enter \"Info\" to show all Duke commands. ");
         System.out.println("_________________________________");
     }
 
@@ -237,6 +240,19 @@ public class Message {
     }
 
     /**
+     * Display message when a task is marked as not done
+     *
+     * @param myList     TaskList that contains the list of task
+     * @param taskNumber Int that represents the task number
+     */
+    public static void msgMarkUnDone(TaskList myList, int taskNumber) {
+        System.out.println("    Okie! This task is marked as not done: ");
+        msgBlankBeforeTaskDetail();
+        new MsgTaskDetail(myList, taskNumber).showTaskDetail();
+        System.out.println("_________________________________");
+    }
+
+    /**
      * Display [x] where x is the int parameter
      * <p>
      * Used in CmdList function to show the following:
@@ -363,15 +379,15 @@ public class Message {
         System.out.println("        >> add a TODO task");
         System.out.println("    2. event (task description)");
         System.out.println("        >> add a EVENT task");
-        System.out.println("    3. event (task description) /at (date)");
+        System.out.println("    3. event (task description)/at (date)");
         System.out.println("        >> add a EVENT task");
-        System.out.println("    4. event (task description) /at (date) (time)");
+        System.out.println("    4. event (task description)/at (date) (time)");
         System.out.println("        >> add a EVENT task");
         System.out.println("    5. deadline (task description)");
         System.out.println("        >> add a DEADLINE task");
-        System.out.println("    6. deadline (task description) /at (date)");
+        System.out.println("    6. deadline (task description)/by (date)");
         System.out.println("        >> add a DEADLINE task");
-        System.out.println("    7. deadline (task description) /at (date) (time start) (time end)");
+        System.out.println("    7. deadline (task description)/by (date) (time start) (time end)");
         System.out.println("        >> add a DEADLINE task");
         System.out.println("    8. list");
         System.out.println("        >> show full list of task");
@@ -385,8 +401,11 @@ public class Message {
         System.out.println("        >> display full list of Duke Command");
         System.out.println("    13. delete (task number)");
         System.out.println("        >> delete a task");
-        System.out.println("    14. bye");
+        System.out.println("    14. save");
+        System.out.println("        >> save all the tasks");
+        System.out.println("    15. bye");
         System.out.println("        >> end your friendly Duke chat box");
+        System.out.println("_________________________________");
     }
     // Error Messages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -422,7 +441,7 @@ public class Message {
      * Description of the task is missing
      */
     public static void msgInvalidInputMissingDescription() {
-        System.out.println("    ☹  OOPS!!! The description cannot be empty.");
+        System.out.println("    OOPS!!! The description cannot be empty.");
         System.out.println("_________________________________");
     }
 
@@ -430,8 +449,8 @@ public class Message {
      * Display message that remind user about invalid input
      * Date of the task is missing
      */
-    public static void msgInvalidInputMissingDay() {
-        System.out.println("    ☹  OOPS!!! The day cannot be empty.");
+    public static void msgInvalidInputMissingDate() {
+        System.out.println("    OOPS!!! The date cannot be empty.");
         System.out.println("_________________________________");
     }
 
@@ -440,7 +459,7 @@ public class Message {
      * Time of the task is missing
      */
     public static void msgInvalidInputMissingTime() {
-        System.out.println("    ☹  OOPS!!! The time cannot be empty.");
+        System.out.println("    OOPS!!! The time cannot be empty.");
         System.out.println("_________________________________");
     }
 
@@ -449,7 +468,7 @@ public class Message {
      * The task number is not found
      */
     public static void msgInvalidTaskNumber() {
-        System.out.println("    ☹  OOPS!!! The task number is invalid.");
+        System.out.println("    OOPS!!! The task number is invalid.");
         System.out.println("_________________________________");
     }
 
@@ -458,7 +477,7 @@ public class Message {
      * The priority is invalid
      */
     public static void msgInvalidPriority() {
-        System.out.println("    ☹  OOPS!!! The priority is invalid. Choose 1, 2 or 3");
+        System.out.println("    OOPS!!! The priority is invalid. Choose 1, 2 or 3");
         System.out.println("_________________________________");
     }
 
@@ -467,7 +486,7 @@ public class Message {
      * Format of the date is unaccepted
      */
     public static void msgInvalidInputWrongDateTimeFormat() {
-        System.out.println("    ☹  OOPS!!! Please follow this format:");
+        System.out.println("    OOPS!!! Please follow this format:");
         System.out.println("    /by yyyy-mm-dd hh:mm");
         System.out.println("_________________________________");
     }
@@ -477,7 +496,7 @@ public class Message {
      * Format of the date and time is unaccepted
      */
     public static void msgInvalidInputWrongDateTimeStartEndFormat() {
-        System.out.println("    ☹  OOPS!!! Please follow this format:");
+        System.out.println("    OOPS!!! Please follow this format:");
         System.out.println("    /at yyyy-mm-dd hh:mm hh:mm:");
         System.out.println("_________________________________");
     }
@@ -487,15 +506,15 @@ public class Message {
      * Start time should be before End time
      */
     public static void msgInvalidInputTimeStartLaterThanTimeEnd() {
-        System.out.println("    ☹  OOPS!!! Event start time cannot be later than end time!");
+        System.out.println("    OOPS!!! Event start time cannot be later than end time!");
         System.out.println("_________________________________");
     }
 
     /**
      * Display message about task list being empty
      */
-    public static void msgInvalidSetTaskListIsEmpty() {
-        System.out.println("    ☹  OOPS!!! The task list is empty.");
+    public static void msgTaskListIsEmpty() {
+        System.out.println("    OOPS!!! The task list is empty.");
         System.out.println("_________________________________");
     }
 

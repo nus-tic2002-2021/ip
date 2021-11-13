@@ -4,18 +4,16 @@ import duke.task.TaskList;
 import duke.ui.Message;
 
 /**
- * Command class that delete a task from a tasklist
+ * Command class that mark a task as undone
  *
  * @author Kang Teng
  * @version 8.0
  * @since 2021-09-01
  */
 
-public class CmdDelete {
-
+public class CmdMarkTaskUnDone {
     /**
-     * Execute the delete task command
-     * Remove a task from a tasklist
+     * Execute the marking command to mark a task as done
      *
      * @param myList    TaskList that contains the list of task
      * @param userInput String
@@ -31,18 +29,12 @@ public class CmdDelete {
         }
 
         try {
-            int taskIndex = Integer.parseInt(userInput.substring(7)) - 1;
-            int numOfTaskAfterDelete = myList.getNumOfItem() - 1;
-
-            if (taskIndex >= myList.getNumOfItem() || taskIndex < 0) {
-                Message.msgInvalidTaskNumber();
-                return;
-            }
-
-            Message.msgRemoveItem(myList, taskIndex, numOfTaskAfterDelete);
-            myList.removeItem(taskIndex);
+            int taskNumber = Integer.parseInt(userInput.substring(7));
+            myList.setTaskUnDone(taskNumber - 1);
+            Message.msgMarkUnDone(myList, taskNumber - 1);
         } catch (Exception e) {
             Message.msgInvalidTaskNumber();
         }
+
     }
 }

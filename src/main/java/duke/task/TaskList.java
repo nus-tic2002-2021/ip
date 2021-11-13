@@ -296,6 +296,16 @@ public class TaskList {
     }
 
     /**
+     * Return TaskType from a task of tasklist
+     *
+     * @param index Int that represents the index in a task list
+     */
+    public void setTaskUnDone(int index) {
+        Task task = list.get(index);
+        task.setTaskInCompleted();
+    }
+
+    /**
      * Update the priority of a task in tasklist
      *
      * @param index        Int that represents the index in a task list

@@ -68,6 +68,16 @@ public class Command {
     }
 
     /**
+     * Mark a task as undone
+     *
+     * @param myList    TaskList that contains the list of task
+     * @param userInput String that the user type
+     */
+    public void markTaskUnDone(TaskList myList, String userInput) {
+        CmdMarkTaskUnDone.run(myList, userInput);
+    }
+
+    /**
      * Add a task of ToDo type into the list of task
      *
      * @param myList    TaskList that contains the list of task

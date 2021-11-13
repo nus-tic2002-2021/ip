@@ -24,8 +24,18 @@ public class CmdMarkTaskDone {
         assert myList != null : "mylist should not be empty";
         assert userInput != null : "userInput should not be empty";
 
-        int taskNumber = Integer.parseInt(userInput.substring(5));
-        myList.setTaskDone(taskNumber - 1);
-        Message.msgMarkDone(myList, taskNumber - 1);
+        if (myList.getNumOfItem() == 0) {
+            Message.msgTaskListIsEmpty();
+            return;
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(userInput.substring(5));
+            myList.setTaskDone(taskNumber - 1);
+            Message.msgMarkDone(myList, taskNumber - 1);
+        } catch (Exception e) {
+            Message.msgInvalidTaskNumber();
+        }
+
     }
 }

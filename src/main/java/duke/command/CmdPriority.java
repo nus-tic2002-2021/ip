@@ -23,6 +23,7 @@ public class CmdPriority {
      * -- Update the task with new priority
      *
      * @param myList TaskList that contains the list of task
+     * @param scanner Scanner that contains read the user input
      */
     public static void run(TaskList myList, Scanner scanner) {
 
@@ -30,7 +31,7 @@ public class CmdPriority {
         assert scanner != null : "scanner should not be empty";
 
         if (myList.getNumOfItem() < 1) {
-            Message.msgInvalidSetTaskListIsEmpty();
+            Message.msgTaskListIsEmpty();
             return;
         }
 
@@ -52,9 +53,11 @@ public class CmdPriority {
 
         while (isPriorityNumberValid == false) {
             Message.msgAskUserWhatPriority();
+            Message.msgArrowHead();
             userInputNewPriorityNumber = scanner.nextLine();
             isPriorityNumberValid = hasValidPriorityNumber(userInputNewPriorityNumber);
         }
+        Message.msgDashLines();
 
         int newPriorityInteger = Integer.parseInt(userInputNewPriorityNumber);
 
@@ -77,7 +80,8 @@ public class CmdPriority {
         try {
             int userInputInt = Integer.parseInt(userInputString);
             int numOfItem = myList.getNumOfItem();
-            if (userInputInt <= numOfItem) {
+
+            if (userInputInt <= numOfItem && userInputInt > 0) {
                 return true;
             }
         } catch (Exception e) {
@@ -118,10 +122,7 @@ public class CmdPriority {
     }
 
     /**
-     * Ask user which task to set priority and change the priority accordingly
-     * -- Ask user which task to be changed
-     * -- Ask user what is the new priority
-     * -- Update the task with new priority
+     * Update the priority of the task based on the taskPriority
      *
      * @param myList       TaskList that contains the list of task
      * @param taskIndex    int that indicates the task number

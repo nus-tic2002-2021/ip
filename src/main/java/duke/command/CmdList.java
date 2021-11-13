@@ -21,7 +21,10 @@ public class CmdList {
      */
     public static void run(TaskList myList) {
 
-        assert myList != null : "mylist should not be empty";
+        if (myList.getNumOfItem() == 0) {
+            Message.msgTaskListIsEmpty();
+            return;
+        }
 
         for (int i = 0; i < myList.getNumOfItem(); i++) {
             Message.msgShowBracketWithIndex(i + 1);

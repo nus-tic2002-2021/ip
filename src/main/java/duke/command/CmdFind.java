@@ -30,6 +30,11 @@ public class CmdFind {
         assert myList != null : "mylist should not be empty";
         assert userInput != null : "userInput should not be empty";
 
+        if (myList.getNumOfItem() == 0) {
+            Message.msgTaskListIsEmpty();
+            return;
+        }
+
         if (userInput.length() <= 5) {
             Message.msgInvalidFindTerm();
             return;
@@ -83,5 +88,6 @@ public class CmdFind {
             new MsgTaskDetail(myList, taskNumber).showTaskDetail();
             index++;
         }
+        Message.msgDashLines();
     }
 }
