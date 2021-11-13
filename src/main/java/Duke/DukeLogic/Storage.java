@@ -91,6 +91,8 @@ public class Storage {
                     newLine = buildStorageLine(taskAtIndex);
                 } else if (taskType.equals("E")) {
                     newLine = buildStorageLine(taskAtIndex);
+                } else if (taskType.equals("W")) {
+                    newLine = buildStorageLine(taskAtIndex);
                 }
                 fw.write(newLine + System.getProperty("line.separator"));
             }
@@ -117,7 +119,7 @@ public class Storage {
         }
         newLine = newLine + targetTask.getDescription();
 
-        if (initial.equals("D") || initial.equals("E")) {
+        if (initial.equals("D") || initial.equals("E") || initial.equals("W")) {
             newLine = newLine + divider + targetTask.getAdditionalInfo();
         }
 
