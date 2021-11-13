@@ -2,6 +2,7 @@ package tasklist;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * An TaskList object holds an arraylist of tasks
@@ -44,7 +45,7 @@ public class TaskList {
     public boolean contains(Task t){return taskList.contains(t);}
 
     /**
-     * The method searches task in the tasklist of the date given
+     * The method searches task in the taskList of the date given
      * @param date user specified date parameter
      * @param taskList is the task list
      * @return another list of task of the date given
@@ -53,8 +54,11 @@ public class TaskList {
     public TaskList getTaskByDate(LocalDate date, TaskList taskList) throws IndexOutOfBoundsException{
         TaskList taskByDate = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getType().equals("E") | taskList.get(i).getType().equals("D")) {
-                if (taskList.get(i).getDateTime().toLocalDate().equals(date)) {
+            boolean isDeadline = taskList.get(i).getType().equals("D");
+            boolean isEvent = taskList.get(i).getType().equals("E");
+            if (isDeadline || isEvent) {
+                boolean matchesDate = taskList.get(i).getDateTime().toLocalDate().equals(date);
+                if(matchesDate) {
                     taskByDate.addTask(taskList.get(i));
                 }
             }
@@ -63,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * The method searches task in the tasklist of the keyword given
+     * The method searches task in the taskList of the keyword given
      * @param keyword user specified keyword parameter
      * @param taskList is the task list
      * @return another list of task of the keyword given
@@ -73,16 +77,21 @@ public class TaskList {
         TaskList taskByKeyword = new TaskList();
         String[] keywordInTask;
         for (int i = 0; i < taskList.size(); i++){
-            if (taskList.get(i).getType().equals("D") || taskList.get(i).getType().equals("E")) {
+            boolean isDeadline = taskList.get(i).getType().equals("D");
+            boolean isEvent = taskList.get(i).getType().equals("E");
+            if (isDeadline || isEvent) {
                 keywordInTask = taskList.get(i).getKeyword()[0].split(" ");
             } else {
                 keywordInTask = taskList.get(i).getKeyword();
             }
+            keywordInTask = Arrays.copyOfRange(keywordInTask, 1, keywordInTask.length);
             for (String s : keywordInTask){
-                if (s.contains(keyword) || keyword.contains(s)) {
-                    if (!taskByKeyword.contains(taskList.get(i))){
-                        taskByKeyword.addTask(taskList.get(i));
-                    }
+                boolean isInList =taskByKeyword.contains(taskList.get(i));
+                boolean containsKeyword = s.contains(keyword);
+                boolean containsString = keyword.contains(s);
+                boolean containsEachOther = containsKeyword || containsString;
+                if (containsEachOther && !isInList) {
+                    taskByKeyword.addTask(taskList.get(i));
                 }
             }
         }
