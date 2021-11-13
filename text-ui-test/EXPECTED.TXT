@@ -10,7 +10,7 @@
     deadline <description> /by <date>
     event <description> /at <date> : <date> must be in yyyy-mm-dd or yyyy-mm-ddThh:mm format.
     done <num> : <num> must be a number that currently exists in the list.
-    remove <num> : <num> must be a number that currently exists in the list.
+    delete <num> : <num> must be a number that currently exists in the list.
     bye
     list
     view <date> : <date> must be in yyyy-mm-dd.
