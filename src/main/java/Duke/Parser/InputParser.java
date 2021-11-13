@@ -1,10 +1,7 @@
 package Duke.Parser;
 
 import Duke.Checker.InputChecker;
-import Duke.Models.Deadline;
-import Duke.Models.Event;
-import Duke.Models.Task;
-import Duke.Models.Todo;
+import Duke.Models.*;
 import Duke.DukeLogic.DukeException;
 import Duke.DukeLogic.TaskList;
 import Duke.DukeLogic.Ui;
@@ -38,6 +35,8 @@ public class InputParser {
             parseDeleteInput(input);
         } else if (input.startsWith("find ")) {
             parseFindInput(input);
+        } else if (input.startsWith("dowithin ")) {
+            parseDoWithinInput(input);
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -163,6 +162,56 @@ public class InputParser {
         }
         return newEvent;
     }
+
+    public static void parseDoWithinInput(String input) {
+        try {
+            if (InputChecker.isValidDoWithinInput(input)) {
+                DoWithin newDoWithin = buildDoWithin(input);
+                TaskList.addTaskToList(newDoWithin);
+                addPriorityToTask(newDoWithin);
+                Ui.printTaskAdded(newDoWithin);
+                Ui.printTaskCount();
+            }
+        } catch (DukeException e) {
+            e.printErrMsg();
+        }
+    }
+
+    public static DoWithin buildDoWithin(String input) {
+        String[] parts = input.substring(8).split("/start");
+        String[] startEnd = parts[1].split("/end");
+        String[] startDateTime = startEnd[0].trim().split(" ");
+        String[] endDateTime = startEnd[1].trim().split(" ");
+        DoWithin newDoWithin;
+        LocalDate newStartDate = null, newEndDate = null;
+        LocalTime newStartTime = null, newEndTime = null;
+        if (startDateTime.length > 2 && endDateTime.length > 2) {
+            newDoWithin = new DoWithin(parts[0], startEnd[0], startEnd[1]);
+        } else {
+            if (startDateTime.length < 3) {
+                String[] startDateDetails = startDateTime[0].trim().split("/");
+                if (checkDateInput(startDateDetails)) {
+                    newStartDate = buildTaskDate(startDateDetails);
+                    if (startDateTime.length == 2 && checkTimeInput(startDateTime[1])) {
+                        newStartTime = buildTaskTime(startDateTime[1]);
+                    }
+                }
+            }
+            if (endDateTime.length < 3) {
+                String[] endDateDetails = endDateTime[0].trim().split("/");
+                if (checkDateInput(endDateDetails)) {
+                    newEndDate = buildTaskDate(endDateDetails);
+                    if (endDateTime.length == 2 && checkTimeInput(endDateTime[1])) {
+                        newEndTime = buildTaskTime(endDateTime[1]);
+                    }
+                }
+            }
+            newDoWithin = new DoWithin(parts[0], startEnd[0], startEnd[1], newStartDate, newStartTime,
+                    newEndDate, newEndTime);
+        }
+        return newDoWithin;
+    }
+
     /**
      * Takes in a string and checks whether it is in an input representing time.
      * If it is in valid format, return true.
