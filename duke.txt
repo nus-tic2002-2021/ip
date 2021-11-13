@@ -1,1 +1,20 @@
+deadline || todo || null
+todo || null
+event || 
+todo || null
+todo || null
+event || 
+todo || null
+deadline || 
+event || 
+deadline || 
+event || 
+todo || null
+deadline || 
+event || 
+event || 
+todo || null
+deadline || 
+event || 
+event || 
 deadline || 

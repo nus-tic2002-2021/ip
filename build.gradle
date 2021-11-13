@@ -1,7 +1,14 @@
 plugins {
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'application'
+    id 'checkstyle'
 }
 
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 group 'org.example'
 version '1.0-SNAPSHOT'
 
