@@ -4,10 +4,8 @@ import Duke.Checker.FileLineChecker;
 
 import Duke.DukeLogic.DukeException;
 import Duke.DukeLogic.TaskList;
-import Duke.Models.Deadline;
-import Duke.Models.Event;
-import Duke.Models.Task;
-import Duke.Models.Todo;
+import Duke.Models.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -37,6 +35,11 @@ public class FileLineParser {
             if (FileLineChecker.isValidEventLine(parts)) {
                 Event newEvent = getEventFromLine(parts);
                 return newEvent;
+            }
+        } else if (parts[0].trim().equals("W")) {
+            if (FileLineChecker.isValidDoWithinLine(parts)) {
+                DoWithin newDoWithin = getDoWithinFromLine(parts);
+                return newDoWithin;
             }
         } else {
             System.out.println("Line is invalid");
@@ -133,5 +136,36 @@ public class FileLineParser {
         }
         newEvent.setPriority(parts[4]);
         return newEvent;
+    }
+
+    public static DoWithin getDoWithinFromLine(String[] parts) {
+        String[] startDateTime = parts[3].trim().split(" ");
+        String[] endDateTime = parts[4].trim().split(" ");
+        DoWithin newDoWithin;
+        LocalDate newStartDate = null, newEndDate = null;
+        LocalTime newStartTime = null, newEndTime = null;
+        try {
+            newStartDate = LocalDate.parse(startDateTime[0]);
+            newStartTime = LocalTime.parse(startDateTime[1]);
+        } catch (DateTimeParseException e) {
+            e.getMessage();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.getMessage();
+        }
+        try {
+            newEndDate = LocalDate.parse(endDateTime[0]);
+            newEndTime = LocalTime.parse(endDateTime[1]);
+        } catch (DateTimeParseException e) {
+            e.getMessage();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.getMessage();
+        }
+        newDoWithin = new DoWithin(parts[2].trim(), parts[3].trim(), parts[4].trim(),
+                newStartDate, newStartTime, newEndDate, newEndTime);
+        if (parts[1].trim().equals("1")) {
+            TaskList.markTask(newDoWithin);
+        }
+        newDoWithin.setPriority(parts[5]);
+        return newDoWithin;
     }
 }
