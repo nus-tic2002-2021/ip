@@ -1,14 +1,16 @@
 package parser;
 
 import command.*;
-import tasklist.*;
+import tasklist.Deadline;
+import tasklist.Event;
+import tasklist.TaskList;
+import tasklist.Todo;
 import ui.Ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
-
 
 /**
  * The <code>Parser</code> class contains methods to parse the user command into required actions.
@@ -87,54 +89,53 @@ public class Parser {
 
 
         switch (commandCollections) {
-            case EVENT:
-                try{
-                    Ui.validateEventCommand(command);
-                    dateTime = parseDateTime(command);
-                    return new AddCommand(new Event(text,dateTime));
-                }catch (DateTimeParseException e) {
-                    return new InvalidCommand(Ui.validateDateTime());
-                }
-            case TODO:
-                Ui.validateTodoCommand(command);
-                return new AddCommand(new Todo(text));
-            case DEADLINE:
-                try{
-                    Ui.validateDeadlineCommand(command);
-                    dateTime = parseDateTime(command);
-                    return new AddCommand(new Deadline(text,dateTime));
-                }catch (DateTimeParseException e) {
-                    return new InvalidCommand(Ui.validateDateTime());
-                }
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                Ui.validateDoneCommand(command, taskList);
-                return new DoneCommand(command);
-            case DELETE:
-                Ui.validateDoneCommand(command, taskList);
-                return new DeleteCommand(command);
-            case VIEW:
-                try{
-                    Ui.validateViewCommand(command);
-                    LocalDate date = parseDate(command);
-                    return new ViewCommand(date);
-                }catch (DateTimeParseException e) {
-                    return new InvalidCommand("Please enter datetime in the format of 'd/M/yyyy'");
-                }
-            case SEARCH:
-                Ui.validateSearchCommand(command);
-                String keyword = command[1];
-                return new SearchCommand(keyword);
-            case HELP:
-                return new HelpCommand();
-            case RESET:
-                return new ResetCommand();
-            case BYE:
-                return new ByeCommand();
-            default:
-                return new InvalidCommand("");
+        case EVENT:
+            try{
+                Ui.validateEventCommand(command);
+                dateTime = parseDateTime(command);
+                return new AddCommand(new Event(text,dateTime));
+            }catch (DateTimeParseException e) {
+                return new InvalidCommand(Ui.validateDateTime());
+            }
+        case TODO:
+            Ui.validateTodoCommand(command);
+            return new AddCommand(new Todo(text));
+        case DEADLINE:
+            try{
+                Ui.validateDeadlineCommand(command);
+                dateTime = parseDateTime(command);
+                return new AddCommand(new Deadline(text,dateTime));
+            }catch (DateTimeParseException e) {
+                return new InvalidCommand(Ui.validateDateTime());
+            }
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            Ui.validateDoneCommand(command, taskList);
+            return new DoneCommand(command);
+        case DELETE:
+            Ui.validateDoneCommand(command, taskList);
+            return new DeleteCommand(command);
+        case VIEW:
+            try{
+                Ui.validateViewCommand(command);
+                LocalDate date = parseDate(command);
+                return new ViewCommand(date);
+            }catch (DateTimeParseException e) {
+                return new InvalidCommand("Please enter datetime in the format of 'd/M/yyyy'");
+            }
+        case SEARCH:
+            Ui.validateSearchCommand(command);
+            String keyword = command[1];
+            return new SearchCommand(keyword);
+        case HELP:
+            return new HelpCommand();
+        case RESET:
+            return new ResetCommand();
+        case BYE:
+            return new ByeCommand();
+        default:
+            return new InvalidCommand("");
         }
-
     }
 }

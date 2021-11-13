@@ -1,9 +1,3 @@
-event [√] meeting /at 2 Dec 2119, 18:00
-event [√] Historical Show /at 19 Feb 1995, 18:00
-event [ ] test123 /at 1 Feb 1995, 18:00
-event [ ] test 456 /at 2 Feb 2007, 19:00
-event [ ] test902 /at 2 Feb 2020, 20:00
-deadline [√] test21 /by 3 Mar 2029, 20:00
-event [√] look at you /at 2 Feb 2020, 22:22
-todo [ ] buy books
-todo [ ] return books
+todo [ ] buy book
+deadline [√] return book /by 2 Feb 2022, 19:00
+event [ ] meeting /at 2 Feb 2022, 20:00
