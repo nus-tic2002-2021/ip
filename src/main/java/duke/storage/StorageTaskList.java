@@ -102,7 +102,7 @@ public class StorageTaskList {
      * @param taskList - data to save.
      */
     public void save(TaskList taskList)  {
-
+        assert this.isExist:true;
         FileWriter myWriter;
         try {
             myWriter = new FileWriter(file.getAbsoluteFile(), false);
