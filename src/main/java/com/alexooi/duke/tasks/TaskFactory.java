@@ -94,7 +94,7 @@ public class TaskFactory {
             String dueDate = line[3];
             try {
                 LocalDateTime dueBy = handleDateInput(dueDate);
-                return new Deadline(description, dueBy);
+                currentTask = new Deadline(description, dueBy);
             } catch (InvalidDateFormatException idfe) {
                 throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
             }
@@ -104,7 +104,7 @@ public class TaskFactory {
 
             try {
                 LocalDateTime eventTime = handleDateInput(timing);
-                return new Event(description, eventTime);
+                currentTask = new Event(description, eventTime);
             } catch (InvalidDateFormatException idfe) {
                 throw new InvalidFileFormatException(InvalidFileFormatException.ERROR_DATE);
             }
