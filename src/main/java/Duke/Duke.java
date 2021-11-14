@@ -5,25 +5,14 @@ import Duke.Storage.Storage;
 import Duke.TaskList.*;
 import Duke.Ui.Ui;
 
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tl;
     private Ui ui;
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
 
     public Duke(){
         run();
@@ -34,30 +23,20 @@ public class Duke {
         ui = new Ui();
         ui.showStartMessage();
         ui.printBreak();
-        String filePath = "";
-        //TaskList tl = new TaskList();
         storage = new Storage();
         try {
             tl = new TaskList(storage.load());
-            //if (filePath.isEmpty()){
-            //    throw new DukeException();
-            //}
         }
          catch (DukeException | IOException e) {
             ui.showLoadingError();
             tl = new TaskList();
         }
-
-        String line;
-        String desc;
-        String desc2 = "";
-        String s1, s2;
+        String line, desc, desc2, s1, s2;
         while (true) {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
             try {
                 if (!line.isEmpty()) {
-                    desc = "";
                     desc2 = "";
                     if (line.contains(" ")) {
 
@@ -92,7 +71,7 @@ public class Duke {
                         if (desc2.isEmpty()){
                             throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
                         }else if (Integer.parseInt(desc2) > tl.getSize() || Integer.parseInt(desc2) <= 0){
-
+                            throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
                         }
                         ui.printBreak();
                         int x = Integer.parseInt(desc2);
@@ -143,18 +122,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //String logo = " ____        _        \n"
-        //        + "|  _ \\ _   _| | _____ \n"
-        //        + "| | | | | | | |/ / _ \\\n"
-        //        + "| |_| | |_| |   <  __/\n"
-        //        + "|____/ \\__,_|_|\\_\\___|\n";
-        //        + "|____/ \\__,_|_|\\_\\___|\n";
-
-        //System.out.println("Hello from\n" + logo);
-        //printBreak();
-        //System.out.println("Hello! I'm Duke.Duke ");
-        //System.out.println("What can I do for you?");
-        //printBreak();
-        Duke d = new Duke();
+        new Duke();
     }
 }
