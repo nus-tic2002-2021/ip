@@ -1,15 +1,19 @@
 package Duke.Checker;
 
+import Duke.DukeLogic.DukeException;
 import org.junit.jupiter.api.Test;
+
+import static Duke.Checker.InputChecker.isValidTodoInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static Duke.Checker.FileLineChecker.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileLineCheckerTest {
 
     @Test
     public void checkTodoLineTest() {
         assertEquals(true, isValidTodoLine(new String[]{"T", "1", "Homework", "MEDIUM"}));
-        assertEquals(false, isValidTodoLine(new String[]{"", "", ""}));
+        assertThrows(AssertionError.class, () -> isValidTodoLine(new String[]{"", "", ""}));
     }
 
     @Test
