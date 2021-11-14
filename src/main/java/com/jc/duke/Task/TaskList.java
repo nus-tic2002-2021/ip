@@ -1,7 +1,7 @@
-package Task;
+package com.jc.duke.Task;
 
-import Exception.DukeTaskNotFoundException;
-import Storage.Storage;
+import com.jc.duke.Exception.DukeTaskNotFoundException;
+import com.jc.duke.Storage.Storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class TaskList extends Task{
             }
         }
 
-        System.out.println("Task.Task Loaded. I've added this task: ");
+        System.out.println("Task Loaded. I've added this task: ");
         System.out.println(getTaskDetails(taskList.size() - 1));
         System.out.println("Now you have " + taskList.size() +" tasks in the list.");
     }

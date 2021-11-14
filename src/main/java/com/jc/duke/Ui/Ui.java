@@ -1,4 +1,4 @@
-package Ui;
+package com.jc.duke.Ui;
 
 /**
  * Handler for all UI related function such as printing messages and exceptions

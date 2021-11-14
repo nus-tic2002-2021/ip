@@ -1,7 +1,7 @@
-package Task;
+package com.jc.duke.Task;
 
-import static Task.Type.*;
-import static Task.Type.todo;
+import static com.jc.duke.Task.Type.*;
+import static com.jc.duke.Task.Type.todo;
 
 /**
  * Task class is the base object used to store all information about user Task.

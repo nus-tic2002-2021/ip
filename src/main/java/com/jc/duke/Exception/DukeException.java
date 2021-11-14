@@ -1,4 +1,4 @@
-package Exception;
+package com.jc.duke.Exception;
 
 /**
  * DukeException handles all Duke error in graceful manner.

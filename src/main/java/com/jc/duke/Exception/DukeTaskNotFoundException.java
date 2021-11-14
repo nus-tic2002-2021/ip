@@ -1,4 +1,4 @@
-package Exception;
+package com.jc.duke.Exception;
 
 /**
  * DukeTaskNotFoundException handles invalid Duke Task (e.g. when user input invalid index number).

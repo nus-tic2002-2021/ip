@@ -1,11 +1,13 @@
+package com.jc.duke;
+
 import java.util.Scanner;
-import Exception.DukeInvalidCommandException;
-import Exception.DukeTaskNotFoundException;
-import Storage.Storage;
-import Task.DateTime;
-import Task.TaskList;
-import Task.Type;
-import Ui.Ui;
+import com.jc.duke.Exception.DukeInvalidCommandException;
+import com.jc.duke.Exception.DukeTaskNotFoundException;
+import com.jc.duke.Storage.Storage;
+import com.jc.duke.Task.DateTime;
+import com.jc.duke.Task.TaskList;
+import com.jc.duke.Task.Type;
+import com.jc.duke.Ui.Ui;
 
 /**
  * Duke class is main code

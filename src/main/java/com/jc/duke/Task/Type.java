@@ -1,4 +1,4 @@
-package Task;
+package com.jc.duke.Task;
 
 /**
  * Type enum lists all valid Duke Task Type

@@ -1,4 +1,4 @@
-package Storage;
+package com.jc.duke.Storage;
 
 import java.io.*;
 import java.nio.file.Files;

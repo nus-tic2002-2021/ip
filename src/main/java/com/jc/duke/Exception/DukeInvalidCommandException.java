@@ -1,4 +1,4 @@
-package Exception;
+package com.jc.duke.Exception;
 
 /**
  * DukeInvalidCommandException handles invalid commands for Duke.
