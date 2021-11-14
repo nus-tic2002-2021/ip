@@ -8,6 +8,7 @@ public class UI {
     private final static String STMT_END = "Bye. Hope to see you again soon!";
     private final static String STMT_DONE = "Nice! I've marked this task as done: ";
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
+    private final static String STMT_DELETE = "Noted. I've removed this task: ";
 
     public UI(TaskManager m) {
         this.manager = m;
@@ -91,7 +92,8 @@ public class UI {
             Task t = manager.markTaskDone(Integer.parseInt((firstToken)));
             System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DONE + "\n" + t);
         } else if (parser.isDelete()) {
-            manager.deleteTask(Integer.parseInt((firstToken)));
+            Task t = manager.deleteTask(Integer.parseInt((firstToken)));
+            System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DELETE + "\n " + t);
         } else if (parser.isFind()) {
             ArrayList<Task> li = manager.findTask(firstToken);
             manager.listTasks(li);
@@ -99,9 +101,10 @@ public class UI {
             manager.viewTaskOn(parser.stringToDate(firstToken));
         } else if (parser.isAdd()) {
             Task t = manager.createTask(taskInfo, instruction);
-            System.out.println("Got it! 👌 I've add this " + t.getType() + ": \n" + t.toString() + "\nNow you have " + manager.getNumOfTasks() + " tasks in the list.");
+            System.out.println("Got it! 👌 I've add this " + t.getType() + ": \n" + t.toString());
         } else {
             System.out.println("🤡 Dukie did not understand the command, try again?");
         }
+        System.out.println("You have " + manager.getNumOfTasks() + " tasks in the list.");
     }
 }

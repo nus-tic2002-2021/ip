@@ -2,13 +2,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TaskManager {
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
-    private final static String STMT_DELETE = "Noted. I've removed this task: ";
     Logger logger = new Logger();
     private ArrayList<Task> tasks = new ArrayList<>();
     Global global = new Global();
@@ -34,22 +32,22 @@ public class TaskManager {
     public Task createTask(String taskInfo, String instruction) {
         switch (instruction) {
             case DETECT_ADD_TODO:
-                Todo t = new Todo(taskInfo, global.getId());
+                Todo t = new Todo(taskInfo, getId());
                 addTask(t);
                 return t;
             case DETECT_ADD_EVENT:
                 ArrayList<String> addInfo = new ArrayList(Arrays.asList(taskInfo.split("/at")));
                 logger.info("add info for event: " + addInfo);
-                Event e = new Event(addInfo.get(0), addInfo.get(1), global.getId());
+                Event e = new Event(addInfo.get(0), addInfo.get(1), getId());
                 addTask(e);
                 return e;
             case DETECT_ADD_DEADLINE:
                 ArrayList<String> deadlineInfo = new ArrayList(Arrays.asList(taskInfo.split("/by")));
-                Deadline d = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), global.getId());
+                Deadline d = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), getId());
                 addTask(d);
                 return d;
         }
-        return new Task(taskInfo, global.getId());
+        return new Task(taskInfo, getId());
     }
 
     public void listTasks() {
@@ -85,15 +83,15 @@ public class TaskManager {
         return tx;
     }
 
-    public void deleteTask(Integer taskId) {
+    public Task deleteTask(Integer taskId) {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getId() != null && tasks.get(i).getId().equals(taskId)) {
-                System.out.println(STMT_DELETE);
-                System.out.println(tasks.get(i).toString());
-                tasks.remove(tasks.get(i));
-                return;
+                Task t = tasks.get(i);
+                tasks.remove(t);
+                return t;
             }
         }
+        return null;
     }
 
     public ArrayList<Task> viewTaskOn(LocalDate date) {
@@ -116,6 +114,10 @@ public class TaskManager {
             }
         });
         return results;
+    }
+
+    public Integer getId() {
+        return getNumOfTasks();
     }
 
     public Integer getNumOfTasks() {
