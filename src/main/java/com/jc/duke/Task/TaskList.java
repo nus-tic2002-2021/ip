@@ -31,6 +31,7 @@ public class TaskList extends Task{
         }
 
         new Storage().writeSaveFile(temp);
+        System.out.println("Tasks saved successfully");
     }
 
     public void archiveTaskList() {
@@ -44,6 +45,7 @@ public class TaskList extends Task{
         new Storage().writeArchiveFile(temp);
 
         taskList.clear();
+        System.out.println("Archived successfully");
     }
 
     public void getArchiveList() {
@@ -135,10 +137,11 @@ public class TaskList extends Task{
 
     public void deleteTask(int index) throws DukeTaskNotFoundException {
         try{
+            Task task = taskList.get(index - 1);
             taskList.remove(index - 1);
 
             System.out.println("Noted. I've removed this task: ");
-            System.out.println(getTaskDetails(index - 1));
+            System.out.println(getTaskDetails(task));
         } catch (Exception ex) {
             throw new DukeTaskNotFoundException("Invalid task number");
         }
@@ -147,7 +150,7 @@ public class TaskList extends Task{
     public void printTaskList() {
 
         if(taskList.size() == 0) {
-            System.out.println("There are nothing in your list yet");
+            System.out.println("There are nothing in your list");
         } else {
             System.out.println("Here are the tasks in your list: ");
             for (int i = 0; i < taskList.size(); i++) {
