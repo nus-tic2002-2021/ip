@@ -29,7 +29,13 @@ public class TaskList {
         Task removeTask = tasks.remove(index);
         return removeTask;
     }
-
+    public Task setDone(int num) {
+        int i = num - 1;
+        Task current = tasks.get(i);
+        Task completed = current.complete();
+        tasks.set(i, completed);
+        return completed;
+    }
 
     public List<Task> getList() {
         return tasks;
@@ -41,6 +47,18 @@ public class TaskList {
             Task currentTask = tasks.get(i);
             int taskNumber = i + 1;
             result += taskNumber + ". " + currentTask;
+        }
+        return result;
+    }
+    public static String findTask(String keyword) {
+        String result = "Here are the matching tasks in your list:";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.toString().contains(keyword)) {
+                result += "\n";
+                int taskNumber = i + 1;
+                result += taskNumber + ". " + currentTask;
+            }
         }
         return result;
     }

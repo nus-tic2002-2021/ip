@@ -1,7 +1,4 @@
 package duke.command;
-
-import duke.command.Command;
-import duke.command.CommandResult;
 import duke.task.Task;
 
 public class Delete extends Command {
@@ -9,7 +6,7 @@ public class Delete extends Command {
     int taskNumToDelete;
 
 
-    Delete(String s) {
+    public Delete(String[] s) {
         this.taskNumToDelete = Integer.parseInt(s[1]);
     }
     @Override

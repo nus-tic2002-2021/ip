@@ -12,8 +12,14 @@ public class DeadlinesCommand extends Command {
     String taskName;
     LocalDate on;
 
-    DeadlinesCommand(String argumentText) throws DukeException, DateTimeParseException {
-        String[] deadParts = argumentText.split(" /at ");
+    /**
+     * creates a DeadlinesCommand
+     * @param Text input by the user
+     * @throws DukeException if the command is empty
+     */
+
+    public DeadlinesCommand(String Text) throws DukeException, DateTimeParseException {
+        String[] deadParts = Text.split(" /at ");
         if (deadParts[0].equals("") || deadParts[1].equals("")) {
             throw new DukeException("The description of an deadline cannot be empty");
         } else {

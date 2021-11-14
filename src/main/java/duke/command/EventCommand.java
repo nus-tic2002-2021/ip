@@ -12,8 +12,14 @@ public class EventCommand extends Command {
     String taskName;
     LocalDate on;
 
-    EventCommand(String argumentText) throws DukeException, DateTimeParseException {
-        String[] eventParts = argumentText.split(" /at ");
+    /**
+     * Creates an EventCommand
+     * @param Text input by the user
+     * @throws DukeException if the command is empty
+     */
+
+    public EventCommand(String Text) throws DukeException, DateTimeParseException {
+        String[] eventParts = Text.split(" /at ");
         if (eventParts[0].equals("") || eventParts[1].equals("")) {
             throw new DukeException("The description of an event cannot be empty");
         } else {
