@@ -109,6 +109,7 @@ public class Storage {
      * @return a String with task information in storage line format.
      */
     public static String buildStorageLine(Task targetTask) {
+        assert(targetTask != null);
         String divider = " | ";
         String initial = targetTask.getTaskType();
         String newLine = initial + divider;

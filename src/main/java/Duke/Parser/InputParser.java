@@ -49,6 +49,7 @@ public class InputParser {
      * @param input
      */
     public static void parseTodoInput(String input) {
+        assert(input.startsWith("todo "));
         try {
             if (InputChecker.isValidTodoInput(input)) {
                 String newTask = input.substring(4).trim();
@@ -70,6 +71,7 @@ public class InputParser {
      * @param input
      */
     public static void parseDeadlineInput(String input) {
+        assert(input.startsWith("deadline "));
         try {
             if (InputChecker.isValidDeadlineInput(input)) {
                 Deadline newDeadline = buildDeadline(input);
@@ -91,6 +93,7 @@ public class InputParser {
      * @return Deadline object created from a valid input with deadline information.
      */
     public static Deadline buildDeadline(String input) {
+        assert(input.startsWith("deadline "));
         String[] parts = input.substring(8).split("/by");
         String[] datetime = parts[1].trim().split(" ");
         Deadline newDeadline;
@@ -120,6 +123,7 @@ public class InputParser {
      * @param input
      */
     public static void parseEventInput(String input) {
+        assert(input.startsWith("event "));
         try {
             if (InputChecker.isValidEventInput(input)) {
                 Event newEvent = buildEvent(input);
@@ -141,6 +145,7 @@ public class InputParser {
      * @return an Event object created from a valid input with event information.
      */
     public static Event buildEvent(String input) {
+        assert(input.startsWith("event "));
         String[] parts = input.substring(5).split("/at");
         String[] datetime = parts[1].trim().split(" ");
         Event newEvent;
@@ -170,6 +175,7 @@ public class InputParser {
      * @param input
      */
     public static void parseDoWithinInput(String input) {
+        assert(input.startsWith("dowithin "));
         try {
             if (InputChecker.isValidDoWithinInput(input)) {
                 DoWithin newDoWithin = buildDoWithin(input);
@@ -192,6 +198,7 @@ public class InputParser {
      * @return a DoWithin object created from a valid input with dowithin information.
      */
     public static DoWithin buildDoWithin(String input) {
+        assert(input.startsWith("dowithin "));
         String[] parts = input.substring(8).split("/start");
         String[] startEnd = parts[1].split("/end");
         String[] startDateTime = startEnd[0].trim().split(" ");
@@ -328,6 +335,10 @@ public class InputParser {
     public static void addPriorityToTask(Task newTask) {
         Ui.requestPriorityLevel();
         String level = Duke.getInput();
+        if (level.equals("HIGH") || level.equals("MEDIUM")
+                || level.equals("LOW") || level.equals("NIL")) {
+            level = "0";
+        }
         newTask.setPriority(level);
     }
 
@@ -337,6 +348,7 @@ public class InputParser {
      * @param input
      */
     public static void parseDoneInput(String input) {
+        assert(input.startsWith("done "));
         try {
             if (InputChecker.isValidDoneInput(input)) {
                 TaskList.markTaskAtIndex(input);
@@ -352,6 +364,7 @@ public class InputParser {
      * @param input
      */
     public static void parseDeleteInput(String input) {
+        assert(input.startsWith("delete "));
         try {
             if (InputChecker.isValidDeleteInput(input)) {
                 TaskList.deleteTaskAtIndex(input);
@@ -367,6 +380,7 @@ public class InputParser {
      * @param input
      */
     public static void parseFindInput(String input) {
+        assert(input.startsWith("find "));
         String[] parts = input.split(" ");
         try {
             if (InputChecker.isValidFindInput(parts)) {

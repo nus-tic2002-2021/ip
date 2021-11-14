@@ -29,6 +29,7 @@ public class TaskList {
      * @param newEntry
      */
     public static void addTaskToList(Task newEntry) {
+        assert(newEntry != null);
         DukeList.add(newEntry);
     }
 
@@ -37,6 +38,7 @@ public class TaskList {
      * @param index
      */
     public static void removeTask(int index) {
+        assert(index < DukeList.size());
         DukeList.remove(index);
     }
 
@@ -74,6 +76,7 @@ public class TaskList {
      * @param inputTask
      */
     public static void markTask(Task inputTask) {
+        assert(inputTask != null);
         inputTask.markCompleted();
     }
 
@@ -101,6 +104,7 @@ public class TaskList {
      * @param desc
      */
     public static void printTaskWithDesc(String desc) {
+        assert(desc.trim() != "");
         int count = 0;
         for (int i = 0; i < TaskList.size(); i++) {
             Task currentTask = DukeList.get(i);

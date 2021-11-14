@@ -14,6 +14,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean isValidTodoLine(String[] parts) {
+        assert(parts[0].trim().equals("T"));
         if (parts.length != 4) {
             return false;
         } else if (parts[2].trim().equals("")) {
@@ -31,6 +32,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean isValidDeadlineLine(String[] parts) {
+        assert(parts[0].trim().equals("D"));
         if (parts.length != 5) {
             return false;
         } else if (parts[2].trim().equals("") || parts[3].trim().equals("")) {
@@ -48,6 +50,7 @@ public class FileLineChecker {
      * @return boolean
      */
     public static boolean isValidEventLine(String[] parts) {
+        assert(parts[0].trim().equals("E"));
         if (parts.length != 5) {
             return false;
         } else if (parts[2].trim().equals("") || parts[3].trim().equals("")) {
@@ -65,6 +68,7 @@ public class FileLineChecker {
      * @return
      */
     public static boolean isValidDoWithinLine(String[] parts) {
+        assert(parts[0].trim().equals("W"));
         if (parts.length != 6) {
             return false;
         } else if (parts[2].trim().equals("") || parts[3].trim().equals("")

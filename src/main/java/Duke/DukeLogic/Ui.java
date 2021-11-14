@@ -41,6 +41,7 @@ public class Ui {
      * @param newTask
      */
     public static void printTaskAdded(Task newTask) {
+        assert(newTask != null);
         System.out.println(LINE);
         System.out.println("Got it. I've added this task:\n"
                 + newTask.getTaskInfo());

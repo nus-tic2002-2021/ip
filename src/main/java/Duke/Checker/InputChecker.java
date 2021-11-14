@@ -15,6 +15,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidTodoInput(String input) throws DukeException {
+        assert(input.startsWith("todo "));
         if (input.length() < 5) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else if (input.substring(4).trim().equals("")) {
@@ -32,6 +33,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidDeadlineInput(String input) throws DukeException {
+        assert(input.startsWith("deadline "));
         if (input.contains("/by")) {
             String[] parts = input.substring(8).split("/by");
             if (parts.length != 2) {
@@ -56,6 +58,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidEventInput(String input) throws DukeException {
+        assert(input.startsWith("event "));
         if (input.contains("/at")) {
             String[] parts = input.substring(5).split("/at");
             if (parts.length != 2) {
@@ -80,6 +83,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidDoWithinInput(String input) throws DukeException {
+        assert(input.startsWith("dowithin "));
         if (input.contains("/start")) {
             String[] parts = input.substring(8).split("/start");
             String[] startEnd;
@@ -117,6 +121,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidDoneInput(String input) throws DukeException {
+        assert(input.startsWith("done "));
         if (input.length() < 5) {
             throw new DukeException("☹ OOPS!!! The index of the task to be marked as done is missing.");
         } else {
@@ -138,6 +143,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidDeleteInput(String input) throws DukeException {
+        assert(input.startsWith("delete "));
         if (input.length() < 7) {
             throw new DukeException("☹ OOPS!!! The index of the task to delete is missing.");
         } else {
@@ -159,6 +165,7 @@ public class InputChecker {
      * @throws DukeException
      */
     public static boolean isValidFindInput(String[] parts) throws DukeException {
+        assert(parts[0].trim().equals("find"));
         if (parts.length != 2) {
             throw new DukeException("☹ OOPS!!! The keyword to find is missing.");
         } else {

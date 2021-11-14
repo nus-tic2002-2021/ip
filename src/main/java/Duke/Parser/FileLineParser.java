@@ -54,6 +54,7 @@ public class FileLineParser {
      * @return "To do" object created from information parsed from a file line.
      */
     public static Todo getTodoFromLine(String[] parts) {
+        assert(parts[0].trim().equals("T"));
         Todo newTodo = new Todo(parts[2].trim());
         if (parts[1].trim().equals("1")) {
             TaskList.markTask(newTodo);
@@ -70,6 +71,7 @@ public class FileLineParser {
      * @return Deadline object created from information parsed from a file line.
      */
     public static Deadline getDeadlineFromLine(String[] parts) {
+        assert(parts[0].trim().equals("D"));
         String[] datetime = parts[3].trim().split(" ");
         Deadline newDeadline;
         if (datetime.length > 2 ) {
@@ -108,6 +110,7 @@ public class FileLineParser {
      * @return an Event object created from information parsed from a file line.
      */
     public static Event getEventFromLine(String[] parts) {
+        assert(parts[0].trim().equals("E"));
         String[] datetime = parts[3].trim().split(" ");
         Event newEvent;
         if (datetime.length > 2 ) {
@@ -147,6 +150,7 @@ public class FileLineParser {
      * @return an DoWithin object created from information parsed from a file line.
      */
     public static DoWithin getDoWithinFromLine(String[] parts) {
+        assert(parts[0].trim().equals("W"));
         String[] startDateTime = parts[3].trim().split(" ");
         String[] endDateTime = parts[4].trim().split(" ");
         DoWithin newDoWithin;
