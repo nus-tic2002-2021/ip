@@ -23,15 +23,15 @@ public class UI {
         String msg = "";
 
         if (timeOfDay >= 0 && timeOfDay < 12) {
-            msg = "Good Morning";
+            msg = "Good morning";
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
-            msg = "Good Afternoon";
+            msg = "Good afternoon";
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
-            msg = "Good Evening";
+            msg = "Good evening";
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
-            msg = "Good Night";
+            msg = "Good night";
         }
-        msg += "I'm Dukie~\nWhat can I do for you?";
+        msg += "! I'm Dukie~\nWhat can I do for you?";
         return msg;
     }
 
@@ -95,7 +95,8 @@ public class UI {
         } else if (parser.isView()) {
             manager.viewTaskOn(parser.stringToDate(firstToken));
         } else {
-            manager.addTask(manager.createTask(taskInfo, instruction));
+            Task t = manager.createTask(taskInfo, instruction);
+            System.out.println("Got it! 👌 I've add this task: \n" + t.toString() + "\nNow you have " + manager.getNumOfTasks() + " tasks in the list.");
         }
     }
 }

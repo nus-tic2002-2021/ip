@@ -106,7 +106,7 @@ public class TaskManager {
         return results;
     }
 
-    public Integer getNextId() {
+    public Integer getNumOfTasks() {
         return tasks.size();
     }
 }
