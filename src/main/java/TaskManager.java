@@ -85,10 +85,10 @@ public class TaskManager {
     }
 
     public ArrayList<Task> viewTaskOn(LocalDate date) {
-        logger.info("viewTasksOn date: " + date + ", current task list: " + tasks);
+        logger.finest("viewTasksOn date: " + date + ", current task list: " + tasks);
         ArrayList<Task> results = new ArrayList<>();
         if (date == null) {
-            logger.info("viewTasksOn got null date");
+            logger.finest("viewTasksOn got null date");
             return results;
         }
         tasks.forEach(t -> {
@@ -100,13 +100,13 @@ public class TaskManager {
                     results.add(e);
                 }
             } catch (ClassCastException e) {
-                logger.info("casting to deadline class got error, item could be todo type, error: " + e.getMessage() + " object: " + t);
+                logger.finest("casting to deadline class got error, item could be todo type, error: " + e.getMessage() + " object: " + t);
             }
         });
         return results;
     }
 
     public Integer getNumOfTasks() {
-        return tasks.size();
+        return tasks.size() + 1;
     }
 }

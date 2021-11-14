@@ -46,25 +46,25 @@ public class Deadline extends Todo {
     }
 
     public void setDate(String date) {
-        logger.info("set date " + date);
+        logger.finest("set date " + date);
         if (Objects.equals(date, "")) {
             return;
         }
         LocalDate parsedDate = parser.stringToDate(date);
         if (parsedDate == null) {
-            logger.info("parsing date got null");
+            logger.finest("parsing date got null");
         } else {
             this.date = parsedDate;
         }
     }
 
     public void setEndTime(String time) {
-        logger.info("set end_time " + time);
+        logger.finest("set end_time " + time);
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
             this.endTime = formatter.parse(time).getTime();
         } catch (ParseException p) {
-            logger.info("parsing time got exception" + p.getMessage());
+            logger.finest("parsing time got exception" + p.getMessage());
         }
     }
 

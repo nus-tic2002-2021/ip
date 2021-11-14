@@ -14,7 +14,7 @@ public class Task {
     public Task(String description, int id) {
         this.id = id;
         this.description = description;
-        logger.info("set task, details: " + id + " description: " + description);
+        logger.finest("set task, details: " + id + " description: " + description);
     }
 
     public Integer getId() {

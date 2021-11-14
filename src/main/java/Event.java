@@ -21,14 +21,14 @@ public class Event extends Deadline {
 
     public void setStartTime(String startTime) {
         if (Objects.equals(startTime, "")) {
-            logger.info("empty time");
+            logger.finest("empty time");
             return;
         }
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
             this.startTime = formatter.parse(startTime).getTime();
         } catch (ParseException p) {
-            logger.info("parsing time got null");
+            logger.finest("parsing time got null");
         }
     }
 

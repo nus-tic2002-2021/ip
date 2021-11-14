@@ -20,7 +20,7 @@ public class Logger {
             fileTxt.setFormatter(formatterTxt);
             logger.addHandler(fileTxt);
         } catch (IOException e) {
-            logger.info("init logger got error");
+            logger.finest("init logger got error");
         }
     }
 
@@ -29,6 +29,6 @@ public class Logger {
     }
 
     public void info(String msg) {
-        logger.info(msg);
+        logger.finest(msg);
     }
 }

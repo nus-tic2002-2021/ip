@@ -53,7 +53,7 @@ public class Parser {
         try {
             parsedDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            logger.info("parse date time got error" + e.getMessage());
+            logger.finest("parse date time got error" + e.getMessage());
         }
         return parsedDate;
     }
@@ -83,7 +83,7 @@ public class Parser {
     }
 
     public Boolean isList(String i) {
-        logger.info("instruction: listing task");
+        logger.finest("instruction: listing task");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_LIST);
     }
 
@@ -92,7 +92,7 @@ public class Parser {
     }
 
     public Boolean isDone(String i) {
-        logger.info("instruction: done");
+        logger.finest("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DONE) && tokens.size() >= 2;
     }
 
@@ -101,14 +101,14 @@ public class Parser {
     }
 
     public Boolean isDelete(String i) {
-        logger.info("instruction: done");
+        logger.finest("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2;
     }
 
     public String getFirstToken() {
         if (tokens.size() > 1) {
             String firstToken = tokens.get(1);
-            logger.info("instruction: get first token" + firstToken);
+            logger.finest("instruction: get first token" + firstToken);
             return firstToken;
         }
 
