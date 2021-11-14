@@ -1,5 +1,9 @@
 package Ui;
 
+/**
+ * Handler for all UI related function such as printing messages and exceptions
+ */
+
 public class Ui {
 
     public static void showWelcome() {

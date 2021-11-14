@@ -7,6 +7,10 @@ import Task.TaskList;
 import Task.Type;
 import Ui.Ui;
 
+/**
+ * Duke class is main code
+ */
+
 public class Duke {
     static String command;
     static String task;

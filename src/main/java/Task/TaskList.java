@@ -6,6 +6,10 @@ import Storage.Storage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList class handles all the Duke task during runtime. It also supports all operations related to Duke Task (e.g. add new task, remove task, update task, save and retrieve tasklist)
+ */
+
 public class TaskList extends Task{
 
     ArrayList<Task> taskList = new ArrayList<Task>();

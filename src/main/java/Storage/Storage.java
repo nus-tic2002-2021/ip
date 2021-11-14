@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class handles storing and retrieving of Duke Task List from a txt file.
+ */
 
 public class Storage {
 

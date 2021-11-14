@@ -3,6 +3,11 @@ package Task;
 import static Task.Type.*;
 import static Task.Type.todo;
 
+/**
+ * Task class is the base object used to store all information about user Task.
+ * It has 3 main task type - Todo, Deadline, Event
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
