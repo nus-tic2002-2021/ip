@@ -73,10 +73,10 @@ public class UserInterface {
             manager.listTasks();
         } else if (parser.isDone()) {
             Task t = manager.markTaskDone(Integer.parseInt((firstToken)));
-            System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DONE + "\n" + t);
+            System.out.println(t == null ? "🤡 Oops this task doesn't exist, try \"list\" to see all your tasks." : STMT_DONE + "\n" + t);
         } else if (parser.isDelete()) {
             Task t = manager.deleteTask(Integer.parseInt((firstToken)));
-            System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DELETE + "\n " + t);
+            System.out.println(t == null ? "🤡 Oops this task doesn't exist, try \"list\" to see all your tasks." : STMT_DELETE + "\n " + t);
         } else if (parser.isFind()) {
             ArrayList<Task> li = manager.findTask(firstToken);
             if (li.size() == 0) {

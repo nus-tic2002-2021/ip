@@ -133,7 +133,7 @@ public class Parser {
     }
 
     public Boolean isView() {
-        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_VIEW) && tokens.size() >= 1;
+        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_VIEW) && tokens.size() >= 2;
     }
 
     public Boolean isView(String i) {
