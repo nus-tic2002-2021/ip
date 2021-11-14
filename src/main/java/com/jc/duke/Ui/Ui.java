@@ -22,6 +22,22 @@ public class Ui {
         System.exit(0) ;
     }
 
+    public static void showHelp() {
+        System.out.println("The following commands are available:\n" +
+                "    todo <description> /<condition> <date> : <date> must be in yyyy/MM/dd HHmm format\n" +
+                "    deadline <description> /<condition> <date> : <date> must be in yyyy/MM/dd HHmm format\n" +
+                "    event <description> /<condition> <date> : <date> must be in yyyy/MM/dd HHmm format\n" +
+                "    done <index> : Mark <index> task as done\n" +
+                "    delete <index> : Delete <index> task\n" +
+                "    bye : Terminate Program\n" +
+                "    list : List all task\n" +
+                "    find <description> : List all task with <description>\n" +
+                "    save : Save all current tasks into /data/save.txt \n" +
+                "    load : Load from /data/save.txt\n" +
+                "    archive : Archive all current tasks\n" +
+                "    archive show : Display all archived files\n");
+    }
+
     public static void showException() {
         System.out.println("unexpected command");
     }

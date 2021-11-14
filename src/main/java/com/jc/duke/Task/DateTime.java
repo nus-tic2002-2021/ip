@@ -31,6 +31,10 @@ public class DateTime {
 //        return time;
 //    }
 
+    public Date getDate() {
+        return date;
+    }
+
     public String getTime() {
         return date.toString();
     }

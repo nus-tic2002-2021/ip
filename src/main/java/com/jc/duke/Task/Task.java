@@ -1,5 +1,7 @@
 package com.jc.duke.Task;
 
+import java.util.Date;
+
 import static com.jc.duke.Task.Type.*;
 import static com.jc.duke.Task.Type.todo;
 
@@ -56,6 +58,9 @@ public class Task {
         return taskType;
     }
 
+    public Date getDate() {
+        return dateTime.getDate();
+    }
     public String getDateTime() {
         return "(" + dateTime.getCondition() + ": " + dateTime.getTime() + ")";
     }

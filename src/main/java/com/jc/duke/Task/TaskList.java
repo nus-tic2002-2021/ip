@@ -3,6 +3,7 @@ package com.jc.duke.Task;
 import com.jc.duke.Exception.DukeTaskNotFoundException;
 import com.jc.duke.Storage.Storage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,15 +24,36 @@ public class TaskList extends Task{
 
     public void saveTaskList() {
         String temp = "";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        for(int i = 0; i < taskList.size(); i++) {
+            Task tempTask = taskList.get(i);
+            temp += tempTask.taskType + delimiter + tempTask.isDone + delimiter + tempTask.description + delimiter + tempTask.dateTime.getCondition() + delimiter + simpleDateFormat.format(tempTask.getDate()) + "\r\n";
+        }
+
+        new Storage().writeSaveFile(temp);
+    }
+
+    public void archiveTaskList() {
+        String temp = "";
 
         for(int i = 0; i < taskList.size(); i++) {
             Task tempTask = taskList.get(i);
             temp += tempTask.taskType + delimiter + tempTask.isDone + delimiter + tempTask.description + delimiter + tempTask.dateTime.getCondition() + delimiter + tempTask.dateTime.getTime() + "\r\n";
         }
 
-        new Storage().writeSaveFile(temp);
+        new Storage().writeArchiveFile(temp);
+
+        taskList.clear();
     }
 
+    public void getArchiveList() {
+        System.out.println("Here are all the archived task list:");
+
+        ArrayList<String> archiveFiles = new Storage().getArchiveFile();
+        for(int i = 0; i < archiveFiles.size(); i++) {
+            System.out.println(archiveFiles.get(i).toString() + "\r\n");
+        }
+    }
     public void loadTaskList() {
         List<String> stringList = new Storage().readSaveFile();
 
@@ -78,7 +100,7 @@ public class TaskList extends Task{
 
         if(isDone){
             try {
-                setDone(taskList.size());
+                taskList.get(taskList.size()-1).setDone();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -93,7 +115,7 @@ public class TaskList extends Task{
         try{
             taskList.get(index-1).setDone();
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println(getTaskDetails(index - 1));
+            System.out.println(getTaskDetails(index-1));
         } catch (Exception ex) {
             throw new DukeTaskNotFoundException("Invalid task number");
         }
@@ -111,10 +133,16 @@ public class TaskList extends Task{
     }
 
     public void printTaskList() {
-        System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + ". " + getTaskDetails(i));
+
+        if(taskList.size() == 0) {
+            System.out.println("There are nothing in your list yet");
+        } else {
+            System.out.println("Here are the tasks in your list: ");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println(i + 1 + ". " + getTaskDetails(i));
+            }
         }
+
     }
 
     public String getTaskDetails(int index) {

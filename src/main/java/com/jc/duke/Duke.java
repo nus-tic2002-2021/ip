@@ -38,6 +38,9 @@ public class Duke {
 
             if(line.equals("bye")) {
                 ui.showGoodbye();
+            } else if (line.equals("help")) {
+                ui.showHelp();
+                isAddTask = false;
             } else if (line.equals("list")) {
                 tl.printTaskList();
                 isAddTask = false;
@@ -47,7 +50,13 @@ public class Duke {
             } else if (line.equals("load")) {
                 tl.loadTaskList();
                 isAddTask = false;
-            }else if (line.contains("done")) {
+            } else if (line.equals("archive")) {
+                tl.archiveTaskList();
+                isAddTask = false;
+            }  else if (line.equals("archive show")) {
+                tl.getArchiveList();
+                isAddTask = false;
+            } else if (line.contains("done")) {
                 //System.out.println(line);
                 isAddTask = false;
                 try {
