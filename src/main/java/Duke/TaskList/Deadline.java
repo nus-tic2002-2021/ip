@@ -1,4 +1,6 @@
-public class Deadline extends Task{
+package Duke.TaskList;
+
+public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) {
@@ -11,4 +13,6 @@ public class Deadline extends Task{
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    @Override
+    public String saveTask(){ return "D|" + super.saveTask() + "|" + by;}
 }
