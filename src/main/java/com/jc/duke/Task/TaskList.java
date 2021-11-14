@@ -88,6 +88,17 @@ public class TaskList extends Task{
 
 
     }
+
+    public void findTask(String keyword) {
+
+        System.out.println("Here are the matching tasks in your list:");
+
+        for(Task t:taskList) {
+            if(t.description.contains(keyword)) {
+                System.out.println(getTaskDetails(t));
+            }
+        }
+    }
     public void addTask(String description, Type type, DateTime dateTime) {
         taskList.add(new Task(description, type, dateTime));
         System.out.println("Got it. I've added this task: ");
@@ -124,9 +135,10 @@ public class TaskList extends Task{
 
     public void deleteTask(int index) throws DukeTaskNotFoundException {
         try{
+            taskList.remove(index - 1);
+
             System.out.println("Noted. I've removed this task: ");
             System.out.println(getTaskDetails(index - 1));
-            taskList.remove(index - 1);
         } catch (Exception ex) {
             throw new DukeTaskNotFoundException("Invalid task number");
         }
@@ -148,6 +160,10 @@ public class TaskList extends Task{
     public String getTaskDetails(int index) {
         Task temp = taskList.get(index);
         return "[" + temp.getTaskType() + "][" + temp.getStatusIcon() + "] " + temp.getDescription() + " " + temp.getDateTime();
+    }
+
+    public String getTaskDetails(Task task) {
+        return "[" + task.getTaskType() + "][" + task.getStatusIcon() + "] " + task.getDescription() + " " + task.getDateTime();
     }
 
 }

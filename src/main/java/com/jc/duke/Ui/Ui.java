@@ -15,6 +15,7 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        System.out.println("Type 'help' to view all commands");
     }
 
     public static void showGoodbye() {

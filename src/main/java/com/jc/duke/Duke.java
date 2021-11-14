@@ -50,6 +50,9 @@ public class Duke {
             } else if (line.equals("load")) {
                 tl.loadTaskList();
                 isAddTask = false;
+            } else if (line.contains("find")) {
+                tl.findTask(line.split(" ")[1]);
+                isAddTask = false;
             } else if (line.equals("archive")) {
                 tl.archiveTaskList();
                 isAddTask = false;
