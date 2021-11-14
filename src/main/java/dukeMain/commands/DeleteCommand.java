@@ -38,7 +38,7 @@ public class DeleteCommand extends Command{
         try{
             ui.print("The Task :");
             ui.print(tasks.deleteTask(index).toString());
-            ui.print("Is removed from the list");
+            ui.print("Is removed from the list. There are currently "+ tasks.getTaskList().size() + " Tasks left in the list");
         }catch(IndexOutOfBoundsException e){
             throw new DukeException("Failed to delete task !!! Please follow the below example\n" + MESSAGE_USAGE);
         }

@@ -48,18 +48,25 @@ public class TaskList {
     }
 
     /** Add task depending on the task type given.
+     * Also Handles adding of task from the source file
+     * For type
+     * - Todos : Checks if description is there else throw ToDosBodyException
+     * - Deadline : Check if description is there else throw DeadlineBodyException.
+     *              Also Checks if date/time is given else throw DeadlineByException.
+     * - Event : Check if description is there else throw EventBodyException.
+     *           Also Checks if date/time is given else throw EventAtException.
      *
      * @param command String Also known as the type of task
      * @param args String[]
      * @param isFile  boolean
-     * @throws DukeException if error while adding task.
+     * @throws DukeException if error while adding task since all classes is child of Dukeexception.
      * */
     public static void addTask(String command,String[] args,boolean isFile) throws DukeException {
         LocalDate lDate;
         String time;
         if(command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) || command.equalsIgnoreCase(AddCommand.COMMAND_WORD_SHORT_1))
         {
-            if ((isFile && args.length != 2) || (!isFile && args.length != 1)){
+            if ((isFile && (args.length != 2 || args[1].isEmpty())) || (!isFile && (args.length != 1 || args[0].isEmpty()))){
                 throw new ToDosBodyException("OOPS!!! The description of a todo cannot be empty");
             }
 
@@ -69,15 +76,15 @@ public class TaskList {
         }
         else if(command.equalsIgnoreCase(AddCommand.COMMAND_WORD_2) || command.equalsIgnoreCase(AddCommand.COMMAND_WORD_SHORT_2))
         {
-            if((!isFile && args.length == 0) || (isFile && args.length == 1))
+            if((!isFile && (args.length == 0 || args[0].isEmpty())) || (isFile && (args.length == 1 || args[1].isEmpty())))
                 throw new DeadlineBodyException("OOPS!!! The description of a dukeMain.tasks.Deadline cannot be empty");
-            if((!isFile && args.length == 1) || (isFile && args.length == 2))
+            if((!isFile && (args.length == 1 || args[1].isEmpty())) || (isFile && (args.length == 2 || args[2].isEmpty())))
                 throw new DeadlineByException("OOPS!!! When is the dukeMain.tasks.Deadline ?");
 
             if (isFile) {
                 lDate = parser.parseLDT(args[2]);
                 time = parser.getTime(args[2]);
-                taskListing.add(new Deadline(Boolean.getBoolean(args[0]), args[1],lDate,time));
+                taskListing.add(new Deadline(((args[0].equals("0")) ? false : true), args[1],lDate,time));
             }else{
                 lDate = parser.parseLDT(args[1]);
                 time = parser.getTime(args[1]);
@@ -86,16 +93,15 @@ public class TaskList {
         }
         else if(command.equalsIgnoreCase(AddCommand.COMMAND_WORD_3) || command.equalsIgnoreCase(AddCommand.COMMAND_WORD_SHORT_3))
         {
-            if(args.length == 0)
+            if((!isFile && (args.length == 0 || args[0].isEmpty())) || (isFile && (args.length == 1 || args[1].isEmpty())))
                 throw new EventBodyException("OOPS!!! The description of a dukeMain.tasks.Event cannot be empty");
-
-            if(args.length == 1)
+            if((!isFile && (args.length == 1 || args[1].isEmpty())) || (isFile && (args.length == 2 || args[2].isEmpty())))
                 throw new EventAtException("OOPS!!! When is the dukeMain.tasks.Event ?");
 
             if (isFile) {
                 lDate = parser.parseLDT(args[2]);
                 time = parser.getTime(args[2]);
-                taskListing.add(new Event(Boolean.getBoolean(args[0]), args[1],lDate,time));
+                taskListing.add(new Event(((args[0].equals("0")) ? false : true), args[1],lDate,time));
             }else{
                 lDate = parser.parseLDT(args[1]);
                 time = parser.getTime(args[1]);
@@ -129,7 +135,7 @@ public class TaskList {
      * @return Task for printing purposes.
      * */
     public static Task deleteTask(int index) {
-        Task tk = taskListing.get(index);
+        Task tk = taskListing.get(index-1);
         taskListing.remove(index - 1 );
         return tk;
     }
@@ -149,7 +155,22 @@ public class TaskList {
         return taskListing;
     }
 
+    /** Getter of task from tasklist
+     * @return task Task
+     * */
     public static Task getTask(int index){
         return taskListing.get(index);
+    }
+
+    /** Find the list of Task with description that matches the given description
+     *
+     * @return ArrayList<Task> of the Task that matches it
+     * */
+    public static ArrayList<Task> findList(String description){
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        for (Task tk : taskListing){
+            if (tk.getDescription().contains(description)) taskArrayList.add(tk);
+        }
+        return taskArrayList;
     }
 }

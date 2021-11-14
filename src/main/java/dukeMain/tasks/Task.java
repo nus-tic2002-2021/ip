@@ -22,7 +22,11 @@ public class Task {
      * default true;
      * */
     public void setDone() {
-        this.done = true;
+        if (this.done){
+            this.done = false;
+        } else{
+            this.done = true;
+        }
     }
 
     /**Getter for done variable
@@ -49,7 +53,7 @@ public class Task {
         return (this.done? "1" : "0");
     }
 
-    /** Getter for variable escription
+    /** Getter for variable description
      *
      * @return description String
      * */

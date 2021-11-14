@@ -30,7 +30,8 @@ public class AddCommand extends Command{
             + "Example: " + COMMAND_WORD_2+" Description / DD.MM.YYYY" + "\n" +
             COMMAND_WORD_3
             + ": Add a Event into Task List\n\n"
-            + "Example: " + COMMAND_WORD_3+" Description / DD.MM.YYYY";
+            + "Example: " + COMMAND_WORD_3+" Description / DD.MM.YYYY\n"
+            + "Note Please do not use / to differential DD/MM/YYYY";
 
     public AddCommand(String command, String[] arguments){
         super(command);
@@ -50,9 +51,10 @@ public class AddCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         // this is implemented by child class.
+
         tasks.addTask(getCommand(),arguments,false);
-        ui.print("Your Task : \n");
+        ui.print("Your Task : ");
         ui.print(tasks.getTask(tasks.getTaskList().size()-1).toString());
-        ui.print("\nIs Added to the list");
+        ui.print("Is Added to the list. Now you have "+tasks.getTaskList().size() +" Tasks in the list");
     }
 }

@@ -37,9 +37,9 @@ public class DoneCommand extends Command{
         // this is implemented by child class.
         try{
             tasks.markTask(index);
-            ui.print("Your Task : \n");
-            tasks.getTask(index-1).toString();
-            ui.print("\nIs marked as completed");
+            ui.print("Your Task :");
+            ui.print(tasks.getTask(index-1).toString());
+            ui.print("Is marked as completed");
         }catch(IndexOutOfBoundsException e){
             throw new DukeException("Failed to add task !!! Here is the list of task you may add\n" + MESSAGE_USAGE);
         }

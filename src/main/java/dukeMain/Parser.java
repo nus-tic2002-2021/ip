@@ -1,14 +1,6 @@
 package dukeMain;
 
-import dukeMain.commands.AddCommand;
-import dukeMain.commands.Command;
-import dukeMain.commands.DoneCommand;
-import dukeMain.commands.DeleteCommand;
-import dukeMain.commands.ExitCommand;
-import dukeMain.commands.HelpCommand;
-import dukeMain.commands.IncorrectCommand;
-import dukeMain.commands.ListCommand;
-import dukeMain.commands.SaveCommand;
+import dukeMain.commands.*;
 import dukeMain.common.month.monthEnum;
 
 import java.time.LocalDate;
@@ -70,8 +62,8 @@ public class Parser {
                 return new ListCommand();
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
-//            case FindCommand.COMMAND_WORD:
-//                return prepareFind(arguments);
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(arguments);
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
                 return new HelpCommand();
@@ -107,9 +99,10 @@ public class Parser {
      * */
     private static Command prepareAdd(String command,String arguments) {
         String[] str = parseType(arguments,"/");
-        if ((command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) && str.length != 1 ) ||
-            (!command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) && str.length != 2))
-            return new IncorrectCommand("Please only include 1 Number argument");
+
+//        if ((command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) && str.length != 1 ) ||
+//            (!command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) && str.length != 2))
+//            return new IncorrectCommand("Wrong format. Please follow this the examples"+AddCommand.MESSAGE_USAGE );
 
         return new AddCommand(command, str);
     }
@@ -159,10 +152,6 @@ public class Parser {
         if(str[beginIndex].isEmpty()){
             beginIndex++;
         }
-        // datetime only has Date no time
-        System.out.println(str[beginIndex]);
-        System.out.println(str[beginIndex+1]);
-        System.out.println(str[beginIndex+2]);
         day = Integer.parseInt(str[beginIndex]);
         try {
             month = Integer.parseInt(str[beginIndex+1]);
@@ -200,11 +189,10 @@ public class Parser {
         String[] str = dateTime.split("\\W");
         String returnStr = "";
         int index = 3;
-        if(str[0].isEmpty()) index ++;
+        if(str[0].isEmpty() || str[0].toLowerCase().startsWith("at") || str[0].toLowerCase().startsWith("by")) index ++;
         for (int i = index; i < str.length;i++){
             returnStr += str[i];
         }
-        System.out.println(returnStr);
         return returnStr;
     }
 }
