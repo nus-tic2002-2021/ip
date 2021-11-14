@@ -32,12 +32,20 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    /**
+     * This method returns the object in String format.
+     *
+     * @return the object in string format
+     * */
     public String toString(){
         String print = "[" + getStatusIcon()+"] " + getDescription();
         return print;
     }
-
+    /**
+     * This method return the object in String format.
+     *
+     * @return the object in string format for the task to be saved.
+     * */
     public String saveTask(){
         String save = getStatusDone() + "|" + getDescription();
         return save;

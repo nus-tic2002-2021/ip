@@ -25,7 +25,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    //Printing the count of tasks in the list.
+    /**
+     * Listing the total number of Task object inside the TaskLists.
+     *
+     * @param counter the number of task in the TaskLists
+     * */
     public void printTotalTask(int counter) {
         System.out.println("Now you have " + counter + " tasks in the list.");
     }

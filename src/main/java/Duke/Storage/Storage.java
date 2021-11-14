@@ -22,9 +22,7 @@ public class Storage {
     public Storage(String filepath) throws IOException {
         this.filePath = filePath;
         path = Paths.get(home, filePath);
-        if (!isValidPath(path)) {
-            //throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
-        }
+        if (!isValidPath(path)) {}
         //check if file exist
         isPathExist();
     }
@@ -41,6 +39,11 @@ public class Storage {
             Files.createFile(path);
         }
     }
+    /**
+     * This method save all the tasks in the ArrayList of TaskLists.
+     *
+     * @param tasks ArrayList of Task in TaskLists.
+     * */
     public void saveTask(TaskList tasks){
         path = Paths.get(home, "data",DEFAULT_STORAGE_FILEPATH);
 
@@ -56,7 +59,12 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
+    /**
+     * This method writes all the text into the file.
+     *
+     * @param filePath Path of the file to be written.
+     * @param text String of the text to be stored in the file.
+     * */
     private void writeToFile(String filePath, String text) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(text);
