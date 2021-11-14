@@ -7,17 +7,24 @@ Hello from
 
 Hello, I'm Duke
 What can I do for you?
+
 ________________________________________________
-added: dance
-________________________________________________
-added: sing
-________________________________________________
-added: act
-________________________________________________
+
+Got it. I've added this task:
+		[null][ ] dance
+
+Got it. I've added this task:
+		[null][ ] sing
+
+Got it. I've added this task:
+		[null][ ] act
 Here are the tasks in your list:
-1. [ ] dance
-2. [ ] sing
-3. [ ] act
+1. [null][ ] dance
+2. [null][ ] sing
+3. [null][ ] act
 Nice! I've marked this task as done:
 	[X] sing
+
+Got it. I've added this task:
+		[null][ ] done 2
 	Bye! Thanks for visiting The Duke!

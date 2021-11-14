@@ -1,13 +1,17 @@
+package task;
+
 public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        super.type("D");
+        super.timing(by);
+        super.isDone = false;
     }
 
     @Override
     public String printTask() {
-        return "[D]" + super.printTask() + " (by: " + by + ")";
+        return super.printTask() + " (by: " + super.timing + ")";
     }
 }
