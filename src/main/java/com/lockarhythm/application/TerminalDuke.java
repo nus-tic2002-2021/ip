@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * TerminalDuke is the entrypoint of the Terminal UI application of Duke.
+ */
 final class TerminalDuke extends Application {
   public static void main(String[] args) {
     Path path = Paths.get(".", "tasks.json");

@@ -7,6 +7,11 @@ import com.lockarhythm.storage.Storage;
 import com.lockarhythm.ui.UI;
 import java.io.IOException;
 
+/**
+ * Application contains the common logic of all Duke Applications (GUI, TUI).
+ *
+ * <p>The application architecture is heavily inspired by the Ports & Adapters architecture.
+ */
 abstract class Application {
   static String logo =
       " \t____        _        \n"
@@ -15,6 +20,15 @@ abstract class Application {
           + "\t| |_| | |_| |   <  __/\n"
           + "\t|____/ \\__,_|_|\\_\\___|\n";
 
+  /**
+   * run should be supplied with concrete implementations of its UI, QueryInterpreter and Storage.
+   *
+   * <p>For example, UI could be the Terminal UI or GUI. Storage could be in-memory or disk.
+   *
+   * @param ui a concrete UI implementation
+   * @param q a concrete QueryInterpreter implementation
+   * @param storage any Storage implementation
+   */
   public static void run(UI ui, QueryInterpreter q, Storage storage) {
     Result result;
 
