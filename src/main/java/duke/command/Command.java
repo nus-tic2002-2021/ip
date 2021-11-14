@@ -14,13 +14,19 @@ public abstract class Command {
     public abstract CommandResult execute();
 
     /**
-     * Supplies the data that command will operate on
+     * Input data so command can work
      * @param taskList the single taskList used in Duke
      */
 
     public void inputData(TaskList taskList) {
         this.taskList = taskList;
     }
+
+    /**
+     * Return the successful message
+     * @param task
+     * @return answers to the user
+     */
 
     public String addTaskSuccess(Task task) {
         return "Got it. I have added the task!\n" + task

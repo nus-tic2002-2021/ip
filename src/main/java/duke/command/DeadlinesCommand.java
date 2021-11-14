@@ -7,6 +7,10 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Adds a deadline to the taskList
+ */
+
 public class DeadlinesCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     String taskName;

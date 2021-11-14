@@ -2,6 +2,10 @@ package duke.command;
 
 import duke.task.Task;
 
+/**
+ * Done Command for a task from taskList
+ */
+
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     int numToComplete;

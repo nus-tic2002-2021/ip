@@ -1,6 +1,10 @@
 package duke.command;
 import duke.task.Task;
 
+/**
+ * Delete tasks from the taskList
+ */
+
 public class Delete extends Command {
     public static final String COMMAND_WORD = "delete";
     int taskNumToDelete;

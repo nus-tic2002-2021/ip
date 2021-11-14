@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Exit from the chat
+ */
+
 public class Exit extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String BYE_MESSAGE = "Bye, hope to see you again";

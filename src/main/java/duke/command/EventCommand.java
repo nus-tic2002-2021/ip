@@ -7,6 +7,10 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Adds an event to the taskList
+ */
+
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     String taskName;

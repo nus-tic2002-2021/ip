@@ -1,7 +1,9 @@
 package duke.command;
 
 import duke.task.TaskList;
-
+/**
+ * Represents a command result
+ */
 public class CommandResult {
     String respondToUser;
     TaskList taskList;

@@ -5,8 +5,12 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Task list
+ */
+
 public class TaskList {
-    private List<Task> tasks;
+    private static List<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();

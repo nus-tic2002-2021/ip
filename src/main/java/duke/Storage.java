@@ -10,6 +10,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores the TaskList
+ */
+
 public class Storage {
     Path filePath;
     Path folderPath;
@@ -28,6 +32,11 @@ public class Storage {
             Files.createFile(filePath);
         }
     }
+    /**
+     * Read the task list
+     * @return task list
+     */
+
     public TaskList read() {
         TaskList taskList = null;
         try {
@@ -47,6 +56,7 @@ public class Storage {
         }
         return TaskEncoder;
     }
+
     public TaskList TaskListDecoder(List<String> TaskEncoder) {
         List<Task> TaskDecoder = new ArrayList<>();
         for (String s : TaskEncoder) {

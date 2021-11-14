@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Pop put incorrect message
+ */
+
 public class IncorrectCommand extends Command{
     String errorMessage;
 

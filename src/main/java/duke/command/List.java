@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Command to list tasks
+ */
+
 public class List extends Command {
     public static final String COMMAND_WORD = "list";
 
