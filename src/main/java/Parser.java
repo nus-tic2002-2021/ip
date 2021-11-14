@@ -3,10 +3,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 public class Parser {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    Logger logger = new Logger();
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
@@ -15,6 +14,10 @@ public class Parser {
     private final static String DETECT_VIEW = "view";
 
     ArrayList<String> tokens = new ArrayList<>();
+
+    public Parser() {
+        logger.init("");
+    }
 
     public String getInstruction() {
         return instruction;
@@ -53,7 +56,7 @@ public class Parser {
         try {
             parsedDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            logger.finest("parse date time got error" + e.getMessage());
+            logger.info("parse date time got error" + e.getMessage());
         }
         return parsedDate;
     }
@@ -83,7 +86,7 @@ public class Parser {
     }
 
     public Boolean isList(String i) {
-        logger.finest("instruction: listing task");
+        logger.info("instruction: listing task");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_LIST);
     }
 
@@ -92,7 +95,7 @@ public class Parser {
     }
 
     public Boolean isDone(String i) {
-        logger.finest("instruction: done");
+        logger.info("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DONE) && tokens.size() >= 2;
     }
 
@@ -101,14 +104,14 @@ public class Parser {
     }
 
     public Boolean isDelete(String i) {
-        logger.finest("instruction: done");
+        logger.info("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2;
     }
 
     public String getFirstToken() {
         if (tokens.size() > 1) {
             String firstToken = tokens.get(1);
-            logger.finest("instruction: get first token" + firstToken);
+            logger.info("instruction: get first token" + firstToken);
             return firstToken;
         }
 

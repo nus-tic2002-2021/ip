@@ -13,22 +13,23 @@ public class Event extends Deadline {
 
     public Event(String description, String date, int id) {
         super(description,
-                (String) new ArrayList(Arrays.asList(date.split(" "))).get(0),
-                (String) new ArrayList(Arrays.asList(Arrays.asList(date.split(" ")).get(1).split("-"))).get(1),
+                (String) new ArrayList(Arrays.asList(date.trim().split(" "))).get(0),
+                (String) new ArrayList(Arrays.asList(Arrays.asList(date.trim().split(" ")).get(1).split("-"))).get(1),
                 id);
-        setStartTime((String) new ArrayList(Arrays.asList(Arrays.asList(date.split(" ")).get(1).split("-"))).get(0));
+        setStartTime((String) new ArrayList(Arrays.asList(Arrays.asList(date.trim().split(" ")).get(1).split("-"))).get(0));
+        logger.init("");
     }
 
     public void setStartTime(String startTime) {
         if (Objects.equals(startTime, "")) {
-            logger.finest("empty time");
+            logger.info("empty time");
             return;
         }
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
             this.startTime = formatter.parse(startTime).getTime();
         } catch (ParseException p) {
-            logger.finest("parsing time got null");
+            logger.info("parsing time got null");
         }
     }
 

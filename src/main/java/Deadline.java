@@ -7,19 +7,21 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class Deadline extends Todo {
     LocalDate date;
     long endTime;
     Parser parser = new Parser();
-
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    Logger logger = new Logger();
 
     public Deadline(String description, String endDateTime, int id) {
         super(description, id);
 
-        ArrayList<String> tokens = new ArrayList(Arrays.asList(endDateTime.split(" ")));
+        logger.init("");
+        logger.info("get description: " + description);
+        logger.info("get endDateTime: " + endDateTime.trim());
+        ArrayList<String> tokens = new ArrayList(Arrays.asList(endDateTime.trim().split(" ")));
+        logger.info("set tokens: " + tokens);
         setDate(tokens.get(0));
         setEndTime(tokens.get(1));
     }
@@ -46,25 +48,25 @@ public class Deadline extends Todo {
     }
 
     public void setDate(String date) {
-        logger.finest("set date " + date);
+        logger.info("set date: " + date);
         if (Objects.equals(date, "")) {
             return;
         }
         LocalDate parsedDate = parser.stringToDate(date);
         if (parsedDate == null) {
-            logger.finest("parsing date got null");
+            logger.info("parsing date got null");
         } else {
             this.date = parsedDate;
         }
     }
 
     public void setEndTime(String time) {
-        logger.finest("set end_time " + time);
+        logger.info("set end_time: " + time);
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
             this.endTime = formatter.parse(time).getTime();
         } catch (ParseException p) {
-            logger.finest("parsing time got exception" + p.getMessage());
+            logger.info("parsing time got exception" + p.getMessage());
         }
     }
 

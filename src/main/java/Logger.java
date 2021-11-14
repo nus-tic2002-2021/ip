@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
@@ -11,6 +12,9 @@ public class Logger {
     }
 
     public void init(String path) {
+        if (Objects.equals(path, "")) {
+            path = "duke_info.logs";
+        }
         logger = java.util.logging.Logger.getLogger(java.util.logging.Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.FINEST);
         try {
@@ -20,7 +24,7 @@ public class Logger {
             fileTxt.setFormatter(formatterTxt);
             logger.addHandler(fileTxt);
         } catch (IOException e) {
-            logger.finest("init logger got error");
+            logger.info("init logger got error");
         }
     }
 
@@ -29,6 +33,8 @@ public class Logger {
     }
 
     public void info(String msg) {
-        logger.finest(msg);
+        if (logger != null) {
+            logger.finest(msg);
+        }
     }
 }

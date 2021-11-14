@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class UI {
     private final static String STMT_END = "Bye. Hope to see you again soon!";
-
+    private final static String STMT_DONE = "Nice! I've marked this task as done: ";
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
     public UI(TaskManager m) {
@@ -86,7 +87,8 @@ public class UI {
         if (parser.isList()) {
             manager.listTasks();
         } else if (parser.isDone()) {
-            manager.markTaskDone(Integer.parseInt((firstToken)));
+            Task t = manager.markTaskDone(Integer.parseInt((firstToken)));
+            System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DONE + "\n" + t);
         } else if (parser.isDelete()) {
             manager.deleteTask(Integer.parseInt((firstToken)));
         } else if (parser.isFind()) {
@@ -96,7 +98,7 @@ public class UI {
             manager.viewTaskOn(parser.stringToDate(firstToken));
         } else {
             Task t = manager.createTask(taskInfo, instruction);
-            System.out.println("Got it! 👌 I've add this task: \n" + t.toString() + "\nNow you have " + manager.getNumOfTasks() + " tasks in the list.");
+            System.out.println("Got it! 👌 I've add this " + t.getType() + ": \n" + t.toString() + "\nNow you have " + manager.getNumOfTasks() + " tasks in the list.");
         }
     }
 }

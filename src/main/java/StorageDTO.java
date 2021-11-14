@@ -20,13 +20,13 @@ public class StorageDTO extends StorageDAO {
             while (s.hasNext()) {
                 Task t = parseLineToTask(s.nextLine(), id, tm);
                 list.add(t);
-                logger.finest("added task successfully to list" + t);
+                logger.info("added task successfully to list" + t);
                 id++;
             }
             tm.setTasks(list);
             return list;
         } catch (Exception e) {
-            logger.finest("got error loading file, error: " + e);
+            logger.info("got error loading file, error: " + e);
         }
         return new ArrayList<Task>();
     }
@@ -45,13 +45,13 @@ public class StorageDTO extends StorageDAO {
                 try {
                     String task = parseTaskToLine(t);
                     fw.write(task + "\n");
-                    logger.finest("task written properly" + task);
+                    logger.info("task written properly" + task);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
             fw.close();
-            logger.finest("file has been saved properly");
+            logger.info("file has been saved properly");
         } catch (Exception e) {
             System.out.println("saving failed, error: " + e);
         }

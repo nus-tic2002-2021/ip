@@ -1,20 +1,21 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Logger;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TaskManager {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
-
-    private final static String STMT_DONE = "Nice! I've marked this task as done: ";
     private final static String STMT_DELETE = "Noted. I've removed this task: ";
-
+    Logger logger = new Logger();
     private ArrayList<Task> tasks = new ArrayList<>();
-    private StorageDTO storageDTO;
     Global global = new Global();
+
+    public TaskManager() {
+        logger.init("");
+    }
 
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
@@ -38,6 +39,7 @@ public class TaskManager {
                 return t;
             case DETECT_ADD_EVENT:
                 ArrayList<String> addInfo = new ArrayList(Arrays.asList(taskInfo.split("/at")));
+                logger.info("add info for event: " + addInfo);
                 Event e = new Event(addInfo.get(0), addInfo.get(1), global.getId());
                 addTask(e);
                 return e;
@@ -65,12 +67,22 @@ public class TaskManager {
         tasks.add(t);
     }
 
-    public void markTaskDone(Integer taskId) {
-        tasks.stream().filter(t -> t.getId().equals(taskId)).forEach(t -> {
-            System.out.println(STMT_DONE);
-            Todo task = (Todo) t;
-            task.setDone(true);
-        });
+    public Task markTaskDone(Integer taskId) {
+        Task tx = null;
+        if (tasks == null) {
+            return null;
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (Objects.equals(t.getId(), taskId)) {
+                tx = t;
+                Todo todo = (Todo) t;
+                todo.setDone(true);
+                t = (Task) todo;
+                tasks.set(i, t);
+            }
+        }
+        return tx;
     }
 
     public void deleteTask(Integer taskId) {
@@ -85,28 +97,28 @@ public class TaskManager {
     }
 
     public ArrayList<Task> viewTaskOn(LocalDate date) {
-        logger.finest("viewTasksOn date: " + date + ", current task list: " + tasks);
+        logger.info("viewTasksOn date: " + date + ", current task list: " + tasks);
         ArrayList<Task> results = new ArrayList<>();
         if (date == null) {
-            logger.finest("viewTasksOn got null date");
+            logger.info("viewTasksOn got null date");
             return results;
         }
         tasks.forEach(t -> {
             try {
                 Deadline e = (Deadline) t;
-                logger.finest("looking at task: " + t + " date for this task " + e.getDate());
+                logger.info("looking at task: " + t + " date for this task " + e.getDate());
                 if (e.getDate().equals(date)) {
-                    logger.finest("added successfully to results " + e);
+                    logger.info("added successfully to results " + e);
                     results.add(e);
                 }
             } catch (ClassCastException e) {
-                logger.finest("casting to deadline class got error, item could be todo type, error: " + e.getMessage() + " object: " + t);
+                logger.info("casting to deadline class got error, item could be todo type, error: " + e.getMessage() + " object: " + t);
             }
         });
         return results;
     }
 
     public Integer getNumOfTasks() {
-        return tasks.size() + 1;
+        return tasks.size();
     }
 }
