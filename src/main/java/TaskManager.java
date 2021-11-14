@@ -1,22 +1,20 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Logger;
+import java.util.Objects;
 
 public class TaskManager {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
-
-    private final static String STMT_DONE = "Nice! I've marked this task as done: ";
-    private final static String STMT_DELETE = "Noted. I've removed this task: ";
-
+    private final Logger logger = new Logger();
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    Global global = new Global();
+    public TaskManager() {
+        logger.init("");
+    }
 
-    public ArrayList<Task> find(String keyword) {
+    public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         tasks.stream().filter(t -> t.getDescription().contains(keyword)).forEach(results::add);
         return results;
@@ -30,34 +28,49 @@ public class TaskManager {
         return tasks;
     }
 
-    public Task createTask(String taskInfo, String instruction) {
-        switch (instruction) {
+    /**
+     * Returns a Task object based on the task's information and type.
+     * The task information for <a href="#{@link}">{@link Todo}</a> has no restrictions.
+     * The task information for <a href="#{@link}">{@link Deadline}</a> must contain "/by", event date and end time.
+     * The task information for <a href="#{@link}">{@link Event}</a> must contain "/at", event date, start and end time.
+     * The taskType must be either <a href="#{@link}">{@link Todo}</a>, <a href="#{@link}">{@link Event}</a> or <a href="#{@link}">{@link Deadline}</a>
+     *
+     * @param taskInfo the information of the task
+     * @param taskType the type of the task, e.g. event, deadline or todo
+     * @return Task
+     * @see Task
+     * @see Todo
+     * @see Deadline
+     * @see Event
+     */
+    public Task createTask(String taskInfo, String taskType) {
+        assert !Objects.equals(taskInfo, "");
+        assert (Objects.equals(taskType, "event") || Objects.equals(taskType, "todo") || Objects.equals(taskType, "deadline"));
+        switch (taskType.trim()) {
             case DETECT_ADD_TODO:
-                Todo t = new Todo(taskInfo, global.getId());
+                Todo t = new Todo(taskInfo, getId());
                 addTask(t);
                 return t;
             case DETECT_ADD_EVENT:
                 ArrayList<String> addInfo = new ArrayList(Arrays.asList(taskInfo.split("/at")));
-                Event e = new Event(addInfo.get(0), addInfo.get(1), global.getId());
+                logger.info("add info for event: " + addInfo);
+                Event e = new Event(addInfo.get(0), addInfo.get(1), getId());
                 addTask(e);
                 return e;
             case DETECT_ADD_DEADLINE:
                 ArrayList<String> deadlineInfo = new ArrayList(Arrays.asList(taskInfo.split("/by")));
-                Deadline d = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), global.getId());
+                Deadline d = new Deadline(deadlineInfo.get(0), deadlineInfo.get(1), getId());
                 addTask(d);
                 return d;
         }
-        return new Task(taskInfo, global.getId());
+        return new Task(taskInfo, getId());
     }
 
-    public void list() {
-        if (tasks.toArray().length == 0) {
-            return;
-        }
-        tasks.forEach(l -> System.out.println(l.toString()));
+    public void listTasks() {
+        listTasks(tasks);
     }
 
-    public void list(ArrayList<Task> l) {
+    public void listTasks(ArrayList<Task> l) {
         if (tasks.toArray().length == 0) {
             return;
         }
@@ -68,26 +81,36 @@ public class TaskManager {
         tasks.add(t);
     }
 
-    public void markDone(Integer taskId) {
-        tasks.stream().filter(t -> t.getId().equals(taskId)).forEach(t -> {
-            System.out.println(STMT_DONE);
-            Todo task = (Todo) t;
-            task.setDone(true);
-        });
-    }
-
-    public void markDelete(ArrayList<Task> list, Integer taskId) throws Exception {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() != null && list.get(i).getId().equals(taskId)) {
-                System.out.println(STMT_DELETE);
-                System.out.println(list.get(i).toString());
-                list.remove(list.get(i));
-                return;
+    public Task markTaskDone(Integer taskId) {
+        Task tx = null;
+        if (tasks == null) {
+            return null;
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (Objects.equals(t.getId(), taskId)) {
+                tx = t;
+                Todo todo = (Todo) t;
+                todo.setDone(true);
+                t = (Task) todo;
+                tasks.set(i, t);
             }
         }
+        return tx;
     }
 
-    public ArrayList<Task> viewTasksOn(LocalDate date) {
+    public Task deleteTask(Integer taskId) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getId() != null && tasks.get(i).getId().equals(taskId)) {
+                Task t = tasks.get(i);
+                tasks.remove(t);
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Task> viewTaskOn(LocalDate date) {
         logger.info("viewTasksOn date: " + date + ", current task list: " + tasks);
         ArrayList<Task> results = new ArrayList<>();
         if (date == null) {
@@ -97,9 +120,9 @@ public class TaskManager {
         tasks.forEach(t -> {
             try {
                 Deadline e = (Deadline) t;
-                logger.finest("looking at task: " + t + " date for this task " + e.getDate());
+                logger.info("looking at task: " + t + " date for this task " + e.getDate());
                 if (e.getDate().equals(date)) {
-                    logger.finest("added successfully to results " + e);
+                    logger.info("added successfully to results " + e);
                     results.add(e);
                 }
             } catch (ClassCastException e) {
@@ -107,5 +130,13 @@ public class TaskManager {
             }
         });
         return results;
+    }
+
+    public Integer getId() {
+        return getNumOfTasks();
+    }
+
+    public Integer getNumOfTasks() {
+        return tasks.size();
     }
 }

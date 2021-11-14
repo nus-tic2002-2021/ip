@@ -16,6 +16,7 @@ bin/
 /vcs.xml
 /logs
 /*.logs
+/*.logs.*
 modules.xml
 
 /*.class

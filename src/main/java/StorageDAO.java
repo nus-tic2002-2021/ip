@@ -1,12 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class FileAccessor {
-    File file;
-    String path;
+public class StorageDAO {
+    protected File file;
+    protected String path;
 
-    public FileAccessor(String path) {
+    private final Logger logger = new Logger();
+
+    public StorageDAO(String path) {
         this.path = "duke.txt";
+        logger.init("");
     }
 
     public File getFile() {
@@ -26,24 +29,21 @@ public class FileAccessor {
     }
 
     public boolean isInit() {
-        if (file == null) {
-            return false;
-        }
-        return true;
+        return file != null;
     }
 
     public void init() throws Exception {
-        System.out.println("init file path: " + path);
+        logger.info("init file path: " + path);
         try {
             this.file = new File(this.path);
-            System.out.println("path " + path);
+            logger.info("path " + path);
             path = this.file.getPath();
             boolean created = file.createNewFile();
             if (created) {
-                System.out.println("no file detected, a new file has been created: " + this.path);
+                logger.info("no file detected, a new file has been created: " + this.path);
             }
         } catch (Exception e) {
-            System.out.println("got err: " + e);
+            logger.info("got err: " + e);
         }
     }
 }
