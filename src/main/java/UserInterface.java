@@ -4,13 +4,13 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class UI {
+public class UserInterface {
     private final static String STMT_END = "Bye 👋🏻😢. Dukie hopes to see you again soon!";
     private final static String STMT_DONE = "Nice! 🚀 Dukie has marked this task as done: ";
     private final static String ERROR_PREFIX = "Oops Dukie did not quite understand that.";
     private final static String STMT_DELETE = "Noted 👁👄👁. Dukie has removed this task: ";
 
-    public UI(TaskManager m) {
+    public UserInterface(TaskManager m) {
         this.manager = m;
     }
 
@@ -57,23 +57,6 @@ public class UI {
 
     public Boolean isExit() {
         return isExit;
-    }
-
-    public void printErrorMessage(Message m) {
-        switch (m) {
-            case ERROR_UNRECOGNISED:
-                System.out.println(ERROR_PREFIX + " Unrecognised operation.");
-                break;
-            case ERROR_INVALID:
-                System.out.println(ERROR_PREFIX + " Invalid input.");
-                break;
-            case EMPTY_LIST:
-                System.out.println(ERROR_PREFIX + " Empty list.");
-                break;
-            case UNKNOWN_OBJECT:
-                System.out.println(ERROR_PREFIX + " Could not find resource.");
-                break;
-        }
     }
 
     public void processInput() {
