@@ -11,27 +11,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import dukeMain.exceptions.*;
-// Handles loading dukeMain.tasks from the file and
-// saving dukeMain.tasks in the file
+
+/** Handles loading dukeMain.tasks from the file and
+ * saving dukeMain.tasks in the file
+ *
+ * */
 public class Storage {
 
     private static String filePath;
     public static final String DEFAULT_STORAGE_FILEPATH = "data.txt";
     public final Path path;
     public static final String home = System.getProperty("user.home");
-    private static Ui ui;
 
-    private static boolean saveResult,createResult;
 
     public Storage(){
         filePath = DEFAULT_STORAGE_FILEPATH;
         path = Paths.get(home, filePath);
     }
 
-    /**
+    /**Constructor of Storage
+     * To initialise the filepath given.
+     *
+     * @param filePath String
      * @throws InvalidStorageFilePathException if the given file path is invalid
+     * @throws DukeException if IOException is detected when creating directories or file
      */
-    public Storage(String filePath) throws InvalidStorageFilePathException {
+    public Storage(String filePath) throws InvalidStorageFilePathException, DukeException{
         this.filePath = filePath;
 
         path = Paths.get(home, filePath);
@@ -42,23 +47,33 @@ public class Storage {
         isPathExist();
     }
 
+    /**Create a File object with the filepath given.
+     *
+     * @return File
+     */
     public static File load() {
 
         return  new File(home+"/"+filePath); // create a File for the given file path
 
     }
 
-    /**
-     * Returns true if the given path is acceptable as a storage file.
-     * The file path is considered acceptable if it ends with '.txt'
+    /** Check if the given path ends with .txt
+     *
+     * @param filePath Path
+     * @return boolean
      */
     private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }
 
-    public static void save(TaskList tkL){
+    /** Initiate to Save the Tasklist
+     * into the filepath
+     *
+     * @param tkL TaskList
+     * @throws DukeException
+     */
+    public static void save(TaskList tkL) throws DukeException{
         System.out.println("Entered Save");
-        saveResult = true;
         // start saving task
         String content = "";
         for (Task tk : tkL.getTaskList())
@@ -66,9 +81,16 @@ public class Storage {
         try{
             writeToFile(home+"/"+filePath+"",content);
         }catch(IOException e){
-            saveResult = false;
+            throw new DukeException("Something is wrong when Saving the taskList. Please Try Again later");
         }
     }
+
+    /** Write the contents into filepath
+     *
+     * @param filePath String
+     * @param textToAdd String
+     * @throws IOException if there is any issues with writing or accessing the file
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         System.out.println("Entered Write");
         FileWriter fw = new FileWriter(filePath);
@@ -77,7 +99,12 @@ public class Storage {
         System.out.println("Exit Write");
     }
 
-    private void isPathExist(){
+    /** Check if the file path given exist in the directory,
+     * else create new directories and/or file
+     *
+     * @throws IOException if there is any issues with writing or accessing the file
+     */
+    private void isPathExist() throws DukeException{
 
         Path path = Paths.get(home, filePath);
 
@@ -88,53 +115,53 @@ public class Storage {
             createFile(home,path);
         }
     }
+    /** Create Directories if it does not exist
+     *
+     * @throws IOException if there is any issues with writing or accessing the file
+     */
 
-    // Create Directories if it does not exist
-    private static void createDirectories(String home, Path path){
+    private static void createDirectories(String home, Path path) throws DukeException{
         boolean directoryExists;
         Path changePath;
 
-        // Check if directory exist
         if (path.getNameCount() > 1) {
             for (int i = 1; i < path.getNameCount(); i++){
                 changePath = Paths.get(path.subpath(0,i).toString());
                 directoryExists = Files.exists(changePath);
-                // if dont exist create directory
+
                 if(!directoryExists){
                     try{
-//                        ui.printThis("File path dont exist : " + path,1);
                         Files.createDirectory(Paths.get(changePath.toString()));
-//                        ui.printThis("File path is created ",2);
                     }catch (IOException e)
                     {
                         // save task
-                        createResult = false;
-//                        ui.printThis("Caught error",3);
-
-                        e.printStackTrace();    //prints exception if any
+                        throw new DukeException("Something is wrong when creating Directory for path\n" + changePath);
                     }
                 }
             }
         }
     }
 
+    /** Create Directories if it does not exist
+     *
+     * @throws IOException if there is any issues with writing or accessing the file
+     */
     // Create File in the path given
-    private static void createFile(String home, Path path){
+    private static void createFile(String home, Path path) throws DukeException{
         // create txt file
         try{
 //            ui.printThis("File path exist : " + path,3);
             Files.createFile(Paths.get(home,path.toString()));
         }catch (IOException e){
 //            ui.printThis("Caught error",3);
-            createResult = false;
-            e.printStackTrace();    //prints exception if any
+            throw new DukeException("There seems to be error creating the File located : "+ getFilePath());
         }
     }
-    //return saveResult to be printed with UI class.
-    public boolean getSaveResult(){
-        return saveResult;
-    }
-    public boolean getCreateResult() {
-        return createResult;
+    /** Getter for FilePath
+     *
+     * @return Filepath String
+     */
+    public static String getFilePath(){
+        return home + "/"+filePath;
     }
 }

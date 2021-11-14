@@ -13,21 +13,42 @@ import dukeMain.common.month.monthEnum;
 
 import java.time.LocalDate;
 
-
-// deals with making sense of the user command
+/** Parser class helps the program to understand
+ * the command entered by the users and/or files.
+ * */
 public class Parser {
     public static String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \\n%1$s";
 
     /**
      * Used for initial separation of command word and args.
+     * split str with regex  : "\\s\\|\\s" translate to " | "
+     * Specially used for File processing
+     *
+     * @param str String
+     * @return String[] of splited str
      */
     public static String[] parseFileLine(String str){
         return str.split("\\s\\|\\s");
     }
+
+    /**
+     * Used for initial separation of command word and args.
+     * split str with regex indicated by type variable
+     *
+     * @param type
+     * @param str String
+     * @return String[] of splited str
+     */
     public static String[] parseType(String str, String type){
         return str.split(type);
     }
 
+    /**
+     * Breakdown the commands given from the users.
+     *
+     * @param fullCommand String
+     * @return Command
+     */
     public static Command parse(String fullCommand){
 
         String[] strArr = processCommand(fullCommand);
@@ -57,19 +78,33 @@ public class Parser {
         }
     }
 
-    private static Command prepareDeleteNDone(String commandWord, String arguments) {
+    /** Helps to prepare and check
+     *  the arguments need for Delete and Done command.
+     *
+     * @param command String
+     * @param arguments String
+     * @return Command type
+     * */
+    private static Command prepareDeleteNDone(String command, String arguments) {
         String[] str = parseType(arguments,"\\s");
 //        System.out.println("Str : " + str[0]);
         int index;
         if (str.length != 1 ) return new IncorrectCommand("Please only include 1 Number after 'done'" );
         try{
             index = Integer.parseInt(str[0]);
-            return (commandWord.equalsIgnoreCase(DoneCommand.COMMAND_WORD)) ? new DoneCommand(index) : new DeleteCommand(index);
+            return (command.equalsIgnoreCase(DoneCommand.COMMAND_WORD)) ? new DoneCommand(index) : new DeleteCommand(index);
         }catch(NumberFormatException e){
             return new IncorrectCommand("Please enter a number");
         }
     }
 
+    /** Helps to prepare and check
+     *  the arguments need for Add commands.
+     *
+     * @param command String
+     * @param arguments String
+     * @return Command type
+     * */
     private static Command prepareAdd(String command,String arguments) {
         String[] str = parseType(arguments,"/");
         if ((command.equalsIgnoreCase(AddCommand.COMMAND_WORD_1) && str.length != 1 ) ||
@@ -79,6 +114,12 @@ public class Parser {
         return new AddCommand(command, str);
     }
 
+    /** Helps to break the user commands
+     * into commands and argments
+     *
+     * @param command String
+     * @return String Array
+     * */
     private static String[] processCommand(String command){
         String [] split = command.split("\\s");
         String [] returnStr = new String[2];
@@ -86,7 +127,7 @@ public class Parser {
         int count = 0;
         for (String str : split){
             if (count == 0){
-                returnStr[0] = str;// add command into First slot
+                returnStr[0] = str; // add command into First slot
                 count ++;
             }else{
                 if (count == 1){
@@ -95,13 +136,17 @@ public class Parser {
                 }else{
                     arg +=  " " + str;
                 }
-//                System.out.println(str);
             }
         }
         returnStr[1] = arg;
         return returnStr;
     }
 
+    /** parse Local Date from string variable
+     *
+     * @param dateTime String
+     * @return LocalDate
+     * */
     public static LocalDate parseLDT(String dateTime){
         String str[] = dateTime.split("\\W");
         int beginIndex = 0,day,month,year;
@@ -134,11 +179,23 @@ public class Parser {
         return lDate;
     }
 
+    /** Convert Month from String to integer
+     * With the use of monthEnum enum Class
+     *
+     * @param month String
+     * @return int of month
+     * */
     public static int convertMonth(String month){
         monthEnum mon = monthEnum.valueOf(month.toUpperCase());
         return mon.getMonthInt();
     }
 
+    /** Retrieve the time only
+     * from the dateTime String
+     *
+     * @param dateTime String
+     * @return String
+     * */
     public static String getTime(String dateTime){
         String[] str = dateTime.split("\\W");
         String returnStr = "";
@@ -150,6 +207,4 @@ public class Parser {
         System.out.println(returnStr);
         return returnStr;
     }
-
-
 }
