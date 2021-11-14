@@ -1,9 +1,11 @@
+package task;
+
 import java.util.Objects;
 
 public class Task {
-    protected String taskName;
-    protected boolean isDone;
-    static int totalTasks;
+
+    private final String taskName;
+    private boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -18,16 +20,12 @@ public class Task {
         return taskName;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
     public boolean isDone() {
         return isDone;
     }
 
     public void setDone(boolean done) {
-        isDone = true;
+        isDone = done;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package exceptions;
+
 public class InvalidUserInputException extends Exception {
 
     public InvalidUserInputException() {

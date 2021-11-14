@@ -1,8 +1,10 @@
+package task;
+
 import java.util.Objects;
 
 public class Event extends Task {
 
-    protected String at;
+    private String at;
 
     public Event(String taskName, String at) {
         super(taskName);
@@ -11,10 +13,6 @@ public class Event extends Task {
 
     public String getAt() {
         return at;
-    }
-
-    public void setAt(String at) {
-        this.at = at;
     }
 
     @Override

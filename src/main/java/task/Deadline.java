@@ -1,8 +1,10 @@
+package task;
+
 import java.util.Objects;
 
 public class Deadline extends Task {
 
-    protected String by;
+    private String by;
 
     public Deadline(String taskName, String by) {
         super(taskName);
