@@ -34,7 +34,7 @@ public class Task {
     }
 
     public String toString(){
-        String print = "[" + getStatusIcon()+"] "+getDescription();
+        String print = "[" + getStatusIcon()+"] " + getDescription();
         return print;
     }
 

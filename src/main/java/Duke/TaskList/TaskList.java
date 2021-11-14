@@ -4,24 +4,12 @@ import Duke.ExceptionList.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class TaskList {
     ArrayList<Task> taskLists = new ArrayList<Task>();
-
-    static int counter;
-
     public TaskList() {
-
     }
-
-    public TaskList(ArrayList<Task> taskListsLoad) {
-
-        //taskLists.add();
-
-    }
-
     public TaskList(String f) throws DukeException {
         //parse the String from the text file then use it to inside into the DB
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
@@ -32,29 +20,35 @@ public class TaskList {
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("File is not found. Please, make sure you entered the correct path.");
-        } catch (toDoNotFoundException | eventNotFoundException | deadlineNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (toDoNotFoundException | eventNotFoundException | deadlineNotFoundException |IOException e) {
             e.printStackTrace();
         }
     }
 
     public void addFileTask(String str) throws toDoNotFoundException, eventNotFoundException, deadlineNotFoundException {
-        String[] input = str.split("|", 2);
+        String[] input = str.split("\\|", 2);
         String s1 = input[0];
         String s2 = input[1];
         addTask(s1, s2, true);
     }
 
+    /**
+     * Adds task into the ArrayList of Tasks object. The cmd has been passed through validation thus unwanted commands
+     * will not be written into the list.
+     *
+     * @param cmd the given command by the user
+     * @param description details on the task listed by user
+     * @param file checks if it is from a loaded file or an input string
+     * */
     public void addTask(String cmd, String description, boolean file) throws toDoNotFoundException, eventNotFoundException, deadlineNotFoundException {
         if (cmd.equalsIgnoreCase("todo") || cmd.equalsIgnoreCase("T")) {
             if (description.isEmpty()) {
                 throw new toDoNotFoundException("Sorry, there cannot be any empty todo task.");
             }
             if (file) {
-                String[] input = description.split("\\|", 3);
-                String s1 = input[1];
-                String s2 = input[2];
+                String[] input = description.split("\\|", 2);
+                String s1 = input[0];
+                String s2 = input[1];
                 taskLists.add(new ToDo(s2));
                 if (s1.equals("1")) {
                     taskLists.get(taskLists.size() - 1).setDone(true);
@@ -66,10 +60,10 @@ public class TaskList {
                 throw new deadlineNotFoundException("Sorry, there cannot be any empty deadline task.");
             }
             if (file) {
-                String[] input = description.split("\\|", 4);
-                String s1 = input[1];
-                String s2 = input[2];
-                String s3 = input[3];
+                String[] input = description.split("\\|", 3);
+                String s1 = input[0];
+                String s2 = input[1];
+                String s3 = input[2];
                 taskLists.add(new Deadline(s2, s3));
                 if (s1.equals("1")) {
                     taskLists.get(taskLists.size() - 1).setDone(true);
@@ -86,11 +80,10 @@ public class TaskList {
                 throw new eventNotFoundException("Sorry, there cannot be any empty event task.");
             }
             if (file) {
-                String[] input = description.split("\\|", 4);
-                String s1 = input[1];
-                String s2 = input[2];
-                String s3 = input[3];
-
+                String[] input = description.split("\\|", 3);
+                String s1 = input[0];
+                String s2 = input[1];
+                String s3 = input[2];
                 taskLists.add(new Event(s2, s3));
                 if (s1.equals("1")) {
                     taskLists.get(taskLists.size() - 1).setDone(true);
@@ -107,7 +100,11 @@ public class TaskList {
     public String getLastAddedTask() {
         return taskLists.get(taskLists.size() - 1).toString();
     }
-
+    /**
+     * User input will perform a deleting of the specific task from the ArrayList of Tasks object.
+     *
+     * @param x the given position of the list given by the user
+     * */
     public void deleteTask(int x) {
         System.out.println(taskLists.get(x - 1).toString());
         taskLists.remove(x - 1);

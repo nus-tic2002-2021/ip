@@ -1,21 +1,18 @@
 package Duke.Storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import Duke.TaskList.*;
 import java.util.ArrayList;
 
 public class Storage {
-    protected static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    protected static final String home = System.getProperty("user.home");
-    private static String filePath = DEFAULT_STORAGE_FILEPATH;
+    protected final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
+    protected final String home = System.getProperty("user.home");
+    private String filePath = DEFAULT_STORAGE_FILEPATH;
     protected Path path;
 
     public Storage(){
@@ -56,7 +53,7 @@ public class Storage {
         try{
             writeToFile(path+"",content);
         }catch(IOException e){
-
+            e.printStackTrace();
         }
     }
 

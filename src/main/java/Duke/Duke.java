@@ -7,6 +7,7 @@ import Duke.Ui.Ui;
 
 import java.util.Scanner;
 import java.io.IOException;  // Import the IOException class to handle errors
+import java.util.regex.Pattern;
 
 public class Duke {
 
@@ -18,6 +19,14 @@ public class Duke {
         run();
     }
 
+    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
 
     public void run() {
         ui = new Ui();
@@ -55,12 +64,12 @@ public class Duke {
                         tl.printTaskList();
                         ui.printBreak();
                     } else if (desc.equalsIgnoreCase("done")) {
-                        ui.printBreak();
-                        if (desc2.isEmpty()){
-                            throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
+                        if (desc2.isEmpty() || !isNumeric(desc2)){
+                            throw new CommandNotFoundException("Please enter a number.");
                         }else if (Integer.parseInt(desc2) > tl.getSize() || Integer.parseInt(desc2) <= 0){
-                            throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
+                            throw new CommandNotFoundException("Sorry, Please enter a legit number.");
                         }
+                        ui.printBreak();
                         int x = Integer.parseInt(desc2);
                         tl.setDoneStatus(x);
                         ui.printBreak();
@@ -68,10 +77,10 @@ public class Duke {
                         if (tl.getSize()==0){
                             throw new NoListFoundException("Sorry, I am unable to delete any task because no task is found.");
                         }
-                        if (desc2.isEmpty()){
-                            throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
+                        if (desc2.isEmpty()|| !isNumeric(desc2)){
+                            throw new CommandNotFoundException("Please enter a number.");
                         }else if (Integer.parseInt(desc2) > tl.getSize() || Integer.parseInt(desc2) <= 0){
-                            throw new CommandNotFoundException("Sorry, I am unable to handle your request.");
+                            throw new CommandNotFoundException("Sorry, Please enter a legit number.");
                         }
                         ui.printBreak();
                         int x = Integer.parseInt(desc2);
@@ -113,6 +122,9 @@ public class Duke {
                     }
                 }
             } catch (toDoNotFoundException | CommandNotFoundException | NoListFoundException | deadlineNotFoundException | eventNotFoundException e ) {
+                ui.printBreak();
+                System.out.println(e.getMessage());
+                ui.printBreak();
                 continue;
             }
         }
