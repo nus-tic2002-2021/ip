@@ -1,9 +1,9 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class UI {
     private final static String STMT_END = "Bye. Hope to see you again soon!";
-    private final static String STMT_START = "Hello! I'm Duke\nWhat can I do for you?";
 
     private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
 
@@ -17,8 +17,26 @@ public class UI {
     Boolean isExit = false;
     TaskManager manager;
 
+    public String getGreeting() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        String msg = "";
+
+        if (timeOfDay >= 0 && timeOfDay < 12) {
+            msg = "Good Morning";
+        } else if (timeOfDay >= 12 && timeOfDay < 16) {
+            msg = "Good Afternoon";
+        } else if (timeOfDay >= 16 && timeOfDay < 21) {
+            msg = "Good Evening";
+        } else if (timeOfDay >= 21 && timeOfDay < 24) {
+            msg = "Good Night";
+        }
+        msg += "I'm Dukie~\nWhat can I do for you?";
+        return msg;
+    }
+
     public void start() {
-        System.out.println(STMT_START);
+        System.out.println(getGreeting());
     }
 
     public String getInput() {
