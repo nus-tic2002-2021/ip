@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class Parser {
-    Logger logger = new Logger();
+    private final Logger logger = new Logger();
     private final static String DETECT_END = "bye";
     private final static String DETECT_LIST = "list";
     private final static String DETECT_DONE = "done";
@@ -16,7 +16,7 @@ public class Parser {
     private final static String DETECT_DEADLINE = "deadline";
     private final static String DETECT_TODO = "todo";
 
-    ArrayList<String> tokens = new ArrayList<>();
+    private ArrayList<String> tokens = new ArrayList<>();
 
     public Parser() {
         logger.init("");
@@ -30,7 +30,7 @@ public class Parser {
         this.instruction = instruction;
     }
 
-    String instruction;
+    private String instruction;
 
     public String getTaskInfo() {
         return taskInfo;
@@ -40,7 +40,7 @@ public class Parser {
         this.taskInfo = taskInfo;
     }
 
-    String taskInfo;
+    private String taskInfo;
 
     public ArrayList<String> getTokens() {
         return tokens;
@@ -51,8 +51,12 @@ public class Parser {
     }
 
     /**
-     * @param date
-     * @return date
+     * Returns a String date into a LocalDate date.
+     * Return will be null if error occurs.
+     *
+     * @param date the date to parse
+     * @return date the parsed date
+     * @see LocalDate
      */
     public LocalDate stringToDate(String date) {
         LocalDate parsedDate = null;

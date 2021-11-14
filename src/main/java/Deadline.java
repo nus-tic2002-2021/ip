@@ -7,10 +7,13 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Deadline extends Todo {
-    LocalDate date;
-    long endTime;
+    protected LocalDate date;
+    protected long endTime;
+
+    String savable;
     Parser parser = new Parser();
     Logger logger = new Logger();
 
@@ -24,6 +27,7 @@ public class Deadline extends Todo {
         logger.info("set tokens: " + tokens);
         setDate(tokens.get(0));
         setEndTime(tokens.get(1));
+        setSavable(description + "/by" + endDateTime);
     }
 
     public Deadline(String description, int id) {
@@ -64,20 +68,41 @@ public class Deadline extends Todo {
         logger.info("set end_time: " + time);
         DateFormat formatter = new SimpleDateFormat("HH:mm");
         try {
-            this.endTime = formatter.parse(time).getTime();
+            this.endTime = formatter.parse(time).getTime() + 27000000;
         } catch (ParseException p) {
             logger.info("parsing time got exception" + p.getMessage());
         }
     }
 
-    public long getEndTime() {
-        return endTime;
+    public String getEndTime() {
+        return String.format("%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(endTime),
+                TimeUnit.MILLISECONDS.toMinutes(endTime) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(endTime)));
+
+    }
+
+    public String getSavable() {
+        return savable;
+    }
+
+    public void setSavable(String savable) {
+        this.savable = savable;
+    }
+
+    @Override
+    public String toTask() {
+        return getType() + "," + getSavable() + "," + (isDone ? "1" : "0");
     }
 
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        return id + ". [D][" + status + "] " + super.getDescription() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return id + ". [D][" + status + "] " + super.getDescription().trim() +
+                (date == null ? "" : " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) +
+                (endTime == 0 ? "" : " by: " + getEndTime()) +
+                ")";
+
     }
 
     @Override

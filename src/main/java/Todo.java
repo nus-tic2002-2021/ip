@@ -1,10 +1,10 @@
 public class Todo extends Task {
-    Logger logger = new Logger();
     public boolean isDone;
 
     public Todo(String desc, int id) {
         super(desc, id);
         isDone = false;
+        Logger logger = new Logger();
         logger.init("");
     }
 

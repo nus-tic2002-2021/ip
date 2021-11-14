@@ -2,13 +2,13 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class StorageDTO extends StorageDAO {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final Logger logger = new Logger();
 
     public StorageDTO(String path) {
         super(path);
+        logger.init("");
     }
 
     public ArrayList<Task> loadInto(TaskManager tm) {
@@ -35,6 +35,26 @@ public class StorageDTO extends StorageDAO {
         if (e == null) {
             throw new Exception("task to parse is empty");
         }
+        try {
+            Event event = (Event) e;
+            return event.toTask();
+        } catch (ClassCastException exception) {
+            logger.info("casting task from file to event class got error");
+        }
+
+        try {
+            Deadline deadline = (Deadline) e;
+            return deadline.toTask();
+        } catch (ClassCastException exception) {
+            logger.info("casting task from file to deadline class got error");
+        }
+
+        try {
+            Todo todo = (Todo) e;
+            return todo.toTask();
+        } catch (ClassCastException exception) {
+            logger.info("casting task from file to todo class got error");
+        }
         return e.toTask();
     }
 
@@ -57,7 +77,6 @@ public class StorageDTO extends StorageDAO {
         }
     }
 
-    //deadline,party to be at 26/20/2021,0
     public Task parseLineToTask(String l, int id, TaskManager tm) throws Exception {
         if (Objects.equals(l, "")) {
             throw new Exception("no content");
@@ -66,11 +85,11 @@ public class StorageDTO extends StorageDAO {
         String[] parts = l.split(",");
         String taskType = parts[0];
         String taskDesc = parts[1];
-        boolean taskStatus = Boolean.parseBoolean(parts[2]);
+        int taskStatus = Integer.parseInt(parts[2]);
         Task t = tm.createTask(taskDesc, taskType);
         if (!Objects.equals(t.getType(), "task")) {
             Todo todo = (Todo) t;
-            todo.setDone(taskStatus);
+            todo.setDone(taskStatus != 0);
         }
         return t;
     }

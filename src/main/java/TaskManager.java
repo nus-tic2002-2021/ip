@@ -7,9 +7,8 @@ public class TaskManager {
     private final static String DETECT_ADD_TODO = "todo";
     private final static String DETECT_ADD_EVENT = "event";
     private final static String DETECT_ADD_DEADLINE = "deadline";
-    Logger logger = new Logger();
+    private final Logger logger = new Logger();
     private ArrayList<Task> tasks = new ArrayList<>();
-    Global global = new Global();
 
     public TaskManager() {
         logger.init("");
@@ -29,8 +28,25 @@ public class TaskManager {
         return tasks;
     }
 
-    public Task createTask(String taskInfo, String instruction) {
-        switch (instruction) {
+    /**
+     * Returns a Task object based on the task's information and type.
+     * The task information for <a href="#{@link}">{@link Todo}</a> has no restrictions.
+     * The task information for <a href="#{@link}">{@link Deadline}</a> must contain "/by", event date and end time.
+     * The task information for <a href="#{@link}">{@link Event}</a> must contain "/at", event date, start and end time.
+     * The taskType must be either <a href="#{@link}">{@link Todo}</a>, <a href="#{@link}">{@link Event}</a> or <a href="#{@link}">{@link Deadline}</a>
+     *
+     * @param taskInfo the information of the task
+     * @param taskType the type of the task, e.g. event, deadline or todo
+     * @return Task
+     * @see Task
+     * @see Todo
+     * @see Deadline
+     * @see Event
+     */
+    public Task createTask(String taskInfo, String taskType) {
+        assert !Objects.equals(taskInfo, "");
+        assert (Objects.equals(taskType, "event") || Objects.equals(taskType, "todo") || Objects.equals(taskType, "deadline"));
+        switch (taskType.trim()) {
             case DETECT_ADD_TODO:
                 Todo t = new Todo(taskInfo, getId());
                 addTask(t);

@@ -5,20 +5,20 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class UI {
-    private final static String STMT_END = "Bye. Hope to see you again soon!";
-    private final static String STMT_DONE = "Nice! I've marked this task as done: ";
-    private final static String ERROR_PREFIX = "Oops I did not quite understand that.";
-    private final static String STMT_DELETE = "Noted. I've removed this task: ";
+    private final static String STMT_END = "Bye 👋🏻😢. Dukie hopes to see you again soon!";
+    private final static String STMT_DONE = "Nice! 🚀 Dukie has marked this task as done: ";
+    private final static String ERROR_PREFIX = "Oops Dukie did not quite understand that.";
+    private final static String STMT_DELETE = "Noted 👁👄👁. Dukie has removed this task: ";
 
     public UI(TaskManager m) {
         this.manager = m;
     }
 
-    Parser parser = new Parser();
-    Scanner in = new Scanner(System.in);
-    String input = "";
-    Boolean isExit = false;
-    TaskManager manager;
+    private final Parser parser = new Parser();
+    private final Scanner in = new Scanner(System.in);
+    private final TaskManager manager;
+    private String input = "";
+    private Boolean isExit = false;
 
     public String getGreeting() {
         Calendar c = Calendar.getInstance();
@@ -26,15 +26,15 @@ public class UI {
         String msg = "";
 
         if (timeOfDay >= 0 && timeOfDay < 12) {
-            msg = "Good morning";
+            msg = "Good morning ⛅️";
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
-            msg = "Good afternoon";
+            msg = "Good afternoon ☀️";
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
-            msg = "Good evening";
+            msg = "Good evening 🌥";
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
-            msg = "Good night";
+            msg = "Good night 🌙";
         }
-        msg += "! I'm Dukie~\nWhat can I do for you?";
+        msg += "! I'm Dukie 😇~\nWhat can I do for you?";
         return msg;
     }
 
@@ -96,15 +96,24 @@ public class UI {
             System.out.println(t == null ? "🤡 Oops that item doesn't exist, try \"list\" to see all your tasks." : STMT_DELETE + "\n " + t);
         } else if (parser.isFind()) {
             ArrayList<Task> li = manager.findTask(firstToken);
-            manager.listTasks(li);
+            if (li.size() == 0) {
+                System.out.println("🤡 No tasks with keyword \"" + firstToken + "\", try \"list\" to see all your tasks.");
+            } else {
+                manager.listTasks(li);
+            }
         } else if (parser.isView()) {
-            manager.viewTaskOn(parser.stringToDate(firstToken));
+            ArrayList<Task> li = manager.viewTaskOn(parser.stringToDate(firstToken));
+            if (li.size() == 0) {
+                System.out.println("🤡 No tasks on \"" + firstToken + "\", try \"list\" to see all your tasks.");
+            } else {
+                manager.listTasks(li);
+            }
         } else if (parser.isAdd()) {
             Task t = manager.createTask(taskInfo, instruction);
-            System.out.println("Got it! 👌 I've add this " + t.getType() + ": \n" + t.toString());
+            System.out.println("Got it! 👌 I've added this " + t.getType() + ": \n" + t.toString());
         } else {
             System.out.println("🤡 Dukie did not understand the command, try again?");
         }
-        System.out.println("You have " + manager.getNumOfTasks() + " tasks in the list.");
+        System.out.println("You have " + manager.getNumOfTasks() + " task(s) in the main list 😇.");
     }
 }
