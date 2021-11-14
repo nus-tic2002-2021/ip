@@ -12,6 +12,9 @@ public class Parser {
     private final static String DETECT_DELETE = "delete";
     private final static String DETECT_FIND = "find";
     private final static String DETECT_VIEW = "view";
+    private final static String DETECT_EVENT = "event";
+    private final static String DETECT_DEADLINE = "deadline";
+    private final static String DETECT_TODO = "todo";
 
     ArrayList<String> tokens = new ArrayList<>();
 
@@ -104,7 +107,6 @@ public class Parser {
     }
 
     public Boolean isDelete(String i) {
-        logger.info("instruction: done");
         return i.toLowerCase(Locale.ROOT).equals(DETECT_DELETE) && tokens.size() >= 2;
     }
 
@@ -132,5 +134,17 @@ public class Parser {
 
     public Boolean isView(String i) {
         return i.toLowerCase(Locale.ROOT).equals(DETECT_VIEW) && tokens.size() >= 1;
+    }
+
+    public Boolean isAdd() {
+        return instruction.toLowerCase(Locale.ROOT).equals(DETECT_EVENT) && tokens.size() >= 1 ||
+                instruction.toLowerCase(Locale.ROOT).equals(DETECT_DEADLINE) && tokens.size() >= 1 ||
+                instruction.toLowerCase(Locale.ROOT).equals(DETECT_TODO) && tokens.size() >= 1;
+    }
+
+    public Boolean isAdd(String i) {
+        return i.toLowerCase(Locale.ROOT).equals(DETECT_EVENT) && tokens.size() >= 1 ||
+                i.toLowerCase(Locale.ROOT).equals(DETECT_DEADLINE) && tokens.size() >= 1 ||
+                i.toLowerCase(Locale.ROOT).equals(DETECT_TODO) && tokens.size() >= 1;
     }
 }

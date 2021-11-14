@@ -1,3 +1,4 @@
+import java.awt.datatransfer.SystemFlavorMap;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -96,9 +97,11 @@ public class UI {
             manager.listTasks(li);
         } else if (parser.isView()) {
             manager.viewTaskOn(parser.stringToDate(firstToken));
-        } else {
+        } else if (parser.isAdd()) {
             Task t = manager.createTask(taskInfo, instruction);
             System.out.println("Got it! 👌 I've add this " + t.getType() + ": \n" + t.toString() + "\nNow you have " + manager.getNumOfTasks() + " tasks in the list.");
+        } else {
+            System.out.println("🤡 Dukie did not understand the command, try again?");
         }
     }
 }
