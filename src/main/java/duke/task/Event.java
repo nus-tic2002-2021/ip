@@ -40,7 +40,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String taskString = super.toString();
-        String result = "[E]" + taskString + " (at: " + this.on + ")";
+        String result = "[E]" + taskString + " (on: " + this.on + ")";
         return result;
     }
 

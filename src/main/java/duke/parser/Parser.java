@@ -17,7 +17,7 @@ public class Parser {
         String Text = words.length == 1 ? "" : Parser.getArguments(words);
 
         try {
-            switch (commandWord) {
+                switch (commandWord) {
                 case List.COMMAND_WORD:
                     return new List();
                 case DoneCommand.COMMAND_WORD:
@@ -36,7 +36,9 @@ public class Parser {
                     return new Find(Text);
                 default:
                     throw new DukeException("Sorry, I do not understand what you mean.");
-            }
+
+                }
+
         } catch (DukeException | DateTimeParseException e) {
             return new IncorrectCommand(e.getMessage());
         }

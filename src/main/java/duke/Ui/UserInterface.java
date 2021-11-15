@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class UserInterface {
 
     Scanner s;
-    public void UserInterface() {
+    public UserInterface() {
         this.s = new Scanner(System.in);
     }
 
@@ -15,11 +15,13 @@ public class UserInterface {
         return s.nextLine();
     }
 
-    public void showLine() {
-        System.out.println("__________________");
-    }
+
     public String getResponse(CommandResult result) {
         return result.getRespondToUser();
+    }
+
+    public void printRespond(CommandResult result) {
+        System.out.println(result.getRespondToUser());
     }
 
     public void goodBye() {

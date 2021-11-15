@@ -23,7 +23,7 @@ public class EventCommand extends Command {
      */
 
     public EventCommand(String Text) throws DukeException, DateTimeParseException {
-        String[] eventParts = Text.split(" /at ");
+        String[] eventParts = Text.split(" /on ");
         if (eventParts[0].equals("") || eventParts[1].equals("")) {
             throw new DukeException("The description of an event cannot be empty");
         } else {

@@ -29,6 +29,7 @@ public abstract class Command {
      */
 
     public String addTaskSuccess(Task task) {
+        assert(taskList != null);
         return "Got it. I have added the task!\n" + task
                 + "Now you have " + taskList.getSize() + " tasks in the list.";
 

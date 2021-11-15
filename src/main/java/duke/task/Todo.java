@@ -31,4 +31,11 @@ public class Todo extends Task {
     public Task setName(String newName) {
         return new Todo(newName, isDone);
     }
+
+    @Override
+    public String toString() {
+        String taskString = super.toString();
+        String result = "[T]" + taskString;
+        return result;
+    }
 }

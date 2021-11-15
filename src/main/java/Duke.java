@@ -31,13 +31,11 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.getInput();
-            ui.showLine(); // show the divider line ("_______")
             Command c = (new Parser()).parseCommand(fullCommand);
             CommandResult result = execute(c);
-            ui.getResponse(result);
+            ui.printRespond(result);
             isExit = Exit.isExitCommand(c);
         }
-            ui.showLine();
     }
 
 

@@ -23,7 +23,7 @@ public class DeadlinesCommand extends Command {
      */
 
     public DeadlinesCommand(String Text) throws DukeException, DateTimeParseException {
-        String[] deadParts = Text.split(" /at ");
+        String[] deadParts = Text.split(" /by ");
         if (deadParts[0].equals("") || deadParts[1].equals("")) {
             throw new DukeException("The description of an deadline cannot be empty");
         } else {

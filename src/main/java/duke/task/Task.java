@@ -35,4 +35,10 @@ public abstract class Task {
 
     public abstract String taskEncode();
 
+    @Override
+    public String toString() {
+        String checkbox = "[" + (this.getIsDone() ? "\u2713" : "\u2718") + "]";
+        String result = checkbox + " " + this.getName();
+        return result;
+    }
 }
