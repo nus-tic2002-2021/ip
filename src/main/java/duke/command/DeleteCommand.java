@@ -4,7 +4,6 @@ import duke.app.TaskList;
 import duke.app.Ui;
 import duke.exceptions.FileProcessError;
 import duke.storage.Storage;
-import java.io.IOException;
 
 public class DeleteCommand extends AbstractCommand {
     @Override

@@ -1,26 +1,34 @@
 package duke.task;
 
+import duke.app.Parser;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represent a type of task with a specific time, represented by a dateTime object.
+ *
+ */
 public class Event extends Task {
 
-    private String at;
+    private LocalDateTime at;
 
     public Event(String taskName, String at) {
         super(taskName);
-        this.at = at;
+        this.at = Parser.parseDateTime(at);
     }
 
     public String getTaskType() { return "EVENT"; }
 
     @Override
     public String getTime() {
-        return at;
+        return at.toString().replace("T", " ");
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() +
+                " (at: " + Parser.formatDatetimeToString(at) + ")";
     }
 
     @Override

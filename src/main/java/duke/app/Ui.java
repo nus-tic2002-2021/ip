@@ -72,4 +72,8 @@ public class Ui {
     public void showErrorMessage(String message) {
         System.out.println(message);
     }
+
+    public void showDateCommandMessage() {
+        System.out.println("Here is the list of the tasks before the date specified: ");
+    }
 }

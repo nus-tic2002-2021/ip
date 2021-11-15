@@ -5,8 +5,9 @@ import duke.app.Ui;
 import duke.exceptions.FileProcessError;
 import duke.storage.Storage;
 
-import java.io.IOException;
-
+/**
+ * Change the specific task status to done.
+ */
 public class DoneCommand extends AbstractCommand{
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {

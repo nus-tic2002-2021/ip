@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Perform necessary actions to save the list of tasks to txt file or read the existing
+ * records from a txt file.
+ */
 public class Storage {
 
     public static final String DEFAULT_FILE_PATH = "./data/duke.txt";

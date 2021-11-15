@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.app.Parser;
 import duke.exceptions.InvalidStorageInput;
 import duke.task.Task;
 import duke.task.TaskFactory;
@@ -9,8 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Decode the text from file into a list of existing before running the app.
+ */
 public class FileDecoder {
 
+    /**decode the list of task from String to task object
+     * @param originalTasks, list of Strings read from the txt file
+     * @return list of tasks, list of task objects
+     */
     public static List<Task> decodeTasks(List<String> originalTasks) {
         List<Task> tasks = new ArrayList<>();
 
@@ -23,7 +31,8 @@ public class FileDecoder {
                     tasks.add(newTask);
                 }
             } catch (InvalidStorageInput e) {
-                System.out.println("Error occurred when decoding task");
+                System.out.println("Error occurred when decoding task\n"
+                        + "reason:" + e.getMessage());
             }
         }
         return tasks;
@@ -42,11 +51,21 @@ public class FileDecoder {
         parsedInputs.put("TaskType", taskComponents[0].trim());
         parsedInputs.put("TaskStatus", taskComponents[1].trim());
         parsedInputs.put("NameOrIndex", taskComponents[2].trim());
-        int compulsoryComponents = 3;
-        if (taskComponents.length > compulsoryComponents) {
-            parsedInputs.put("Time", taskComponents[3].trim());
+
+        if ("EVENT".equals(parsedInputs.get("TaskType")) || "DEADLINE".equals(parsedInputs.get("TaskType"))) {
+            String time = taskComponents[3].trim();
+            checkValidTime(time);
+            parsedInputs.put("Time", time);
         }
         return parsedInputs;
+    }
+
+    private static void checkValidTime(String time) throws InvalidStorageInput {
+        try {
+            Parser.parseDateTime(time);
+        } catch (Exception e) {
+            throw new InvalidStorageInput("DateTime format incorrect");
+        }
     }
 
     private static void checkValidTaskComponents(String[] taskComponents) throws InvalidStorageInput {
@@ -57,8 +76,15 @@ public class FileDecoder {
     }
 
     private static void checkValidLength(String[] taskComponents) throws InvalidStorageInput {
-        if (taskComponents.length <3) {
+        int compulsoryComponents = 3;
+        if (taskComponents.length < compulsoryComponents) {
             throw new InvalidStorageInput("Incomplete task components, must have type, description and status");
+        }
+
+        if ("EVENT".equals(taskComponents[0].trim()) || "DEADLINE".equals(taskComponents[0].trim())){
+            if (taskComponents.length < compulsoryComponents + 1) {
+                throw new InvalidStorageInput("Incomplete task components, must have time for event and deadline");
+            }
         }
     }
 

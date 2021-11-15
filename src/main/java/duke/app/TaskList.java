@@ -3,11 +3,15 @@ package duke.app;
 import duke.task.Task;
 import duke.task.TaskFactory;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represent a list of tasks including todo, event and deadline.
+ */
 public class TaskList {
 
     private List<Task> taskList;
@@ -35,6 +39,16 @@ public class TaskList {
         this.parsedUserInputs = parsedUserInputs;
     }
 
+    public String deleteTask() {
+        int idx = Integer.parseInt(parsedUserInputs.get("NameOrIndex")) - 1;
+        Task removedTask = taskList.remove(idx);
+        return removedTask.toString();
+    }
+
+    /**
+     * mark the task as done.
+     * @return string representation of the task marked as done
+     */
     public String changeTaskStatus() {
 
         int idx = Integer.parseInt(parsedUserInputs.get("NameOrIndex")) - 1;
@@ -43,6 +57,28 @@ public class TaskList {
         return taskDone.toString();
     }
 
+    /**
+     * find out a list of tasks due before a specified date.
+     * @return list of tasks
+     */
+    public List<Task> getTasksBeforeDate() {
+        List<Task> criticalTasks = new ArrayList<>();
+        LocalDateTime comparedDate = Parser.parseDateTime(parsedUserInputs.get("Time"));
+
+        for (Task task: taskList) {
+            if (task.getTime() != null) {
+                LocalDateTime taskDate = Parser.parseDateTime(task.getTime());
+                if (taskDate.isBefore(comparedDate)) {
+                    criticalTasks.add(task);
+                }
+            }
+        }
+        return criticalTasks;
+    }
+
+    /** Add a new task to the list of tasks, only unique task will be added
+     * @return task, Task
+     */
     public boolean addTask() {
         Task newTask = TaskFactory.creatTask(parsedUserInputs);
         return addUniqueTask(newTask);
@@ -55,11 +91,5 @@ public class TaskList {
         } else {
             return false;
         }
-    }
-
-    public String deleteTask() {
-        int idx = Integer.parseInt(parsedUserInputs.get("NameOrIndex")) - 1;
-        Task removedTask = taskList.remove(idx);
-        return removedTask.toString();
     }
 }

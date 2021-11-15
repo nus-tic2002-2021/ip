@@ -2,6 +2,10 @@ package duke.task;
 
 import java.util.Map;
 
+
+/**
+ * Initiate task objects based on specified task type
+ */
 public class TaskFactory {
 
     public enum validTaskTypes {

@@ -5,6 +5,9 @@ import duke.app.Ui;
 import duke.exceptions.FileProcessError;
 import duke.storage.Storage;
 
+/**
+ * Add a new Task to TaskList object and save the records in the text file.
+ */
 public class AddCommand extends AbstractCommand{
 
     @Override

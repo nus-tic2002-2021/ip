@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.app.Parser;
 
+/**
+ * Initialise a command object based on specified user action, which includes list, done, delete, add, bye, date.
+ */
 public class CommandFactory {
 
     public static AbstractCommand create(Parser.validActions validAction) {
@@ -16,6 +19,8 @@ public class CommandFactory {
                 return new AddCommand();
             case BYE:
                 return new ExitCommand();
+            case DATE:
+                return new DateCommand();
             default:
                 return null;
         }

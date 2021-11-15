@@ -1,3 +1,5 @@
+package duke;
+
 import duke.app.Parser;
 import duke.app.TaskList;
 import duke.app.Ui;

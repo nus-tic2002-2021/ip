@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encode the tasklist object to a list of strings in order to be saved in a txt file
+ */
 public class FileEncoder {
 
     public static List<String> encodeTasks(List<Task> tasksToSave) {
