@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    Scanner in;
+    Scanner s;
     public void UserInterface() {
-        this.in = new Scanner(System.in);
+        this.s = new Scanner(System.in);
     }
 
     public String getInput() {
-        return in.nextLine();
+        return s.nextLine();
     }
 
     public void showLine() {
@@ -41,8 +41,8 @@ public class UserInterface {
         System.out.println("Hello from\n" + logo);
     }
 
-
-    public void showError(String message) {
-        System.out.println(message);
+    public void showGoodbyeMessage() {
+        System.out.println("Bye :)");
     }
+
 }
