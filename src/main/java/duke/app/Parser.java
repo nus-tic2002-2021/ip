@@ -1,7 +1,8 @@
-package app;
+package duke.app;
 
-import exceptions.InvalidUserInputException;
-import task.TaskFactory;
+import duke.command.*;
+import duke.exceptions.InvalidUserInputException;
+import duke.task.TaskFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,26 +17,26 @@ public class Parser {
     private Map<String, String> parsedInput;
 
     public void setUserInput(String userInput) {
-
         this.userInput = userInput;
         parsedInput = new HashMap<>();
     }
 
-    public Map<String, String> getParsedInput() {
-        return parsedInput;
+    public AbstractCommand parseCommand() throws InvalidUserInputException {
+        validActions validAction = getAction();
+        return CommandFactory.create(validAction);
     }
 
-    public void parseUserInput() {
-
-        if (!validActions.LIST.name().equals(parsedInput.get("Action")) &&
-        !validActions.BYE.name().equals(parsedInput.get("Action")))
-            parseNameOrIndex();
-        if (parsedInput.containsKey("TaskType") && !parsedInput.get("TaskType").equals("TODO")) {
-            parseTime();
+    public Map<String, String> parseAndCheckInput() throws InvalidUserInputException {
+        try {
+            parseValidAction();
+            parseUserInput();
+            return parsedInput;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidUserInputException("Oops the task description/time is empty");
         }
     }
 
-    public void parseValidAction() throws InvalidUserInputException {
+    private void parseValidAction() throws InvalidUserInputException {
         String action = userInput.split(" ")[0].trim().toUpperCase();
         for (validActions a : validActions.values()) {
             if (a.name().equals(action)) {
@@ -50,6 +51,17 @@ public class Parser {
         }
         if (!parsedInput.containsKey("Action")) {
             throw new InvalidUserInputException("input invalid, please enter a valid command");
+        }
+    }
+
+    private void parseUserInput() {
+
+        if (!validActions.LIST.name().equals(parsedInput.get("Action")) &&
+                !validActions.BYE.name().equals(parsedInput.get("Action"))) {
+            parseNameOrIndex();
+        }
+        if (parsedInput.containsKey("TaskType") && !parsedInput.get("TaskType").equals("TODO")) {
+            parseTime();
         }
     }
 

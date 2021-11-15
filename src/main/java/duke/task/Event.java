@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.util.Objects;
 
@@ -11,7 +11,10 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getAt() {
+    public String getTaskType() { return "EVENT"; }
+
+    @Override
+    public String getTime() {
         return at;
     }
 
@@ -26,11 +29,11 @@ public class Event extends Task {
         if (!(o instanceof Event)) return false;
         if (!super.equals(o)) return false;
         Event event = (Event) o;
-        return Objects.equals(getAt(), event.getAt());
+        return Objects.equals(getTime(), event.getTime());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getAt());
+        return Objects.hash(super.hashCode(), getTime());
     }
 }

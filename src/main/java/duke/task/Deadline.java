@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.util.Objects;
 
@@ -15,8 +15,11 @@ public class Deadline extends Task {
         return by;
     }
 
-    public void setBy(String by) {
-        this.by = by;
+    public String getTaskType() { return "DEADLINE"; }
+
+    @Override
+    public String getTime() {
+        return getBy();
     }
 
     @Override

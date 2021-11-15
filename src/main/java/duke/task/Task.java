@@ -1,8 +1,8 @@
-package task;
+package duke.task;
 
 import java.util.Objects;
 
-public class Task {
+public abstract class Task {
 
     private final String taskName;
     private boolean isDone;
@@ -27,6 +27,10 @@ public class Task {
     public void setDone(boolean done) {
         isDone = done;
     }
+
+    public abstract String getTaskType();
+
+    public abstract String getTime();
 
     @Override
     public String toString() {
