@@ -6,10 +6,18 @@ public abstract class Task {
 
     private final String taskName;
     private boolean isDone;
+    private String tag;
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.tag = null;
+    }
+
+    public Task(String taskName, boolean isDone, String tag) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+        this.tag = tag;
     }
 
     public String getStatusIcon() {
@@ -28,12 +36,21 @@ public abstract class Task {
         isDone = done;
     }
 
+    public String getTag() {
+        return tag != null ? "#" + tag : "";
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public abstract String getTaskType();
 
     public abstract String getTime();
 
     @Override
     public String toString() {
+
         return "[" + getStatusIcon() + "] " + taskName;
     }
 

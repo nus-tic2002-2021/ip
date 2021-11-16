@@ -26,7 +26,7 @@ public class FileDecoder {
             try {
                 Map<String, String> parsedInput = decodeIndividualTask(task);
                 if (!parsedInput.isEmpty()) {
-                    Task newTask = getNewTaskWithStatus(parsedInput);
+                    Task newTask = getNewTaskWithStatusTag(parsedInput);
                     tasks.add(newTask);
                 }
             } catch (InvalidStorageInput e) {
@@ -37,11 +37,19 @@ public class FileDecoder {
         return tasks;
     }
 
-    private static Task getNewTaskWithStatus(Map<String, String> parsedInput) {
+    private static Task getNewTaskWithStatusTag(Map<String, String> parsedInput) {
         Task newTask = TaskFactory.creatTask(parsedInput);
         setTaskStatus(parsedInput.get("TaskStatus"), newTask);
+        if (parsedInput.containsKey("Tag")) {
+            setTaskTag(parsedInput.get("Tag"), newTask);
+        }
         return newTask;
     }
+
+    private static void setTaskTag(String tag, Task newTask) {
+        newTask.setTag(tag);
+    }
+
 
     private static void setTaskStatus(String status, Task newTask) {
         boolean taskStatus = !"0".equals(status);
@@ -58,6 +66,7 @@ public class FileDecoder {
         parsedInputs.put("NameOrIndex", taskComponents[2].trim());
 
         getDatetime(parsedInputs, taskComponents);
+        getTagIfPresent(parsedInputs, taskComponents);
         return parsedInputs;
     }
 
@@ -97,7 +106,6 @@ public class FileDecoder {
         }
     }
 
-
     private static void checkAndAddValidTaskType(String taskType) throws InvalidStorageInput {
         for (TaskFactory.validTaskTypes type : TaskFactory.validTaskTypes.values()) {
             if (type.name().equals(taskType)) {
@@ -116,6 +124,13 @@ public class FileDecoder {
     private static void checkValidTaskStatus(String taskStatus) throws InvalidStorageInput {
         if (!"01".contains(taskStatus)) {
             throw new InvalidStorageInput("wrong task status, must be 0 or 1");
+        }
+    }
+
+    private static void getTagIfPresent(Map<String, String> parsedInputs, String[] taskComponents) {
+        String tagIfPresent = taskComponents[taskComponents.length - 1].trim();
+        if (tagIfPresent.contains("#") && !"".equals(tagIfPresent.split("#")[1].trim())) {
+            parsedInputs.put("Tag", tagIfPresent.split("#")[1].trim().toLowerCase());
         }
     }
 }

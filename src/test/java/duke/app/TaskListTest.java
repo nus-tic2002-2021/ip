@@ -87,4 +87,15 @@ class TaskListTest {
 
         assertEquals(expectedSuccess, actualSuccess);
     }
+
+    @Test
+    void setTagForOneTask_success() {
+        parsedUserInputs.put("NameOrIndex", "2");
+        parsedUserInputs.put("Tag", "fun");
+        taskList.setParsedUserInputs(parsedUserInputs);
+        taskList.setTagForOneTask();
+
+        beforeTasks.get(1).setTag("fun");
+        assertEquals("#fun", taskList.getTaskList().get(1).getTag());
+    }
 }

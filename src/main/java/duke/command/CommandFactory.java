@@ -23,6 +23,8 @@ public class CommandFactory {
             return new ReminderCommand();
         case FIND:
             return new FindComment();
+        case TAG:
+            return new TagCommand();
         default:
             return null;
         }

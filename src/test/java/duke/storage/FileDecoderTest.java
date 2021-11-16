@@ -35,6 +35,19 @@ class FileDecoderTest {
     }
 
     @Test
+    void decodeTasks_withTag_success() {
+        beforeTasks.add("TODO | 0 | read | #fun");
+        beforeTasks.add("DEADLINE | 0 | discussion  | 2021-11-17 12:00");
+
+        Task task1 = new Todo("read");
+        task1.setTag("fun");
+        afterTasks.add(task1);
+        afterTasks.add(new Deadline("discussion", "2021-11-17 12:00"));
+
+        assertEquals(afterTasks, FileDecoder.decodeTasks(beforeTasks));
+    }
+
+    @Test
     void decodeTasks_noDescription_fail() {
         beforeTasks.add("DEADLINE | 0 |  | 2021-11-11 12:00");
         assertEquals(true, FileDecoder.decodeTasks(beforeTasks).isEmpty());

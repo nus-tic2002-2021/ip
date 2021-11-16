@@ -26,6 +26,9 @@ public class FileEncoder {
         if (task.getTime() != null) {
             taskString.append(" | ").append(task.getTime());
         }
+        if (task.getTag() != null) {
+            taskString.append(" | ").append(task.getTag());
+        }
         return taskString.toString();
     }
 }

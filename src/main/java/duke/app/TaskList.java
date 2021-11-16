@@ -75,6 +75,14 @@ public class TaskList {
         return matchedTasks;
     }
 
+    public Task setTagForOneTask() {
+        String tag = parsedUserInputs.get("Tag").toLowerCase();
+        int index = Integer.parseInt(parsedUserInputs.get("NameOrIndex")) - 1;
+        Task task = taskList.get(index);
+        task.setTag(tag);
+        return task;
+    }
+
     /**
      * find out a list of tasks due before a specified date.
      * @return list of tasks

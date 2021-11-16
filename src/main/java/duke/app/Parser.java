@@ -16,7 +16,7 @@ import java.util.Map;
 public class Parser {
 
     public enum validActions {
-        ADD, LIST, DONE, DELETE, BYE, REMIND, FIND
+        ADD, LIST, DONE, DELETE, BYE, REMIND, FIND, TAG
     }
 
     private String userInput;
@@ -67,6 +67,7 @@ public class Parser {
         try {
             parseValidAction();
             parseUserInput();
+            assert parsedInput.get("Action") != null;
             return parsedInput;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidUserInputException("Oops the task description/time is empty");
@@ -101,23 +102,26 @@ public class Parser {
             String time = userInput.split("/")[1].substring(2).trim();
             parseTime(time);
         }
+        if (parsedInput.get("Action").equals(validActions.TAG.name())) {
+            parseTag();
+        }
     }
 
     private void parseNameOrIndex() throws InvalidUserInputException {
-        String nameOrIndex = userInput.split("/")[0].split(" ", 2)[1].trim();
+        String nameOrIndex = userInput.split("/")[0].split(" ", 2)[1].split("#")[0].trim();
         checkValidIndex(nameOrIndex);
         parsedInput.put("NameOrIndex", nameOrIndex);
     }
 
     private void checkValidIndex(String nameOrIndex) throws InvalidUserInputException {
-        String[] actionWithIndex = new String[]{
-                validActions.DONE.name(), validActions.DELETE.name(), validActions.REMIND.name()};
+        String[] actionWithIndex = new String[]{validActions.DONE.name(), validActions.DELETE.name(),
+                validActions.REMIND.name(), validActions.TAG.name()};
         for (String action: actionWithIndex) {
             if (action.equals(parsedInput.get("Action"))) {
                 try {
                     Integer.parseInt(nameOrIndex);
                 } catch (NumberFormatException e) {
-                    throw new InvalidUserInputException("done/delete/remind command must follow by an integer index");
+                    throw new InvalidUserInputException("done/delete/remind/tag command must follow by an integer index");
                 }
             }
         }
@@ -130,5 +134,13 @@ public class Parser {
         } catch (Exception e) {
             throw new InvalidUserInputException("DateTime format should be yyyy-MM-dd HH:mm");
         }
+    }
+
+    private void parseTag() throws InvalidUserInputException {
+        if (!userInput.contains("#")) {
+            throw new InvalidUserInputException("use #tagname to indicate a tag, e.g. #fun");
+        }
+        String tag = userInput.split("#")[1].trim();
+        parsedInput.put("Tag", tag);
     }
 }

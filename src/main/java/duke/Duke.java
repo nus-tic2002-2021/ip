@@ -23,6 +23,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.loadFile());
+            assert tasks.getTaskList() != null;
         } catch (FileProcessError e) {
             ui.showErrorMessage(e.getMessage());
         }

@@ -87,4 +87,8 @@ public class Ui {
     public void printFindCommand() {
         System.out.println("Here are the matching tasks in your list:");
     }
+
+    public void printTagCommand(String task) {
+        System.out.println("Got it, I've tagged this task:"  + task);
+    }
 }
