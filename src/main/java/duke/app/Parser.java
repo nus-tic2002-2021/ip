@@ -16,7 +16,7 @@ import java.util.Map;
 public class Parser {
 
     public enum validActions {
-        ADD, LIST, DONE, DELETE, BYE, DATE
+        ADD, LIST, DONE, DELETE, BYE, REMIND, FIND
     }
 
     private String userInput;
@@ -27,6 +27,20 @@ public class Parser {
         parsedInput = new HashMap<>();
     }
 
+    public static LocalDateTime parseDateTime(String time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(time, formatter);
+    }
+
+    /**
+     * format LocalDateTime object using a user-friendly format for printing
+     * @param time, a LocalDateTime object
+     * @return formatted time, String
+     */
+    public static String formatDatetimeToString(LocalDateTime time) {
+        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(time);
+    }
+
     /**parse user command to be passed to commandFactory
      * @return a command object created by <code>CommandFactory</code>
      * @throws InvalidUserInputException if command is not valid.
@@ -34,6 +48,10 @@ public class Parser {
     public AbstractCommand parseCommand() throws InvalidUserInputException {
         validActions validAction = getAction();
         return CommandFactory.create(validAction);
+    }
+
+    public validActions getAction() {
+        return validActions.valueOf(parsedInput.get("Action"));
     }
 
     /**
@@ -53,24 +71,6 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidUserInputException("Oops the task description/time is empty");
         }
-    }
-
-    public validActions getAction() {
-        return validActions.valueOf(parsedInput.get("Action"));
-    }
-
-    public static LocalDateTime parseDateTime(String time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(time, formatter);
-    }
-
-    /**
-     * format LocalDateTime object using a user-friendly format for printing
-     * @param time, a LocalDateTime object
-     * @return formatted time, String
-     */
-    public static String formatDatetimeToString(LocalDateTime time) {
-        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(time);
     }
 
     private void parseValidAction() throws InvalidUserInputException {
@@ -93,11 +93,6 @@ public class Parser {
 
     private void parseUserInput() throws InvalidUserInputException {
 
-        if (validActions.DATE.name().equals(parsedInput.get("Action"))) {
-            String time = userInput.split("/")[0].split(" ", 2)[1];
-            parseTime(time);
-            return;
-        }
         if (!validActions.LIST.name().equals(parsedInput.get("Action")) &&
                 !validActions.BYE.name().equals(parsedInput.get("Action"))) {
             parseNameOrIndex();
@@ -108,14 +103,27 @@ public class Parser {
         }
     }
 
-    private void parseNameOrIndex() {
-        String name = userInput.split("/")[0].split(" ", 2)[1];
+    private void parseNameOrIndex() throws InvalidUserInputException {
+        String nameOrIndex = userInput.split("/")[0].split(" ", 2)[1].trim();
+        checkValidIndex(nameOrIndex);
+        parsedInput.put("NameOrIndex", nameOrIndex);
+    }
 
-        parsedInput.put("NameOrIndex", name);
+    private void checkValidIndex(String nameOrIndex) throws InvalidUserInputException {
+        String[] actionWithIndex = new String[]{
+                validActions.DONE.name(), validActions.DELETE.name(), validActions.REMIND.name()};
+        for (String action: actionWithIndex) {
+            if (action.equals(parsedInput.get("Action"))) {
+                try {
+                    Integer.parseInt(nameOrIndex);
+                } catch (NumberFormatException e) {
+                    throw new InvalidUserInputException("done/delete/remind command must follow by an integer index");
+                }
+            }
+        }
     }
 
     private void parseTime(String time) throws InvalidUserInputException {
-        //allow empty time?
         try {
             Parser.parseDateTime(time);
             parsedInput.put("Time", time);

@@ -10,15 +10,12 @@ import java.util.List;
 /**
  * print all the tasks before a user-specified date
  */
-public class DateCommand extends AbstractCommand{
+public class ReminderCommand extends AbstractCommand{
 
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
-        List<Task> criticalTasks = taskList.getTasksBeforeDate();
-        ui.showDateCommandMessage();
-
-        for (Task task: criticalTasks) {
-            System.out.println(task);
-        }
+        List<Task> criticalTasks = taskList.getTasksReminder();
+        ui.showRemindCommandMessage();
+        taskList.printTask(criticalTasks);
     }
 }

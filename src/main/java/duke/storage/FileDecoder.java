@@ -26,8 +26,7 @@ public class FileDecoder {
             try {
                 Map<String, String> parsedInput = decodeIndividualTask(task);
                 if (!parsedInput.isEmpty()) {
-                    Task newTask = TaskFactory.creatTask(parsedInput);
-                    setTaskStatus(parsedInput.get("TaskStatus"), newTask);
+                    Task newTask = getNewTaskWithStatus(parsedInput);
                     tasks.add(newTask);
                 }
             } catch (InvalidStorageInput e) {
@@ -36,6 +35,12 @@ public class FileDecoder {
             }
         }
         return tasks;
+    }
+
+    private static Task getNewTaskWithStatus(Map<String, String> parsedInput) {
+        Task newTask = TaskFactory.creatTask(parsedInput);
+        setTaskStatus(parsedInput.get("TaskStatus"), newTask);
+        return newTask;
     }
 
     private static void setTaskStatus(String status, Task newTask) {
@@ -52,12 +57,16 @@ public class FileDecoder {
         parsedInputs.put("TaskStatus", taskComponents[1].trim());
         parsedInputs.put("NameOrIndex", taskComponents[2].trim());
 
+        getDatetime(parsedInputs, taskComponents);
+        return parsedInputs;
+    }
+
+    private static void getDatetime(Map<String, String> parsedInputs, String[] taskComponents) throws InvalidStorageInput {
         if ("EVENT".equals(parsedInputs.get("TaskType")) || "DEADLINE".equals(parsedInputs.get("TaskType"))) {
             String time = taskComponents[3].trim();
             checkValidTime(time);
             parsedInputs.put("Time", time);
         }
-        return parsedInputs;
     }
 
     private static void checkValidTime(String time) throws InvalidStorageInput {

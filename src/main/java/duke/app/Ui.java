@@ -45,9 +45,16 @@ public class Ui {
                 + "I will provide everything you need:))\n";
         String instruction = "Please follow the instructions below\n"
                 + "1. \"list\": print a list of tasks\n"
-                + "2. \"done +number\" (e.g. done 2): set the task status to done\n"
-                + "3. add task using \"todo\" \"deadline\" \"event\" keyword\n"
-                + "4. \"bye\": end the program\n"
+                + "2. Mark the task as done using \"done index\" (e.g. done 2)\n"
+                + "3. add task using \"todo\" \"deadline\" \"event\" task description /by or /at datetime \n"
+                + "   Note: for datetime (necessary for deadline and event), follow the format yyyy-MM-dd HH:mm\n"
+                + "   e.g. -> todo reading book;\n"
+                + "        -> deadline homework submission /by 2021-11-17 18:00\n"
+                + "        -> event project meeting /at 2021-11-22 12:00\n"
+                + "4. Delete task using \"delete index\" (e.g. delete 2): delete the 2nd task on the list\n"
+                + "5. Find a list of task using a keyword, \"find keyword\" (e.g. find book)\n"
+                + "6. Remind the list of tasks due in a specified number of days, \"remind number\" (e.g. remind 7)\n"
+                + "7. \"bye\": end the program\n"
                 +"Please type any command to start: \n";
         System.out.println(greeting);
         System.out.println(instruction);
@@ -73,7 +80,11 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void showDateCommandMessage() {
-        System.out.println("Here is the list of the tasks before the date specified: ");
+    public void showRemindCommandMessage() {
+        System.out.println("Here is the list of the tasks due soon: ");
+    }
+
+    public void printFindCommand() {
+        System.out.println("Here are the matching tasks in your list:");
     }
 }

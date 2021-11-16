@@ -39,6 +39,12 @@ public class TaskList {
         this.parsedUserInputs = parsedUserInputs;
     }
 
+    public void printTask(List<Task> tasks) {
+        for (int i=0; i< tasks.size(); i++){
+            System.out.println(i + 1 + "." + tasks.get(i));
+        }
+    }
+
     public String deleteTask() {
         int idx = Integer.parseInt(parsedUserInputs.get("NameOrIndex")) - 1;
         Task removedTask = taskList.remove(idx);
@@ -57,18 +63,31 @@ public class TaskList {
         return taskDone.toString();
     }
 
+    public List<Task> findMatchTasks() {
+        List<Task> matchedTasks = new ArrayList<>();
+        String keyword = parsedUserInputs.get("NameOrIndex").toLowerCase();
+
+        for (Task task: taskList) {
+            if (task.getTaskName().toLowerCase().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
+    }
+
     /**
      * find out a list of tasks due before a specified date.
      * @return list of tasks
      */
-    public List<Task> getTasksBeforeDate() {
+    public List<Task> getTasksReminder() {
         List<Task> criticalTasks = new ArrayList<>();
-        LocalDateTime comparedDate = Parser.parseDateTime(parsedUserInputs.get("Time"));
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime remindDate = now.plusDays(Integer.parseInt(parsedUserInputs.get("NameOrIndex")));
 
         for (Task task: taskList) {
             if (task.getTime() != null) {
                 LocalDateTime taskDate = Parser.parseDateTime(task.getTime());
-                if (taskDate.isBefore(comparedDate)) {
+                if (taskDate.isAfter(now) && taskDate.isBefore(remindDate)) {
                     criticalTasks.add(task);
                 }
             }

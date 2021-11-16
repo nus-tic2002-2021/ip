@@ -11,8 +11,7 @@ public class ListCommand extends AbstractCommand{
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
         ui.printTask();
-        for (int i=0; i< taskList.getTaskList().size(); i++){
-            System.out.println(i + 1 + "." + taskList.getTaskList().get(i));
-        }
+        taskList.printTask(taskList.getTaskList());
     }
 }
+
