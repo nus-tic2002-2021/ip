@@ -1,17 +1,38 @@
 package task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import static app.DateTime.toNewDateFormat;
+
+/**
+ * Deadline is inheriting from Task
+ */
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
+    /**
+     * Deadline takes in input of String description, LocalDate dDate and LocalTime dTime
+     * @param description description from Parser that user entered
+     * @param dDate date from Parser
+     * @param dTime time from Parser
+     * The Deadline method stores these tasks in Task
+     * super.type - Assigns type "D"
+     * super.isDone - Assigns false to done
+     */
+    public Deadline(String description, LocalDate dDate, LocalTime dTime) {
         super(description);
         super.type("D");
-        super.timing(by);
+        super.date = dDate;
+        super.time = dTime;
         super.isDone = false;
     }
 
     @Override
+/**
+ * Print Task that has been added to ArrayList
+ */
     public String printTask() {
-        return super.printTask() + " (by: " + super.timing + ")";
+        return super.printTask() + " (by: " + toNewDateFormat(super.date) + ", " + super.time + ")";
     }
 }

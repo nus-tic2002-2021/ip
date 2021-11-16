@@ -1,53 +1,147 @@
 package task;
 
-import app.Storage;
-import task.List;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class TaskCommands extends Task {
+import static app.DateTime.toNewDateFormat;
 
+/**
+ * TaskCommands inherits from Task
+ */
+public class TaskCommands extends Task {
+    /**
+     * Creates a Temporary ArrayList
+     */
         private ArrayList<Task> Temp = new ArrayList<>();
 
+    /**
+     * Method to add to Todo
+     * @param description takes String description and adds to Todo
+     */
         public static void addTodo(String description){
             List.addList(new Todo(description));
         }
+    /**
+     * Method to add to Event
+     * @param description takes String description and adds to Event
+     * @param at Takes String at and adds to Event (timing)
+     */
         public static void addEvent(String description, String at){
             List.addList(new Event(description, at));
         }
-
-        public static void addDeadline(String description, String by){
-            List.addList(new Deadline(description, by));
+    /**
+     * Method to add to Deadline
+     * @param description takes description and adds to Deadline
+     * @param byDate takes LocalDate date and adds to Deadline (date of deadline)
+     * @param byTime takes LocalDate time and adds to Deadline (time of deadline)
+     */
+        public static void addDeadline(String description, LocalDate byDate, LocalTime byTime){
+            List.addList(new Deadline(description, byDate, byTime));
         }
 
+    /**
+     * prints out number of tasks in list
+     */
         public static void printCount(){
             System.out.println("\tNow you have " + List.getSize() + " tasks in the list.");
         }
-        public static void printList() {
+
+    /**
+     * Method prints out list
+     * if list size is empty, print out error
+     * return
+     */
+    public static void printList() {
             ArrayList<Task> Temp = List.getList();
             if(Temp.size() == 0){
                 System.out.println("\tThere are no items in your list");
                 return;
             }
-            System.out.println("\tHere are the tasks in your list:");
+        /**
+         * print out tasks in list line
+         * print out tasks using a loop, number the list items
+         */
+        System.out.println("\tHere are the tasks in your list:");
             for (int i=0; i<Temp.size(); i++) {
                 System.out.println("\t" + (i+1) + ". " + Temp.get(i).printTask());
             }
         }
 
-        public static void printTask(int ref) {
+    /**
+     * Method to check if date matches
+     * @param checkDate takes in user input of date
+     *                  creates Temp ArrayList and Placeholder ArrayList
+     *                  creates LocalDate listDate as dates in our listing
+     */
+        public static void printDateList(LocalDate checkDate){
             ArrayList<Task> Temp = List.getList();
-            System.out.println("\t\t" + Temp.get(ref));
+            ArrayList<Task> Placeholder = new ArrayList<>();
+            LocalDate listDate;
+    /**
+     * if Temp is empty, print error
+     */
+            if(Temp.size() == 0){
+                System.out.println("\tThere are no items in your list");
+                return;
+                }
+    /**
+     * Using for loop, check each item in our listing
+     * if the Task in the list matches "D" (Deadline)
+     * Get date from that Task
+     * Compare date from listing listDate with user input date checkDate
+     * if dates are equal, add to Placeholder ArrayList
+     */
+            for (int i=0; i<Temp.size(); i++){
+                if(Temp.get(i).getType().equals("D")){
+                    listDate = Temp.get(i).getDate();
+                    int result = checkDate.compareTo(listDate);
+                    if (result == 0){
+                        Placeholder.add(Temp.get(i));
+                    }
+                }
+            }
+    /**
+     * If no items were copied, no dates match, print error
+     */
+            if(Placeholder.size() == 0){
+                System.out.println("\tThere are no items in your list that matches " + toNewDateFormat(checkDate));
+                return;
+            }
+    /**
+     * Print out Tasks that has dates matched
+     */
+            System.out.println("\tHere are the tasks in your list that matches " + toNewDateFormat(checkDate) + ": " );
+            for (int i=0; i<Placeholder.size(); i++) {
+                System.out.println("\t" + (i+1) + ". " + Placeholder.get(i).printTask());
+            }
         }
 
-        public static void setDone(int ref) {
+    /**
+     * Method to set Task as done
+     * @param ref gets index from user
+     *            Retrieve Task from List and set as done
+     *            Print out line to confirm done
+     *            Print out Task that is set as done
+     *            Update main ArrayList List in List class
+     */
+
+    public static void setDone(int ref) {
             ArrayList<Task> Temp = List.getList();
             Temp.get(ref).setDone();
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t" + Temp.get(ref).printTask());
+            System.out.println("\t\t" + Temp.get(ref).printTask());
             List.setList(Temp);
         }
-
+    /**
+     * Method to delete Task
+     * @param ref gets index from user
+     *            Print delete statement
+     *            Copy ArrayList List from List class to ArrayList Temp
+     *            Print Task to be removed from Temp ArrayList
+     *            Delete Task from Temp
+     *            Update main ArrayList List in List class
+     */
         public static void deleteTask(int ref){
             System.out.println("\tNoted. I've removed this task: ");
             ArrayList<Task> Temp = List.getList();
