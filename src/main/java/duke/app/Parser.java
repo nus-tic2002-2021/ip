@@ -42,7 +42,7 @@ public class Parser {
     }
 
     /**parse user command to be passed to commandFactory
-     * @return a command object created by <code>CommandFactory</code>
+     * @return a command object created by CommandFactory
      * @throws InvalidUserInputException if command is not valid.
      */
     public AbstractCommand parseCommand() throws InvalidUserInputException {
@@ -108,7 +108,10 @@ public class Parser {
     }
 
     private void parseNameOrIndex() throws InvalidUserInputException {
-        String nameOrIndex = userInput.split("/")[0].split(" ", 2)[1].split("#")[0].trim();
+        String nameOrIndex = userInput.split("/")[0].split(" ", 2)[1].trim().split("#")[0].trim();
+        if ("".equals(nameOrIndex)) {
+            throw new InvalidUserInputException("Oops the task description/index is empty");
+        }
         checkValidIndex(nameOrIndex);
         parsedInput.put("NameOrIndex", nameOrIndex);
     }

@@ -44,6 +44,7 @@ public class Duke {
             } catch (InvalidUserInputException e) {
                 ui.showErrorMessage(e.getMessage());
             }
+            ui.showLine();
         }
     }
 

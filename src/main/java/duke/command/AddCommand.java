@@ -17,10 +17,10 @@ public class AddCommand extends AbstractCommand{
         int taskSize = taskList.getTaskList().size();
         String newTaskStr = taskList.getTaskList().get(taskSize - 1).toString();
         ui.printAddTask(success, newTaskStr);
-        ui.printTotalNumber(taskSize);
         if (success) {
             try {
                 storage.saveToFile(taskList.getTaskList());
+                ui.printTotalNumber(taskSize);
             } catch (FileProcessError e) {
                 ui.showErrorMessage(e.getMessage());
             }

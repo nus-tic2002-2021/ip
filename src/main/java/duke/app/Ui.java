@@ -17,8 +17,9 @@ public class Ui {
     public void printAddTask(boolean success, String newTask) {
         if (!success) {
             System.out.println("The same task has been added previously, please enter another task");
+        } else {
+            System.out.println("Got it. I've added this task: " + " " + newTask);
         }
-        System.out.println("Got it. I've added this task: " + " " + newTask);
     }
 
     public void printTotalNumber(int size) {
