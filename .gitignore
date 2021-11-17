@@ -13,5 +13,14 @@ src/main/resources/docs/
 *.iml
 bin/
 
+/vcs.xml
+/logs
+/*.logs
+/*.logs.*
+modules.xml
+
+/*.class
+*.class
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

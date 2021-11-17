@@ -1,0 +1,4 @@
+todo,borrow book,1
+deadline,clean room /by 2019-12-23 21:00,1
+todo,read books,1
+event,hackathon /at 2021-12-25 18:00-21:00,0
