@@ -1,0 +1,18 @@
+list
+read a book
+todo
+todo read a book
+deadline return the book
+deadline return the book /by
+deadline return the book /by 6th Sep
+eventt meeting /at 9th Sep 2pm-3pm
+event /at 9th Sep 2pm-3pm
+event meeting /at 9th Sep 2pm-3pm
+list
+done 1
+done 3
+done
+done 5
+delete 2
+list
+bye
