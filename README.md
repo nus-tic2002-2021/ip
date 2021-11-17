@@ -1,24 +1,61 @@
-# Duke project template
+![](./docs/logo.png)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+# Duke
+A cli-chatbot task manager.
 
-## Setting up in Intellij
+# Requirements
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+For production you will need JDK 11 support and maven for build. Source code is tested on Linux/Catalina.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+# Run
+
+Clone the repo.
+
+## Test
+
+### With Local Github Action
+```act``` test
+
+### With Maven
+
+```mvn test```
+
+### Build
+
+In root of repository,
+
+```mvn package``` package \
+```./NoelLim/Duke.jar``` generated jar is single executable fatty \
+```java -jar ./NoelLim/Duke.jar``` run jar
+
+# Command List
+
+`[*]`   - unknown command
+
+`todo [description]` add ToDo \
+`deadline [description] /by [date:dateOption]` add Deadline \
+`event [description] /at [from:dateOption]-[to:dateOption]` add Event
+
+- dateOption formats
+    - Input year, month and day : "20201231"
+    - Input year, month, day, hour, minutes : "20201231 23:59"
+
+`delete [id]` delete task by id \
+`done [id]` set task as done \
+`undone [id]` set task as not done
+
+`see [id]` see task
+
+`list` list tasks \
+`find [keyword]` query tasks with keyword in description
+
+`stats:all` summary of tasks
+
+`projection [days]` projection for next days \
+`projection:yet [days]` projection for next days (only show incomplete tasks)
+
+`scan:duplicates` check for tasks with same description
+
+`bye` exit input loop \
+`save` save tasks to file
+
