@@ -1,5 +1,7 @@
 package task;
 
+import static task.Priority.printPriority;
+
 /**
  * Todo is inheriting from Task
  */
@@ -14,13 +16,14 @@ public class Todo extends Task {
         super(description);
         super.type("T");
         super.isDone = false;
+        super.priority = 0;
     }
     /**
      * Print Task that has been added to ArrayList
      */
     @Override
     public String printTask() {
-        return super.printTask() ;
+        return super.printTask();
     }
 
 }

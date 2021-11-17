@@ -115,6 +115,8 @@ public class UI {
                         "delete [number] - to delete a task\n\t" +
                         "save - to save task list\n\t" +
                         "on yyyy-mm-dd - to check if tasks match date given\n\t" +
+                        "priority [index] [0(TO REMOVE) / 1(LOW) / 2(MED) / 3(HIGH)] - to set priority\n\t" +
+                        "find [word] - To search for a word\n\t" +
                         "bye - to end DUKE");
             }
         }

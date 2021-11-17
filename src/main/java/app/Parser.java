@@ -2,11 +2,14 @@ package app;
 
 import task.TaskCommands;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import static app.DateTime.*;
+import static task.Find.findWord;
+import static task.Priority.isValidPriority;
 import static task.TaskCommands.*;
 
 
@@ -15,7 +18,7 @@ public class Parser {
      * Set enumerations of valid commands
      */
     public enum validCommands {
-        LIST, DONE, UNDONE, DELETE, HELP, BYE, TODO, EVENT, DEADLINE, ON
+        LIST, DONE, UNDONE, DELETE, HELP, BYE, TODO, EVENT, DEADLINE, ON, PRIORITY, FIND
     }
 
     /**
@@ -42,6 +45,7 @@ public class Parser {
      *                  Create int size to check length of String userEntry
      *                  String commandUpper to change String command to upper case
      *                  check if user entered only command without description, except for LIST & BYE
+     *                  Check if matches validCommands
      * @throws DukeException when error occurs
      */
     public static void parseCommand(String userEntry) throws DukeException {
@@ -52,6 +56,9 @@ public class Parser {
         int size = userEntry.length();
         String commandUpper = command.toUpperCase();
         if(size == 1 && !commandUpper.equals("LIST") && !commandUpper.equals("BYE")){
+            throw new DukeException();
+        }
+        if(!validInput(commandUpper)){
             throw new DukeException();
         }
         /**
@@ -71,8 +78,7 @@ public class Parser {
                      * break to end command switch
                      */
                     case"DONE":
-                        int ref = 0;
-                        ref = Integer.valueOf(description);
+                        int ref = Integer.valueOf(description);
                         TaskCommands.setDone(ref-1);
                         break;
                     /**
@@ -80,7 +86,6 @@ public class Parser {
                      * break to end command switch
                      */
                     case"UNDONE":
-                        ref = 0;
                         ref = Integer.valueOf(description);
                         TaskCommands.setUnDone(ref-1);
                         break;
@@ -89,7 +94,6 @@ public class Parser {
                      * break to end command switch
                      */
                     case"DELETE":
-                        ref = 0;
                         ref = Integer.valueOf(description);
                         TaskCommands.deleteTask(ref-1);
                         break;
@@ -158,7 +162,7 @@ public class Parser {
                          * print error line
                          * break command switch
                          */
-                        else if(isValidDate(date) == false || isValidTime(time) == false) {
+                        else if(!isValidDate(date) || !isValidTime(time)) {
                             System.out.println("Please use an exact date time, yyyy-mm-dd, hh:mm");
                             break;
                         }
@@ -183,7 +187,7 @@ public class Parser {
                      * break switch
                      */
                     case"ON":
-                        if(isValidDate(description)==false || (description.equals(""))){
+                        if(!isValidDate(description) || (description.equals(""))){
                             System.out.println("Please use an exact date: yyyy-mm-dd");
                             break;
                         }
@@ -195,6 +199,21 @@ public class Parser {
                             LocalDate checkDate = toDate(description);
                             TaskCommands.printDateList(checkDate);
                         }
+                        break;
+                    case"PRIORITY":
+                        try {
+                            ref = Integer.valueOf(description.split(" ")[0]);
+                            int priority = Integer.valueOf(description.split(" ")[1]);
+
+                            if(isValidPriority(priority)){
+                                updatePriority(ref-1, priority);
+                            }
+                        } catch (NumberFormatException e){
+                            throw new DukeException();
+                        }
+                        break;
+                    case"FIND":
+                        findWord(description);
                         break;
 
                     default: throw new DukeException();

@@ -1,5 +1,7 @@
 package task;
 
+import static task.Priority.printPriority;
+
 public class Event extends Task {
     /**
      * Deadline takes in input of String description, String at
@@ -13,6 +15,7 @@ public class Event extends Task {
         super.type("E");
         super.timing(at);
         super.isDone = false;
+        super.priority = 0;
     }
     /**
      * Print Task that has been added to ArrayList

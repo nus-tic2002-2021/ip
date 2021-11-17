@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static task.Priority.printPriority;
+
 /**
  * Creates what is in a Task
  * creates String description - description of task
@@ -18,6 +20,7 @@ public class Task {
     protected String timing;
     protected LocalDate date;
     protected LocalTime time;
+    protected int priority;
 
     public Task(){}
 
@@ -49,6 +52,7 @@ public class Task {
      */
     public void isDone(Boolean isDone) {this.isDone = isDone; }
 
+    public void priority (int priority) {this.priority = priority; }
     /**
      * Modify date of task to be completed by
      * @param date date of task to be completed by
@@ -68,6 +72,7 @@ public class Task {
     }
 
     public void setUnDone() {this.isDone = false; }
+
 
     /**
      * Method to get status of isDone
@@ -113,10 +118,16 @@ public class Task {
     public LocalTime getTime() { return time; }
 
     /**
+     * Get priority number
+     * @return priority number
+     */
+    public int getPriority() {return priority; }
+
+    /**
      * prints tasks out
      * @return format of task with type, status and description of Task
      */
     public String printTask() {
-        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "]" + printPriority(priority) + " " + getDescription();
     }
 }

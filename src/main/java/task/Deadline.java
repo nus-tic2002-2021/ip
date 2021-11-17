@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static app.DateTime.toNewDateFormat;
+import static task.Priority.printPriority;
 
 /**
  * Deadline is inheriting from Task
@@ -26,6 +27,7 @@ public class Deadline extends Task {
         super.date = dDate;
         super.time = dTime;
         super.isDone = false;
+        super.priority = 0;
     }
 
     @Override

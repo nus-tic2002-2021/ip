@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,7 +27,7 @@ public class Storage {
      */
     public static void loadList() {
         String home = System.getProperty("user.home");
-        java.nio.file.Path path = Paths.get(home, "data", "duke.txt");
+        Path path = Paths.get(home, "data", "duke.txt");
         /**
          * Create boolean to check if path for Duke.txt exists
          * Create String description to store Task description
@@ -34,7 +35,7 @@ public class Storage {
          * read the file using buffered reader
          * create int i as a reference point
          */
-        boolean directoryExists = java.nio.file.Files.exists(path);
+        boolean directoryExists = Files.exists(path);
         String description;
         if(directoryExists) {
             try (BufferedReader br = new BufferedReader(new FileReader(path + ""))) {
@@ -47,7 +48,9 @@ public class Storage {
                  * create boolean done for String array index 1
                  */
                 while ((sCurrentLine = br.readLine()) != null) {
-                    String [] words = sCurrentLine.split("\\|");
+                    String line = sCurrentLine.split(",")[0];
+                    int priority = Integer.valueOf(sCurrentLine.split(",")[1]);
+                    String [] words = line.split("\\|");
                     String type = words[0];
                     boolean isDone = Boolean.parseBoolean(words[1]);
                     /**
@@ -65,6 +68,7 @@ public class Storage {
                         case "T":
                             description = words[2];
                             Load.add(new Todo(description));
+                            Load.get(i).priority(priority);
                             if(isDone == true){
                                 Load.get(i).setDone();
                             }
@@ -89,6 +93,7 @@ public class Storage {
                             LocalDate byDate = toDate(date);
                             LocalTime byTime = toTime(time);
                             Load.add(new Deadline(description, byDate, byTime));
+                            Load.get(i).priority(priority);
                             if(isDone == true){
                                 Load.get(i).setDone();
                             }
@@ -105,6 +110,7 @@ public class Storage {
                         case "E":
                             description = words[2];
                             Load.add(new Event(description, words[3]));
+                            Load.get(i).priority(priority);
                             if(isDone == true){
                                 Load.get(i).setDone();
                             }
@@ -187,7 +193,8 @@ public class Storage {
                     case "T":
                         save += Load.get(i).getType() + "|"
                                 + Load.get(i).getDone() + "|"
-                                + Load.get(i).getDescription()
+                                + Load.get(i).getDescription() + ","
+                                + Load.get(i).getPriority()
                                 + System.lineSeparator();
                         break;
                     /**
@@ -204,7 +211,8 @@ public class Storage {
                         save += Load.get(i).getType() + "|" +
                                 Load.get(i).getDone() + "|" +
                                 Load.get(i).getDescription() + "|" +
-                                Load.get(i).getTiming() + "|" +
+                                Load.get(i).getTiming() + "," +
+                                Load.get(i).getPriority() +
                                 System.lineSeparator();
                         break;
                         /**
@@ -223,7 +231,8 @@ public class Storage {
                                 Load.get(i).getDone() + "|" +
                                 Load.get(i).getDescription() + "|" +
                                 Load.get(i).getDate() + "|" +
-                                Load.get(i).getTime() +
+                                Load.get(i).getTime() + "," +
+                                Load.get(i).getPriority() +
                                 System.lineSeparator();
                         break;
 

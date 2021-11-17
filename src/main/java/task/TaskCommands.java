@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import static app.DateTime.toNewDateFormat;
+import static task.Priority.printPriority;
 
 /**
  * TaskCommands inherits from Task
@@ -164,6 +165,21 @@ public class TaskCommands extends Task {
             Temp.remove(ref);
             List.setList(Temp);
         }
+
+        public static void updatePriority(int ref, int priority){
+            ArrayList<Task> Temp = List.getList();
+            Temp.get(ref).priority = priority;
+            if(priority == 0){
+                System.out.println("\tOk! I've removed the priority");
+            }
+            else {
+                System.out.println("\tOk! I've updated the priority");
+            }
+            System.out.println("\t\t" + Temp.get(ref).printTask());
+            List.setList(Temp);
+        }
+
+
 
     }
 
