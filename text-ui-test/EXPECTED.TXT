@@ -1,7 +1,79 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    _________________________________________
+    Hello! I'm Tassie, your virtual assistant.
+    What can I do for you?
 
+    Note: Enter help to see a list of commands.
+    _________________________________________
+    _________________________________________
+    The following commands are available:
+    todo <description>
+    deadline <description> /by <date>
+    event <description> /at <date> : <date> must be in yyyy-mm-dd or yyyy-mm-ddThh:mm format.
+    done <num> : <num> must be a number that currently exists in the list.
+    delete <num> : <num> must be a number that currently exists in the list.
+    bye
+    list
+    view <date> : <date> must be in yyyy-mm-dd.
+    find <description>
+    archive <num>/all : <num> must be a number that currently exists in the list.
+    help
+    _________________________________________
+    _________________________________________
+    added: read book
+    Now you have 1 task in the list.
+    _________________________________________
+    _________________________________________
+    added: return book
+    Now you have 2 tasks in the list.
+    _________________________________________
+    _________________________________________
+    1. [T][ ] read book
+    2. [D][ ] return book (by: 2021-09-20T00:00)
+    _________________________________________
+    _________________________________________
+    added: meet friend
+    Now you have 3 tasks in the list.
+    _________________________________________
+    _________________________________________
+    Nice! I've marked this task as done:
+       [D][X] return book (by: 2021-09-20T00:00)
+    _________________________________________
+    _________________________________________
+    1. [T][ ] read book
+    2. [D][X] return book (by: 2021-09-20T00:00)
+    3. [E][ ] meet friend (at: 2021-09-15T00:00)
+    _________________________________________
+    _________________________________________
+    You have the following tasks scheduled on 2021-09-20
+    1. [D][X] return book (by: 2021-09-20T00:00)
+    _________________________________________
+    _________________________________________
+    Here are the matching tasks in your list:
+    1. [T][ ] read book
+    2. [D][X] return book (by: 2021-09-20T00:00)
+    _________________________________________
+    _________________________________________
+    Noted. I've removed this task:
+       [D][X] return book (by: 2021-09-20T00:00)
+    Now you have 2 tasks in the list.
+    _________________________________________
+    _________________________________________
+    1. [T][ ] read book
+    2. [E][ ] meet friend (at: 2021-09-15T00:00)
+    _________________________________________
+    _________________________________________
+    We successfully archived the following task:
+    [E][ ] meet friend (at: 2021-09-15T00:00)
+    _________________________________________
+    _________________________________________
+    1. [T][ ] read book
+    _________________________________________
+    _________________________________________
+    We successfully archived all of your tasks!
+    1. [T][ ] read book
+    _________________________________________
+    _________________________________________
+    _________________________________________
+    _________________________________________
+    Bye. Hope to see you again soon!
+    _________________________________________
