@@ -134,6 +134,21 @@ public class TaskCommands extends Task {
             List.setList(Temp);
         }
     /**
+     * Method to set Task as done
+     * @param ref gets index from user
+     *            Retrieve Task from List and set as not done
+     *            Print out line to set as not done
+     *            Print out Task that is set as not done
+     *            Update main ArrayList List in List class
+     */
+        public static void setUnDone(int ref) {
+            ArrayList<Task> Temp = List.getList();
+            Temp.get(ref).setUnDone();
+            System.out.println("\tOk! I've marked this task as not done:");
+            System.out.println("\t\t" + Temp.get(ref).printTask());
+            List.setList(Temp);
+        }
+    /**
      * Method to delete Task
      * @param ref gets index from user
      *            Print delete statement

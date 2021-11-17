@@ -4,6 +4,7 @@ import task.TaskCommands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 import static app.DateTime.*;
 import static task.TaskCommands.*;
@@ -14,7 +15,7 @@ public class Parser {
      * Set enumerations of valid commands
      */
     public enum validCommands {
-        LIST, DONE, DELETE, HELP, BYE, TODO, EVENT, DEADLINE, ON
+        LIST, DONE, UNDONE, DELETE, HELP, BYE, TODO, EVENT, DEADLINE, ON
     }
 
     /**
@@ -73,6 +74,15 @@ public class Parser {
                         int ref = 0;
                         ref = Integer.valueOf(description);
                         TaskCommands.setDone(ref-1);
+                        break;
+                    /**
+                     * UNDONE - Get int ref of list, marks task as undone
+                     * break to end command switch
+                     */
+                    case"UNDONE":
+                        ref = 0;
+                        ref = Integer.valueOf(description);
+                        TaskCommands.setUnDone(ref-1);
                         break;
                     /**
                      * DELETE - Get ref of list = 0, finds task and delete by calling TaskCommands.deleteTask(ref-1)
@@ -158,9 +168,13 @@ public class Parser {
                          * add to Deadline task
                          */
                         else{
+                            try{
                             LocalDate dateDate = toDate(date);
                             LocalTime timeTime = toTime(time);
                             addDeadline(description, dateDate, timeTime);
+                            } catch (DateTimeParseException e){
+                                System.out.println("Please enter in yyyy-mm-dd, hh:mm");
+                            }
                         }
                         break;
                     /**

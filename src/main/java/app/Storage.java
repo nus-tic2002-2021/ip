@@ -97,16 +97,14 @@ public class Storage {
                         /**
                          * if type is E
                          * store String word array index 2 as description
-                         * store String word array index 3 as String timing
-                         * add Deadline as task with description and timing
+                         * add Deadline as task with description and word array index 3
                          * if Task is done, mark as done
                          * increment i
                          * break switch
                          */
                         case "E":
                             description = words[2];
-                            String timing = words[3];
-                            Load.add(new Event(description, timing));
+                            Load.add(new Event(description, words[3]));
                             if(isDone == true){
                                 Load.get(i).setDone();
                             }
@@ -208,6 +206,7 @@ public class Storage {
                                 Load.get(i).getDescription() + "|" +
                                 Load.get(i).getTiming() + "|" +
                                 System.lineSeparator();
+                        break;
                         /**
                          * for Deadline tasks
                          * Store the following in String save

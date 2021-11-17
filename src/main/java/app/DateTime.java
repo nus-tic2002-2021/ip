@@ -3,29 +3,24 @@ package app;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Locale;
 
 public class DateTime {
     /**
      * To validate user input String date
      * @param date Takes a String input date
      *             verifying if date matches "yyyy-mm-dd" format
-     * @return true if matches accurate format
-     * @return false if does not match accurate format
+     * @return returns true if matches accurate format
+     *         returns false if does not match accurate format
+     * parse date with format
+     * must be exact with format
+     * if true, set
+     * return valid as true
      */
     public static boolean isValidDate (String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-        boolean valid = false;
-        /**
-         * parse date with format
-         * must be exact with format
-         * if true, set
-         * @param valid as true
-         */
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        boolean valid;
         try {
             sdf.parse(date);
             sdf.setLenient(false);
@@ -40,12 +35,11 @@ public class DateTime {
      * To valid user input String time
      * @param time takes a String input time
      *             verifying if time matches "hh:mm" format
-     * @return true if matches format
-     * @return false if does not match format
+     * @return true if matches format, false if does not match format
      */
     public static boolean isValidTime (String time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        boolean valid = false;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        boolean valid;
         /**
          * parse date with format
          * must be exact with format
@@ -82,7 +76,7 @@ public class DateTime {
     }
     /**
      * Takes LocalDate date and returns in a new format
-     * @param formatter to format date to "dd MMM yyyy"
+     * formatter to format date to "dd MMM yyyy"
      * @return new date format
      */
     public static String toNewDateFormat (LocalDate date){

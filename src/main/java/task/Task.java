@@ -67,6 +67,8 @@ public class Task {
         this.isDone = true;
     }
 
+    public void setUnDone() {this.isDone = false; }
+
     /**
      * Method to get status of isDone
      * @return "X" if true, "" if false
