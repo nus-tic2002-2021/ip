@@ -18,8 +18,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import static com.tic2002.app.DateTime.toDate;
-import static com.tic2002.app.DateTime.toTime;
+import static com.tic2002.app.DateTime.*;
+import static com.tic2002.app.Parser.isNumber;
 
 public class Storage {
 
@@ -44,13 +44,9 @@ public class Storage {
 
                 while ((sCurrentLine = br.readLine()) != null) {
                     String line = sCurrentLine.split(",")[0];
-                    try {
-                        Integer.parseInt(sCurrentLine.split(",")[1]);
-                    } catch (ArrayIndexOutOfBoundsException e){
-                        System.out.println("Error in file: " + sCurrentLine);
-                        break;
-                    }
-                    int priority = Integer.parseInt(sCurrentLine.split(",")[1]);
+                    String priorityString = sCurrentLine.split(",")[1];
+                    assert !isNumber(priorityString) : "Error in file: " + sCurrentLine;
+                    int priority = Integer.parseInt(priorityString);
                     String [] words = line.split("\\|");
                     String type = words[0];
                     boolean isDone = Boolean.parseBoolean(words[1]);
@@ -74,11 +70,26 @@ public class Storage {
                             LocalDate byDate = toDate(date);
                             LocalTime byTime = toTime(time);
                             Load.add(new Deadline(description, byDate, byTime));
+
+                            if(isDone){
+                                Load.get(i).setDone();
+                                Load.get(i).priority(0);
+                            }
+
+                            if(!isDone) {
+                                if (isWithinThreeDays(byDate)) {
+                                    Load.get(i).priority(3);
+                                } else if (isOverDue(byDate)) {
+                                    Load.get(i).priority(4);
+                                } else {
+                                    Load.get(i).priority(priority);
+                                }
+                            }
+
                         } catch (DateTimeParseException e) {
                             System.out.println("Error in file: " + sCurrentLine );
                             break;
                         }
-                            Load.get(i).priority(priority);
                         if(isDone){
                             Load.get(i).setDone();
                         }

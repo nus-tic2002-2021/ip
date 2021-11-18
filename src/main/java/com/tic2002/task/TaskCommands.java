@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import static com.tic2002.app.DateTime.toNewDateFormat;
+import static com.tic2002.app.DateTime.*;
 
 /**
  * TaskCommands inherits from Task
@@ -63,6 +63,14 @@ public class TaskCommands extends Task {
         }
         System.out.println("\tHere are the tasks in your list:");
         for (int i=0; i<Temp.size(); i++) {
+            if(Temp.get(i).getStatusIcon().equals(" ") && Temp.get(i).getType().equals("D")) {
+                if (isWithinThreeDays(Temp.get(i).date)) {
+                    Temp.get(i).priority(3);
+                }
+                if(isOverDue(Temp.get(i).date)){
+                    Temp.get(i).priority(4);
+                }
+            }
             System.out.println("\t" + (i+1) + ". " + Temp.get(i).printTask());
         }
     }
@@ -126,6 +134,7 @@ public class TaskCommands extends Task {
     public static void setDone(int ref) {
         ArrayList<Task> Temp = List.getList();
         Temp.get(ref).setDone();
+        Temp.get(ref).priority(0);
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t\t" + Temp.get(ref).printTask());
         List.setList(Temp);

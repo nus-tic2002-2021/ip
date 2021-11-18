@@ -3,7 +3,7 @@ package com.tic2002.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static com.tic2002.app.DateTime.toNewDateFormat;
+import static com.tic2002.app.DateTime.*;
 
 
 /**
@@ -27,6 +27,15 @@ public class Deadline extends Task {
         super.time = dTime;
         super.isDone = false;
         super.priority = 0;
+        if(isWithinThreeDays(dDate)){
+            super.priority = 3;
+        }
+        else if(isOverDue(dDate)){
+            super.priority = 4;
+        }
+        else{
+            super.priority = 0;
+        }
     }
 
     @Override

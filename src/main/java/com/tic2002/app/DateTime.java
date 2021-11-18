@@ -62,6 +62,7 @@ public class DateTime {
     public static LocalDate toDate(String date) {
         return LocalDate.parse(date);
     }
+
     /**
      * Takes user input String time and returns as LocalTime
      * @param time parses to LocalTime
@@ -70,6 +71,7 @@ public class DateTime {
     public static LocalTime toTime(String time) {
         return LocalTime.parse(time);
     }
+
     /**
      * Takes LocalDate date and returns in a new format
      * formatter to format date to "dd MMM yyyy"
@@ -78,5 +80,16 @@ public class DateTime {
     public static String toNewDateFormat (LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return date.format(formatter);
+    }
+
+    public static boolean isWithinThreeDays(LocalDate taskDate) {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        LocalDate threeDaysAfter = LocalDate.now().plusDays(3);
+        return taskDate.isAfter(yesterday) && taskDate.isBefore(threeDaysAfter);
+    }
+
+    public static boolean isOverDue(LocalDate taskDate) {
+        LocalDate today = LocalDate.now();
+        return taskDate.isBefore(today);
     }
 }

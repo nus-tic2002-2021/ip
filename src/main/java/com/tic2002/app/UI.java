@@ -16,6 +16,20 @@ public class UI {
      * loadList - Calling the Storage function to load duke.txt
      * line - Creates a String to store user input
      * Scanner in - to scan and read user input
+     * while(true) - while there is input from the user
+     * newLine() - Calls a line break
+     * command Split user line to the first word
+     * commandUpper Convert user input String to uppercase
+     * parser.validInput(commandUpper) passes command String to check boolean
+     * catch(NullPointerException e) catches null in String
+     * println tells user to input accurately
+     * instructions() print instructions to use Duke
+     * parser.parseCommand(line) passes command String to Parser to do command
+     * catch(NullPointerException e) catches null in String
+     * println tells user to input accurately
+     * instructions() print instructions to use Duke
+     * catch(ArrayIndexOutOfBoundsException e) catches array out of bounds in String
+     * catch(IndexOutOfBoundsException e) catches index out of bounds in String
      */
     public void run(){
         dukeLogo();
@@ -23,38 +37,22 @@ public class UI {
         String line;
         Scanner in = new Scanner(System.in);
         parser = new Parser();
-    /**
-     * @param while(true) - while there is input from the user
-     * newLine() - Calls a line break
-     * @param command Split user line to the first word
-     * @param commandUpper Convert user input String to uppercase
-     */
+
         while(true) {
             line = in.nextLine();
             newLine();
             String command = line.split(" ")[0];
             String commandUpper = command.toUpperCase();
-            /**
-             * @param parser.validInput(commandUpper) passes command String to check boolean
-             * @param catch(NullPointerException e) catches null in String
-             * @param println tells user to input accurately
-             * @param instructions() print instructions to use Duke
-             */
+
             try {
+                assert commandUpper != null : "Please enter valid input\n";
                 parser.isValidInput(commandUpper);
             } catch (NullPointerException e){
                 System.out.println("Please enter a valid input\n");
                 instructions();
             }
-            /**
-             * @param parser.parseCommand(line) passes command String to Parser to do command
-             * @param catch(NullPointerException e) catches null in String
-             * @param println tells user to input accurately
-             * @param instructions() print instructions to use Duke
-             * @param catch(ArrayIndexOutOfBoundsException e) catches array out of bounds in String
-             * @param catch(IndexOutOfBoundsException e) catches index out of bounds in String
-             */
             try {
+                assert line != null: "Please enter a valid input\n";
                 parser.parseCommand(line);
             } catch (DukeException e) {
                 System.out.println("Please enter a valid input\n");

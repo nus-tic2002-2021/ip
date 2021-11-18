@@ -87,6 +87,17 @@ public class Parser {
                 updatePriority(ref-1, priority);
         }
     }
+
+    public static boolean isNumber(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
     /**
      * Takes user input as String and parse input
      * @param userEntry Takes user entry as String
@@ -112,7 +123,6 @@ public class Parser {
      * find - find tasks that matches user input
      */
     public static void parseCommand(String userEntry) throws DukeException {
-        String timeDescription;
         String description;
         String command = userEntry.split(" ")[0];
         description = userEntry.replaceFirst(command + " ", "");
