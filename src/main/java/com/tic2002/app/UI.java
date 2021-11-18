@@ -41,7 +41,7 @@ public class UI {
             String commandUpper = command.toUpperCase();
 
             try {
-                assert commandUpper == null : "Please enter valid input\n";
+                assert commandUpper != null : "Please enter valid input\n";
                 parser.isValidInput(commandUpper);
             } catch (NullPointerException e){
                 System.out.println("Please enter a valid input\n");
@@ -104,7 +104,7 @@ public class UI {
         System.out.println("DUKE helps you organise your tasks efficiently, please enter as follows:" +
                 "\n\tevent [description] /at [time]\n\t" +
                 "todo [description]\n\t" +
-                "deadline [description] /by yyyy-mm-dd, hh.mm\n\t" +
+                "deadline [description] /by yyyy-mm-dd, hh:mm\n\t" +
                 "done [number] - to mark task as completed\n\t" +
                 "list - to show all tasks\n\t" +
                 "delete [number] - to delete a task\n\t" +
