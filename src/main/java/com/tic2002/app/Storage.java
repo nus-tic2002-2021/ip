@@ -18,10 +18,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import static com.tic2002.app.DateTime.*;
+import static com.tic2002.task.DateTime.*;
 import static com.tic2002.app.Parser.isNumber;
 
-public class Storage {
+public class Storage extends List {
 
     private static ArrayList<Task> Load = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class Storage {
                 while ((sCurrentLine = br.readLine()) != null) {
                     String line = sCurrentLine.split(",")[0];
                     String priorityString = sCurrentLine.split(",")[1];
-                    assert !isNumber(priorityString) : "Error in file: " + sCurrentLine;
+                    assert isNumber(priorityString) : "Error in file: " + sCurrentLine;
                     int priority = Integer.parseInt(priorityString);
                     String [] words = line.split("\\|");
                     String type = words[0];

@@ -3,7 +3,7 @@ package com.tic2002.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static com.tic2002.app.DateTime.*;
+import static com.tic2002.task.DateTime.*;
 
 
 /**

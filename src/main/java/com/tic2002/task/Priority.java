@@ -1,12 +1,7 @@
 package com.tic2002.task;
 
 public class Priority extends Task {
-    private enum validPriority {NONE(0), LOW(1), MEDIUM(2), HIGH(3), OVERDUE(4);
-        private int value;
-        validPriority(int value) {
-            this.value = value;
-        }
-    }
+    private enum validPriority {LOW, MEDIUM, HIGH, OVERDUE; }
 
     /**
      * Check if user input is within 1 to 3
@@ -23,13 +18,13 @@ public class Priority extends Task {
     public static String printPriority(int value) {
         switch(value) {
         case 1:
-            return "[LOW]";
+            return "[" + validPriority.LOW + "]";
         case 2:
-            return "[MED]";
+            return "[" + validPriority.MEDIUM + "]";
         case 3:
-            return "[HIGH]";
+            return "[" + validPriority.HIGH + "]";
         case 4:
-            return "[OVERDUE]";
+            return "[" + validPriority.OVERDUE + "]";
         }
         return "";
     }

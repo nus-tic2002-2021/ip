@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import static com.tic2002.app.DateTime.*;
+import static com.tic2002.task.DateTime.*;
 
 /**
  * TaskCommands inherits from Task
@@ -44,7 +44,11 @@ public class TaskCommands extends Task {
      * prints out number of tasks in list
      */
     public static void printCount() {
-        System.out.println("\tNow you have " + List.getSize() + " tasks in the list.");
+        ArrayList<Task> Temp = List.getList();
+        int ref = -1;
+        ref += Temp.size();
+        System.out.println("\t\t" + Temp.get(ref).printTask()  +
+                "\n\tNow you have " + List.getSize() + " tasks in the list.");
     }
 
     /**

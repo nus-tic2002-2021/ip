@@ -1,15 +1,11 @@
 package com.tic2002.app;
 
-import com.tic2002.task.Task;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.tic2002.app.Storage.loadList;
 
 public class UI {
     private Parser parser;
-    private ArrayList<Task> List = new ArrayList<>();
 
     /** Main function of UI to run program
      * dukeLogo - Calling the logo
@@ -45,7 +41,7 @@ public class UI {
             String commandUpper = command.toUpperCase();
 
             try {
-                assert commandUpper != null : "Please enter valid input\n";
+                assert commandUpper == null : "Please enter valid input\n";
                 parser.isValidInput(commandUpper);
             } catch (NullPointerException e){
                 System.out.println("Please enter a valid input\n");
@@ -71,51 +67,50 @@ public class UI {
         }
     }
 
-        private static void dukeLogo () {
-            String logo = " ____        _        \n"
+    private static void dukeLogo () {
+        String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
-            //Hello command
-                System.out.println("Hello, I'm Duke\n" + "What tasks can I serve you?");
-                newLine();
-            }
+        System.out.println("Hello from\n" + logo);
+        //Hello command
+        System.out.println("Hello, I'm Duke\n" + "What tasks can I serve you?");
+        newLine();
+    }
 
     /**
      * to end program
      * Storage.saveList() - call Storage to save list to duke.txt
      * System.exit() - exit system safely
      */
-            public static void endDuke () {
-                System.out.println("\tBye! Thanks for visiting The Duke!");
-                Storage.saveList();
-                System.exit(0);
-            }
+    public static void endDuke () {
+        System.out.println("\tBye! Thanks for visiting The Duke!");
+        Storage.saveList();
+        System.exit(0);
+    }
 
     /**
      * newLine() - Prints a new line break
      */
-           public static void newLine () {
+    public static void newLine () {
                 System.out.println("________________________________________________");
             }
 
     /**
      * Prints out instructions to use Duke
      */
-            public static void instructions () {
-                System.out.println("DUKE helps you organise your tasks efficiently, please enter as follows:" +
-                        "\n\tevent [description] /at [time]\n\t" +
-                        "todo [description]\n\t" +
-                        "deadline [description] /by yyyy-mm-dd, hh.mm\n\t" +
-                        "done [number] - to mark task as completed\n\t" +
-                        "list - to show all tasks\n\t" +
-                        "delete [number] - to delete a task\n\t" +
-                        "save - to save task list\n\t" +
-                        "on yyyy-mm-dd - to check if tasks match date given\n\t" +
-                        "priority [index] [0(TO REMOVE) / 1(LOW) / 2(MED) / 3(HIGH)] - to set priority\n\t" +
-                        "find [word] - To search for a word\n\t" +
-                        "bye - to end DUKE");
-            }
-        }
+    public static void instructions () {
+        System.out.println("DUKE helps you organise your tasks efficiently, please enter as follows:" +
+                "\n\tevent [description] /at [time]\n\t" +
+                "todo [description]\n\t" +
+                "deadline [description] /by yyyy-mm-dd, hh.mm\n\t" +
+                "done [number] - to mark task as completed\n\t" +
+                "list - to show all tasks\n\t" +
+                "delete [number] - to delete a task\n\t" +
+                "on yyyy-mm-dd - to check if tasks match date given\n\t" +
+                "priority [index] [0(TO REMOVE) / 1(LOW) / 2(MED) / 3(HIGH)] - to set priority\n\t" +
+                "find [word] - To search for a word\n\t" +
+                "bye - to end DUKE");
+    }
+}

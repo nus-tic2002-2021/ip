@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import static com.tic2002.app.DateTime.isValidDate;
-import static com.tic2002.app.DateTime.isValidTime;
-import static com.tic2002.app.DateTime.toDate;
-import static com.tic2002.app.DateTime.toTime;
+import static com.tic2002.task.DateTime.isValidDate;
+import static com.tic2002.task.DateTime.isValidTime;
+import static com.tic2002.task.DateTime.toDate;
+import static com.tic2002.task.DateTime.toTime;
 import static com.tic2002.task.Find.findWord;
 import static com.tic2002.task.Priority.isValidPriority;
 import static com.tic2002.task.TaskCommands.addEvent;

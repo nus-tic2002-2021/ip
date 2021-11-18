@@ -6,10 +6,7 @@ import java.util.ArrayList;
 
 import static com.tic2002.task.TaskCommands.printCount;
 
-/**
- * ArrayList List inheriting from Task as the List stores Tasks
- */
-public class List extends Task{
+public class List {
     private static ArrayList<Task> List = new ArrayList<>();
 
     /**

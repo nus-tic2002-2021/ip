@@ -17,7 +17,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String timing;
+    protected String timing; 
     protected LocalDate date;
     protected LocalTime time;
     protected int priority;
