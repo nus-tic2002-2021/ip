@@ -41,10 +41,6 @@ public class Deadline extends Task {
 //-------------------------------------
 // allow to delete by description regex
 
-// Read (DONE)
-// ------------------------------------
-// allow to save into txt file harddisk (LV7)
-// allow regex to search for current tasks
 
 // Error handle
 //-------------------------------------
