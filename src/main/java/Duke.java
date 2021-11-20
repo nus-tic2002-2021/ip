@@ -242,8 +242,9 @@ public class Duke {
                 gui.botResponse("I think you want to add a todo, input it like this... \n [ todo xxx ]");
             } else {
                 storedTask.add(record);
-                String response = "-  [ T ] " + "[ ] " + description.strip() + "\n";
+                String response = "-  [ T ] " + "[ ] " + description.strip();
                 gui.botResponse("Sure! I have added that to the list." + "\n" + response);
+                gui.botResponse("Now you have " + storedTask.size() + " tasks in your list.");
             }
         }
         if (command.equals("done")){
@@ -267,8 +268,9 @@ public class Duke {
                 } else {
                     Task deadline = new Deadline(description.strip(), byDate.strip());
                     storedTask.add(deadline);
-                    String response = "-  [ D ] " + "[ ] " + description.strip() + " ( by: " + byDate.strip() + " ) " + "\n";
+                    String response = "-  [ D ] " + "[ ] " + description.strip() + " ( by: " + byDate.strip() + " ) ";
                     gui.botResponse("Sure! I have added that to the list." + "\n" + response);
+                    gui.botResponse("Now you have " + storedTask.size() + " tasks in your list.");
                 }
             } else {
                 gui.botResponse("To add a new deadline, you should input... \n [ deadline xxx by monday ]");
@@ -292,7 +294,9 @@ public class Duke {
                 } else {
                     Task event = new Event(description.strip(), at.strip().split(" ")[0], time);
                     storedTask.add(event);
-                    gui.botResponse("added");
+                    String response = "-  [ E ] " + "[ ] " + description.strip() + " ( at: " + at.strip() + " ) ";
+                    gui.botResponse("Sure! I have added that to the list." + "\n" + response);
+                    gui.botResponse("Now you have " + storedTask.size() + " tasks in your list.");
                 }
             } else {
                 gui.botResponse("To add a new event, you have to say... \n [ event xxx at monday 3pm-4pm ]");
@@ -366,7 +370,6 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         gui.botResponse("Hello! I'm Duke. What can I do for you today?");
     }
 }
