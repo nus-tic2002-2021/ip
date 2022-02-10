@@ -1,0 +1,27 @@
+todo borrow book
+deadline return book /by Oct 25 10pm
+event buy bread /at Oct 25 morning
+deadline return book /by 2021-12-31T23:59:59
+event buy bread /at 2021-11-30T23:59:59
+done 1
+list
+done 2
+done 2
+todo done 1
+list
+a-command-that-duke-doesnt-know
+delete 0
+delete 2
+event this task is so 2008 /at 2008-10-31T23:59:59
+event this task is so 2000-and-late /at 2000-12-31T23:59:59
+sort by date
+sort by date desc
+list
+done 3
+sort by done
+sort by done asc
+sort by done desc
+list
+find bread
+find answer2life
+bye

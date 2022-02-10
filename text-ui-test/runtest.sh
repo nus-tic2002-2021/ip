@@ -12,15 +12,21 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete tasks.json from previous run
+if [ -e "./tasks.json" ]
+then
+    rm tasks.json
+fi
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk build //:TerminalDukeQA
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+../bazel-bin/TerminalDukeQA < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
@@ -30,9 +36,19 @@ dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test result: PASSED"
+    echo "Test result: PASSED [UI TESTS]"
+else
+    echo "Test result: FAILED [UI TESTS]"
+    exit 1
+fi
+
+# compare the output to the expected output
+diff tasks.json EXPECTED.json
+if [ $? -eq 0 ]
+then
+    echo "Test result: PASSED [SERIALIZATION TESTS]"
     exit 0
 else
-    echo "Test result: FAILED"
+    echo "Test result: FAILED [SERIALIZATION TESTS]"
     exit 1
 fi

@@ -1,0 +1,45 @@
+on: push
+name: Build, Test and Upload JAR
+jobs:
+  checks:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Mount bazel cache
+      uses: actions/cache@v1
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: bazel
+
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.1.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Run Unit Tests
+      run: |
+        "${GITHUB_WORKSPACE}/bin/bazel" test //...
+
+    - name: Run UI and Serialization Tests
+      working-directory: ./text-ui-test
+      run: |
+        chmod +x runtest.sh
+        ./runtest.sh
+
+    - name: Build JAR File
+      run: |
+        "${GITHUB_WORKSPACE}/bin/bazel" build //:TerminalDuke_deploy.jar
+
+    - name: "Move file to non-symlink directory (a workaround for some bug See: https://github.com/actions/upload-artifact/issues/92)"
+      run: |
+       mv ${{ github.workspace }}/bazel-bin/TerminalDuke_deploy.jar ${{ github.workspace }}/TerminalDuke_deploy.jar
+
+    - name: Upload JAR File
+      uses: actions/upload-artifact@v2
+      with:
+        name: TerminalDuke_deploy.jar
+        path: ${{ github.workspace }}/TerminalDuke_deploy.jar

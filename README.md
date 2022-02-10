@@ -1,24 +1,61 @@
-# Duke project template
+<img src="https://user-images.githubusercontent.com/88638946/130622078-e049680c-7895-4725-ace0-49869574887c.png" width="50%" align="right">
+
+# Duke
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+## Demo
+![output](https://user-images.githubusercontent.com/88638946/131530452-cbe5ab59-9e43-4c08-affe-f9fdf2c75427.gif)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Build
+Prerequisites: Have `bazel` installed.
+
+To build for local development on macOS:
+```bash
+# bazel makes a wrapper script around the jar file.
+bazel build //:TerminalDuke && ./bazel-bin/TerminalDuke
+
+# or simply
+bazel run //:TerminalDuke
+
+# Use bazelisk for M1 Macs (Apple Silicon)
+USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk run //:TerminalDuke
+
+# For QA build, for example, having assertions enabled, build TerminalDukeQA instead
+USE_BAZEL_VERSION=ac9353fab161efae4af72e73fbb657a762b3620d bazelisk run //:TerminalDukeQA
+```
+
+To build jar file for deployment purposes:
+```bash
+bazel build //:Duke_deploy.jar
+
+java -jar ./bazel-bin/Duke_deploy.jar
+```
+
+## Testing
+For unit tests:
+```bash
+bazel test --test_output=all //...
+```
+For terminal ui tests (`text-ui-test`):
+```bash
+cd text-ui-test
+./runtest.sh
+```
+
+## Code Formatting & Style
+Use [google-java-format](https://github.com/google/google-java-format):
+```bash
+google-java-format --replace **/*.java # executes recursively
+```
+
+## Pre-commit Git Hook (Tested on macOS)
+`pre-commit` is a python tool that helps to create git pre-commit hook handlers. For this project, it is used to enforce Google Java Style (via `google-java-format`) on new commits.
+
+To setup, ensure you have [`pre-commit`](https://pre-commit.com/#install) installed, then run:
+```bash
+pre-commit install
+```
+This only needs to be executed once, so that `pre-commit` can generate the script and write it to `.git/hooks/pre-commit`
+Thereafter, it should be executed right before every commit!
