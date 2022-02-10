@@ -6,7 +6,7 @@ then
     mkdir ../bin
 fi
 
-# delete output from previous run
+# delete output from previous execute
 if [ -e "./ACTUAL.TXT" ]
 then
     rm ACTUAL.TXT
@@ -19,7 +19,7 @@ then
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+# execute the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
