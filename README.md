@@ -1,24 +1,32 @@
-# Duke project template
+# Duke assignment TIC2002
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Program that takes in user input and create a list of task which should benefit the user.
 
-## Setting up in Intellij
+## Commands
+Add and assignment to do.
+`Todo` --- **todo assignment**
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Add an assignment with deadline on 10 Oct 2021 2359
+`Deadline` --- **deadline assignment submission /by 2021-10-10 2359**
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Add an event that happens from 21 Dec 2021 8PM to 9:30PM
+`Event` --- **event live concert /at 2021-12-21 2000 /for 1:30**
+
+List all task.
+`List` --- **list**
+
+Set a task as done according to the order in list. Sets task 1 as done if it exists.
+`Done` --- **done 1**
+
+Delete a task according to the order in list. Deletes task 1 if it exists.
+`Delete` --- **delete 1**
+
+Find the task with description matching the keyword. Find all task with assignment in description.
+`Find` --- **find assignment**
+
+View the task with date matching the search date. Find all task which occurs on Nov 15 2021.
+`View` --- **view 2021-11-15**
+
+Saves and exit program.
+`Bye` --- **bye**
+
