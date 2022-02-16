@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+sourceSets {
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+
+application {
+    mainClassName = "com.tic2002.duke.Duke"
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveClassifier = null
+}
+
+run{
+    standardInput = System.in
+    enableAssertions = true
+}
