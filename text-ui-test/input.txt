@@ -1,0 +1,55 @@
+todo borrow book
+event project meeting/at 2001-01-25
+event project meeting/at 2002-06-25 18:00
+event project meeting/at 2002-06-25 18:00 19:00
+deadline return book/by 2010-01-25
+deadline return book/by 2011-02-25 06:00
+list
+set
+2
+1
+done 2
+list
+undone 2
+list
+find meeting
+info
+delete 1
+save
+list
+save
+bye
+
+
+dfd gsfdg
+XXXX
+to do something
+todo
+event
+deadline
+event project meeting sometime later
+deadline project meeting sometime later
+event project meeting/at 2001 jan 15
+deadline project meeting/by 2001 jan 15
+event project meeting/at 2002-06-25 1800
+deadline return book/by 2011-02-25 0600
+event project meeting/at 2002-06-25 19:00 18:00
+list abc
+set abc
+set
+100
+-1
+-1
+abc
+100
+1
+done 100
+undone 100
+done aaa
+undone aaa
+find
+find Meeting
+find meeeeeeting
+delete
+delete 0
+delete -1

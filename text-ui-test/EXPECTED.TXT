@@ -1,7 +1,245 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+_________________________________
+>> todo borrow book
+    Got it. I've added this task:
+      [T][ ] borrow book
+    Now you have 1 tasks in the list.
+_________________________________
+>> event project meeting/at 2001-01-25
+    Got it. I've added this task:
+      [E][ ] project meeting(at: 2001-01-25)
+    Now you have 2 tasks in the list.
+_________________________________
+>> event project meeting/at 2002-06-25 18:00
+    Got it. I've added this task:
+      [E][ ] project meeting
+      (at: 2002-06-25, from: 18:00)
+    Now you have 3 tasks in the list.
+_________________________________
+>> event project meeting/at 2002-06-25 18:00 19:00
+    Got it. I've added this task:
+      [E][ ] project meeting
+      (at: 2002-06-25, from: 18:00 to 19:00)
+    Now you have 4 tasks in the list.
+_________________________________
+>> event project meeting/at 2003-12-25 19:00 19:00
+    Got it. I've added this task:
+      [E][ ] project meeting
+      (at: 2003-12-25, from: 19:00 to 19:00)
+    Now you have 5 tasks in the list.
+_________________________________
+>> deadline return book/by 2010-01-25
+    Got it. I've added this task:
+      [D][ ] return book(by: 2010-01-25)
+    Now you have 6 tasks in the list.
+_________________________________
+>> deadline return book/by 2011-02-25 06:00
+    Got it. I've added this task:
+      [D][ ] return book(by: 2011-02-25 06:00)
+    Now you have 7 tasks in the list.
+_________________________________
+>> list
+    1.[T][ ] borrow book [LOW]
+    2.[E][ ] project meeting [LOW]
+             (at 2001 JANUARY 25)
+    3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00)
+    4.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+    5.[E][ ] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    6.[D][ ] return book [LOW]
+             by: 2010 JANUARY 25)
+    7.[D][ ] return book [LOW]
+             by: 2011 FEBRUARY 25 06:00)
+_________________________________
+>> done 2
+    Naisuuuu! This task is marked as done:
+    [E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+_________________________________
+>> done 5
+    Naisuuuu! This task is marked as done:
+    [E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+_________________________________
+>> done 6
+    Naisuuuu! This task is marked as done:
+    [D][X] return book [LOW]
+             by: 2010 JANUARY 25)
+_________________________________
+>> list
+    1.[T][ ] borrow book [LOW]
+    2.[E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+    3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00)
+    4.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+    5.[E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    6.[D][X] return book [LOW]
+             by: 2010 JANUARY 25)
+    7.[D][ ] return book [LOW]
+             by: 2011 FEBRUARY 25 06:00)
+_________________________________
+>> delete 1
+    Noted. I've removed this task:
+    [T][ ] borrow book [LOW]
+    Now you have 6 tasks in the list.
+_________________________________
+>> delete 5
+    Noted. I've removed this task:
+    [D][X] return book [LOW]
+             by: 2010 JANUARY 25)
+    Now you have 5 tasks in the list.
+_________________________________
+>> list
+    1.[E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+    2.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00)
+    3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+    4.[E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    5.[D][ ] return book [LOW]
+             by: 2011 FEBRUARY 25 06:00)
+_________________________________
+>> set
+    Which task do you want to set priority?
+>> 2
+_________________________________
+    What is it's priority? choose 1 to 3
+    1: Very urgent >>> 3: Chin Cai not that urgent
+1
+    Done! The new task priority is set
+    Priority of Task #2 has been set to HIGH
+_________________________________
+>> list
+    1.[E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+    2.[E][ ] project meeting [HIGH]
+             (at 2002 JUNE 25 ; from: 18:00)
+    3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+    4.[E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    5.[D][ ] return book [LOW]
+             by: 2011 FEBRUARY 25 06:00)
+_________________________________
+>> save
+    Progress Saved!
+_________________________________
+>> event project meeting/at 2003-12-25 19:00 19:00
+    Got it. I've added this task:
+      [E][ ] project meeting
+      (at: 2003-12-25, from: 19:00 to 19:00)
+    Now you have 6 tasks in the list.
+_________________________________
+>> deadline return book/by 2010-01-25
+    Got it. I've added this task:
+      [D][ ] return book(by: 2010-01-25)
+    Now you have 7 tasks in the list.
+_________________________________
+>> save
+    Progress Saved!
+_________________________________
+>> deadline return book
+    ☹  OOPS!!! The day cannot be empty.
+_________________________________
+>> event project meeting /at 2016-12-25 19:00 18:00
+    ☹  OOPS!!! Event start time cannot be later than end time!
+_________________________________
+>> event project AAmeeting /at 2016-12-25 18:00 19:00
+    Got it. I've added this task:
+      [E][ ] project AAmeeting
+      (at: 2016-12-25, from: 18:00 to 19:00)
+    Now you have 8 tasks in the list.
+_________________________________
+>> event project meeting /at 2016-12-25 18:00 19:00
+    Got it. I've added this task:
+      [E][ ] project meeting
+      (at: 2016-12-25, from: 18:00 to 19:00)
+    Now you have 9 tasks in the list.
+_________________________________
+>> event project meet /at 2016-12-25 18:00 19:00
+    Got it. I've added this task:
+      [E][ ] project meet
+      (at: 2016-12-25, from: 18:00 to 19:00)
+    Now you have 10 tasks in the list.
+_________________________________
+>> find meeting
+    Here are the matching tasks in your list:
+        1.[E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+        2.[E][ ] project meeting [HIGH]
+             (at 2002 JUNE 25 ; from: 18:00)
+        3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+        4.[E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+        5.[E][ ] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+        6.[E][ ] project meeting  [LOW]
+             (at 2016 DECEMBER 25 ; from: 18:00 to 19:00)
+>> list
+    1.[E][X] project meeting [LOW]
+             (at 2001 JANUARY 25)
+    2.[E][ ] project meeting [HIGH]
+             (at 2002 JUNE 25 ; from: 18:00)
+    3.[E][ ] project meeting [LOW]
+             (at 2002 JUNE 25 ; from: 18:00 to 19:00)
+    4.[E][X] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    5.[D][ ] return book [LOW]
+             by: 2011 FEBRUARY 25 06:00)
+    6.[E][ ] project meeting [LOW]
+             (at 2003 DECEMBER 25 ; from: 19:00 to 19:00)
+    7.[D][ ] return book [LOW]
+             by: 2010 JANUARY 25)
+    8.[E][ ] project AAmeeting  [LOW]
+             (at 2016 DECEMBER 25 ; from: 18:00 to 19:00)
+    9.[E][ ] project meeting  [LOW]
+             (at 2016 DECEMBER 25 ; from: 18:00 to 19:00)
+    10.[E][ ] project meet  [LOW]
+             (at 2016 DECEMBER 25 ; from: 18:00 to 19:00)
+_________________________________
+>> save
+    Progress Saved!
+_________________________________
+>> bye
+Bye. Hope to see you again soon!
+_________________________________
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//     Buddha Protect Me       Say Bye to All Bug
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
