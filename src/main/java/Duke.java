@@ -1,10 +1,61 @@
+import duke.command.Command;
+import duke.DukeException;
+import duke.Storage;
+import duke.command.CommandResult;
+import duke.command.Exit;
+import duke.parser.Parser;
+import duke.task.TaskList;
+import duke.Ui.UserInterface;
+
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    UserInterface ui;
+    TaskList taskList;
+    Storage storage;
+
+    public Duke() {
+        this.ui = new UserInterface();
+        this.taskList = new TaskList();
+        this.storage = new Storage();
     }
+
+    public void run() {
+        ui.logo();
+        ui.showWelcomeMessage();
+        this.userCommand();
+        ui.showGoodbyeMessage();
+        System.exit(0);
+    }
+
+    public void userCommand() {
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.getInput();
+            Command c = (new Parser()).parseCommand(fullCommand);
+            CommandResult result = execute(c);
+            ui.printRespond(result);
+            isExit = Exit.isExitCommand(c);
+        }
+    }
+
+
+    public CommandResult execute (Command command) {
+        command.inputData(taskList);
+        storage.save(taskList);
+        return command.execute();
+    }
+
+
+    public String getResponse(String userInput) {
+        Command command = (new Parser()).parseCommand(userInput);
+        CommandResult result = execute(command);
+        return ui.getResponse(result);
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+
+    }
+
 }
