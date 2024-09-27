@@ -1,0 +1,19 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('backgroud.jpeg');
+	-fx-background-size: cover;
+}
+
+.button {
+    -fx-background-color: #0080ff;
+    -fx-font-size: 1.5em;
+    -fx-font-family: 'Calibri and Cambria Fonts'
+}
+
+.button:hover {
+    -fx-background-color: #0F52BA;
+}
+
+.text-field {
+    -fx-font-size: 1.5em;
+    -fx-font-family: 'Calibri and Cambria Fonts'
+}
